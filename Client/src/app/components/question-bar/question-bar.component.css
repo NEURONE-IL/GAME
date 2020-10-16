@@ -1,0 +1,78 @@
+.tab-icon{
+    font-size: 30px;
+    align-content: center;
+    color: black;
+}
+
+.counter{
+    position:relative; 
+    top: -82px; 
+    font-size: 35px;
+}
+
+.panel-container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.mat-tab-group{
+    transition: max-height .25s ease-in-out;
+    max-height: 360px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #f6f6f6;
+}
+
+.hide {
+    transition: max-height .25s ease-in-out;
+    max-height: 50px;
+}
+
+::ng-deep .mat-tab-label-container{
+    margin-left: 10%;
+}
+
+::ng-deep .mat-tab-labels{
+    cursor: pointer;
+}
+
+::ng-deep .mat-tab-header{
+    cursor: pointer;
+}
+
+.question-text{
+    font-size: x-large;
+    color: black;
+}
+  
+.answer-form{
+    width: 100%;
+}
+  .input-full-width{
+    width: 66%;
+}
+  
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: black !important;
+}
+  
+::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: black !important;
+    color: black !important;
+}
+  
+::ng-deep .mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: black !important;;
+}
+  
+  
+.hint-input{
+    width: 20%;
+    margin-left: 1%;
+    background-color: darkblue;
+}
