@@ -8,6 +8,8 @@ const morgan = require('morgan');
 
 /** Internal modules **/
 require('./config/config');
+const authRoutes = require('./routes/auth');
+const searchRoutes = require('./routes/search');
 
 
 //db connection
@@ -33,7 +35,8 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json'}));
 
 /** Express routing **/
-
+app.use('/api/auth', authRoutes);
+app.use('/api/search', searchRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
