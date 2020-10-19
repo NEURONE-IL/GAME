@@ -1,0 +1,23 @@
+<div class="result-content">
+    <div class="toolbar" >
+        <img class="logo" src="assets/mainlogo.png">
+            <mat-form-field appearance="outline" class="search-box" >
+                <mat-icon matSuffix>search</mat-icon>
+                <input matInput [(ngModel)]="query">
+            </mat-form-field>
+      </div>
+
+    <hr >
+
+    <div class="documents-container">
+        <div *ngFor="let doc of documents">
+          <h5 class="url-bar">{{doc.url}}</h5>
+          <a [routerLink]="['/viewPage', doc._id]"  class="document-link">{{doc.title}}</a>
+          <h5 class="doc-body">{{doc.indexedBody.substring(0,200)}}</h5>
+          <br>
+        </div>
+        <div *ngIf="documents.length <= 0" class="text-center">
+          <h3>No results found for your search</h3>
+        </div>
+      </div>
+</div>

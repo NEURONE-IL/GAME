@@ -1,0 +1,37 @@
+.search-content{
+    position: absolute;
+    top: 7.1%;
+    width: 100%;
+}
+
+.main-logo{
+    width: 30%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+::ng-deep .mat-form-field-infix{
+    display: block;
+    flex: auto;
+    padding: 0.3em 0 0.3em 0 !important;
+}
+
+.search-box{
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+.search-button{
+    width: 10%;
+    height: 3%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.2%;
+}

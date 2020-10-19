@@ -21,6 +21,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoginComponent } from './views/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StartComponent } from './views/start/start.component';
+import { SearchComponent } from './views/search/search.component';
+import { SearchResultComponent } from './views/search-result/search-result.component';
+import { EndpointsService } from './components/endpoints.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,7 +35,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     QuestionBarComponent,
     HeaderComponent,
     LoginComponent,
-    StartComponent
+    StartComponent,
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   }),
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [EndpointsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

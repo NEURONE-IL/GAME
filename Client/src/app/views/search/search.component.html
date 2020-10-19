@@ -1,0 +1,8 @@
+<div class="search-content">
+    <img class="main-logo" src="assets/mainlogo.png">
+    <mat-form-field appearance="outline" class="search-box" >
+        <mat-icon matSuffix>search</mat-icon>
+        <input matInput [(ngModel)]="query">
+    </mat-form-field>
+    <button mat-raised-button class="search-button" color="accent" (click)="search()">Buscar</button>
+</div>
