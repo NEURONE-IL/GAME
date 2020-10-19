@@ -2,9 +2,9 @@
     <ng-template mat-tab-header>
         hola
     </ng-template>
-    <mat-tab>
+    <mat-tab *ngFor="let tab of tabs">
       <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">looks_one</mat-icon>
+        <mat-icon class="tab-icon">{{tab}}</mat-icon>
       </ng-template>
       <div class="panel-container" >
         <mat-grid-list cols="3" rowHeight="103px">
@@ -26,58 +26,6 @@
               <button *ngIf="hint" mat-raised-button color="primary" class="hint-input" >
                 <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
                 Give me a hint</button>
-            </form>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">looks_two</mat-icon>
-      </ng-template>
-      <div class="panel-container">
-        <mat-grid-list cols="3" rowHeight="103px">
-          <mat-grid-tile class="question-text" colspan="2" rowspan="2">
-            In Imperial Ballet's 1892 program for the Tchaikovsky ballet that opens Act I on Christmas Eve, what is the number of the dance in Act II that is named for a vegetable?
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="2">
-            <div>
-                <mat-progress-spinner class="spinner" diameter=120 mode=determinate [value]="value"> </mat-progress-spinner>
-                <div class="counter" [ngStyle]="{'left':leftValue}">{{timeLeft}}</div>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="3" rowspan="1">
-            <form class="answer-form">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Enter your answer...">
-                <mat-icon matSuffix>send</mat-icon>
-              </mat-form-field>
-            </form>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">looks_3</mat-icon>
-      </ng-template>
-      <div class="panel-container">
-        <mat-grid-list cols="3" rowHeight="103px">
-          <mat-grid-tile class="question-text" colspan="2" rowspan="2" >
-            The first fight ever held in the Madison Square Garden ring was lost by what former and future champ?
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="2">
-            <div>
-              <mat-progress-spinner class="spinner" diameter=120 mode=determinate [value]="value"> </mat-progress-spinner>
-              <div class="counter" [ngStyle]="{'left':leftValue}">{{timeLeft}}</div>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="3" rowspan="1">
-            <form class="answer-form">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Enter your answer...">
-                <mat-icon matSuffix>send</mat-icon>
-              </mat-form-field>
             </form>
           </mat-grid-tile>
         </mat-grid-list>

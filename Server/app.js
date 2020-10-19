@@ -9,7 +9,7 @@ const morgan = require('morgan');
 /** Internal modules **/
 require('./config/config');
 const authRoutes = require('./routes/auth');
-const searchRoutes = require('./routes/search');
+const questionRoutes = require('./routes/question');
 
 
 //db connection
@@ -36,7 +36,7 @@ app.use(bodyParser.json({ type: 'application/json'}));
 
 /** Express routing **/
 app.use('/api/auth', authRoutes);
-app.use('/api/search', searchRoutes);
+app.use('/api/questions', questionRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');

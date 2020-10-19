@@ -4,6 +4,7 @@ import { LoginComponent } from './views/login/login.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
 import { SearchComponent } from './views/search/search.component';
 import { StartComponent } from './views/start/start.component';
+import { ViewPageComponent } from './views/view-page/view-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'search-result',
         component: SearchResultComponent
+      },
+      {
+        path: 'view-page/:url',
+        component: ViewPageComponent
       }
     ]
   },

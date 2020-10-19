@@ -12,8 +12,8 @@
     <div class="documents-container">
         <div *ngFor="let doc of documents">
           <h5 class="url-bar">{{doc.url}}</h5>
-          <a [routerLink]="['/viewPage', doc._id]"  class="document-link">{{doc.title}}</a>
-          <h5 class="doc-body">{{doc.indexedBody.substring(0,200)}}</h5>
+          <a [routerLink]="['/start/view-page', doc.route]"  class="document-link">{{doc.title}}</a>
+          <h5 class="doc-body">{{doc.searchSnippet}}</h5>
           <br>
         </div>
         <div *ngIf="documents.length <= 0" class="text-center">

@@ -23,7 +23,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { StartComponent } from './views/start/start.component';
 import { SearchComponent } from './views/search/search.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
-import { EndpointsService } from './components/endpoints.service';
+import { EndpointsService } from './services/endpoints/endpoints.service';
+import { ViewPageComponent } from './views/view-page/view-page.component';
+import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,7 +39,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     StartComponent,
     SearchComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    ViewPageComponent,
+    SafeurlPipe
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-  }),
+    }),
     AppRoutingModule,
   ],
   providers: [EndpointsService],
