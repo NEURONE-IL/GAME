@@ -17,6 +17,7 @@
     display: inline-block;
     margin-right: 6%;
     margin-left: 1%;
+    cursor: pointer;
 }
 
 ::ng-deep .mat-form-field-infix{

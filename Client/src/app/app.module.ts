@@ -26,6 +26,7 @@ import { SearchResultComponent } from './views/search-result/search-result.compo
 import { EndpointsService } from './services/endpoints/endpoints.service';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
+import { SessionComponent } from './views/session/session.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchComponent,
     SearchResultComponent,
     ViewPageComponent,
-    SafeurlPipe
+    SafeurlPipe,
+    SessionComponent
   ],
   imports: [
     BrowserModule,

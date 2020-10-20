@@ -34,8 +34,8 @@ mat-card-content {
 }
 
 .card{
-    width: 30%;
-    height: 30%;
+    width: 400px;
+    height: 300px;
     margin: auto;
     margin-top: 12%;
     border: 1px solid black;

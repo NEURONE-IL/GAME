@@ -12,7 +12,7 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue = '30px';
   hint = false;
-  tabs = ['looks_one','looks_two','looks_3','looks_4', 'looks_5', 'looks_6', 'looks_7']
+  tabs = ['looks_one','looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
   constructor() { }
 
   ngOnInit(): void {

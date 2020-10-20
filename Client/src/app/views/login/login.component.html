@@ -2,7 +2,7 @@
     <a class="title-span" href="/">NEURONE GAME</a>
 </div>
 <div class="main-content">
-    <mat-card class="card">
+  <mat-card class="card mat-elevation-z8">
         <mat-card-title>{{"login" | translate}}</mat-card-title>
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -27,7 +27,7 @@
       </p>
 
       <div class="button">
-        <button type="submit" mat-button>{{"enter" | translate}}</button>
+        <button type="submit" color="primary" mat-raised-button>{{"enter" | translate}}</button>
       </div>
 
 
