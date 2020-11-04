@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RutValidator } from 'ng9-rut';
 import { ActivatedRoute } from '@angular/router';
+import { StudiesService } from '../../services/game/studies.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,12 +14,14 @@ export class SignupComponent implements OnInit {
   consentForm: FormGroup;
   guardianForm: FormGroup;
   studentForm: FormGroup;
+  study: any;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private rutValidator: RutValidator) { }
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private rutValidator: RutValidator, private studiesService: StudiesService) {
+  }
 
   ngOnInit(): void {
 
-    console.log(this.route.snapshot.paramMap.get('study_id'));
+    this.checkStudy();
 
     this.consentForm = this.formBuilder.group({
       consent: [false, Validators.requiredTrue]
@@ -53,6 +56,16 @@ export class SignupComponent implements OnInit {
     console.log(this.consentFormControls);
     console.log(this.guardianFormControls);
     console.log(this.studentFormControls);
+  }
+
+  checkStudy() {
+    const study_id = this.route.snapshot.paramMap.get('study_id');
+    this.studiesService.getStudy(study_id).subscribe(response => {
+      this.study = response['study'];
+    },
+    (error) => {
+      console.log("couldn't access study");
+    });
   }
 
   get consentFormControls(): any {

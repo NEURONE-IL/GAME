@@ -16,7 +16,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 
-
+import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
 import  { PdfViewerModule }  from  'ng2-pdf-viewer';
 import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
@@ -24,7 +24,7 @@ import { ValidateEqualModule } from 'ng-validate-equal';
 import { AppComponent } from './app.component';
 import { QuestionBarComponent } from './components/question-bar/question-bar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -39,6 +39,7 @@ import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
 import { SessionComponent } from './views/session/session.component';
 import { ConsentComponent } from './components/consent/consent.component';
 import { SignupComponent } from './views/signup/signup.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SafeurlPipe,
     SessionComponent,
     ConsentComponent,
-    SignupComponent
+    SignupComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AppRoutingModule,
   ],
-  providers: [EndpointsService],
+  providers: [EndpointsService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
