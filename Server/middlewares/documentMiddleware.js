@@ -58,7 +58,7 @@ verifyBody = async (req, res, next) => {
 
 verifyEditBody = async (req, res, next) => {
     try {
-        const validation = await schema.validateAsync(req.body);
+        const validation = await editSchema.validateAsync(req.body);
         next();
     }
     catch (err) {
