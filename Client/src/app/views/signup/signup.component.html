@@ -1,0 +1,204 @@
+<!-- <div class="toolbar" role="banner">
+  <a class="title-span" href="/">NEURONE GAME</a>
+</div>
+<div class="main-content">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <app-consent></app-consent>
+    <div class="accept-terms">
+      <mat-checkbox formControlName="consent">{{"SIGNUP.CONSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
+      <div>
+        <button type="submit" color="primary" mat-raised-button>{{"SIGNUP.CONTINUE" | translate}}</button>
+      </div>
+    </div>
+  </form>
+</div> -->
+
+<div class="toolbar" role="banner">
+  <a class="title-span" href="/">NEURONE GAME</a>
+</div>
+<!-- <button (click)="printControls()" mat-raised-button>CONTROLS</button> -->
+<div class="main-content">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="consentForm">
+      <form [formGroup]="consentForm">
+        <ng-template matStepLabel>{{"SIGNUP.STEP_CONSENT" | translate}}</ng-template>
+          <app-consent></app-consent>
+          <mat-checkbox formControlName="consent" required>{{"SIGNUP.CONSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
+          <div *ngIf="consentFormControls.consent.invalid && (consentFormControls.consent.dirty || consentFormControls.consent.touched)">
+            <mat-error *ngIf="consentFormControls.consent.hasError('required')">
+              {{"SIGNUP.FORM.ERROR.CONSENT" | translate}}
+            </mat-error>
+          </div>
+        <div>
+          <button mat-button matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="guardianForm" [label]="'SIGNUP.STEP_GUARDIAN' | translate">
+      <form [formGroup]="guardianForm">
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>
+          <input matInput formControlName="names" placeholder=""
+                 required>
+          <mat-error *ngIf="guardianFormControls.names.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.NAMES" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.LAST_NAMES" | translate}}</mat-label>
+          <input matInput formControlName="lastNames" placeholder=""
+                 required>
+          <mat-error *ngIf="guardianFormControls.lastNames.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.LAST_NAMES" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.EMAIL" | translate}}</mat-label>
+          <input matInput formControlName="email" placeholder=""
+                 required>
+          <mat-error *ngIf="guardianFormControls.email.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.EMAIL_REQUIRED" | translate}}
+          </mat-error>
+          <mat-error *ngIf="guardianFormControls.email.hasError('email') && !guardianFormControls.email.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.EMAIL_INVALID" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.RUT" | translate}}</mat-label>
+          <input matInput formControlName="rut" placeholder=""
+                 required>
+          <mat-error *ngIf="guardianFormControls.rut.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.RUT_REQUIRED" | translate}}
+          </mat-error>
+          <mat-error *ngIf="guardianFormControls.rut.hasError('invalidRut') && !guardianFormControls.rut.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.RUT_INVALID" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.PHONE_NUMBER" | translate}}</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder=""
+                 required>
+          <mat-error *ngIf="guardianFormControls.phoneNumber.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.PHONE_REQUIRED" | translate}}
+          </mat-error>
+          <mat-error *ngIf="guardianFormControls.phoneNumber.hasError('pattern') && !guardianFormControls.phoneNumber.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.PHONE_INVALID" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
+          <button mat-button matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="studentForm" [label]="'SIGNUP.STEP_STUDENT' | translate">
+      <form [formGroup]="studentForm">
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>
+          <input matInput formControlName="names" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.names.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.NAMES" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.LAST_NAMES" | translate}}</mat-label>
+          <input matInput formControlName="lastNames" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.lastNames.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.LAST_NAMES" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.BIRTHDATE" | translate}}</mat-label>
+          <input matInput formControlName="birthdate" [matDatepicker]="picker" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="studentFormControls.birthdate.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.BIRTHDATE" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.GRADE" | translate}}</mat-label>
+          <input matInput formControlName="grade" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.grade.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.GRADE" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.SCHOOL" | translate}}</mat-label>
+          <input matInput formControlName="school" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.school.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.SCHOOL" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.REGION" | translate}}</mat-label>
+          <input matInput formControlName="region" placeholder=""
+                 required>
+          <!-- <mat-select>
+            <mat-option value="option">Option</mat-option>
+          </mat-select> -->
+          <mat-error *ngIf="studentFormControls.region.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.REGION" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.COMMUNE" | translate}}</mat-label>
+          <input matInput formControlName="commune" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.commune.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.COMMUNE" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.PASSWORD" | translate}}</mat-label>
+          <input matInput type="password" name="password" formControlName="password" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.password.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.PASSWORD" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{"SIGNUP.FORM.PASSWORD_CONFIRMATION" | translate}}</mat-label>
+          <input matInput type="password" ngValidateEqual="password" formControlName="passwordConfirmation" placeholder=""
+                 required>
+          <mat-error *ngIf="studentFormControls.passwordConfirmation.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.PASSWORD_CONFIRMATION" | translate}}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <div>
+          <button mat-button matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
+          <button mat-button matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{"SIGNUP.STEP_DONE" | translate}}</ng-template>
+      <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
+      <button type="submit" (click)="save()" mat-raised-button>{{"SIGNUP.CONTINUE" | translate}}</button>
+      <div>
+        <button mat-button matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
+        <button mat-button (click)="stepper.reset()">{{"SIGNUP.RESET" | translate}}</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+

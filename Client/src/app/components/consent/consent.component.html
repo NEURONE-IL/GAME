@@ -1,0 +1,18 @@
+<div class="container">
+  <span class="mat-headline">{{"SIGNUP.CONSENT.DISCLAIMER" | translate}}</span>
+  <div class="pdf-controls" *ngIf="isLoaded">
+    <button (click)="prevPage()" [disabled]="page === 1" color="accent" mat-raised-button>{{"SIGNUP.CONSENT.PREV_TEXT" | translate}}</button>
+    <span>{{ page }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages" color="accent" mat-raised-button>{{"SIGNUP.CONSENT.NEXT_TEXT" | translate}}</button>
+  </div>
+  <div class="pdf-display">
+    <pdf-viewer [src]="consentSource"
+                (error)="onError($event)"
+                [show-all]="false"
+                [(page)]="page"
+                [autoresize]="true"
+                [original-size]="false"
+                (after-load-complete)="afterLoadComplete($event)"
+    ></pdf-viewer>
+  </div>
+</div>

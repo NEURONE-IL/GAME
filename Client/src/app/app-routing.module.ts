@@ -5,6 +5,7 @@ import { LoginComponent } from './views/login/login.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
 import { SearchComponent } from './views/search/search.component';
 import { SessionComponent } from './views/session/session.component';
+import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 
@@ -36,6 +37,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent},
+  { path: 'signup/:study_id', component: SignupComponent},
   { path: '**', redirectTo: '/login' }
 ];
 

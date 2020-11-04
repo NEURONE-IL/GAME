@@ -1,0 +1,39 @@
+.container {
+  padding: 10px;
+}
+
+.main-content{
+  top: 9%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+}
+
+.title-span {
+  margin-left: 1.5%;
+  font-size: calc(0.9em + 1vmin);
+  margin-right: 3%;
+  color: #9d9d9d;
+  text-decoration: none;
+  font-family: Comic Sans MS, sans-serif;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 9%;
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  color: white;
+  font-weight: 600;
+}
+
+.accept-terms {
+
+}
