@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 const QuestionnaireSchema = new Schema({
     name: {type: String, required: true},
     type: {type: String, required: true},
-    study: {type: Schema.Types.ObjectId, ref: 'Study'},
     questions: [
         {
             question: {type: String, required: true},
