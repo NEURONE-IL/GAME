@@ -22,7 +22,7 @@ export class AuthService {
         this.router.navigate(['login']);
       }
       );
-    }
+  }
 
     logout() {
       localStorage.removeItem('auth_token');
@@ -30,5 +30,16 @@ export class AuthService {
 
     public get loggedIn(): boolean {
       return (localStorage.getItem('auth_token') !== null);
+    }
+
+    signup(userData: any, study_id: string) {
+      this.http.post(this.uri + 'register/' + study_id, userData)
+      .subscribe((resp: any) => {
+        this.router.navigate(['admin_panel']);
+        },
+        (error) => {
+          this.router.navigate(['signup']);
+        }
+        );
     }
 }

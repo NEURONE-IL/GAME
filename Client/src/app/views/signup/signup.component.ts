@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RutValidator } from 'ng9-rut';
 import { ActivatedRoute } from '@angular/router';
 import { StudiesService } from '../../services/game/studies.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,11 +13,15 @@ import { StudiesService } from '../../services/game/studies.service';
 export class SignupComponent implements OnInit {
 
   consentForm: FormGroup;
-  guardianForm: FormGroup;
+  tutorForm: FormGroup;
   studentForm: FormGroup;
   study: any;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private rutValidator: RutValidator, private studiesService: StudiesService) {
+  constructor(private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private rutValidator: RutValidator,
+              private studiesService: StudiesService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -26,36 +31,30 @@ export class SignupComponent implements OnInit {
     this.consentForm = this.formBuilder.group({
       consent: [false, Validators.requiredTrue]
     });
-    this.guardianForm = this.formBuilder.group({
-      names: ['', [Validators.required, Validators.minLength(3)]],
-      lastNames: ['', [Validators.required, Validators.minLength(3)]],
+    this.tutorForm = this.formBuilder.group({
+      tutor_names: ['', [Validators.required, Validators.minLength(3)]],
+      tutor_last_names: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.email, Validators.required]],
-      rut: ['', [this.rutValidator, Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{6,}")]]
+      tutor_rut: ['', [this.rutValidator, Validators.required]],
+      tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{6,}")]]
     });
     this.studentForm = this.formBuilder.group({
       names: ['', [Validators.required, Validators.minLength(3)]],
-      lastNames: ['', [Validators.required, Validators.minLength(3)]],
-      birthdate: ['', Validators.required],
-      grade: ['', Validators.required],
-      school: ['', Validators.required],
-      commune: ['', Validators.required],
-      region: ['', Validators.required],
+      last_names: ['', [Validators.required, Validators.minLength(3)]],
+      birthday: ['', Validators.required],
+      course: ['', Validators.required],
+      institution: ['', Validators.required],
+      institution_commune: ['', Validators.required],
+      institution_region: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
-      passwordConfirmation: ['', [Validators.required, Validators.minLength(4)]]
+      password_confirmation: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
   save() {
-    console.log(this.consentForm.value);
-    console.log(this.guardianForm.value);
-    console.log(this.studentForm.value);
-  }
-
-  printControls() {
-    console.log(this.consentFormControls);
-    console.log(this.guardianFormControls);
-    console.log(this.studentFormControls);
+    let userData = Object.assign(this.tutorForm.value, this.studentForm.value);
+    delete userData.password_confirmation;
+    this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'));
   }
 
   checkStudy() {
@@ -72,8 +71,8 @@ export class SignupComponent implements OnInit {
     return this.consentForm['controls'];
   }
 
-  get guardianFormControls(): any {
-    return this.guardianForm['controls'];
+  get tutorFormControls(): any {
+    return this.tutorForm['controls'];
   }
 
   get studentFormControls(): any {
