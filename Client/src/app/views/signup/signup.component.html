@@ -176,11 +176,7 @@
     <mat-step>
       <ng-template matStepLabel>{{"SIGNUP.STEP_DONE" | translate}}</ng-template>
       <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
-      <button type="submit" (click)="save()" mat-raised-button>{{"SIGNUP.CONTINUE" | translate}}</button>
-      <div>
-        <button mat-button matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
-        <button mat-button (click)="stepper.reset()">{{"SIGNUP.RESET" | translate}}</button>
-      </div>
+      <button type="submit" (click)="save()" mat-raised-button color="primary">{{"SIGNUP.FINISH" | translate}}</button>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
