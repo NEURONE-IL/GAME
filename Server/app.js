@@ -17,6 +17,8 @@ const challengeRoutes = require('./routes/challenge');
 const userRoutes = require('./routes/user');
 const studyRoutes = require('./routes/study');
 const documentRoutes = require('./routes/document');
+const questionnaireRoutes = require('./routes/questionnaire');
+const sendEmailRoutes = require('./routes/send-email');
 
 
 //db connection
@@ -103,6 +105,8 @@ app.use('/api/challenge', challengeRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/study', studyRoutes);
 app.use('/api/document', documentRoutes);
+app.use('/api/questionnaire', questionnaireRoutes);
+app.use('/api/send-email', sendEmailRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');

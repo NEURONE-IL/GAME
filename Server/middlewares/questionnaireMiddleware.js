@@ -1,19 +1,35 @@
 const Joi = require('joi');
-const Study = require('../models/study');
 
 const schema = Joi.object({
     
     name: Joi.string()
         .required(),
     
-    description: Joi.string(),
+    type: Joi.string()
+        .required(),
+    
+    questions: Joi.array().items(Joi.object({
+        question: Joi.string()
+            .required(),
+        
+        number: Joi.number()
+    }))
 })
 
 const editSchema = Joi.object({
     
-    name: Joi.string(),
+    name: Joi.string()
+        .required(),
     
-    description: Joi.string(),
+    type: Joi.string()
+        .required(),
+    
+    questions: Joi.array().items(Joi.object({
+        question: Joi.string()
+            .required(),
+        
+        number: Joi.number()
+    }))
 })
 
 verifyBody = async (req, res, next) => {
