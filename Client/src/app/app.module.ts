@@ -93,11 +93,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AppRoutingModule,
   ],
-  providers: [EndpointsService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true
-  }],
+  providers: [EndpointsService,
+              {
+              provide: HTTP_INTERCEPTORS,
+              useClass: AuthInterceptorService,
+              multi: true
+              }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,7 +29,7 @@
         "SCHOOL": "Colegio",
         "COMMUNE": "Comuna",
         "REGION": "Región",
-        "PASSWORD": "Contraseña",
+        "PASSWORD": "Contraseña de acceso",
         "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
         "ERROR": {
           "CONSENT": "Debe aceptar el consentimiento informado para continuar",
