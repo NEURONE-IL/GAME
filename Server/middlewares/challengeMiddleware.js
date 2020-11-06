@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const Study = require('../models/study');
 
 const schema = Joi.object({
     

@@ -1,4 +1,6 @@
 const Joi = require('joi');
+const { isValidObjectId } = require('mongoose');
+
 
 const schema = Joi.object({
     
@@ -18,14 +20,24 @@ const schema = Joi.object({
 
 const editSchema = Joi.object({
     
-    name: Joi.string()
-        .required(),
+    name: Joi.string(),
     
-    type: Joi.string()
-        .required(),
+    type: Joi.string(),
     
     questions: Joi.array().items(Joi.object({
         question: Joi.string()
+            .required(),
+        
+        number: Joi.number()
+    }))
+})
+
+const answerSchema = Joi.object({
+    answers: Joi.array().items(Joi.object({
+        question: Joi.string()
+            .required(),
+
+        answer: Joi.number()
             .required(),
         
         number: Joi.number()
@@ -58,9 +70,35 @@ verifyEditBody = async (req, res, next) => {
      }
 };
 
+verifyAnswerBody = async (req, res, next) => {
+    if(!isValidObjectId(req.body.user)){
+        return res.status(404).json({
+            ok: false,
+            message: "User doesn't exist!"
+        });
+    }
+    if(!isValidObjectId(req.body.questionnaire)){
+        return res.status(404).json({
+            ok: false,
+            message: "Questionnaire doesn't exist!"
+        });
+    }
+    try {
+        const validation = await editSchema.validateAsync(req.body);
+        next();
+    }
+    catch (err) {
+        return res.status(400).json({
+            ok: false,
+            err
+        });
+     }
+}
+
 const authMiddleware = {
     verifyBody,
-    verifyEditBody
+    verifyEditBody,
+    verifyAnswerBody
 };
 
 module.exports = authMiddleware;

@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Study = require('../models/study');
-const bcrypt = require('bcryptjs');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('' , async (req, res) => {
     Study.find({}, (err, studys) =>{
         if(err){
             return res.status(404).json({
@@ -19,7 +18,7 @@ router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
     });
 })
 
-router.get('/:study_id', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('/:study_id', async (req, res) => {
     const _id = req.params.study_id;
     Study.findOne({_id: _id}, (err, study) =>{
         if(err){
