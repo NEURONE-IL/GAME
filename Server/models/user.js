@@ -7,6 +7,8 @@ const UserSchema = new Schema({
     tutor_last_names: {type: String },
     tutor_rut: {type: String },
     tutor_phone: {type: String },
+    names: {type: String },
+    last_names: {type: String },
     birthday: {type: Date, required: true},
     course: {type: String },
     institution: {type: String },

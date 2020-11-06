@@ -50,6 +50,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         tutor_last_names: req.body.tutor_last_names,
         tutor_rut: req.body.tutor_rut,
         tutor_phone: req.body.tutor_phone,
+        names: req.body.names,
+        last_names: req.body.last_names,
         birthday: req.body.birthday,
         course: req.body.course,
         institution: req.body.institution,

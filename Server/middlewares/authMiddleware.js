@@ -18,6 +18,14 @@ const schema = Joi.object({
     tutor_last_names: Joi.string()
         .alphanum()
         .required(),
+
+    names: Joi.string()
+        .alphanum()
+        .required(),
+    
+    last_names: Joi.string()
+        .alphanum()
+        .required(),
     
     tutor_rut: Joi.string()
         .required(), 

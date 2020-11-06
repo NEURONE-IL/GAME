@@ -1,0 +1,22 @@
+pdf-viewer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(5px 5px 5px #222222);
+}
+
+.pdf-display {
+  max-width: 40vw;
+  margin: auto;
+}
+
+.pdf-controls {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.pdf-controls button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
