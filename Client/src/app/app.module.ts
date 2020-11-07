@@ -10,6 +10,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { QuestionBarComponent } from './components/question-bar/question-bar.component';
@@ -27,6 +30,15 @@ import { EndpointsService } from './services/endpoints/endpoints.service';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
 import { SessionComponent } from './views/session/session.component';
+import { InitialQuestionaryComponent } from './views/initial-questionary/initial-questionary.component';
+import { PreTestQuestionaryComponent } from './views/pre-test-questionary/pre-test-questionary.component';
+import { PostTestQuestionaryComponent } from './views/post-test-questionary/post-test-questionary.component';
+import { QuestionaryComponent } from './views/questionary/questionary.component';
+import { ResourcesUploadComponent } from './views/resources-upload/resources-upload.component';
+import { StudyCreationComponent } from './views/study-creation/study-creation.component';
+import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
+import { UploadComponent } from './views/upload/upload.component';
+import { CreationComponent } from './views/creation/creation.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,7 +55,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchResultComponent,
     ViewPageComponent,
     SafeurlPipe,
-    SessionComponent
+    SessionComponent,
+    InitialQuestionaryComponent,
+    PreTestQuestionaryComponent,
+    PostTestQuestionaryComponent,
+    QuestionaryComponent,
+    ResourcesUploadComponent,
+    StudyCreationComponent,
+    ChallengeCreationComponent,
+    UploadComponent,
+    CreationComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +81,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     MatPaginatorModule,
     MatCardModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSelectModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

@@ -1,0 +1,27 @@
+.documents-upload-card{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+.mat-form-field{
+	width: 85%;
+}
+.checkbox-section{
+  margin-top: 5%;
+  text-align: center;
+}
+.checkbox{
+  margin: 0 10px;
+}
+.cardActions{
+  text-align: center;
+  margin-bottom: 5%;
+}
+.saveButton{
+  background-color: #4CAF50;
+  color: #FFFFFF;
+}
+.clearButton{
+  background-color: #FF9800;
+  color: #FFFFFF;
+}

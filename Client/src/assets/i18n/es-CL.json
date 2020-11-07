@@ -1,3 +1,64 @@
 {
-    "logout": "Cerrar Sesión"
+	"LOGOUT": "Cerrar Sesión",
+	"BUTTONS": {
+		"CLEAR": "LIMPIAR",
+		"SAVE": "GUARDAR"
+	},
+	"CHALLENGE": {
+		"FORM": {
+			"FIELDS": {
+				"ANSWER": "Respuesta",
+				"ANSWER_TYPE": "Tipo de respuesta",
+				"CHECK": "Por favor confirme para continuar",				
+				"DOMAIN": "Dominio",
+				"HINT": "Pista",
+				"LOCALE": "Idioma",
+				"QUESTION": "Pregunta",
+				"SECONDS": "Segundos",
+				"STUDY": "Estudio",
+				"TASK": "Tarea"
+			}
+		},		
+		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
+		"TITLE": "Creación de desafíos"
+	},
+	"ERRORS": {
+		"CHECK_REQUIRED": "La confirmación es requerida",
+		"MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
+		"MAX_LENGTH_200": "El largo del campo no puede exceder los 200 caracteres",
+		"MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
+		"MIN_LENGTH_5": "El largo del campo no puede ser menor a 5 caracteres",
+		"MIN_LENGTH_20": "El largo del campo no puede ser menor a 20 caracteres",
+		"MIN_VALUE_30": "El valor mínimo del campo es 30",
+		"REQUIRED": "El campo es requerido",
+		"SELECTION_REQUIRED": "Debe seleccionar una opción",
+		"UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
+	},
+	"STUDY": {
+		"FORM": {
+			"FIELDS": {
+				"CHECK": "Por favor confirme para continuar",
+				"DESCRIPTION": "Descripción",
+				"NAME": "Nombre"
+			}
+		},		
+		"SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
+		"TITLE": "Creación de estudios"
+	},	
+	"UPLOAD": {
+		"FORM": {
+			"FIELDS": {
+				"CHECK": "Por favor confirme para continuar",
+				"DOMAIN": "Dominio",
+				"LOCALE": "Idioma",
+				"NAME": "Nombre",
+				"TASK": "Tarea",
+				"TYPE_OF": "Tipo de recurso",
+				"TITLE": "Título",
+				"URL": "URL"
+			}
+		},
+		"SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
+		"TITLE": "Carga de recursos"
+	}
 }

@@ -1,0 +1,70 @@
+<mat-card class="questionay-card">
+  <mat-card-header>
+    <mat-card-title>Cuestionario pre-desafío</mat-card-title>
+    <mat-card-subtitle>Responde las siguientes preguntas antes de responder el desafío:</mat-card-subtitle>
+  </mat-card-header>
+  <h4 class="challenge">
+    La pregunta desafío es: Ejemplo de pregunta desafío.
+  </h4>
+  <mat-card-content>
+    <div id="acquainted-label" class="acquaintedLabel">1. ¿Qué tan familiarizado estás con el tema de esta pregunta?</div>
+    <mat-grid-list cols="12">
+      <mat-grid-tile colspan="4">
+        <div class="initLabel">
+          Nada familiarizado
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-radio-group
+          aria-labelledby="acquainted-label"
+          [(ngModel)]="acquainted"
+          isRequired>
+          <mat-radio-button *ngFor="let value of values" [value]="value">
+            {{value}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <div style="margin-right: 50%">
+          Muy familiarizado
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>     
+<!--    <div>Estás relacionado: {{acquainted}}</div>  -->
+    <div id="difficulty-label" class="difficultyLabel">2. ¿Qué tan difícil crees que será encontrar la respuesta?</div>
+    <mat-grid-list cols="12">
+      <mat-grid-tile colspan="4">
+        <div class="initLabel">
+          Muy fácil
+        </div>        
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-radio-group
+        aria-labelledby="difficulty-label"
+        [(ngModel)]="difficulty"
+        isRequired>
+        <mat-radio-button *ngFor="let value of values" [value]="value">
+          {{value}}
+        </mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <div style="margin-right: 50%">
+          Muy difícil
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>   
+<!--    <div>Nivel de dificultad: {{difficulty}}</div>  -->
+    <mat-grid-list cols="12" class="checkbox-section">
+        <mat-checkbox class="checkbox" [(ngModel)]="checked">Por favor confirme para continuar</mat-checkbox>      
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-actions class="cardActions">
+    <button mat-raised-button class="saveButton" [(disabled)]="!checked">
+      GUARDAR
+    </button>
+    <button mat-raised-button class="clearButton">
+      LIMPIAR
+    </button>
+  </mat-card-actions>
+</mat-card>

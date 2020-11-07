@@ -1,0 +1,45 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.mat-radio-group {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.questionay-card{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+.initLabel{
+  margin-left: 50%;
+}​
+.acquaintedLabel{
+  margin-top: 5%;
+}
+.difficultyLabel{
+  margin-top: 5%;
+}
+.checkbox-section{
+  margin-top: 5%;
+  text-align: center;
+}
+.checkbox{
+  margin: 0 10px;
+}
+.cardActions{
+  text-align: center;
+  margin-bottom: 5%;
+}
+.challenge{
+  text-align: center;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.saveButton{
+  background-color: #4CAF50;
+  color: #FFFFFF;
+}
+.clearButton{
+  background-color: #FF9800;
+  color: #FFFFFF;
+}
