@@ -85,7 +85,7 @@
           "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
         }
       }
-    }
+    },
 	"STUDY": {
 		"FORM": {
 			"FIELDS": {
@@ -112,4 +112,5 @@
 		},
 		"SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
 		"TITLE": "Carga de recursos"
+	}
 }

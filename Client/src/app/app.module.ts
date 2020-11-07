@@ -16,7 +16,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
 import  { PdfViewerModule }  from  'ng2-pdf-viewer';
@@ -76,7 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudyCreationComponent,
     ChallengeCreationComponent,
     UploadComponent,
-    CreationComponent
+    CreationComponent,
     SessionComponent,
     ConsentComponent,
     SignupComponent,
