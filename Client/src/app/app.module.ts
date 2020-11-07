@@ -13,11 +13,20 @@ import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+
+import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
+import  { PdfViewerModule }  from  'ng2-pdf-viewer';
+import { Ng9RutModule } from 'ng9-rut';
+import { ValidateEqualModule } from 'ng-validate-equal';
 
 import { AppComponent } from './app.component';
 import { QuestionBarComponent } from './components/question-bar/question-bar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -39,6 +48,9 @@ import { StudyCreationComponent } from './views/study-creation/study-creation.co
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { UploadComponent } from './views/upload/upload.component';
 import { CreationComponent } from './views/creation/creation.component';
+import { ConsentComponent } from './components/consent/consent.component';
+import { SignupComponent } from './views/signup/signup.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -65,6 +77,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChallengeCreationComponent,
     UploadComponent,
     CreationComponent
+    SessionComponent,
+    ConsentComponent,
+    SignupComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +100,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatRadioModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatCheckboxModule,
+    MatStepperModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    PdfViewerModule,
+    Ng9RutModule,
+    ValidateEqualModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -93,7 +117,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AppRoutingModule,
   ],
-  providers: [EndpointsService],
+  providers: [EndpointsService,
+              {
+              provide: HTTP_INTERCEPTORS,
+              useClass: AuthInterceptorService,
+              multi: true
+              }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

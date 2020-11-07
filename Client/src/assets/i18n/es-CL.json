@@ -34,6 +34,58 @@
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",
 		"UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
 	},
+    "SIGNUP": {
+      "CONSENT": {
+        "DISCLAIMER": "Por favor, lea el siguiente consentimiento informado.",
+        "PREV_TEXT": "Anterior",
+        "NEXT_TEXT": "Siguiente",
+        "ACCEPT_TEXT": "Acepto"
+      },
+      "STEP_CONSENT": "Consentimiento",
+      "STEP_GUARDIAN": "Datos del apoderado",
+      "STEP_STUDENT": "Datos del estudiante",
+      "STEP_DONE": "Listo",
+      "DONE_TEXT": "Formulario completo, haga click en finalizar para completar su registro",
+      "CONTINUE": "Continuar",
+      "FINISH": "Finalizar",
+      "NEXT": "Siguiente",
+      "BACK": "Volver",
+      "RESET": "Reiniciar",
+      "SIGNUP": "Registrarte",
+      "FORM" : {
+        "NAMES": "Nombres",
+        "LAST_NAMES": "Apellidos",
+        "RUT": "RUT",
+        "PHONE_NUMBER": "Número de teléfono",
+        "EMAIL": "Correo electrónico",
+        "BIRTHDATE": "Fecha de nacimiento",
+        "GRADE": "Curso",
+        "SCHOOL": "Colegio",
+        "COMMUNE": "Comuna",
+        "REGION": "Región",
+        "PASSWORD": "Contraseña de acceso",
+        "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
+        "ERROR": {
+          "CONSENT": "Debe aceptar el consentimiento informado para continuar",
+          "NAMES": "Debe ingresar los nombres",
+          "LAST_NAMES": "Debe ingresar los apellidos",
+          "EMAIL_REQUIRED": "Debe ingresar su correo",
+          "EMAIL_INVALID": "Debe ingresar un correo válido",
+          "RUT_REQUIRED": "Debe ingresar su rut",
+          "RUT_INVALID": "Debe ingresar un rut válido",
+          "PHONE_REQUIRED": "Debe ingresar su teléfono",
+          "PHONE_INVALID": "Debe ingresar un teléfono válido",
+          "BIRTHDATE": "Debe ingresar la fecha de nacimiento",
+          "GRADE": "Debe ingresar el curso",
+          "SCHOOL": "Debe ingresar el colegio",
+          "REGION": "Debe ingresar la región",
+          "COMMUNE": "Debe ingresar la comuna",
+          "PASSWORD": "Debe ingresar una contraseña",
+          "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
+          "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
+        }
+      }
+    }
 	"STUDY": {
 		"FORM": {
 			"FIELDS": {
@@ -60,5 +112,4 @@
 		},
 		"SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
 		"TITLE": "Carga de recursos"
-	}
 }

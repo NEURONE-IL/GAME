@@ -5,6 +5,7 @@ import { LoginComponent } from './views/login/login.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
 import { SearchComponent } from './views/search/search.component';
 import { SessionComponent } from './views/session/session.component';
+import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 import { QuestionaryComponent } from './views/questionary/questionary.component';
@@ -16,6 +17,7 @@ import { ResourcesUploadComponent } from './views/resources-upload/resources-upl
 import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {
@@ -99,11 +101,10 @@ const routes: Routes = [
     path: 'login', 
     component: LoginComponent
   },
-  { 
-    path: '**', 
-    redirectTo: '/login' 
-  }
-]
+  { path: 'signup/:study_id', component: SignupComponent},
+  { path: 'admin_panel', component: AdminPanelComponent},
+  { path: '**', redirectTo: '/login' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

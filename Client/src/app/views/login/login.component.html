@@ -8,8 +8,8 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field style="margin-top: 5%">
-            <mat-label>{{"username" | translate}}</mat-label>
-          <input type="text" matInput formControlName="username">
+            <mat-label>{{"email" | translate}}</mat-label>
+          <input type="text" matInput formControlName="email">
           <mat-error>
             {{"fieldRequired" | translate}}
           </mat-error>
