@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const documentMiddleware = require('../middlewares/documentMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('', [verifyToken] , async (req, res) => {
     Document.find({}, (err, documents) =>{
         if(err){
             return res.status(404).json({
@@ -18,7 +18,7 @@ router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
     });
 })
 
-router.get('/:document_id', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('/:document_id', [verifyToken] , async (req, res) => {
     const _id = req.params.document_id;
     Document.findOne({_id: _id}, (err, document) =>{
         if(err){

@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('' , async (req, res) => {
+router.get('' ,  [verifyToken], async (req, res) => {
     Study.find({}, (err, studys) =>{
         if(err){
             return res.status(404).json({
@@ -18,7 +18,7 @@ router.get('' , async (req, res) => {
     });
 })
 
-router.get('/:study_id', async (req, res) => {
+router.get('/:study_id', [verifyToken], async (req, res) => {
     const _id = req.params.study_id;
     Study.findOne({_id: _id}, (err, study) =>{
         if(err){

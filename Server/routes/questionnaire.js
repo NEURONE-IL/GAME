@@ -7,7 +7,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const questionnaireMiddleware = require('../middlewares/questionnaireMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('', async (req, res) => {
+router.get('', [verifyToken], async (req, res) => {
     Questionnaire.find({}, (err, questionnaires) =>{
         if(err){
             return res.status(404).json({
@@ -19,7 +19,7 @@ router.get('', async (req, res) => {
     });
 })
 
-router.get('/answer', async (req, res) => {
+router.get('/answer', [verifyToken], async (req, res) => {
     UserQuestionnaire.find({}, (err, userQuestionnaires) =>{
         if(err){
             return res.status(404).json({
@@ -31,7 +31,7 @@ router.get('/answer', async (req, res) => {
     }).populate('user', {password:0}).populate('questionnaire');
 })
 
-router.get('/:questionnaire_id', async (req, res) => {
+router.get('/:questionnaire_id', [verifyToken], async (req, res) => {
     const _id = req.params.questionnaire_id;
     Questionnaire.findOne({_id: _id}, (err, questionnaire) =>{
         if(err){
@@ -44,7 +44,7 @@ router.get('/:questionnaire_id', async (req, res) => {
     });
 });
 
-router.get('/answer/:answers_id', async (req, res) => {
+router.get('/answer/:answers_id', [verifyToken], async (req, res) => {
     const _id = req.params.answers_id;
     UserQuestionnaire.findOne({_id: _id}, (err, userQuestionnaire) =>{
         if(err){
