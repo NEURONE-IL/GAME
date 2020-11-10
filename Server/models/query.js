@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const QuerySchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     userEmail: {type: String},
     query: {type: String},
     title: {type: String},
     url: {type: String},
-    localDate: {type: Date},
+    localTimeStamp: {type: Date},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
