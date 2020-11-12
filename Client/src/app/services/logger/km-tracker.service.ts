@@ -27,12 +27,12 @@ export class KmTrackerService {
       g: document.getElementsByTagName('body')[0]
     };
 
-    this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
-    this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
-    this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
-    this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
-    this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
-    this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
+    // this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
+    // this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
+    // this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
+    // this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
+    // this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
+    // this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
 
     this.isTracking = true;
   }

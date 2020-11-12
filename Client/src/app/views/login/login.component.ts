@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  user: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
@@ -18,10 +19,10 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
   });
+  this.user = this.authService.getUser();
   }
 
   onSubmit(){
-    this.authService.logout();
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
   }
 

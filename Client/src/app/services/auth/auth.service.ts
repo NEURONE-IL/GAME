@@ -26,7 +26,7 @@ export class AuthService {
         localTimeStamp: Date.now()
       }
       this.logger.postSessionLog(sessionLog).subscribe(()=> {
-        
+
       });
       },
       (error) => {
@@ -35,30 +35,40 @@ export class AuthService {
       );
   }
 
-    logout() {
-      const obj = JSON.parse(localStorage.getItem('currentUser')); // this is how you parse a string into JSON 
-      let sessionLog = {
-        userId: obj._id,
-        userEmail: obj.email,
-        state: 'login',
-        localTimeStamp: Date.now()
-      }   
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem("currentUser");
+  logout() {
+    const obj = JSON.parse(localStorage.getItem('currentUser'));
+    let sessionLog = {
+      userId: obj._id,
+      userEmail: obj.email,
+      state: 'login',
+      localTimeStamp: Date.now()
     }
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem("currentUser");
+  }
 
-    public get loggedIn(): boolean {
-      return (localStorage.getItem('auth_token') !== null);
-    }
+  public get loggedIn(): boolean {
+    return (localStorage.getItem('auth_token') !== null);
+  }
 
-    signup(userData: any, study_id: string) {
-      this.http.post(this.uri + 'register/' + study_id, userData)
-      .subscribe((resp: any) => {
-        this.router.navigate(['admin_panel']);
-        },
-        (error) => {
-          this.router.navigate(['signup']);
-        }
-        );
-    }
+  public isAdmin(): any {
+    const role = JSON.parse(localStorage.getItem('currentUser')).role;
+    console.log(role);
+    return true;
+  }
+
+  public getUser(): any {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  signup(userData: any, study_id: string) {
+    this.http.post(this.uri + 'register/' + study_id, userData)
+    .subscribe((resp: any) => {
+      this.router.navigate(['admin_panel']);
+      },
+      (error) => {
+        this.router.navigate(['signup']);
+      }
+      );
+  }
 }

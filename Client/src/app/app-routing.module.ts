@@ -18,6 +18,8 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { AuthGuard } from './helpers/auth.guard';
+import { AdminGuard } from './helpers/admin.guard';
 
 const routes: Routes = [
   {
@@ -84,7 +86,7 @@ const routes: Routes = [
     path: 'create',
     component: CreationComponent,
     //canActivate: [DirectAccessGuard],
-    children: [  
+    children: [
       {
         path: 'challenge',
         component: ChallengeCreationComponent,
@@ -97,12 +99,19 @@ const routes: Routes = [
       }
     ]
   },
-  { 
-    path: 'login', 
+  {
+    path: 'login',
     component: LoginComponent
   },
   { path: 'signup/:study_id', component: SignupComponent},
-  { path: 'admin_panel', component: AdminPanelComponent},
+  {
+    path: 'admin_panel',
+    canActivate: [
+      AuthGuard,
+      AdminGuard
+    ],
+    component: AdminPanelComponent
+  },
   { path: '**', redirectTo: '/login' }
 ];
 
