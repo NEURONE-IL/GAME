@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResourceService } from '../../services/game/resource.service';
 
 @Component({
-  selector: 'app-resources-upload',
-  templateUrl: './resources-upload.component.html',
-  styleUrls: ['./resources-upload.component.css']
+  selector: 'app-resource-upload',
+  templateUrl: './resource-upload.component.html',
+  styleUrls: ['./resource-upload.component.css']
 })
-export class ResourcesUploadComponent implements OnInit {
-  uploadForm: FormGroup;
+export class ResourceUploadComponent implements OnInit {
+  resourceForm: FormGroup;
   docTypes = [
     { id: 1, typeOf: 'document', show: 'Documento' },
     { id: 2, typeOf: 'image', show: 'Imagen' },
@@ -15,11 +16,11 @@ export class ResourcesUploadComponent implements OnInit {
     { id: 4, typeOf: 'video', show: 'Vídeo' }
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService) { }
 
   ngOnInit(): void {
 
-    this.uploadForm = this.formBuilder.group({
+    this.resourceForm = this.formBuilder.group({
       docName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       docType: ['', [Validators.required]],
       title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -31,11 +32,15 @@ export class ResourcesUploadComponent implements OnInit {
     })
   }
 
-  get uploadFormControls(): any {
-    return this.uploadForm['controls'];
+  get resourceFormControls(): any {
+    return this.resourceForm['controls'];
   }
 
   resetForm() {
-    this.uploadForm.reset();
+    this.resourceForm.reset();
+  }
+
+  uploadResource() {
+    this.resourceService.postResource(this.resourceForm.value);
   }
 }

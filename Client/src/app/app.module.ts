@@ -42,7 +42,7 @@ import { InitialQuestionaryComponent } from './views/initial-questionary/initial
 import { PreTestQuestionaryComponent } from './views/pre-test-questionary/pre-test-questionary.component';
 import { PostTestQuestionaryComponent } from './views/post-test-questionary/post-test-questionary.component';
 import { QuestionaryComponent } from './views/questionary/questionary.component';
-import { ResourcesUploadComponent } from './views/resources-upload/resources-upload.component';
+import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { UploadComponent } from './views/upload/upload.component';
@@ -71,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PreTestQuestionaryComponent,
     PostTestQuestionaryComponent,
     QuestionaryComponent,
-    ResourcesUploadComponent,
+    ResourceUploadComponent,
     StudyCreationComponent,
     ChallengeCreationComponent,
     UploadComponent,

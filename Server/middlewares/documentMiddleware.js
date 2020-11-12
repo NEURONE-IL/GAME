@@ -15,14 +15,11 @@ const schema = Joi.object({
     url: Joi.string()
         .required(),    
 
-    domain: Joi.string()
-        .required(),
+    domain: Joi.string(),
 
-    locale: Joi.string()
-        .required(),
+    locale: Joi.string(),
 
     task: Joi.string()
-        .required()
         
 })
 

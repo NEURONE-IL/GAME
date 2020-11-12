@@ -8,20 +8,15 @@ const schema = Joi.object({
     seconds: Joi.number()
         .required(),
     
-    domain: Joi.string()
-        .required(),
+    domain: Joi.string(),
 
-    locale: Joi.string()
-        .required(),    
+    locale: Joi.string(),    
 
-    task: Joi.string()
-        .required(),
+    task: Joi.string(),
 
-    hint: Joi.string()
-        .required(),
+    hint: Joi.string(),
 
-    answer_type: Joi.string()
-        .required(),
+    answer_type: Joi.string(),
 
     answer: Joi.string()
         .required(),

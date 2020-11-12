@@ -13,7 +13,7 @@ import { InitialQuestionaryComponent } from './views/initial-questionary/initial
 import { PreTestQuestionaryComponent } from './views/pre-test-questionary/pre-test-questionary.component';
 import { PostTestQuestionaryComponent } from './views/post-test-questionary/post-test-questionary.component';
 import { UploadComponent } from './views/upload/upload.component';
-import { ResourcesUploadComponent } from './views/resources-upload/resources-upload.component';
+import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
@@ -74,8 +74,8 @@ const routes: Routes = [
     //canActivate: [DirectAccessGuard],
     children: [
       {
-        path: 'resources',
-        component: ResourcesUploadComponent,
+        path: 'resource',
+        component: ResourceUploadComponent,
         //canActivate: [DirectAccessGuard],
       }
     ]

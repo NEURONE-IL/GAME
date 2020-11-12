@@ -82,11 +82,8 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.HINT" | translate }}</mat-label>
-						<input matInput formControlName="hint" required #inputHint maxlength="100">
+						<input matInput formControlName="hint" #inputHint maxlength="100">
 						<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
-						<mat-error *ngIf="challengeFormControls.hint.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('minlength')">
 							{{ "ERRORS.MIN_LENGTH_20" | translate }}
 						</mat-error>
@@ -100,9 +97,6 @@
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER_TYPE" | translate }}</mat-label>
 						<input matInput formControlName="answer_type" #inputAnswerType maxlength="50">
 						<mat-hint align="end">{{inputAnswerType.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="challengeFormControls.answer_type.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
 						<mat-error *ngIf="challengeFormControls.answer_type.hasError('minlength')">
 							{{ "ERRORS.MIN_LENGTH_3" | translate }}
 						</mat-error>
@@ -114,7 +108,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER" | translate }}</mat-label>
-						<input matInput formControlName="answer" #inputAnswer maxlength="50">
+						<input matInput formControlName="answer" required #inputAnswer maxlength="50">
 						<mat-hint align="end">{{inputAnswer.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="challengeFormControls.answer.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
@@ -130,17 +124,12 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.STUDY" | translate }}</mat-label>
-						<input matInput formControlName="study" #inputStudy maxlength="50">
-						<mat-hint align="end">{{inputStudy.value?.length || 0}}/50</mat-hint>
+						<mat-select formControlName="study" required>
+							<mat-option *ngFor="let study of studies" #Study [value]="study._id">{{study.name}}</mat-option>
+						</mat-select>
 						<mat-error *ngIf="challengeFormControls.study.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
 						</mat-error>
-						<mat-error *ngIf="challengeFormControls.study.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="challengeFormControls.study.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>
 			</mat-grid-list>
@@ -153,7 +142,7 @@
 		</form>	
 	</mat-card-content>		
 	<mat-card-actions class="cardActions">
-		<button mat-raised-button class="saveButton" [disabled]="!challengeForm.valid">
+		<button mat-raised-button class="saveButton" [disabled]="!challengeForm.valid" (click)="createChallenge()">
 			{{ "BUTTONS.SAVE" | translate }}
 		</button>
 		<button mat-raised-button class="clearButton" (click)="resetForm()">

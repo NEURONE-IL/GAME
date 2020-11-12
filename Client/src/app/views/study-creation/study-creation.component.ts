@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StudyService } from '../../services/game/study.service';
 
 @Component({
   selector: 'app-study-creation',
@@ -8,7 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class StudyCreationComponent implements OnInit {
   studyForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+
+  constructor(private formBuilder: FormBuilder, private studyService: StudyService) { }
 
   ngOnInit(): void {
 
@@ -26,4 +28,8 @@ export class StudyCreationComponent implements OnInit {
   resetForm() {
     this.studyForm.reset();
   }
-}
+  
+  createStudy(){
+    this.studyService.postStudy(this.studyForm.value);
+  }
+}  

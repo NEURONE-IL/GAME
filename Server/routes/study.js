@@ -14,7 +14,7 @@ router.get('' , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({studys});
+        res.send(studys);
     });
 })
 

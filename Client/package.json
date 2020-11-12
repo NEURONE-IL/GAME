@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.1",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "axios": "^0.21.0",
     "ng-validate-equal": "^1.0.4",
     "ng2-pdf-viewer": "^6.3.2",
     "ng9-rut": "0.0.6",
