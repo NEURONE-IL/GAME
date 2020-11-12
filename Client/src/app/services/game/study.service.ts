@@ -17,12 +17,12 @@ export interface Study {
 })
 export class StudyService {
 
-  uri = this.endpoints.rootURL + 'study';
+  uri = this.endpoints.rootURL + 'study/';
 
   constructor(protected http: HttpClient, private endpoints: EndpointsService) { }
 
   getStudies(): Observable<any> {
-    return this.http.get('http://localhost:3090/api/study');
+    return this.http.get(this.uri);
   }
 
   getStudy(id: string) {
@@ -41,13 +41,13 @@ export class StudyService {
     }
     /*Sends the request using Axios*/
     await Axios
-    .post('http://localhost:3090/api/study', cleanStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
+    .post(this.uri, cleanStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
     .then( response => {
       console.log(response.data)
     })
     .catch(error => {
       console.log(error);
     })
-  }  
+  }
 
 }

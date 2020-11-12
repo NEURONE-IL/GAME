@@ -29,11 +29,9 @@ export class KmTrackerService {
       s: 'state'
     };
 
-    console.log(data);
-
     // this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, LoggerConfigs.eventThrottle);
     // this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, LoggerConfigs.eventThrottle);
-    this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
+    // this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
     // this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
     // this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
     // this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
@@ -44,7 +42,6 @@ export class KmTrackerService {
   bindEvent(elem, evt, data, fn) {
     elem.addEventListener(evt, fn);
     elem.data = data;
-    console.log('Bind!')
   }
 
   mouseClickListener(evt) {
@@ -56,10 +53,7 @@ export class KmTrackerService {
           gtb = evt.currentTarget.data.g,
           w = window.innerWidth  || elm.clientWidth  || gtb.clientWidth,
           h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
-          // s = evt.currentTarget.data.s,
-          // src = s.href(s.current.name, s.params, {absolute: false}),
-          src = 'pendiente',
-          time = 'pendiente';
+          time = Date.now();
 
       let docX = evt.pageX,
           docY = evt.pageY,
@@ -67,8 +61,8 @@ export class KmTrackerService {
           winY = evt.clientY,
           // docW = doc.width(),
           // docH = doc.height(),
-          docW = 'pendiente',
-          docH = 'pendiente',
+          docW = doc.body.clientWidth,
+          docH = doc.body.clientWidth,
           winW = w,
           winH = h;
 
@@ -89,7 +83,97 @@ export class KmTrackerService {
         localTimestamp: time
       };
       console.log(clickOutput);
-      // Save clickOutput here
     }
   }
+
+  keydownListener(evt) {
+    evt = evt || event;
+
+    let t = Date.now(),
+        w = evt.which,
+       kc = evt.keyCode,
+      chc = evt.charCode,
+      key = evt.key || '',
+      chr = String.fromCharCode(kc || chc),
+      doc = evt.currentTarget.data.d
+
+    if (true) {
+      let keyOutput = {
+        userId: 'userId',
+        username: 'userName',
+        type: 'KeyDown',
+        source: 'Window',
+        which: w,
+        keyCode: kc,
+        charCode: chc,
+        key: key,
+        chr: chr,
+        localTimestamp: t,
+        url: doc.URL
+      };
+
+      console.log(keyOutput);
+    }
+  }
+
+  keyupListener(evt) {
+    evt = evt || event;
+
+    let t = Date.now(),
+        w = evt.which,
+       kc = evt.keyCode,
+      chc = evt.charCode,
+      key = evt.key || '',
+      chr = String.fromCharCode(kc || chc),
+      doc = evt.currentTarget.data.d
+
+    if (true) {
+      let keyOutput = {
+        userId: 'userId',
+        username: 'userName',
+        type: 'KeyUp',
+        source: 'Window',
+        which: w,
+        keyCode: kc,
+        charCode: chc,
+        key: key,
+        chr: chr,
+        localTimestamp: t,
+        url: doc.URL
+      };
+
+      console.log(keyOutput);
+    }
+  }
+
+  keypressListener(evt) {
+    evt = evt || event;
+
+    let t = Date.now(),
+        w = evt.which,
+       kc = evt.keyCode,
+      chc = evt.charCode,
+      key = evt.key || '',
+      chr = String.fromCharCode(kc || chc),
+      doc = evt.currentTarget.data.d
+
+    if (true) {
+      let keyOutput = {
+        userId: 'userId',
+        username: 'username',
+        type: 'KeyPress',
+        source: 'Window',
+        which: w,
+        keyCode: kc,
+        charCode: chc,
+        key: key,
+        chr: chr,
+        localTimestamp: t,
+        url: doc.URL
+      };
+
+      console.log(keyOutput);
+    }
+  }
+
 }
