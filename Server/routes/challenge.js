@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const challengeMiddleware = require('../middlewares/challengeMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('', [verifyToken] , async (req, res) => {
     Challenge.find({}, (err, challenges) =>{
         if(err){
             return res.status(404).json({
@@ -18,7 +18,7 @@ router.get('', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
     });
 })
 
-router.get('/:challenge_id', [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+router.get('/:challenge_id', [verifyToken] , async (req, res) => {
     const _id = req.params.challenge_id;
     Challenge.findOne({_id: _id}, (err, challenge) =>{
         if(err){

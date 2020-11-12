@@ -20,6 +20,13 @@ const documentRoutes = require('./routes/document');
 const questionnaireRoutes = require('./routes/questionnaire');
 const sendEmailRoutes = require('./routes/send-email');
 
+const keystrokeRoutes = require('./routes/keystroke');
+const mouseClickRoutes = require('./routes/mouseClick');
+const mouseCoordinateRoutes = require('./routes/mouseCoordinate');
+const queryRoutes = require('./routes/query');
+const sessionLogRoutes = require('./routes/sessionLog');
+const visitedLinkRoutes = require('./routes/visitedLink');
+
 
 //db connection
 mongoose.connect(config.DBHost, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
@@ -106,7 +113,15 @@ app.use('/api/user', userRoutes);
 app.use('/api/study', studyRoutes);
 app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
+
 app.use('/api/send-email', sendEmailRoutes);
+
+app.use('/api/keystroke', keystrokeRoutes);
+app.use('/api/mouseClick', mouseClickRoutes);
+app.use('/api/mouseCoordinate', mouseCoordinateRoutes);
+app.use('/api/query', queryRoutes);
+app.use('/api/sessionLog', sessionLogRoutes);
+app.use('/api/visitedLink', visitedLinkRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');

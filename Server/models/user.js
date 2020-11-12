@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
+    confirmed: {type: Boolean, default: false},
     tutor_names: {type: String },
     tutor_last_names: {type: String },
     tutor_rut: {type: String },
