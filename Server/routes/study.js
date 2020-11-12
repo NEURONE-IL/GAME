@@ -18,7 +18,7 @@ router.get('' ,  [verifyToken], async (req, res) => {
     });
 })
 
-router.get('/:study_id', [verifyToken], async (req, res) => {
+router.get('/:study_id', async (req, res) => {
     const _id = req.params.study_id;
     Study.findOne({_id: _id}, (err, study) =>{
         if(err){

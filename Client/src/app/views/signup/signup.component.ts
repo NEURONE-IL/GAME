@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit {
   tutorForm: FormGroup;
   studentForm: FormGroup;
   study: any;
+  validStudy = true;
+  isLoadingStudy = true;
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -61,8 +63,11 @@ export class SignupComponent implements OnInit {
     const study_id = this.route.snapshot.paramMap.get('study_id');
     this.studyService.getStudy(study_id).subscribe(response => {
       this.study = response['study'];
+      this.isLoadingStudy=false;
     },
     (error) => {
+      this.validStudy = false;
+      this.isLoadingStudy=false;
       console.log("couldn't access study");
     });
   }

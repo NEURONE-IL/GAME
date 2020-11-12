@@ -1,7 +1,16 @@
 <div class="toolbar" role="banner">
   <a class="title-span" href="/">NEURONE GAME</a>
 </div>
-<div class="main-content">
+<div class="main-content" *ngIf="!isLoadingStudy && !validStudy">
+  <mat-card class="card mat-elevation-z8">
+      <mat-card-title>{{"SIGNUP.INVALID_LINK.TITLE" | translate}}</mat-card-title>
+    <mat-card-content>
+      <p>{{"SIGNUP.INVALID_LINK.MESSAGE" | translate}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="main-content" *ngIf="!isLoadingStudy && validStudy">
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="consentForm">
       <form [formGroup]="consentForm">

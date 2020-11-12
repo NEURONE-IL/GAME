@@ -42,6 +42,10 @@
       "REQUIRED": "El campo es requerido"
     },
     "SIGNUP": {
+      "INVALID_LINK": {
+        "TITLE": "Link inválido",
+        "MESSAGE": "El link de registro utilizado es inválido, por favor póngase en contacto con el responsable del estudio."
+      },
       "CONSENT": {
         "DISCLAIMER": "Por favor, lea el siguiente consentimiento informado.",
         "PREV_TEXT": "Anterior",
