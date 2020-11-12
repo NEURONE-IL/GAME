@@ -1,33 +1,33 @@
 <div class="toolbar" role="banner">
-    <a class="title-span" href="/">{{user}}</a>
+    <a class="title-span" href="/">NEURONE GAME</a>
 </div>
 <div class="main-content">
   <mat-card class="card mat-elevation-z8">
-        <mat-card-title>{{"login" | translate}}</mat-card-title>
+        <mat-card-title>{{"LOGIN.TITLE" | translate}}</mat-card-title>
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field style="margin-top: 5%">
-            <mat-label>{{"email" | translate}}</mat-label>
+            <mat-label>{{"LOGIN.EMAIL" | translate}}</mat-label>
           <input type="text" matInput formControlName="email">
           <mat-error>
-            {{"fieldRequired" | translate}}
+            {{"LOGIN.REQUIRED" | translate}}
           </mat-error>
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field>
-          <mat-label>{{"password" | translate}}</mat-label>
+          <mat-label>{{"LOGIN.PASSWORD" | translate}}</mat-label>
           <input type="password" matInput formControlName="password">
           <mat-error>
-            {{"fieldRequired" | translate}}
+            {{"LOGIN.REQUIRED" | translate}}
           </mat-error>
         </mat-form-field>
       </p>
 
       <div class="button">
-        <button type="submit" color="primary" mat-raised-button>{{"enter" | translate}}</button>
+        <button type="submit" color="primary" mat-raised-button>{{"LOGIN.ENTER" | translate}}</button>
       </div>
 
 

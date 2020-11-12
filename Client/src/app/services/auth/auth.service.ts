@@ -16,7 +16,6 @@ export class AuthService {
   login(email: string, password: string) {
     this.http.post(this.uri + 'login', {email: email,password: password})
     .subscribe((resp: any) => {
-      this.router.navigate(['admin_panel']);
       localStorage.setItem('auth_token', resp.token);
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
       let sessionLog = {
@@ -28,6 +27,7 @@ export class AuthService {
       this.logger.postSessionLog(sessionLog).subscribe(()=> {
 
       });
+      this.redirectUserPanel(resp.user.role.name);
       },
       (error) => {
         this.router.navigate(['login']);
@@ -45,6 +45,7 @@ export class AuthService {
     }
     localStorage.removeItem('auth_token');
     localStorage.removeItem("currentUser");
+    this.router.navigate(['login']);
   }
 
   public get loggedIn(): boolean {
@@ -53,8 +54,8 @@ export class AuthService {
 
   public isAdmin(): any {
     const role = JSON.parse(localStorage.getItem('currentUser')).role;
-    console.log(role);
-    return true;
+    if (role.name=='admin') return true;
+    else return false;
   }
 
   public getUser(): any {
@@ -64,11 +65,21 @@ export class AuthService {
   signup(userData: any, study_id: string) {
     this.http.post(this.uri + 'register/' + study_id, userData)
     .subscribe((resp: any) => {
-      this.router.navigate(['admin_panel']);
+      this.router.navigate(['/']);
       },
       (error) => {
         this.router.navigate(['signup']);
       }
       );
+  }
+
+  redirectUserPanel(role) {
+    console.log('redirect');
+    if (role=='admin') {
+      console.log('admin');
+      this.router.navigate(['admin_panel']);
+    } else {
+      this.router.navigate(['start']);
+    }
   }
 }

@@ -9,7 +9,7 @@
 			"FIELDS": {
 				"ANSWER": "Respuesta",
 				"ANSWER_TYPE": "Tipo de respuesta",
-				"CHECK": "Por favor confirme para continuar",				
+				"CHECK": "Por favor confirme para continuar",
 				"DOMAIN": "Dominio",
 				"HINT": "Pista",
 				"LOCALE": "Idioma",
@@ -18,7 +18,7 @@
 				"STUDY": "Estudio",
 				"TASK": "Tarea"
 			}
-		},		
+		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
 		"TITLE": "Creación de desafíos"
 	},
@@ -33,7 +33,14 @@
 		"REQUIRED": "El campo es requerido",
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",
 		"UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
-	},
+  },
+    "LOGIN": {
+      "TITLE": "Iniciar sesión",
+      "EMAIL": "Correo electrónico",
+      "PASSWORD": "Contraseña",
+      "ENTER": "Ingresar",
+      "REQUIRED": "El campo es requerido"
+    },
     "SIGNUP": {
       "CONSENT": {
         "DISCLAIMER": "Por favor, lea el siguiente consentimiento informado.",
@@ -93,10 +100,10 @@
 				"DESCRIPTION": "Descripción",
 				"NAME": "Nombre"
 			}
-		},		
+		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
 		"TITLE": "Creación de estudios"
-	},	
+	},
 	"UPLOAD": {
 		"FORM": {
 			"FIELDS": {

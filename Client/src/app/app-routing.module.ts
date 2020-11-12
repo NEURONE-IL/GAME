@@ -24,27 +24,25 @@ import { AdminGuard } from './helpers/admin.guard';
 const routes: Routes = [
   {
     path: 'start',
+    canActivate: [ AuthGuard ],
     component: StartComponent
   },
   {
     path: 'questionary',
     component: QuestionaryComponent,
-    //canActivate: [DirectAccessGuard],
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: 'initial',
         component: InitialQuestionaryComponent,
-        //canActivate: [DirectAccessGuard],
       },
       {
         path: 'pre-test',
         component: PreTestQuestionaryComponent,
-        //canActivate: [DirectAccessGuard],
       },
       {
         path: 'post-test',
         component: PostTestQuestionaryComponent,
-        //canActivate: [DirectAccessGuard],
       }
     ]
   },
@@ -85,17 +83,15 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreationComponent,
-    //canActivate: [DirectAccessGuard],
+    canActivate: [ AuthGuard, AdminGuard ],
     children: [
       {
         path: 'challenge',
-        component: ChallengeCreationComponent,
-        //canActivate: [DirectAccessGuard],
+        component: ChallengeCreationComponent
       },
       {
         path: 'study',
-        component: StudyCreationComponent,
-        //canActivate: [DirectAccessGuard],
+        component: StudyCreationComponent
       }
     ]
   },
@@ -106,10 +102,7 @@ const routes: Routes = [
   { path: 'signup/:study_id', component: SignupComponent},
   {
     path: 'admin_panel',
-    canActivate: [
-      AuthGuard,
-      AdminGuard
-    ],
+    canActivate: [ AuthGuard, AdminGuard ],
     component: AdminPanelComponent
   },
   { path: '**', redirectTo: '/login' }
