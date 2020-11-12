@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
 
  /*
  * Keyboard and mouse tracker service.
@@ -13,8 +14,6 @@ import { Injectable } from '@angular/core';
 export class KmTrackerService {
 
     isTracking = false;
-    window = window;
-    document = document;
 
   constructor() { }
 
@@ -22,25 +21,30 @@ export class KmTrackerService {
     let targetDoc = window;
 
     let data = {
-      w: this.window,
-      d: this.document,
-      e: this.document.documentElement,
-      g: document.getElementsByTagName('body')[0],
-      s: 'state'
+      w: window,
+      d: document,
+      e: document.documentElement,
+      g: document.getElementsByTagName('body')[0]
     };
 
-    // this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, LoggerConfigs.eventThrottle);
-    // this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, LoggerConfigs.eventThrottle);
-    // this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
-    // this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
-    // this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
-    // this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
+    this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
+    this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
+    this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
+    this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
+    this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
+    this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
 
     this.isTracking = true;
   }
 
   bindEvent(elem, evt, data, fn) {
     elem.addEventListener(evt, fn);
+    elem.data = data;
+  }
+
+  bindThrottledEvent(elem, evt, data, fn, delay) {
+    const throttledFn = _.throttle(fn, delay, { 'trailing': false });
+    elem.addEventListener(evt, throttledFn);
     elem.data = data;
   }
 
@@ -59,8 +63,6 @@ export class KmTrackerService {
           docY = evt.pageY,
           winX = evt.clientX,
           winY = evt.clientY,
-          // docW = doc.width(),
-          // docH = doc.height(),
           docW = doc.body.clientWidth,
           docH = doc.body.clientWidth,
           winW = w,
@@ -173,6 +175,85 @@ export class KmTrackerService {
       };
 
       console.log(keyOutput);
+    }
+  }
+
+  mouseMoveListener(evt) {
+    if (true) {
+      // From http://stackoverflow.com/a/23323821
+      let win = evt.currentTarget.data.w,
+          doc = evt.currentTarget.data.d,
+          elm = evt.currentTarget.data.e,
+          gtb = evt.currentTarget.data.g,
+          w = window.innerWidth  || elm.clientWidth  || gtb.clientWidth,
+          h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
+          time = Date.now();
+
+      let docX = evt.pageX,
+          docY = evt.pageY,
+          winX = evt.clientX,
+          winY = evt.clientY,
+          docW = doc.body.clientWidth,
+          docH = doc.body.clientWidth,
+          winW = w,
+          winH = h;
+
+
+      let movementOutput = {
+        userId: 'userId',
+        username: 'username',
+        type: 'MouseMovement',
+        source: 'Window',
+        url: doc.URL,
+        x_win: winX,
+        y_win: winY,
+        w_win: winW,
+        h_win: winH,
+        x_doc: docX,
+        y_doc: docY,
+        w_doc: docW,
+        h_doc: docH,
+        localTimestamp: time
+      };
+
+      console.log(movementOutput);
+    }
+  }
+
+  scrollListener(evt) {
+    if (true) {
+      // From http://stackoverflow.com/a/23323821
+      let win = evt.currentTarget.data.w,
+          doc = evt.currentTarget.data.d,
+          elm = evt.currentTarget.data.e,
+          gtb = evt.currentTarget.data.g,
+          w = window.innerWidth  || elm.clientWidth  || gtb.clientWidth,
+          h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
+          time = Date.now();
+
+      let scrollX = window.scrollX,
+          scrollY = window.scrollY,
+          docW = doc.body.clientWidth,
+          docH = doc.body.clientWidth,
+          winW = w,
+          winH = h;
+
+      let scrollOutput = {
+        userId: 'userId',
+        username: 'username',
+        type: 'Scroll',
+        source: 'Window',
+        url: doc.URL,
+        x_scr: scrollX,
+        y_scr: scrollY,
+        w_win: winW,
+        h_win: winH,
+        w_doc: docW,
+        h_doc: docH,
+        localTimestamp: time
+      };
+
+      console.log(scrollOutput);
     }
   }
 
