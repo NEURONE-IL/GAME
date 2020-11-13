@@ -34,7 +34,6 @@ export class AuthService {
   }
 
   logout() {
-    const obj = JSON.parse(localStorage.getItem('currentUser'));
     let sessionLog = {
       userId: this.getUser()._id,
       userEmail: this.getUser().email,

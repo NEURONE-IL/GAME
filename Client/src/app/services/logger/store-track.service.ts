@@ -17,46 +17,52 @@ export class StoreTrackService {
 
   // Save mouse clicks
   postMouseClick(data) {
-    data.userId = this.authService.getUser()._id;
-    this.http.post(this.mouseClickUri, data)
-    .subscribe((resp: any) => {
-      console.log(resp);
-      },
-      (error) => {
-        console.log(error);
-      }
-      );
+    if(this.authService.loggedIn){
+      data.userId = this.authService.getUser()._id;
+      this.http.post(this.mouseClickUri, data)
+      .subscribe((resp: any) => {
+        console.log(resp);
+        },
+        (error) => {
+          console.log(error);
+        }
+        );
+    }
   }
 
 
   // Save mouse coordinates
   postMouseCoordinates(data) {
-    let user = this.authService.getUser();
-    data.userId = user._id;
-    data.userEmail = user.email;
-    this.http.post(this.mouseCoordinateUri, data)
-    .subscribe((resp: any) => {
-      console.log(resp);
-      },
-      (error) => {
-        console.log(error);
-      }
-      );
+    if(this.authService.loggedIn){
+      let user = this.authService.getUser();
+      data.userId = user._id;
+      data.userEmail = user.email;
+      this.http.post(this.mouseCoordinateUri, data)
+      .subscribe((resp: any) => {
+        console.log(resp);
+        },
+        (error) => {
+          console.log(error);
+        }
+        );
+    }
   }
 
   // Save scrolls
   postScroll(data) {
-    let user = this.authService.getUser();
-    data.userId = user._id;
-    data.userEmail = user.email;
-    this.http.post(this.mouseCoordinateUri, data)
-    .subscribe((resp: any) => {
-      console.log(resp);
-      },
-      (error) => {
-        console.log(error);
-      }
-      );
+    if(this.authService.loggedIn){
+      let user = this.authService.getUser();
+      data.userId = user._id;
+      data.userEmail = user.email;
+      this.http.post(this.mouseCoordinateUri, data)
+      .subscribe((resp: any) => {
+        console.log(resp);
+        },
+        (error) => {
+          console.log(error);
+        }
+        );
+    }
   }
 
 
