@@ -15,7 +15,6 @@ export class StoreSessionService {
   postSessionLog(data) {
     this.http.post(this.sessionLogUri, data)
     .subscribe((resp: any) => {
-      console.log(resp);
       },
       (error) => {
         console.log(error);

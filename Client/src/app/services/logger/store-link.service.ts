@@ -18,7 +18,6 @@ export class StoreLinkService {
       data.userId = this.authService.getUser()._id;
       this.http.post(this.visitedLinkUri, data)
       .subscribe((resp: any) => {
-        console.log(resp);
         },
         (error) => {
           console.log(error);

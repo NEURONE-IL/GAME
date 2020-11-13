@@ -31,6 +31,19 @@ router.get('/:challenge_id', [verifyToken] , async (req, res) => {
     });
 });
 
+router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
+    const _id = req.params.study_id;
+    Challenge.find({study: _id}, (err, challenges) => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({challenges});
+    })
+})
+
 router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyBody], async (req, res) => {
     const challenge = new Challenge(req.body);
     challenge.save((err, challenge) => {
