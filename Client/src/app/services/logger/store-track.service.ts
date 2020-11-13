@@ -17,7 +17,6 @@ export class StoreTrackService {
 
   // Save mouse clicks
   postMouseClick(data) {
-<<<<<<< HEAD
     data.userId = this.authService.getUser()._id;
     this.http.post(this.mouseClickUri, data)
     .subscribe((resp: any) => {
@@ -26,41 +25,17 @@ export class StoreTrackService {
         console.log(error);
       }
       );
-=======
-    if(this.authService.loggedIn){
-      data.userId = this.authService.getUser()._id;
-      this.http.post(this.mouseClickUri, data)
-      .subscribe((resp: any) => {
-        console.log(resp);
-        },
-        (error) => {
-          console.log(error);
-        }
-        );
-    }
->>>>>>> cecc5cdede6f57128eca0bc1ac17e85e7410b4fe
   }
 
 
   // Save mouse coordinates
   postMouseCoordinates(data) {
-<<<<<<< HEAD
-    data.userId = this.authService.getUser()._id;
-    this.http.post(this.mouseCoordinateUri, data)
-    .subscribe((resp: any) => {
-      },
-      (error) => {
-        console.log(error);
-      }
-      );
-=======
     if(this.authService.loggedIn){
       let user = this.authService.getUser();
       data.userId = user._id;
       data.userEmail = user.email;
       this.http.post(this.mouseCoordinateUri, data)
       .subscribe((resp: any) => {
-        console.log(resp);
         },
         (error) => {
           console.log(error);
@@ -75,16 +50,14 @@ export class StoreTrackService {
       let user = this.authService.getUser();
       data.userId = user._id;
       data.userEmail = user.email;
-      this.http.post(this.mouseCoordinateUri, data)
+      this.http.post(this.scrollUri, data)
       .subscribe((resp: any) => {
-        console.log(resp);
         },
         (error) => {
           console.log(error);
         }
         );
     }
->>>>>>> cecc5cdede6f57128eca0bc1ac17e85e7410b4fe
   }
 
   // Save keystrokes

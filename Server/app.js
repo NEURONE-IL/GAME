@@ -123,7 +123,7 @@ app.use('/api/mouseCoordinate', mouseCoordinateRoutes);
 app.use('/api/query', queryRoutes);
 app.use('/api/sessionLog', sessionLogRoutes);
 app.use('/api/visitedLink', visitedLinkRoutes);
-app.use('/api/scroll/', ScrollRoutes);
+app.use('/api/scroll', ScrollRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');

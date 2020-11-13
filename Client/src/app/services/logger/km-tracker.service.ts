@@ -251,7 +251,7 @@ export class KmTrackerService {
         h_doc: docH,
         localTimestamp: time
       };
-      console.log(scrollOutput);
+      // console.log(scrollOutput);
       evt.currentTarget.storeService.postScroll(scrollOutput);
     }
   }
