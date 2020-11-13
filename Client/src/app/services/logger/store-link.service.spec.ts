@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoggerService } from './logger.service';
+import { StoreLinkService } from './store-link.service';
 
-describe('LoggerService', () => {
-  let service: LoggerService;
+describe('StoreLinkService', () => {
+  let service: StoreLinkService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LoggerService);
+    service = TestBed.inject(StoreLinkService);
   });
 
   it('should be created', () => {

@@ -252,6 +252,7 @@ export class KmTrackerService {
         localTimestamp: time
       };
       console.log(scrollOutput);
+      evt.currentTarget.storeService.postScroll(scrollOutput);
     }
   }
 }
