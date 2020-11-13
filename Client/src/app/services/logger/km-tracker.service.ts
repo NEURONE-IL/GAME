@@ -31,11 +31,11 @@ export class KmTrackerService {
     };
 
     this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
-    // this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
+    this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
     this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
-    // this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
-    // this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
-    // this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
+    this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
+    this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
+    this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
 
     this.isTracking = true;
   }
@@ -105,8 +105,6 @@ export class KmTrackerService {
 
     if (true) {
       let keyOutput = {
-        userId: 'userId',
-        username: 'userName',
         type: 'KeyDown',
         source: 'Window',
         which: w,
@@ -117,8 +115,8 @@ export class KmTrackerService {
         localTimestamp: t,
         url: doc.URL
       };
-
-      console.log(keyOutput);
+      // console.log(keyOutput);
+      evt.currentTarget.storeService.postKeyStroke(keyOutput);
     }
   }
 
@@ -135,8 +133,6 @@ export class KmTrackerService {
 
     if (true) {
       let keyOutput = {
-        userId: 'userId',
-        username: 'userName',
         type: 'KeyUp',
         source: 'Window',
         which: w,
@@ -148,7 +144,8 @@ export class KmTrackerService {
         url: doc.URL
       };
 
-      console.log(keyOutput);
+      // console.log(keyOutput);
+      evt.currentTarget.storeService.postKeyStroke(keyOutput);
     }
   }
 
@@ -165,8 +162,6 @@ export class KmTrackerService {
 
     if (true) {
       let keyOutput = {
-        userId: 'userId',
-        username: 'username',
         type: 'KeyPress',
         source: 'Window',
         which: w,
@@ -178,7 +173,8 @@ export class KmTrackerService {
         url: doc.URL
       };
 
-      console.log(keyOutput);
+      // console.log(keyOutput);
+      evt.currentTarget.storeService.postKeyStroke(keyOutput);
     }
   }
 
@@ -255,7 +251,6 @@ export class KmTrackerService {
         h_doc: docH,
         localTimestamp: time
       };
-
       console.log(scrollOutput);
     }
   }

@@ -20,7 +20,6 @@ export class StoreTrackService {
     data.userId = this.authService.getUser()._id;
     this.http.post(this.mouseClickUri, data)
     .subscribe((resp: any) => {
-      console.log(resp);
       },
       (error) => {
         console.log(error);
@@ -33,7 +32,6 @@ export class StoreTrackService {
     data.userId = this.authService.getUser()._id;
     this.http.post(this.mouseCoordinateUri, data)
     .subscribe((resp: any) => {
-      console.log(resp);
       },
       (error) => {
         console.log(error);
@@ -41,5 +39,15 @@ export class StoreTrackService {
       );
   }
 
-
+  // Save keystrokes
+  postKeyStroke(data) {
+    data.userId = this.authService.getUser()._id;
+    this.http.post(this.keyStrokeUri, data)
+    .subscribe((resp: any) => {
+      },
+      (error) => {
+        console.log(error);
+      }
+      );
+  }
 }
