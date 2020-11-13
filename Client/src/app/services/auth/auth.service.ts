@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EndpointsService } from '../endpoints/endpoints.service';
-import { LoggerService } from '../game/logger.service';
+import { StoreSessionService } from '../logger/store-session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService {
 
   uri = this.endpoints.rootURL + 'auth/';
 
-  constructor(private http: HttpClient,private router: Router, private endpoints: EndpointsService, private logger: LoggerService) {}
+  constructor(private http: HttpClient,private router: Router, private endpoints: EndpointsService, private storeSession: StoreSessionService) {}
 
   login(email: string, password: string) {
     this.http.post(this.uri + 'login', {email: email,password: password})
@@ -24,9 +24,7 @@ export class AuthService {
         state: 'login',
         localTimeStamp: Date.now()
       }
-      this.logger.postSessionLog(sessionLog).subscribe(()=> {
-
-      });
+      this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name);
       },
       (error) => {
@@ -38,11 +36,12 @@ export class AuthService {
   logout() {
     const obj = JSON.parse(localStorage.getItem('currentUser'));
     let sessionLog = {
-      userId: obj._id,
-      userEmail: obj.email,
+      userId: this.getUser()._id,
+      userEmail: this.getUser().email,
       state: 'login',
       localTimeStamp: Date.now()
     }
+    this.storeSession.postSessionLog(sessionLog);
     localStorage.removeItem('auth_token');
     localStorage.removeItem("currentUser");
     this.router.navigate(['login']);

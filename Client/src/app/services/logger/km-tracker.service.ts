@@ -257,6 +257,7 @@ export class KmTrackerService {
       };
 
       console.log(scrollOutput);
+      evt.currentTarget.storeService.postScroll(scrollOutput);
     }
   }
 }

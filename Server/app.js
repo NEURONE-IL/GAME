@@ -26,6 +26,7 @@ const mouseCoordinateRoutes = require('./routes/mouseCoordinate');
 const queryRoutes = require('./routes/query');
 const sessionLogRoutes = require('./routes/sessionLog');
 const visitedLinkRoutes = require('./routes/visitedLink');
+const ScrollRoutes = require('./routes/scroll');
 
 
 //db connection
@@ -122,6 +123,7 @@ app.use('/api/mouseCoordinate', mouseCoordinateRoutes);
 app.use('/api/query', queryRoutes);
 app.use('/api/sessionLog', sessionLogRoutes);
 app.use('/api/visitedLink', visitedLinkRoutes);
+app.use('/api/scroll/', ScrollRoutes);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
