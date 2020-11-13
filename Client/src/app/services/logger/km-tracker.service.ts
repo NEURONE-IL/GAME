@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { EndpointsService } from '../endpoints/endpoints.service';
+import { StoreTrackService } from './store-track.service';
+
 
  /*
  * Keyboard and mouse tracker service.
@@ -15,7 +18,7 @@ export class KmTrackerService {
 
     isTracking = false;
 
-  constructor() { }
+  constructor(private endpoints: EndpointsService, private storeService: StoreTrackService) { }
 
   startTrack() {
     let targetDoc = window;
@@ -27,9 +30,9 @@ export class KmTrackerService {
       g: document.getElementsByTagName('body')[0]
     };
 
-    // this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
+    this.bindThrottledEvent(targetDoc, 'mousemove', data, this.mouseMoveListener, 250);
     // this.bindThrottledEvent(targetDoc, 'scroll', data, this.scrollListener, 250);
-    // this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
+    this.bindEvent(targetDoc, 'click', data, this.mouseClickListener);
     // this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
     // this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
     // this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
@@ -40,12 +43,14 @@ export class KmTrackerService {
   bindEvent(elem, evt, data, fn) {
     elem.addEventListener(evt, fn);
     elem.data = data;
+    elem.storeService = this.storeService;
   }
 
   bindThrottledEvent(elem, evt, data, fn, delay) {
     const throttledFn = _.throttle(fn, delay, { 'trailing': false });
     elem.addEventListener(evt, throttledFn);
     elem.data = data;
+    elem.storeService = this.storeService;
   }
 
   mouseClickListener(evt) {
@@ -69,8 +74,6 @@ export class KmTrackerService {
           winH = h;
 
       let clickOutput = {
-        userId: 'user Id',
-        username: 'username',
         type: 'MouseClick',
         source: 'Window',
         url: doc.URL,
@@ -84,7 +87,8 @@ export class KmTrackerService {
         h_doc: docH,
         localTimestamp: time
       };
-      console.log(clickOutput);
+      // console.log(clickOutput);
+      evt.currentTarget.storeService.postMouseClick(clickOutput);
     }
   }
 
@@ -200,8 +204,6 @@ export class KmTrackerService {
 
 
       let movementOutput = {
-        userId: 'userId',
-        username: 'username',
         type: 'MouseMovement',
         source: 'Window',
         url: doc.URL,
@@ -216,7 +218,8 @@ export class KmTrackerService {
         localTimestamp: time
       };
 
-      console.log(movementOutput);
+      // console.log(movementOutput);
+      evt.currentTarget.storeService.postMouseCoordinates(movementOutput);
     }
   }
 
@@ -256,5 +259,4 @@ export class KmTrackerService {
       console.log(scrollOutput);
     }
   }
-
 }
