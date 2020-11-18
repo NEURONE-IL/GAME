@@ -16,9 +16,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatListModule} from '@angular/material/list';
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
-import  { PdfViewerModule }  from  'ng2-pdf-viewer';
+import { PdfViewerModule }  from  'ng2-pdf-viewer';
 import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
 
@@ -50,6 +51,9 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ConsentComponent } from './components/consent/consent.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { ChallengeDisplayComponent } from './views/challenge-display/challenge-display.component';
+import { StudyDisplayComponent } from './views/study-display/study-display.component';
+import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,7 +83,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     SessionComponent,
     ConsentComponent,
     SignupComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ChallengeDisplayComponent,
+    StudyDisplayComponent,
+    StudiesDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatStepperModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatListModule,
     MatSelectModule,
     PdfViewerModule,
     Ng9RutModule,

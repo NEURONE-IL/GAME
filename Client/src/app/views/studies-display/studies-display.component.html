@@ -1,0 +1,24 @@
+<mat-card class="studies-display-card">
+  <mat-card-header>
+    <mat-card-title>{{ "ADMIN.TITLE" | translate }}</mat-card-title>
+    <mat-card-subtitle>{{ "ADMIN.SUBTITLE" | translate }}:</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<mat-grid-list cols="12" [gutterSize]="'12px'">
+			<mat-grid-tile class="study-card" [routerLink]="['/admin_panel/study/', study._id]" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>
+							{{study.name}}
+						</mat-card-title>
+					</mat-card-header>
+					<img mat-card-image [src]="getCover(index)">
+					<mat-card-content>
+						<p *ngIf="study.description">{{study.description}}</p>
+						<p *ngIf="!study.description">{{ "ADMIN.STUDIES.NO_DESCRIPTION" | translate}}</p>
+					</mat-card-content>
+				</mat-card>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</mat-card-content>		
+</mat-card>

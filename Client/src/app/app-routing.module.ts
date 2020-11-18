@@ -18,6 +18,8 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
+import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 
@@ -102,8 +104,20 @@ const routes: Routes = [
   { path: 'signup/:study_id', component: SignupComponent},
   {
     path: 'admin_panel',
+    component: AdminPanelComponent,
     canActivate: [ AuthGuard, AdminGuard ],
-    component: AdminPanelComponent
+    children: [
+      {
+        path: 'studies',
+        component: StudiesDisplayComponent,
+        //canActivate: [ AuthGuard, AdminGuard ],
+      },
+      {
+        path: 'study/:study_id',
+        component: StudyDisplayComponent,
+        //canActivate: [ AuthGuard, AdminGuard ],
+      }
+    ]
   },
   { path: '**', redirectTo: '/login' }
 ];

@@ -1,0 +1,16 @@
+.mat-list-icon {
+	color: rgba(0, 0, 0, 0.54);
+}
+.study-display-card{
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 5%;
+}
+::ng-deep .mat-list .mat-list-item .mat-line{
+	word-wrap: break-word;
+ 	white-space: pre-line;
+}
+.challenge-cover{
+	background-image: url('../../../assets/study-images/Study00.jpg');
+	background-size: cover;	
+}

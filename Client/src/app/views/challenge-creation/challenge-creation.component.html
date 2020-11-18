@@ -9,8 +9,8 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION" | translate }}</mat-label>
-						<input matInput formControlName="question" required #inputQuestion maxlength="200">
-						<mat-hint align="end">{{inputQuestion.value?.length || 0}}/200</mat-hint>
+						<input matInput formControlName="question" required #inputQuestion maxlength="300">
+						<mat-hint align="end">{{inputQuestion.value?.length || 0}}/300</mat-hint>
 						<mat-error *ngIf="challengeFormControls.question.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
@@ -18,7 +18,7 @@
 							{{ "ERRORS.MIN_LENGTH_20" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.question.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_200" | translate }}
+							{{ "ERRORS.MAX_LENGTH_300" | translate }}
 						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>
@@ -108,8 +108,8 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER" | translate }}</mat-label>
-						<input matInput formControlName="answer" required #inputAnswer maxlength="50">
-						<mat-hint align="end">{{inputAnswer.value?.length || 0}}/50</mat-hint>
+						<input matInput formControlName="answer" required #inputAnswer maxlength="300">
+						<mat-hint align="end">{{inputAnswer.value?.length || 0}}/300</mat-hint>
 						<mat-error *ngIf="challengeFormControls.answer.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
@@ -117,7 +117,7 @@
 							{{ "ERRORS.MIN_LENGTH_3" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.answer.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
+							{{ "ERRORS.MAX_LENGTH_300" | translate }}
 						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>

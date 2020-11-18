@@ -14,7 +14,7 @@ router.get('' ,  [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.send(studys);
+        res.status(200).json({studys});
     });
 })
 

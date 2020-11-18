@@ -25,7 +25,7 @@ export class StudyService {
     return this.http.get(this.uri);
   }
 
-  getStudy(id: string) {
+  getStudy(id: string): Observable<any> {
     return this.http.get(this.uri+id);
   }
 
