@@ -12,8 +12,7 @@ export class AuthInterceptorService {
     next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = localStorage.getItem("auth_token");
-
-    if (token) {
+    if (token && req.headers.get("Content-Type") == null) {
       const cloned = req.clone({
           headers: req.headers.set("x-access-token", token)
       });
