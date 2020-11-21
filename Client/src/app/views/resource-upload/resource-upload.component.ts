@@ -41,6 +41,6 @@ export class ResourceUploadComponent implements OnInit {
   }
 
   uploadResource() {
-    this.resourceService.postResource(this.resourceForm.value);
+    this.resourceService.postResource(this.resourceForm);
   }
 }

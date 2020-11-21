@@ -39,10 +39,10 @@ import { EndpointsService } from './services/endpoints/endpoints.service';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
 import { SessionComponent } from './views/session/session.component';
-import { InitialQuestionaryComponent } from './views/initial-questionary/initial-questionary.component';
-import { PreTestQuestionaryComponent } from './views/pre-test-questionary/pre-test-questionary.component';
-import { PostTestQuestionaryComponent } from './views/post-test-questionary/post-test-questionary.component';
-import { QuestionaryComponent } from './views/questionary/questionary.component';
+import { InitialQuestionnaireComponent } from './views/initial-questionnaire/initial-questionnaire.component';
+import { PreTestQuestionnaireComponent } from './views/pre-test-questionnaire/pre-test-questionnaire.component';
+import { PostTestQuestionnaireComponent } from './views/post-test-questionnaire/post-test-questionnaire.component';
+import { QuestionnaireComponent } from './views/questionnaire/questionnaire.component';
 import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
@@ -71,10 +71,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewPageComponent,
     SafeurlPipe,
     SessionComponent,
-    InitialQuestionaryComponent,
-    PreTestQuestionaryComponent,
-    PostTestQuestionaryComponent,
-    QuestionaryComponent,
+    InitialQuestionnaireComponent,
+    PreTestQuestionnaireComponent,
+    PostTestQuestionnaireComponent,
+    QuestionnaireComponent,
     ResourceUploadComponent,
     StudyCreationComponent,
     ChallengeCreationComponent,

@@ -50,69 +50,84 @@
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",
 		"UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
   },
-    "LOGIN": {
-      "TITLE": "Iniciar sesión",
-      "EMAIL": "Correo electrónico",
-      "PASSWORD": "Contraseña",
-      "ENTER": "Ingresar",
-      "REQUIRED": "El campo es requerido"
-    },
-    "SIGNUP": {
-      "INVALID_LINK": {
-        "TITLE": "Link inválido",
-        "MESSAGE": "El link de registro utilizado es inválido, por favor póngase en contacto con el responsable del estudio."
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "EMAIL": "Correo electrónico",
+    "PASSWORD": "Contraseña",
+    "ENTER": "Ingresar",
+    "REQUIRED": "El campo es requerido"
+  },
+  "QUESTIONNAIRE": {
+    "PRE_TEST": {
+      "CHALLENGE": "La pregunta desafío es",
+      "ERRORS": {
+        "CHECK_REQUIRED": "La confirmación es requerida"
       },
-      "CONSENT": {
-        "DISCLAIMER": "Por favor, lea el siguiente consentimiento informado.",
-        "PREV_TEXT": "Anterior",
-        "NEXT_TEXT": "Siguiente",
-        "ACCEPT_TEXT": "Acepto"
-      },
-      "STEP_CONSENT": "Consentimiento",
-      "STEP_GUARDIAN": "Datos del apoderado",
-      "STEP_STUDENT": "Datos del estudiante",
-      "STEP_DONE": "Listo",
-      "DONE_TEXT": "Formulario completo, haga click en finalizar para completar su registro",
-      "CONTINUE": "Continuar",
-      "FINISH": "Finalizar",
-      "NEXT": "Siguiente",
-      "BACK": "Volver",
-      "RESET": "Reiniciar",
-      "SIGNUP": "Registrarte",
-      "FORM" : {
-        "NAMES": "Nombres",
-        "LAST_NAMES": "Apellidos",
-        "RUT": "RUT",
-        "PHONE_NUMBER": "Número de teléfono",
-        "EMAIL": "Correo electrónico",
-        "BIRTHDATE": "Fecha de nacimiento",
-        "GRADE": "Curso",
-        "SCHOOL": "Colegio",
-        "COMMUNE": "Comuna",
-        "REGION": "Región",
-        "PASSWORD": "Contraseña de acceso",
-        "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
-        "ERROR": {
-          "CONSENT": "Debe aceptar el consentimiento informado para continuar",
-          "NAMES": "Debe ingresar los nombres",
-          "LAST_NAMES": "Debe ingresar los apellidos",
-          "EMAIL_REQUIRED": "Debe ingresar su correo",
-          "EMAIL_INVALID": "Debe ingresar un correo válido",
-          "RUT_REQUIRED": "Debe ingresar su rut",
-          "RUT_INVALID": "Debe ingresar un rut válido",
-          "PHONE_REQUIRED": "Debe ingresar su teléfono",
-          "PHONE_INVALID": "Debe ingresar un teléfono válido",
-          "BIRTHDATE": "Debe ingresar la fecha de nacimiento",
-          "GRADE": "Debe ingresar el curso",
-          "SCHOOL": "Debe ingresar el colegio",
-          "REGION": "Debe ingresar la región",
-          "COMMUNE": "Debe ingresar la comuna",
-          "PASSWORD": "Debe ingresar una contraseña",
-          "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
-          "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
+      "FORM": {
+        "FIELDS": {
+          "CHECK": "Por favor confirme para continuar"
         }
-      }
+      },
+      "SUBTITLE": "Responde las siguientes preguntas antes de responder el desafío",
+      "TITLE": "Cuestionario pre-desafío"
+    }
+  },
+  "SIGNUP": {
+    "INVALID_LINK": {
+      "TITLE": "Link inválido",
+      "MESSAGE": "El link de registro utilizado es inválido, por favor póngase en contacto con el responsable del estudio."
     },
+    "CONSENT": {
+      "DISCLAIMER": "Por favor, lea el siguiente consentimiento informado.",
+      "PREV_TEXT": "Anterior",
+      "NEXT_TEXT": "Siguiente",
+      "ACCEPT_TEXT": "Acepto"
+    },
+    "STEP_CONSENT": "Consentimiento",
+    "STEP_GUARDIAN": "Datos del apoderado",
+    "STEP_STUDENT": "Datos del estudiante",
+    "STEP_DONE": "Listo",
+    "DONE_TEXT": "Formulario completo, haga click en finalizar para completar su registro",
+    "CONTINUE": "Continuar",
+    "FINISH": "Finalizar",
+    "NEXT": "Siguiente",
+    "BACK": "Volver",
+    "RESET": "Reiniciar",
+    "SIGNUP": "Registrarte",
+    "FORM" : {
+      "NAMES": "Nombres",
+      "LAST_NAMES": "Apellidos",
+      "RUT": "RUT",
+      "PHONE_NUMBER": "Número de teléfono",
+      "EMAIL": "Correo electrónico",
+      "BIRTHDATE": "Fecha de nacimiento",
+      "GRADE": "Curso",
+      "SCHOOL": "Colegio",
+      "COMMUNE": "Comuna",
+      "REGION": "Región",
+      "PASSWORD": "Contraseña de acceso",
+      "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
+      "ERROR": {
+        "CONSENT": "Debe aceptar el consentimiento informado para continuar",
+        "NAMES": "Debe ingresar los nombres",
+        "LAST_NAMES": "Debe ingresar los apellidos",
+        "EMAIL_REQUIRED": "Debe ingresar su correo",
+        "EMAIL_INVALID": "Debe ingresar un correo válido",
+        "RUT_REQUIRED": "Debe ingresar su rut",
+        "RUT_INVALID": "Debe ingresar un rut válido",
+        "PHONE_REQUIRED": "Debe ingresar su teléfono",
+        "PHONE_INVALID": "Debe ingresar un teléfono válido",
+        "BIRTHDATE": "Debe ingresar la fecha de nacimiento",
+        "GRADE": "Debe ingresar el curso",
+        "SCHOOL": "Debe ingresar el colegio",
+        "REGION": "Debe ingresar la región",
+        "COMMUNE": "Debe ingresar la comuna",
+        "PASSWORD": "Debe ingresar una contraseña",
+        "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
+        "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
+      }
+    }
+  },
 	"STUDY": {
 		"FORM": {
 			"FIELDS": {

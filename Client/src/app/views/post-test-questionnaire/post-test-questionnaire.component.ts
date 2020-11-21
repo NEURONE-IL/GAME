@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-post-test-questionary',
-  templateUrl: './post-test-questionary.component.html',
-  styleUrls: ['./post-test-questionary.component.css']
+  selector: 'app-post-test-questionnaire',
+  templateUrl: './post-test-questionnaire.component.html',
+  styleUrls: ['./post-test-questionnaire.component.css']
 })
-export class PostTestQuestionaryComponent implements OnInit {
+export class PostTestQuestionnaireComponent implements OnInit {
   certainty: number;
   difficulty: number;
   values: number[] = [1, 2, 3, 4, 5, 6];  

@@ -14,8 +14,15 @@ const schema = Joi.object({
         question: Joi.string()
             .required(),
         
-        number: Joi.number()
-    }))
+        number: Joi.number(),
+
+        options: Joi.array().items(Joi.object({
+            option: Joi.string()
+                .required(),
+    
+            number: Joi.number()
+        }))         
+    }))   
 })
 
 const editSchema = Joi.object({
@@ -28,7 +35,14 @@ const editSchema = Joi.object({
         question: Joi.string()
             .required(),
         
-        number: Joi.number()
+        number: Joi.number(),
+
+        options: Joi.array().items(Joi.object({
+            option: Joi.string()
+                .required(),
+    
+            number: Joi.number()
+        }))         
     }))
 })
 

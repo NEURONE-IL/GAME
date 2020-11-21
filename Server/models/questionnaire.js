@@ -7,7 +7,13 @@ const QuestionnaireSchema = new Schema({
     questions: [
         {
             question: {type: String, required: true},
-            number: { type: Number}
+            number: { type: Number},
+            options: [
+              {
+                option: {type: String, required: true},
+                number: { type: Number}
+              }
+            ]            
         }
     ],
     createdAt: { type: Date, default: Date.now },

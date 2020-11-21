@@ -1,22 +1,25 @@
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+.questionnaire-card{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+.mat-form-field{
+	width: 85%;
 }
 .mat-radio-group {
   margin-left: 2%;
   margin-right: 2%;
 }
-.questionay-card{
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 5%;
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.mat-error{
+  display: block;
 }
 .initLabel{
   margin-left: 50%;
 }​
-.certaintyLabel{
-  margin-top: 5%;
-}
-.difficultyLabel{
+.label{
   margin-top: 5%;
 }
 .checkbox-section{
