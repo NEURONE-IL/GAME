@@ -17,6 +17,7 @@ export class ViewPageComponent implements OnInit {
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.docUrl = 'http://localhost:3000/'+this.url;
+        console.log(this.docUrl)
       });
   }
 
