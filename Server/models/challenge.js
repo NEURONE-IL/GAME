@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const ChallengeSchema = new Schema({
     question: {type: String, required: true},
+    number: {type: Number},
     seconds: {type: Number, required: true},
     domain: {type: String},
     locale: {type: String},

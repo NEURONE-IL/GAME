@@ -72,6 +72,9 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
         if(req.body.seconds){
             challenge.seconds = req.body.seconds;
         }
+        if(req.body.number){
+            challenge.number = req.body.number;
+        }
         if(req.body.domain){
             challenge.domain = req.body.domain;
         }

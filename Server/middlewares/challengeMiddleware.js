@@ -5,6 +5,8 @@ const schema = Joi.object({
     question: Joi.string()
         .required(),
     
+    number: Joi.number(),
+    
     seconds: Joi.number()
         .required(),
     
@@ -29,6 +31,8 @@ const schema = Joi.object({
 const editSchema = Joi.object({
     
     question: Joi.string(),
+
+    number: Joi.number(),
     
     seconds: Joi.number(),
     

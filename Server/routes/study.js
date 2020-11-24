@@ -33,7 +33,8 @@ router.get('/:study_id', async (req, res) => {
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBody], async (req, res) => {
     const study = new Study({
-        name: req.body.name
+        name: req.body.name,
+        domain: req.body.domain
     });
     if(req.body.description){
         study.description = req.body.description;
