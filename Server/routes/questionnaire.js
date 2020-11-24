@@ -44,6 +44,19 @@ router.get('/:questionnaire_id', [verifyToken], async (req, res) => {
     });
 });
 
+router.get('/byType/:type', [verifyToken], async (req, res) => {
+    const type = req.params.type;
+    Questionnaire.find({type}, (err, questionnaires) => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({questionnaires});
+    })
+});
+
 router.get('/answer/:answers_id', [verifyToken], async (req, res) => {
     const _id = req.params.answers_id;
     UserQuestionnaire.findOne({_id: _id}, (err, userQuestionnaire) =>{

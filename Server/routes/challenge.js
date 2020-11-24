@@ -42,7 +42,7 @@ router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
         }
         res.status(200).json({challenges});
     })
-})
+});
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyBody], async (req, res) => {
     const challenge = new Challenge(req.body);

@@ -8,10 +8,10 @@ import { SessionComponent } from './views/session/session.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
-import { QuestionaryComponent } from './views/questionary/questionary.component';
-import { InitialQuestionaryComponent } from './views/initial-questionary/initial-questionary.component';
-import { PreTestQuestionaryComponent } from './views/pre-test-questionary/pre-test-questionary.component';
-import { PostTestQuestionaryComponent } from './views/post-test-questionary/post-test-questionary.component';
+import { QuestionnaireComponent } from './views/questionnaire/questionnaire.component';
+import { InitialQuestionnaireComponent } from './views/initial-questionnaire/initial-questionnaire.component';
+import { PreTestQuestionnaireComponent } from './views/pre-test-questionnaire/pre-test-questionnaire.component';
+import { PostTestQuestionnaireComponent } from './views/post-test-questionnaire/post-test-questionnaire.component';
 import { UploadComponent } from './views/upload/upload.component';
 import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { CreationComponent } from './views/creation/creation.component';
@@ -30,21 +30,21 @@ const routes: Routes = [
     component: StartComponent
   },
   {
-    path: 'questionary',
-    component: QuestionaryComponent,
+    path: 'questionnaire',
+    component: QuestionnaireComponent,
     canActivate: [ AuthGuard ],
     children: [
       {
         path: 'initial',
-        component: InitialQuestionaryComponent,
+        component: InitialQuestionnaireComponent,
       },
       {
         path: 'pre-test',
-        component: PreTestQuestionaryComponent,
+        component: PreTestQuestionnaireComponent,
       },
       {
         path: 'post-test',
-        component: PostTestQuestionaryComponent,
+        component: PostTestQuestionnaireComponent,
       }
     ]
   },
