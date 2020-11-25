@@ -22,6 +22,7 @@ import { StudiesDisplayComponent } from './views/studies-display/studies-display
 import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
+import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 
 const routes: Routes = [
   {
@@ -99,7 +100,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [ NotLoggedInGuard ]
   },
   { path: 'signup/:study_id', component: SignupComponent},
   {
@@ -119,7 +121,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/start' }
 ];
 
 @NgModule({
