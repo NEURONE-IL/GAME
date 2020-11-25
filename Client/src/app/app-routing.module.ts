@@ -121,7 +121,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '/start' }
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
