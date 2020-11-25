@@ -15,13 +15,24 @@
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.question.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_20" | translate }}
+							{{ "ERRORS.MIN_LENGTH_10" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.question.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_300" | translate }}
 						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
+						<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}</mat-label>
+						<mat-select formControlName="question_type" required>
+							<mat-option *ngFor="let option of questionOptions" [value]="option.value">{{option.show}}</mat-option>
+						</mat-select>  
+						<mat-error *ngIf="challengeFormControls.question_type.hasError('required')">
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						</mat-error>
+					</mat-form-field>
+				</mat-grid-tile>		
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.SECONDS" | translate }}</mat-label>
@@ -42,67 +53,15 @@
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "CHALLENGE.FORM.FIELDS.DOMAIN" | translate }}</mat-label>
-						<input matInput formControlName="domain" #inputDomain maxlength="50">
-						<mat-hint align="end">{{inputDomain.value?.length || 0}}/50</mat-hint>		
-						<mat-error *ngIf="challengeFormControls.domain.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>														
-						<mat-error *ngIf="challengeFormControls.domain.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>				
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "CHALLENGE.FORM.FIELDS.LOCALE" | translate }}</mat-label>
-						<input matInput formControlName="locale" #inputLocale maxlength="50">
-						<mat-hint align="end">{{inputLocale.value?.length || 0}}/50</mat-hint>					
-						<mat-error *ngIf="challengeFormControls.locale.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>														
-						<mat-error *ngIf="challengeFormControls.locale.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>		
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "CHALLENGE.FORM.FIELDS.TASK" | translate }}</mat-label>
-						<input matInput formControlName="task" #inputTask maxlength="50">
-						<mat-hint align="end">{{inputTask.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="challengeFormControls.task.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>														
-						<mat-error *ngIf="challengeFormControls.task.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>	
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.HINT" | translate }}</mat-label>
 						<input matInput formControlName="hint" #inputHint maxlength="100">
 						<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_20" | translate }}
+							{{ "ERRORS.MIN_LENGTH_10" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_100" | translate }}
 						</mat-error>						
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER_TYPE" | translate }}</mat-label>
-						<input matInput formControlName="answer_type" #inputAnswerType maxlength="50">
-						<mat-hint align="end">{{inputAnswerType.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="challengeFormControls.answer_type.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="challengeFormControls.answer_type.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
@@ -121,6 +80,17 @@
 						</mat-error>												
 					</mat-form-field>
 				</mat-grid-tile>
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
+						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER_TYPE" | translate }}</mat-label>
+						<mat-select formControlName="answer_type" required>
+							<mat-option *ngFor="let option of answerOptions" [value]="option.value">{{option.show}}</mat-option>
+						</mat-select>  
+						<mat-error *ngIf="challengeFormControls.answer_type.hasError('required')">
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						</mat-error>
+					</mat-form-field>
+				</mat-grid-tile>				
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.STUDY" | translate }}</mat-label>

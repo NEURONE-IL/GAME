@@ -11,20 +11,30 @@ import { Study, StudyService } from '../../services/game/study.service'
 export class ChallengeCreationComponent implements OnInit {
   challengeForm: FormGroup;
   studies: Study[];
+  questionOptions = [
+    { id: 1, value: 'page', show: 'Página web' },
+    { id: 2, value: 'image', show: 'Imagen' },
+    { id: 3, value: 'book', show: 'Libro' },
+    { id: 4, value: 'video', show: 'Vídeo' }
+  ];
+  answerOptions = [
+    { id: 1, value: 'string', show: 'Texto' },
+    { id: 2, value: 'number', show: 'Número' },
+    { id: 3, value: 'url', show: 'URL' },
+    { id: 4, value: 'video', show: 'Vídeo' }
+  ];  
 
   constructor(private formBuilder: FormBuilder, private challengeService: ChallengeService, private studyService: StudyService) { }
 
   ngOnInit(): void {
 
     this.challengeForm = this.formBuilder.group({
-      question: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(300)]],
+      question: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
+      question_type: ['', Validators.required],
       seconds: ['', [Validators.required, Validators.maxLength(3), Validators.min(30)]],
-      domain: ['', [Validators.minLength(3), Validators.maxLength(50)]],
-      locale: ['', [Validators.minLength(3), Validators.maxLength(50)]],
-      task: ['', [Validators.minLength(3), Validators.maxLength(50)]],
-      hint: ['', [Validators.minLength(20), Validators.maxLength(100)]],
+      hint: ['', [Validators.minLength(10), Validators.maxLength(100)]],
       answer_type: ['', [Validators.minLength(3), Validators.maxLength(50)]],
-      answer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(300)]],
+      answer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
       study: ['', Validators.required],
       checked: ['', Validators.required]
     });

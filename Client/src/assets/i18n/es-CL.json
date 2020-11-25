@@ -25,13 +25,11 @@
 				"ANSWER": "Respuesta",
 				"ANSWER_TYPE": "Tipo de respuesta",
 				"CHECK": "Por favor confirme para continuar",
-				"DOMAIN": "Dominio",
 				"HINT": "Pista",
-				"LOCALE": "Idioma",
-				"QUESTION": "Pregunta",
+        "QUESTION": "Pregunta",
+        "QUESTION_TYPE": "Tipo de pregunta",
 				"SECONDS": "Segundos para responder",
-				"STUDY": "Estudio",
-				"TASK": "Tarea"
+				"STUDY": "Estudio"
 			}
 		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
@@ -44,7 +42,7 @@
     "MAX_LENGTH_300": "El largo del campo no puede exceder los 300 caracteres",
 		"MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
 		"MIN_LENGTH_5": "El largo del campo no puede ser menor a 5 caracteres",
-		"MIN_LENGTH_20": "El largo del campo no puede ser menor a 20 caracteres",
+		"MIN_LENGTH_10": "El largo del campo no puede ser menor a 10 caracteres",
 		"MIN_VALUE_30": "El valor mínimo del campo es 30",
 		"REQUIRED": "El campo es requerido",
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",

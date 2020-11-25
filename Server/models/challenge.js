@@ -3,12 +3,11 @@ const { Schema } = mongoose;
 
 const ChallengeSchema = new Schema({
     question: {type: String, required: true},
+    question_type: {type: String, required: true},
+    number: {type: Number},
     seconds: {type: Number, required: true},
-    domain: {type: String},
-    locale: {type: String},
-    task: {type: String},
     hint: {type: String},
-    answer_type: {type: String},
+    answer_type: {type: String, required: true},
     answer: {type: String, required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study', required: true},
     createdAt: { type: Date, default: Date.now },

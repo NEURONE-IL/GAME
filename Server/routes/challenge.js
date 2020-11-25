@@ -69,17 +69,14 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
         if(req.body.question){
             challenge.question = req.body.question;
         }
+        if(req.body.question_type){
+            challenge.question_type = req.body.question_type;
+        }        
         if(req.body.seconds){
             challenge.seconds = req.body.seconds;
         }
-        if(req.body.domain){
-            challenge.domain = req.body.domain;
-        }
-        if(req.body.locale){
-            challenge.locale = req.body.locale;
-        }
-        if(req.body.task){
-            challenge.task = req.body.task;
+        if(req.body.number){
+            challenge.number = req.body.number;
         }
         if(req.body.hint){
             challenge.hint = req.body.hint;

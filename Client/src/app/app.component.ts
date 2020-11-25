@@ -45,7 +45,7 @@ export class AppComponent {
     }
     //Si no por defecto se usa la traducción a inglés
     else{
-      this.translate.use('en-US');
+      this.translate.use('es-CL');
     }
 
     kmTracker.startTrack();

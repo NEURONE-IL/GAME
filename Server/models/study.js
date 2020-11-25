@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const StudySchema = new Schema({
     name: {type: String, required: true},
     description: {type: String},
+    domain: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

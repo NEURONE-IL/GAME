@@ -4,19 +4,19 @@ const schema = Joi.object({
     
     question: Joi.string()
         .required(),
+
+    question_type: Joi.string()
+    .required(),        
+    
+    number: Joi.number(),
     
     seconds: Joi.number()
         .required(),
-    
-    domain: Joi.string(),
-
-    locale: Joi.string(),    
-
-    task: Joi.string(),
 
     hint: Joi.string(),
 
-    answer_type: Joi.string(),
+    answer_type: Joi.string()
+        .required(),
 
     answer: Joi.string()
         .required(),
@@ -29,14 +29,12 @@ const schema = Joi.object({
 const editSchema = Joi.object({
     
     question: Joi.string(),
+
+    question_type: Joi.string(),
+
+    number: Joi.number(),
     
     seconds: Joi.number(),
-    
-    domain: Joi.string(),
-
-    locale: Joi.string(),
-
-    task: Joi.string(),
 
     hint: Joi.string(),
 
