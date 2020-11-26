@@ -15,11 +15,11 @@ export class NotLoggedInGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.loggedIn) {
-        if(this.authService.isAdmin) {
-          this.router.navigate(['/admin_panel']);
+        if(this.authService.isAdmin()) {
+          this.router.navigate(['admin_panel']);
         }
         else {
-          this.router.navigate(['/start']);
+          this.router.navigate(['start']);
         }
         return false;
       }
