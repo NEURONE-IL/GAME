@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit {
 
+  stage = "assent";
+
   constructor(public router: Router) { }
 
   ngOnInit(): void {
@@ -15,6 +17,12 @@ export class StartComponent implements OnInit {
 
   doStart(){
     this.router.navigate(['session/search']);
+  }
+
+  nextStage() {
+    if(this.stage=="assent") this.stage="initial";
+    else if(this.stage=="initial") this.stage="pretest";
+    else if(this.stage=="pretest") this.stage="start";
   }
 
 }

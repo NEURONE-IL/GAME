@@ -1,5 +1,18 @@
 <app-header></app-header>
-<div class="container">
-    <button mat-raised-button class="start-button" color="primary" (click)="doStart()">Start</button>
+<!-- Asentimiento informado pending -->
+<div class="container" *ngIf="stage=='assent'">
+  <app-assent (onSaveClick)="nextStage()"></app-assent>
+</div>
+<!-- Initial questionnaire pending -->
+<div class="container" *ngIf="stage=='initial'">
+  <app-initial-questionnaire (onSaveClick)="nextStage()"></app-initial-questionnaire>
+</div>
+<!-- Pre-test questionnaire pending -->
+<div class="container" *ngIf="stage=='pretest'">
+  <app-pre-test-questionnaire (onSaveClick)="nextStage()"></app-pre-test-questionnaire>
+</div>
+<!-- Everything ok, game can start -->
+<div class="container" *ngIf="stage=='start'">
+  <button mat-raised-button class="start-button" color="primary" (click)="doStart()">Start</button>
 </div>
 <router-outlet></router-outlet>

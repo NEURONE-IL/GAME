@@ -14,7 +14,7 @@
           <mat-grid-tile colspan="4">
             <div class="initLabel">
               {{ question.options[0].option }}
-            </div>      
+            </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
             <mat-radio-group
@@ -22,29 +22,29 @@
               [formControlName]="index">
               <mat-radio-button *ngFor="let value of values" [value]="value" required>
                 {{value}}
-              </mat-radio-button>         
+              </mat-radio-button>
             </mat-radio-group>
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
             <div style="margin-right: 50%">
               {{ question.options[1].option }}
-            </div>      
+            </div>
           </mat-grid-tile>
         </mat-grid-list>
       </div>
 			<mat-grid-list cols="12" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "QUESTIONNAIRE.PRE_TEST.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>      
+				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "QUESTIONNAIRE.PRE_TEST.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
 				<mat-error *ngIf="questionnaireFormControls.checked.hasError('required') && questionnaireFormControls.checked.touched">
 					{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>				
-			</mat-grid-list>	      
+				</mat-error>
+			</mat-grid-list>
     </form>
   </mat-card-content>
   <mat-card-actions class="cardActions">
-    <button mat-raised-button class="saveButton" (click)="test()" [disabled]="!questionnaireForm.valid">
+    <button mat-raised-button color="primary" class="saveButton" (click)="test()" [disabled]="!questionnaireForm.valid">
       {{ "BUTTONS.SAVE" | translate }}
     </button>
-    <button mat-raised-button class="clearButton" (click)="test()">
+    <button mat-raised-button color="accent" class="clearButton" (click)="test()">
       {{ "BUTTONS.CLEAR" | translate }}
     </button>
   </mat-card-actions>

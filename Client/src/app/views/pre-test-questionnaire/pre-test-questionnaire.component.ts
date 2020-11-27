@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireService } from '../../services/game/questionnaire.service';
 
@@ -12,6 +12,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   values: number[] = [1, 2, 3, 4, 5, 6];
   questionnaires: Questionnaire[];
   requiredType: string = 'pre';
+  @Output() onSaveClick = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private questionnaireService: QuestionnaireService) { }
 
@@ -47,6 +48,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   }
 
   test() {
+    this.onSaveClick.emit();
     console.log(this.questionnaireForm.value);
   }
 }

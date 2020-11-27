@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-consent',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsentComponent implements OnInit {
 
+  @Input() mode: string;
   consentSource = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   isLoaded = false;
   page = 1;

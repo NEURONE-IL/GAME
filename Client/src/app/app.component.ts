@@ -48,6 +48,6 @@ export class AppComponent {
       this.translate.use('es-CL');
     }
 
-    kmTracker.startTrack();
+    // kmTracker.startTrack();
   }
 }

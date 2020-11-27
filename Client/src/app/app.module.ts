@@ -54,6 +54,7 @@ import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 import { ChallengeDisplayComponent } from './views/challenge-display/challenge-display.component';
 import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
+import { AssentComponent } from './views/assent/assent.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminPanelComponent,
     ChallengeDisplayComponent,
     StudyDisplayComponent,
-    StudiesDisplayComponent
+    StudiesDisplayComponent,
+    AssentComponent
   ],
   imports: [
     BrowserModule,
