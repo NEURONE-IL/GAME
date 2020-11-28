@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ConsentComponent implements OnInit {
 
   @Input() mode: string;
-  consentSource = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  consentSource = "/assets/docs/consent.pdf";
   isLoaded = false;
   page = 1;
   totalPages: number;
@@ -16,6 +16,9 @@ export class ConsentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.mode=='assent') {
+      this.consentSource = "/assets/docs/assent.pdf";
+    }
   }
 
   afterLoadComplete(pdfData: any) {
