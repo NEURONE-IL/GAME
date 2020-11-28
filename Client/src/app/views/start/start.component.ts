@@ -9,7 +9,7 @@ import { GameService } from '../../services/game/game.service';
 })
 export class StartComponent implements OnInit {
 
-  stage = "start";
+  stage = "assent";
 
   constructor(public router: Router, private gameService: GameService) { }
 
