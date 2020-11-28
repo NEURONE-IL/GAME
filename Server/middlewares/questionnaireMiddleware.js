@@ -47,6 +47,12 @@ const editSchema = Joi.object({
 })
 
 const answerSchema = Joi.object({
+    user: Joi.any()
+        .required(),
+
+    questionnaire: Joi.any()
+        .required(),
+    
     answers: Joi.array().items(Joi.object({
         question: Joi.string()
             .required(),
@@ -98,7 +104,7 @@ verifyAnswerBody = async (req, res, next) => {
         });
     }
     try {
-        const validation = await editSchema.validateAsync(req.body);
+        const validation = await answerSchema.validateAsync(req.body);
         next();
     }
     catch (err) {
