@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game/game.service';
 
 @Component({
   selector: 'app-start',
@@ -8,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit {
 
-  stage = "assent";
+  stage = "start";
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private gameService: GameService) { }
 
   ngOnInit(): void {
   }

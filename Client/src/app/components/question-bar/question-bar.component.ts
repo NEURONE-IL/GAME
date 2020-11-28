@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { GameService } from '../../services/game/game.service';
 
 @Component({
   selector: 'app-question-bar',
@@ -7,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionBarComponent implements OnInit {
 
-  timeLeft = 120;
+  challenges: any;
+  currentChallenge: number;
+
+  timeLeft: number;
   interval;
   value = 100;
   leftValue = '30px';
-  hint = false;
+  hintActive = false;
   tabs = ['looks_one']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
-  constructor() { }
+  constructor(private gameService: GameService) {
+    this.refreshChallenge();
+  }
 
   ngOnInit(): void {
     this.interval = setInterval(() => {
@@ -22,7 +29,7 @@ export class QuestionBarComponent implements OnInit {
         this.value = this.timeLeft / 120 * 100;
         if (this.timeLeft < 100){
           this.leftValue = '40px';
-          this.hint = true;
+          this.hintActive = true;
         }
       } else {
         this.timeLeft = 120;
@@ -43,6 +50,17 @@ export class QuestionBarComponent implements OnInit {
     if (x.classList.contains('hide')) {
       x.classList.toggle('hide');
     }
+  }
+
+  refreshChallenge() {
+    this.challenges = this.gameService.challenges;
+    this.currentChallenge = this.gameService.currentChallenge;
+    this.timeLeft = this.challenges[this.currentChallenge].seconds;
+  }
+
+  finishChallenge() {
+    this.gameService.nextChallenge();
+    this.refreshChallenge();
   }
 }
 

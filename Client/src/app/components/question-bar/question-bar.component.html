@@ -9,7 +9,7 @@
       <div class="panel-container" >
         <mat-grid-list cols="3" rowHeight="103px">
           <mat-grid-tile class="question-text" colspan="2" rowspan="2" >
-            ¿Cuándo se instaló el primer semáforo?
+            {{challenges[currentChallenge].question}}
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="2">
             <div>
@@ -23,9 +23,14 @@
                 <input matInput placeholder="Entrega tu respuesta...">
                 <mat-icon matSuffix>send</mat-icon>
               </mat-form-field>
-              <button *ngIf="hint" mat-raised-button color="primary" class="hint-input" >
+              <button *ngIf="hintActive" mat-raised-button color="primary" class="hint-input" >
                 <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
-                Dame una pista</button>
+                Dame una pista
+              </button>
+              <button mat-raised-button (click)="finishChallenge()" color="accent" class="hint-input" >
+                <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
+                NextChallenge
+              </button>
             </form>
           </mat-grid-tile>
         </mat-grid-list>

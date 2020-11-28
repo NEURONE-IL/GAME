@@ -55,7 +55,6 @@ export class InitialQuestionnaireComponent implements OnInit {
 
   save() {
     this.onSaveClick.emit();
-    console.log(this.questionnaireForm.value);
   }
 
 }

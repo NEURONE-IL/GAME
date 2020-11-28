@@ -49,6 +49,5 @@ export class PreTestQuestionnaireComponent implements OnInit {
 
   test() {
     this.onSaveClick.emit();
-    console.log(this.questionnaireForm.value);
   }
 }
