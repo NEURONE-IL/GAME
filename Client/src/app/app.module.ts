@@ -17,6 +17,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
 import { PdfViewerModule }  from  'ng2-pdf-viewer';
@@ -54,6 +55,7 @@ import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 import { ChallengeDisplayComponent } from './views/challenge-display/challenge-display.component';
 import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
+import { AssentComponent } from './views/assent/assent.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminPanelComponent,
     ChallengeDisplayComponent,
     StudyDisplayComponent,
-    StudiesDisplayComponent
+    StudiesDisplayComponent,
+    AssentComponent
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatListModule,
     MatSelectModule,
+    MatDialogModule,
     PdfViewerModule,
     Ng9RutModule,
     ValidateEqualModule,

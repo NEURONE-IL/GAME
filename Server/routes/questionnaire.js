@@ -97,13 +97,18 @@ router.post('/answer', [verifyToken, questionnaireMiddleware.verifyAnswerBody], 
             });
         }
     })
+    if(questionnaire === null){
+        return res.status(404).json({
+            ok: false,
+            message: "Questionnaire doesn't exist!"
+        });
+    }
     const userQuestionnaire = new UserQuestionnaire({
         user: req.body.user,
         questionnaire: questionnaire._id,
         type: questionnaire.type,
         answers: req.body.answers
     })
-    console.log(userQuestionnaire)
     userQuestionnaire.save((err, userQuestionnaire) => {
         if (err) {
             return res.status(404).json({

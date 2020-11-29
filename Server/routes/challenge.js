@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Challenge = require('../models/challenge');
+const UserChallenge = require('../models/userChallenge');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const challengeMiddleware = require('../middlewares/challengeMiddleware');
@@ -31,6 +32,18 @@ router.get('/:challenge_id', [verifyToken] , async (req, res) => {
     });
 });
 
+router.get('/answer/all', [verifyToken], async (req, res) => {
+    UserChallenge.find({}, (err, userChallenges) =>{
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({userChallenges});
+    }).populate('user', {password:0}).populate('challenge');
+})
+
 router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
     const _id = req.params.study_id;
     Challenge.find({study: _id}, (err, challenges) => {
@@ -43,6 +56,19 @@ router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
         res.status(200).json({challenges});
     })
 });
+
+router.get('/answer/byId/:answers_id', [verifyToken], async (req, res) => {
+    const _id = req.params.answers_id;
+    UserChallenge.findOne({_id: _id}, (err, userChallenges) =>{
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({userChallenges});
+    }).populate('challenge').populate('user', {password:0});
+})
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyBody], async (req, res) => {
     const challenge = new Challenge(req.body);
@@ -57,6 +83,27 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
         });
     })
 });
+
+router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
+    const userChallenge = new UserChallenge({
+        user: req.body.user,
+        challenge: req.body.challenge,
+        date: req.body.date,
+        answers: req.body.answers,
+        timeLeft: req.body.timeLeft
+    })
+    userChallenge.pointsObtained = 0 //llamar función para calcular puntos aquí.
+    userChallenge.save((err, userChallenge) => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+        res.status(200).json({
+            userChallenge
+        });
+    })
+})
 
 router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyEditBody], async (req, res) => {
     const _id = req.params.challenge_id;
@@ -90,6 +137,9 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
         if(req.body.answer){
             challenge.answer = req.body.answer;
         }
+        if(req.body.max_attempts){
+            challenge.max_attempts = req.body.max_attempts;
+        }
         challenge.updatedAt = Date.now();
         challenge.save((err, challenge) => {
             if (err) {
@@ -114,6 +164,20 @@ router.delete('/:challenge_id',  [verifyToken, authMiddleware.isAdmin] , async (
         }
         res.status(200).json({
             challenge
+        });
+    })
+})
+
+router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
+    const _id = req.params.answer_id;
+    UserChallenge.deleteOne({_id: _id}, (err, userChallenge) => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+        res.status(200).json({
+            userChallenge
         });
     })
 })

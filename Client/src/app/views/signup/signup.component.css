@@ -3,8 +3,7 @@
 }
 
 .main-content{
-  top: 9%;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -22,7 +21,7 @@
 }
 
 .toolbar {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;

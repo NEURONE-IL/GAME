@@ -1,8 +1,13 @@
 
-.start-button{
-    top: 25em;
-    display: block;
-    width: 10%;
-    margin-left: auto;
-    margin-right: auto;
+.center-container {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.loading-spinner {
+  margin: auto;
+}
+
+.start-button {
+  width: 400px;
 }

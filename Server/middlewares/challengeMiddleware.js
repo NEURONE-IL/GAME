@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { isValidObjectId } = require('mongoose');
 
 const schema = Joi.object({
     
@@ -22,6 +23,9 @@ const schema = Joi.object({
         .required(),
 
     study: Joi.any()
+        .required(),
+
+    max_attempts: Joi.number()
         .required()
         
 })
@@ -42,7 +46,28 @@ const editSchema = Joi.object({
 
     answer: Joi.string(),
 
-    study: Joi.any()
+    study: Joi.any(),
+
+    max_attempts: Joi.number()
+})
+
+const answerSchema = Joi.object({
+    user: Joi.any()
+        .required(),
+
+    challenge: Joi.any()
+        .required(),
+
+    date: Joi.date()
+        .required(),
+
+    timeLeft: Joi.number()
+        .required(),
+
+    answers: Joi.array().items(Joi.object({
+        answer: Joi.string()
+            .required()
+    }))
 })
 
 verifyBody = async (req, res, next) => {
@@ -71,9 +96,35 @@ verifyEditBody = async (req, res, next) => {
      }
 };
 
+verifyAnswerBody = async (req, res, next) => {
+    if(!isValidObjectId(req.body.user)){
+        return res.status(404).json({
+            ok: false,
+            message: "User doesn't exist!"
+        });
+    }
+    if(!isValidObjectId(req.body.challenge)){
+        return res.status(404).json({
+            ok: false,
+            message: "Challenge doesn't exist!"
+        });
+    }
+    try {
+        const validation = await answerSchema.validateAsync(req.body);
+        next();
+    }
+    catch (err) {
+        return res.status(400).json({
+            ok: false,
+            err
+        });
+     }
+}
+
 const authMiddleware = {
     verifyBody,
-    verifyEditBody
+    verifyEditBody,
+    verifyAnswerBody
 };
 
 module.exports = authMiddleware;

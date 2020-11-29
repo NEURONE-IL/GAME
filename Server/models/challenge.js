@@ -9,6 +9,7 @@ const ChallengeSchema = new Schema({
     hint: {type: String},
     answer_type: {type: String, required: true},
     answer: {type: String, required: true},
+    max_attempts: {type: Number, required:true},
     study: { type: Schema.Types.ObjectId, ref: 'Study', required: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

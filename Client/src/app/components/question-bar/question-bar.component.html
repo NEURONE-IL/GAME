@@ -1,15 +1,15 @@
-<mat-tab-group id="mat-tab" (click)="tabhideshow($event)" (selectedTabChange)="onTabChanged()">
+<mat-tab-group id="mat-tab" [(selectedIndex)]="currentChallenge" (click)="tabhideshow($event)" (selectedTabChange)="onTabChanged()">
     <ng-template mat-tab-header>
         hola
     </ng-template>
-    <mat-tab *ngFor="let tab of tabs">
+    <mat-tab [disabled]="i!=currentChallenge" *ngFor="let challenge of challenges; let i = index">
       <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">{{tab}}</mat-icon>
+        <i class="tab-icon">{{i+1}}</i>
       </ng-template>
       <div class="panel-container" >
         <mat-grid-list cols="3" rowHeight="103px">
           <mat-grid-tile class="question-text" colspan="2" rowspan="2" >
-            ¿Cuándo se instaló el primer semáforo?
+            {{challenge.question}}
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="2">
             <div>
@@ -21,11 +21,17 @@
             <form class="answer-form">
               <mat-form-field class="input-full-width">
                 <input matInput placeholder="Entrega tu respuesta...">
-                <mat-icon matSuffix>send</mat-icon>
+                <mat-icon matSuffix (click)="finishChallenge()" class="submit-icon">send</mat-icon>
               </mat-form-field>
-              <button *ngIf="hint" mat-raised-button color="primary" class="hint-input" >
+              <button class="hidden-btn" (click)="finishChallenge()"></button>
+              <button *ngIf="hintActive" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >
                 <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
-                Dame una pista</button>
+                Dame una pista
+              </button>
+              <!-- <button mat-raised-button (click)="finishChallenge()" color="accent" class="hint-input" >
+                <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
+                NextChallenge
+              </button> -->
             </form>
           </mat-grid-tile>
         </mat-grid-list>

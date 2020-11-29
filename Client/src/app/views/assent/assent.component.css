@@ -1,3 +1,13 @@
+.container{
+  top: 9%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+}
+
 pdf-viewer {
   display: flex;
   align-items: center;
@@ -6,7 +16,7 @@ pdf-viewer {
 }
 
 .pdf-display {
-  max-width: 60vw;
+  max-width: 40vw;
   margin: auto;
 }
 

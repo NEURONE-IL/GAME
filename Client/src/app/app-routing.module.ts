@@ -103,7 +103,10 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [ NotLoggedInGuard ]
   },
-  { path: 'signup/:study_id', component: SignupComponent},
+  { path: 'signup/:study_id',
+    component: SignupComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },
   {
     path: 'admin_panel',
     component: AdminPanelComponent,
