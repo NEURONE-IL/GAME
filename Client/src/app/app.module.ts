@@ -17,6 +17,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
 import { PdfViewerModule }  from  'ng2-pdf-viewer';
@@ -114,6 +115,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatListModule,
     MatSelectModule,
+    MatDialogModule,
     PdfViewerModule,
     Ng9RutModule,
     ValidateEqualModule,
