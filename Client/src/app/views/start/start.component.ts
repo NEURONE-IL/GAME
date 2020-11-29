@@ -10,10 +10,17 @@ import { GameService } from '../../services/game/game.service';
 export class StartComponent implements OnInit {
 
   stage = "assent";
+  loading = true;
 
   constructor(public router: Router, private gameService: GameService) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  async loadData() {
+    await this.gameService.loadGameData();
+    this.loading = false;
   }
 
   doStart(){

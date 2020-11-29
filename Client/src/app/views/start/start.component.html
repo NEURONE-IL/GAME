@@ -13,6 +13,13 @@
 </div>
 <!-- Everything ok, game can start -->
 <div class="container" *ngIf="stage=='start'">
-  <button mat-raised-button class="start-button" color="primary" (click)="doStart()">Start</button>
+  <div class='center-container'>
+    <h3>{{"STARTPAGE.INSTRUCTIONS.TITLE" | translate}}</h3>
+    <p>{{"STARTPAGE.INSTRUCTIONS.TEXT" | translate}}</p>
+  </div>
+  <div class='center-container'>
+    <mat-spinner *ngIf="loading" class="loading-spinner"></mat-spinner>
+    <button *ngIf="!loading" mat-raised-button class="start-button" color="primary" (click)="doStart()">{{"STARTPAGE.STARTBUTTON" | translate}}</button>
+  </div>
 </div>
 <router-outlet></router-outlet>

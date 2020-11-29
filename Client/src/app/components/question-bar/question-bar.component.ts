@@ -23,7 +23,7 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue = '30px';
   hintActive = false;
-  tabs = ['looks_one', 'looks_two']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
+  // tabs = ['looks_one', 'looks_two']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
   constructor(private gameService: GameService, public hintDialog: MatDialog) {
     this.refreshChallenge();
   }
@@ -81,9 +81,7 @@ export class QuestionBarComponent implements OnInit {
       data: {text: this.challenges[this.currentChallenge].hint}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe();
   }
 }
 
