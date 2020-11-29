@@ -46,7 +46,8 @@
 		"MIN_VALUE_30": "El valor mínimo del campo es 30",
 		"REQUIRED": "El campo es requerido",
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",
-		"UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
+    "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres",
+    "UNREQUIRED_MIN_LENGTH_5": "El campo puede quedar vacío o tener un largo de al menos 5 caracteres"
   },
   "LOGIN": {
     "TITLE": "Iniciar sesión",
@@ -138,13 +139,26 @@
 		"TITLE": "Creación de estudios"
 	},
 	"UPLOAD": {
+    "ARRAYS": {
+      "DOC_TYPES": {
+        "BOOK": "Libro",
+        "DOCUMENT": "Documento",
+        "IMAGE": "Imagen",
+        "VIDEO": "Vídeo"
+      },
+      "LOCALE_OPTIONS": {
+        "ENGLISH": "Inglés",
+        "SPANISH": "Español"
+      }
+    },
 		"FORM": {
 			"FIELDS": {
-				"CHECK": "Por favor confirme para continuar",
-				"DOMAIN": "Dominio",
-				"LOCALE": "Idioma",
+        "CHECK": "Por favor confirme para continuar",
+        "CHALLENGE": "Desafío",
+        "LOCALE": "Idioma",
+        "MASKED_URL": "URL enmascarada",
 				"NAME": "Nombre",
-				"TASK": "Tarea",
+        "STUDY": "Estudio",
 				"TYPE_OF": "Tipo de recurso",
 				"TITLE": "Título",
 				"URL": "URL"

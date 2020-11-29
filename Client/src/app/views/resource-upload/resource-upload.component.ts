@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EndpointsService } from '../../services/endpoints/endpoints.service';
 import { ResourceService } from '../../services/game/resource.service';
+import { Study, StudyService } from '../../services/game/study.service';
+import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 
 @Component({
   selector: 'app-resource-upload',
@@ -9,27 +12,42 @@ import { ResourceService } from '../../services/game/resource.service';
 })
 export class ResourceUploadComponent implements OnInit {
   resourceForm: FormGroup;
+  studies: Study[];
+  challenges: Challenge[];
   docTypes = [
-    { id: 1, typeOf: 'document', show: 'Documento' },
-    { id: 2, typeOf: 'image', show: 'Imagen' },
-    { id: 3, typeOf: 'book', show: 'Libro' },
-    { id: 4, typeOf: 'video', show: 'Vídeo' }
+    { id: 1, value: 'document', show: 'UPLOAD.ARRAYS.DOC_TYPES.DOCUMENT' },
+    { id: 2, value: 'image', show: 'UPLOAD.ARRAYS.DOC_TYPES.IMAGE' },
+    { id: 3, value: 'book', show: 'UPLOAD.ARRAYS.DOC_TYPES.BOOK' },
+    { id: 4, value: 'video', show: 'UPLOAD.ARRAYS.DOC_TYPES.VIDEO' }
   ];
+  localeOptions = [
+    { id: 1, value: 'en-US', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.ENGLISH' },
+    { id: 2, value: 'es-CL', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.SPANISH' }
+  ]
 
-  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService) { }
+  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService) { }
 
   ngOnInit(): void {
 
     this.resourceForm = this.formBuilder.group({
-      docName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      docType: ['', [Validators.required]],
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      url: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
-      domain: ['', [Validators.minLength(10), Validators.maxLength(50)]],
-      locale: ['', [Validators.minLength(10), Validators.maxLength(50)]],
-      task: ['', [Validators.minLength(10), Validators.maxLength(50)]],
-      checked: ['', Validators.required]
-    })
+      docName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      type: [null, [Validators.required]],
+      title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      url: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+      domain: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      locale: [null, [Validators.required]],
+      task: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      /*NEURONE required*/
+      maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
+      relevant: false,
+      searchSnippet: '',
+      keywords: [[]],
+      /*Validation*/
+      checked: [null, Validators.required]
+    });
+
+    this.studyService.getStudies()
+      .subscribe(response => this.studies = response['studys']);    
   }
 
   get resourceFormControls(): any {
@@ -38,9 +56,28 @@ export class ResourceUploadComponent implements OnInit {
 
   resetForm() {
     this.resourceForm.reset();
+    this.challenges.length = 0;
   }
 
   uploadResource() {
-    this.resourceService.postResource(this.resourceForm);
+    this.endpointsService.loadDocument(this.resourceForm.value)
+      .subscribe((data: []) => console.log(data));
+  }
+
+  getChallengesByStudy(studyId: any){
+    this.challengeService.getChallengesByStudy(studyId)
+      .subscribe(response => this.challenges = response['challenges']);        
+  }
+
+  async waitAndGet(studyId: any) {
+    if(this.challenges){
+      this.challenges.length = 0;
+    }    
+    await this.sleep(500);
+    this.getChallengesByStudy(studyId);
+  }
+
+  sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

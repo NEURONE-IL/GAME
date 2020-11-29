@@ -23,10 +23,15 @@ export class EndpointsService {
     return this.http.get(this.neuroneURL+'/v1/ping');
   }
 
-  loadDocument(document){
+  loadDocument(resource: any){
+    let cleanResource = Object.assign(new Object, resource);
+    delete cleanResource.checked;    
+    delete cleanResource.type;
+    cleanResource.domain = cleanResource.domain.split();
+    cleanResource.task = cleanResource.task.split();    
     let header = new HttpHeaders();
     header= header.append('Content-Type', 'text/plain');
-    return this.http.post(this.neuroneURL+'/v1/document/load', document, {headers: header});
+    return this.http.post(this.neuroneURL+'/v1/document/load', cleanResource, {headers: header});  
   }
 
   /* QUESTIONS */

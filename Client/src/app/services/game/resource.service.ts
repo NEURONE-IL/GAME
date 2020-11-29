@@ -24,18 +24,21 @@ export class ResourceService {
   }
 
   async postResource(resource: any) {
-    /*Includes just the non empty properties and excludes the checked property used for validation*/
+    /*Includes just the NEURONE required properties*/
     let cleanResource = Object.assign(new Object, resource);
     delete cleanResource.checked;
-    /*Iterates through the object to remove the empty properties*/
-    for (const property in cleanResource) {
-      if(cleanResource[property] === ''){
-        delete cleanResource[property];
-      }
-    }
+//    delete cleanResource.keywords;
+//    delete cleanResource.searchSnippet;
+//    delete cleanResource.relevant;
+//    delete cleanResource.maskedURL;
+    /*NEURONE required*/
+    cleanResource.domain = cleanResource.domain.split();
+    cleanResource.task = cleanResource.task.split();
+    console.log(cleanResource, 'clean');
     /*Sends the request using Axios*/
-    await Axios
-    .post('http://localhost:3090/api/document', cleanResource, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
+    await Axios  
+    .post('http://localhost:3000/v1/document/load', cleanResource, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
+//    .post('http://localhost:3090/api/document', cleanResource, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
     .then( response => {
       console.log(response.data)
     })

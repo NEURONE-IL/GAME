@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChallengeService } from '../../services/game/challenge.service';
-import { Study, StudyService } from '../../services/game/study.service'
+import { Study, StudyService } from '../../services/game/study.service';
 
 @Component({
   selector: 'app-challenge-creation',

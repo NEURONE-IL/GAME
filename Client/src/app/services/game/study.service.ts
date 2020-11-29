@@ -35,7 +35,7 @@ export class StudyService {
     delete cleanStudy.checked;
     /*Iterates through the object to remove the empty properties*/
     for (const property in cleanStudy) {
-      if(cleanStudy[property] === ''){
+      if(!cleanStudy[property] && property !== 'relevant'){
         delete cleanStudy[property];
       }
     }
