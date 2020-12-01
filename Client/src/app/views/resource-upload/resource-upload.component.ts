@@ -4,6 +4,8 @@ import { EndpointsService } from '../../services/endpoints/endpoints.service';
 import { ResourceService } from '../../services/game/resource.service';
 import { Study, StudyService } from '../../services/game/study.service';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resource-upload',
@@ -25,7 +27,7 @@ export class ResourceUploadComponent implements OnInit {
     { id: 2, value: 'es-CL', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.SPANISH' }
   ]
 
-  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService) { }
+  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -59,9 +61,23 @@ export class ResourceUploadComponent implements OnInit {
     this.challenges.length = 0;
   }
 
-  uploadResource() {
-    this.endpointsService.loadDocument(this.resourceForm.value)
-      .subscribe((data: []) => console.log(data));
+  uploadResource(){
+    let resource = this.resourceForm.value;
+    this.endpointsService.loadDocument(resource).subscribe(
+      resource => {
+        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
 
   getChallengesByStudy(studyId: any){

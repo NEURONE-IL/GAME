@@ -25,7 +25,8 @@
 				"ANSWER": "Respuesta",
 				"ANSWER_TYPE": "Tipo de respuesta",
 				"CHECK": "Por favor confirme para continuar",
-				"HINT": "Pista",
+        "HINT": "Pista",
+        "MAX_ATTEMPTS": "Intentos máximos",
         "QUESTION": "Pregunta",
         "QUESTION_TYPE": "Tipo de pregunta",
 				"SECONDS": "Segundos para responder",
@@ -33,16 +34,25 @@
 			}
 		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
-		"TITLE": "Creación de desafíos"
+    "TITLE": "Creación de desafíos",
+    "TOAST": {
+      "ERROR": "Fallo!",
+      "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
+      "SUCCESS": "Éxito!",
+      "SUCCESS_MESSAGE": "Se ha creado el Desafío: "
+    }    
 	},
 	"ERRORS": {
-		"CHECK_REQUIRED": "La confirmación es requerida",
+    "CHECK_REQUIRED": "La confirmación es requerida",
+    "MAX_LENGTH_2": "El largo del campo no puede exceder los 2 caracteres",
+    "MAX_LENGTH_3": "El largo del campo no puede exceder los 3 caracteres",
 		"MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
 		"MAX_LENGTH_200": "El largo del campo no puede exceder los 200 caracteres",
     "MAX_LENGTH_300": "El largo del campo no puede exceder los 300 caracteres",
 		"MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
 		"MIN_LENGTH_5": "El largo del campo no puede ser menor a 5 caracteres",
-		"MIN_LENGTH_10": "El largo del campo no puede ser menor a 10 caracteres",
+    "MIN_LENGTH_10": "El largo del campo no puede ser menor a 10 caracteres",
+    "MIN_VALUE_1": "El valor mínimo del campo es 1",
 		"MIN_VALUE_30": "El valor mínimo del campo es 30",
 		"REQUIRED": "El campo es requerido",
 		"SELECTION_REQUIRED": "Debe seleccionar una opción",
@@ -136,8 +146,14 @@
 			}
 		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
-		"TITLE": "Creación de estudios"
-	},
+    "TITLE": "Creación de estudios",
+    "TOAST": {
+      "ERROR": "Fallo!",
+      "ERROR_MESSAGE": "No se ha creado el nuevo Estudio",
+      "SUCCESS": "Éxito!",
+      "SUCCESS_MESSAGE": "Se ha creado el Estudio: "
+    }
+  },
 	"UPLOAD": {
     "ARRAYS": {
       "DOC_TYPES": {
@@ -165,6 +181,12 @@
 			}
 		},
 		"SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
-		"TITLE": "Carga de recursos"
+    "TITLE": "Carga de recursos",
+    "TOAST": {
+      "ERROR": "Fallo!",
+      "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
+      "SUCCESS": "Éxito!",
+      "SUCCESS_MESSAGE": "Se ha cargado el Recurso: "
+    }        
 	}
 }

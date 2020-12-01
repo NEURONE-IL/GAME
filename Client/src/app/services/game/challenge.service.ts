@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EndpointsService } from '../endpoints/endpoints.service';
-import Axios from 'axios';
 import { Observable } from 'rxjs';
 
 export interface Challenge {
@@ -40,7 +39,7 @@ export class ChallengeService {
     return this.http.get(this.uri+id);
   }
 
-  async postChallenge(challenge: any) {
+  postChallenge(challenge: any) {
     /*Includes just the non empty properties and excludes the checked property used for validation*/
     let cleanChallenge = Object.assign(new Object, challenge);
     delete cleanChallenge.checked;
@@ -50,14 +49,7 @@ export class ChallengeService {
         delete cleanChallenge[property];
       }
     }
-    /*Sends the request using Axios*/    
-    await Axios
-    .post('http://localhost:3090/api/challenge', cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
-    .then( response => {
-      console.log(response.data)
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    /*Sends the request*/
+    return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }  
 }

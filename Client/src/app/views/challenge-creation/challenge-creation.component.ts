@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-challenge-creation',
@@ -24,7 +26,7 @@ export class ChallengeCreationComponent implements OnInit {
     { id: 4, value: 'video', show: 'Vídeo' }
   ];  
 
-  constructor(private formBuilder: FormBuilder, private challengeService: ChallengeService, private studyService: StudyService) { }
+  constructor(private formBuilder: FormBuilder, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -32,6 +34,7 @@ export class ChallengeCreationComponent implements OnInit {
       question: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
       question_type: ['', Validators.required],
       seconds: ['', [Validators.required, Validators.maxLength(3), Validators.min(30)]],
+      max_attempts: ['', [Validators.required, Validators.maxLength(2), Validators.min(1)]],
       hint: ['', [Validators.minLength(10), Validators.maxLength(100)]],
       answer_type: ['', [Validators.minLength(3), Validators.maxLength(50)]],
       answer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
@@ -50,9 +53,23 @@ export class ChallengeCreationComponent implements OnInit {
   resetForm() {
     this.challengeForm.reset();
   }
-
-  createChallenge() {
-    this.challengeService.postChallenge(this.challengeForm.value)
-  }
   
-}
+  createChallenge(){
+    let challenge = this.challengeForm.value;
+    this.challengeService.postChallenge(challenge).subscribe(
+      challenge => {
+        this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+} 

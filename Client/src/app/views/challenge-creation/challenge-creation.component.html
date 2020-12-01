@@ -53,6 +53,24 @@
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
+						<mat-label>{{ "CHALLENGE.FORM.FIELDS.MAX_ATTEMPTS" | translate }}</mat-label>
+						<input matInput formControlName="max_attempts" type="number" required #inputMaxAttempts min="1" maxlength="2" 
+							oninput="javascript: if (this.value.toString().length > this.maxLength) this.value = parseInt(this.value.toString().slice(0, this.maxLength));"
+						>
+						<mat-hint align="end">{{inputMaxAttempts.value?.length || 0}}/2</mat-hint>
+						<mat-error *ngIf="challengeFormControls.max_attempts.hasError('required')">
+							{{ "ERRORS.REQUIRED" | translate }}
+						</mat-error>
+						<mat-error *ngIf="challengeFormControls.max_attempts.hasError('min')">
+							{{ "ERRORS.MIN_VALUE_1" | translate }}
+						</mat-error>						
+						<mat-error *ngIf="challengeFormControls.max_attempts.hasError('maxlength')">
+							{{ "ERRORS.MAX_LENGTH_2" | translate }}
+						</mat-error>							
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.HINT" | translate }}</mat-label>
 						<input matInput formControlName="hint" #inputHint maxlength="100">
 						<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
