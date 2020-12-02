@@ -17,7 +17,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
@@ -26,7 +26,7 @@ import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
- 
+
 
 
 import { AppComponent } from './app.component';
