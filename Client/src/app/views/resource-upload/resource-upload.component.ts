@@ -65,7 +65,7 @@ export class ResourceUploadComponent implements OnInit {
     let resource = this.resourceForm.value;
     this.endpointsService.loadDocument(resource).subscribe(
       resource => {
-        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE") + ': ', this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

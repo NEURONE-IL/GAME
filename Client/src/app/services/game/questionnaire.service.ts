@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EndpointsService } from '../endpoints/endpoints.service';
-import Axios from 'axios';
 import { Observable } from 'rxjs';
 
 export interface Questionnaire {
@@ -27,15 +26,14 @@ export class QuestionnaireService {
   }
 
   getQuestionnairesByType(type: string): Observable<any> {
-    console.log('http://localhost:3090/api/questionnaire/byType/'+type)
-    return this.http.get('http://localhost:3090/api/questionnaire/byType/'+type)
+    return this.http.get(this.uri+'byType/'+type)
   }
 
   getQuestionnaire(id: string) {
     return this.http.get(this.uri+id);
   }
 
-  async postQuestionnaire(questionnaire: any) {
+  postQuestionnaire(questionnaire: any): Observable<any> {
     /*Includes just the non empty properties and excludes the checked property used for validation*/
     let cleanQuestionnaire = Object.assign(new Object, questionnaire);
     delete cleanQuestionnaire.checked;
@@ -44,15 +42,28 @@ export class QuestionnaireService {
       if(cleanQuestionnaire[property] === ''){
         delete cleanQuestionnaire[property];
       }
-    }
-    /*Sends the request using Axios*/    
-    await Axios
-    .post('http://localhost:3090/api/questionnaire', cleanQuestionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
-    .then( response => {
-      console.log(response.data)
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    };
+    /*Sends the request*/
+    return this.http.post(this.uri, cleanQuestionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }  
+
+  postAnswers(user: any, questionnaire: any, questionnaireAnswers: any): Observable<any> {
+    let answers = [];
+    questionnaireAnswers.forEach((answer: number, index: number) => {
+      let newAnswer = {
+        question: questionnaire.questions[index].question,
+        answer: answer,
+        number: questionnaire.questions[index].number
+      }
+      answers.push(newAnswer);
+    });
+    let userQuestionnaire = {
+      user: user._id,
+      questionnaire: questionnaire._id,
+      answers: answers
+    };
+    /*Sends the request*/
+    console.log(userQuestionnaire)
+    return this.http.post(this.uri+'answer', userQuestionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+  }
 }

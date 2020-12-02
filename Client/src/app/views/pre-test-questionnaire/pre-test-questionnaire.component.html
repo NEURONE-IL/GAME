@@ -18,7 +18,7 @@
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
             <mat-radio-group
-              isRequired
+              required
               [formControlName]="index">
               <mat-radio-button *ngFor="let value of values" [value]="value" required>
                 {{value}}
@@ -41,10 +41,10 @@
     </form>
   </mat-card-content>
   <mat-card-actions class="cardActions">
-    <button mat-raised-button color="primary" class="saveButton" (click)="test()" [disabled]="!questionnaireForm.valid">
+    <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
       {{ "BUTTONS.SAVE" | translate }}
     </button>
-    <button mat-raised-button color="accent" class="clearButton" (click)="test()">
+    <button mat-raised-button color="accent" class="clearButton" (click)="resetForm()">
       {{ "BUTTONS.CLEAR" | translate }}
     </button>
   </mat-card-actions>

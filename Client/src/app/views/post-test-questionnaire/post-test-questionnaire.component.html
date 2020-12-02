@@ -1,68 +1,51 @@
 <mat-card class="questionnaire-card">
   <mat-card-header>
-    <mat-card-title>Cuestionario post-desafío</mat-card-title>
-    <mat-card-subtitle>Responde las siguientes preguntas respecto al deasfío que acabas de responder:</mat-card-subtitle>
+    <mat-card-title>{{ "QUESTIONNAIRE.POST_TEST.TITLE" | translate }}</mat-card-title>
+    <mat-card-subtitle>{{ "QUESTIONNAIRE.POST_TEST.SUBTITLE" | translate }}:</mat-card-subtitle>
   </mat-card-header>
   <h4 class="challenge">
-    La pregunta desafío fue: Ejemplo de pregunta desafío.
+    {{ "QUESTIONNAIRE.POST_TEST.CHALLENGE" | translate }}:
   </h4>
-  <mat-card-content>
-    <div id="certainty-label" class="certaintyLabel">1. ¿Qué tan seguro estás de la respuesta que entregaste?</div>
-    <mat-grid-list cols="12">
-      <mat-grid-tile colspan="4">
-        <div class="initLabel">
-          Muy inseguro
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="4">
-        <mat-radio-group
-          aria-labelledby="certainty-label"
-          [(ngModel)]="certainty">
-          <mat-radio-button *ngFor="let value of values" [value]="value">
-            {{value}}
-          </mat-radio-button>
-        </mat-radio-group>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="4">
-        <div style="margin-right: 50%">
-          Muy seguro
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>     
-<!--    <div>Estás relacionado: {{acquainted}}</div>  -->
-    <div id="difficulty-label" class="difficultyLabel">2. ¿Qué tan difícil fue encontrar la respuesta?</div>
-    <mat-grid-list cols="12">
-      <mat-grid-tile colspan="4">
-        <div class="initLabel">
-          Muy fácil
-        </div>        
-      </mat-grid-tile>
-      <mat-grid-tile colspan="4">
-        <mat-radio-group
-        aria-labelledby="difficulty-label"
-        [(ngModel)]="difficulty">
-        <mat-radio-button *ngFor="let value of values" [value]="value">
-          {{value}}
-        </mat-radio-button>
-        </mat-radio-group>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="4">
-        <div style="margin-right: 50%">
-          Muy difícil
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>   
-<!--    <div>Nivel de dificultad: {{difficulty}}</div>  -->
-    <mat-grid-list cols="12" class="checkbox-section">
-        <mat-checkbox class="checkbox" [(ngModel)]="checked">Por favor confirme para continuar</mat-checkbox>      
-    </mat-grid-list>
+  <mat-card-content *ngFor="let questionnaire of questionnaires">
+    <form [formGroup]="questionnaireForm">
+      <div formArrayName="answers">
+        <mat-grid-list cols="12" *ngFor="let question of questionnaire.questions; let index = index">
+          <div class="label">{{questionnaire.questions[index].number}}. {{questionnaire.questions[index].question}} </div>
+          <mat-grid-tile colspan="4">
+            <div class="initLabel">
+              {{ question.options[0].option }}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <mat-radio-group
+              isRequired
+              [formControlName]="index">
+              <mat-radio-button *ngFor="let value of values" [value]="value" required>
+                {{value}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <div style="margin-right: 50%">
+              {{ question.options[1].option }}
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+			<mat-grid-list cols="12" class="checkbox-section">
+				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "QUESTIONNAIRE.PRE_TEST.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
+				<mat-error *ngIf="questionnaireFormControls.checked.hasError('required') && questionnaireFormControls.checked.touched">
+					{{ "ERRORS.CHECK_REQUIRED" | translate }}
+				</mat-error>
+			</mat-grid-list>
+    </form>
   </mat-card-content>
   <mat-card-actions class="cardActions">
-    <button mat-raised-button class="saveButton" [(disabled)]="!checked">
-      GUARDAR
+    <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
+      {{ "BUTTONS.SAVE" | translate }}
     </button>
-    <button mat-raised-button class="clearButton">
-      LIMPIAR
+    <button mat-raised-button color="accent" class="clearButton" (click)="resetForm()">
+      {{ "BUTTONS.CLEAR" | translate }}
     </button>
   </mat-card-actions>
 </mat-card>

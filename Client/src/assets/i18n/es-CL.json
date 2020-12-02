@@ -39,7 +39,7 @@
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Desafío: "
+      "SUCCESS_MESSAGE": "Se ha creado el Desafío"
     }    
 	},
 	"ERRORS": {
@@ -67,6 +67,25 @@
     "REQUIRED": "El campo es requerido"
   },
   "QUESTIONNAIRE": {
+    "POST_TEST": {
+      "CHALLENGE": "La pregunta desafío fue",
+      "ERRORS": {
+        "CHECK_REQUIRED": "La confirmación es requerida"
+      },
+      "FORM": {
+        "FIELDS": {
+          "CHECK": "Por favor confirme para continuar"
+        }
+      },
+      "SUBTITLE": "Responde las siguientes preguntas sobre el desafío que acabas de responder",
+      "TITLE": "Cuestionario post-desafío",
+      "TOAST": {
+        "ERROR": "Fallo!",
+        "ERROR_MESSAGE": "No se han guardado las respuestas post desafío",
+        "SUCCESS": "Éxito!",
+        "SUCCESS_MESSAGE": "Se han guardado las respuestas post desafío"
+      }      
+    },    
     "PRE_TEST": {
       "CHALLENGE": "La pregunta desafío es",
       "ERRORS": {
@@ -78,7 +97,13 @@
         }
       },
       "SUBTITLE": "Responde las siguientes preguntas antes de responder el desafío",
-      "TITLE": "Cuestionario pre-desafío"
+      "TITLE": "Cuestionario pre-desafío",
+      "TOAST": {
+        "ERROR": "Fallo!",
+        "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
+        "SUCCESS": "Éxito!",
+        "SUCCESS_MESSAGE": "Se han guardado las respuestas pre desafío"
+      }            
     }
   },
   "SIGNUP": {
@@ -151,7 +176,7 @@
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Estudio",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Estudio: "
+      "SUCCESS_MESSAGE": "Se ha creado el Estudio"
     }
   },
 	"UPLOAD": {
@@ -186,7 +211,7 @@
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha cargado el Recurso: "
+      "SUCCESS_MESSAGE": "Se ha cargado el Recurso"
     }        
 	}
 }

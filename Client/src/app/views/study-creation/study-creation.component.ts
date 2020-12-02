@@ -35,7 +35,7 @@ export class StudyCreationComponent implements OnInit {
     let study = this.studyForm.value;
     this.studyService.postStudy(study).subscribe(
       study => {
-        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

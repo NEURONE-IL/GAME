@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireService } from '../../services/game/questionnaire.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pre-test-questionnaire',
@@ -12,9 +15,10 @@ export class PreTestQuestionnaireComponent implements OnInit {
   values: number[] = [1, 2, 3, 4, 5, 6];
   questionnaires: Questionnaire[];
   requiredType: string = 'pre';
-  @Output() onSaveClick = new EventEmitter();
+  isLoggedIn = false;
+  user: any;  
 
-  constructor(private formBuilder: FormBuilder, private questionnaireService: QuestionnaireService) { }
+  constructor(private formBuilder: FormBuilder, private questionnaireService: QuestionnaireService, private authService: AuthService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -30,8 +34,12 @@ export class PreTestQuestionnaireComponent implements OnInit {
         for(var i=0; i<questionnaire.questions.length; i++){
           this.addAnswer();
         }
-      })
+      });
+      this.resetForm();
     });
+
+    this.isLoggedIn = this.authService.loggedIn;
+    this.user = this.authService.getUser();    
   }
 
   get questionnaireFormControls(): any {
@@ -47,7 +55,21 @@ export class PreTestQuestionnaireComponent implements OnInit {
     this.questionnaireForm.reset();
   }
 
-  test() {
-    this.onSaveClick.emit();
+  saveAnswers(){
+    this.questionnaireService.postAnswers(this.user, this.questionnaires[0], this.questionnaireForm.value.answers)
+    .subscribe(response => {
+      this.toastr.success(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
-}
+}       

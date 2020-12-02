@@ -58,7 +58,7 @@ export class ChallengeCreationComponent implements OnInit {
     let challenge = this.challengeForm.value;
     this.challengeService.postChallenge(challenge).subscribe(
       challenge => {
-        this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

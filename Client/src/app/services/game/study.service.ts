@@ -38,7 +38,7 @@ export class StudyService {
         delete cleanStudy[property];
       }
     }
-    /*Sends the request using Axios*/
+    /*Sends the request*/
     return this.http.post(this.uri, cleanStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 }
