@@ -86,7 +86,7 @@ export class QuestionBarComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-content-example-dialog',
+  selector: 'hint-dialog-content',
   templateUrl: 'hint-dialog.html',
 })
 export class HintDialog {
