@@ -1,12 +1,18 @@
-import { EventEmitter, Output } from '@angular/core';
+import { EventEmitter, Inject, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface HintData {
+  text: string;
+}
 
 @Component({
   selector: 'app-question-bar',
   templateUrl: './question-bar.component.html',
   styleUrls: ['./question-bar.component.css']
 })
+
 export class QuestionBarComponent implements OnInit {
 
   challenges: any;
@@ -17,8 +23,8 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue = '30px';
   hintActive = false;
-  tabs = ['looks_one']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
-  constructor(private gameService: GameService) {
+  // tabs = ['looks_one', 'looks_two']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
+  constructor(private gameService: GameService, public hintDialog: MatDialog) {
     this.refreshChallenge();
   }
 
@@ -56,12 +62,35 @@ export class QuestionBarComponent implements OnInit {
     this.challenges = this.gameService.challenges;
     this.currentChallenge = this.gameService.currentChallenge;
     this.timeLeft = this.challenges[this.currentChallenge].seconds;
+    this.challenges.forEach((challenge, i) => {
+      if (i!=this.currentChallenge) {
+        challenge.active = false;
+      }
+    });
+    console.log(this.currentChallenge);
   }
 
   finishChallenge() {
     this.gameService.nextChallenge();
     this.refreshChallenge();
   }
+
+  showHint(): void {
+    const dialogRef = this.hintDialog.open(HintDialog, {
+      width: '250px',
+      data: {text: this.challenges[this.currentChallenge].hint}
+    });
+
+    // dialogRef.afterClosed().subscribe();
+  }
+}
+
+@Component({
+  selector: 'hint-dialog-content',
+  templateUrl: 'hint-dialog.html',
+})
+export class HintDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public hint: HintData) {}
 }
 
 

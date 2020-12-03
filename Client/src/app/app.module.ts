@@ -17,11 +17,17 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
 import { PdfViewerModule }  from  'ng2-pdf-viewer';
 import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
+
 
 import { AppComponent } from './app.component';
 import { QuestionBarComponent } from './components/question-bar/question-bar.component';
@@ -114,9 +120,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatListModule,
     MatSelectModule,
+    MatDialogModule,
     PdfViewerModule,
     Ng9RutModule,
     ValidateEqualModule,
+    CommonModule,
+    ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

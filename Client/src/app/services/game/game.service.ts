@@ -12,26 +12,18 @@ export class GameService {
   study: any;
   challenges: any;
   currentChallenge: number;
-  loadingGameData: true;
 
-  constructor(private authService: AuthService, private challengeService: ChallengeService, private studyService: StudyService) {
-    this.loadGameData();
-   }
+  constructor(private authService: AuthService, private challengeService: ChallengeService, private studyService: StudyService) { }
 
-  loadGameData() {
+  async loadGameData() {
+    await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     this.player = this.authService.getUser();
-    this.studyService.getStudy(this.player.study)
-      .subscribe((resp: any) => {
-        this.study = resp.study;
-      },
-      (error: any) => console.log(error));
-
-    this.challengeService.getChallengesByStudy(this.player.study)
-      .subscribe((resp: any) => {
-        this.challenges = resp.challenges;
-        this.currentChallenge = 0;
-      },
-      (error: any) => console.log(error));
+    this.study = await this.studyService.getStudy(this.player.study).toPromise();
+    this.study = this.study.study;
+    this.challenges = await this.challengeService.getChallengesByStudy(this.player.study).toPromise();
+    this.challenges = this.challenges.challenges;
+    this.currentChallenge = 0;
+    console.log('done loading game data');
   }
 
   nextChallenge() {
@@ -49,4 +41,5 @@ export class GameService {
     console.log(this.challenges);
     console.log(this.currentChallenge);
   }
+
 }

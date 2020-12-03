@@ -25,10 +25,10 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.TYPE_OF" | translate }}</mat-label>
-						<mat-select formControlName="docType" required>
-							<mat-option *ngFor="let type of docTypes" [value]="type.typeOf">{{type.show}}</mat-option>
+						<mat-select formControlName="type" required>
+							<mat-option *ngFor="let type of docTypes" [value]="type.value">{{ type.show | translate }}</mat-option>
 						</mat-select>
-						<mat-error *ngIf="resourceFormControls.docType.hasError('required')">
+						<mat-error *ngIf="resourceFormControls.type.hasError('required')">
 							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
 						</mat-error>
 					</mat-form-field>
@@ -36,8 +36,8 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.TITLE" | translate }}</mat-label>
-						<input matInput formControlName="title" required #inputDocType maxlength="50">
-						<mat-hint align="end">{{inputDocType.value?.length || 0}}/50</mat-hint>
+						<input matInput formControlName="title" required #inputType maxlength="50">
+						<mat-hint align="end">{{inputType.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="resourceFormControls.title.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
@@ -49,6 +49,17 @@
 						</mat-error>						
 					</mat-form-field>
 				</mat-grid-tile>
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
+						<mat-label>{{ "UPLOAD.FORM.FIELDS.LOCALE" | translate }}</mat-label>
+						<mat-select formControlName="locale" required>
+							<mat-option *ngFor="let option of localeOptions" [value]="option.value">{{ option.show | translate }}</mat-option>
+						</mat-select>
+						<mat-error *ngIf="resourceFormControls.locale.hasError('required')">
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						</mat-error>
+					</mat-form-field>
+				</mat-grid-tile>				
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.URL" | translate }}</mat-label>
@@ -67,41 +78,37 @@
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.DOMAIN" | translate }}</mat-label>
-						<input matInput formControlName="domain" #inputDomain maxlength="50" ng-required="true">
-						<mat-hint align="end">{{inputDomain.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="resourceFormControls.domain.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
-						</mat-error>						
-						<mat-error *ngIf="resourceFormControls.domain.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>						
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.LOCALE" | translate }}</mat-label>
-						<input matInput formControlName="locale" #inputLocale maxlength="50" ng-required="true">
-						<mat-hint align="end">{{inputLocale.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="resourceFormControls.locale.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
+						<mat-label>{{ "UPLOAD.FORM.FIELDS.MASKED_URL" | translate }}</mat-label>
+						<input matInput formControlName="maskedURL" #inputMaskedURL maxlength="200">
+						<mat-hint align="end">{{inputMaskedURL.value?.length || 0}}/200</mat-hint>
+						<mat-error *ngIf="resourceFormControls.maskedURL.hasError('minlength')">
+							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
 						</mat-error>
-						<mat-error *ngIf="resourceFormControls.locale.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>						
+						<mat-error *ngIf="resourceFormControls.maskedURL.hasError('maxlength')">
+							{{ "ERRORS.MAX_LENGTH_200" | translate }}
+						</mat-error>		
+					</mat-form-field>
+				</mat-grid-tile>				
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
+						<mat-label>{{ "UPLOAD.FORM.FIELDS.STUDY" | translate }}</mat-label>
+						<mat-select formControlName="domain" required>
+							<mat-option *ngFor="let study of studies" #Study [value]="study._id" (onSelectionChange)="waitAndGet(study._id)">{{study.name}}</mat-option>
+						</mat-select>
+						<mat-error *ngIf="resourceFormControls.domain.hasError('required')">
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.TASK" | translate }}</mat-label>
-						<input matInput formControlName="task" #inputTask maxlength="50" ng-required="true">
-						<mat-hint align="end">{{inputTask.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="resourceFormControls.task.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
-						</mat-error>						
-						<mat-error *ngIf="resourceFormControls.task.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>									
+						<mat-label>{{ "UPLOAD.FORM.FIELDS.CHALLENGE" | translate }}</mat-label>
+						<mat-select formControlName="task" required [disabled]="!resourceForm.value.domain">
+							<mat-option *ngFor="let challenge of challenges" #Challenge [value]="challenge._id">{{challenge.question}}</mat-option>
+						</mat-select>
+						<mat-error *ngIf="resourceFormControls.task.hasError('required')">
+							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
 			</mat-grid-list>

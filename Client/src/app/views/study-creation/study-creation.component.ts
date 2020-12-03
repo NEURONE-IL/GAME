@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudyService } from '../../services/game/study.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-study-creation',
@@ -10,7 +12,7 @@ import { StudyService } from '../../services/game/study.service';
 export class StudyCreationComponent implements OnInit {
   studyForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private studyService: StudyService) { }
+  constructor(private formBuilder: FormBuilder, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -30,6 +32,21 @@ export class StudyCreationComponent implements OnInit {
   }
   
   createStudy(){
-    this.studyService.postStudy(this.studyForm.value);
+    let study = this.studyForm.value;
+    this.studyService.postStudy(study).subscribe(
+      study => {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
-}  
+} 

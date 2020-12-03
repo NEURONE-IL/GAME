@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EndpointsService } from '../endpoints/endpoints.service';
-import Axios from 'axios';
 import { Observable } from 'rxjs';
 
 export interface Study {
@@ -29,25 +28,17 @@ export class StudyService {
     return this.http.get(this.uri+id);
   }
 
-  async postStudy(study: any) {
+  postStudy(study: any): Observable<any> {
     /*Includes just the non empty properties and excludes the checked property used for validation*/
     let cleanStudy = Object.assign(new Object, study);
     delete cleanStudy.checked;
     /*Iterates through the object to remove the empty properties*/
     for (const property in cleanStudy) {
-      if(cleanStudy[property] === ''){
+      if(!cleanStudy[property] && property !== 'relevant'){
         delete cleanStudy[property];
       }
     }
-    /*Sends the request using Axios*/
-    await Axios
-    .post(this.uri, cleanStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} })
-    .then( response => {
-      console.log(response.data)
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    /*Sends the request*/
+    return this.http.post(this.uri, cleanStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
-
 }
