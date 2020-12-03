@@ -15,33 +15,40 @@ export interface HintData {
 
 export class QuestionBarComponent implements OnInit {
 
+  // Challenge data
   challenges: any;
   currentChallenge: number;
+  hintActive = false;
 
+  // Timer data
   timeLeft: number;
   interval;
   value = 100;
-  leftValue = '30px';
-  hintActive = false;
-  // tabs = ['looks_one', 'looks_two']//,'looks_two','looks_3','looks_4', 'looks_5', 'looks_6']
+  leftValue: string;
+
   constructor(private gameService: GameService, public hintDialog: MatDialog) {
     this.refreshChallenge();
   }
 
   ngOnInit(): void {
+    this.startTimer();
+  }
+
+  startTimer() {
     this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
+      if(this.timeLeft > 0) {
         this.timeLeft--;
-        this.value = this.timeLeft / 120 * 100;
-        if (this.timeLeft < 100){
-          this.leftValue = '40px';
-          this.hintActive = true;
-        }
-      } else {
-        this.timeLeft = 120;
-        this.leftValue = '30px';
+        this.value = this.timeLeft * 100 / this.challenges[this.currentChallenge].seconds;
+        if (this.timeLeft < 1000) this.leftValue = '30px';
+        if (this.timeLeft < 100) this.leftValue = '40px';
+        if (this.timeLeft < 10) this.leftValue = '50px';
       }
-    }, 1000);
+      if (this.timeLeft==0) this.finishChallenge();
+    },1000)
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
   }
 
   tabhideshow(event) {
@@ -59,15 +66,22 @@ export class QuestionBarComponent implements OnInit {
   }
 
   refreshChallenge() {
+    // Get challenges
     this.challenges = this.gameService.challenges;
+    // Get current challenge index
     this.currentChallenge = this.gameService.currentChallenge;
-    this.timeLeft = this.challenges[this.currentChallenge].seconds;
+    // Set active challenge
     this.challenges.forEach((challenge, i) => {
       if (i!=this.currentChallenge) {
         challenge.active = false;
       }
     });
-    console.log(this.currentChallenge);
+    // Set timer data
+    this.timeLeft = this.challenges[this.currentChallenge].seconds;
+    if(this.timeLeft >= 1000) this.leftValue = '20px';
+    if(this.timeLeft < 1000) this.leftValue = '30px';
+    if(this.timeLeft < 100) this.leftValue = '40px';
+    if(this.timeLeft < 10) this.leftValue = '50px';
   }
 
   finishChallenge() {
