@@ -16,6 +16,7 @@ const UserSchema = new Schema({
     institution_commune: {type: String },
     institution_region: {type: String },
     password: {type: String, required: true},
+    gm_code: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
