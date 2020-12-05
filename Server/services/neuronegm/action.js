@@ -1,13 +1,13 @@
 const axios = require("axios");
 const connect = require('./connect');
 
-const getPoints = async (callback) => {
+const getActions = async (callback) => {
     await connect.getHeadersGM((err, headers) => {
         let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/points',headers.headers ).then((response)=> {
+        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions',headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -15,13 +15,13 @@ const getPoints = async (callback) => {
     });
 }
 
-const postPoint = async (point, callback) => {
+const postAction = async (action, callback) => {
     await connect.getHeadersGM((err, headers) => {
         let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/points', point, headers ).then((response)=> {
+        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions', action, headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -29,13 +29,13 @@ const postPoint = async (point, callback) => {
     });
 }
 
-const updatePoint = async (point, code, callback) => {
+const updateAction = async (action, code, callback) => {
     await connect.getHeadersGM((err, headers) => {
         let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/points/'+code, point, headers ).then((response)=> {
+        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, action, headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -43,13 +43,13 @@ const updatePoint = async (point, code, callback) => {
     });
 }
 
-const deletePoint = async (code, callback) => {
+const deleteAction = async (code, callback) => {
     await connect.getHeadersGM((err, headers) => {
         let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/points/'+code, headers ).then((response)=> {
+        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -57,11 +57,11 @@ const deletePoint = async (code, callback) => {
     });
 }
 
-const point = {
-    getPoints,
-    postPoint,
-    updatePoint,
-    deletePoint
+const action = {
+    getActions,
+    postAction,
+    updateAction,
+    deleteAction
 };
 
-module.exports = point;
+module.exports = action;
