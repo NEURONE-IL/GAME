@@ -89,6 +89,7 @@ export class QuestionBarComponent implements OnInit {
 
   sendAnswer() {
     // Add code to submit answer to server
+    clearInterval(this.interval);
     this.gameService.finishChallenge();
   }
 

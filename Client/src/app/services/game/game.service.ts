@@ -86,6 +86,7 @@ export class GameService {
 
   finishChallenge() {
     this.setStage('post-test');
+    this.storeToLocal();
     this.router.navigate(['start']);
   }
 
@@ -99,6 +100,7 @@ export class GameService {
     }
     this.router.navigate(['start']);
     this.setStage('pre-test');
+    this.storeToLocal();
   }
 
   fetchUserStage() {
