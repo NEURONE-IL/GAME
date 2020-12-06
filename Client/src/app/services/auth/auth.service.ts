@@ -10,8 +10,11 @@ import { StoreSessionService } from '../logger/store-session.service';
 export class AuthService {
 
   uri = this.endpoints.rootURL + 'auth/';
+  userUri = this.endpoints.rootURL + 'user/';
 
-  constructor(private http: HttpClient,private router: Router, private endpoints: EndpointsService, private storeSession: StoreSessionService) {}
+  constructor(private http: HttpClient,private router: Router,
+              private endpoints: EndpointsService,
+              private storeSession: StoreSessionService) {}
 
   login(email: string, password: string) {
     this.http.post(this.uri + 'login', {email: email,password: password})
@@ -43,6 +46,7 @@ export class AuthService {
     this.storeSession.postSessionLog(sessionLog);
     localStorage.removeItem('auth_token');
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("game");
     this.router.navigate(['login']);
   }
 
@@ -69,6 +73,18 @@ export class AuthService {
         this.router.navigate(['signup']);
       }
       );
+  }
+
+  updateUser(body) {
+    this.http.put(this.userUri + this.getUser()._id, body)
+      .subscribe((res: any) => {
+        console.log(res);
+        localStorage.setItem("currentUser",JSON.stringify(res.user));
+      },
+      (error) => {
+        console.log('error updating user');
+        console.log(error);
+      });
   }
 
   redirectUserPanel(role) {

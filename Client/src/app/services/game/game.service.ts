@@ -10,7 +10,7 @@ import { StudyService } from './study.service';
 })
 export class GameService {
 
-  player: any;
+  // player: any;
   study: any;
   challenges: any;
   currentChallenge: number;
@@ -21,35 +21,67 @@ export class GameService {
 
   gameDataChange: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private authService: AuthService,
-              private challengeService: ChallengeService,
+  constructor(private challengeService: ChallengeService,
               private studyService: StudyService,
-              public router: Router) {
-
+              public router: Router,
+              private authService: AuthService) {
     this.init();
   }
 
   init() {
-    console.log('gameService init');
-    this.loadGameData();
+    if (this.authService.loggedIn) {
+      console.log('gameService init');
+      this.loadGameData();
+    }
   }
 
   async loadGameData() {
     await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
-    this.player = this.authService.getUser();
-    this.study = await this.studyService.getStudy(this.player.study).toPromise();
-    this.study = this.study.study;
-    this.gameActive = true;
-    // For multiple challenges support
-    this.challenges = await this.challengeService.getChallengesByStudy(this.player.study).toPromise();
-    this.challenges = this.challenges.challenges;
-    // For one challenge at once
-    this.currentChallenge = 0; // Will be loaded from database later
-    this.challenge = this.challenges[this.currentChallenge];
-    this.stage = 'assent';
-    this.loading = false;
+    JSON.parse(localStorage.getItem('currentUser'));
+    if(localStorage.getItem('game')) {
+      this.fetchFromLocal();
+    }
+    else {
+      // this.player = this.authService.getUser();
+      this.study = await this.studyService.getStudy(this.authService.getUser().study).toPromise();
+      this.study = this.study.study;
+      this.gameActive = true;
+      // For multiple challenges support
+      this.challenges = await this.challengeService.getChallengesByStudy(this.authService.getUser().study).toPromise();
+      this.challenges = this.challenges.challenges;
+      // For one challenge at once
+      this.currentChallenge = 0; // Will be loaded from database later
+      this.challenge = this.challenges[this.currentChallenge];
+      this.fetchUserStage();
+      this.storeToLocal();
+      this.loading = false;
+    }
     console.log('done loading game data');
     this.gameDataChange.next();
+  }
+
+  storeToLocal() {
+    localStorage.setItem('game', JSON.stringify({
+      // 'player': this.player,
+      'study': this.study,
+      'challenges': this.challenges,
+      'currentChallenge': this.currentChallenge,
+      'challenge': this.challenge,
+      'stage': this.stage,
+      'gameActive': this.gameActive
+    }));
+  }
+
+  fetchFromLocal() {
+    const localData = JSON.parse(localStorage.getItem('game'));
+    // this.player = this.authService.getUser();
+    this.study = localData.study;
+    this.gameActive = localData.gameActive;
+    this.challenges = localData.challenges;
+    this.currentChallenge = localData.currentChallenge;
+    this.challenge = localData.challenge;
+    this.fetchUserStage();
+    this.loading = false;
   }
 
   finishChallenge() {
@@ -67,6 +99,20 @@ export class GameService {
     }
     this.router.navigate(['start']);
     this.setStage('pre-test');
+  }
+
+  fetchUserStage() {
+    console.log('fetching user stage');
+    if(this.stage!='pre-test' && this.stage!='gameplay' && this.stage!='post-test') {
+      if (!this.authService.getUser().assent) {
+        console.log('user stage is assent')
+        this.stage = 'assent';
+      }
+      if (!this.authService.getUser().initial) {
+        console.log('user stage is initial')
+        this.stage = 'initial';
+      }
+    }
   }
 
   setStage(stage) {

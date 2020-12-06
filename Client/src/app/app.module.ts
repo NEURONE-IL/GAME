@@ -139,6 +139,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
   ],
   providers: [EndpointsService,
+              GameService,
               {
               provide: HTTP_INTERCEPTORS,
               useClass: AuthInterceptorService,

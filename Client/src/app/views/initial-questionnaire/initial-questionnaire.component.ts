@@ -2,6 +2,7 @@ import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { Questionnaire, QuestionnaireService } from 'src/app/services/game/questionnaire.service';
 
@@ -15,6 +16,7 @@ export class InitialQuestionnaireComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private questionnaireService: QuestionnaireService,
               private gameService: GameService,
+              private authService: AuthService,
               public router: Router) { }
 
   questionnaireForm: FormGroup;
@@ -60,6 +62,7 @@ export class InitialQuestionnaireComponent implements OnInit {
 
   save() {
     this.onSaveClick.emit();
+    this.authService.updateUser({'initialQuestionnaire': true});
     this.router.navigate(['start/pre-test']);
   }
 

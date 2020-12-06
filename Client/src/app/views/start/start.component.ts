@@ -20,6 +20,7 @@ export class StartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gameService.init();
     if (!this.gameService.loading) {
       console.log('not loading!!');
       this.loadData();

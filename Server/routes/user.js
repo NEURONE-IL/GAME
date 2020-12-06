@@ -73,5 +73,33 @@ router.post('/changePassword', [verifyToken], async (req, res) => {
     }
 })
 
+router.put('/:user_id', [verifyToken], async (req, res) => {
+    const _id = req.params.user_id;
+    const user = await User.findOne({_id: _id}, (err, user) => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+        if('assent' in req.body){
+            user.assent = req.body.assent;
+        }
+        if('initialQuestionnaire' in req.body){
+            user.initialQuestionnaire = req.body.initialQuestionnaire;
+        }
+        user.updatedAt = Date.now();
+        user.save((err, user) => {
+            if (err) {
+                return res.status(404).json({
+                    err
+                });
+            }
+            res.status(200).json({
+                user
+            });
+        })
+    })
+})
+
 
 module.exports = router;
