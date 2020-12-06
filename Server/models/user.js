@@ -1,3 +1,4 @@
+const { any } = require('joi');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
@@ -22,7 +23,8 @@ const UserSchema = new Schema({
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
     assent: {type: Boolean, default: false},
-    initialQuestionnaire: {type: Boolean, default: false}
+    initial_questionnaire: {type: Boolean, default: false},
+    challenges_sequence: {type: [Schema.Types.ObjectId], default: []}
 });
 
 // Sets the createdAt parameter equal to the current time

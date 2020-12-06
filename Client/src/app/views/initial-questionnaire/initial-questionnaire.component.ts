@@ -62,7 +62,7 @@ export class InitialQuestionnaireComponent implements OnInit {
 
   save() {
     this.onSaveClick.emit();
-    this.authService.updateUser({'initialQuestionnaire': true});
+    this.authService.updateUser({'initial_questionnaire': true});
     this.router.navigate(['start/pre-test']);
   }
 

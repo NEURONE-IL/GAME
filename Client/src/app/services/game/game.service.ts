@@ -108,9 +108,13 @@ export class GameService {
         console.log('user stage is assent')
         this.stage = 'assent';
       }
-      if (!this.authService.getUser().initial) {
+      else if (!this.authService.getUser().initial_questionnaire) {
         console.log('user stage is initial')
         this.stage = 'initial';
+      }
+      else {
+        console.log('user stage is pre-test');
+        this.stage = 'pre-test';
       }
     }
   }
