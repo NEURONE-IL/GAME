@@ -11,7 +11,7 @@ export class DirectAccessGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean  {
     // If the previous URL was blank, then the user is directly accessing this page
     if (this.router.url === '/') {
-      this.router.navigate(['start']); // Navigate away to some other page
+      this.router.navigate(['login']); // Navigate away to some other page
       return false;
     }
     return true;

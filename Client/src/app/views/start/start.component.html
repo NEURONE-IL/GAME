@@ -1,25 +1,7 @@
 <app-header></app-header>
-<!-- Asentimiento informado pending -->
-<div class="container" *ngIf="stage=='assent'">
-  <app-assent (onSaveClick)="nextStage()"></app-assent>
+<button (click)="test()">test</button>
+<!-- Game data loading -->
+<div class='center-container' *ngIf="loading">
+  <mat-spinner class="loading-spinner"></mat-spinner>
 </div>
-<!-- Initial questionnaire pending -->
-<div class="container" *ngIf="stage=='initial'">
-  <app-initial-questionnaire (onSaveClick)="nextStage()"></app-initial-questionnaire>
-</div>
-<!-- Pre-test questionnaire pending -->
-<div class="container" *ngIf="stage=='pretest'">
-  <app-pre-test-questionnaire (onSaveClick)="nextStage()"></app-pre-test-questionnaire>
-</div>
-<!-- Everything ok, game can start -->
-<div class="container" *ngIf="stage=='start'">
-  <div class='center-container'>
-    <h3>{{"STARTPAGE.INSTRUCTIONS.TITLE" | translate}}</h3>
-    <p>{{"STARTPAGE.INSTRUCTIONS.TEXT" | translate}}</p>
-  </div>
-  <div class='center-container'>
-    <mat-spinner *ngIf="loading" class="loading-spinner"></mat-spinner>
-    <button *ngIf="!loading" mat-raised-button class="start-button" color="primary" (click)="doStart()">{{"STARTPAGE.STARTBUTTON" | translate}}</button>
-  </div>
-</div>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!loading"></router-outlet>

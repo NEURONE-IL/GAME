@@ -1,6 +1,8 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GameService } from 'src/app/services/game/game.service';
 import { Questionnaire, QuestionnaireService } from 'src/app/services/game/questionnaire.service';
 
 @Component({
@@ -10,7 +12,10 @@ import { Questionnaire, QuestionnaireService } from 'src/app/services/game/quest
 })
 export class InitialQuestionnaireComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private questionnaireService: QuestionnaireService) { }
+  constructor(private formBuilder: FormBuilder,
+              private questionnaireService: QuestionnaireService,
+              private gameService: GameService,
+              public router: Router) { }
 
   questionnaireForm: FormGroup;
   questionnaires: Questionnaire[];
@@ -55,6 +60,7 @@ export class InitialQuestionnaireComponent implements OnInit {
 
   save() {
     this.onSaveClick.emit();
+    this.router.navigate(['start/pre-test']);
   }
 
 }

@@ -6,6 +6,7 @@
   <h4 class="challenge">
     {{ "QUESTIONNAIRE.PRE_TEST.CHALLENGE" | translate }}:
   </h4>
+  <p class="challenge-text">{{ question }}</p>
   <mat-card-content *ngFor="let questionnaire of questionnaires">
     <form [formGroup]="questionnaireForm">
       <div formArrayName="answers">

@@ -4,6 +4,8 @@ import { Questionnaire, QuestionnaireService } from '../../services/game/questio
 import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { GameService } from 'src/app/services/game/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pre-test-questionnaire',
@@ -16,12 +18,20 @@ export class PreTestQuestionnaireComponent implements OnInit {
   questionnaires: Questionnaire[];
   requiredType: string = 'pre';
   isLoggedIn = false;
-  user: any;  
+  user: any;
+  question: string;
 
-  constructor(private formBuilder: FormBuilder, private questionnaireService: QuestionnaireService, private authService: AuthService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder,
+              private questionnaireService: QuestionnaireService,
+              private authService: AuthService,
+              private toastr: ToastrService,
+              private translate: TranslateService,
+              private gameService: GameService,
+              public router: Router) { }
 
   ngOnInit(): void {
 
+    this.question = this.gameService.challenges[this.gameService.currentChallenge].question;
     this.questionnaireForm = this.formBuilder.group({
       answers: new FormArray([]),
       checked: ['', Validators.required]
@@ -39,7 +49,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
     });
 
     this.isLoggedIn = this.authService.loggedIn;
-    this.user = this.authService.getUser();    
+    this.user = this.authService.getUser();
   }
 
   get questionnaireFormControls(): any {
@@ -63,6 +73,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
+        this.router.navigate(['start/instructions']);
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR"), {
@@ -72,4 +83,4 @@ export class PreTestQuestionnaireComponent implements OnInit {
       }
     );
   }
-}       
+}

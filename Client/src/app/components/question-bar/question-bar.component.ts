@@ -2,6 +2,7 @@ import { EventEmitter, Inject, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 export interface HintData {
   text: string;
@@ -26,13 +27,12 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue: string;
 
-  constructor(private gameService: GameService, public hintDialog: MatDialog) {
-    this.refreshChallenge();
-  }
-
-  ngOnInit(): void {
+  constructor(private gameService: GameService, public hintDialog: MatDialog, public router: Router) {
+    this.loadChallenge();
     this.startTimer();
   }
+
+  ngOnInit(): void {}
 
   startTimer() {
     this.interval = setInterval(() => {
@@ -43,7 +43,10 @@ export class QuestionBarComponent implements OnInit {
         if (this.timeLeft < 100) this.leftValue = '40px';
         if (this.timeLeft < 10) this.leftValue = '50px';
       }
-      if (this.timeLeft==0) this.finishChallenge();
+      if (this.timeLeft==0) {
+        console.log('time out!');
+        this.pauseTimer();
+      }
     },1000)
   }
 
@@ -65,7 +68,7 @@ export class QuestionBarComponent implements OnInit {
     }
   }
 
-  refreshChallenge() {
+  loadChallenge() {
     // Get challenges
     this.challenges = this.gameService.challenges;
     // Get current challenge index
@@ -85,12 +88,13 @@ export class QuestionBarComponent implements OnInit {
   }
 
   finishChallenge() {
-    this.gameService.nextChallenge();
-    this.refreshChallenge();
+    console.log(this.gameService.stage);
+    this.gameService.setStage('post-test');
+    this.router.navigate(['start', this.gameService.stage]);
   }
 
   showHint(): void {
-    const dialogRef = this.hintDialog.open(HintDialog, {
+    const dialogRef = this.hintDialog.open(HintDialogComponent, {
       width: '250px',
       data: {text: this.challenges[this.currentChallenge].hint}
     });
@@ -100,10 +104,10 @@ export class QuestionBarComponent implements OnInit {
 }
 
 @Component({
-  selector: 'hint-dialog-content',
+  selector: 'app-hint-dialog',
   templateUrl: 'hint-dialog.html',
 })
-export class HintDialog {
+export class HintDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public hint: HintData) {}
 }
 

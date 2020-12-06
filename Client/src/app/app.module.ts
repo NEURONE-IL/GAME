@@ -30,7 +30,7 @@ import { CommonModule } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
-import { QuestionBarComponent } from './components/question-bar/question-bar.component';
+import { HintDialogComponent, QuestionBarComponent } from './components/question-bar/question-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +38,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoginComponent } from './views/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { StartComponent } from './views/start/start.component';
+import { StartComponent, StartInstructionsComponent } from './views/start/start.component';
 import { SearchComponent } from './views/search/search.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
 import { EndpointsService } from './services/endpoints/endpoints.service';
@@ -61,6 +61,7 @@ import { ChallengeDisplayComponent } from './views/challenge-display/challenge-d
 import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
 import { AssentComponent } from './views/assent/assent.component';
+import { GameService } from './services/game/game.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,7 +95,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChallengeDisplayComponent,
     StudyDisplayComponent,
     StudiesDisplayComponent,
-    AssentComponent
+    HintDialogComponent,
+    AssentComponent,
+    StartInstructionsComponent
   ],
   imports: [
     BrowserModule,

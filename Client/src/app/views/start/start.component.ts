@@ -9,28 +9,46 @@ import { GameService } from '../../services/game/game.service';
 })
 export class StartComponent implements OnInit {
 
-  stage = "assent";
-  loading = true;
+  stage: string;
+  loading: boolean;
 
-  constructor(public router: Router, private gameService: GameService) { }
+  constructor(public router: Router, private gameService: GameService) {
+  }
 
   ngOnInit(): void {
-    this.loadData();
+    this.gameService.gameDataChange.subscribe(() => {
+      console.log('gameData updated');
+      this.loadData();
+    });
   }
 
-  async loadData() {
-    await this.gameService.loadGameData();
-    this.loading = false;
+  loadData() {
+    this.stage = this.gameService.stage;
+    this.loading = this.gameService.loading;
+    console.log(this.stage, this.loading);
+    console.log(this);
+    this.router.navigate(['start', this.gameService.stage]);
   }
+
+  test() {
+    console.log(this);
+    console.log(this.stage);
+    console.log(this.loading);
+  }
+}
+
+@Component({
+  selector: 'app-start-instructions',
+  templateUrl: './instructions.html',
+  styleUrls: ['./start.component.css']
+})
+export class StartInstructionsComponent {
+
+  constructor(public router: Router, private gameService: GameService) {}
 
   doStart(){
+    this.gameService.setStage('gameplay');
     this.router.navigate(['session/search']);
-  }
 
-  nextStage() {
-    if(this.stage=="assent") this.stage="initial";
-    else if(this.stage=="initial") this.stage="pretest";
-    else if(this.stage=="pretest") this.stage="start";
   }
-
 }

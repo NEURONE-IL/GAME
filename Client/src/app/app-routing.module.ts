@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DirectAccessGuard } from './helpers/direct-access.guard';
 import { LoginComponent } from './views/login/login.component';
@@ -23,12 +23,41 @@ import { StudyDisplayComponent } from './views/study-display/study-display.compo
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
+import { AssentComponent } from './views/assent/assent.component';
+import { StartInstructionsComponent } from './views/start/start.component';
 
 const routes: Routes = [
   {
     path: 'start',
-    canActivate: [ AuthGuard ],
-    component: StartComponent
+    canActivate: [AuthGuard],
+    component: StartComponent,
+    children: [
+      {
+        path: 'assent',
+        component: AssentComponent,
+        canActivate: [DirectAccessGuard],
+      },
+      {
+        path: 'initial',
+        component: InitialQuestionnaireComponent,
+        canActivate: [DirectAccessGuard],
+      },
+      {
+        path: 'pre-test',
+        component: PreTestQuestionnaireComponent,
+        canActivate: [DirectAccessGuard],
+      },
+      {
+        path: 'instructions',
+        component: StartInstructionsComponent,
+        canActivate: [DirectAccessGuard],
+      },
+      {
+        path: 'post-test',
+        component: PostTestQuestionnaireComponent,
+        canActivate: [DirectAccessGuard],
+      }
+    ]
   },
   {
     path: 'questionnaire',

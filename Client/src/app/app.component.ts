@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { GameService } from './services/game/game.service';
 import { KmTrackerService } from './services/logger/km-tracker.service';
 import { StoreLinkService } from './services/logger/store-link.service';
 
@@ -12,7 +13,11 @@ import { StoreLinkService } from './services/logger/store-link.service';
 export class AppComponent {
   title = 'Question Game';
 
-  constructor(public translate: TranslateService, private kmTracker: KmTrackerService, private router: Router, private storeLink: StoreLinkService ) {
+  constructor(public translate: TranslateService,
+              private kmTracker: KmTrackerService,
+              private router: Router,
+              private storeLink: StoreLinkService,
+              private gameService: GameService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let visitedLink = {
@@ -49,5 +54,6 @@ export class AppComponent {
     }
 
     // kmTracker.startTrack();
+    // gameService.loadGameData();
   }
 }
