@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
@@ -10,14 +11,22 @@ import { GameService } from '../../services/game/game.service';
 export class StartComponent implements OnInit {
 
   stage: string;
-  loading: boolean;
+  loading = true;
+  gameActive: boolean;
+
+  gameDataSubscription: Subscription;
 
   constructor(public router: Router, private gameService: GameService) {
   }
 
   ngOnInit(): void {
+    if (!this.gameService.loading) {
+      console.log('not loading!!');
+      this.loadData();
+    }
+    this.gameDataSubscription =
     this.gameService.gameDataChange.subscribe(() => {
-      console.log('gameData updated');
+      console.log('subscription triggered!');
       this.loadData();
     });
   }
@@ -25,15 +34,17 @@ export class StartComponent implements OnInit {
   loadData() {
     this.stage = this.gameService.stage;
     this.loading = this.gameService.loading;
-    console.log(this.stage, this.loading);
-    console.log(this);
-    this.router.navigate(['start', this.gameService.stage]);
+    this.gameActive = this.gameService.gameActive;
+    console.log('navigating from start to ' + this.stage);
+    this.router.navigate(['start', this.stage]);
   }
 
   test() {
     console.log(this);
-    console.log(this.stage);
-    console.log(this.loading);
+  }
+
+  ngOnDestroy() {
+    this.gameDataSubscription.unsubscribe();
   }
 }
 

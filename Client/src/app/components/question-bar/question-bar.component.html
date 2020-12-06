@@ -21,9 +21,9 @@
             <form class="answer-form">
               <mat-form-field class="input-full-width">
                 <input matInput placeholder="Entrega tu respuesta...">
-                <mat-icon matSuffix (click)="finishChallenge()" class="submit-icon">send</mat-icon>
+                <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
               </mat-form-field>
-              <button class="hidden-btn" (click)="finishChallenge()"></button>
+              <button class="hidden-btn" (click)="sendAnswer()"></button>
               <button *ngIf="true" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >
                 <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
                 Dame una pista

@@ -87,10 +87,9 @@ export class QuestionBarComponent implements OnInit {
     if(this.timeLeft < 10) this.leftValue = '50px';
   }
 
-  finishChallenge() {
-    console.log(this.gameService.stage);
-    this.gameService.setStage('post-test');
-    this.router.navigate(['start', this.gameService.stage]);
+  sendAnswer() {
+    // Add code to submit answer to server
+    this.gameService.finishChallenge();
   }
 
   showHint(): void {

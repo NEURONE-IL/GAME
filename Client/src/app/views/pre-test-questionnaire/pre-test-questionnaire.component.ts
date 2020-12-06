@@ -73,7 +73,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.router.navigate(['start/instructions']);
+        this.gameService.setStage('instructions');
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR"), {

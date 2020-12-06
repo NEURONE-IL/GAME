@@ -4,4 +4,12 @@
 <div class='center-container' *ngIf="loading">
   <mat-spinner class="loading-spinner"></mat-spinner>
 </div>
-<router-outlet *ngIf="!loading"></router-outlet>
+<div class="center-card" *ngIf="!loading && !gameActive">
+  <mat-card class="card mat-elevation-z8">
+      <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
+    <mat-card-content>
+      <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<router-outlet *ngIf="!loading && gameActive"></router-outlet>

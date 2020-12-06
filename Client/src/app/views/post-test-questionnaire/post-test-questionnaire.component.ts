@@ -74,8 +74,6 @@ export class PostTestQuestionnaireComponent implements OnInit {
         });
         this.resetForm();
         this.gameService.nextChallenge();
-        console.log('game service stage: ' + this.gameService.stage);
-        this.router.navigate(['start', this.gameService.stage]);
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {

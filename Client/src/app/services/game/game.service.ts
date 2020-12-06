@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ChallengeService } from './challenge.service';
@@ -15,14 +16,15 @@ export class GameService {
   currentChallenge: number;
   challenge: any;
   stage: string;
-  loading: boolean;
+  loading = true;
   gameActive: boolean;
 
   gameDataChange: Subject<boolean> = new Subject<boolean>();
 
   constructor(private authService: AuthService,
               private challengeService: ChallengeService,
-              private studyService: StudyService) {
+              private studyService: StudyService,
+              public router: Router) {
 
     this.init();
   }
@@ -50,26 +52,25 @@ export class GameService {
     this.gameDataChange.next();
   }
 
+  finishChallenge() {
+    this.setStage('post-test');
+    this.router.navigate(['start']);
+  }
+
   nextChallenge() {
     if(this.currentChallenge+1<this.challenges.length) {
       this.currentChallenge = this.currentChallenge + 1;
-      this.setStage('pre-test');
     }
     else {
+      this.gameActive = false;
       console.log('no more challenges');
     }
+    this.router.navigate(['start']);
+    this.setStage('pre-test');
   }
 
   setStage(stage) {
     this.stage = stage;
     this.gameDataChange.next();
   }
-
-  printGameData() {
-    console.log(this.player);
-    console.log(this.study);
-    console.log(this.challenges);
-    console.log(this.currentChallenge);
-  }
-
 }

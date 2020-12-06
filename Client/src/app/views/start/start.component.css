@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.center-card {
+  margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 15%;
+}
+
 .loading-spinner {
   margin: auto;
 }
