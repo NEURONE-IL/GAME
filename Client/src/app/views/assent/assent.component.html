@@ -1,10 +1,10 @@
 <div class="container">
   <form [formGroup]="assentForm">
     <app-consent [mode]="'assent'"></app-consent>
-    <mat-checkbox formControlName="assent" required>{{"SIGNUP.ASSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
+    <mat-checkbox formControlName="assent" required>{{"GAME.ASSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
     <div *ngIf="assentFormControls.assent.invalid && (assentFormControls.assent.dirty || assentFormControls.assent.touched)">
       <mat-error *ngIf="assentFormControls.assent.hasError('required')">
-        {{"SIGNUP.FORM.ERROR.ASSENT" | translate}}
+        {{"GAME.ASSENT.ERROR" | translate}}
       </mat-error>
     </div>
 </form>

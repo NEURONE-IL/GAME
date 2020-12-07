@@ -40,7 +40,7 @@
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha creado el Desafío"
-    }    
+    }
 	},
 	"ERRORS": {
     "CHECK_REQUIRED": "La confirmación es requerida",
@@ -67,6 +67,18 @@
     "REQUIRED": "El campo es requerido"
   },
   "QUESTIONNAIRE": {
+    "INITIAL": {
+      "TITLE": "Cuestionario inicial",
+      "SUBTITLE": "Responde las siguientes preguntas antes de comenzar",
+      "FORM": {
+        "FIELDS": {
+          "CHECK": "Por favor confirme para continuar"
+        }
+      },
+      "ERRORS": {
+        "CHECK_REQUIRED": "La confirmación es requerida"
+      }
+    },
     "POST_TEST": {
       "CHALLENGE": "La pregunta desafío fue",
       "ERRORS": {
@@ -84,8 +96,8 @@
         "ERROR_MESSAGE": "No se han guardado las respuestas post desafío",
         "SUCCESS": "Éxito!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas post desafío"
-      }      
-    },    
+      }
+    },
     "PRE_TEST": {
       "CHALLENGE": "La pregunta desafío es",
       "ERRORS": {
@@ -103,7 +115,7 @@
         "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
         "SUCCESS": "Éxito!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas pre desafío"
-      }            
+      }
     }
   },
   "SIGNUP": {
@@ -212,6 +224,28 @@
       "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha cargado el Recurso"
-    }        
-	}
+    }
+  },
+  "GAME": {
+    "ASSENT": {
+      "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
+      "ACCEPT_TEXT": "Acepto",
+      "ERROR": "Debe aceptar el asentimiento informado para continuar."
+    },
+    "STARTPAGE": {
+      "INSTRUCTIONS": {
+        "TITLE": "Instrucciones del juego",
+        "TEXT": "Al presionar el botón continuar, blah blah blah..."
+      },
+      "STARTBUTTON": "Comenzar"
+    },
+    "INACTIVE": {
+      "TITLE": "Aún no puedes jugar",
+      "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde."
+    },
+    "HINT": {
+      "TITLE": "Pista",
+      "CLOSE": "Cerrar"
+    }
+  }
 }
