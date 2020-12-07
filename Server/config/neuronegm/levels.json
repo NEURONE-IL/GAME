@@ -1,0 +1,53 @@
+{
+    "levels": [
+        {
+            "name": "Principiante",
+            "description": "Estudiante que entra por primera vez a la plataforma",
+            "point_required": "exp_1",
+            "point_threshold": 0,
+            "key": "principiante_1"
+        },
+        {
+            "name": "Aprendiz",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 1000,
+            "key": "aprendiz_1"
+        },
+        {
+            "name": "Adepto",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 2000,
+            "key": "adepto_1"
+        },
+        {
+            "name": "Graduado",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 3000,
+            "key": "graduado_1"
+        },
+        {
+            "name": "Experto",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 4000,
+            "key": "experto_1"
+        },
+        {
+            "name": "Maestro",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 5000,
+            "key": "maestro_1"
+        },
+        {
+            "name": "Leyenda",
+            "description": "",
+            "point_required": "exp_1",
+            "point_threshold": 6000,
+            "key": "leyenda_1"
+        }
+    ]
+}

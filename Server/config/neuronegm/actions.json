@@ -1,0 +1,28 @@
+{
+    "actions": [
+        {
+            "name": "Inicar Sesión",
+            "description": "El estudiante inicia sesión un día",
+            "repeatable": "true",
+            "key": "inicio_sesion_1"
+        },
+        {
+            "name": "Responder una pregunta",
+            "description": "El estudiante responde una pregunta",
+            "repeatable": "true",
+            "key": "responder_pregunta_1"
+        },
+        {
+            "name": "Responder sin utilizar pistas",
+            "description": "El estudiante responde una pregunta sin hacer uso de pistas",
+            "repeatable": "false",
+            "key": "sin_pistas_1"
+        },
+        {
+            "name": "Responder con mas de 30 segundos restantes",
+            "description": "El estudiante termina una pregunta con mas de 30 segundos restantes para responder",
+            "repeatable": "false",
+            "key": "responder_30"
+        }
+    ]
+}

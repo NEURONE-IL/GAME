@@ -6,7 +6,7 @@ const CredentialSchema = new Schema({
     logged: {type: Boolean},
     registered: {type: Boolean},
     app_code: {type: String},
-    sec: {type: Number},
+    sec: {type: Number, unique: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

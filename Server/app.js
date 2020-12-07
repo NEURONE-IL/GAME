@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const config = require('config'); //we load the db location from the JSON files
 const morgan = require('morgan');
 const bcrypt = require('bcryptjs');
-const axios = require('axios');
+const schedule = require('node-schedule');
 
 /** Internal modules **/
 require('./config/config');
@@ -17,7 +17,9 @@ const studyRoutes = require('./routes/study');
 const documentRoutes = require('./routes/document');
 const questionnaireRoutes = require('./routes/questionnaire');
 const sendEmailRoutes = require('./routes/send-email');
+
 const pointRoutes = require('./routes/point');
+const neuronegmRoutes = require('./routes/neuronegm');
 
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
@@ -31,16 +33,18 @@ const Role = require('./models/role');
 const User = require('./models/user');
 const Credential = require('./models/credential');
 
+const connectGM = require('./services/neuronegm/connect');
+
 
 //db connection
 mongoose.connect(config.DBHost, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");
         initial();
-        loginGM();
     });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
 
 async function initial() {
      Role.estimatedDocumentCount((err, count) => {
@@ -95,20 +99,24 @@ async function initial() {
     })
 }
 
-async function loginGM(credential){
-    credential = await Credential.findOne({});
-    if(credential!= null){
-        await axios.post(process.env.NEURONEGM+'/auth/signin', {username: 'neuronegame', password: 'neuroneclient'}).then((response)=> {
-            credential.logged = true;
-            credential.token = response.data.data.accessToken;
-            credential.updatedAt = new Date();
-            console.log("Logged into NEURONE GM ")
-            credential.save();
-        }).catch((err) => {
-            console.log(err)
+const j = schedule.scheduleJob('*/60 * * * * *', async () =>{
+    credential = await Credential.findOne({sec: 1});
+    if(credential !== null){
+        await connectGM.pingGM((err, response) => {
+            if(!err){
+                connectGM.checkToken( (err, response) => {
+                    if(response.expired){
+                        connectGM.loginGM(credential, err => {
+                            if(err){
+                                console.log(err)
+                            }
+                        })
+                    }
+                })
+            }
         })
     }
-}
+});
 
 /** Express setup **/
 const app = express();
@@ -133,7 +141,9 @@ app.use('/api/user', userRoutes);
 app.use('/api/study', studyRoutes);
 app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
+
 app.use('/api/point', pointRoutes);
+app.use('/neuronegm', neuronegmRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 

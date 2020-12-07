@@ -1,0 +1,15 @@
+{
+    "points": [
+        {
+            "name": "Experiencia",
+            "abbreviation": "EXP",
+            "description": "Experiencia que gana el estudiante al realizar desafíos",
+            "initial_points": 0,
+            "max_points": -1,
+            "daily_max": -1,
+            "is_default": "true",
+            "hidden": "false",
+            "key": "exp_1"
+        }
+    ]
+}
