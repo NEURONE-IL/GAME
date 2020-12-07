@@ -2,6 +2,8 @@ import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { Questionnaire, QuestionnaireService } from 'src/app/services/game/questionnaire.service';
@@ -17,7 +19,9 @@ export class InitialQuestionnaireComponent implements OnInit {
               private questionnaireService: QuestionnaireService,
               private gameService: GameService,
               private authService: AuthService,
-              public router: Router) { }
+              public router: Router,
+              private toastr: ToastrService,
+              private translate: TranslateService) { }
 
   questionnaireForm: FormGroup;
   questionnaires: Questionnaire[];
@@ -62,8 +66,25 @@ export class InitialQuestionnaireComponent implements OnInit {
 
   save() {
     this.onSaveClick.emit();
-    this.authService.updateUser({'initial_questionnaire': true});
-    this.router.navigate(['start/pre-test']);
+    console.log(this.questionnaireForm);
+    console.log(this.questionnaires[0]);
+    this.questionnaireService.postAnswers(this.authService.getUser(), this.questionnaires[0], this.questionnaireForm.value.marked)
+    .subscribe(response => {
+        this.toastr.success(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+        this.authService.updateUser({'initial_questionnaire': true});
+        this.gameService.nextChallenge();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
 
 }

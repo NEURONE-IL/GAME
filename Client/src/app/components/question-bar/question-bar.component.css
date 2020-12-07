@@ -84,3 +84,12 @@
 .hidden-btn {
   visibility: hidden;
 }
+
+.close-hint-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+  line-height: 3px;
+  min-width: auto;
+}

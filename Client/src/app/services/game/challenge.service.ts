@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EndpointsService } from '../endpoints/endpoints.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 export interface Challenge {
   _id: string,
@@ -25,7 +26,9 @@ export class ChallengeService {
 
   uri = this.endpoints.rootURL + 'challenge/';
 
-  constructor(protected http: HttpClient, private endpoints: EndpointsService) { }
+  constructor(protected http: HttpClient,
+              private endpoints: EndpointsService,
+              private authService: AuthService) { }
 
   getChallenges(): Observable<any> {
     return this.http.get(this.uri);
@@ -51,5 +54,19 @@ export class ChallengeService {
     }
     /*Sends the request*/
     return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
-  }  
+  }
+
+  postAnswer(challenge: any, answer: any, timeLeft: number) {
+    const formattedAnswer = {
+      user: this.authService.getUser(),
+      challenge: challenge,
+      answers: [
+        {
+          answer
+        }
+      ],
+      timeLeft: timeLeft
+    }
+    return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+  }
 }
