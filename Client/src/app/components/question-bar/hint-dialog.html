@@ -1,4 +1,9 @@
-<h2>HINT</h2>
-<div>
+<h1 mat-dialog-title>{{"GAME.HINT.TITLE" | translate}}</h1>
+<div mat-dialog-content>
   <p>{{hint.text}}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button class="close-hint-icon" [mat-dialog-close]="true">
+    {{"GAME.HINT.CLOSE" | translate}}
+  </button>
 </div>

@@ -3,6 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ChallengeService } from 'src/app/services/game/challenge.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface HintData {
   text: string;
@@ -19,6 +23,7 @@ export class QuestionBarComponent implements OnInit {
   // Challenge data
   challenges: any;
   currentChallenge: number;
+  challenge: any;
   hintActive = false;
 
   // Timer data
@@ -27,7 +32,19 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue: string;
 
-  constructor(private gameService: GameService, public hintDialog: MatDialog, public router: Router) {
+  // Answer data
+  answerForm: FormGroup;
+
+  constructor(private gameService: GameService,
+              public hintDialog: MatDialog,
+              public router: Router,
+              private challengeService: ChallengeService,
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+              private translate: TranslateService) {
+    this.answerForm = this.formBuilder.group({
+      answer: ['', Validators.requiredTrue]
+    });
     this.loadChallenge();
     this.startTimer();
   }
@@ -89,7 +106,25 @@ export class QuestionBarComponent implements OnInit {
 
   sendAnswer() {
     // Add code to submit answer to server
-    this.gameService.finishChallenge();
+    const challenge = this.challenges[this.currentChallenge];
+    const answer = this.answerForm.value.answer;
+    // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
+    this.challengeService.postAnswer(challenge, answer, this.timeLeft).subscribe(
+      () => {
+        this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        clearInterval(this.interval);
+        this.gameService.finishChallenge();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("GAME.TOAST.ERROR_MESSAGE"), this.translate.instant("GAME.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
 
   showHint(): void {

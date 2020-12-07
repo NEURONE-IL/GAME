@@ -18,9 +18,9 @@
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="3" rowspan="1">
-            <form class="answer-form">
+            <form class="answer-form" [formGroup]="answerForm">
               <mat-form-field class="input-full-width">
-                <input matInput placeholder="Entrega tu respuesta...">
+                <input matInput formControlName="answer" placeholder="Entrega tu respuesta...">
                 <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
               </mat-form-field>
               <button class="hidden-btn" (click)="sendAnswer()"></button>

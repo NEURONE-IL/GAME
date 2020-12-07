@@ -84,8 +84,8 @@ router.put('/:user_id', [verifyToken], async (req, res) => {
         if('assent' in req.body){
             user.assent = req.body.assent;
         }
-        if('initialQuestionnaire' in req.body){
-            user.initialQuestionnaire = req.body.initialQuestionnaire;
+        if('initial_questionnaire' in req.body){
+            user.initial_questionnaire = req.body.initial_questionnaire;
         }
         user.updatedAt = Date.now();
         user.save((err, user) => {

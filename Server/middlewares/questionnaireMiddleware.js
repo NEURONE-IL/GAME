@@ -57,7 +57,7 @@ const answerSchema = Joi.object({
         question: Joi.string()
             .required(),
 
-        answer: Joi.number()
+        answer: Joi.any()
             .required(),
         
         number: Joi.number()

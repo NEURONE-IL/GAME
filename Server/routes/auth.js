@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Role = require('../models/role');
 const Study = require('../models/study');
+const Challenge = require('../models/challenge');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -43,6 +44,14 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(req.body.password, salt);
+    const challenges = await Challenge.find({study: study}, err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    })
     //create user
     const user = new User({
         email: req.body.email,
@@ -59,7 +68,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         institution_region: req.body.institution_region,
         password: hashpassword,
         role: role._id,
-        study: study._id
+        study: study._id,
+        challenges_sequence: generateSequence(challenges)
     })
     //save user in db
     user.save((err, user) => {
@@ -87,6 +97,23 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('x-access-token', token).send({user: user, token: token});
 })
+
+function generateSequence(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    while (0 !== currentIndex) {
+  
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    // return array.map(ch => ({challenge_id: ch._id}));
+    return array;
+  }
 
 
 

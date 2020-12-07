@@ -86,6 +86,7 @@ export class GameService {
 
   finishChallenge() {
     this.setStage('post-test');
+    this.storeToLocal();
     this.router.navigate(['start']);
   }
 
@@ -99,6 +100,7 @@ export class GameService {
     }
     this.router.navigate(['start']);
     this.setStage('pre-test');
+    this.storeToLocal();
   }
 
   fetchUserStage() {
@@ -108,9 +110,13 @@ export class GameService {
         console.log('user stage is assent')
         this.stage = 'assent';
       }
-      if (!this.authService.getUser().initial) {
+      else if (!this.authService.getUser().initial_questionnaire) {
         console.log('user stage is initial')
         this.stage = 'initial';
+      }
+      else {
+        console.log('user stage is pre-test');
+        this.stage = 'pre-test';
       }
     }
   }

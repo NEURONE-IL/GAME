@@ -7,8 +7,8 @@ const UserQuestionnaireSchema = new Schema({
     type: {type: String},
     answers: [
         {
-            question: {type: String, required: true},
-            answer: {type: Number, required: true},
+            question: { type: String, required: true },
+            answer: { type: mongoose.Schema.Types.Mixed, required: true },
             number: { type: Number}
         }
     ],
