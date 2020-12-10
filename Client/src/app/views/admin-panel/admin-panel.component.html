@@ -1,20 +1,22 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+
 <mat-card class="studies-display-card">
   <mat-card-header>
-    <mat-card-title>{{ "ADMIN.TITLE" | translate }}</mat-card-title>
-    <mat-card-subtitle>{{ "ADMIN.SUBTITLE" | translate }}:</mat-card-subtitle>
+    <mat-card-title>{{ "" +
+    "ADMIN.TITLE" | translate }}</mat-card-title>
     <div class="container options">
-      <button mat-raised-button color="primary" (click)="CreateStudy()"> Crear Estudio </button>
-      <button mat-raised-button color="primary" (click)="CreateChallenge()"> Crear Challenge </button>
+      <button mat-raised-button color="primary" (click)="CreateStudy()"> {{"" +"ADMIN.STUDIES.CREATE" | translate}} </button>
+      <button mat-raised-button color="primary" (click)="CreateChallenge()"> {{"" +"ADMIN.CHALLENGES.CREATE" | translate}} </button>
     </div>
   </mat-card-header>
 </mat-card>
 
 <div class="main-content">
+
     <div>
+
         <app-studies-display> </app-studies-display>
     </div>
 </div>
-
+<router-outlet></router-outlet>
 
