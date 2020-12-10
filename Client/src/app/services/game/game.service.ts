@@ -46,12 +46,9 @@ export class GameService {
       this.study = await this.studyService.getStudy(this.authService.getUser().study).toPromise();
       this.study = this.study.study;
       this.gameActive = true;
-      // For multiple challenges support
-      this.challenges = await this.challengeService.getChallengesByStudy(this.authService.getUser().study).toPromise();
-      this.challenges = this.challenges.challenges;
       // For one challenge at once
       this.currentChallenge = 0; // Will be loaded from database later
-      this.challenge = this.challenges[this.currentChallenge];
+      this.challenge = this.challengeService.getChallenge(this.authService.getUser().challenges_progress[0]);
       this.fetchUserStage();
       this.storeToLocal();
       this.loading = false;
@@ -124,5 +121,14 @@ export class GameService {
   setStage(stage) {
     this.stage = stage;
     this.gameDataChange.next();
+  }
+
+  getStage() {
+    const user = this.authService.getUser();
+    const stage = '';
+    user.challenges_progress.forEach(challenge => {
+
+    });
+    return user.challenges_progress;
   }
 }

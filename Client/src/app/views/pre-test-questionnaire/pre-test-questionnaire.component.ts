@@ -31,7 +31,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.question = this.gameService.challenges[this.gameService.currentChallenge].question;
+    this.question = this.gameService.challenge.question;
     this.questionnaireForm = this.formBuilder.group({
       answers: new FormArray([]),
       checked: ['', Validators.required]

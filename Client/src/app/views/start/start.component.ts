@@ -41,7 +41,7 @@ export class StartComponent implements OnInit {
   }
 
   test() {
-    console.log(this);
+    console.log(this.gameService.getStage());
   }
 
   ngOnDestroy() {

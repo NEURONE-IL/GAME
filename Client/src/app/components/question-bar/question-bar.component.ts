@@ -55,7 +55,7 @@ export class QuestionBarComponent implements OnInit {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
-        this.value = this.timeLeft * 100 / this.challenges[this.currentChallenge].seconds;
+        this.value = this.timeLeft * 100 / this.challenge.seconds;
         if (this.timeLeft < 1000) this.leftValue = '30px';
         if (this.timeLeft < 100) this.leftValue = '40px';
         if (this.timeLeft < 10) this.leftValue = '50px';
@@ -86,6 +86,10 @@ export class QuestionBarComponent implements OnInit {
   }
 
   loadChallenge() {
+    // Get challenge
+    this.challenge = this.gameService.challenge;
+
+    // ---- DEPRACATED ---------
     // Get challenges
     this.challenges = this.gameService.challenges;
     // Get current challenge index
@@ -96,8 +100,10 @@ export class QuestionBarComponent implements OnInit {
         challenge.active = false;
       }
     });
+    // -----------------------------
+
     // Set timer data
-    this.timeLeft = this.challenges[this.currentChallenge].seconds;
+    this.timeLeft = this.challenge.seconds;
     if(this.timeLeft >= 1000) this.leftValue = '20px';
     if(this.timeLeft < 1000) this.leftValue = '30px';
     if(this.timeLeft < 100) this.leftValue = '40px';
@@ -106,7 +112,7 @@ export class QuestionBarComponent implements OnInit {
 
   sendAnswer() {
     // Add code to submit answer to server
-    const challenge = this.challenges[this.currentChallenge];
+    const challenge = this.challenge;
     const answer = this.answerForm.value.answer;
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
     this.challengeService.postAnswer(challenge, answer, this.timeLeft).subscribe(
@@ -130,7 +136,7 @@ export class QuestionBarComponent implements OnInit {
   showHint(): void {
     const dialogRef = this.hintDialog.open(HintDialogComponent, {
       width: '250px',
-      data: {text: this.challenges[this.currentChallenge].hint}
+      data: {text: this.challenge.hint}
     });
 
     // dialogRef.afterClosed().subscribe();
