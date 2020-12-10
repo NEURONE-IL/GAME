@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middlewares/authMiddleware');
 const { isValidObjectId } = require('mongoose');
 
-
 router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.uniqueEmail], async (req, res)=>{
     const study_id = req.params.study_id;
     if(!isValidObjectId(study_id)){
@@ -69,7 +68,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         password: hashpassword,
         role: role._id,
         study: study._id,
-        challenges_sequence: generateSequence(challenges)
+        challenges_progress: generateProgressArray(challenges)
     })
     //save user in db
     user.save((err, user) => {
@@ -98,7 +97,7 @@ router.post('/login', async (req, res) => {
     res.header('x-access-token', token).send({user: user, token: token});
 })
 
-function generateSequence(array) {
+function generateChallengeSequence(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
     while (0 !== currentIndex) {
@@ -110,9 +109,22 @@ function generateSequence(array) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-  
-    // return array.map(ch => ({challenge_id: ch._id}));
     return array;
+  }
+
+  function generateProgressArray(challenges) {
+    const sequence = generateChallengeSequence(challenges);
+    let progress = [];
+    sequence.forEach(challenge => {
+        progress.push({
+            challenge: challenge,
+            pre_test: false,
+            post_test: false,
+            started: false,
+            hint_used: false
+        });
+    });
+    return progress;
   }
 
 
