@@ -1,0 +1,19 @@
+
+.options{
+  text-align: right;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+.options button{
+  margin: 10px;
+}
+
+.studies-display-card{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+mat-card{
+  /**/
+  align-self: flex-start;
+}
