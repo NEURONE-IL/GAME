@@ -63,10 +63,8 @@ const answerSchema = Joi.object({
     timeLeft: Joi.number()
         .required(),
 
-    answers: Joi.array().items(Joi.object({
-        answer: Joi.string()
-            .required()
-    }))
+    answer: Joi.string()
+        .required()
 })
 
 verifyBody = async (req, res, next) => {
