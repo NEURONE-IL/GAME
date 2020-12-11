@@ -30,7 +30,7 @@ const UserSchema = new Schema({
       pre_test: {type: Boolean, default: false},
       post_test: {type: Boolean, default: false},
       started: {type: Boolean, default: false},
-      hint_used: {type: Boolean, default: false},
+      finished: {type: Boolean, default: false},
       _id: false,
       id: false
     }], default: []}

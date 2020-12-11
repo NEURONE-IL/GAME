@@ -11,6 +11,7 @@ const UserChallengeSchema = new Schema({
         }
     ],
     timeLeft: { type: Number },
+    hintUsed: { type: Boolean, default: false},
     pointsObtained: { type: Number},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

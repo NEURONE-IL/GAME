@@ -63,6 +63,9 @@ const answerSchema = Joi.object({
     timeLeft: Joi.number()
         .required(),
 
+    hintUsed: Joi.boolean()
+        .required(),
+
     answers: Joi.array().items(Joi.object({
         answer: Joi.string()
             .required()

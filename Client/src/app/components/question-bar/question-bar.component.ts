@@ -91,15 +91,15 @@ export class QuestionBarComponent implements OnInit {
 
     // ---- DEPRACATED ---------
     // Get challenges
-    this.challenges = this.gameService.challenges;
+    // this.challenges = this.gameService.challenges;
     // Get current challenge index
-    this.currentChallenge = this.gameService.currentChallenge;
+    // this.currentChallenge = this.gameService.currentChallenge;
     // Set active challenge
-    this.challenges.forEach((challenge, i) => {
-      if (i!=this.currentChallenge) {
-        challenge.active = false;
-      }
-    });
+    // this.challenges.forEach((challenge, i) => {
+    //   if (i!=this.currentChallenge) {
+    //     challenge.active = false;
+    //   }
+    // });
     // -----------------------------
 
     // Set timer data
@@ -115,7 +115,7 @@ export class QuestionBarComponent implements OnInit {
     const challenge = this.challenge;
     const answer = this.answerForm.value.answer;
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswer(challenge, answer, this.timeLeft).subscribe(
+    this.challengeService.postAnswer(challenge, answer, this.timeLeft, false).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,

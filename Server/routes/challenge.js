@@ -90,6 +90,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         challenge: req.body.challenge,
         date: req.body.date,
         answers: req.body.answers,
+        hintUsed: req.body.hintUsed,
         timeLeft: req.body.timeLeft
     })
     userChallenge.pointsObtained = 0 //llamar función para calcular puntos aquí.

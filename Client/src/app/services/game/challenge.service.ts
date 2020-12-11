@@ -56,7 +56,7 @@ export class ChallengeService {
     return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
-  postAnswer(challenge: any, answer: any, timeLeft: number) {
+  postAnswer(challenge: any, answer: any, timeLeft: number, hintUsed: boolean) {
     const formattedAnswer = {
       user: this.authService.getUser(),
       challenge: challenge,
@@ -65,7 +65,8 @@ export class ChallengeService {
           answer
         }
       ],
-      timeLeft: timeLeft
+      timeLeft: timeLeft,
+      hintUsed: hintUsed
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

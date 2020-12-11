@@ -117,11 +117,7 @@ function generateChallengeSequence(array) {
     let progress = [];
     sequence.forEach(challenge => {
         progress.push({
-            challenge: challenge,
-            pre_test: false,
-            post_test: false,
-            started: false,
-            hint_used: false
+            challenge: challenge
         });
     });
     return progress;

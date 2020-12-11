@@ -38,22 +38,23 @@ export class GameService {
   async loadGameData() {
     await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     JSON.parse(localStorage.getItem('currentUser'));
-    if(localStorage.getItem('game')) {
-      this.fetchFromLocal();
+    // this.player = this.authService.getUser();
+    this.study = await this.studyService.getStudy(this.authService.getUser().study).toPromise();
+    this.study = this.study.study;
+    this.gameActive = true;
+    // For one challenge at once
+    const challengeId = this.getCurrentChallenge();
+    if (challengeId!=null) {
+      this.challenge = await this.challengeService.getChallenge(challengeId).toPromise();
+      this.challenge = this.challenge.challenge;
     }
     else {
-      // this.player = this.authService.getUser();
-      this.study = await this.studyService.getStudy(this.authService.getUser().study).toPromise();
-      this.study = this.study.study;
-      this.gameActive = true;
-      // For one challenge at once
-      this.currentChallenge = 0; // Will be loaded from database later
-      this.challenge = this.challengeService.getChallenge(this.authService.getUser().challenges_progress[0]);
-      this.fetchUserStage();
-      this.storeToLocal();
-      this.loading = false;
+      this.gameActive = false;
     }
+    this.fetchUserStage();
+    this.loading = false;
     console.log('done loading game data');
+    console.log(this.challenge);
     this.gameDataChange.next();
   }
 
@@ -61,8 +62,6 @@ export class GameService {
     localStorage.setItem('game', JSON.stringify({
       // 'player': this.player,
       'study': this.study,
-      'challenges': this.challenges,
-      'currentChallenge': this.currentChallenge,
       'challenge': this.challenge,
       'stage': this.stage,
       'gameActive': this.gameActive
@@ -74,8 +73,6 @@ export class GameService {
     // this.player = this.authService.getUser();
     this.study = localData.study;
     this.gameActive = localData.gameActive;
-    this.challenges = localData.challenges;
-    this.currentChallenge = localData.currentChallenge;
     this.challenge = localData.challenge;
     this.fetchUserStage();
     this.loading = false;
@@ -126,9 +123,13 @@ export class GameService {
   getStage() {
     const user = this.authService.getUser();
     const stage = '';
-    user.challenges_progress.forEach(challenge => {
-
-    });
     return user.challenges_progress;
+  }
+
+  getCurrentChallenge() {
+    const user = this.authService.getUser();
+    const challenge = user.challenges_progress.find(challenge => challenge.finished == false);
+    if (challenge!=null) return challenge.challenge;
+    else return null;
   }
 }
