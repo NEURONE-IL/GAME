@@ -76,6 +76,7 @@ export class InitialQuestionnaireComponent implements OnInit {
         });
         this.resetForm();
         this.authService.updateUser({'initial_questionnaire': true});
+        this.gameService.stage = 'pre-test';
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {

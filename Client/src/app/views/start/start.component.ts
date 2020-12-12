@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
@@ -10,42 +9,18 @@ import { GameService } from '../../services/game/game.service';
 })
 export class StartComponent implements OnInit {
 
-  stage: string;
-  loading = true;
-  gameActive: boolean;
-
-  gameDataSubscription: Subscription;
-
-  constructor(public router: Router, private gameService: GameService) {
+  constructor(public router: Router, public gameService: GameService) {
   }
 
-  ngOnInit(): void {
-    this.gameService.init();
+  async ngOnInit(): Promise<void> {
+    await this.gameService.load();
     if (!this.gameService.loading) {
       console.log('not loading!!');
-      this.loadData();
     }
-    this.gameDataSubscription =
-    this.gameService.gameDataChange.subscribe(() => {
-      console.log('subscription triggered!');
-      this.loadData();
-    });
-  }
-
-  loadData() {
-    this.stage = this.gameService.stage;
-    this.loading = this.gameService.loading;
-    this.gameActive = this.gameService.gameActive;
-    console.log('navigating from start to ' + this.stage);
-    this.router.navigate(['start', this.stage]);
   }
 
   test() {
-    console.log(this.gameService.getStage());
-  }
-
-  ngOnDestroy() {
-    this.gameDataSubscription.unsubscribe();
+    console.log(this.gameService.stage);
   }
 }
 
@@ -59,7 +34,8 @@ export class StartInstructionsComponent {
   constructor(public router: Router, private gameService: GameService) {}
 
   doStart(){
-    this.gameService.setStage('gameplay');
+    this.gameService.stage = 'gameplay';
+    this.gameService.updateUserProgress('gameplay');
     this.router.navigate(['session/search']);
 
   }

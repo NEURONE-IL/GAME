@@ -1,10 +1,12 @@
 <app-header></app-header>
 <button (click)="test()">test</button>
 <!-- Game data loading -->
-<div class='center-container' *ngIf="loading">
+<div class='center-container' *ngIf="gameService.loading">
   <mat-spinner class="loading-spinner"></mat-spinner>
 </div>
-<div class="center-card" *ngIf="!loading && !gameActive">
+
+<!-- Game inactive -->
+<div class="center-card" *ngIf="!gameService.loading && !gameService.gameActive">
   <mat-card class="card mat-elevation-z8">
       <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
     <mat-card-content>
@@ -12,4 +14,34 @@
     </mat-card-content>
   </mat-card>
 </div>
-<router-outlet *ngIf="!loading && gameActive"></router-outlet>
+
+<!-- Asentimiento informado pending -->
+<div class="container" *ngIf="gameService.stage=='assent' && gameService.gameActive">
+  <app-assent ></app-assent>
+</div>
+<!-- Initial questionnaire pending -->
+<div class="container" *ngIf="gameService.stage=='initial' && gameService.gameActive">
+  <app-initial-questionnaire ></app-initial-questionnaire>
+</div>
+<!-- Pre-test questionnaire pending -->
+<div class="container" *ngIf="gameService.stage=='pre-test' && gameService.gameActive">
+  <app-pre-test-questionnaire ></app-pre-test-questionnaire>
+</div>
+<!-- Everything ok, game can start -->
+<div class="container" *ngIf="gameService.stage=='instructions' && gameService.gameActive">
+  <app-start-instructions></app-start-instructions>
+</div>
+<!-- Post-test questionnaire pending -->
+<div class="container" *ngIf="gameService.stage=='post-test' && gameService.gameActive">
+  <app-post-test-questionnaire ></app-post-test-questionnaire>
+</div>
+
+<!-- <div class="center-card" *ngIf="!gameService.loading && !gameService.gameActive">
+  <mat-card class="card mat-elevation-z8">
+      <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
+    <mat-card-content>
+      <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<router-outlet *ngIf="!gameService.loading && gameService.gameActive"></router-outlet> -->

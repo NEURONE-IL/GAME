@@ -73,7 +73,7 @@ export class PostTestQuestionnaireComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.gameService.nextChallenge();
+        this.gameService.updateUserProgress('post-test');
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {

@@ -30,11 +30,9 @@ export class AssentComponent implements OnInit {
   }
 
   save() {
-    // this.onSaveClick.emit();
     console.log(this.assentForm.value);
     this.authService.updateUser({"assent": true});
-    this.gameService.setStage('initial');
-    // this.router.navigate(['start']);
+    this.gameService.stage = 'initial';
   }
 
 }
