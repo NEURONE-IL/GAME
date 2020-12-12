@@ -61,7 +61,7 @@ export class QuestionBarComponent implements OnInit {
       if (this.timeLeft==0) {
         console.log('time out!');
         this.pauseTimer();
-        this.sendAnswer();
+        this.sendDataTimeOut();
       }
     },1000)
   }
@@ -99,9 +99,35 @@ export class QuestionBarComponent implements OnInit {
   sendAnswer() {
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
-    const answer = this.answerForm.value.answer;
+    let answer = this.answerForm.value.answer;
+    if(answer==null) answer = '';
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
     this.challengeService.postAnswer(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
+      () => {
+        this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        clearInterval(this.interval);
+        this.gameService.finishChallenge();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("GAME.TOAST.ERROR_MESSAGE"), this.translate.instant("GAME.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+
+  // Send data when the player runs out of time (no answer).
+  sendDataTimeOut() {
+    // Add code to submit answer to server
+    const challenge = this.gameService.challenge;
+    let answer = this.answerForm.value.answer;
+    if(answer==null) answer = '';
+    // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
+    this.challengeService.postAnswerFromTimeOut(challenge, this.timeLeft, this.hintUsed).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,

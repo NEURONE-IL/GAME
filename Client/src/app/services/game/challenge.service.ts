@@ -70,4 +70,14 @@ export class ChallengeService {
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
+
+  postAnswerFromTimeOut(challenge: any, timeLeft: number, hintUsed: boolean) {
+    const formattedAnswer = {
+      user: this.authService.getUser(),
+      challenge: challenge,
+      timeLeft: timeLeft,
+      hintUsed: hintUsed
+    }
+    return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+  }
 }
