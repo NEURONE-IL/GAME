@@ -90,6 +90,21 @@ export class AuthService {
     });
   }
 
+  refreshUser() {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.userUri + this.getUser()._id, {})
+      .subscribe((res: any) => {
+        localStorage.setItem("currentUser",JSON.stringify(res.user));
+        resolve(true);
+      },
+      (error) => {
+        console.log('error updating user');
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
+
   redirectUserPanel(role) {
     console.log('redirect');
     if (role=='admin') {

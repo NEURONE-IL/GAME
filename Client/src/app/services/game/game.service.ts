@@ -9,7 +9,6 @@ import { ChallengeService } from './challenge.service';
 })
 export class GameService {
 
-  currentChallenge: any;
   challenge: any;
   stage: string;
   loading: boolean;
@@ -28,10 +27,11 @@ export class GameService {
 
   async loadGameData() {
     // this.player = this.authService.getUser();
+    await this.authService.refreshUser();
     this.gameActive = true;
     this.loading = true;
     // For one challenge at once
-    const challengeId = this.getCurrentChallenge();
+    const challengeId = this.getCurrentChallengeId();
     if (challengeId!=null) {
       this.challenge = await this.challengeService.getChallenge(challengeId).toPromise();
       this.challenge = this.challenge.challenge;
@@ -119,7 +119,7 @@ export class GameService {
     this.router.navigate(['/']);
   }
 
-  getCurrentChallenge() {
+  getCurrentChallengeId() {
     const user = this.authService.getUser();
     const challenge = user.challenges_progress.find(ch => ch.finished == false);
     if (challenge!=null) return challenge.challenge;
