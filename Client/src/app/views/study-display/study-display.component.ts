@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
 
@@ -12,7 +12,7 @@ export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[];
   
-  constructor(private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService) { }
 
   ngOnInit(): void {
 
@@ -21,6 +21,8 @@ export class StudyDisplayComponent implements OnInit {
 
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.challenges = response['challenges']);    
+  
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   };
 
 }

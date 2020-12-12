@@ -89,20 +89,15 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
 router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
     const _id = req.body.challenge;
     const challenge = await Challenge.findOne({_id: _id});
-
-
-    console.log(challenge.answer, req.body.answer)
-
-    let distance = await normalizeAndDistance(challenge.answer, req.body.answer)
+    let distance = await normalizeAndDistance(challenge.answer.toLowerCase(), req.body.answers[0].answer.toLowerCase())
     const userChallenge = new UserChallenge({
         user: req.body.user,
         challenge: challenge,
         date: req.body.date,
-        answer: req.body.answer,
+        answers: req.body.answers,
         timeLeft: req.body.timeLeft,
         pointsObtained: distance
     })
-//    userChallenge.pointsObtained = 0 //llamar función para calcular puntos aquí.
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
@@ -195,9 +190,8 @@ router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , asy
 async function normalizeAndDistance(answer, userAnswer) {
     let normalizedAnswer = await normalize.normalize(answer);
     let normalizedUserAnswer = await normalize.normalize(userAnswer);
-    console.log(normalizedAnswer, normalizedUserAnswer)
+    console.log(normalizedAnswer, normalizedUserAnswer);
     var distance = levenshtein(normalizedAnswer, normalizedUserAnswer);
-    console.log(distance);
     return distance;
 }
 
