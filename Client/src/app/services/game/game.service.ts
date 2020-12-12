@@ -12,7 +12,7 @@ export class GameService {
   currentChallenge: any;
   challenge: any;
   stage: string;
-  loading = true;
+  loading: boolean;
   gameActive: boolean;
 
   constructor(private challengeService: ChallengeService,
@@ -27,9 +27,9 @@ export class GameService {
   }
 
   async loadGameData() {
-    await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     // this.player = this.authService.getUser();
     this.gameActive = true;
+    this.loading = true;
     // For one challenge at once
     const challengeId = this.getCurrentChallenge();
     if (challengeId!=null) {
@@ -40,6 +40,7 @@ export class GameService {
       this.gameActive = false;
     }
     this.fetchUserStage();
+    await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     this.loading = false;
   }
 
@@ -49,12 +50,6 @@ export class GameService {
   }
 
   nextChallenge() {
-    // if(this.currentChallenge+1<this.challenges.length) {
-    //   this.currentChallenge = this.currentChallenge + 1;
-    // }
-    // else {
-    //   this.gameActive = false;
-    // }
     this.router.navigate(['start']);
     this.stage ='pre-test';
   }
@@ -90,23 +85,37 @@ export class GameService {
     this.router.navigate(['start', stage]);
   }
 
-  updateUserProgress(currentStage) {
+  async finishPreTest() {
     let progress = this.authService.getUser().challenges_progress;
     progress.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
-        if(currentStage=='pre-test') {
-          chProgress.pre_test = true;
-        }
-        else if(currentStage=='post-test') {
-          chProgress.post_test = true;
-          chProgress.finished = true;
-        }
-        else if(currentStage=='gameplay') {
-          chProgress.started = true;
-        }
+        chProgress.pre_test = true;
       }
     });
-    this.authService.updateUser({"challenges_progress": progress});
+    await this.authService.updateUser({"challenges_progress": progress});
+  }
+
+  async challengeStarted() {
+    let progress = this.authService.getUser().challenges_progress;
+    progress.forEach(chProgress => {
+      if(this.challenge._id==chProgress.challenge) {
+        chProgress.started = true;
+      }
+    });
+    await this.authService.updateUser({"challenges_progress": progress});
+  }
+
+  async finishPostTest() {
+    let progress = this.authService.getUser().challenges_progress;
+    progress.forEach(chProgress => {
+      if(this.challenge._id==chProgress.challenge) {
+        chProgress.post_test = true;
+        chProgress.finished = true;
+      }
+    });
+    await this.authService.updateUser({"challenges_progress": progress});
+    this.load();
+    this.router.navigate(['/']);
   }
 
   getCurrentChallenge() {

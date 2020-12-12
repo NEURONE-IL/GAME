@@ -60,7 +60,7 @@ export class AuthService {
     else return false;
   }
 
-  public getUser(): any {
+  public getUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -76,15 +76,18 @@ export class AuthService {
   }
 
   updateUser(body) {
-    this.http.put(this.userUri + this.getUser()._id, body)
+    return new Promise((resolve, reject) => {
+      this.http.put(this.userUri + this.getUser()._id, body)
       .subscribe((res: any) => {
-        console.log(res);
         localStorage.setItem("currentUser",JSON.stringify(res.user));
+        resolve(true);
       },
       (error) => {
         console.log('error updating user');
         console.log(error);
+        resolve(false);
       });
+    });
   }
 
   redirectUserPanel(role) {

@@ -68,13 +68,13 @@ export class PreTestQuestionnaireComponent implements OnInit {
 
   saveAnswers(){
     this.questionnaireService.postAnswers(this.user, this.questionnaires[0], this.questionnaireForm.value.answers)
-    .subscribe(response => {
+    .subscribe(async response => {
       this.toastr.success(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.gameService.updateUserProgress('pre-test');
+        await this.gameService.finishPreTest();
         this.gameService.stage = 'instructions';
       },
       err => {

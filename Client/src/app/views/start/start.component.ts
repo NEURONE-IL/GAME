@@ -13,10 +13,11 @@ export class StartComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.gameService.load();
-    if (!this.gameService.loading) {
-      console.log('not loading!!');
-    }
+    await this.gameService.load().then(() => {
+      if (!this.gameService.loading) {
+        console.log('not loading!!');
+      }
+    });
   }
 
   test() {
@@ -35,7 +36,7 @@ export class StartInstructionsComponent {
 
   doStart(){
     this.gameService.stage = 'gameplay';
-    this.gameService.updateUserProgress('gameplay');
+    this.gameService.challengeStarted();
     this.router.navigate(['session/search']);
 
   }

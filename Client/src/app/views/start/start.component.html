@@ -16,23 +16,23 @@
 </div>
 
 <!-- Asentimiento informado pending -->
-<div class="container" *ngIf="gameService.stage=='assent' && gameService.gameActive">
+<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='assent'">
   <app-assent ></app-assent>
 </div>
 <!-- Initial questionnaire pending -->
-<div class="container" *ngIf="gameService.stage=='initial' && gameService.gameActive">
+<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='initial'">
   <app-initial-questionnaire ></app-initial-questionnaire>
 </div>
 <!-- Pre-test questionnaire pending -->
-<div class="container" *ngIf="gameService.stage=='pre-test' && gameService.gameActive">
+<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='pre-test'">
   <app-pre-test-questionnaire ></app-pre-test-questionnaire>
 </div>
 <!-- Everything ok, game can start -->
-<div class="container" *ngIf="gameService.stage=='instructions' && gameService.gameActive">
+<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='instructions'">
   <app-start-instructions></app-start-instructions>
 </div>
 <!-- Post-test questionnaire pending -->
-<div class="container" *ngIf="gameService.stage=='post-test' && gameService.gameActive">
+<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='post-test'">
   <app-post-test-questionnaire ></app-post-test-questionnaire>
 </div>
 

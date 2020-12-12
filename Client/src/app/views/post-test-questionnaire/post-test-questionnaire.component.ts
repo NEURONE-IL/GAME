@@ -67,13 +67,14 @@ export class PostTestQuestionnaireComponent implements OnInit {
 
   saveAnswers(){
     this.questionnaireService.postAnswers(this.user, this.questionnaires[0], this.questionnaireForm.value.answers)
-    .subscribe(response => {
+    .subscribe(async response => {
         this.toastr.success(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.gameService.updateUserProgress('post-test');
+        await this.gameService.finishPostTest();
+        this.gameService.finishChallenge();
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {
