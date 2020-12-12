@@ -19,7 +19,6 @@ const questionnaireRoutes = require('./routes/questionnaire');
 const sendEmailRoutes = require('./routes/send-email');
 
 const pointRoutes = require('./routes/point');
-const neuronegmRoutes = require('./routes/neuronegm');
 
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
@@ -31,9 +30,6 @@ const ScrollRoutes = require('./routes/scroll');
 
 const Role = require('./models/role');
 const User = require('./models/user');
-const Credential = require('./models/credential');
-
-const connectGM = require('./services/neuronegm/connect');
 
 
 //db connection
@@ -99,25 +95,6 @@ async function initial() {
     })
 }
 
-const j = schedule.scheduleJob('*/60 * * * * *', async () =>{
-    credential = await Credential.findOne({sec: 1});
-    if(credential !== null){
-        await connectGM.pingGM((err, response) => {
-            if(!err){
-                connectGM.checkToken( (err, response) => {
-                    if(response.expired){
-                        connectGM.loginGM(credential, err => {
-                            if(err){
-                                console.log(err)
-                            }
-                        })
-                    }
-                })
-            }
-        })
-    }
-});
-
 /** Express setup **/
 const app = express();
 app.use(cors())
@@ -143,7 +120,6 @@ app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
 
 app.use('/api/point', pointRoutes);
-app.use('/neuronegm', neuronegmRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 
