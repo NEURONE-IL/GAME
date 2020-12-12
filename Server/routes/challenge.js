@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Challenge = require('../models/challenge');
 const UserChallenge = require('../models/userChallenge');
+const levenshtein = require('../node_modules/js-levenshtein');
+const normalize = require('../node_modules/normalize-diacritics');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const challengeMiddleware = require('../middlewares/challengeMiddleware');
@@ -85,14 +87,22 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
 });
 
 router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
+    const _id = req.body.challenge;
+    const challenge = await Challenge.findOne({_id: _id});
+
+
+    console.log(challenge.answer, req.body.answer)
+
+    let distance = await normalizeAndDistance(challenge.answer, req.body.answer)
     const userChallenge = new UserChallenge({
         user: req.body.user,
-        challenge: req.body.challenge,
+        challenge: challenge,
         date: req.body.date,
-        answers: req.body.answers,
-        timeLeft: req.body.timeLeft
+        answer: req.body.answer,
+        timeLeft: req.body.timeLeft,
+        pointsObtained: distance
     })
-    userChallenge.pointsObtained = 0 //llamar función para calcular puntos aquí.
+//    userChallenge.pointsObtained = 0 //llamar función para calcular puntos aquí.
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
@@ -182,5 +192,13 @@ router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , asy
     })
 })
 
+async function normalizeAndDistance(answer, userAnswer) {
+    let normalizedAnswer = await normalize.normalize(answer);
+    let normalizedUserAnswer = await normalize.normalize(userAnswer);
+    console.log(normalizedAnswer, normalizedUserAnswer)
+    var distance = levenshtein(normalizedAnswer, normalizedUserAnswer);
+    console.log(distance);
+    return distance;
+}
 
 module.exports = router;

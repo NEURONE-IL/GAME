@@ -6,12 +6,14 @@
   },
   "ADMIN": {
     "CHALLENGES": {
+      "CREATE": "Crear Desafio",
       "ANSWER": "Respuesta",
       "QUESTION": "Pregunta",
       "SECONDS": "Segundos para responder",
       "STUDY_CHALLENGES": "Desafíos del estudio"
     },
     "STUDIES": {
+      "CREATE": "Crear Estudio",
       "CURRENT_STUDIES": "Estudios actuales",
       "HEADER": "Estudio",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio"

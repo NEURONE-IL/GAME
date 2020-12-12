@@ -5,11 +5,7 @@ const UserChallengeSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     challenge: { type: Schema.Types.ObjectId, ref: 'Challenge', required: true},
     date: {type: Date},
-    answers: [
-        {
-            answer: {type: String, required: true}
-        }
-    ],
+    answer: {type: String, required: true},
     timeLeft: { type: Number },
     pointsObtained: { type: Number},
     createdAt: { type: Date, default: Date.now },
