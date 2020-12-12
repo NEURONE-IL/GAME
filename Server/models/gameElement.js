@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const CredentialSchema = new Schema({
-    token: {type: String},
-    logged: {type: Boolean},
-    registered: {type: Boolean},
-    app_code: {type: String},
-    gamified: {type: Boolean, default: false},
-    code: {type: String, unique: true},
+const GameElementSchema = new Schema({
+    type: {type: String, required: true},
+    key: {type: String, required: true, unique: true},
+    gmCode: {type: String, required: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
 
 // Sets the createdAt parameter equal to the current time
-CredentialSchema.pre('save', next => {
+GameElementSchema.pre('save', next => {
     now = new Date();
     if(!this.createdAt) {
       this.createdAt = now;
@@ -24,4 +21,4 @@ CredentialSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Credential', CredentialSchema);
+module.exports = mongoose.model('GameElement', GameElementSchema);

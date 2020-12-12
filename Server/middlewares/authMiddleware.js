@@ -49,6 +49,16 @@ const schema = Joi.object({
         .required()
 })
 
+const adminSchema = Joi.object({
+    password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+
+    repeat_password: Joi.ref('password'),
+
+    email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'cl'] } }),
+})
+
 verifyBody = async (req, res, next) => {
     try {
         const validation = await schema.validateAsync(req.body);
@@ -61,6 +71,19 @@ verifyBody = async (req, res, next) => {
         });
      }
 };
+
+verifyBodyAdmin = async (req, res, next) => {
+    try {
+        const validation = await adminSchema.validateAsync(req.body);
+        next();
+    }
+    catch(err){
+        return res.status(400).json({
+            ok: false,
+            err
+        });
+    }
+}
 
 uniqueEmail = async(req, res, next) => {
     await User.findOne({email: req.body.email}, (err, user) => {
@@ -118,6 +141,7 @@ isAdmin = async(req, res, next) => {
 
 const authMiddleware = {
     verifyBody,
+    verifyBodyAdmin,
     uniqueEmail,
     isAdmin
 };

@@ -7,8 +7,95 @@ const Challenge = require('../models/challenge');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const neuronegmService = require('../services/neuronegm/connect');
+const actionService = require('../services/neuronegm/action');
+const pointService = require('../services/neuronegm/point');
+const levelService = require('../services/neuronegm/level');
+
 const authMiddleware = require('../middlewares/authMiddleware');
-const { isValidObjectId } = require('mongoose');
+const { isValidObjectId, connect } = require('mongoose');
+
+
+router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueEmail], async (req, res) => {
+    const role = await Role.findOne({name: 'admin'}, err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+    //hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashpassword = await bcrypt.hash(req.body.password, salt);
+    //create user
+    const user = new User({
+        email: req.body.email,
+        password: hashpassword,
+        role: role._id
+    })
+    await neuronegmService.connectGM(req.body.email, req.body.password, err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    })
+    //save user in db
+    await user.save((err, user) => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({
+            user
+        });
+    })
+})
+
+router.get('/gamify', async (req, res) => {
+    await actionService.postAllActions(err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+    await pointService.postAllPoints(err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+    await levelService.postAllLevels(err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+    res.status(200).send("OK");
+})
+
+router.get('/gamifyDependent', async (req, res) => {
+    await levelService.postAllLevels(err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    })
+    res.status(200).send("OK");
+})
+
 
 router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.uniqueEmail], async (req, res)=>{
     const study_id = req.params.study_id;

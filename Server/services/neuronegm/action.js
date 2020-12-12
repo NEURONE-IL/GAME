@@ -1,5 +1,7 @@
 const axios = require("axios");
 const connect = require('./connect');
+const actionsJson = require('../../config/neuronegm/actions.json');
+const GameElement = require('../../models/gameElement');
 
 const getActions = async (callback) => {
     await connect.getHeadersGM((err, headers) => {
@@ -21,12 +23,31 @@ const postAction = async (action, callback) => {
         if(err){
             callback(err)
         }
-        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions', action, headers ).then((response)=> {
+        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions', action, headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
         })
     });
+}
+
+const postAllActions = async(callback) => {
+    let actions = actionsJson.actions;
+    let newGameElem;
+    for(let i = 0; i<actions.length; i++){
+        await postAction(actions[i], (err, action) => {
+            if(err){
+                console.log(err)
+            }
+            newGameElem = new GameElement({
+                type: "action",
+                key: actions[i].key,
+                gmCode: action.code
+            })
+            newGameElem.save();
+        })
+    }
+    callback(null);
 }
 
 const updateAction = async (action, code, callback) => {
@@ -35,7 +56,7 @@ const updateAction = async (action, code, callback) => {
         if(err){
             callback(err)
         }
-        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, action, headers ).then((response)=> {
+        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, action, headers.headers  ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -49,7 +70,7 @@ const deleteAction = async (code, callback) => {
         if(err){
             callback(err)
         }
-        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, headers ).then((response)=> {
+        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/actions/'+code, headers.headers  ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -60,6 +81,7 @@ const deleteAction = async (code, callback) => {
 const action = {
     getActions,
     postAction,
+    postAllActions,
     updateAction,
     deleteAction
 };
