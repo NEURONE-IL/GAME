@@ -35,13 +35,14 @@ export class GameService {
     if (challengeId!=null) {
       this.challenge = await this.challengeService.getChallenge(challengeId).toPromise();
       this.challenge = this.challenge.challenge;
+      this.fetchUserStage();
     }
     else {
       this.gameActive = false;
     }
-    this.fetchUserStage();
     await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     this.loading = false;
+
   }
 
   finishChallenge() {
