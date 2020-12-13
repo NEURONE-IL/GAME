@@ -42,7 +42,7 @@ const postAllChallenges = async(callback) => {
             newGameElem = new GameElement({
                 type: "challenge",
                 key: challenges[i].key,
-                gmCode: challenge.code
+                gm_code: challenge.code
             })
             newGameElem.save();
         })

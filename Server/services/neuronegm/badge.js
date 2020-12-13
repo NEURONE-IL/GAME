@@ -42,7 +42,7 @@ const postAllBadges = async(callback) => {
             newGameElem = new GameElement({
                 type: "badge",
                 key: badges[i].key,
-                gmCode: badge.code
+                gm_code: badge.code
             })
             newGameElem.save();
         })

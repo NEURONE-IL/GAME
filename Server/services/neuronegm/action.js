@@ -42,7 +42,7 @@ const postAllActions = async(callback) => {
             newGameElem = new GameElement({
                 type: "action",
                 key: actions[i].key,
-                gmCode: action.code
+                gm_code: action.code
             })
             newGameElem.save();
         })

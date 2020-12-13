@@ -42,7 +42,7 @@ const postAllPoints = async(callback) => {
             newGameElem = new GameElement({
                 type: "point",
                 key: points[i].key,
-                gmCode: point.code
+                gm_code: point.code
             })
             newGameElem.save();
         })

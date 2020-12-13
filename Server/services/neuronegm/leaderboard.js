@@ -43,7 +43,7 @@ const postAllLeaderboards = async(callback) => {
             newGameElem = new GameElement({
                 type: "leaderboard",
                 key: leaderboards[i].key,
-                gmCode: leaderboard.code
+                gm_code: leaderboard.code
             })
             newGameElem.save();
         })

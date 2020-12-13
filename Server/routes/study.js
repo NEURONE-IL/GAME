@@ -5,6 +5,7 @@ const Study = require('../models/study');
 const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
+const groupService = require('../services/neuronegm/group');
 
 router.get('' ,  [verifyToken], async (req, res) => {
     Study.find({}, (err, studys) =>{
@@ -45,8 +46,27 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBod
                 err
             });
         }
-        res.status(200).json({
-            study
+        groupService.postGroup({name: req.body.name, sourceId: study._id }, (err, data) => {
+            if(err){
+                console.log(err);
+                res.status(200).json({
+                    study
+                });
+            }
+            else{
+                study.gm_code = data.code;
+                study.save(err => {
+                    if(err){
+                        return res.status(404).json({
+                            ok: false,
+                            err
+                        });
+                    }
+                    res.status(200).json({
+                        study
+                    });
+                })
+            }
         });
     })
 });

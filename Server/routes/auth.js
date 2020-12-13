@@ -15,11 +15,21 @@ const badgeService = require('../services/neuronegm/badge');
 const levelService = require('../services/neuronegm/level');
 const challengeService = require('../services/neuronegm/challenge');
 const leaderboardService = require('../services/neuronegm/leaderboard');
+const playerService = require('../services/neuronegm/player');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const { isValidObjectId, connect } = require('mongoose');
 
-
+router.post('/testxd', async(req, res) => {
+    playerService.postPlayer({name: 'testa', last_name: 'testa', sourceId: 'xddaasda'}, (err, data) => {
+        if(err){
+            console.log(err)
+        }
+        res.status(200).json({
+            data
+        });
+    })
+})
 
 router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueEmail], async (req, res) => {
     const role = await Role.findOne({name: 'admin'}, err => {
@@ -212,7 +222,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         role: role._id,
         study: study._id,
         challenges_progress: generateProgressArray(challenges)
-    })
+    });
     //save user in db
     user.save((err, user) => {
         if(err){
@@ -221,8 +231,27 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
                 err
             });
         }
-        res.status(200).json({
-            user
+        playerService.postPlayer({name: req.body.names, last_name: req.body.last_names, sourceId: user._id }, (err, data) => {
+            if(err){
+                console.log(err);
+                res.status(200).json({
+                    user
+                });
+            }
+            else{
+                user.gm_code = data.code;
+                user.save(err => {
+                    if(err){
+                        return res.status(404).json({
+                            ok: false,
+                            err
+                        });
+                    }
+                    res.status(200).json({
+                        user
+                    });
+                })
+            }
         });
     })
     

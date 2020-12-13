@@ -41,7 +41,7 @@ const postAllLevels = async(callback) => {
             newGameElem = new GameElement({
                 type: "level",
                 key: levels[i].key,
-                gmCode: level.code
+                gm_code: level.code
             })
             newGameElem.save();
         })

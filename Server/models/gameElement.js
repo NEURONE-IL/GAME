@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const GameElementSchema = new Schema({
     type: {type: String, required: true},
     key: {type: String, required: true, unique: true},
-    gmCode: {type: String, required: true},
+    gm_code: {type: String, required: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

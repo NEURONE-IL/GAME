@@ -5,6 +5,7 @@ const StudySchema = new Schema({
     name: {type: String, required: true},
     description: {type: String},
     domain: {type: String},
+    gm_code: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

@@ -7,7 +7,7 @@ const getGroups = async (callback) => {
         if(err){
             callback(err)
         }
-        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/groups',headers ).then((response)=> {
+        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/groups',headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -21,7 +21,7 @@ const postGroup = async (group, callback) => {
         if(err){
             callback(err)
         }
-        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/groups', group, headers ).then((response)=> {
+        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/groups', group, headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
