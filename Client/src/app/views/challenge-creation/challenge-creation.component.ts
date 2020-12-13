@@ -4,6 +4,7 @@ import { ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-challenge-creation',
@@ -24,9 +25,9 @@ export class ChallengeCreationComponent implements OnInit {
     { id: 2, value: 'number', show: 'Número' },
     { id: 3, value: 'url', show: 'URL' },
     { id: 4, value: 'video', show: 'Vídeo' }
-  ];  
+  ];
 
-  constructor(private formBuilder: FormBuilder, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -53,7 +54,7 @@ export class ChallengeCreationComponent implements OnInit {
   resetForm() {
     this.challengeForm.reset();
   }
-  
+
   createChallenge(){
     let challenge = this.challengeForm.value;
     this.challengeService.postChallenge(challenge).subscribe(
@@ -62,6 +63,7 @@ export class ChallengeCreationComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.router.navigate(['/admin_panel']);
         this.resetForm();
       },
       err => {
@@ -72,4 +74,4 @@ export class ChallengeCreationComponent implements OnInit {
       }
     );
   }
-} 
+}

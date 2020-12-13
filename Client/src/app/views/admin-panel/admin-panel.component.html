@@ -2,21 +2,22 @@
 
 <mat-card class="studies-display-card">
   <mat-card-header>
-    <mat-card-title>{{ "" +
-    "ADMIN.TITLE" | translate }}</mat-card-title>
-    <div class="container options">
-      <button mat-raised-button color="primary" (click)="CreateStudy()"> {{"" +"ADMIN.STUDIES.CREATE" | translate}} </button>
-      <button mat-raised-button color="primary" (click)="CreateChallenge()"> {{"" +"ADMIN.CHALLENGES.CREATE" | translate}} </button>
-    </div>
+    <mat-card-title>{{ "" +    "ADMIN.TITLE" | translate }}</mat-card-title>
   </mat-card-header>
 </mat-card>
 
-<div class="main-content">
-
-    <div>
-
-        <app-studies-display> </app-studies-display>
-    </div>
+<div *ngIf="StudioSelected; else elseBlock" >
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
+<ng-template #elseBlock>
+  <div class="main-content">
+    <div>
+      <app-studies-display (studySelected)="studySelectedHandler($event)"> </app-studies-display>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
 

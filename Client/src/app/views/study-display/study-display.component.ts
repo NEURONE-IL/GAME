@@ -11,7 +11,7 @@ import { Study, StudyService } from '../../services/game/study.service';
 export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[];
-  
+
   constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService) { }
 
   ngOnInit(): void {
@@ -20,9 +20,14 @@ export class StudyDisplayComponent implements OnInit {
       .subscribe(response => this.study = response['study']);
 
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
-      .subscribe(response => this.challenges = response['challenges']);    
-  
+      .subscribe(response => this.challenges = response['challenges']);
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   };
-
+  CreateChallenge(){
+    this.router.navigate(['create/challenge']);
+  }
+  BackToStudies(){
+    this.router.navigate(['admin_panel']);
+  }
 }

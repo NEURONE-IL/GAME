@@ -9,8 +9,23 @@ mat-card{
 	align-self: flex-start;
 }
 
+
+
 .study-card:hover{
 	cursor: pointer;
 	box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.8);
 	/*border-color: #2196F3 !important;*/
+}
+
+.options{
+  text-align: right;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+.options button{
+  margin: 10px;
+}
+
+.emptyText{
+  padding-left: 15px
 }
