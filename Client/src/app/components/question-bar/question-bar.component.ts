@@ -21,9 +21,7 @@ export interface HintData {
 export class QuestionBarComponent implements OnInit {
 
   // Challenge data
-  challenges: any;
-  currentChallenge: number;
-  challenge: any;
+  hintUsed = false;
   hintActive = false;
 
   // Timer data
@@ -35,10 +33,10 @@ export class QuestionBarComponent implements OnInit {
   // Answer data
   answerForm: FormGroup;
 
-  constructor(private gameService: GameService,
+  constructor(public gameService: GameService,
               public hintDialog: MatDialog,
               public router: Router,
-              private challengeService: ChallengeService,
+              public challengeService: ChallengeService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
               private translate: TranslateService) {
@@ -55,7 +53,7 @@ export class QuestionBarComponent implements OnInit {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
-        this.value = this.timeLeft * 100 / this.challenge.seconds;
+        this.value = this.timeLeft * 100 / this.gameService.challenge.seconds;
         if (this.timeLeft < 1000) this.leftValue = '30px';
         if (this.timeLeft < 100) this.leftValue = '40px';
         if (this.timeLeft < 10) this.leftValue = '50px';
@@ -63,6 +61,7 @@ export class QuestionBarComponent implements OnInit {
       if (this.timeLeft==0) {
         console.log('time out!');
         this.pauseTimer();
+        this.sendDataTimeOut();
       }
     },1000)
   }
@@ -87,23 +86,10 @@ export class QuestionBarComponent implements OnInit {
 
   loadChallenge() {
     // Get challenge
-    this.challenge = this.gameService.challenge;
-
-    // ---- DEPRACATED ---------
-    // Get challenges
-    // this.challenges = this.gameService.challenges;
-    // Get current challenge index
-    // this.currentChallenge = this.gameService.currentChallenge;
-    // Set active challenge
-    // this.challenges.forEach((challenge, i) => {
-    //   if (i!=this.currentChallenge) {
-    //     challenge.active = false;
-    //   }
-    // });
-    // -----------------------------
+    // this.challenge = this.gameService.challenge;
 
     // Set timer data
-    this.timeLeft = this.challenge.seconds;
+    this.timeLeft = this.gameService.challenge.seconds;
     if(this.timeLeft >= 1000) this.leftValue = '20px';
     if(this.timeLeft < 1000) this.leftValue = '30px';
     if(this.timeLeft < 100) this.leftValue = '40px';
@@ -112,10 +98,36 @@ export class QuestionBarComponent implements OnInit {
 
   sendAnswer() {
     // Add code to submit answer to server
-    const challenge = this.challenge;
-    const answer = this.answerForm.value.answer;
+    const challenge = this.gameService.challenge;
+    let answer = this.answerForm.value.answer;
+    if(answer==null) answer = '';
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswer(challenge, answer, this.timeLeft, false).subscribe(
+    this.challengeService.postAnswer(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
+      () => {
+        this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        clearInterval(this.interval);
+        this.gameService.finishChallenge();
+      },
+      err => {
+        this.toastr.error(this.translate.instant("GAME.TOAST.ERROR_MESSAGE"), this.translate.instant("GAME.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+
+  // Send data when the player runs out of time (no answer).
+  sendDataTimeOut() {
+    // Add code to submit answer to server
+    const challenge = this.gameService.challenge;
+    let answer = this.answerForm.value.answer;
+    if(answer==null) answer = '';
+    // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
+    this.challengeService.postAnswerFromTimeOut(challenge, this.timeLeft, this.hintUsed).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,
@@ -136,10 +148,9 @@ export class QuestionBarComponent implements OnInit {
   showHint(): void {
     const dialogRef = this.hintDialog.open(HintDialogComponent, {
       width: '250px',
-      data: {text: this.challenge.hint}
+      data: {text: this.gameService.challenge.hint}
     });
-
-    // dialogRef.afterClosed().subscribe();
+    this.hintUsed = true;
   }
 }
 
