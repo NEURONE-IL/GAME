@@ -33,7 +33,7 @@ export class QuestionBarComponent implements OnInit {
   // Answer data
   answerForm: FormGroup;
 
-  constructor(private gameService: GameService,
+  constructor(public gameService: GameService,
               public hintDialog: MatDialog,
               public router: Router,
               public challengeService: ChallengeService,
