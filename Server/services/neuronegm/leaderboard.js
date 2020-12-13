@@ -1,5 +1,8 @@
 const axios = require("axios");
 const connect = require('./connect');
+const leaderboardsJson = require('../../config/neuronegm/leaderboards.json');
+const GameElement = require('../../models/gameElement');
+
 
 const getLeaderboards = async (callback) => {
     await connect.getHeadersGM((err, headers) => {
@@ -21,12 +24,31 @@ const postLeaderboard = async (leaderboard, callback) => {
         if(err){
             callback(err)
         }
-        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards', leaderboard, headers ).then((response)=> {
+        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards', leaderboard, headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
         })
     });
+}
+
+const postAllLeaderboards = async(callback) => {
+    let leaderboards = leaderboardsJson.leaderboards;
+    let newGameElem;
+    for(let i = 0; i<leaderboards.length; i++){
+        await postLeaderboard(leaderboards[i], (err, leaderboard) => {
+            if(err){
+                console.log(err)
+            }
+            newGameElem = new GameElement({
+                type: "leaderboard",
+                key: leaderboards[i].key,
+                gmCode: leaderboard.code
+            })
+            newGameElem.save();
+        })
+    }
+    callback(null);
 }
 
 const updateLeaderboard = async (leaderboard, code, callback) => {
@@ -35,7 +57,7 @@ const updateLeaderboard = async (leaderboard, code, callback) => {
         if(err){
             callback(err)
         }
-        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, leaderboard, headers ).then((response)=> {
+        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, leaderboard, headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -49,7 +71,7 @@ const deleteLeaderboard = async (code, callback) => {
         if(err){
             callback(err)
         }
-        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, headers ).then((response)=> {
+        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, headers.headers ).then((response)=> {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
@@ -60,6 +82,7 @@ const deleteLeaderboard = async (code, callback) => {
 const leaderboard = {
     getLeaderboards,
     postLeaderboard,
+    postAllLeaderboards,
     updateLeaderboard,
     deleteLeaderboard
 };

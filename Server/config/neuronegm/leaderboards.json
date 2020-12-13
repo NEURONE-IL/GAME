@@ -1,0 +1,23 @@
+{
+    "leaderboards": [
+        {
+            "parameter": "points",
+            "element_code": "game_point_Experiencia",
+            "name": "Ranking de experiencia",
+            "key": "ranking_exp"
+        },
+        {
+            "parameter": "actions",
+            "element_code": "game_action_InicarSesion",
+            "name": "Ranking de inicios de sesión",
+            "key": "ranking_sesion"
+        },
+        {
+            "parameter": "actions",
+            "element_code": "game_action_Responderuna",
+            "name": "Ranking de preguntas respondidas",
+            "key": "ranking_preguntas"
+        }
+
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "challenges": [
+        {
+            "name": "Primer inicio de sesión",
+            "description": "Estudiante entra por primera vez a la plataforma",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_InicarSesion",
+                    "times_required": 1
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 500
+                }
+            ],
+            "key": "challenge_login_1"
+        }
+    ]
+}
