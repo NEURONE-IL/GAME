@@ -17,7 +17,7 @@
 
 	<mat-card-content>
 		<mat-grid-list cols="12" [gutterSize]="'12px'">
-			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >
+			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" (mouseover)="fullStudy(study)" (mouseout)="shortStudy(study)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
@@ -26,7 +26,12 @@
 					</mat-card-header>
 					<img mat-card-image [src]="getCover(index)">
 					<mat-card-content>
-						<p *ngIf="study.description">{{study.description}}</p>
+            <div *ngIf="actualStudy==study._id; else studyShortDescription">
+              <p *ngIf="study.description">{{study.description}}</p>
+            </div>
+						<ng-template #studyShortDescription>
+              <p *ngIf="study.description">{{showShortDescription(study.description)}}</p>
+            </ng-template>
 						<p *ngIf="!study.description">{{ "ADMIN.STUDIES.NO_DESCRIPTION" | translate}}</p>
 					</mat-card-content>
 				</mat-card>

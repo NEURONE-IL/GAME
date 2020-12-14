@@ -33,4 +33,16 @@ export class StudiesDisplayComponent implements OnInit {
     this.studySelected.emit(link);
     /* this.router.navigate([link]); */
   }
+
+  actualStudy='';
+  fullStudy(study){
+    this.actualStudy= study._id;
+  }
+  shortStudy(study){
+    this.actualStudy= '';
+  }
+
+  showShortDescription(description){
+      return (description.substr(0, 40));
+  }
 }
