@@ -18,7 +18,7 @@ const documentRoutes = require('./routes/document');
 const questionnaireRoutes = require('./routes/questionnaire');
 const sendEmailRoutes = require('./routes/send-email');
 
-const pointRoutes = require('./routes/point');
+const gamificationRoutes = require('./routes/gamification');
 
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
@@ -119,7 +119,7 @@ app.use('/api/study', studyRoutes);
 app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
 
-app.use('/api/point', pointRoutes);
+app.use('/api/gamification', gamificationRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 
