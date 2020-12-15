@@ -33,6 +33,8 @@ const User = require('./models/user');
 
 
 //db connection
+
+//mongoose.connect('mongodb://admin:admin@localhost:27017/neurone-game', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connect(config.DBHost, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");

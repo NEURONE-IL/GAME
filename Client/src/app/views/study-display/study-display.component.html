@@ -1,16 +1,46 @@
+
 <mat-card class="study-display-card">
-  <mat-card-header>
-    <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
-    <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
-	</mat-card-header>
-	<mat-card-content>
-		<mat-list>
-			<mat-list-item *ngFor="let challenge of challenges">
-				<mat-icon mat-list-icon class="challenge-cover"></mat-icon>
-				<div mat-line> {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}</div>
-				<div mat-line> {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}</div>
-				<div mat-line> {{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </div>
-			</mat-list-item>
-		</mat-list>		
-	</mat-card-content>		
+    <div class="row">
+      <div class="col-md-8" style="padding-top: 10px">
+        <mat-card-header>
+        <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
+        <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
+        </mat-card-header>
+      </div>
+      <div class="col-md-4">
+        <div class="options" >
+          {{"Atras"}}
+          <button mat-mini-fab  color="default" (click)="BackToStudies()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
+          <button mat-mini-fab  color="primary" (click)="CreateChallenge()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  <div *ngIf="challenges.length==0; else showChallenges">
+    <mat-label class="emptyText">Aún no se ha creado ningun desafio</mat-label>
+  </div>
+  <ng-template #showChallenges>
+    <mat-card-content>
+      <mat-list>      
+        <mat-list-item *ngFor="let challenge of challenges">
+          <mat-icon mat-list-icon class="challenge-cover"></mat-icon>
+          <div mat-line> {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}</div>
+          <div mat-line> {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}</div>
+          <div mat-line> {{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </div>
+          {{" " + "Edit"}}  
+          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          {{" " + "Delete"}}
+          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="warn"> 
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </ng-template>
 </mat-card>
