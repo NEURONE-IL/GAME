@@ -31,52 +31,6 @@ const routes: Routes = [
     path: 'start',
     canActivate: [AuthGuard],
     component: StartComponent,
-    children: [
-      {
-        path: 'assent',
-        component: AssentComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'initial',
-        component: InitialQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'pre-test',
-        component: PreTestQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'instructions',
-        component: StartInstructionsComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'post-test',
-        component: PostTestQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      }
-    ]
-  },
-  {
-    path: 'questionnaire',
-    component: QuestionnaireComponent,
-    canActivate: [ AuthGuard ],
-    children: [
-      {
-        path: 'initial',
-        component: InitialQuestionnaireComponent,
-      },
-      {
-        path: 'pre-test',
-        component: PreTestQuestionnaireComponent,
-      },
-      {
-        path: 'post-test',
-        component: PostTestQuestionnaireComponent,
-      }
-    ]
   },
   {
     path: 'session',

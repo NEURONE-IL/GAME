@@ -19,10 +19,6 @@ export class StartComponent implements OnInit {
       }
     });
   }
-
-  test() {
-    console.log(this.gameService.stage);
-  }
 }
 
 @Component({

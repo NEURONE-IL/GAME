@@ -4,6 +4,8 @@ import { RutValidator } from 'ng9-rut';
 import { ActivatedRoute } from '@angular/router';
 import { StudyService } from '../../services/game/study.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { SignupConstants } from './signup.constants';
+import { getRegiones, getComunasByRegion } from 'dpacl';
 
 @Component({
   selector: 'app-signup',
@@ -19,16 +21,25 @@ export class SignupComponent implements OnInit {
   validStudy = true;
   isLoadingStudy = true;
 
+  courses: any;
+  regions: any;
+  selectedRegion: any;
+  communes: any;
+
+
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private rutValidator: RutValidator,
               private studyService: StudyService,
               private authService: AuthService) {
+
+    this.courses = SignupConstants.courses;
   }
 
   ngOnInit(): void {
 
     this.checkStudy();
+    this.regions = getRegiones();
 
     this.consentForm = this.formBuilder.group({
       consent: [false, Validators.requiredTrue]
@@ -69,9 +80,13 @@ export class SignupComponent implements OnInit {
     (error) => {
       this.validStudy = false;
       this.isLoadingStudy=false;
-      console.log("couldn't access study");
     });
   }
+
+  onRegionChange(regionChange) {
+    console.log(this.communes);
+    this.communes = getComunasByRegion(regionChange.value);
+}
 
   get consentFormControls(): any {
     return this.consentForm['controls'];
