@@ -36,7 +36,7 @@
             <mat-icon>edit</mat-icon>
           </button>
           {{" " + "Delete"}}
-          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="warn"> 
+          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="warn" (click)="deleteChallenge(challenge._id)"> 
             <mat-icon>delete</mat-icon>
           </button>
         </mat-list-item>

@@ -40,8 +40,12 @@
     "TOAST": {
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el Desafío",
+      "ERROR_MESSAGE_UPDATE": "No se ha actualizado el Desafío",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Desafío"
+      "SUCCESS_MESSAGE": "Se ha creado el Desafío",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el Desafío",
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el Desafío"
     }
 	},
 	"ERRORS": {

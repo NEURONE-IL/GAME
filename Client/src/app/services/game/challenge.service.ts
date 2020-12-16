@@ -55,7 +55,15 @@ export class ChallengeService {
     /*Sends the request*/
     return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
+ 
+  putChallenge(id: string, updatedChallenge: any): Observable<any> {
+    return this.http.put(this.uri+id, updatedChallenge);
+  }  
 
+  deleteChallenge(id: string): Observable<any> {
+    return this.http.delete(this.uri+id);
+  }  
+ 
   postAnswer(challenge: any, answer: any, timeLeft: number, hintUsed: boolean) {
     const formattedAnswer = {
       user: this.authService.getUser(),
@@ -79,5 +87,5 @@ export class ChallengeService {
       hintUsed: hintUsed
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
-  }
+  }  
 }
