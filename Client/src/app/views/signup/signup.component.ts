@@ -84,7 +84,6 @@ export class SignupComponent implements OnInit {
   }
 
   onRegionChange(regionChange) {
-    console.log(this.communes);
     this.communes = getComunasByRegion(regionChange.value);
 }
 

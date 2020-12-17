@@ -36,3 +36,12 @@
 .signup-form-field {
   width: 70%
 }
+
+.bottom-stepper-panel {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.stepper-button {
+  margin-right: 5px;
+}
