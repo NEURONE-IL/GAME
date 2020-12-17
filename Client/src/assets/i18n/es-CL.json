@@ -40,8 +40,12 @@
     "TOAST": {
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el Desafío",
+      "ERROR_MESSAGE_UPDATE": "No se ha actualizado el Desafío",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Desafío"
+      "SUCCESS_MESSAGE": "Se ha creado el Desafío",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el Desafío",
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el Desafío"
     }
 	},
 	"ERRORS": {
@@ -132,7 +136,7 @@
       "ACCEPT_TEXT": "Acepto"
     },
     "STEP_CONSENT": "Consentimiento",
-    "STEP_GUARDIAN": "Datos del apoderado",
+    "STEP_GUARDIAN": "Datos del apoderado/a",
     "STEP_STUDENT": "Datos del estudiante",
     "STEP_DONE": "Listo",
     "DONE_TEXT": "Formulario completo, haga click en finalizar para completar su registro",
@@ -147,12 +151,12 @@
       "LAST_NAMES": "Apellidos",
       "RUT": "RUT",
       "PHONE_NUMBER": "Número de teléfono",
-      "EMAIL": "Correo electrónico",
+      "EMAIL": "Correo electrónico (del apoderado/a)",
       "BIRTHDATE": "Fecha de nacimiento",
       "GRADE": "Curso",
       "SCHOOL": "Colegio",
-      "COMMUNE": "Comuna",
-      "REGION": "Región",
+      "COMMUNE": "Comuna del colegio",
+      "REGION": "Región del colegio",
       "PASSWORD": "Contraseña de acceso",
       "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
       "ERROR": {

@@ -18,7 +18,7 @@ const documentRoutes = require('./routes/document');
 const questionnaireRoutes = require('./routes/questionnaire');
 const sendEmailRoutes = require('./routes/send-email');
 
-const pointRoutes = require('./routes/point');
+const gamificationRoutes = require('./routes/gamification');
 
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
@@ -33,6 +33,8 @@ const User = require('./models/user');
 
 
 //db connection
+
+//mongoose.connect('mongodb://admin:admin@localhost:27017/neurone-game', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connect(config.DBHost, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");
@@ -119,7 +121,7 @@ app.use('/api/study', studyRoutes);
 app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
 
-app.use('/api/point', pointRoutes);
+app.use('/api/gamification', gamificationRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 

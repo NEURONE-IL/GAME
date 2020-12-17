@@ -14,7 +14,6 @@
 	background-image: url('../../../assets/study-images/Study00.jpg');
 	background-size: cover;
 }
-
 .options{
   text-align: right;
   padding-right: 5%;
@@ -25,4 +24,11 @@
 }
 .emptyText{
   padding-left: 15px
+}
+.actions{
+	justify-content: flex-end;  
+}
+::ng-deep mat-grid-tile.mat-grid-tile .mat-figure {
+	align-items: center; 
+	justify-content: flex-start;  
 }

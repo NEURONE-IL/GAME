@@ -8,10 +8,6 @@ import { SessionComponent } from './views/session/session.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
-import { QuestionnaireComponent } from './views/questionnaire/questionnaire.component';
-import { InitialQuestionnaireComponent } from './views/initial-questionnaire/initial-questionnaire.component';
-import { PreTestQuestionnaireComponent } from './views/pre-test-questionnaire/pre-test-questionnaire.component';
-import { PostTestQuestionnaireComponent } from './views/post-test-questionnaire/post-test-questionnaire.component';
 import { UploadComponent } from './views/upload/upload.component';
 import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { CreationComponent } from './views/creation/creation.component';
@@ -23,60 +19,12 @@ import { StudyDisplayComponent } from './views/study-display/study-display.compo
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
-import { AssentComponent } from './views/assent/assent.component';
-import { StartInstructionsComponent } from './views/start/start.component';
 
 const routes: Routes = [
   {
     path: 'start',
     canActivate: [AuthGuard],
     component: StartComponent,
-    children: [
-      {
-        path: 'assent',
-        component: AssentComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'initial',
-        component: InitialQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'pre-test',
-        component: PreTestQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'instructions',
-        component: StartInstructionsComponent,
-        canActivate: [DirectAccessGuard],
-      },
-      {
-        path: 'post-test',
-        component: PostTestQuestionnaireComponent,
-        canActivate: [DirectAccessGuard],
-      }
-    ]
-  },
-  {
-    path: 'questionnaire',
-    component: QuestionnaireComponent,
-    canActivate: [ AuthGuard ],
-    children: [
-      {
-        path: 'initial',
-        component: InitialQuestionnaireComponent,
-      },
-      {
-        path: 'pre-test',
-        component: PreTestQuestionnaireComponent,
-      },
-      {
-        path: 'post-test',
-        component: PostTestQuestionnaireComponent,
-      }
-    ]
   },
   {
     path: 'session',

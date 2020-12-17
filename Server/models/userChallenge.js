@@ -7,7 +7,12 @@ const UserChallengeSchema = new Schema({
     date: {type: Date},
     answers: [
         {
-            answer: {type: String, required: true}
+            answer: {type: String, required: true},
+            urls: [
+              {
+                url: {type: String},
+              }
+            ]
         }
     ],
     timeLeft: { type: Number },
