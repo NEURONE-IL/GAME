@@ -14,14 +14,16 @@
       <form [formGroup]="consentForm">
         <ng-template matStepLabel>{{"SIGNUP.STEP_CONSENT" | translate}}</ng-template>
           <app-consent></app-consent>
-          <mat-checkbox formControlName="consent" required>{{"SIGNUP.CONSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
+          <div class="checkbox-div">
+            <mat-checkbox formControlName="consent" required>{{"SIGNUP.CONSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
+          </div>
           <div *ngIf="consentFormControls.consent.invalid && (consentFormControls.consent.dirty || consentFormControls.consent.touched)">
             <mat-error *ngIf="consentFormControls.consent.hasError('required')">
               {{"SIGNUP.FORM.ERROR.CONSENT" | translate}}
             </mat-error>
           </div>
         <div class="bottom-stepper-panel">
-          <button mat-raised-button (click)="consentFormControls.consent.touched=true"
+          <button mat-raised-button (click)="consentFormControls.consent.markAsTouched()"
                   class="stepper-button" color="primary" matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
         </div>
       </form>
@@ -150,7 +152,7 @@
         <br>
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.COMMUNE" | translate}}</mat-label>
-          <mat-select [disabled]="communes==null" formControlName="institution_commune">
+          <mat-select formControlName="institution_commune">
             <mat-option *ngFor="let commune of communes" [value]="commune.id">{{commune.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="studentFormControls.institution_commune.hasError('required')">

@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
       tutor_last_names: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.email, Validators.required]],
       tutor_rut: ['', [this.rutValidator, Validators.required]],
-      tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{6,}")]]
+      tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{8,}")]]
     });
     this.studentForm = this.formBuilder.group({
       names: ['', [Validators.required, Validators.minLength(3)]],
@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
       birthday: ['', Validators.required],
       course: ['', Validators.required],
       institution: ['', Validators.required],
-      institution_commune: ['', Validators.required],
+      institution_commune: [{value: '', disabled: true}, Validators.required],
       institution_region: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(4)]]
@@ -85,6 +85,7 @@ export class SignupComponent implements OnInit {
 
   onRegionChange(regionChange) {
     this.communes = getComunasByRegion(regionChange.value);
+    this.studentFormControls.institution_commune.enable();
 }
 
   get consentFormControls(): any {
