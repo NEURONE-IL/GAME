@@ -21,7 +21,8 @@
             </mat-error>
           </div>
         <div class="bottom-stepper-panel">
-          <button mat-raised-button class="stepper-button" color="primary" matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
+          <button mat-raised-button (click)="consentFormControls.consent.touched=true"
+                  class="stepper-button" color="primary" matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
         </div>
       </form>
     </mat-step>
