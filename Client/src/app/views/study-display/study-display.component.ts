@@ -49,7 +49,7 @@ export class StudyDisplayComponent implements OnInit {
         this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
-        });        
+        });
       }
     );
   }
@@ -68,9 +68,39 @@ export class StudyDisplayComponent implements OnInit {
         this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE_UPDATE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
-        });        
+        });
       }
     );
   }
-
+  getClass(type){
+    console.log(type);
+    if (type=="page"){
+      return "webPage";
+    }
+    else if(type=="video"){
+      return "video"
+    }
+    else if(type=="image"){
+      return "image"
+    }else{
+      return "document"
+    }
+  }
+  getClassQuestion(type){
+    console.log(type);
+    if (type=="page"){
+      return "PAGINA";
+    }
+    else if(type=="video"){
+      return "VIDEO"
+    }
+    else if(type=="image"){
+      return "IMAGEN"
+    }else{
+      return "DOCUMENTO"
+    }
+  }
+  formatDate(date){
+    return date.substr(0,10);
+  }
 }

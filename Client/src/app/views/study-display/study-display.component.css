@@ -26,9 +26,89 @@
   padding-left: 15px
 }
 .actions{
-	justify-content: flex-end;  
+	justify-content: flex-end;
 }
 ::ng-deep mat-grid-tile.mat-grid-tile .mat-figure {
-	align-items: center; 
-	justify-content: flex-start;  
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.header-challenge mat-card-title{
+  color: white;
+  margin-right: 0px;
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-radius: 30px 30px 0px 0px;
+  padding-top: 10px;
+  padding-left: 40px;
+  margin-bottom: 10px;
+}
+
+.header-challenge mat-card-title buttons{
+  text-align: right;
+}
+.header-challenge div.col-md-8{
+  padding-right: 0px;
+}
+.header-challenge div.col-md-4{
+  padding-left: 0px;
+}
+
+.header-challenge mat-card-subtitle{
+  margin-right: 58px;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-left: 0px;
+  margin-left: 0px;
+  padding-bottom: 14px;
+  margin-bottom: 0px;
+  text-align: right;
+  border-bottom: solid 1px #EEEEEE;
+}
+.mat-card-content{
+  margin-right: 40px;
+  margin-left: 47px;
+  padding-left: 25px;
+  padding-bottom: 10px;
+  padding-right: 2px;
+  margin-bottom: 0px;
+  border-left: solid 1px #EEEEEE;
+  border-right: solid 1px #EEEEEE;
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-card-title{
+  display: flex;
+  flex-direction: row;
+}
+.mat-card-actions{
+  text-align: right;
+  margin-right: 40px;
+  border-bottom: solid 1px #CCCCCC;
+  border-left: solid 1px #EEEEEE;
+  border-right: solid 1px #EEEEEE;
+  margin-left: 47px;
+  padding-left: 10px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.webPage{
+  background-color: dodgerblue;
+}
+.image{
+  background-color: darkorchid;
+}
+.document{
+  background-color: darkorange;
+}
+.video{
+  background-color: red;
+}
+
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 5px; /* optional */
 }

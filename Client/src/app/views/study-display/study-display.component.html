@@ -24,23 +24,56 @@
     <mat-label class="emptyText">Aún no se ha creado ningun desafio</mat-label>
   </div>
   <ng-template #showChallenges>
-    <mat-card-content>
-      <mat-list>      
-        <mat-list-item *ngFor="let challenge of challenges">
-          <mat-icon mat-list-icon class="challenge-cover"></mat-icon>
-          <div mat-line> {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}</div>
-          <div mat-line> {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}</div>
-          <div mat-line> {{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </div>
-          {{" " + "Edit"}}  
-          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="primary">
-            <mat-icon>edit</mat-icon>
-          </button>
-          {{" " + "Delete"}}
-          <button class="mr-4" style="margin: 10px;" mat-mini-fab color="warn" (click)="deleteChallenge(challenge._id)"> 
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
+
+    <!-- Another visualiation -->
+    <div class="row">
+      <div class="col-md-12" *ngFor="let challenge of challenges">
+
+          <mat-card-header class="header-challenge">
+            <div class="col-md-8">
+              <mat-card-title class="{{getClass(challenge.question_type)}}">
+                <div class="col-md-9" style="padding-top: 5px">
+                  {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
+                </div>
+                <div class="col-md-3 buttons">
+                  <button mat-button>EDIT <mat-icon>edit</mat-icon></button>
+                  <button mat-button (click)="deleteChallenge(challenge._id)">DELETE <mat-icon>delete</mat-icon></button>
+                </div>
+
+              </mat-card-title>
+            </div>
+            <div class="col-md-4">
+              <mat-card-subtitle>Typo: {{getClassQuestion(challenge.question_type)}}</mat-card-subtitle>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="col-md-6">
+              {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
+            </div>
+            <div class="col-md-2">
+              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">Tiempo: {{challenge.seconds}} scnds. </span>
+            </div>
+            <div class="col-md-2">
+               <mat-icon>cached</mat-icon><span class="aligned-with-icon">Intentos: {{challenge.max_attempts}}</span>
+            </div>
+          </mat-card-content>
+          <mat-card-content>
+            <div class="col-md-6">
+              Hint: {{challenge.hint}}
+            </div>
+            <div class="col-md-2">
+              Creado: {{formatDate(challenge.createdAt)}}
+            </div>
+            <div class="col-md-2">
+              Modificado: {{formatDate(challenge.updatedAt)}}
+            </div>
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+
+      </div>
+    </div>
+
   </ng-template>
+
 </mat-card>
+
