@@ -1,5 +1,8 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { GamificationService } from 'src/app/services/game/gamification.service';
 
 
 @Component({
@@ -9,12 +12,17 @@ import { Router } from '@angular/router';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private gamificationService: GamificationService, private toastr: ToastrService, private translate: TranslateService) { }
+
+  StudioSelected;
+  gamified: false;
+  connected: false;
 
   ngOnInit(): void {
     this.checkPath();
+    this.gamificationStatus();
   }
-  StudioSelected;
+
   CreateStudy(){
     this.router.navigate(['create/study']);
   }
@@ -24,7 +32,42 @@ export class AdminPanelComponent implements OnInit {
   studySelectedHandler(event){
     this.StudioSelected = true;
     this.router.navigate([event]);
+  }
 
+  gamificationStatus(){
+    this.gamificationService.gamificationStatus().subscribe(
+      response => {
+        this.gamified = response.gamified;
+        this.connected = response.connected;
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  gamify(){
+    this.gamificationService.gamify().subscribe(
+      response => {
+        console.log(response);
+        this.gamificationService.gamifyDependent().subscribe(
+          response2 => {
+            console.log(response2);
+            this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            });
+            this.gamificationStatus();
+          },
+          err => {
+            console.log(err)
+          }
+        );
+      },
+      err => {
+        console.log(err)
+      }
+    );
   }
 
   checkPath(){

@@ -6,6 +6,7 @@ const StudySchema = new Schema({
     description: {type: String},
     domain: {type: String},
     gm_code: {type: String},
+    cooldown: {type: Number},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

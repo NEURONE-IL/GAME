@@ -18,6 +18,13 @@
       "HEADER": "Estudio",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio"
     },
+    "GAMIFICATION": {
+      "STATUS_TITLE": "Estado Gamificación",
+      "APP_GAMIFIED": "Aplicación gamificada",
+      "APP_NOT_GAMIFIED": "Aplicación no gamificada",
+      "APP_NOT_CONNECTED": "No conectado a NEURONE-GM",
+      "GAMIFY_BUTTON": "Gamificar"
+    },
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
   },

@@ -113,6 +113,25 @@ const checkToken = async (callback) => {
             callback(err);
         })
     });
+};
+
+const postWebhooks = async (callback) => {
+    await getHeadersGM((err, headers) => {
+        if(err){
+            callback(err)
+        }
+        let webhooks = {
+            givePointsUrl: 'http://localhost:3090/api/notifications/getPoints',
+            challengeCompletedUrl: 'http://localhost:3090/api/notifications/challengeCompleted',
+            badgeAcquiredUrl: 'http://localhost:3090/api/notifications/badgeAcquired',
+            levelUpUrl: 'http://localhost:3090/api/notifications/levelUp'
+        }
+        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/webhooks', webhooks, headers.headers ).then((response)=> {
+            callback(null, response.data.data)
+        }).catch((err) => {
+            callback(err);
+        });
+    });
 }
 
 
@@ -123,6 +142,7 @@ const connect = {
     connectGM,
     getHeadersGM,
     pingGM,
+    postWebhooks,
     checkToken
 };
 

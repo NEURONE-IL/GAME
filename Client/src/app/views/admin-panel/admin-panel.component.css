@@ -8,6 +8,30 @@
   margin: 10px;
 }
 
+.status{
+  margin-left: 10%;
+  margin-top: 3%;
+  width: 25%;
+  display: inline-block;
+}
+
+.gamify-button{
+  margin-left: 3%;
+  margin-top: 3%;
+  width: 10%;
+  display: inline-block;
+}
+
+.ok{
+  margin-left: 5%;
+  color: green;
+}
+
+.notok{
+  margin-left: 5%;
+  color: red;
+}
+
 .studies-display-card{
   margin-left: 10%;
   margin-right: 10%;

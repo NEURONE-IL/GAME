@@ -33,9 +33,11 @@ router.get('/:study_id', async (req, res) => {
 });
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBody], async (req, res) => {
+    let cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
     const study = new Study({
         name: req.body.name,
-        domain: req.body.domain
+        domain: req.body.domain,
+        cooldown: cooldown
     });
     if(req.body.description){
         study.description = req.body.description;
@@ -84,6 +86,9 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, studyMiddleware.v
         }
         if(req.body.description){
             study.description = req.body.description;
+        }
+        if(req.body.hours && req.body.minutes && req.body.seconds ){
+            study.cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
         }
         study.updatedAt = Date.now();
         study.save((err, study) => {
