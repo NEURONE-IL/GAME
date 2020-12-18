@@ -13,11 +13,11 @@ import { Study, StudyService } from '../../services/game/study.service';
 export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[] = [];
-
+  createChallenge: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
-
+    this.createChallenge = false;
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.study = response['study']);
 
@@ -26,9 +26,18 @@ export class StudyDisplayComponent implements OnInit {
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
+  BackToChallenges(){
+    this.createChallenge = false;
+    this.challenges=[];
+    this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
+      .subscribe(response => this.challenges = response['challenges']);
+  }
 
   CreateChallenge(){
-    this.router.navigate(['create/challenge']);
+    this.createChallenge = true;
+
+    /* this.router.navigate(['create/challenge']); */
+
   }
 
   BackToStudies(){
@@ -91,15 +100,17 @@ export class StudyDisplayComponent implements OnInit {
       return "CHALLENGE.QUESTION_TYPE.PAGE";
     }
     else if(type=="video"){
-      return "CHALLENGE.QUESTION_TYPE.IMAGE"
+      return "CHALLENGE.QUESTION_TYPE.VIDEO"
     }
     else if(type=="image"){
-      return "CHALLENGE.QUESTION_TYPE.DOCUMENT"
+      return "CHALLENGE.QUESTION_TYPE.IMAGE"
     }else{
-      return "CHALLENGE.QUESTION_TYPE.VIDEO"
+      return "CHALLENGE.QUESTION_TYPE.DOCUMENT"
     }
   }
   formatDate(date){
     return date.substr(0,10);
   }
+
+
 }
