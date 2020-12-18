@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./challenge-creation.component.css']
 })
 export class ChallengeCreationComponent implements OnInit {
+  @Input() study: string;
   challengeForm: FormGroup;
   studies: Study[];
   questionOptions = [
@@ -39,7 +40,6 @@ export class ChallengeCreationComponent implements OnInit {
       hint: ['', [Validators.minLength(10), Validators.maxLength(100)]],
       answer_type: ['', [Validators.minLength(3), Validators.maxLength(50)]],
       answer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
-      study: ['', Validators.required],
       checked: ['', Validators.required]
     });
 
@@ -57,13 +57,15 @@ export class ChallengeCreationComponent implements OnInit {
 
   createChallenge(){
     let challenge = this.challengeForm.value;
+    challenge.study=this.study;
+    console.log(challenge);
     this.challengeService.postChallenge(challenge).subscribe(
       challenge => {
         this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        this.router.navigate(['/admin_panel']);
+        /* this.router.navigate(['/admin_panel']); */
         this.resetForm();
       },
       err => {

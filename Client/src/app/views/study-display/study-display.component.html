@@ -10,19 +10,25 @@
       <div class="col-md-4">
         <div class="options" >
           {{"Atras"}}
-          <button mat-mini-fab  color="default" (click)="BackToStudies()">
+          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
             <mat-icon>arrow_back</mat-icon>
           </button>
           {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
-          <button mat-mini-fab  color="primary" (click)="CreateChallenge()">
+          <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
     </div>
-  <div *ngIf="challenges.length==0; else showChallenges">
-    <mat-label class="emptyText">Aún no se ha creado ningun desafio</mat-label>
+  <div *ngIf="createChallenge; else challengesView">
+    <app-challenge-creation [study]="study._id"> </app-challenge-creation>
   </div>
+  <ng-template #challengesView >
+    <div *ngIf="challenges.length==0; else showChallenges">
+      <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
+    </div>
+  </ng-template>
+
   <ng-template #showChallenges>
 
     <!-- Another visualiation -->
@@ -32,40 +38,40 @@
           <mat-card-header class="header-challenge">
             <div class="col-md-8">
               <mat-card-title class="{{getClass(challenge.question_type)}}">
-                <div class="col-md-9" style="padding-top: 5px">
+                <div class="col-md-8" style="padding-top: 5px">
                   {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
                 </div>
-                <div class="col-md-3 buttons">
-                  <button mat-button>EDIT <mat-icon>edit</mat-icon></button>
-                  <button mat-button (click)="deleteChallenge(challenge._id)">DELETE <mat-icon>delete</mat-icon></button>
+                <div class="col-md-4 buttons" style="text-align: right">
+                  <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
+                  <button mat-button (click)="deleteChallenge(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
                 </div>
 
               </mat-card-title>
             </div>
             <div class="col-md-4">
-              <mat-card-subtitle>Typo: {{getClassQuestion(challenge.question_type)}}</mat-card-subtitle>
+              <mat-card-subtitle>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
             </div>
           </mat-card-header>
           <mat-card-content>
             <div class="col-md-6">
               {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
             </div>
-            <div class="col-md-2">
-              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">Tiempo: {{challenge.seconds}} scnds. </span>
+            <div class="col-md-3">
+              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "CHALLENGE.FORM.FIELDS.SECONDS" | translate }}: {{challenge.seconds}} </span>
             </div>
             <div class="col-md-2">
-               <mat-icon>cached</mat-icon><span class="aligned-with-icon">Intentos: {{challenge.max_attempts}}</span>
+               <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "CHALLENGE.FORM.FIELDS.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
             </div>
           </mat-card-content>
           <mat-card-content>
             <div class="col-md-6">
               Hint: {{challenge.hint}}
             </div>
-            <div class="col-md-2">
-              Creado: {{formatDate(challenge.createdAt)}}
+            <div class="col-md-3">
+              {{ "CHALLENGE.FORM.FIELDS.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
             </div>
             <div class="col-md-2">
-              Modificado: {{formatDate(challenge.updatedAt)}}
+              {{ "CHALLENGE.FORM.FIELDS.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
             </div>
           </mat-card-content>
           <mat-card-actions></mat-card-actions>
@@ -74,6 +80,7 @@
     </div>
 
   </ng-template>
-
 </mat-card>
+
+
 

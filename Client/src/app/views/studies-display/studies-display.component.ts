@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./studies-display.component.css']
 })
 export class StudiesDisplayComponent implements OnInit {
-  studies: Study[];
+  studies: Study[] = [];
 
   constructor(
     private studyService: StudyService, private router: Router) { }
