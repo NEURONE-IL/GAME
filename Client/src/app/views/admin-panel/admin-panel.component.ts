@@ -17,7 +17,6 @@ export class AdminPanelComponent implements OnInit {
   StudioSelected;
   gamified: false;
   connected: false;
-
   ngOnInit(): void {
     this.checkPath();
     this.gamificationStatus();
@@ -53,19 +52,25 @@ export class AdminPanelComponent implements OnInit {
         this.gamificationService.gamifyDependent().subscribe(
           response2 => {
             console.log(response2);
-            this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
+            this.toastr.success(this.translate.instant("ADMIN.GAMIFICATION.TOAST.SUCCESS_MESSAGE"), this.translate.instant("ADMIN.GAMIFICATION.TOAST.SUCCESS"), {
               timeOut: 5000,
               positionClass: 'toast-top-center'
             });
             this.gamificationStatus();
           },
           err => {
-            console.log(err)
+            this.toastr.error(this.translate.instant("ADMIN.GAMIFICATION.TOAST.ERROR_MESSAGE"), this.translate.instant("ADMIN.GAMIFICATION.TOAST.ERROR"), {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            });
           }
         );
       },
       err => {
-        console.log(err)
+        this.toastr.error(this.translate.instant("ADMIN.GAMIFICATION.TOAST.ERROR_MESSAGE"), this.translate.instant("ADMIN.GAMIFICATION.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
       }
     );
   }

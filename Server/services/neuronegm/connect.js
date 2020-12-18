@@ -120,6 +120,7 @@ const postWebhooks = async (callback) => {
         if(err){
             callback(err)
         }
+        let credential = headers.credential;
         let webhooks = {
             givePointsUrl: 'http://localhost:3090/api/notifications/getPoints',
             challengeCompletedUrl: 'http://localhost:3090/api/notifications/challengeCompleted',
