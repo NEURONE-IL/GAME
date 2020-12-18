@@ -7,6 +7,15 @@ const schema = Joi.object({
         .required(),
 
     domain: Joi.string(),
+
+    hours: Joi.number()
+        .required(),
+
+    minutes: Joi.number()
+        .required(),
+    
+    seconds: Joi.number()
+        .required(),
     
     description: Joi.string(),
 })
@@ -16,6 +25,12 @@ const editSchema = Joi.object({
     name: Joi.string(),
 
     domain: Joi.string(),
+
+    hours: Joi.number(),
+
+    minutes: Joi.number(),
+    
+    seconds: Joi.number(),
     
     description: Joi.string(),
 })

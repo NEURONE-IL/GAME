@@ -10,19 +10,25 @@
       <div class="col-md-4">
         <div class="options" >
           {{"Atras"}}
-          <button mat-mini-fab  color="default" (click)="BackToStudies()">
+          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
             <mat-icon>arrow_back</mat-icon>
           </button>
           {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
-          <button mat-mini-fab  color="primary" (click)="CreateChallenge()">
+          <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
     </div>
-  <div *ngIf="challenges.length==0; else showChallenges">
-    <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
+  <div *ngIf="createChallenge; else challengesView">
+    <app-challenge-creation [study]="study._id"> </app-challenge-creation>
   </div>
+  <ng-template #challengesView >
+    <div *ngIf="challenges.length==0; else showChallenges">
+      <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
+    </div>
+  </ng-template>
+
   <ng-template #showChallenges>
 
     <!-- Another visualiation -->
@@ -74,6 +80,7 @@
     </div>
 
   </ng-template>
-
 </mat-card>
+
+
 

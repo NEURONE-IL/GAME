@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const config = require('config'); //we load the db location from the JSON files
 const morgan = require('morgan');
 const bcrypt = require('bcryptjs');
-const schedule = require('node-schedule');
 
 /** Internal modules **/
 require('./config/config');

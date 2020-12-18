@@ -27,7 +27,7 @@ const postAction = async (action, callback) => {
             callback(null, response.data.data)
         }).catch((err) => {
             callback(err);
-        })
+        });
     });
 }
 

@@ -4,32 +4,14 @@ const User = require('../models/user');
 const Role = require('../models/role');
 const Study = require('../models/study');
 const Challenge = require('../models/challenge');
-const Credential = require('../models/credential');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const neuronegmService = require('../services/neuronegm/connect');
-const actionService = require('../services/neuronegm/action');
-const pointService = require('../services/neuronegm/point');
-const badgeService = require('../services/neuronegm/badge');
-const levelService = require('../services/neuronegm/level');
-const challengeService = require('../services/neuronegm/challenge');
-const leaderboardService = require('../services/neuronegm/leaderboard');
 const playerService = require('../services/neuronegm/player');
 
 const authMiddleware = require('../middlewares/authMiddleware');
-const { isValidObjectId, connect } = require('mongoose');
-
-router.post('/testxd', async(req, res) => {
-    playerService.postPlayer({name: 'testa', last_name: 'testa', sourceId: 'xddaasda'}, (err, data) => {
-        if(err){
-            console.log(err)
-        }
-        res.status(200).json({
-            data
-        });
-    })
-})
+const { isValidObjectId } = require('mongoose');
 
 router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueEmail], async (req, res) => {
     const role = await Role.findOne({name: 'admin'}, err => {
@@ -70,98 +52,6 @@ router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueE
         });
     })
 })
-
-router.get('/gamify', async (req, res) => {
-    let credential = await Credential.findOne({code: "superadmin"}, err => {
-        if(err){
-            return res.status(404).json({
-                ok: false,
-                err
-            });
-        }
-    })
-    if(credential && !credential.gamified){
-        await actionService.postAllActions(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        });
-        await pointService.postAllPoints(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        });
-        await badgeService.postAllBadges(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        })
-        res.status(200).send("OK");
-    }
-    else{
-        res.status(400).send("Can't gamify!");
-    }
-})
-
-router.get('/gamifyDependent', async (req, res) => {
-    let credential = await Credential.findOne({code: "superadmin"}, err => {
-        if(err){
-            return res.status(404).json({
-                ok: false,
-                err
-            });
-        }
-    })
-    if(credential && !credential.gamified){
-        await levelService.postAllLevels(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        });
-        await challengeService.postAllChallenges(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        });
-        await leaderboardService.postAllLeaderboards(err => {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        })
-        credential.gamified = true;
-        await credential.save(err=> {
-            if(err){
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
-            }
-        })
-        res.status(200).send("OK");
-    }
-    else{
-        res.status(400).send("Can't gamify!");
-    }
-})
-
 
 router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.uniqueEmail], async (req, res)=>{
     const study_id = req.params.study_id;
