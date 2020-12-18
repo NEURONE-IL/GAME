@@ -2,7 +2,9 @@
 	"LOGOUT": "Cerrar Sesión",
 	"BUTTONS": {
 		"CLEAR": "LIMPIAR",
-		"SAVE": "GUARDAR"
+		"SAVE": "GUARDAR",
+    "EDIT": "EDITAR",
+    "DELETE": "ELIMINAR"
   },
   "ADMIN": {
     "CHALLENGES": {
@@ -32,11 +34,20 @@
         "QUESTION": "Pregunta",
         "QUESTION_TYPE": "Tipo de pregunta",
 				"SECONDS": "Segundos para responder",
-				"STUDY": "Estudio"
+				"STUDY": "Estudio",
+        "CREATED_AT": "Creado",
+        "UPDATED_AT": "Modificado"
 			}
 		},
 		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
     "TITLE": "Creación de desafíos",
+    "NO_CHALLENGE":"Aún no se ha registrado ningun desafio.",
+    "QUESTION_TYPE": {
+      "PAGE": "Pagina web",
+      "VIDEO": "Video",
+      "IMAGE": "Imagen",
+      "DOCUMENT": "Documento"
+    },
     "TOAST": {
       "ERROR": "Fallo!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",

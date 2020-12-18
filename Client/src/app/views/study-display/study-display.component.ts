@@ -12,7 +12,7 @@ import { Study, StudyService } from '../../services/game/study.service';
 })
 export class StudyDisplayComponent implements OnInit {
   study: Study;
-  challenges: Challenge[];
+  challenges: Challenge[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
@@ -87,17 +87,16 @@ export class StudyDisplayComponent implements OnInit {
     }
   }
   getClassQuestion(type){
-    console.log(type);
     if (type=="page"){
-      return "PAGINA";
+      return "CHALLENGE.QUESTION_TYPE.PAGE";
     }
     else if(type=="video"){
-      return "VIDEO"
+      return "CHALLENGE.QUESTION_TYPE.IMAGE"
     }
     else if(type=="image"){
-      return "IMAGEN"
+      return "CHALLENGE.QUESTION_TYPE.DOCUMENT"
     }else{
-      return "DOCUMENTO"
+      return "CHALLENGE.QUESTION_TYPE.VIDEO"
     }
   }
   formatDate(date){
