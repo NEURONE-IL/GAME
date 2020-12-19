@@ -19,12 +19,19 @@ const loginGM = async (credential, email, password, callback) => {
     })
 }
 const getHeadersGM = async (callback) => {
-    await Credential.findOne({code: "superadmin"}, (err, credential) => {
+    await pingGM((err, data) => {
         if(err){
-            callback(err)
+            callback(err);
         }
-        callback(null, {headers: {headers: {"x-access-token": credential.token}}, credential: credential});
-    });
+        else{
+            Credential.findOne({code: "superadmin"}, (err, credential) => {
+                if(err){
+                    callback(err)
+                }
+                callback(null, {headers: {headers: {"x-access-token": credential.token}}, credential: credential});
+            });
+        }
+    }) 
 }
 
 const registerGM = async (email, password, callback) => {
@@ -104,6 +111,7 @@ const pingGM = async (callback) => {
 
 const checkToken = async (callback) => {
     await getHeadersGM((err, headers) => {
+        let credential = headers.credential;
         if(err){
             callback(err)
         }
