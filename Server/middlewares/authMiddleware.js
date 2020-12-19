@@ -42,10 +42,10 @@ const schema = Joi.object({
     institution: Joi.string()
         .required(),
     
-    institution_commune: Joi.string()
+    institution_commune: Joi.number()
         .required(),
 
-    institution_region: Joi.string()
+    institution_region: Joi.number()
         .required()
 })
 
