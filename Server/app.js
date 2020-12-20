@@ -68,32 +68,6 @@ async function initial() {
         }
     });
 
-    const salt = await bcrypt.genSalt(10);
-    const hashpassword = await bcrypt.hash("admin", salt);
-
-    User.estimatedDocumentCount((err, count)=> {
-        if(!err && count == 0){
-            Role.findOne({name: 'admin'}, (err, role) => {
-                if(err){
-                    return res.status(404).json({
-                        ok: false,
-                        err
-                    });
-                }
-                new User({
-                    email: "admin@admin.com",
-                    password: hashpassword,
-                    birthday: Date.now(),
-                    role: role._id
-                }).save((err, user) =>{
-                    if(err){
-                        console.log("error", err);
-                    }
-                    console.log("added admin to users collection")
-                })
-            });
-        }
-    })
 }
 
 /** Express setup **/

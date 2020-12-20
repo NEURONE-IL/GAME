@@ -6,15 +6,17 @@ const GameElement = require('../../models/gameElement');
 
 const getLeaderboards = async (callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards',headers.headers ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards',headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
@@ -40,12 +42,14 @@ const postAllLeaderboards = async(callback) => {
             if(err){
                 console.log(err)
             }
-            newGameElem = new GameElement({
-                type: "leaderboard",
-                key: leaderboards[i].key,
-                gm_code: leaderboard.code
-            })
-            newGameElem.save();
+            else{
+                newGameElem = new GameElement({
+                    type: "leaderboard",
+                    key: leaderboards[i].key,
+                    gm_code: leaderboard.code
+                })
+                newGameElem.save();
+            }
         })
     }
     callback(null);
@@ -53,29 +57,33 @@ const postAllLeaderboards = async(callback) => {
 
 const updateLeaderboard = async (leaderboard, code, callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, leaderboard, headers.headers ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, leaderboard, headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
 const deleteLeaderboard = async (code, callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, headers.headers ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code, headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 

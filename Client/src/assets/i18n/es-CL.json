@@ -37,7 +37,13 @@
       "APP_GAMIFIED": "Aplicación gamificada",
       "APP_NOT_GAMIFIED": "Aplicación no gamificada",
       "APP_NOT_CONNECTED": "No conectado a NEURONE-GM",
-      "GAMIFY_BUTTON": "Gamificar"
+      "GAMIFY_BUTTON": "Gamificar",
+      "TOAST": {
+        "ERROR": "¡Fallo!",
+        "ERROR_MESSAGE": "No se ha podido gamificar la aplicación",
+        "SUCCESS": "¡Éxito!",
+        "SUCCESS_MESSAGE": "Se ha gamificado la aplicación"
+      }
     },
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"

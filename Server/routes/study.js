@@ -50,7 +50,6 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBod
         }
         groupService.postGroup({name: req.body.name, sourceId: study._id }, (err, data) => {
             if(err){
-                console.log(err);
                 res.status(200).json({
                     study
                 });

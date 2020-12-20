@@ -5,29 +5,33 @@ const GameElement = require('../../models/gameElement');
 
 const getChallenges = async (callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges',headers.headers ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges',headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
 const postChallenge = async (challenge, callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges', challenge, headers.headers ).then((response)=> {
-            callback(null, response.data.challenge)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges', challenge, headers.headers ).then((response)=> {
+                callback(null, response.data.challenge)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
@@ -39,12 +43,14 @@ const postAllChallenges = async(callback) => {
             if(err){
                 console.log(err)
             }
-            newGameElem = new GameElement({
-                type: "challenge",
-                key: challenges[i].key,
-                gm_code: challenge.code
-            })
-            newGameElem.save();
+            else{
+                newGameElem = new GameElement({
+                    type: "challenge",
+                    key: challenges[i].key,
+                    gm_code: challenge.code
+                })
+                newGameElem.save();
+            }
         })
     }
     callback(null);
@@ -52,29 +58,33 @@ const postAllChallenges = async(callback) => {
 
 const updateChallenge = async (challenge, code, callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges/'+code, challenge, headers.headers  ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.put(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges/'+code, challenge, headers.headers  ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
 const deleteChallenge = async (code, callback) => {
     await connect.getHeadersGM((err, headers) => {
-        let credential = headers.credential;
         if(err){
             callback(err)
         }
-        axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges/'+code, headers.headers  ).then((response)=> {
-            callback(null, response.data.data)
-        }).catch((err) => {
-            callback(err);
-        })
+        else{
+            let credential = headers.credential;
+            axios.delete(process.env.NEURONEGM+'/api/'+credential.app_code+'/challenges/'+code, headers.headers  ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
     });
 }
 
