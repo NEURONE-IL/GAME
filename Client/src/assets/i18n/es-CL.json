@@ -1,18 +1,30 @@
 {
-	"LOGOUT": "Cerrar Sesión",
+	"LOGOUT": {
+    "LOGOUT": "Cerrar Sesión",
+    "LOGOUT_CONFIRMATION": "¿Está segur@ que desea cerrar la sesión?"
+  },
 	"BUTTONS": {
+    "BACK": "ATRÁS",
 		"CLEAR": "LIMPIAR",
-		"SAVE": "GUARDAR",
+    "DELETE": "ELIMINAR",
     "EDIT": "EDITAR",
-    "DELETE": "ELIMINAR"
+    "SAVE": "GUARDAR"
   },
   "ADMIN": {
     "CHALLENGES": {
-      "CREATE": "Crear Desafio",
       "ANSWER": "Respuesta",
+      "ANSWER_TYPE": "Tipo de respuesta",
+      "CREATE": "CREAR DESAFÍO",
+      "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
+      "HINT": "Pista",
+      "MAX_ATTEMPTS": "Intentos máximos",
       "QUESTION": "Pregunta",
+      "QUESTION_TYPE": "Tipo de pregunta",
       "SECONDS": "Segundos para responder",
-      "STUDY_CHALLENGES": "Desafíos del estudio"
+      "STUDY": "Estudio",
+      "STUDY_CHALLENGES": "Desafíos del estudio",
+      "CREATED_AT": "Creado",
+      "UPDATED_AT": "Modificado"
     },
     "STUDIES": {
       "CREATE": "Crear Estudio",

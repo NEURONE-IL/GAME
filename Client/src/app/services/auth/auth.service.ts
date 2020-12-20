@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { EndpointsService } from '../endpoints/endpoints.service';
 import { StoreSessionService } from '../logger/store-session.service';
 
@@ -14,7 +15,8 @@ export class AuthService {
 
   constructor(private http: HttpClient,private router: Router,
               private endpoints: EndpointsService,
-              private storeSession: StoreSessionService) {}
+              private storeSession: StoreSessionService,
+              private translate: TranslateService) {}
 
   login(email: string, password: string) {
     this.http.post(this.uri + 'login', {email: email,password: password})
@@ -34,6 +36,10 @@ export class AuthService {
         this.router.navigate(['login']);
       }
       );
+  }
+
+  confirmLogout() {
+    confirm(this.translate.instant("LOGOUT.LOGOUT_CONFIRMATION")) && this.logout();
   }
 
   logout() {

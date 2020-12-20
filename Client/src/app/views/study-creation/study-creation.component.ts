@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 })
 export class StudyCreationComponent implements OnInit {
   studyForm: FormGroup;
+  hours: number[] = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24];
+  minutes: number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
+  seconds: number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,7 +28,10 @@ export class StudyCreationComponent implements OnInit {
     this.studyForm = this.formBuilder.group({
       description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      checked: ['', Validators.required]
+      checked: ['', Validators.required],
+      hours: [''],
+      minutes: [''],
+      seconds: ['']
     })
   }
 
@@ -39,6 +45,7 @@ export class StudyCreationComponent implements OnInit {
 
   createStudy(){
     let study = this.studyForm.value;
+    console.log(study)
     this.studyService.postStudy(study).subscribe(
       study => {
         this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {

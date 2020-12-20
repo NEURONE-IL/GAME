@@ -44,6 +44,10 @@ export class StudyDisplayComponent implements OnInit {
     this.router.navigate(['admin_panel']);
   }
 
+  confirmDelete(id: string){
+    confirm(this.translate.instant("ADMIN.CHALLENGES.DELETE_CONFIRMATION")) && this.deleteChallenge(id);
+  }  
+
   deleteChallenge(id: string){
     this.challengeService.deleteChallenge(id)
       .subscribe(challenge => {

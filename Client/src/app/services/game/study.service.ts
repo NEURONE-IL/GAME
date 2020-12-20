@@ -7,6 +7,9 @@ export interface Study {
   _id: string,
   name: string,
   description: string,
+  domain: string,
+  gm_code: string,
+  cooldown: number,
   createdAt: string,
   updatedAt: string
 }
@@ -29,6 +32,7 @@ export class StudyService {
   }
 
   postStudy(study: any): Observable<any> {
+    console.log(study)
     /*Includes just the non empty properties and excludes the checked property used for validation*/
     let cleanStudy = Object.assign(new Object, study);
     delete cleanStudy.checked;

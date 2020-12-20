@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-4">
         <div class="options" >
-          {{"Atras"}}
+          {{ "BUTTONS.BACK" | translate }}
           <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
             <mat-icon>arrow_back</mat-icon>
           </button>
@@ -43,13 +43,13 @@
                 </div>
                 <div class="col-md-4 buttons" style="text-align: right">
                   <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
-                  <button mat-button (click)="deleteChallenge(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
+                  <button mat-button (click)="confirmDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
                 </div>
 
               </mat-card-title>
             </div>
             <div class="col-md-4">
-              <mat-card-subtitle>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
+              <mat-card-subtitle>{{ "ADMIN.CHALLENGES.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
             </div>
           </mat-card-header>
           <mat-card-content>
@@ -57,21 +57,21 @@
               {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
             </div>
             <div class="col-md-3">
-              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "CHALLENGE.FORM.FIELDS.SECONDS" | translate }}: {{challenge.seconds}} </span>
+              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </span>
             </div>
             <div class="col-md-2">
-               <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "CHALLENGE.FORM.FIELDS.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
+               <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
             </div>
           </mat-card-content>
           <mat-card-content>
             <div class="col-md-6">
-              Hint: {{challenge.hint}}
+              {{ "ADMIN.CHALLENGES.HINT" | translate }}: {{challenge.hint}}
             </div>
             <div class="col-md-3">
-              {{ "CHALLENGE.FORM.FIELDS.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
+              {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
             </div>
             <div class="col-md-2">
-              {{ "CHALLENGE.FORM.FIELDS.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
+              {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
             </div>
           </mat-card-content>
           <mat-card-actions></mat-card-actions>

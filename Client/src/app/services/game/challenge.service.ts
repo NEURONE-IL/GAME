@@ -7,13 +7,13 @@ import { AuthService } from '../auth/auth.service';
 export interface Challenge {
   _id: string,
   question: string,
+  question_type: string,
+  number: number,
   seconds: number,
-  domain: string,
-  locale: string,
-  task: string,
   hint: string,
   answer_type: string,
   answer: string,
+  max_attempts: string,
   study: string,
   createdAt: string,
   updatedAt: string
