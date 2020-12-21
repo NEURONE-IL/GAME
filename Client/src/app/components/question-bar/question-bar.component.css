@@ -51,7 +51,7 @@
     width: 100%;
 }
   .input-full-width{
-    width: 66%;
+    width: 85%;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -72,7 +72,7 @@
 
 
 .hint-input{
-    width: 20%;
+    width: 30%;
     margin-left: 1%;
     background-color: darkblue;
 }

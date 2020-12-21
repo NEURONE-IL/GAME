@@ -41,7 +41,9 @@ export class QuestionBarComponent implements OnInit {
               private toastr: ToastrService,
               private translate: TranslateService) {
     this.answerForm = this.formBuilder.group({
-      answer: ['', Validators.requiredTrue]
+      answer: ['', Validators.requiredTrue],
+      url1: [''],
+      url2: ['']
     });
     this.loadChallenge();
     this.startTimer();
