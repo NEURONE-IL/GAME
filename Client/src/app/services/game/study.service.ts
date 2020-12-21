@@ -19,7 +19,7 @@ export interface Study {
 })
 export class StudyService {
 
-  uri = this.endpoints.rootURL + 'study';
+  uri = this.endpoints.rootURL + 'study/';
 
   constructor(protected http: HttpClient, private endpoints: EndpointsService) { }
 

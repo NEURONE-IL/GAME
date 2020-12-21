@@ -27,7 +27,7 @@
       "UPDATED_AT": "Modificado"
     },
     "STUDIES": {
-      "CREATE": "Crear Estudio",
+      "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
       "HEADER": "Estudio",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio"
@@ -288,6 +288,11 @@
     "HINT": {
       "TITLE": "Pista",
       "CLOSE": "Cerrar"
+    },
+    "ANSWER_TYPE": {
+      "JUSTIFY": "Justifica tu respuesta aquí",
+      "TEXT": "Ingresa tu respuesta aquí",
+      "URL": "Las páginas que seleccionaste se muestran aquí"
     }
   }
 }

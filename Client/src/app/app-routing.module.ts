@@ -23,28 +23,28 @@ import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 const routes: Routes = [
   {
     path: 'start',
-    canActivate: [AuthGuard],
+//    canActivate: [AuthGuard],
     component: StartComponent,
   },
   {
     path: 'session',
     component: SessionComponent,
-    canActivate: [DirectAccessGuard],
+//    canActivate: [DirectAccessGuard],
     children: [
       {
         path: 'search', // child route path
         component: SearchComponent, // child route component that the router renders
-        canActivate: [DirectAccessGuard]
+//        canActivate: [DirectAccessGuard]
       },
       {
         path: 'search-result/:query',
         component: SearchResultComponent,
-        canActivate: [DirectAccessGuard]
+//        canActivate: [DirectAccessGuard]
       },
       {
         path: 'view-page/:url',
         component: ViewPageComponent,
-        canActivate: [DirectAccessGuard]
+//        canActivate: [DirectAccessGuard]
       }
     ]
   },
