@@ -46,7 +46,7 @@ router.get('/gamify', verifyToken, async (req, res) => {
         }
     });
     if(credential && !credential.gamified){
-        await actionService.postAllActions(err => {
+        await pointService.postAllPoints(err => {
             if(err){
                 return res.status(404).json({
                     ok: false,
@@ -54,7 +54,7 @@ router.get('/gamify', verifyToken, async (req, res) => {
                 });
             }
         });
-        await pointService.postAllPoints(err => {
+        await actionService.postAllActions(err => {
             if(err){
                 return res.status(404).json({
                     ok: false,

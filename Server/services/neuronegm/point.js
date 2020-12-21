@@ -88,12 +88,29 @@ const deletePoint = async (code, callback) => {
     });
 }
 
+const givePoints = async (post, player_code, callback) => {
+    await connect.getHeadersGM((err, headers) => {
+        if(err){
+            callback(err)
+        }
+        else{
+            let credential = headers.credential;
+            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/players/'+ player_code+'/give-points' , post, headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            });
+        }
+    });
+}
+
 const point = {
     getPoints,
     postPoint,
     postAllPoints,
     updatePoint,
-    deletePoint
+    deletePoint,
+    givePoints
 };
 
 module.exports = point;

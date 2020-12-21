@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Challenge = require('../models/challenge');
+const User = require('../models/user');
 const UserChallenge = require('../models/userChallenge');
+const GameElement = require('../models/gameElement');
 const levenshtein = require('../node_modules/js-levenshtein');
 const normalize = require('../node_modules/normalize-diacritics');
 
+const pointService = require('../services/neuronegm/point');
+const actionService = require('../services/neuronegm/action');
 const authMiddleware = require('../middlewares/authMiddleware');
 const challengeMiddleware = require('../middlewares/challengeMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
@@ -89,20 +93,54 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
 router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
     const _id = req.body.challenge;
     const challenge = await Challenge.findOne({_id: _id});
+    const user = await User.findOne({_id: req.body.user});
+    const pointElement = await GameElement.findOne({key: 'exp_1'});
+    const answerAction = await GameElement.findOne({key: 'responder_pregunta_1'});
+    const noHintsAction = await GameElement.findOne({key: 'sin_pistas_1'});
     let distance = await normalizeAndDistance(challenge.answer.toLowerCase(), req.body.answers[0].answer.toLowerCase())
     const userChallenge = new UserChallenge({
         user: req.body.user,
-        challenge: challenge,
+        challenge: challenge._id,
         date: req.body.date,
         answers: req.body.answers,
         hintUsed: req.body.hintUsed,
         timeLeft: req.body.timeLeft,
-        pointsObtained: distance
+        distance: distance
     })
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
                 err
+            });
+        }
+        if(user && user.gm_code && pointElement){
+            let post =  {point_code: pointElement.gm_code, date: userChallenge.createdAt, amount: 100};
+            pointService.givePoints(post, user.gm_code, (err, data) => {
+                if(err){
+                    console.log(err);
+                }
+            });
+        }
+        if(user && user.gm_code && answerAction){
+            let post =  {action_code: answerAction.gm_code, date: userChallenge.createdAt};
+            actionService.postPlayerAction(post, user.gm_code, (err, data) => {
+                if(err){
+                    console.log(err);
+                }
+                res.status(200).json({
+                    user
+                });
+            });
+        }
+        if(user && user.gm_code && noHintsAction){
+            let post =  {action_code: noHintsAction.gm_code, date: userChallenge.createdAt};
+            actionService.postPlayerAction(post, user.gm_code, (err, data) => {
+                if(err){
+                    console.log(err);
+                }
+                res.status(200).json({
+                    user
+                });
             });
         }
         res.status(200).json({
