@@ -1,46 +1,37 @@
 <app-header></app-header>
 <!-- Game data loading -->
-<div class='center-container' *ngIf="gameService.loading">
+<div class='center-container' *ngIf="loading else loaded">
   <mat-spinner class="loading-spinner"></mat-spinner>
 </div>
+<ng-template #loaded>
+  <!-- Game inactive -->
+  <div class="center-card" *ngIf="!gameService.gameActive">
+    <mat-card class="card mat-elevation-z8">
+        <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
+      <mat-card-content>
+        <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-<!-- Game inactive -->
-<div class="center-card" *ngIf="!gameService.loading && !gameService.gameActive">
-  <mat-card class="card mat-elevation-z8">
-      <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
-    <mat-card-content>
-      <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<!-- Asentimiento informado pending -->
-<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='assent'">
-  <app-assent ></app-assent>
-</div>
-<!-- Initial questionnaire pending -->
-<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='initial'">
-  <app-initial-questionnaire ></app-initial-questionnaire>
-</div>
-<!-- Pre-test questionnaire pending -->
-<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='pre-test'">
-  <app-pre-test-questionnaire ></app-pre-test-questionnaire>
-</div>
-<!-- Everything ok, game can start -->
-<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='instructions'">
-  <app-start-instructions></app-start-instructions>
-</div>
-<!-- Post-test questionnaire pending -->
-<div class="container" *ngIf="!gameService.loading && gameService.gameActive && gameService.stage=='post-test'">
-  <app-post-test-questionnaire ></app-post-test-questionnaire>
-</div>
-
-<!-- <div class="center-card" *ngIf="!gameService.loading && !gameService.gameActive">
-  <mat-card class="card mat-elevation-z8">
-      <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
-    <mat-card-content>
-      <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
-    </mat-card-content>
-  </mat-card>
-</div>
-<router-outlet *ngIf="!gameService.loading && gameService.gameActive"></router-outlet> -->
+  <!-- Asentimiento informado pending -->
+  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='assent'">
+    <app-assent ></app-assent>
+  </div>
+  <!-- Initial questionnaire pending -->
+  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='initial'">
+    <app-initial-questionnaire ></app-initial-questionnaire>
+  </div>
+  <!-- Pre-test questionnaire pending -->
+  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='pre-test'">
+    <app-pre-test-questionnaire ></app-pre-test-questionnaire>
+  </div>
+  <!-- Everything ok, game can start -->
+  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='instructions'">
+    <app-start-instructions></app-start-instructions>
+  </div>
+  <!-- Post-test questionnaire pending -->
+  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='post-test'">
+    <app-post-test-questionnaire ></app-post-test-questionnaire>
+  </div>
+</ng-template>

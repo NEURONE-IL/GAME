@@ -46,7 +46,7 @@ export class AuthService {
     let sessionLog = {
       userId: this.getUser()._id,
       userEmail: this.getUser().email,
-      state: 'login',
+      state: 'logout',
       localTimeStamp: Date.now()
     }
     this.storeSession.postSessionLog(sessionLog);

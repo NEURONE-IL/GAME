@@ -23,7 +23,7 @@ import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 const routes: Routes = [
   {
     path: 'start',
-//    canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: StartComponent,
   },
   {

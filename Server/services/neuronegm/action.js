@@ -35,6 +35,22 @@ const postAction = async (action, callback) => {
     });
 }
 
+const postPlayerAction = async (playerAction, player_code, callback) => {
+    await connect.getHeadersGM((err, headers) => {
+        if(err){
+            callback(err)
+        }
+        else{
+            let credential = headers.credential;
+            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/players/'+ player_code+'/actions' , playerAction, headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            });
+        }
+    });
+}
+
 const postAllActions = async(callback) => {
     let actions = actionsJson.actions;
     let newGameElem;
@@ -91,6 +107,7 @@ const deleteAction = async (code, callback) => {
 const action = {
     getActions,
     postAction,
+    postPlayerAction,
     postAllActions,
     updateAction,
     deleteAction

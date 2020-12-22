@@ -9,13 +9,15 @@ import { GameService } from '../../services/game/game.service';
 })
 export class StartComponent implements OnInit {
 
+  loading = true;
+
   constructor(public router: Router, public gameService: GameService) {
   }
 
   async ngOnInit(): Promise<void> {
     await this.gameService.load().then(() => {
       if (!this.gameService.loading) {
-        console.log('not loading!!');
+        this.loading = false;
       }
     });
   }
