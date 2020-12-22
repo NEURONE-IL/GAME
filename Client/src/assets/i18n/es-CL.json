@@ -106,7 +106,12 @@
     "EMAIL": "Correo electrónico",
     "PASSWORD": "Contraseña",
     "ENTER": "Ingresar",
-    "REQUIRED": "El campo es requerido"
+    "REQUIRED": "El campo es requerido",
+    "TOAST" : {
+      "ERROR_EMAIL_MESSAGE":"Correo no encontrado",
+      "ERROR_CREDENTIALS_MESSAGE":"Credenciales incorrectas",
+      "ERROR":"Error"
+    }
   },
   "QUESTIONNAIRE": {
     "INITIAL": {

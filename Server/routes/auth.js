@@ -14,6 +14,27 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const { isValidObjectId } = require('mongoose');
 
 router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueEmail], async (req, res) => {
+    // Send confirmation email
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'neuronemail2020@gmail.com',
+            pass: 'neuronedevs'
+        }
+    })
+    transporter.sendMail(mailOptions, (err, data)=> {
+        if(err){
+            console.log(err);
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        else{
+            console.log("Email sent!")
+        }
+    })
+    // Role
     const role = await Role.findOne({name: 'admin'}, err => {
         if(err){
             return res.status(404).json({
@@ -150,10 +171,10 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
 router.post('/login', async (req, res) => {
     //checking if username exists
     const user = await User.findOne({ email: req.body.email }).populate('role');
-    if(!user) res.status(400).send('Email is not found!');
+    if(!user) res.status(400).send('EMAIL_NOT_FOUND');
     //checking password
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) res.status(400).send('Invalid password!');
+    if(!validPass) res.status(400).send('INVALID_PASSWORD');
     //create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('x-access-token', token).send({user: user, token: token});
