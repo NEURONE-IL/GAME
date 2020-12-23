@@ -31,7 +31,7 @@ router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueE
     const hashpassword = await bcrypt.hash(req.body.password, salt);
     //create user
     const user = new User({
-        email: req.body.email,
+        email: req.body.email.toLowerCase(),
         password: hashpassword,
         role: role._id
     })
@@ -141,6 +141,21 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
     });
 });
 
+router.post('/login', async (req, res) => {
+    //checking if username exists
+    const user = await User.findOne({ email: req.body.email.toLowerCase() }).populate('role');
+    if(!user) res.status(400).send('EMAIL_NOT_FOUND');
+    //checking password
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if(!validPass) res.status(400).send('INVALID_PASSWORD');
+    //check if user is confirmed
+    if(!user.confirmed) res.status(400).send('USER_NOT_CONFIRMED');
+    //create and assign a token
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    res.header('x-access-token', token).send({user: user, token: token});
+});
+
+// Creates player on NEURONE-GM
 function saveGMPlayer(req, user, res) {
     playerService.postPlayer({ name: req.body.names, last_name: req.body.last_names, sourceId: user._id }, (err, data) => {
         if (err) {
@@ -163,6 +178,8 @@ function saveGMPlayer(req, user, res) {
     });
 }
 
+// Sends user confirmation email
+// Adapted from: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
 function sendConfirmationEmail(user, res, req) {
     // Create a verification token
     const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
@@ -180,6 +197,7 @@ function sendConfirmationEmail(user, res, req) {
     });
 }
 
+// Generates the challenges sequence for a new user
 function generateChallengeSequence(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -195,6 +213,7 @@ function generateChallengeSequence(array) {
     return array;
 }
 
+// Generates the progress array for a new user
 function generateProgressArray(challenges) {
     const sequence = generateChallengeSequence(challenges);
     let progress = [];
@@ -205,7 +224,5 @@ function generateProgressArray(challenges) {
     });
     return progress;
 }
-
-
 
 module.exports = router;

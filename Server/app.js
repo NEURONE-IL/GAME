@@ -11,6 +11,7 @@ require('dotenv').config(); //setup custom environment variables
 /** Internal modules **/
 require('./config/config');
 const authRoutes = require('./routes/auth');
+const confirmationRoutes = require('./routes/confirmation');
 const challengeRoutes = require('./routes/challenge');
 const userRoutes = require('./routes/user');
 const studyRoutes = require('./routes/study');
@@ -90,6 +91,7 @@ app.use(bodyParser.json({ type: 'application/json'}));
 
 /** Express routing **/
 app.use('/api/auth', authRoutes);
+app.use('', confirmationRoutes);
 app.use('/api/challenge', challengeRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/study', studyRoutes);
