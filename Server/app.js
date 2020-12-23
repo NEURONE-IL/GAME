@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const config = require('config'); //we load the db location from the JSON files
 const morgan = require('morgan');
 const bcrypt = require('bcryptjs');
+require('dotenv').config(); //setup custom environment variables
 
 /** Internal modules **/
 require('./config/config');
