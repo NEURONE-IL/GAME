@@ -192,7 +192,6 @@ function sendConfirmationEmail(user, res, req) {
 
         // Generate email data
         const { mailHTML, mailText } = generateEmailData(req, token, user);
-        console.log(mailHTML);
 
         // Send the email
         const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.SENDEMAIL_USER, pass: process.env.SENDEMAIL_PASSWORD } });
