@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
 const crypto = require('crypto');
+const fs = require('fs');
 
 const neuronegmService = require('../services/neuronegm/connect');
 const playerService = require('../services/neuronegm/player');
@@ -181,6 +182,7 @@ function saveGMPlayer(req, user, res) {
 // Sends user confirmation email
 // Adapted from: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
 function sendConfirmationEmail(user, res, req) {
+
     // Create a verification token
     const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
 
@@ -188,13 +190,48 @@ function sendConfirmationEmail(user, res, req) {
     token.save((err) => {
         if (err) { return res.status(500).send({ msg: 'TOKEN_ERROR' }); }
 
+        // Generate email data
+        const { mailHTML, mailText } = generateEmailData(req, token, user);
+        console.log(mailHTML);
+
         // Send the email
         const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.SENDEMAIL_USER, pass: process.env.SENDEMAIL_PASSWORD } });
-        const mailOptions = { from: 'neuronemail2020@gmail.com', to: user.email, subject: 'Verifique su correo', text: 'Hola,\n\n' + 'por favor, verifique su correo ingresando al siguiente link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+        const mailOptions = { from: 'neuronemail2020@gmail.com', to: user.email, subject: 'Verifique su correo', text: mailText, html: mailHTML };
         transporter.sendMail(mailOptions, (err) => {
             if (err) { return res.status(500).send({ msg: err.message }); }
         });
     });
+}
+
+// Reads email template and adds custom data
+function generateEmailData(req, token, user) {
+    const emailTemplateFile = 'assets/confirmationEmail.html';
+    const link = 'http://' + req.headers.host + '\/confirmation\/' + token.token;
+    let mailHTML = null;
+    let mailText = 'Hola,\n\n' + 'Por favor, verifique su correo ingresando al siguiente link: \nhttp:\/\/' + link + '.\n';
+
+    // Load email template
+    mailHTML = fs.readFileSync(emailTemplateFile, 'utf8', (err, data) => {
+        if (err) { console.log(err); }
+        mailHTML = data.toString();
+    });
+    // Add custom text to email
+    mailHTML = addTextToEmail(mailHTML, user, link);
+    return { mailHTML, mailText };
+}
+
+// Add translated text and user data to email
+function addTextToEmail(mailHTML, user, link) {
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]","Hola " + user.tutor_names.split(" ")[0]);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TEXT]","Gracias por registrar a " + user.names.split(" ")[0] +" en NEURONE-GAME, "
+                                + "antes de ingresar al juego debe confirmar su correo.\n"
+                                + "Al realizar este paso, también está confirmando que leyó y acepta el consentimiento informado "
+                                + "presentado en el registro.");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.CONFIRM]", "Confirmar cuenta");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_BUTTON_DOESNT_WORK_TEXT]", "Si el botón no funciona, usa el siguiente link:");
+    mailHTML = mailHTML.replace(/%CONFIRMATION_EMAIL.LINK%/g, link);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
+    return mailHTML;
 }
 
 // Generates the challenges sequence for a new user
