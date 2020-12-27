@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
 import { ResourceService } from '../../services/game/resource.service';
@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./resource-upload.component.css']
 })
 export class ResourceUploadComponent implements OnInit {
+  @Input() study: string;
   resourceForm: FormGroup;
   studies: Study[];
   challenges: Challenge[];
@@ -30,13 +31,13 @@ export class ResourceUploadComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
-
+    this.getChallengesByStudy(this.study);
     this.resourceForm = this.formBuilder.group({
       docName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       type: [null, [Validators.required]],
       title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       url: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
-      domain: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      domain: this.study,
       locale: [null, [Validators.required]],
       task: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       /*NEURONE required*/
@@ -49,7 +50,7 @@ export class ResourceUploadComponent implements OnInit {
     });
 
     this.studyService.getStudies()
-      .subscribe(response => this.studies = response['studys']);    
+      .subscribe(response => this.studies = response['studys']);
   }
 
   get resourceFormControls(): any {
@@ -63,6 +64,7 @@ export class ResourceUploadComponent implements OnInit {
 
   uploadResource(){
     let resource = this.resourceForm.value;
+    console.log(resource);
     this.endpointsService.loadDocument(resource).subscribe(
       resource => {
         this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE") + ': ', this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
@@ -82,15 +84,7 @@ export class ResourceUploadComponent implements OnInit {
 
   getChallengesByStudy(studyId: any){
     this.challengeService.getChallengesByStudy(studyId)
-      .subscribe(response => this.challenges = response['challenges']);        
-  }
-
-  async waitAndGet(studyId: any) {
-    if(this.challenges){
-      this.challenges.length = 0;
-    }    
-    await this.sleep(500);
-    this.getChallengesByStudy(studyId);
+      .subscribe(response => this.challenges = response['challenges']);
   }
 
   sleep(ms: number) {

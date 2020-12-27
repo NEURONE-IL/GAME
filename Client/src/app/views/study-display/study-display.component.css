@@ -95,20 +95,41 @@
 }
 
 .webPage{
+  color: white;
   background-color: dodgerblue;
 }
 .image{
+  color: white;
   background-color: darkorchid;
 }
 .document{
+  color: white;
   background-color: darkorange;
 }
 .video{
+  color: white;
   background-color: red;
+}
+
+.webPageButton{
+  color: dodgerblue;
+}
+.imageButton{
+  color: darkorchid;
+}
+.documentButton{
+  color: darkorange;
+}
+.videoButton{
+  color: red;
 }
 
 .aligned-with-icon{
   position: absolute;
   margin-top: 3px;
   margin-left: 5px; /* optional */
+}
+
+.mat-expansion-panel {
+  margin-right: 10px;
 }
