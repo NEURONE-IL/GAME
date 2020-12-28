@@ -154,6 +154,11 @@ export class QuestionBarComponent implements OnInit {
     });
     this.hintUsed = true;
   }
+
+  getUrl(): void {
+    this.answerForm.patchValue({url1: window.location.href});
+    console.log(this.answerForm.value);
+  }
 }
 
 @Component({

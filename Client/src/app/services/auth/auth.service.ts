@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { EndpointsService } from '../endpoints/endpoints.service';
 import { StoreSessionService } from '../logger/store-session.service';
 
@@ -16,6 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient,private router: Router,
               private endpoints: EndpointsService,
               private storeSession: StoreSessionService,
+              private toastr: ToastrService,
               private translate: TranslateService) {}
 
   login(email: string, password: string) {
@@ -33,6 +35,20 @@ export class AuthService {
       this.redirectUserPanel(resp.user.role.name);
       },
       (error) => {
+        let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
+        if (error.error=='EMAIL_NOT_FOUND') {
+          error_msg = this.translate.instant("LOGIN.TOAST.ERROR_EMAIL_MESSAGE");
+        }
+        else if (error.error=='INVALID_PASSWORD') {
+          error_msg = this.translate.instant("LOGIN.TOAST.ERROR_CREDENTIALS_MESSAGE");
+        }
+        else if (error.error='USER_NOT_CONFIRMED') {
+          error_msg = this.translate.instant("LOGIN.TOAST.ERROR_USER_NOT_CONFIRMED");
+        }
+        this.toastr.error(error_msg, this.translate.instant("LOGIN.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
         this.router.navigate(['login']);
       }
       );

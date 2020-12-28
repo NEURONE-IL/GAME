@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
-
+import {MatExpansionModule} from '@angular/material/expansion' ;
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -14,10 +14,12 @@ export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[] = [];
   createChallenge: boolean;
+  verDocumentos: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.createChallenge = false;
+    this.verDocumentos = false;
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.study = response['study']);
 
@@ -28,6 +30,7 @@ export class StudyDisplayComponent implements OnInit {
   }
   BackToChallenges(){
     this.createChallenge = false;
+    this.verDocumentos = false;
     this.challenges=[];
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.challenges = response['challenges']);
@@ -46,7 +49,7 @@ export class StudyDisplayComponent implements OnInit {
 
   confirmDelete(id: string){
     confirm(this.translate.instant("ADMIN.CHALLENGES.DELETE_CONFIRMATION")) && this.deleteChallenge(id);
-  }  
+  }
 
   deleteChallenge(id: string){
     this.challengeService.deleteChallenge(id)
@@ -116,5 +119,8 @@ export class StudyDisplayComponent implements OnInit {
     return date.substr(0,10);
   }
 
-
+  manageDocuments(){
+    this.verDocumentos = true;
+    return null;
+  }
 }

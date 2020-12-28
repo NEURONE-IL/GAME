@@ -19,7 +19,7 @@
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
             <mat-radio-group
-              isRequired
+              required
               [formControlName]="index">
               <mat-radio-button *ngFor="let value of values" [value]="value" required>
                 {{value}}

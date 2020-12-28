@@ -4,7 +4,7 @@ const Role = require('../models/role');
 
 const schema = Joi.object({
     password: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+        .pattern(/^(?=.*\d).{4,32}$/),
 
     repeat_password: Joi.ref('password'),
 
@@ -12,19 +12,15 @@ const schema = Joi.object({
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'cl'] } }),
 
     tutor_names: Joi.string()
-        .alphanum()
         .required(),
     
     tutor_last_names: Joi.string()
-        .alphanum()
         .required(),
 
     names: Joi.string()
-        .alphanum()
         .required(),
     
     last_names: Joi.string()
-        .alphanum()
         .required(),
     
     tutor_rut: Joi.string()
@@ -51,7 +47,7 @@ const schema = Joi.object({
 
 const adminSchema = Joi.object({
     password: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+        .pattern(/^(?=.*\d).{4,32}$/),
 
     repeat_password: Joi.ref('password'),
 

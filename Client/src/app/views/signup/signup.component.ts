@@ -59,8 +59,8 @@ export class SignupComponent implements OnInit {
       institution: ['', Validators.required],
       institution_commune: [{value: '', disabled: true}, Validators.required],
       institution_region: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(4)]]
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]],
+      password_confirmation: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]]
     });
   }
 

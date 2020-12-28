@@ -24,7 +24,7 @@ import { UserProfileComponent } from './views/user-profile/user-profile.componen
 const routes: Routes = [
   {
     path: 'start',
-//    canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: StartComponent,
   },
   {

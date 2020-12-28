@@ -106,7 +106,14 @@
     "EMAIL": "Correo electrónico",
     "PASSWORD": "Contraseña",
     "ENTER": "Ingresar",
-    "REQUIRED": "El campo es requerido"
+    "REQUIRED": "El campo es requerido",
+    "TOAST" : {
+      "ERROR_MESSAGE":"No ha sido posible iniciar sesión.",
+      "ERROR_EMAIL_MESSAGE":"Correo no encontrado.",
+      "ERROR_CREDENTIALS_MESSAGE":"Credenciales incorrectas.",
+      "ERROR_USER_NOT_CONFIRMED":"Por favor, confirme su correo antes de ingresar.",
+      "ERROR":"Error"
+    }
   },
   "QUESTIONNAIRE": {
     "INITIAL": {

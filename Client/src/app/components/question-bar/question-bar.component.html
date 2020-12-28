@@ -14,7 +14,7 @@
               <div class="counter" [ngStyle]="{'left':leftValue}">{{timeLeft}}</div>
             </div>
           </mat-grid-tile>
-          <mat-grid-tile colspan="8" rowspan="3">
+          <mat-grid-tile colspan="6" rowspan="3">
             <form class="answer-form" [formGroup]="answerForm">
 <!--              <mat-form-field class="input-full-width">
                 <input matInput formControlName="answer" placeholder="Entrega tu respuesta...">
@@ -30,13 +30,11 @@
 
 
               <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
-                <mat-label>{{ "GAME.ANSWER_TYPE.URL" | translate }}</mat-label>
-                <input matInput formControlName="url1" readonly>
+                <input matInput formControlName="url1">
               </mat-form-field>
 
               <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
-                <mat-label>{{ "GAME.ANSWER_TYPE.VIDEO" | translate }}</mat-label>
-                <input matInput formControlName="url2" readonly>
+                <input matInput formControlName="url2">
               </mat-form-field>              
               
               <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
@@ -52,6 +50,34 @@
               </button> -->
             </form>
           </mat-grid-tile>
+
+
+          <mat-grid-tile colspan="2" rowspan="1">
+            <button mat-icon-button *ngIf="true" (click)="getUrl()"  style="color: #FF9800 !important">
+              <mat-icon>grade</mat-icon>
+              
+            </button>              
+            <button mat-icon-button *ngIf="true" (click)="getUrl()" color="warn">
+              <mat-icon>delete_forever</mat-icon>
+              
+            </button>                            
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="1">
+            <button mat-icon-button *ngIf="true" (click)="getUrl()"  style="color: #FF9800 !important">
+              <mat-icon>grade</mat-icon>
+              
+            </button>              
+            <button mat-icon-button *ngIf="true" (click)="getUrl()" color="warn">
+              <mat-icon>delete_forever</mat-icon>
+              
+            </button>                            
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="1">
+                       
+          </mat-grid-tile>          
+
           <mat-grid-tile colspan="4" rowspan="1">
             <button *ngIf="true" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >
               <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>

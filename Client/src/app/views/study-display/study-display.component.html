@@ -1,28 +1,42 @@
 
 <mat-card class="study-display-card">
     <div class="row">
-      <div class="col-md-8" style="padding-top: 10px">
+      <div class="col-md-4" style="padding-top: 10px">
         <mat-card-header>
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
         <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
         </mat-card-header>
       </div>
+      <div class="col-md-4" *ngIf="!createChallenge">
+        <div class="options" style="text-align: right">
+        AGREGAR RECURSO
+        <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
+          <mat-icon>description</mat-icon>
+        </button>
+          </div>
+      </div>
       <div class="col-md-4">
         <div class="options" >
-          {{ "BUTTONS.BACK" | translate }}
-          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
+
           {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
           <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
             <mat-icon>add</mat-icon>
           </button>
+          {{ "BUTTONS.BACK" | translate }}
+          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
         </div>
       </div>
     </div>
-  <div *ngIf="createChallenge; else challengesView">
-    <app-challenge-creation [study]="study._id"> </app-challenge-creation>
+  <div *ngIf="verDocumentos; else challengesPanel">
+    <app-resource-upload [study]="study._id"> </app-resource-upload>
   </div>
+  <ng-template #challengesPanel>
+    <div *ngIf="createChallenge; else challengesView">
+      <app-challenge-creation [study]="study._id"> </app-challenge-creation>
+    </div>
+  </ng-template>
   <ng-template #challengesView >
     <div *ngIf="challenges.length==0; else showChallenges">
       <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
@@ -59,7 +73,7 @@
             <div class="col-md-3">
               <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </span>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
             </div>
           </mat-card-content>
@@ -70,11 +84,29 @@
             <div class="col-md-3">
               {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
             </div>
           </mat-card-content>
-          <mat-card-actions></mat-card-actions>
+
+          <mat-card-actions  style="text-align: left">
+            <div>
+              <!--
+              <button mat-button class="{{getClass(challenge.question_type)}}">
+                <mat-icon>add</mat-icon> VER RECURSOS ASOCIADOS
+              </button>
+              -->
+              <mat-expansion-panel>
+                <mat-expansion-panel-header >
+                  <mat-panel-title>
+                    <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> Ver Recursos </span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>This is the content in the panneL</p>
+              </mat-expansion-panel>
+
+            </div>
+          </mat-card-actions>
 
       </div>
     </div>

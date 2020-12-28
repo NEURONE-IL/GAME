@@ -51,7 +51,7 @@
     width: 100%;
 }
   .input-full-width{
-    width: 85%;
+    width: 100%;
 }
 
 ::ng-deep .mat-form-field-label {

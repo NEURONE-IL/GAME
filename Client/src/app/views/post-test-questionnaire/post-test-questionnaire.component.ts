@@ -36,6 +36,7 @@ export class PostTestQuestionnaireComponent implements OnInit {
       answers: new FormArray([]),
       checked: ['', Validators.required]
     })
+    console.log(this.question);
 
     this.questionnaireService.getQuestionnairesByType(this.requiredType)
     .subscribe(response => {
