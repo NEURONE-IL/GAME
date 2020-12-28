@@ -54,6 +54,8 @@
   .name-span {
     margin-left: 0.5%;
     font-size: calc(0.6em + 1vmin);
+    text-decoration: none;
+    color: white;
     margin-right: 0.5%;
     font-family: Ubuntu;
     letter-spacing: 0.2em;

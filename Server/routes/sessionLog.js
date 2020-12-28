@@ -39,7 +39,7 @@ router.post('',  [verifyToken], async (req, res) => {
     let user;
     let loginAction;
     if(sessionLog.state === "login"){
-        lastLogin = await SessionLog.find({state: "login", userId: req.body.userId}).sort({"createdAt": -1}).limit(1);
+        lastLogin = await SessionLog.findOne({state: "login", userId: req.body.userId}).sort({"createdAt": -1}).limit(1);
         user = await User.findById(req.body.userId);
         loginAction = await GameElement.findOne({key: 'inicio_sesion_1'});
     }
@@ -49,16 +49,33 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        if(loginAction && user && user.gm_code && lastLogin && lastLogin.createdAt.getUTCDate() < sessionLog.createdAt.getUTCDate()){
+        if(loginAction && user && user.gm_code){
             let post =  {action_code: loginAction.gm_code, date: sessionLog.createdAt};
-            actionService.postPlayerAction(post, user.gm_code, (err, data) => {
-                if(err){
-                    console.log(err);
-                }
-                res.status(200).json({
-                    user
+            if(!lastLogin){
+                actionService.postPlayerAction(post, user.gm_code, (err, data) => {
+                    if(err){
+                        console.log(err);
+                    }
+                    res.status(200).json({
+                        sessionLog
+                    });
                 });
-            });
+            }
+            else if(lastLogin && lastLogin.createdAt.getUTCDate() < sessionLog.createdAt.getUTCDate()){
+                actionService.postPlayerAction(post, user.gm_code, (err, data) => {
+                    if(err){
+                        console.log(err);
+                    }
+                    res.status(200).json({
+                        sessionLog
+                    });
+                });
+            }
+            else{
+                res.status(200).json({
+                    sessionLog
+                });
+            }
         }
         else{
             res.status(200).json({

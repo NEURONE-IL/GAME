@@ -4,18 +4,21 @@ const Notification = require('../models/notification');
 const User = require('../models/user');
 
 router.post('/getPoints', async (req, res) => {
-    let player_code = req.body.player.code;
-    if(!player_code){
+    let player = req.body.player;
+    if(!player || !player.code){
         return res.status(400).json({
             ok: false,
             err: 'Player not found!'
         });
     }
+    let player_code = player.code;
     let user = await User.findOne({gm_code: player_code}, err => {
-        return res.status(400).json({
+        if(err){
+            return res.status(400).json({
             ok: false,
             err: 'Player not found!'
-        });
+            });
+        }
     })
     if(!user){
         return res.status(400).json({
@@ -32,7 +35,8 @@ router.post('/getPoints', async (req, res) => {
         messageES: req.body.messageES,
         acquisitionDate: req.body.acquisitionDate,
         notificationDate: req.body.notificationDate
-    });
+    })
+
     notification.save( err => {
         if(err){
             return res.status(404).json({
@@ -45,18 +49,21 @@ router.post('/getPoints', async (req, res) => {
 });
 
 router.post('/challengeCompleted', async (req, res) => {
-    let player_code = req.body.player.code;
-    if(!player_code){
+    let player = req.body.player;
+    if(!player || !player.code){
         return res.status(400).json({
             ok: false,
             err: 'Player not found!'
         });
     }
+    let player_code = player.code;
     let user = await User.findOne({gm_code: player_code}, err => {
-        return res.status(400).json({
+        if(err){
+            return res.status(400).json({
             ok: false,
             err: 'Player not found!'
-        });
+            });
+        }
     })
     if(!user){
         return res.status(400).json({
@@ -86,18 +93,21 @@ router.post('/challengeCompleted', async (req, res) => {
 });
 
 router.post('/badgeAcquired', async (req, res) => {
-    let player_code = req.body.player.code;
-    if(!player_code){
+    let player = req.body.player;
+    if(!player || !player.code){
         return res.status(400).json({
             ok: false,
             err: 'Player not found!'
         });
     }
+    let player_code = player.code;
     let user = await User.findOne({gm_code: player_code}, err => {
-        return res.status(400).json({
+        if(err){
+            return res.status(400).json({
             ok: false,
             err: 'Player not found!'
-        });
+            });
+        }
     })
     if(!user){
         return res.status(400).json({
@@ -127,18 +137,21 @@ router.post('/badgeAcquired', async (req, res) => {
 });
 
 router.post('/levelUp', async (req, res) => {
-    let player_code = req.body.player.code;
-    if(!player_code){
+    let player = req.body.player;
+    if(!player || !player.code){
         return res.status(400).json({
             ok: false,
             err: 'Player not found!'
         });
     }
+    let player_code = player.code;
     let user = await User.findOne({gm_code: player_code}, err => {
-        return res.status(400).json({
+        if(err){
+            return res.status(400).json({
             ok: false,
             err: 'Player not found!'
-        });
+            });
+        }
     })
     if(!user){
         return res.status(400).json({

@@ -52,6 +52,7 @@ const postAllPoints = async(callback) => {
                 newGameElem.save();
             }
         })
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
     callback(null);
 }

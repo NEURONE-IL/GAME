@@ -170,6 +170,23 @@ router.get('/userLevels/:user_id' , verifyToken, async (req, res) => {
     })
 });
 
+router.get('/userLevelProgress/:user_id' , verifyToken, async (req, res) => {
+    const _id = req.params.user_id;
+    const user = await User.findOne({_id: _id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
+    await playerService.getPlayerLevelProgress(user.gm_code, (err, levels) => {
+        if(err){
+            res.status(404).send(err);
+        }
+        res.status(200).send(levels);
+    })
+});
+
 router.get('/userBadges/:user_id' , verifyToken, async (req, res) => {
     const _id = req.params.user_id;
     const user = await User.findOne({_id: _id}, err => {

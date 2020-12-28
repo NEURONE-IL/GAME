@@ -1,0 +1,68 @@
+h3 {
+    margin-top:2%;
+    margin-left: auto;
+    margin-right: auto;
+	border-bottom: 1px solid #ccc;
+	width: 60%; 
+	padding: 0 0 .25em;
+}
+
+h4 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%; 
+    color: teal;
+	padding: 0 0 .25em;
+}
+
+.challengeCard{
+    width: 50%; 
+    display: inline-block;
+    height: 10%; 
+    margin: auto;
+    background-color: whitesmoke;
+}
+
+
+.progressLevelCard{
+    width: 60%; 
+    height: 10%; 
+    margin: auto;
+    background-color: whitesmoke;
+}
+
+.progress {
+    height: 2em;
+    width: 100%;
+    background-color: #c9c9c9;
+    position: relative;
+    background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.progress:before {
+    content: attr(data-label);
+    font-size: 1.1em;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 0;
+    right: 0;
+    vertical-align: 0;
+    
+}
+.progress .value {
+    
+    background-image:
+	   -webkit-linear-gradient(-45deg, 
+	                           transparent 33%, rgba(0, 0, 0, .1) 33%, 
+	                           rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top, 
+	                           rgba(255, 255, 255, .25), 
+	                           rgba(0, 0, 0, .25)),
+       -webkit-linear-gradient(left, rgb(0, 204, 102), rgb(221, 255, 68));
+    
+    display: inline-block;
+    height: 100%;
+}

@@ -96,7 +96,7 @@ app.use('/api/document', documentRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
 
 app.use('/api/gamification', gamificationRoutes);
-app.use('api/notification', notificationRoutes);
+app.use('/api/notification', notificationRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 

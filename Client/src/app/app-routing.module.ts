@@ -19,6 +19,7 @@ import { StudyDisplayComponent } from './views/study-display/study-display.compo
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
+import { UserProfileComponent } from './views/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,10 @@ const routes: Routes = [
   { path: 'signup/:study_id',
     component: SignupComponent,
     canActivate: [ NotLoggedInGuard ]
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent
   },
   {
     path: 'admin_panel',

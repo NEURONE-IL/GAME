@@ -113,6 +113,22 @@ const getPlayerLevels = async (player_code, callback) => {
     });
 }
 
+const getPlayerLevelProgress = async (player_code, callback) => {
+    await connect.getHeadersGM((err, headers) => {
+        if(err){
+            callback(err)
+        }
+        else{
+            let credential = headers.credential;
+            axios.get(process.env.NEURONEGM+'/api/'+credential.app_code+'/players/'+player_code+'/level-progress', headers.headers ).then((response)=> {
+                callback(null, response.data.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
+    });
+}
+
 const getPlayerChallenges = async (player_code, callback) => {
     await connect.getHeadersGM((err, headers) => {
         if(err){
@@ -169,6 +185,7 @@ const player = {
     getPlayersByGroup,
     getPlayersPoints,
     getPlayerLevels,
+    getPlayerLevelProgress,
     getPlayerChallenges,
     getPlayersBadges,
     getPlayerActions
