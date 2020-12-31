@@ -87,14 +87,14 @@ export class AuthService {
   }
 
   signup(userData: any, study_id: string) {
-    this.http.post(this.uri + 'register/' + study_id, userData)
-    .subscribe((resp: any) => {
-      this.router.navigate(['/']);
-      },
-      (error) => {
-        this.router.navigate(['signup']);
-      }
-      );
+    return this.http.post(this.uri + 'register/' + study_id, userData);
+    // .subscribe((resp: any) => {
+    //   this.router.navigate(['/']);
+    //   },
+    //   (error) => {
+    //     this.router.navigate(['signup']);
+    //   }
+    //   );
   }
 
   updateUser(body) {

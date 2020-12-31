@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RutValidator } from 'ng9-rut';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudyService } from '../../services/game/study.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { SignupConstants } from './signup.constants';
@@ -26,12 +25,14 @@ export class SignupComponent implements OnInit {
   selectedRegion: any;
   communes: any;
 
+  userSubmitted = false;
+
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private rutValidator: RutValidator,
               private studyService: StudyService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              public router: Router) {
 
     this.courses = SignupConstants.courses;
   }
@@ -47,8 +48,8 @@ export class SignupComponent implements OnInit {
     this.tutorForm = this.formBuilder.group({
       tutor_names: ['', [Validators.required, Validators.minLength(3)]],
       tutor_last_names: ['', [Validators.required, Validators.minLength(3)]],
+      relation: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.email, Validators.required]],
-      tutor_rut: ['', [this.rutValidator, Validators.required]],
       tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{8,}")]]
     });
     this.studentForm = this.formBuilder.group({
@@ -62,12 +63,22 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]],
       password_confirmation: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]]
     });
+    console.log(!this.userSubmitted);
   }
 
   save() {
     let userData = Object.assign(this.tutorForm.value, this.studentForm.value);
     delete userData.password_confirmation;
-    this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'));
+    this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'))
+      .subscribe((res) => {
+        this.userSubmitted = true;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 10000);
+      },
+      (err) => {
+        console.log(err);
+      });
   }
 
   checkStudy() {
