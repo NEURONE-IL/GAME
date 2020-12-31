@@ -189,6 +189,7 @@
     "BACK": "Volver",
     "RESET": "Reiniciar",
     "SIGNUP": "Registrarte",
+    "CONFIRMATION_EMAIL_SENT": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam) para confirmar su usuario. Será redirigido a la página inicial en 10 segundos...",
     "FORM" : {
       "NAMES": "Nombres",
       "LAST_NAMES": "Apellidos",
@@ -202,6 +203,7 @@
       "REGION": "Región del colegio",
       "PASSWORD": "Contraseña de acceso",
       "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
+      "RELATION": "Parentesco con estudiante (Padre, madre, tutor/a, etc.)",
       "ERROR": {
         "CONSENT": "Debe aceptar el consentimiento informado para continuar",
         "NAMES": "Debe ingresar los nombres",
@@ -219,7 +221,9 @@
         "COMMUNE": "Debe ingresar la comuna",
         "PASSWORD": "Debe ingresar una contraseña",
         "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
-        "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
+        "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
+        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 4 caracteres y al menos 1 número",
+        "RELATION_REQUIRED": "Debe ingresar su parentesco"
       }
     }
   },

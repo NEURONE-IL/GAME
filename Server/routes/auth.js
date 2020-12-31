@@ -106,7 +106,6 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         email: req.body.email,
         tutor_names: req.body.tutor_names,
         tutor_last_names: req.body.tutor_last_names,
-        tutor_rut: req.body.tutor_rut,
         tutor_phone: req.body.tutor_phone,
         names: req.body.names,
         last_names: req.body.last_names,
@@ -118,6 +117,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         password: hashpassword,
         role: role._id,
         study: study._id,
+        relation: req.body.relation,
         challenges_progress: generateProgressArray(challenges)
     });
 
@@ -221,7 +221,8 @@ function generateEmailData(req, token, user) {
 
 // Add translated text and user data to email
 function addTextToEmail(mailHTML, user, link) {
-    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]","Hola " + user.tutor_names.split(" ")[0]);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.PREHEADER_TEXT]", "Confirme su cuenta:");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]","Hola " + user.tutor_names.split(" ")[0] + ".");
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TEXT]","Gracias por registrar a " + user.names.split(" ")[0] +" en NEURONE-GAME, "
                                 + "antes de ingresar al juego debe confirmar su correo.\n"
                                 + "Al realizar este paso, también está confirmando que leyó y acepta el consentimiento informado "
