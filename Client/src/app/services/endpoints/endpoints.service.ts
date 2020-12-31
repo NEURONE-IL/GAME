@@ -15,7 +15,7 @@ export class EndpointsService {
   getDocuments(query, locale, task, domain){
     const post = JSON.stringify({query: query, locale: locale, task: task, domain: domain});
     let header = new HttpHeaders();
-    header= header.append('Content-Type', 'text/plain');
+    header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'/v1/document/search', post, {headers: header});
   }
 
@@ -23,6 +23,7 @@ export class EndpointsService {
     return this.http.get(this.neuroneURL+'/v1/ping');
   }
 
+  /*uploadDocument*/
   loadDocument(resource: any){
     let cleanResource = Object.assign(new Object, resource);
     delete cleanResource.checked;    
