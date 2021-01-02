@@ -306,6 +306,12 @@
       "JUSTIFY": "Justifica tu respuesta aquí",
       "TEXT": "Ingresa tu respuesta aquí",
       "URL": "Las páginas que seleccionaste se muestran aquí"
+    },
+    "TOAST": {
+      "SUCCESS":"¡Éxito!",
+      "ERROR":"Error",
+      "ANSWER_SUBMITTED":"Respuesta enviada correctamente",
+      "ERROR_MESSAGE":"No ha sido posible envíar la respuesta"
     }
   }
 }

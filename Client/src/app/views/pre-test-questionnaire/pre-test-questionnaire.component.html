@@ -21,7 +21,7 @@
             <mat-radio-group
               required
               [formControlName]="index">
-              <mat-radio-button *ngFor="let value of values" [value]="value" required>
+              <mat-radio-button class="custom-radio-button" *ngFor="let value of values" [value]="value" required>
                 {{value}}
               </mat-radio-button>
             </mat-radio-group>

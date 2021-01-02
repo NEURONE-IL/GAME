@@ -1,3 +1,4 @@
+
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
@@ -5,6 +6,15 @@
   margin-left: 2%;
   margin-right: 2%;
 }
+
+::ng-deep .mat-radio-label{
+  flex-direction: column;
+}
+
+::ng-deep .mat-radio-label .mat-radio-label-content {
+  padding-left: 0px;
+}
+
 .questionnaire-card{
   margin-left: 5%;
   margin-right: 5%;

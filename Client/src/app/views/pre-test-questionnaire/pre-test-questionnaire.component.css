@@ -14,6 +14,14 @@
   margin-left: 16px;
 }
 
+::ng-deep .mat-radio-label{
+  flex-direction: column;
+}
+
+::ng-deep .mat-radio-label .mat-radio-label-content {
+  padding-left: 0px;
+}
+
 .mat-error{
   display: block;
 }
