@@ -1,3 +1,6 @@
+.container {
+  min-width: 1100px;
+}
 
 .center-container {
   padding: 100px 0;

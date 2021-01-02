@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireService } from '../../services/game/questionnaire.service';
 import { AuthService } from '../../services/auth/auth.service';

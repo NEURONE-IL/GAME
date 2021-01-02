@@ -1,6 +1,6 @@
 .questionnaire-card{
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 5%;
 }
 .mat-form-field{
@@ -13,6 +13,7 @@
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+
 .mat-error{
   display: block;
 }
