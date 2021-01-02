@@ -81,6 +81,11 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [ NotLoggedInGuard ]
   },
+  {
+    path: 'login/confirmedOK',
+    component: LoginComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },
   { path: 'signup/:study_id',
     component: SignupComponent,
     canActivate: [ NotLoggedInGuard ]

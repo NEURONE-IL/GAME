@@ -10,7 +10,7 @@
 
 <div class="main-content" *ngIf="!isLoadingStudy && validStudy">
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="consentForm">
+    <mat-step [stepControl]="consentForm" [editable]="false">
       <form [formGroup]="consentForm">
         <ng-template matStepLabel>{{"SIGNUP.STEP_CONSENT" | translate}}</ng-template>
           <app-consent></app-consent>
@@ -28,7 +28,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="tutorForm" [label]="'SIGNUP.STEP_GUARDIAN' | translate">
+    <mat-step [stepControl]="tutorForm" [editable]="!userSubmitted" [label]="'SIGNUP.STEP_GUARDIAN' | translate">
       <form [formGroup]="tutorForm">
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>
@@ -86,7 +86,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="studentForm" [label]="'SIGNUP.STEP_STUDENT' | translate">
+    <mat-step [stepControl]="studentForm" [editable]="!userSubmitted" [label]="'SIGNUP.STEP_STUDENT' | translate">
       <form [formGroup]="studentForm">
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>

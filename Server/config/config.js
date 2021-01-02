@@ -10,3 +10,6 @@ process.env.URI = 'mongodb://localhost:27017/neuronegame';
 //NEURONE GM
 
 process.env.NEURONEGM = 'http://localhost:3080'
+
+//NEURONE GAME CLIENT
+process.env.GAME_CLIENT = 'http://localhost:4200';

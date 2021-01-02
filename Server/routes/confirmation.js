@@ -23,7 +23,7 @@ router.get('/confirmation/:token', async(req, res)=> {
             user.confirmed = true;
             user.save(function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
-                res.status(200).send({type:"USER_CONFIRMED", msg:"The account has been confirmed."});
+                res.status(200).redirect(process.env.GAME_CLIENT + '/login/confirmedOK');
             });
         });
     });
