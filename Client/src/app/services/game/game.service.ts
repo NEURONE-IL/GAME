@@ -95,7 +95,7 @@ export class GameService {
         chProgress.pre_test = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress});
+    await this.authService.updateProgress({challenges: progress.challenges});
   }
 
   async challengeStarted() {
@@ -105,7 +105,7 @@ export class GameService {
         chProgress.started = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress});
+    await this.authService.updateProgress({challenges: progress.challenges});
   }
 
   async finishPostTest() {
@@ -116,7 +116,7 @@ export class GameService {
         chProgress.finished = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress});
+    await this.authService.updateProgress({challenges: progress.challenges});
     this.load();
     this.router.navigate(['/']);
   }
