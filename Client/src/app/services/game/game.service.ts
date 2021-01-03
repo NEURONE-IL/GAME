@@ -59,14 +59,14 @@ export class GameService {
 
   fetchUserStage() {
     const user = this.authService.getUser();
-    if (!user.assent) {
+    if (!this.progress.assent) {
       this.stage = 'assent';
     }
-    else if (!user.initial_questionnaire) {
+    else if (!this.progress.initial_questionnaire) {
       this.stage = 'initial';
     }
     else {
-      this.progress.forEach(chProgress => {
+      this.progress.challenges.forEach(chProgress => {
         if(chProgress.challenge==this.challenge._id) {
           if (!chProgress.pre_test) {
             this.stage = 'pre-test';
@@ -90,39 +90,39 @@ export class GameService {
 
   async finishPreTest() {
     let progress = this.progress;
-    progress.forEach(chProgress => {
+    progress.challenges.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
         chProgress.pre_test = true;
       }
     });
-    await this.authService.updateProgress(progress);
+    await this.authService.updateProgress({challenges: progress});
   }
 
   async challengeStarted() {
     let progress = this.progress;
-    progress.forEach(chProgress => {
+    progress.challenges.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
         chProgress.started = true;
       }
     });
-    await this.authService.updateProgress(progress);
+    await this.authService.updateProgress({challenges: progress});
   }
 
   async finishPostTest() {
     let progress = this.progress;
-    progress.forEach(chProgress => {
+    progress.challenges.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
         chProgress.post_test = true;
         chProgress.finished = true;
       }
     });
-    await this.authService.updateProgress(progress);
+    await this.authService.updateProgress({challenges: progress});
     this.load();
     this.router.navigate(['/']);
   }
 
   getCurrentChallengeId() {
-    const challenge = this.progress.find(ch => ch.finished == false);
+    const challenge = this.progress.challenges.find(ch => ch.finished == false);
     console.log(this.progress);
     console.log(challenge);
     if (challenge!=null) return challenge.challenge;

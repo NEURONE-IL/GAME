@@ -82,15 +82,7 @@ router.put('/:user_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        if('assent' in req.body){
-            user.assent = req.body.assent;
-        }
-        if('initial_questionnaire' in req.body){
-            user.initial_questionnaire = req.body.initial_questionnaire;
-        }
-        if('challenges_progress' in req.body) {
-            user.challenges_progress = req.body.challenges_progress;
-        }
+        
         user.updatedAt = Date.now();
         user.save((err, user) => {
             if (err) {
@@ -115,7 +107,7 @@ router.get('/:user_id/progress', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json(userStudy.progress);
+        res.status(200).json(userStudy);
     });
 })
 
@@ -129,8 +121,18 @@ router.put('/:user_id/progress', [verifyToken], async (req, res) => {
                 err
             });
         }
-        
-        userStudy.progress = req.body;
+
+        if ('assent' in req.body) {
+            userStudy.assent = req.body.assent;
+        }
+
+        if ('initial_questionnaire' in req.body) {
+            userStudy.initial_questionnaire = req.body.initial_questionnaire;
+        }
+
+        if ('challenges' in req.body) {
+            userStudy.challenges = req.body.challenges;
+        }
 
         userStudy.save((err, userStudy) => {
             if (err) {
@@ -138,7 +140,7 @@ router.put('/:user_id/progress', [verifyToken], async (req, res) => {
                     err
                 });
             }
-            res.status(200).json(userStudy.progress);
+            res.status(200).json(userStudy);
         });
 
     });

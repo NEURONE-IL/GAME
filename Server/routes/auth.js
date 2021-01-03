@@ -126,9 +126,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         password: hashpassword,
         role: role._id,
         study: study._id,
-        relation: req.body.relation,
-        // challenges_progress: generateProgressArray(challenges)
-        challenges_progress: null
+        relation: req.body.relation
     });
 
     //save user in db
@@ -186,7 +184,7 @@ function generateProgress(challenges, user, study) {
     const userStudy = new UserStudy({
         user: user,
         study: study,
-        progress: progress
+        challenges: progress
     });
 
     userStudy.save((err, res) => {
