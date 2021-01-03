@@ -169,11 +169,17 @@ router.post('/login', async (req, res) => {
     res.header('x-access-token', token).send({user: user, token: token});
 });
 
+// Creates user study progress
 function generateProgress(challenges, user, study) {
     let progress = [];
 
+    // WIP: getting last registered sequence
+    UserStudy.find().sort({ _id: -1 }).limit(1).then((result) => {
+        console.log('last user study progress');
+        console.log(result);
+    });
+
     challenges.forEach((challenge) => {
-        console.log(challenge);
         progress.push({ challenge: challenge });
     });
 
@@ -269,34 +275,6 @@ function addTextToEmail(mailHTML, user, link) {
     mailHTML = mailHTML.replace(/%CONFIRMATION_EMAIL.LINK%/g, link);
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
     return mailHTML;
-}
-
-// Generates the challenges sequence for a new user
-function generateChallengeSequence(challengesArray) {
-    var currentIndex = challengesArray.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        temporaryValue = challengesArray[currentIndex];
-        challengesArray[currentIndex] = challengesArray[randomIndex];
-        challengesArray[randomIndex] = temporaryValue;
-    }
-    return challengesArray;
-}
-
-// Generates the progress array for a new user
-function generateProgressArray(challenges) {
-    const sequence = generateChallengeSequence(challenges);
-    let progress = [];
-    sequence.forEach(challenge => {
-        progress.push({
-            challenge: challenge
-        });
-    });
-    return progress;
 }
 
 module.exports = router;

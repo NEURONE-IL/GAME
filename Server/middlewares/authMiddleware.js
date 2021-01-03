@@ -90,7 +90,6 @@ uniqueEmail = async(req, res, next) => {
             });
         }
         if(user){
-            console.log(user);
             return res.status(403).json({
                 ok: false,
                 message: "Email already exists!"
