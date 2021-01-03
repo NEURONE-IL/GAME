@@ -95,7 +95,9 @@ export class GameService {
         chProgress.pre_test = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress.challenges});
+    this.authService.updateProgress({challenges: progress.challenges}).then(() => {
+      this.stage='instructions';
+    });
   }
 
   async challengeStarted() {
@@ -105,7 +107,10 @@ export class GameService {
         chProgress.started = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress.challenges});
+    this.authService.updateProgress({challenges: progress.challenges}).then(() => {
+      this.stage = 'gameplay';
+      this.router.navigate(['session/search']);
+    });
   }
 
   async finishPostTest() {
@@ -116,9 +121,10 @@ export class GameService {
         chProgress.finished = true;
       }
     });
-    await this.authService.updateProgress({challenges: progress.challenges});
-    this.load();
-    this.router.navigate(['/']);
+    this.authService.updateProgress({challenges: progress.challenges}).then(() => {
+      this.load();
+      this.router.navigate(['/']);
+    });
   }
 
   getCurrentChallengeId() {

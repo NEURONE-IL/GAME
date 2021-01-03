@@ -33,9 +33,6 @@ export class StartInstructionsComponent {
   constructor(public router: Router, private gameService: GameService) {}
 
   doStart(){
-    this.gameService.stage = 'gameplay';
     this.gameService.challengeStarted();
-    this.router.navigate(['session/search']);
-
   }
 }
