@@ -127,6 +127,34 @@ export class AuthService {
     });
   }
 
+  refreshProgress() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.userUri + this.getUser()._id + '/progress', {})
+      .subscribe((progress: any) => {
+        resolve(progress);
+      },
+      (error) => {
+        console.log('error fetching user progress');
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
+
+  updateProgress(body) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.userUri + this.getUser()._id + '/progress', body)
+      .subscribe((progress: any) => {
+        resolve(progress);
+      },
+      (error) => {
+        console.log('error updating user');
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
+
   redirectUserPanel(role) {
     console.log('redirect');
     if (role=='admin') {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Role = require('../models/role');
+const UserStudy = require('../models/userStudy');
 const verifyToken = require('../middlewares/verifyToken');
 const bcrypt = require('bcryptjs');
 
@@ -100,8 +101,47 @@ router.put('/:user_id', [verifyToken], async (req, res) => {
             res.status(200).json({
                 user
             });
-        })
-    })
+        });
+    });
+})
+
+router.get('/:user_id/progress', [verifyToken] , async (req, res) => {
+    const userId = req.params.user_id;
+
+    UserStudy.findOne({user: userId}, (err, userStudy) => {
+        if(err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json(userStudy.progress);
+    });
+})
+
+router.put('/:user_id/progress', [verifyToken], async (req, res) => {
+    const userId = req.params.user_id;
+
+    UserStudy.findOne({user: userId}, (err, userStudy) => {
+        if(err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        
+        userStudy.progress = req.body;
+
+        userStudy.save((err, userStudy) => {
+            if (err) {
+                return res.status(500).json({
+                    err
+                });
+            }
+            res.status(200).json(userStudy.progress);
+        });
+
+    });
 })
 
 

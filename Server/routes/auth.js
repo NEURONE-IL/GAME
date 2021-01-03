@@ -5,6 +5,7 @@ const Role = require('../models/role');
 const Study = require('../models/study');
 const Token = require('../models/token');
 const Challenge = require('../models/challenge');
+const UserStudy = require('../models/userStudy');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
@@ -67,6 +68,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
             message: "Study doesn't exist!"
         });
     }
+
+    // Find student role
     const role = await Role.findOne({name: 'student'}, err => {
         if(err){
             return res.status(404).json({
@@ -75,6 +78,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
             });
         }
     });
+
+    // Find study
     const study = await Study.findOne({_id: study_id}, err => {
         if(err){
             return res.status(404).json({
@@ -82,7 +87,18 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
                 err
             });
         }
-    })
+    });
+
+    // Find study challenges
+    const challenges = await Challenge.find({study: study}, err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+
     if(!study){
         return res.status(404).json({
             ok: false,
@@ -93,14 +109,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(req.body.password, salt);
-    const challenges = await Challenge.find({study: study}, err => {
-        if(err){
-            return res.status(404).json({
-                ok: false,
-                err
-            });
-        }
-    })
+
     //create user
     const user = new User({
         email: req.body.email,
@@ -118,7 +127,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         role: role._id,
         study: study._id,
         relation: req.body.relation,
-        challenges_progress: generateProgressArray(challenges)
+        // challenges_progress: generateProgressArray(challenges)
+        challenges_progress: null
     });
 
     //save user in db
@@ -129,6 +139,9 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
                 err
             });
         }
+
+        // Generate user study progress entry
+        generateProgress(challenges, user, study);
 
         // Send confirmation email
         sendConfirmationEmail(user, res, req);
@@ -155,6 +168,30 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('x-access-token', token).send({user: user, token: token});
 });
+
+function generateProgress(challenges, user, study) {
+    let progress = [];
+
+    challenges.forEach((challenge) => {
+        console.log(challenge);
+        progress.push({ challenge: challenge });
+    });
+
+    const userStudy = new UserStudy({
+        user: user,
+        study: study,
+        progress: progress
+    });
+
+    userStudy.save((err, res) => {
+        if (err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+}
 
 // Creates player on NEURONE-GM
 function saveGMPlayer(req, user, res) {
@@ -235,19 +272,19 @@ function addTextToEmail(mailHTML, user, link) {
 }
 
 // Generates the challenges sequence for a new user
-function generateChallengeSequence(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function generateChallengeSequence(challengesArray) {
+    var currentIndex = challengesArray.length, temporaryValue, randomIndex;
 
     while (0 !== currentIndex) {
 
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = challengesArray[currentIndex];
+        challengesArray[currentIndex] = challengesArray[randomIndex];
+        challengesArray[randomIndex] = temporaryValue;
     }
-    return array;
+    return challengesArray;
 }
 
 // Generates the progress array for a new user
