@@ -75,7 +75,7 @@ export class InitialQuestionnaireComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.authService.updateUser({'initial_questionnaire': true});
+        this.authService.updateProgress({'initial_questionnaire': true});
         this.gameService.stage = 'pre-test';
       },
       err => {

@@ -20,6 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
@@ -65,6 +66,7 @@ import { StudiesDisplayComponent } from './views/studies-display/studies-display
 import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -101,7 +103,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HintDialogComponent,
     AssentComponent,
     StartInstructionsComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BookmarkComponent
   ],
   imports: [
     BrowserModule,
@@ -130,6 +133,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatExpansionModule,
     MatProgressBarModule,
+    MatTooltipModule,
     PdfViewerModule,
     Ng9RutModule,
     ValidateEqualModule,

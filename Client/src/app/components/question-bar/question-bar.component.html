@@ -22,22 +22,22 @@
               </mat-form-field>
             -->
   
-              <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'">
+              <mat-form-field class="input-full-width answerField" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'">
                 <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
                 <input matInput formControlName="answer">
                 <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
               </mat-form-field>
 
 
-              <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
+              <mat-form-field class="input-full-width urlField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
                 <input matInput formControlName="url1">
               </mat-form-field>
 
-              <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
+              <mat-form-field class="input-full-width urlField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
                 <input matInput formControlName="url2">
               </mat-form-field>              
               
-              <mat-form-field class="input-full-width" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
+              <mat-form-field class="input-full-width answerField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
                 <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
                 <input matInput formControlName="answer">
                 <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
@@ -52,26 +52,26 @@
           </mat-grid-tile>
 
 
-          <mat-grid-tile colspan="2" rowspan="1">
-            <button mat-icon-button *ngIf="true" (click)="getUrl()"  style="color: #FF9800 !important">
-              <mat-icon>grade</mat-icon>
-              
-            </button>              
-            <button mat-icon-button *ngIf="true" (click)="getUrl()" color="warn">
-              <mat-icon>delete_forever</mat-icon>
-              
-            </button>                            
+          <mat-grid-tile colspan="2" rowspan="1" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
+            <button mat-icon-button class="bookmark-button" *ngIf="router.url.includes('view-page') || answerForm.get('url1').value !== ''" (click)="favoriteAction(1)"  style="color: #FF9800 !important"
+              #tooltip="matTooltip"  
+              [(matTooltip)]="currentTooltip1"
+              matTooltipPosition="right"
+            >
+              <mat-icon *ngIf="answerForm.get('url1').value === ''">star_border</mat-icon>
+              <mat-icon *ngIf="answerForm.get('url1').value !== ''">star</mat-icon>
+            </button>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="2" rowspan="1">
-            <button mat-icon-button *ngIf="true" (click)="getUrl()"  style="color: #FF9800 !important">
-              <mat-icon>grade</mat-icon>
-              
-            </button>              
-            <button mat-icon-button *ngIf="true" (click)="getUrl()" color="warn">
-              <mat-icon>delete_forever</mat-icon>
-              
-            </button>                            
+          <mat-grid-tile colspan="2" rowspan="1" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
+            <button mat-icon-button class="bookmark-button" *ngIf="router.url.includes('view-page') || answerForm.get('url2').value !== ''" (click)="favoriteAction(2)"  style="color: #FF9800 !important"
+              #tooltip="matTooltip"  
+              [(matTooltip)]="currentTooltip2"
+              matTooltipPosition="right"
+            >
+            <mat-icon *ngIf="answerForm.get('url2').value === ''">star_border</mat-icon>
+            <mat-icon *ngIf="answerForm.get('url2').value !== ''">star</mat-icon>
+            </button>                           
           </mat-grid-tile>
 
           <mat-grid-tile colspan="2" rowspan="1">

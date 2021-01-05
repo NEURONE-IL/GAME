@@ -10,7 +10,7 @@
 
 <div class="main-content" *ngIf="!isLoadingStudy && validStudy">
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="consentForm">
+    <mat-step [stepControl]="consentForm" [editable]="false">
       <form [formGroup]="consentForm">
         <ng-template matStepLabel>{{"SIGNUP.STEP_CONSENT" | translate}}</ng-template>
           <app-consent></app-consent>
@@ -28,7 +28,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="tutorForm" [label]="'SIGNUP.STEP_GUARDIAN' | translate">
+    <mat-step [stepControl]="tutorForm" [editable]="!userSubmitted" [label]="'SIGNUP.STEP_GUARDIAN' | translate">
       <form [formGroup]="tutorForm">
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>
@@ -61,14 +61,11 @@
         </mat-form-field>
         <br>
         <mat-form-field class="signup-form-field">
-          <mat-label>{{"SIGNUP.FORM.RUT" | translate}}</mat-label>
-          <input matInput formControlName="tutor_rut" placeholder=""
+          <mat-label>{{"SIGNUP.FORM.RELATION" | translate}}</mat-label>
+          <input matInput formControlName="relation" placeholder=""
                  required>
-          <mat-error *ngIf="tutorFormControls.tutor_rut.hasError('required')">
-            {{"SIGNUP.FORM.ERROR.RUT_REQUIRED" | translate}}
-          </mat-error>
-          <mat-error *ngIf="tutorFormControls.tutor_rut.hasError('invalidRut') && !tutorFormControls.tutor_rut.hasError('required')">
-            {{"SIGNUP.FORM.ERROR.RUT_INVALID" | translate}}
+          <mat-error *ngIf="tutorFormControls.email.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.RELATION_REQUIRED" | translate}}
           </mat-error>
         </mat-form-field>
         <br>
@@ -89,7 +86,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="studentForm" [label]="'SIGNUP.STEP_STUDENT' | translate">
+    <mat-step [stepControl]="studentForm" [editable]="!userSubmitted" [label]="'SIGNUP.STEP_STUDENT' | translate">
       <form [formGroup]="studentForm">
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.NAMES" | translate}}</mat-label>
@@ -121,8 +118,6 @@
         <br>
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.GRADE" | translate}}</mat-label>
-          <!-- <input matInput formControlName="course" placeholder=""
-                 required> -->
           <mat-select formControlName="course">
             <mat-option *ngFor="let course of courses" [value]="course.value">{{course.display}}</mat-option>
           </mat-select>
@@ -167,6 +162,9 @@
           <mat-error *ngIf="studentFormControls.password.hasError('required')">
             {{"SIGNUP.FORM.ERROR.PASSWORD" | translate}}
           </mat-error>
+          <mat-error *ngIf="studentFormControls.password.hasError('pattern')">
+            {{"SIGNUP.FORM.ERROR.PASSWORD_PATTERN" | translate}}
+          </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field class="signup-form-field">
@@ -175,6 +173,9 @@
                  required>
           <mat-error *ngIf="studentFormControls.password_confirmation.hasError('required')">
             {{"SIGNUP.FORM.ERROR.PASSWORD_CONFIRMATION" | translate}}
+          </mat-error>
+          <mat-error *ngIf="studentFormControls.password_confirmation.hasError('notEqual')">
+            {{"SIGNUP.FORM.ERROR.PASSWORD_EQUAL" | translate}}
           </mat-error>
         </mat-form-field>
         <br>
@@ -187,8 +188,11 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{"SIGNUP.STEP_DONE" | translate}}</ng-template>
-      <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
-      <button type="submit" (click)="save()" mat-raised-button color="primary">{{"SIGNUP.FINISH" | translate}}</button>
+        <div *ngIf="!userSubmitted">
+          <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
+          <button [disabled]="userSubmitted" type="submit" (click)="save()" mat-raised-button color="primary">{{"SIGNUP.FINISH" | translate}}</button>
+        </div>
+        <p *ngIf="userSubmitted">{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

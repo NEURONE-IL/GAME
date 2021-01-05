@@ -38,7 +38,7 @@ const routes: Routes = [
 //        canActivate: [DirectAccessGuard]
       },
       {
-        path: 'search-result/:query',
+        path: 'search-result/:query/:locale/:task/:domain',
         component: SearchResultComponent,
 //        canActivate: [DirectAccessGuard]
       },
@@ -78,6 +78,11 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    component: LoginComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },
+  {
+    path: 'login/confirmedOK',
     component: LoginComponent,
     canActivate: [ NotLoggedInGuard ]
   },

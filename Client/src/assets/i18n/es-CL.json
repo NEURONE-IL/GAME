@@ -1,11 +1,11 @@
 {
-	"LOGOUT": {
+  "LOGOUT": {
     "LOGOUT": "Cerrar Sesión",
     "LOGOUT_CONFIRMATION": "¿Está segur@ que desea cerrar la sesión?"
   },
-	"BUTTONS": {
+  "BUTTONS": {
     "BACK": "ATRÁS",
-		"CLEAR": "LIMPIAR",
+    "CLEAR": "LIMPIAR",
     "DELETE": "ELIMINAR",
     "EDIT": "EDITAR",
     "SAVE": "GUARDAR"
@@ -48,25 +48,25 @@
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
   },
-	"CHALLENGE": {
-		"FORM": {
-			"FIELDS": {
-				"ANSWER": "Respuesta",
-				"ANSWER_TYPE": "Tipo de respuesta",
-				"CHECK": "Por favor confirme para continuar",
+  "CHALLENGE": {
+    "FORM": {
+      "FIELDS": {
+        "ANSWER": "Respuesta",
+        "ANSWER_TYPE": "Tipo de respuesta",
+        "CHECK": "Por favor confirme para continuar",
         "HINT": "Pista",
         "MAX_ATTEMPTS": "Intentos máximos",
         "QUESTION": "Pregunta",
         "QUESTION_TYPE": "Tipo de pregunta",
-				"SECONDS": "Segundos para responder",
-				"STUDY": "Estudio",
+        "SECONDS": "Segundos para responder",
+        "STUDY": "Estudio",
         "CREATED_AT": "Creado",
         "UPDATED_AT": "Modificado"
-			}
-		},
-		"SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
+      }
+    },
+    "SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
     "TITLE": "Creación de desafíos",
-    "NO_CHALLENGE":"Aún no se ha registrado ningun desafio.",
+    "NO_CHALLENGE": "Aún no se ha registrado ningun desafio.",
     "QUESTION_TYPE": {
       "PAGE": "Pagina web",
       "VIDEO": "Video",
@@ -83,21 +83,21 @@
       "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el Desafío",
       "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el Desafío"
     }
-	},
-	"ERRORS": {
+  },
+  "ERRORS": {
     "CHECK_REQUIRED": "La confirmación es requerida",
     "MAX_LENGTH_2": "El largo del campo no puede exceder los 2 caracteres",
     "MAX_LENGTH_3": "El largo del campo no puede exceder los 3 caracteres",
-		"MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
-		"MAX_LENGTH_200": "El largo del campo no puede exceder los 200 caracteres",
+    "MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
+    "MAX_LENGTH_200": "El largo del campo no puede exceder los 200 caracteres",
     "MAX_LENGTH_300": "El largo del campo no puede exceder los 300 caracteres",
-		"MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
-		"MIN_LENGTH_5": "El largo del campo no puede ser menor a 5 caracteres",
+    "MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
+    "MIN_LENGTH_5": "El largo del campo no puede ser menor a 5 caracteres",
     "MIN_LENGTH_10": "El largo del campo no puede ser menor a 10 caracteres",
     "MIN_VALUE_1": "El valor mínimo del campo es 1",
-		"MIN_VALUE_30": "El valor mínimo del campo es 30",
-		"REQUIRED": "El campo es requerido",
-		"SELECTION_REQUIRED": "Debe seleccionar una opción",
+    "MIN_VALUE_30": "El valor mínimo del campo es 30",
+    "REQUIRED": "El campo es requerido",
+    "SELECTION_REQUIRED": "Debe seleccionar una opción",
     "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres",
     "UNREQUIRED_MIN_LENGTH_5": "El campo puede quedar vacío o tener un largo de al menos 5 caracteres"
   },
@@ -107,12 +107,14 @@
     "PASSWORD": "Contraseña",
     "ENTER": "Ingresar",
     "REQUIRED": "El campo es requerido",
-    "TOAST" : {
-      "ERROR_MESSAGE":"No ha sido posible iniciar sesión.",
-      "ERROR_EMAIL_MESSAGE":"Correo no encontrado.",
-      "ERROR_CREDENTIALS_MESSAGE":"Credenciales incorrectas.",
-      "ERROR_USER_NOT_CONFIRMED":"Por favor, confirme su correo antes de ingresar.",
-      "ERROR":"Error"
+    "TOAST": {
+      "ERROR_MESSAGE": "No ha sido posible iniciar sesión.",
+      "ERROR_EMAIL_MESSAGE": "Correo no encontrado.",
+      "ERROR_CREDENTIALS_MESSAGE": "Credenciales incorrectas.",
+      "ERROR_USER_NOT_CONFIRMED": "Por favor, confirme su correo antes de ingresar.",
+      "ERROR": "Error",
+      "SUCCESS": "¡Éxito!",
+      "USER_CONFIRMED": "Su usuario ha sido confirmado correctamente"
     }
   },
   "QUESTIONNAIRE": {
@@ -189,7 +191,8 @@
     "BACK": "Volver",
     "RESET": "Reiniciar",
     "SIGNUP": "Registrarte",
-    "FORM" : {
+    "CONFIRMATION_EMAIL_SENT": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam) para confirmar su usuario. Será redirigido a la página inicial en 10 segundos...",
+    "FORM": {
       "NAMES": "Nombres",
       "LAST_NAMES": "Apellidos",
       "RUT": "RUT",
@@ -202,6 +205,7 @@
       "REGION": "Región del colegio",
       "PASSWORD": "Contraseña de acceso",
       "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
+      "RELATION": "Parentesco con estudiante (Padre, madre, tutor/a, etc.)",
       "ERROR": {
         "CONSENT": "Debe aceptar el consentimiento informado para continuar",
         "NAMES": "Debe ingresar los nombres",
@@ -219,19 +223,21 @@
         "COMMUNE": "Debe ingresar la comuna",
         "PASSWORD": "Debe ingresar una contraseña",
         "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
-        "PASSWORD_EQUAL": "Las contraseñas deben ser iguales"
+        "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
+        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 4 caracteres y al menos 1 número",
+        "RELATION_REQUIRED": "Debe ingresar su parentesco"
       }
     }
   },
-	"STUDY": {
-		"FORM": {
-			"FIELDS": {
-				"CHECK": "Por favor confirme para continuar",
-				"DESCRIPTION": "Descripción",
-				"NAME": "Nombre"
-			}
-		},
-		"SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
+  "STUDY": {
+    "FORM": {
+      "FIELDS": {
+        "CHECK": "Por favor confirme para continuar",
+        "DESCRIPTION": "Descripción",
+        "NAME": "Nombre"
+      }
+    },
+    "SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
     "TITLE": "Creación de estudios",
     "TOAST": {
       "ERROR": "Fallo!",
@@ -240,7 +246,7 @@
       "SUCCESS_MESSAGE": "Se ha creado el Estudio"
     }
   },
-	"UPLOAD": {
+  "UPLOAD": {
     "ARRAYS": {
       "DOC_TYPES": {
         "BOOK": "Libro",
@@ -253,20 +259,20 @@
         "SPANISH": "Español"
       }
     },
-		"FORM": {
-			"FIELDS": {
+    "FORM": {
+      "FIELDS": {
         "CHECK": "Por favor confirme para continuar",
         "CHALLENGE": "Desafío",
         "LOCALE": "Idioma",
         "MASKED_URL": "URL enmascarada",
-				"NAME": "Nombre",
+        "NAME": "Nombre",
         "STUDY": "Estudio",
-				"TYPE_OF": "Tipo de recurso",
-				"TITLE": "Título",
-				"URL": "URL"
-			}
-		},
-		"SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
+        "TYPE_OF": "Tipo de recurso",
+        "TITLE": "Título",
+        "URL": "URL"
+      }
+    },
+    "SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
     "TITLE": "Carga de recursos",
     "TOAST": {
       "ERROR": "Fallo!",
@@ -300,6 +306,12 @@
       "JUSTIFY": "Justifica tu respuesta aquí",
       "TEXT": "Ingresa tu respuesta aquí",
       "URL": "Las páginas que seleccionaste se muestran aquí"
+    },
+    "TOAST": {
+      "SUCCESS":"¡Éxito!",
+      "ERROR":"Error",
+      "ANSWER_SUBMITTED":"Respuesta enviada correctamente",
+      "ERROR_MESSAGE":"No ha sido posible envíar la respuesta"
     }
   }
 }

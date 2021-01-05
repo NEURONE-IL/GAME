@@ -5,6 +5,7 @@ const Role = require('../models/role');
 const Study = require('../models/study');
 const Token = require('../models/token');
 const Challenge = require('../models/challenge');
+const UserStudy = require('../models/userStudy');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
@@ -64,6 +65,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
             message: "Study doesn't exist!"
         });
     }
+
+    // Find student role
     const role = await Role.findOne({name: 'student'}, err => {
         if(err){
             return res.status(404).json({
@@ -72,6 +75,8 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
             });
         }
     });
+
+    // Find study
     const study = await Study.findOne({_id: study_id}, err => {
         if(err){
             return res.status(404).json({
@@ -79,7 +84,18 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
                 err
             });
         }
-    })
+    });
+
+    // Find study challenges
+    const challenges = await Challenge.find({study: study}, err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+
     if(!study){
         return res.status(404).json({
             ok: false,
@@ -90,20 +106,12 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(req.body.password, salt);
-    const challenges = await Challenge.find({study: study}, err => {
-        if(err){
-            return res.status(404).json({
-                ok: false,
-                err
-            });
-        }
-    })
+
     //create user
     const user = new User({
         email: req.body.email,
         tutor_names: req.body.tutor_names,
         tutor_last_names: req.body.tutor_last_names,
-        tutor_rut: req.body.tutor_rut,
         tutor_phone: req.body.tutor_phone,
         names: req.body.names,
         last_names: req.body.last_names,
@@ -115,7 +123,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         password: hashpassword,
         role: role._id,
         study: study._id,
-        challenges_progress: generateProgressArray(challenges)
+        relation: req.body.relation
     });
 
     //save user in db
@@ -126,6 +134,9 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
                 err
             });
         }
+
+        // Generate user study progress entry
+        generateProgress(challenges, user, study);
 
         // Send confirmation email
         sendConfirmationEmail(user, res, req);
@@ -152,6 +163,36 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('x-access-token', token).send({user: user, token: token});
 });
+
+// Creates user study progress
+function generateProgress(challenges, user, study) {
+    let progress = [];
+
+    // WIP: getting last registered sequence
+    UserStudy.find().sort({ _id: -1 }).limit(1).then((result) => {
+        console.log('last user study progress');
+        console.log(result);
+    });
+
+    challenges.forEach((challenge) => {
+        progress.push({ challenge: challenge });
+    });
+
+    const userStudy = new UserStudy({
+        user: user,
+        study: study,
+        challenges: progress
+    });
+
+    userStudy.save((err, res) => {
+        if (err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+    });
+}
 
 // Creates player on NEURONE-GM
 function saveGMPlayer(req, user, res) {
@@ -218,7 +259,8 @@ function generateEmailData(req, token, user) {
 
 // Add translated text and user data to email
 function addTextToEmail(mailHTML, user, link) {
-    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]","Hola " + user.tutor_names.split(" ")[0]);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.PREHEADER_TEXT]", "Confirme su cuenta:");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]","Hola " + user.tutor_names.split(" ")[0] + ".");
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TEXT]","Gracias por registrar a " + user.names.split(" ")[0] +" en NEURONE-GAME, "
                                 + "antes de ingresar al juego debe confirmar su correo.\n"
                                 + "Al realizar este paso, también está confirmando que leyó y acepta el consentimiento informado "
@@ -228,34 +270,6 @@ function addTextToEmail(mailHTML, user, link) {
     mailHTML = mailHTML.replace(/%CONFIRMATION_EMAIL.LINK%/g, link);
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
     return mailHTML;
-}
-
-// Generates the challenges sequence for a new user
-function generateChallengeSequence(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    return array;
-}
-
-// Generates the progress array for a new user
-function generateProgressArray(challenges) {
-    const sequence = generateChallengeSequence(challenges);
-    let progress = [];
-    sequence.forEach(challenge => {
-        progress.push({
-            challenge: challenge
-        });
-    });
-    return progress;
 }
 
 module.exports = router;

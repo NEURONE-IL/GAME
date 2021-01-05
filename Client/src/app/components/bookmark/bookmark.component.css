@@ -1,0 +1,60 @@
+.header {
+	height: 5%;
+	background-color: #DDDDDD;
+	vertical-align: middle;
+}
+
+.bookmark-button .material-icons{
+	vertical-align: middle;
+} 
+
+.a-1{
+	margin-left: 1%;
+	font-size: calc(0.5em + 1vmin);
+	margin-right: 2.5%;
+	color: #9d9d9d;
+	letter-spacing: 0.2em;
+	text-decoration: none;
+	font-family: Candara, sans-serif;
+	font-weight: lighter;
+}
+
+.a-1:hover {
+	color: white;
+	font-weight: bolder;
+	text-shadow: 0 0 20px #888585, 0 0 30px #888585, 0 0 40px #888585, 0 0 50px #888585, 0 0 60px #888585, 0 0 70px #888585, 0 0 80px #888585;
+}
+
+.title-span:hover {
+	color: white;
+	font-weight: bolder;
+	text-shadow: 0 0 20px #4b4949, 0 0 30px #4b4949, 0 0 40px #4b4949, 0 0 50px #4b4949, 0 0 60px #4b4949, 0 0 70px #4b4949, 0 0 80px #4b4949;
+}
+
+.spacer {
+	flex: 1;
+}
+
+.marked{
+	color: white;
+}
+
+.title-span {
+	margin-left: 1.5%;
+	font-size: calc(0.9em + 1vmin);
+	margin-right: 3%;
+	color: #9d9d9d;
+	text-decoration: none;
+	font-family: Comic Sans MS, sans-serif;
+}
+
+.name-span {
+	margin-left: 0.5%;
+	font-size: calc(0.6em + 1vmin);
+	text-decoration: none;
+	color: white;
+	margin-right: 0.5%;
+	font-family: Ubuntu;
+	letter-spacing: 0.2em;
+	font-family: Comic Sans MS, sans-serif;
+}

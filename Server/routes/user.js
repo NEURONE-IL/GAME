@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Role = require('../models/role');
+const UserStudy = require('../models/userStudy');
 const verifyToken = require('../middlewares/verifyToken');
 const bcrypt = require('bcryptjs');
 
@@ -81,15 +82,7 @@ router.put('/:user_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        if('assent' in req.body){
-            user.assent = req.body.assent;
-        }
-        if('initial_questionnaire' in req.body){
-            user.initial_questionnaire = req.body.initial_questionnaire;
-        }
-        if('challenges_progress' in req.body) {
-            user.challenges_progress = req.body.challenges_progress;
-        }
+        
         user.updatedAt = Date.now();
         user.save((err, user) => {
             if (err) {
@@ -100,8 +93,57 @@ router.put('/:user_id', [verifyToken], async (req, res) => {
             res.status(200).json({
                 user
             });
-        })
-    })
+        });
+    });
+})
+
+router.get('/:user_id/progress', [verifyToken] , async (req, res) => {
+    const userId = req.params.user_id;
+
+    UserStudy.findOne({user: userId}, (err, userStudy) => {
+        if(err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json(userStudy);
+    });
+})
+
+router.put('/:user_id/progress', [verifyToken], async (req, res) => {
+    const userId = req.params.user_id;
+
+    UserStudy.findOne({user: userId}, (err, userStudy) => {
+        if(err) {
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+
+        if ('assent' in req.body) {
+            userStudy.assent = req.body.assent;
+        }
+
+        if ('initial_questionnaire' in req.body) {
+            userStudy.initial_questionnaire = req.body.initial_questionnaire;
+        }
+
+        if ('challenges' in req.body) {
+            userStudy.challenges = req.body.challenges;
+        }
+
+        userStudy.save((err, userStudy) => {
+            if (err) {
+                return res.status(500).json({
+                    err
+                });
+            }
+            res.status(200).json(userStudy);
+        });
+
+    });
 })
 
 

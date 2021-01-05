@@ -31,7 +31,7 @@ export class AssentComponent implements OnInit {
 
   save() {
     console.log(this.assentForm.value);
-    this.authService.updateUser({"assent": true});
+    this.authService.updateProgress({"assent": true});
     this.gameService.stage = 'initial';
   }
 

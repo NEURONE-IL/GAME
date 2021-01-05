@@ -8,7 +8,6 @@ const UserSchema = new Schema({
     confirmed: {type: Boolean, default: false},
     tutor_names: {type: String },
     tutor_last_names: {type: String },
-    tutor_rut: {type: String },
     tutor_phone: {type: String },
     names: {type: String },
     last_names: {type: String },
@@ -23,17 +22,7 @@ const UserSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
-    assent: {type: Boolean, default: false},
-    initial_questionnaire: {type: Boolean, default: false},
-    challenges_progress: { type: [{
-      challenge: {type: Schema.Types.ObjectId, ref: 'Challenge'},
-      pre_test: {type: Boolean, default: false},
-      post_test: {type: Boolean, default: false},
-      started: {type: Boolean, default: false},
-      finished: {type: Boolean, default: false},
-      _id: false,
-      id: false
-    }], default: []}
+    relation: { type: String }
 });
 
 // Sets the createdAt parameter equal to the current time

@@ -30,6 +30,10 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue: string;
 
+  //Tootips
+  currentTooltip1: string;
+  currentTooltip2: string;
+
   // Answer data
   answerForm: FormGroup;
 
@@ -49,7 +53,10 @@ export class QuestionBarComponent implements OnInit {
     this.startTimer();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentTooltip1 = 'Agregar a favoritos';
+    this.currentTooltip2 = 'Agregar a favoritos';
+  }
 
   startTimer() {
     this.interval = setInterval(() => {
@@ -155,9 +162,28 @@ export class QuestionBarComponent implements OnInit {
     this.hintUsed = true;
   }
 
-  getUrl(): void {
-    this.answerForm.patchValue({url1: window.location.href});
-    console.log(this.answerForm.value);
+  favoriteAction(index: number): void{
+    switch(index){
+      case 1:
+        if(this.answerForm.get('url1').value === ''){
+          this.answerForm.patchValue({url1: window.location.href});
+          this.currentTooltip1 = 'Quitar de favoritos';
+        }else{
+          this.answerForm.patchValue({url1: ''});
+          this.currentTooltip1 = 'Agregar a favoritos';
+        }
+        break;
+      case 2: 
+        if(this.answerForm.get('url2').value === ''){
+          this.answerForm.patchValue({url2: window.location.href});
+          this.currentTooltip2 = 'Quitar de favoritos';
+
+        }else{
+          this.answerForm.patchValue({url2: ''});
+          this.currentTooltip2 = 'Agregar a favoritos';
+        }
+        break;
+    }
   }
 }
 
