@@ -38,10 +38,7 @@ router.post('/register', [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueE
     })
     await neuronegmService.connectGM(req.body.email, req.body.password, err => {
         if(err){
-            return res.status(404).json({
-                ok: false,
-                err
-            });
+            console.log(err);
         }
     })
     //save user in db

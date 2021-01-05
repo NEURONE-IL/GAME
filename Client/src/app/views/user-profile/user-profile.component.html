@@ -1,7 +1,7 @@
 <app-header></app-header>
 <h3>Título actual</h3>
 
-<h4 *ngIf="actualLevel">{{actualLevel.level.name}}</h4>
+<h4 *ngIf="actualLevel">{{actualLevel.level.name}} <span style="float: right; color: black;">{{points[0].amount}} {{points[0].point.abbreviation}}</span></h4> 
 
 <h3>Progreso siguiente nivel</h3>
 <mat-card class="progressLevelCard" >

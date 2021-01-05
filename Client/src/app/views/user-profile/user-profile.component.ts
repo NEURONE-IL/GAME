@@ -13,12 +13,14 @@ export class UserProfileComponent implements OnInit {
   nearLevel
   completedChallenges
   actualLevel
+  points
   constructor(private gamificationService: GamificationService,  private authService: AuthService) { }
 
   ngOnInit(): void {
     this.levelProgress();
     this.getCompletedChallenges();
     this.getLevels();
+    this.getPoints();
   }
 
   getCompletedChallenges(){
@@ -45,6 +47,17 @@ export class UserProfileComponent implements OnInit {
             this.actualLevel = levels[i];
           }
         }
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  getPoints(){
+    this.gamificationService.userPoints(this.authService.getUser()._id).subscribe(
+      response => {
+        this.points = response;
       },
       err => {
         console.log(err)

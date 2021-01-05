@@ -35,4 +35,8 @@ export class GamificationService {
   userCompletedChallenges(user_id): Observable<any> {
     return this.http.get(this.uri+'gamification/userChallenges/'+user_id );
   }
+
+  userPoints(user_id): Observable<any>{
+    return this.http.get(this.uri+'gamification/userPoints/'+user_id );
+  }
 }
