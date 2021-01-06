@@ -1,0 +1,63 @@
+/*Questionnaires*/
+{
+	"name": "initial",
+	"type": "initial",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1 ,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+},
+
+{
+	"name": "pre",
+	"type": "pre",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1 ,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+}
+
+{
+	"name": "post",
+	"type": "post",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1 ,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+}

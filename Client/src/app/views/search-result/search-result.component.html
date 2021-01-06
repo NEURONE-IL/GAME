@@ -3,7 +3,7 @@
         <img class="logo" src="assets/mainlogo.png" [routerLink]="['/session/search']">
             <mat-form-field appearance="outline" class="search-box" >
                 <mat-icon matSuffix (click)="search()" style="cursor: pointer;">search</mat-icon>
-                <input matInput [(ngModel)]="query" (keyup.enter)="search()" >
+                <input matInput [(ngModel)]="query" (keydown.enter)="search()" >
             </mat-form-field>
       </div>
 
@@ -12,7 +12,7 @@
     <div class="documents-container">
         <div *ngFor="let doc of documents">
           <h5 class="url-bar">{{doc.url}}</h5>
-          <a [routerLink]="['/session/view-page', doc.route]"  class="document-link">{{doc.title}}</a>
+          <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
           <br>
           <br>
         </div>

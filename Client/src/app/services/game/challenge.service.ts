@@ -48,10 +48,11 @@ export class ChallengeService {
     delete cleanChallenge.checked;
     /*Iterates through the object to remove the empty properties*/
     for (const property in cleanChallenge) {
-      if(cleanChallenge[property] === ''){
+      if(cleanChallenge[property] === '' || cleanChallenge[property] === null){
         delete cleanChallenge[property];
       }
     }
+    console.log(cleanChallenge)
     /*Sends the request*/
     return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

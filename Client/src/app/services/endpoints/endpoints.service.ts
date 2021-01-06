@@ -12,8 +12,8 @@ export class EndpointsService {
   constructor(protected http: HttpClient) { }
 
   /* DOCUMENT RETRIEVER */
-  getDocuments(query, locale, task, domain){
-    const post = JSON.stringify({query: query, locale: locale, task: task, domain: domain});
+  getDocuments(query, locale, domain){
+    const post = JSON.stringify({query: query, locale: locale, domain: domain});
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'/v1/document/search', post, {headers: header});

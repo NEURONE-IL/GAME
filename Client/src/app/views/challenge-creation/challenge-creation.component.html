@@ -75,7 +75,7 @@
 						<input matInput formControlName="hint" #inputHint maxlength="100">
 						<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_10" | translate }}
+							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_100" | translate }}

@@ -163,10 +163,14 @@ export class QuestionBarComponent implements OnInit {
   }
 
   favoriteAction(index: number): void{
+    //Hay que pasar la URL al back y mostrar el título en front
+    const titleArray = window.location.href.split('/');
+    let docTitle = decodeURI(titleArray[5]);
+    console.log(docTitle)
     switch(index){
       case 1:
         if(this.answerForm.get('url1').value === ''){
-          this.answerForm.patchValue({url1: window.location.href});
+          this.answerForm.patchValue({url1: docTitle});
           this.currentTooltip1 = 'Quitar de favoritos';
         }else{
           this.answerForm.patchValue({url1: ''});
@@ -175,7 +179,7 @@ export class QuestionBarComponent implements OnInit {
         break;
       case 2: 
         if(this.answerForm.get('url2').value === ''){
-          this.answerForm.patchValue({url2: window.location.href});
+          this.answerForm.patchValue({url2: docTitle});
           this.currentTooltip2 = 'Quitar de favoritos';
 
         }else{
