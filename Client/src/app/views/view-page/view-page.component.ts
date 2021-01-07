@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { EndpointsService } from '../../services/endpoints/endpoints.service';
 
 @Component({
   selector: 'app-view-page',
@@ -8,7 +9,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class ViewPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private endpoints: EndpointsService) { }
 
   url: string;
   docUrl: string;
@@ -19,10 +20,7 @@ export class ViewPageComponent implements OnInit {
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.title = params.get('title');
-        console.log(this.url);
-        console.log(this.title, 'title');
-        this.docUrl = 'http://localhost:3000/'+this.url;
-        console.log(this.docUrl)
+        this.docUrl = this.endpoints.neuroneURL + this.url;
       });
   }
 
