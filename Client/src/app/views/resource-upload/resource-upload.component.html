@@ -92,7 +92,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.CHALLENGE" | translate }}</mat-label>
-						<mat-select formControlName="task" required [disabled]="!resourceForm.value.domain">
+						<mat-select formControlName="task" required>
 							<mat-option *ngFor="let challenge of challenges" #Challenge [value]="challenge._id">{{challenge.question}}</mat-option>
 						</mat-select>
 						<mat-error *ngIf="resourceFormControls.task.hasError('required')">

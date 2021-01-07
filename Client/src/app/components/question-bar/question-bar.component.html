@@ -30,11 +30,11 @@
 
 
               <mat-form-field class="input-full-width urlField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
-                <input matInput formControlName="url1">
+                <input matInput class="urlInput" formControlName="url1" [readonly]="true">
               </mat-form-field>
 
               <mat-form-field class="input-full-width urlField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">
-                <input matInput formControlName="url2">
+                <input matInput class="urlInput" formControlName="url2" [readonly]="true">
               </mat-form-field>              
               
               <mat-form-field class="input-full-width answerField" *ngIf="gameService.challenge.answer_type === 'url' || gameService.challenge.answer_type === 'video'">

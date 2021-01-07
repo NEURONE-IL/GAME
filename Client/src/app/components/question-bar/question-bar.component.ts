@@ -37,6 +37,7 @@ export class QuestionBarComponent implements OnInit {
   // Answer data
   answerForm: FormGroup;
 
+
   constructor(public gameService: GameService,
               public hintDialog: MatDialog,
               public router: Router,
@@ -47,7 +48,9 @@ export class QuestionBarComponent implements OnInit {
     this.answerForm = this.formBuilder.group({
       answer: ['', Validators.requiredTrue],
       url1: [''],
-      url2: ['']
+      url2: [''],
+      rawUrl1: [''],
+      rawUrl2: ['']
     });
     this.loadChallenge();
     this.startTimer();
@@ -163,31 +166,48 @@ export class QuestionBarComponent implements OnInit {
   }
 
   favoriteAction(index: number): void{
-    //Hay que pasar la URL al back y mostrar el título en front
+    //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
+    //Get docTitle
     let docTitle = decodeURI(titleArray[5]);
-    console.log(docTitle)
+    //Get docURL
+    let rawURL = decodeURIComponent(titleArray[6]);
+    //Remove the URL prefix from NEURONE Core
+    const urlArray = rawURL.split('/');
+    let docURL = '';
+    for(var i=3; i<urlArray.length; i++){
+      docURL += urlArray[i] + '/';
+    }
+    //Remove the URL postfix from NEURONE Core
+    docURL = docURL.replace('/index.html/', '');
+//    console.log(docURL)
+//    console.log(titleArray)
     switch(index){
       case 1:
         if(this.answerForm.get('url1').value === ''){
           this.answerForm.patchValue({url1: docTitle});
+          this.answerForm.patchValue({rawUrl1: docURL});          
           this.currentTooltip1 = 'Quitar de favoritos';
         }else{
           this.answerForm.patchValue({url1: ''});
+          this.answerForm.patchValue({rawUrl1: ''});
           this.currentTooltip1 = 'Agregar a favoritos';
         }
         break;
       case 2: 
         if(this.answerForm.get('url2').value === ''){
           this.answerForm.patchValue({url2: docTitle});
+          this.answerForm.patchValue({rawUrl2: docURL});  
           this.currentTooltip2 = 'Quitar de favoritos';
 
         }else{
           this.answerForm.patchValue({url2: ''});
+          this.answerForm.patchValue({rawUrl2: ''});
           this.currentTooltip2 = 'Agregar a favoritos';
         }
         break;
     }
+    console.log(this.answerForm.value);
   }
 }
 

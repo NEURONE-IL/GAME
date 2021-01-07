@@ -59,7 +59,7 @@ export class ResourceUploadComponent implements OnInit {
 
   resetForm() {
     this.resourceForm.reset();
-    this.challenges.length = 0;
+//    this.challenges.length = 0;
   }
 
   uploadResource(){
