@@ -1,6 +1,9 @@
 //PORT
 process.env.PORT = process.env.PORT || 3090;
 
+//PUBLIC PORT
+process.env.PUBLIC_PORT = 3030;
+
 //token secret
 process.env.TOKEN_SECRET = 'ady7asdy78'
 //DB

@@ -243,7 +243,7 @@ function sendConfirmationEmail(user, res, req) {
 // Reads email template and adds custom data
 function generateEmailData(req, token, user) {
     const emailTemplateFile = 'assets/confirmationEmail.html';
-    const link = 'http://' + req.headers.host + '\/confirmation\/' + token.token;
+    const link = 'http://' + req.headers.host + ':' + process.env.PUBLIC_PORT + '\/confirmation\/' + token.token;
     let mailHTML = null;
     let mailText = 'Hola,\n\n' + 'Por favor, verifique su correo ingresando al siguiente link: \nhttp:\/\/' + link + '.\n';
 
