@@ -35,7 +35,7 @@ export class ChallengeService {
   }
 
   getChallengesByStudy(studyId: string): Observable<any> {
-    return this.http.get(this.endpoints.rootURL +'/challenge/byStudy/'+studyId)
+    return this.http.get(this.endpoints.rootURL +'challenge/byStudy/'+studyId)
   }
 
   getChallenge(id: string) {
