@@ -299,6 +299,7 @@
       "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde."
     },
     "HINT": {
+      "BUTTON": "Pista",
       "TITLE": "Pista",
       "CLOSE": "Cerrar"
     },
