@@ -1,4 +1,4 @@
-import { Component, OnInit , Output, EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 
@@ -9,7 +9,6 @@ import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 })
 export class SearchResultComponent implements OnInit {
 
-  @Output() searchParams: EventEmitter<object> = new EventEmitter();
   query: string;
   locale: string;
   domain: string;
