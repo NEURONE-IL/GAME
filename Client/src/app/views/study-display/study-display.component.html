@@ -5,6 +5,7 @@
         <mat-card-header>
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
         <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
+
         </mat-card-header>
       </div>
       <div class="col-md-4" *ngIf="!createChallenge">
@@ -13,6 +14,11 @@
         <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
           <mat-icon>description</mat-icon>
         </button>
+
+          SEARCH
+          <button mat-mini-fab  color="primary"  (click)="search()">
+            <mat-icon>search</mat-icon>
+          </button>
           </div>
       </div>
       <div class="col-md-4">
@@ -33,15 +39,25 @@
     <app-resource-upload [study]="study._id"> </app-resource-upload>
   </div>
   <ng-template #challengesPanel>
-    <div *ngIf="createChallenge; else challengesView">
+    <div *ngIf="createChallenge; else searchView1">
       <app-challenge-creation [study]="study._id"> </app-challenge-creation>
     </div>
   </ng-template>
+  <ng-template #searchView1>
+    <div *ngIf="searchView; else challengesView">
+      <div class="searchEngine">
+        <app-admin-search-result [query]="'*'" [domain]="study._id"></app-admin-search-result>
+      </div>
+
+    </div>
+  </ng-template>
+
   <ng-template #challengesView >
     <div *ngIf="challenges.length==0; else showChallenges">
       <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
     </div>
   </ng-template>
+
 
   <ng-template #showChallenges>
 
@@ -102,7 +118,7 @@
                     <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> Ver Recursos </span>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <p>This is the content in the panneL</p>
+                <p>detail</p>
               </mat-expansion-panel>
 
             </div>

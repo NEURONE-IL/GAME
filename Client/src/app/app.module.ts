@@ -67,6 +67,7 @@ import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import {AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -104,7 +105,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssentComponent,
     StartInstructionsComponent,
     UserProfileComponent,
-    BookmarkComponent
+    BookmarkComponent,
+    AdminSearchResultComponent
   ],
   imports: [
     BrowserModule,

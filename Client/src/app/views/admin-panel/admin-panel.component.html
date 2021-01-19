@@ -6,13 +6,14 @@
   </mat-card-header>
 </mat-card>
 
-<h5 class="status">{{ "ADMIN.GAMIFICATION.STATUS_TITLE" | translate }}: 
+<h5 class="status">{{ "ADMIN.GAMIFICATION.STATUS_TITLE" | translate }}:
   <span *ngIf="gamified" class="ok">{{ "ADMIN.GAMIFICATION.APP_GAMIFIED" | translate }}</span>
   <span *ngIf="!gamified && connected" class="notok">{{ "ADMIN.GAMIFICATION.APP_NOT_GAMIFIED" | translate }}</span>
   <span *ngIf="!gamified && !connected" class="notok">{{ "ADMIN.GAMIFICATION.APP_NOT_CONNECTED" | translate }}</span>
 </h5>
 
 <button mat-raised-button class="gamify-button" color="primary" *ngIf="!gamified && connected" (click)="gamify()" >{{ "ADMIN.GAMIFICATION.GAMIFY_BUTTON" | translate }}</button>
+
 
 <div *ngIf="StudioSelected; else elseBlock" >
   <router-outlet></router-outlet>

@@ -133,3 +133,8 @@
 .mat-expansion-panel {
   margin-right: 10px;
 }
+
+.searchEngine{
+  height: 100%;
+  margin-top:40px;
+}

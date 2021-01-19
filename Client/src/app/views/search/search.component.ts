@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game/game.service';
 
@@ -11,7 +11,7 @@ export class SearchComponent implements OnInit {
 
   query: string;
   locale: string;
-  domain: string;  
+  domain: string;
   constructor(public router: Router, public gameService: GameService) { }
 
   ngOnInit(): void {

@@ -15,11 +15,21 @@ export class StudyDisplayComponent implements OnInit {
   challenges: Challenge[] = [];
   createChallenge: boolean;
   verDocumentos: boolean;
-  constructor(private router: Router, private route: ActivatedRoute, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
+  searchView: boolean;
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private challengeService: ChallengeService,
+              private studyService: StudyService,
+              private toastr: ToastrService,
+              private translate: TranslateService,
+              ) { }
 
   ngOnInit(): void {
     this.createChallenge = false;
     this.verDocumentos = false;
+    this.searchView = false;
+
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.study = response['study']);
 
@@ -31,6 +41,8 @@ export class StudyDisplayComponent implements OnInit {
   BackToChallenges(){
     this.createChallenge = false;
     this.verDocumentos = false;
+    this.searchView = false;
+
     this.challenges=[];
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.challenges = response['challenges']);
@@ -121,6 +133,13 @@ export class StudyDisplayComponent implements OnInit {
 
   manageDocuments(){
     this.verDocumentos = true;
-    return null;
+    this.createChallenge = false;
+    this.searchView = false;
+  }
+
+  search(){
+    this.searchView = true;
+    this.createChallenge = false;
+    this.verDocumentos = false;
   }
 }

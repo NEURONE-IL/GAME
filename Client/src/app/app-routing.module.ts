@@ -108,7 +108,7 @@ const routes: Routes = [
         path: 'study/:study_id',
         component: StudyDisplayComponent,
         //canActivate: [ AuthGuard, AdminGuard ],
-      }
+      },
     ]
   },
   { path: '**', redirectTo: '/login' }
