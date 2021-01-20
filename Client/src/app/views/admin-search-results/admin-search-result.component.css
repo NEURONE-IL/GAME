@@ -69,3 +69,50 @@ hr {
     color: #eee;
     height: 1px;
 }
+
+p .soft{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888585;
+}
+
+.cardStyle{
+  margin: 10px;
+}
+
+mat-card{
+  /**/
+  align-self: flex-start;
+
+}
+mat-grid-tile .mat-figure{
+  height: 50%;
+}
+
+.document-link{
+  font-size: 14px;
+
+}
+
+.image-card:hover{
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.8);
+  /*border-color: #2196F3 !important;*/
+}
+
+.doc-card:hover{
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.8);
+  /*border-color: #2196F3 !important;*/
+}
+
+.doc-card{
+  border: 0px;
+  box-shadow: 0px 0px 0px 0px;
+}
+
+.doc-card .mat-card-content{
+  border: 0px;
+  box-shadow: 0px 0px 0px 0px;
+}
