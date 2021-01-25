@@ -172,6 +172,11 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
           if (err) {
             res.status(500).json(err);
           }
+          if(!latestAnswer) {
+            res.status(200).json({
+              canPlay: true
+            })
+          }
           const cooldown = study.cooldown
           const timeNow = new Date(Date.now());
           const latestAnswerDate = new Date(latestAnswer.createdAt);
