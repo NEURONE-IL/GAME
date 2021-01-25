@@ -171,24 +171,26 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
         .exec((err, latestAnswer) => {
           if (err) {
             res.status(500).json(err);
-          }
-          if(!latestAnswer) {
+          } else if (!latestAnswer) {
             res.status(200).json({
-              canPlay: true
-            })
-          }
-          const cooldown = study.cooldown
-          const timeNow = new Date(Date.now());
-          const latestAnswerDate = new Date(latestAnswer.createdAt);
-          const canPlayAtTime = new Date(latestAnswerDate.getTime() + cooldown*1000);
-          const canPlay = (timeNow > canPlayAtTime) ? true : false;
-          res.status(200).json({
+              canPlay: true,
+            });
+          } else {
+            const cooldown = study.cooldown;
+            const timeNow = new Date(Date.now());
+            const latestAnswerDate = new Date(latestAnswer.createdAt);
+            const canPlayAtTime = new Date(
+              latestAnswerDate.getTime() + cooldown * 1000
+            );
+            const canPlay = timeNow > canPlayAtTime ? true : false;
+            res.status(200).json({
               latestAnswerDate: latestAnswerDate,
               cooldown: cooldown,
               timeNow: timeNow,
               canPlayAtTime: canPlayAtTime,
-              canPlay: canPlay
-          });
+              canPlay: canPlay,
+            });
+          }
         });
     });
   });
