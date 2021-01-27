@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../models/user');
 const Credential = require('../models/credential');
+const GameElement = require('../models/gameElement');
 
 const connectService = require('../services/neuronegm/connect');
 const playerService = require('../services/neuronegm/player');
@@ -237,6 +238,35 @@ router.get('/userActions/:user_id' , verifyToken, async (req, res) => {
         res.status(200).send(challenges);
     })
 });
+
+router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
+    const _id = req.params.user_id;
+    const key = req.params.key;
+    console.log(key)
+    const user = await User.findOne({_id: _id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    }).populate('study');
+    const rankingName = await GameElement.findOne({type: "leaderboard", key: key}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    })
+    console.log(rankingName)
+    await leaderboardService.getLeaderboardByGroup(rankingName.gm_code, {group_code: user.study.gm_code}, (err, leaderboard) => {
+        if(err){
+            res.status(404).send(err);
+        }
+        res.status(200).send(leaderboard);
+    })
+});
+
+
 
 
 

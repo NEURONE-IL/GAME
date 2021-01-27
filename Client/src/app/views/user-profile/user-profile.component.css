@@ -1,38 +1,16 @@
-h3 {
-    margin-top:2%;
-    margin-left: auto;
-    margin-right: auto;
-	border-bottom: 1px solid #ccc;
-	width: 60%; 
-	padding: 0 0 .25em;
-}
-
-h4 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%; 
-    color: teal;
-	padding: 0 0 .25em;
-}
-
-h5 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%; 
-	padding: 0 0 .25em;
-}
 
 .challengeCard{
     width: 50%; 
     display: inline-block;
-    height: 10%; 
+    padding: 1%;
+    height: 10%;
     margin: auto;
     background-color: whitesmoke;
 }
 
 
 .progressLevelCard{
-    width: 60%; 
+    width: 100%; 
     height: 10%; 
     margin: auto;
     background-color: whitesmoke;
@@ -72,4 +50,122 @@ h5 {
     
     display: inline-block;
     height: 100%;
+}
+
+.h2{
+    border-color: #f0f0f0;
+    border-style: solid;
+    border-width: 0 0 1px;
+    color: #000;
+    font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+    font-size: 30px;
+    font-weight: 1000;
+    margin: 4px 0;
+    padding: 2px 0;
+}
+
+h3 {
+    margin-top:2%;
+    margin-left: auto;
+    margin-right: auto;
+	border-bottom: 1px solid #ccc;
+    width: 100%; 
+	padding: 0 0 .25em;
+}
+
+
+.h5{
+    border-bottom: #f0f0f0 1px solid;
+    font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+    font-size: 18px;
+    color: blueviolet;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    padding-bottom: 2px;
+}
+
+.content-container{
+    display: table;
+    width: 100%;
+}
+
+.container-left{
+    display: table-cell;
+    padding: 8px 8px 8px 8px;
+    vertical-align: top;
+    width: 325px;
+    border-right: #ebebeb 1px solid;
+    border-left: #ebebeb 1px solid;
+    border-bottom: #ebebeb 1px solid;
+}
+
+.container-right{
+    display: table-cell;
+    padding-left: 8px;
+    vertical-align: top;
+}
+
+.player-image{
+    display: block;
+    text-align: center;
+}
+
+.img{
+    width: 325px;
+}
+
+.player-status{
+    border-top: #f0f0f0 1px solid;
+    padding-bottom: 8px!important;
+    padding-top: 8px!important;
+    margin-bottom: 30px!important;
+    list-style-type: none;
+}
+
+.clear{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    margin-left: -20px;
+}
+
+.m0{
+    margin: 0 !important;
+}
+
+
+.player-status-title{
+    font-weight: 700;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.player-status-value{
+    font-weight: 400;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.large{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.user-statistics{
+    display: table;
+    width: 100%;
+    border-bottom: #f0f0f0 1px solid;
+    margin-bottom: 2%;
+}
+
+.stats{
+    display: table-cell;
+    padding-right: 8px;
+    width: 50%;
+    border-right: #f0f0f0 1px solid;
 }

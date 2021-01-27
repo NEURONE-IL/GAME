@@ -1,21 +1,55 @@
 <app-header></app-header>
-<h3>Título actual</h3>
 
-<h4 *ngIf="actualLevel">{{actualLevel.level.name}} <span style="float: right; color: black;">{{points[0].amount}} {{points[0].point.abbreviation}}</span></h4> 
-
-<h3>Progreso siguiente nivel</h3>
-<mat-card class="progressLevelCard" >
-    <img src="https://static-cdn.jtvnw.net/cb-achievements-assets/badge_vip.png" style="height: 50%; display: inline-block;">
-    <p *ngIf="nearLevel" style="display: inline-block; margin-left: 2%;">{{nearLevel.level.name}}</p>
-    <div id="progressLevel" class="progress">
-        <span id="progressValue" class="value"></span>
+<div class="content-container" >
+    <div class="container-left">
+        <div class="player-image mb8">
+            <img src="/assets/img_avatar.png" class="player-image img">
+            <ul class="player-status di-b">
+                <li class="clear"><span class="player-status-title di-ib fl">Nombres:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
+                <li class="clear"><span class="player-status-title di-ib fl">Apellidos:</span> <span class="player-status-value di-ib fr">{{user.last_names}}</span></li>
+                <li class="clear"><span class="player-status-title di-ib fl">Correo:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
+            </ul>
+        </div>
     </div>
-</mat-card>
-
-<h3>Logros Completados</h3>
-<div style="width: 60%; margin: auto">
-    <mat-card *ngFor="let chall of completedChallenges"class="challengeCard" >
-        <img src="https://i.dlpng.com/static/png/6926035_preview.png" style="height: 50px; display: inline-block;">
-        <p style="display: inline-block; margin-left: 2%; width: 85%">{{chall.challenge.name}} <span style="float: right;">{{chall.dateDisplay}}</span></p>
-    </mat-card>
+    <div class="container-right">
+        <h2 class="h2">Tú perfil</h2>
+        <div class="user-statistics">
+            <div class="stats">
+                <h5 class="h5">Título actual</h5>
+                <li class="clear m0"><span class="player-status-value di-ib fl large">{{actualLevel?.level.name}}</span></li>
+            </div>
+            <div class="stats">
+                <h5 class="h5">Experiencia total</h5>
+                <li class="clear m0"><span class="player-status-value di-ib fl large" *ngIf="points && points.length > 0">{{points[0].amount}} {{points[0].point.abbreviation}}</span></li>
+            </div>
+        </div>
+        <div class="user-statistics">
+            <div class="stats">
+                <h5 class="h5">Progreso siguiente nivel</h5>
+                <mat-card class="progressLevelCard" >
+                    <p  class="large" style="display: inline-block;">{{nearLevel?.level.name}}</p>
+                    <div id="progressLevel" class="progress large">
+                        <span id="progressValue" class="value large"></span>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <div class="user-statistics">
+            <div class="stats">
+                <h5 class="h5">Rankings</h5>
+                <li class="clear m0" *ngFor="let rank of ranks"><span class="player-status-value di-ib fl large">{{rank}}</span></li>
+            </div>
+        </div>
+        <div class="user-statistics">
+            <div class="stats">
+                <h5 class="h5">Logros Completados</h5>
+                <div>
+                    <mat-card *ngFor="let chall of completedChallenges"class="challengeCard" >
+                        <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">
+                        <p class="large" style="display: inline-block; margin-left: 2%; width: 85%">{{chall.challenge.name}} <span style="float: right;">{{chall.dateDisplay}}</span></p>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

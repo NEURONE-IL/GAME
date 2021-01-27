@@ -14,13 +14,14 @@ export class UserProfileComponent implements OnInit {
   completedChallenges
   actualLevel
   points
+  user
+  ranks
   constructor(private gamificationService: GamificationService,  private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.levelProgress();
-    this.getCompletedChallenges();
-    this.getLevels();
-    this.getPoints();
+    this.user = this.authService.getUser();
+    this.status();
+
   }
 
   getCompletedChallenges(){
@@ -83,6 +84,36 @@ export class UserProfileComponent implements OnInit {
         console.log(err)
       }
     );
+  }
+
+  rankings(){
+    this.gamificationService.userRankings(this.authService.getUser()._id, 'ranking_exp').subscribe(
+      response => {
+        let ranks = [];
+        for(let i = 0; i<response.leaderboardResult.length; i++){
+          if(response.leaderboardResult[i].code === this.user.gm_code){
+            ranks.push(response.leaderboardResult[i].rank.toString()+'° en cantidad de Experiencia')
+          }
+        }
+        this.ranks = ranks;
+
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  status(){
+    this.gamificationService.gamificationStatus().subscribe(response => {
+      if(response.gamified){
+        this.levelProgress();
+        this.getCompletedChallenges();
+        this.getLevels();
+        this.getPoints();
+        this.rankings();
+      }
+    })
   }
 
 }

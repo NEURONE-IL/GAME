@@ -20,6 +20,22 @@ const getLeaderboards = async (callback) => {
     });
 }
 
+const getLeaderboardByGroup = async (code, post, callback) => {
+    await connect.getHeadersGM((err, headers) => {
+        if(err){
+            callback(err)
+        }
+        else{
+            let credential = headers.credential;
+            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/leaderboards/'+code+'/generate', post, headers.headers ).then((response)=> {
+                callback(null, response.data)
+            }).catch((err) => {
+                callback(err);
+            })
+        }
+    });
+}
+
 const postLeaderboard = async (leaderboard, callback) => {
     await connect.getHeadersGM((err, headers) => {
         let credential = headers.credential;
@@ -89,6 +105,7 @@ const deleteLeaderboard = async (code, callback) => {
 
 const leaderboard = {
     getLeaderboards,
+    getLeaderboardByGroup,
     postLeaderboard,
     postAllLeaderboards,
     updateLeaderboard,

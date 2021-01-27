@@ -3,3 +3,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*Common*/
+.mb8{
+    margin-bottom: 8px;
+}
+
+.fl{
+    float: left !important;
+}
+
+.fr{
+    float: right !important;
+}
+
+.di-ib{
+    display: inline-block;
+}
+
+.di-b{
+    display: block;
+}

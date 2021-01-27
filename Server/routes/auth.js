@@ -142,7 +142,7 @@ router.post('/register/:study_id', [authMiddleware.verifyBody, authMiddleware.un
         sendConfirmationEmail(user, res, req);
 
         // Register player in NEURONE-GM
-        saveGMPlayer(req, user, res);
+        saveGMPlayer(req, user, study, res);
 
         res.status(200).json({
             user
@@ -195,22 +195,16 @@ function generateProgress(challenges, user, study) {
 }
 
 // Creates player on NEURONE-GM
-function saveGMPlayer(req, user, res) {
-    playerService.postPlayer({ name: req.body.names, last_name: req.body.last_names, sourceId: user._id }, (err, data) => {
+function saveGMPlayer(req, user, study, res) {
+    playerService.postPlayer({ name: req.body.names, last_name: req.body.last_names, sourceId: user._id, group_code: study.gm_code }, (err, data) => {
         if (err) {
             console.log(err);
-            res.status(200).json({
-                user
-            });
         }
         else {
             user.gm_code = data.code;
             user.save(err => {
                 if (err) {
-                    return res.status(404).json({
-                        ok: false,
-                        err
-                    });
+                    console.log(err);
                 }
             });
         }
