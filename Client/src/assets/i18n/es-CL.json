@@ -296,7 +296,9 @@
     },
     "INACTIVE": {
       "TITLE": "Aún no puedes jugar",
-      "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde."
+      "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde.",
+      "TIME_NOW": "La hora actual es",
+      "CAN_PLAY_AT": "Puedes volver a jugar a las"
     },
     "HINT": {
       "BUTTON": "Pista",

@@ -143,5 +143,19 @@ export class AuthService {
       // this.router.navigate(['questionnaire/pre-test']);
       this.router.navigate(['start']);
     }
+
+
+  }
+
+  canPlay() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.userUri+'/'+this.getUser()._id + '/can_play')
+      .subscribe((canPlay: any) => {
+        resolve(canPlay);
+      },
+      (error) => {
+        resolve({canPlay: false});
+      });
+    });
   }
 }

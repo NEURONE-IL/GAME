@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { EndpointsService } from '../endpoints/endpoints.service';
 import { ChallengeService } from './challenge.service';
 
 @Injectable({
@@ -12,8 +13,8 @@ export class GameService {
   challenge: any;
   stage: string;
   loading: boolean;
-  gameActive: boolean;
   progress: any;
+  canPlay: any;
 
   constructor(private challengeService: ChallengeService,
               public router: Router,
@@ -27,26 +28,33 @@ export class GameService {
   }
 
   async loadGameData() {
-    // this.player = this.authService.getUser();
+    this.loading = true;
     await this.authService.refreshUser();
     this.progress = await this.authService.refreshProgress();
-    this.gameActive = true;
-    this.loading = true;
     // For one challenge at once
     const challengeId = this.getCurrentChallengeId();
     if (challengeId!=null) {
       this.challenge = await this.challengeService.getChallenge(challengeId).toPromise();
       this.challenge = this.challenge.challenge;
       this.fetchUserStage();
+      if(this.stage!='post-test') {
+        this.canPlay = await this.authService.canPlay();
+      }
+      else {
+        this.canPlay = {canPlay: true};
+      }
     }
     else {
-      this.gameActive = false;
+      this.canPlay = {canPlay: false};
     }
     await new Promise(r => setTimeout(r, 1000)); // For testing purposes only
     this.loading = false;
 
   }
 
+  checkPlay() {
+
+  }
 
   finishChallenge() {
     this.stage = 'post-test';

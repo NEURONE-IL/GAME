@@ -1,37 +1,60 @@
 <app-header></app-header>
 <!-- Game data loading -->
-<div class='center-container' *ngIf="loading else loaded">
+<div class="center-container" *ngIf="loading; else loaded">
   <mat-spinner class="loading-spinner"></mat-spinner>
 </div>
 <ng-template #loaded>
   <!-- Game inactive -->
-  <div class="center-card" *ngIf="!gameService.gameActive">
+  <div class="center-card" *ngIf="!gameService.canPlay.canPlay">
     <mat-card class="card mat-elevation-z8">
-        <mat-card-title>{{"GAME.INACTIVE.TITLE" | translate}}</mat-card-title>
+      <mat-card-title>{{ "GAME.INACTIVE.TITLE" | translate }}</mat-card-title>
       <mat-card-content>
-        <p>{{"GAME.INACTIVE.MESSAGE" | translate}}</p>
+        <p>{{ "GAME.INACTIVE.MESSAGE" | translate }}</p>
+        <!-- <p *ngIf="gameService.canPlay.timeNow">
+          {{ "GAME.INACTIVE.TIME_NOW" | translate }}
+          {{ gameService.canPlay.timeNow | date: "shortTime" }}
+        </p> -->
+        <p *ngIf="gameService.canPlay.canPlayAtTime">
+          {{ "GAME.INACTIVE.CAN_PLAY_AT" | translate }}
+          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
+        </p>
       </mat-card-content>
     </mat-card>
   </div>
 
   <!-- Asentimiento informado pending -->
-  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='assent'">
-    <app-assent ></app-assent>
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'assent'"
+  >
+    <app-assent></app-assent>
   </div>
   <!-- Initial questionnaire pending -->
-  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='initial'">
-    <app-initial-questionnaire ></app-initial-questionnaire>
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'initial'"
+  >
+    <app-initial-questionnaire></app-initial-questionnaire>
   </div>
   <!-- Pre-test questionnaire pending -->
-  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='pre-test'">
-    <app-pre-test-questionnaire ></app-pre-test-questionnaire>
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'pre-test'"
+  >
+    <app-pre-test-questionnaire></app-pre-test-questionnaire>
   </div>
   <!-- Everything ok, game can start -->
-  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='instructions'">
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'instructions'"
+  >
     <app-start-instructions></app-start-instructions>
   </div>
   <!-- Post-test questionnaire pending -->
-  <div class="container" *ngIf="gameService.gameActive && gameService.stage=='post-test'">
-    <app-post-test-questionnaire ></app-post-test-questionnaire>
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'post-test'"
+  >
+    <app-post-test-questionnaire></app-post-test-questionnaire>
   </div>
 </ng-template>
