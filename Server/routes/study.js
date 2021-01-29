@@ -42,22 +42,37 @@ router.get('/:study_id/getForSignup', async (req, res) => {
                 err
             });
         }
-        Challenge.find({study: study.id}, (err, challenges) => {
-            if(err) {
-                return res.status(404).json({
-                    ok: false,
-                    err
-                });
+        if(study!=null) {
+            if('published' in study) {
+                if(!published) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: "STUDY_NOT_PUBLISHED"
+                    });
+                }
             }
-            if(challenges.length<1) {
-                return res.status(404).json({
-                    ok: false,
-                    err,
-                    msg: "NO_CHALLENGES_IN_STUDY"
-                });
-            }
-            res.status(200).json({study:study});
-        });
+            Challenge.find({study: study.id}, (err, challenges) => {
+                if(err) {
+                    return res.status(404).json({
+                        ok: false,
+                        err
+                    });
+                }
+                if(challenges.length<1) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: "NO_CHALLENGES_IN_STUDY"
+                    });
+                }
+                res.status(200).json({study:study});
+            });
+        }
+        else {
+            return res.status(404).json({
+                ok: false,
+                msg: "STUDY_NOT_FOUND"
+            });
+        }
     });
 });
 

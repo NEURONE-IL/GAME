@@ -83,7 +83,7 @@ export class SignupComponent implements OnInit {
 
   checkStudy() {
     const study_id = this.route.snapshot.paramMap.get('study_id');
-    this.studyService.getStudy(study_id).subscribe(response => {
+    this.studyService.getStudySignup(study_id).subscribe(response => {
       console.log(response);
       this.study = response['study'];
       this.isLoadingStudy=false;
