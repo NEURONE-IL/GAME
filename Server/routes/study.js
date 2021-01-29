@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Study = require('../models/study');
+const Challenge = require('../models/challenge');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
@@ -29,6 +30,34 @@ router.get('/:study_id', async (req, res) => {
             });
         }
         res.status(200).json({study});
+    });
+});
+
+router.get('/:study_id/getForSignup', async (req, res) => {
+    const _id = req.params.study_id;
+    Study.findOne({_id: _id}, (err, study) =>{
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        Challenge.find({study: study.id}, (err, challenges) => {
+            if(err) {
+                return res.status(404).json({
+                    ok: false,
+                    err
+                });
+            }
+            if(challenges.length<1) {
+                return res.status(404).json({
+                    ok: false,
+                    err,
+                    msg: "NO_CHALLENGES_IN_STUDY"
+                });
+            }
+            res.status(200).json({study:study});
+        });
     });
 });
 
