@@ -52,10 +52,6 @@ export class GameService {
 
   }
 
-  checkPlay() {
-
-  }
-
   finishChallenge() {
     this.stage = 'post-test';
     this.router.navigate(['start']);

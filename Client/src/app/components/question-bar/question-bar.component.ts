@@ -61,6 +61,16 @@ export class QuestionBarComponent implements OnInit {
     this.currentTooltip2 = 'Agregar a favoritos';
   }
 
+  ngOnDestroy(): void {
+    this.clearTimer();
+  }
+
+  clearTimer() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
   startTimer() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
@@ -72,14 +82,9 @@ export class QuestionBarComponent implements OnInit {
       }
       if (this.timeLeft==0) {
         console.log('time out!');
-        this.pauseTimer();
         this.sendDataTimeOut();
       }
     },1000)
-  }
-
-  pauseTimer() {
-    clearInterval(this.interval);
   }
 
   tabhideshow(event) {
@@ -120,7 +125,7 @@ export class QuestionBarComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        clearInterval(this.interval);
+        this.clearTimer();
         this.gameService.finishChallenge();
       },
       err => {
@@ -134,18 +139,19 @@ export class QuestionBarComponent implements OnInit {
 
   // Send data when the player runs out of time (no answer).
   sendDataTimeOut() {
+    this.clearTimer();
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer;
     if(answer==null) answer = '';
+    console.log('pasamos todas las init')
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswerFromTimeOut(challenge, this.timeLeft, this.hintUsed).subscribe(
+    this.challengeService.postAnswerFromTimeOut(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        clearInterval(this.interval);
         this.gameService.finishChallenge();
       },
       err => {
@@ -153,6 +159,7 @@ export class QuestionBarComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.gameService.finishChallenge();
       }
     );
   }
@@ -186,7 +193,7 @@ export class QuestionBarComponent implements OnInit {
       case 1:
         if(this.answerForm.get('url1').value === ''){
           this.answerForm.patchValue({url1: docTitle});
-          this.answerForm.patchValue({rawUrl1: docURL});          
+          this.answerForm.patchValue({rawUrl1: docURL});
           this.currentTooltip1 = 'Quitar de favoritos';
         }else{
           this.answerForm.patchValue({url1: ''});
@@ -194,10 +201,10 @@ export class QuestionBarComponent implements OnInit {
           this.currentTooltip1 = 'Agregar a favoritos';
         }
         break;
-      case 2: 
+      case 2:
         if(this.answerForm.get('url2').value === ''){
           this.answerForm.patchValue({url2: docTitle});
-          this.answerForm.patchValue({rawUrl2: docURL});  
+          this.answerForm.patchValue({rawUrl2: docURL});
           this.currentTooltip2 = 'Quitar de favoritos';
 
         }else{
