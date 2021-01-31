@@ -25,8 +25,8 @@ export class ChallengeCreationComponent implements OnInit {
     { id: 1, value: 'string', show: 'Texto' },
     { id: 2, value: 'number', show: 'Número' },
     { id: 3, value: 'url', show: 'URL' },
-    { id: 4, value: 'video', show: 'Vídeo' }
-  ];
+    { id: 4, value: 'justify', show: 'URL justificada' }
+];
 
   constructor(private formBuilder: FormBuilder, private router: Router, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 

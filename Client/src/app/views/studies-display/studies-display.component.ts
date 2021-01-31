@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import { Study, StudyService } from '../../services/game/study.service';
 import {Router} from '@angular/router';
+import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
+
 @Component({
   selector: 'app-studies-display',
   templateUrl: './studies-display.component.html',
@@ -10,13 +12,13 @@ export class StudiesDisplayComponent implements OnInit {
   studies: Study[] = [];
 
   constructor(
-    private studyService: StudyService, private router: Router) { }
+    private studyService: StudyService, private router: Router, public endpoints: EndpointsService) { }
+
 
   ngOnInit(): void {
 
     this.studyService.getStudies()
       .subscribe(response => this.studies = response['studys']);
-
   }
 
   getCover(index: number): string{

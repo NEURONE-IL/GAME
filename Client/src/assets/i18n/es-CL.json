@@ -30,8 +30,9 @@
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
       "HEADER": "Estudio",
-      "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio"
-    },
+      "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
+			"REGISTER_LINK": "Enlace de registro"
+		},
     "GAMIFICATION": {
       "STATUS_TITLE": "Estado Gamificación",
       "APP_GAMIFIED": "Aplicación gamificada",
@@ -306,7 +307,8 @@
       "CLOSE": "Cerrar"
     },
     "ANSWER_TYPE": {
-      "JUSTIFY": "Justifica tu respuesta aquí",
+			"JUSTIFY": "Justifica tu respuesta aquí",
+			"NUMBER": "Ingresa el número de tu respuesta aquí",
       "TEXT": "Ingresa tu respuesta aquí",
       "URL": "Las páginas que seleccionaste se muestran aquí"
     },

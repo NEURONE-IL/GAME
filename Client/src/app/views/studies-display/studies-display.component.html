@@ -1,6 +1,4 @@
 <mat-card class="studies-display-card">
-
-
     <div class="row">
       <div class="col-md-9" style="padding-top: 10px">
         <mat-card-subtitle>{{ "ADMIN.SUBTITLE" | translate }}:</mat-card-subtitle>
@@ -15,9 +13,6 @@
 
       </div>
     </div>
-
-
-
 	<mat-card-content>
 		<mat-grid-list cols="12" [gutterSize]="'12px'">
 			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" (mouseover)="fullStudy(study)" (mouseout)="shortStudy(study)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >

@@ -4,7 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
-import {MatExpansionModule} from '@angular/material/expansion' ;
+import { MatExpansionModule } from '@angular/material/expansion' ;
+import { EndpointsService } from '../../services/endpoints/endpoints.service'
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -23,6 +24,7 @@ export class StudyDisplayComponent implements OnInit {
               private studyService: StudyService,
               private toastr: ToastrService,
               private translate: TranslateService,
+              public endpoints: EndpointsService
               ) { }
 
   ngOnInit(): void {

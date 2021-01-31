@@ -20,7 +20,8 @@ export class ViewPageComponent implements OnInit {
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.title = params.get('title');
-        this.docUrl = this.endpoints.neuroneURL + this.url;
+        this.docUrl = this.endpoints.neuroneURL + '/' + this.url;
+        console.log(this.docUrl)
       });
   }
 
