@@ -144,7 +144,6 @@ export class QuestionBarComponent implements OnInit {
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer;
     if(answer==null) answer = '';
-    console.log('pasamos todas las init')
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
     this.challengeService.postAnswerFromTimeOut(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
       () => {
