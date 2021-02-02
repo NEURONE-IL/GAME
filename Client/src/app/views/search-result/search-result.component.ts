@@ -13,6 +13,7 @@ export class SearchResultComponent implements OnInit {
   locale: string;
   domain: string;
   documents = [];
+  BaseUrl = "http://159.65.100.191:3000/";
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
   ngOnInit(): void {

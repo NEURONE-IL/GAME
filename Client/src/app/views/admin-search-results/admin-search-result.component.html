@@ -38,7 +38,7 @@
           <div *ngFor="let doc of documents">
           <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'">
             <mat-card class="cardStyle">
-              <img mat-card-image src="{{doc.img}}">
+              <img mat-card-image src="{{BaseUrl+ doc.img}}">
               <mat-card-content>
                 <h5 class="url-bar">{{doc.url}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
