@@ -17,6 +17,7 @@
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
       "HINT": "Pista",
+      "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Tipo de pregunta",
@@ -30,6 +31,7 @@
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
       "HEADER": "Estudio",
+      "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
 			"REGISTER_LINK": "Enlace de registro"
 		},
@@ -273,6 +275,7 @@
         "URL": "URL"
       }
     },
+    "LOADING_DOC": "Cargando documento, por favor espere...",
     "SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
     "TITLE": "Carga de recursos",
     "TOAST": {

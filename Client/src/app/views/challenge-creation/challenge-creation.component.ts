@@ -26,7 +26,8 @@ export class ChallengeCreationComponent implements OnInit {
     { id: 2, value: 'number', show: 'Número' },
     { id: 3, value: 'url', show: 'URL' },
     { id: 4, value: 'justify', show: 'URL justificada' }
-];
+  ];
+  loading: Boolean;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
@@ -45,6 +46,8 @@ export class ChallengeCreationComponent implements OnInit {
 
     this.studyService.getStudies()
       .subscribe(response => this.studies = response['studys']);
+
+    this.loading = false;
   }
 
   get challengeFormControls(): any {
@@ -56,6 +59,7 @@ export class ChallengeCreationComponent implements OnInit {
   }
 
   createChallenge(){
+    this.loading = true;
     let challenge = this.challengeForm.value;
     challenge.study=this.study;
     console.log(challenge);
@@ -67,6 +71,7 @@ export class ChallengeCreationComponent implements OnInit {
         });
         /* this.router.navigate(['/admin_panel']); */
         this.resetForm();
+        this.loading = false;
       },
       err => {
         this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
