@@ -17,6 +17,7 @@
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
       "HINT": "Pista",
+      "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Tipo de pregunta",
@@ -30,6 +31,7 @@
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
       "HEADER": "Estudio",
+      "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
 			"REGISTER_LINK": "Enlace de registro"
 		},
@@ -40,7 +42,7 @@
       "APP_NOT_CONNECTED": "No conectado a NEURONE-GM",
       "GAMIFY_BUTTON": "Gamificar",
       "TOAST": {
-        "ERROR": "¡Fallo!",
+        "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se ha podido gamificar la aplicación",
         "SUCCESS": "¡Éxito!",
         "SUCCESS_MESSAGE": "Se ha gamificado la aplicación"
@@ -75,7 +77,7 @@
       "DOCUMENT": "Documento"
     },
     "TOAST": {
-      "ERROR": "Fallo!",
+      "ERROR": "¡Error!",
       "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
       "ERROR_MESSAGE_DELETE": "No se ha eliminado el Desafío",
       "ERROR_MESSAGE_UPDATE": "No se ha actualizado el Desafío",
@@ -144,7 +146,7 @@
       "SUBTITLE": "Responde las siguientes preguntas sobre el desafío que acabas de responder",
       "TITLE": "Cuestionario post-desafío",
       "TOAST": {
-        "ERROR": "Fallo!",
+        "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas post desafío",
         "SUCCESS": "Éxito!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas post desafío"
@@ -163,7 +165,7 @@
       "SUBTITLE": "Responde las siguientes preguntas antes de responder el desafío",
       "TITLE": "Cuestionario pre-desafío",
       "TOAST": {
-        "ERROR": "Fallo!",
+        "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
         "SUCCESS": "Éxito!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas pre desafío"
@@ -241,10 +243,12 @@
     "SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
     "TITLE": "Creación de estudios",
     "TOAST": {
-      "ERROR": "Fallo!",
-      "ERROR_MESSAGE": "No se ha creado el nuevo Estudio",
+      "ERROR": "¡Error!",
+      "ERROR_MESSAGE": "No se ha creado el nuevo estudio",
+      "NOT_LOADED_ERROR": "El estudio no han sido cargado",
+      "NOT_LOADED_MULTIPLE_ERROR": "Los estudios no han sido cargados",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Estudio"
+      "SUCCESS_MESSAGE": "Se ha creado el estudio"
     }
   },
   "UPLOAD": {
@@ -273,10 +277,11 @@
         "URL": "URL"
       }
     },
+    "LOADING_DOC": "Cargando documento, por favor espere...",
     "SUBTITLE": "Complete los siguientes campos para cargar un nuevo recurso en el sistema",
     "TITLE": "Carga de recursos",
     "TOAST": {
-      "ERROR": "Fallo!",
+      "ERROR": "¡Error!",
       "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha cargado el Recurso"
@@ -313,10 +318,12 @@
       "URL": "Las páginas que seleccionaste se muestran aquí"
     },
     "TOAST": {
-      "SUCCESS":"¡Éxito!",
-      "ERROR":"Error",
       "ANSWER_SUBMITTED":"Respuesta enviada correctamente",
-      "ERROR_MESSAGE":"No ha sido posible envíar la respuesta"
+      "ERROR":"Error",
+      "ERROR_MESSAGE":"No ha sido posible enviar la respuesta",
+      "SUCCESS":"¡Éxito!",
+      "TIMED_OUT_ANSWER": "¡Se te ha acabado el tiempo! No has dado una respuesta",
+      "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
     }
   }
 }

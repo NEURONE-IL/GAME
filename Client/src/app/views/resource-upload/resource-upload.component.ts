@@ -26,7 +26,8 @@ export class ResourceUploadComponent implements OnInit {
   localeOptions = [
     { id: 1, value: 'en-US', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.ENGLISH' },
     { id: 2, value: 'es-CL', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.SPANISH' }
-  ]
+  ];
+  loading: Boolean;
 
   constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
@@ -49,8 +50,19 @@ export class ResourceUploadComponent implements OnInit {
       checked: [null, Validators.required]
     });
 
-    this.studyService.getStudies()
-      .subscribe(response => this.studies = response['studys']);
+    this.studyService.getStudies().subscribe(
+      response => {
+        this.studies = response['studys'];
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_MULTIPLE_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+       
+    this.loading = false;
   }
 
   get resourceFormControls(): any {
@@ -63,6 +75,7 @@ export class ResourceUploadComponent implements OnInit {
   }
 
   uploadResource(){
+    this.loading = true;
     let resource = this.resourceForm.value;
     console.log(resource);
     this.endpointsService.loadDocument(resource).subscribe(
@@ -72,6 +85,7 @@ export class ResourceUploadComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
+        this.loading = false;
       },
       err => {
         this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
