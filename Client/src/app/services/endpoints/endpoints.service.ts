@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class EndpointsService {
 
   rootURL = 'http://159.65.100.191:3030/api/';
+//  rootURL = 'http://localhost:3090/api/';
 //  neuroneURL = 'http://localhost:3000';
   neuroneURL = 'http://159.65.100.191:3000';
 

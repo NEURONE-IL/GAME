@@ -3,29 +3,29 @@
 <div class="content-container" >
     <div class="container-left">
         <div class="player-image mb8">
-            <img src="/assets/img_avatar.png" class="player-image img">
+            <img src="/assets/img_avatar.png" class="player-image img" (click)="hola()">
             <ul class="player-status di-b">
-                <li class="clear"><span class="player-status-title di-ib fl">Nombres:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
-                <li class="clear"><span class="player-status-title di-ib fl">Apellidos:</span> <span class="player-status-value di-ib fr">{{user.last_names}}</span></li>
-                <li class="clear"><span class="player-status-title di-ib fl">Correo:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
+                <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
+                <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.LAST_NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.last_names}}</span></li>
+                <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.EMAIL" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
             </ul>
         </div>
     </div>
     <div class="container-right">
-        <h2 class="h2">Tú perfil</h2>
+        <h2 class="h2">{{"USER.PROFILE.YOUR_PROFILE" | translate}}</h2>
         <div class="user-statistics">
             <div class="stats">
-                <h5 class="h5">Título actual</h5>
+                <h5 class="h5">{{"USER.PROFILE.ACTUAL_TITLE" | translate}}</h5>
                 <li class="clear m0"><span class="player-status-value di-ib fl large">{{actualLevel?.level.name}}</span></li>
             </div>
             <div class="stats">
-                <h5 class="h5">Experiencia total</h5>
+                <h5 class="h5">{{"USER.PROFILE.TOTAL_EXP" | translate}}</h5>
                 <li class="clear m0"><span class="player-status-value di-ib fl large" *ngIf="points && points.length > 0">{{points[0].amount}} {{points[0].point.abbreviation}}</span></li>
             </div>
         </div>
         <div class="user-statistics">
             <div class="stats">
-                <h5 class="h5">Progreso siguiente nivel</h5>
+                <h5 class="h5">{{"USER.PROFILE.NEXT_LEVEL_PROGRESS" | translate}}</h5>
                 <mat-card class="progressLevelCard" >
                     <p  class="large" style="display: inline-block;">{{nearLevel?.level.name}}</p>
                     <div id="progressLevel" class="progress large">
@@ -36,13 +36,13 @@
         </div>
         <div class="user-statistics">
             <div class="stats">
-                <h5 class="h5">Rankings</h5>
+                <h5 class="h5">{{"USER.PROFILE.RANKINGS" | translate}}</h5>
                 <li class="clear m0" *ngFor="let rank of ranks"><span class="player-status-value di-ib fl large">{{rank}}</span></li>
             </div>
         </div>
         <div class="user-statistics">
             <div class="stats">
-                <h5 class="h5">Logros Completados</h5>
+                <h5 class="h5">{{"USER.PROFILE.ACHIEVEMENTS_COMPLETED" | translate}}</h5>
                 <div>
                     <mat-card *ngFor="let chall of completedChallenges"class="challengeCard" >
                         <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">

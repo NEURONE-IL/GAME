@@ -42,7 +42,8 @@ const postPlayerAction = async (playerAction, player_code, callback) => {
         }
         else{
             let credential = headers.credential;
-            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/players/'+ player_code+'/actions' , playerAction, headers.headers ).then((response)=> {
+            axios.post(process.env.NEURONEGM+'/api/'+credential.app_code+'/players/'+ player_code+'/actions', playerAction, headers.headers)
+            .then((response)=> {
                 callback(null, response.data.data)
             }).catch((err) => {
                 callback(err);

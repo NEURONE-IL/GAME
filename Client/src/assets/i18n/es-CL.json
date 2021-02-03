@@ -49,6 +49,19 @@
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
   },
+  "USER": {
+    "PROFILE": {
+      "NAMES": "Nombres",
+      "LAST_NAMES": "Apellidos",
+      "EMAIL": "Correo",
+      "YOUR_PROFILE": "Tu perfil",
+      "ACTUAL_TITLE": "Título actual",
+      "TOTAL_EXP": "Experiencia Total",
+      "NEXT_LEVEL_PROGRESS": "Progreso siguiente nivel",
+      "RANKINGS": "Rankings",
+      "ACHIEVEMENTS_COMPLETED": "Logros Completados"
+    }
+  },
   "CHALLENGE": {
     "FORM": {
       "FIELDS": {

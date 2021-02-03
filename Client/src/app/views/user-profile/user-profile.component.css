@@ -88,6 +88,7 @@ h3 {
 
 .content-container{
     display: table;
+    margin-top: 5%;
     width: 100%;
 }
 
@@ -96,9 +97,7 @@ h3 {
     padding: 8px 8px 8px 8px;
     vertical-align: top;
     width: 325px;
-    border-right: #ebebeb 1px solid;
-    border-left: #ebebeb 1px solid;
-    border-bottom: #ebebeb 1px solid;
+    border: #ebebeb 1px solid;
 }
 
 .container-right{

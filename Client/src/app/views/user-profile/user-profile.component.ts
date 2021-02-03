@@ -85,7 +85,9 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-
+  hola(){
+    console.log("xd")
+  }
   rankings(){
     this.gamificationService.userRankings(this.authService.getUser()._id, 'ranking_exp').subscribe(
       response => {
