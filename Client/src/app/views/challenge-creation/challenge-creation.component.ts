@@ -44,9 +44,18 @@ export class ChallengeCreationComponent implements OnInit {
       checked: ['', Validators.required]
     });
 
-    this.studyService.getStudies()
-      .subscribe(response => this.studies = response['studys']);
-
+    this.studyService.getStudies().subscribe(
+      response => {
+        this.studies = response['studys'];
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_MULTIPLE_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+        
     this.loading = false;
   }
 

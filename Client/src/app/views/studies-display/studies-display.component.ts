@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import { Study, StudyService } from '../../services/game/study.service';
 import {Router} from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-studies-display',
@@ -11,14 +13,21 @@ import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 export class StudiesDisplayComponent implements OnInit {
   studies: Study[] = [];
 
-  constructor(
-    private studyService: StudyService, private router: Router, public endpoints: EndpointsService) { }
-
+  constructor(private studyService: StudyService, private router: Router, public endpoints: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 
-    this.studyService.getStudies()
-      .subscribe(response => this.studies = response['studys']);
+    this.studyService.getStudies().subscribe(
+      response => {
+        this.studies = response['studys'];
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_MULTIPLE_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
 
   getCover(index: number): string{

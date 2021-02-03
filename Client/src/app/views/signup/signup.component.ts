@@ -5,6 +5,8 @@ import { StudyService } from '../../services/game/study.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { SignupConstants } from './signup.constants';
 import { getRegiones, getComunasByRegion } from 'dpacl';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +34,9 @@ export class SignupComponent implements OnInit {
               private formBuilder: FormBuilder,
               private studyService: StudyService,
               private authService: AuthService,
-              public router: Router) {
+              public router: Router,
+              private toastr: ToastrService, 
+              private translate: TranslateService) {
 
     this.courses = SignupConstants.courses;
   }
@@ -83,15 +87,20 @@ export class SignupComponent implements OnInit {
 
   checkStudy() {
     const study_id = this.route.snapshot.paramMap.get('study_id');
-    this.studyService.getStudySignup(study_id).subscribe(response => {
-      console.log(response);
-      this.study = response['study'];
-      this.isLoadingStudy=false;
-    },
-    (error) => {
-      this.validStudy = false;
-      this.isLoadingStudy=false;
-    });
+    this.studyService.getStudySignup(study_id).subscribe(
+      response => {
+        this.study = response['study'];
+        this.isLoadingStudy=false;
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.validStudy = false;
+        this.isLoadingStudy=false;      
+      }
+    );      
   }
 
   onRegionChange(regionChange) {
