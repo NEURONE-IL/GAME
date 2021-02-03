@@ -37,7 +37,7 @@ export class GameService {
       this.challenge = await this.challengeService.getChallenge(challengeId).toPromise();
       this.challenge = this.challenge.challenge;
       this.fetchUserStage();
-      if(this.stage!='post-test') {
+      if(this.stage!='summary') {
         this.canPlay = await this.authService.canPlay();
       }
       else {
@@ -53,7 +53,7 @@ export class GameService {
   }
 
   finishChallenge() {
-    this.stage = 'post-test';
+    this.stage = 'summary';
     this.router.navigate(['start']);
   }
 
@@ -127,9 +127,13 @@ export class GameService {
       }
     });
     this.authService.updateProgress({challenges: progress.challenges}).then(() => {
-      this.load();
-      this.router.navigate(['/']);
+      this.stage = 'summary';
     });
+  }
+
+  async finishSummary(){
+    this.load();
+    this.router.navigate(['/']);
   }
 
   getCurrentChallengeId() {
