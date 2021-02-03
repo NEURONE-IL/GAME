@@ -121,7 +121,7 @@
 			</mat-grid-list>
 		</form>
 	</mat-card-content>
-	<mat-card-actions class="cardActions">
+	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
 		<button mat-raised-button class="saveButton" [disabled]="!challengeForm.valid" (click)="createChallenge()">
 			{{ "BUTTONS.SAVE" | translate }}
 		</button>
@@ -129,4 +129,13 @@
 			{{ "BUTTONS.CLEAR" | translate }}
 		</button>
 	</mat-card-actions>
+	<ng-template #elseBlock>
+		<div class="spinnerCard">
+			<mat-progress-spinner color="primary" mode="indeterminate">
+			</mat-progress-spinner>
+			<span>
+				{{ "ADMIN.CHALLENGES.LOADING" | translate }}
+			</span>
+		</div>
+	</ng-template>	
 </mat-card>

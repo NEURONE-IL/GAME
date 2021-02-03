@@ -147,14 +147,14 @@ export class QuestionBarComponent implements OnInit {
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
     this.challengeService.postAnswerFromTimeOut(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
       () => {
-        this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("GAME.TOAST.TIMED_OUT_ANSWER"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
         this.gameService.finishChallenge();
       },
       err => {
-        this.toastr.error(this.translate.instant("GAME.TOAST.ERROR_MESSAGE"), this.translate.instant("GAME.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("GAME.TOAST.TIMED_OUT_ANSWER_ERROR"), this.translate.instant("GAME.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

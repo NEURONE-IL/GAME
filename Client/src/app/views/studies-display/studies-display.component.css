@@ -30,3 +30,7 @@ mat-card{
   padding-left: 15px
 }
 
+.registerLink{
+	font-weight: 500;
+	font-size: xx-small;
+}

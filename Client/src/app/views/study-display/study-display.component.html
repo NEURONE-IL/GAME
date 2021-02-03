@@ -1,14 +1,13 @@
 <mat-card class="study-display-card">
     <div class="row">
-      <div class="col-md-5" style="padding-top: 10px">
+      <div class="col-md-3" style="padding-top: 10px">
         <mat-card-header>
-        <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
-				<mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{endpoints.rootURL + study._id}}</mat-card-subtitle>
-        <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
-
+          <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
+          <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{endpoints.frontURL + '/signup/' + study._id}}</mat-card-subtitle>
+          <mat-card-subtitle class="mt-4">{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
         </mat-card-header>
       </div>
-      <div class="col-md-4" *ngIf="!createChallenge">
+      <div class="col-md-5" *ngIf="!createChallenge">
         <div class="options" style="text-align: right">
         AGREGAR RECURSO
         <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
@@ -21,7 +20,7 @@
           </button>
           </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="options" >
 
           {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}

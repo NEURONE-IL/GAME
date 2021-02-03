@@ -32,8 +32,17 @@ export class StudyDisplayComponent implements OnInit {
     this.verDocumentos = false;
     this.searchView = false;
 
-    this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id'))
-      .subscribe(response => this.study = response['study']);
+    this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id')).subscribe(
+      response => {
+        this.study = response['study'];
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
 
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
       .subscribe(response => this.challenges = response['challenges']);
