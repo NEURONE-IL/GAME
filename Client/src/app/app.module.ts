@@ -68,6 +68,7 @@ import { GameService } from './services/game/game.service';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import {AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
+import { SummaryComponent } from './views/summary/summary.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -106,7 +107,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartInstructionsComponent,
     UserProfileComponent,
     BookmarkComponent,
-    AdminSearchResultComponent
+    AdminSearchResultComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

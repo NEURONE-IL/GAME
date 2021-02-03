@@ -20,6 +20,7 @@ import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
+import { SummaryComponent } from './views/summary/summary.component';
 
 const routes: Routes = [
   {
@@ -111,7 +112,7 @@ const routes: Routes = [
       },
     ]
   },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

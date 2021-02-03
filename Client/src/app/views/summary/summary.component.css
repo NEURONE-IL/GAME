@@ -1,0 +1,76 @@
+h2{
+    font-size: 30px;
+    text-align: center !important;
+}
+
+h4{
+    margin-top: 1%;
+    text-align: center !important;
+}
+
+.summary-card{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+  }
+
+.summary-img{
+    width:10%;
+    margin-left: 45%;
+}
+
+.okButton{
+	background-color: #4CAF50;
+    color: #FFFFFF;
+    width:10%;
+    margin-top:5%;
+    margin-left: 45%;
+}
+
+.large{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.progressLevelCard{
+    width: 80%; 
+    height: 10%; 
+    margin: auto;
+    background-color: whitesmoke;
+}
+
+.progress {
+    height: 2em;
+    width: 100%;
+    background-color: #c9c9c9;
+    position: relative;
+    background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.progress:before {
+    content: attr(data-label);
+    font-size: 1.1em;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 0;
+    right: 0;
+    vertical-align: 0;
+    
+}
+.progress .value {
+    
+    background-image:
+	   -webkit-linear-gradient(-45deg, 
+	                           transparent 33%, rgba(0, 0, 0, .1) 33%, 
+	                           rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top, 
+	                           rgba(255, 255, 255, .25), 
+	                           rgba(0, 0, 0, .25)),
+       -webkit-linear-gradient(left, rgb(0, 204, 102), rgb(221, 255, 68));
+    
+    display: inline-block;
+    height: 100%;
+}

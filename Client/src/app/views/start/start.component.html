@@ -57,4 +57,12 @@
   >
     <app-post-test-questionnaire></app-post-test-questionnaire>
   </div>
+
+  <!-- Summary  / Gamification -->
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'summary'"
+  >
+    <app-summary></app-summary>
+  </div>
 </ng-template>

@@ -1,0 +1,20 @@
+<mat-card class="summary-card">
+    <mat-card-content>
+      <h2>¡Felicidades has completado el desafío!</h2>
+      <h4>Has adquirido 100 Experiencia</h4>
+      <img src="/assets/star.png" class="summary-img">
+      <h4>{{"USER.PROFILE.NEXT_LEVEL_PROGRESS" | translate}}</h4>
+                <mat-card class="progressLevelCard" >
+                    <p  class="large" style="display: inline-block;">{{nearLevel?.level.name}}</p>
+                    <div id="progressLevel" class="progress large">
+                        <span id="progressValue" class="value large"></span>
+                    </div>
+                </mat-card>
+
+      <button mat-raised-button color="accent" class="okButton" (click)="continue()">
+        Continuar
+      </button>
+    </mat-card-content>
+
+  </mat-card>
+  
