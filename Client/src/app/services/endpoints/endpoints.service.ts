@@ -29,7 +29,6 @@ export class EndpointsService {
   /*uploadDocument*/
   loadDocument(resource: any){
     let cleanResource = Object.assign(new Object, resource);
-    delete cleanResource.checked;
     delete cleanResource.type;
     cleanResource.domain = cleanResource.domain.split();
     cleanResource.task = cleanResource.task.split();

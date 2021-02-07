@@ -75,7 +75,7 @@
 						<input matInput formControlName="hint" #inputHint maxlength="100">
 						<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
+							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
 						</mat-error>
 						<mat-error *ngIf="challengeFormControls.hint.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_100" | translate }}
@@ -109,15 +109,6 @@
 						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-
-				</mat-grid-tile>
-			</mat-grid-list>
-			<mat-grid-list cols="12" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "CHALLENGE.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
-				<mat-error *ngIf="challengeFormControls.checked.hasError('required') && challengeFormControls.checked.touched">
-					{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>
 			</mat-grid-list>
 		</form>
 	</mat-card-content>

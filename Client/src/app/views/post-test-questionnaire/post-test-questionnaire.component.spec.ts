@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostTestQuestionnaireComponent } from./post-test-questionnaire.componentnent';
+import { PostTestQuestionnaireComponent } from './post-test-questionnaire.component'
 
 describe('PostTestQuestionnaireComponent', () => {
   let component: PostTestQuestionnaireComponent;

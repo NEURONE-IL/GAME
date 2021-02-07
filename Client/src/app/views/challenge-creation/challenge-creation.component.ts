@@ -38,10 +38,9 @@ export class ChallengeCreationComponent implements OnInit {
       question_type: ['', Validators.required],
       seconds: ['', [Validators.required, Validators.maxLength(3), Validators.min(30)]],
       max_attempts: ['', [Validators.required, Validators.maxLength(2), Validators.min(1)]],
-      hint: ['', [Validators.minLength(10), Validators.maxLength(100)]],
+      hint: ['', [Validators.minLength(5), Validators.maxLength(100)]],
       answer_type: ['', [Validators.minLength(3), Validators.maxLength(50)]],
       answer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
-      checked: ['', Validators.required]
     });
 
     this.studyService.getStudies().subscribe(

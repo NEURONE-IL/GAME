@@ -46,8 +46,6 @@ export class ResourceUploadComponent implements OnInit {
       relevant: false,
       searchSnippet: '',
       keywords: [[]],
-      /*Validation*/
-      checked: [null, Validators.required]
     });
 
     this.studyService.getStudies().subscribe(

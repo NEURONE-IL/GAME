@@ -32,8 +32,7 @@ export class InitialQuestionnaireComponent implements OnInit {
   ngOnInit(): void {
 
     this.questionnaireForm = this.formBuilder.group({
-      marked: new FormArray([]),
-      checked: ['', Validators.required]
+      marked: new FormArray([])
     })
 
     this.questionnaireService.getQuestionnairesByType(this.requiredType)

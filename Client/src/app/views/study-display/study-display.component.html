@@ -7,7 +7,19 @@
           <mat-card-subtitle class="mt-4">{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
         </mat-card-header>
       </div>
-      <div class="col-md-5" *ngIf="!createChallenge">
+      <div class="col-md-4" *ngIf="true">
+        <div class="options" >
+          {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
+          <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
+            <mat-icon>add</mat-icon>
+          </button>
+          {{ "BUTTONS.BACK" | translate }}
+          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-5" *ngIf="!createChallenge && challenges.length">
         <div class="options" style="text-align: right">
         AGREGAR RECURSO
         <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
@@ -19,19 +31,6 @@
             <mat-icon>search</mat-icon>
           </button>
           </div>
-      </div>
-      <div class="col-md-4">
-        <div class="options" >
-
-          {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
-          <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
-            <mat-icon>add</mat-icon>
-          </button>
-          {{ "BUTTONS.BACK" | translate }}
-          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-        </div>
       </div>
     </div>
   <div *ngIf="verDocumentos; else challengesPanel">

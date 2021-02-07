@@ -34,17 +34,14 @@ export class QuestionnaireService {
   }
 
   postQuestionnaire(questionnaire: any): Observable<any> {
-    /*Includes just the non empty properties and excludes the checked property used for validation*/
-    let cleanQuestionnaire = Object.assign(new Object, questionnaire);
-    delete cleanQuestionnaire.checked;
     /*Iterates through the object to remove the empty properties*/
-    for (const property in cleanQuestionnaire) {
-      if(cleanQuestionnaire[property] === ''){
-        delete cleanQuestionnaire[property];
+    for (const property in questionnaire) {
+      if(questionnaire[property] === ''){
+        delete questionnaire[property];
       }
     };
     /*Sends the request*/
-    return this.http.post(this.uri, cleanQuestionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+    return this.http.post(this.uri, questionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
   postAnswers(user: any, questionnaire: any, questionnaireAnswers: any): Observable<any> {

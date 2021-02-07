@@ -19,12 +19,6 @@
           </mat-grid-tile>
         </mat-grid-list>
       </div>
-			<mat-grid-list cols="4" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "QUESTIONNAIRE.INITIAL.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
-				<mat-error *ngIf="questionnaireFormControls.checked.hasError('required') && questionnaireFormControls.checked.touched">
-					{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>
-			</mat-grid-list>
     </form>
   </mat-card-content>
   <mat-card-actions class="cardActions">

@@ -33,8 +33,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
 
     this.question = this.gameService.challenge.question;
     this.questionnaireForm = this.formBuilder.group({
-      answers: new FormArray([]),
-      checked: ['', Validators.required]
+      answers: new FormArray([])
     })
     console.log(this.question);
 

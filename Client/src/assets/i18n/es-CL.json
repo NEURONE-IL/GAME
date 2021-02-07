@@ -282,7 +282,7 @@
         "CHECK": "Por favor confirme para continuar",
         "CHALLENGE": "Desafío",
         "LOCALE": "Idioma",
-        "MASKED_URL": "URL enmascarada",
+        "MASKED_URL": "URL visible al usuario",
         "NAME": "Nombre",
         "STUDY": "Estudio",
         "TYPE_OF": "Tipo de recurso",
