@@ -6,9 +6,13 @@ process.env.PUBLIC_PORT = 3030;
 
 //token secret
 process.env.TOKEN_SECRET = 'ady7asdy78'
-//DB
 
-process.env.URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@localhost:27017/neuronegame`;
+//DB
+process.env.DB_USER = 'neuroneAdmin';
+
+process.env.DB_PWD = 'DK,V-Dk6-*Pd-PM'
+
+process.env.URI = 'mongodb://localhost:27017/neuronegame';
 
 //NEURONE GM
 
