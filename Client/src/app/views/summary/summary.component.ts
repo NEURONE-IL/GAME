@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ChallengeService } from 'src/app/services/game/challenge.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { GamificationService } from 'src/app/services/game/gamification.service';
 
@@ -10,10 +11,10 @@ import { GamificationService } from 'src/app/services/game/gamification.service'
 })
 export class SummaryComponent implements OnInit {
 
-  constructor(private gamificationService: GamificationService,  private authService: AuthService,private gameService: GameService) { }
+  constructor(private gamificationService: GamificationService,  private authService: AuthService,private gameService: GameService, private challengeService: ChallengeService) { }
   progress
   nearLevel
-
+  answer
   ngOnInit(): void {
     this.levelProgress();
   }
@@ -36,6 +37,17 @@ export class SummaryComponent implements OnInit {
         console.log(err)
       }
     );
+  }
+
+  getAnswer(){
+    this.challengeService.lastUserAnswer().subscribe(
+      response => {
+        this.answer = response;
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
   async continue(){

@@ -105,7 +105,8 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         answers: req.body.answers,
         hintUsed: req.body.hintUsed,
         timeLeft: req.body.timeLeft,
-        distance: distance
+        distance: distance,
+        pointsObtained: 100
     })
     userChallenge.save((err, userChallenge) => {
         if (err) {
@@ -147,6 +148,20 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
             userChallenge
         });
     })
+})
+
+router.get('/last-answer', verifyToken, async (req, res)=> {
+    const user_id = req.body.user;
+    UserChallenge({user: user_id}, (err, last_answer) => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+        res.status(200).json({
+            last_answer
+        });
+    }).sort({createdAt: -1});
 })
 
 router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyEditBody], async (req, res) => {

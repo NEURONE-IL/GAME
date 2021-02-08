@@ -91,4 +91,8 @@ export class ChallengeService {
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
+
+  lastUserAnswer(){
+    return this.http.get(this.uri + 'last-answer', { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+  }
 }

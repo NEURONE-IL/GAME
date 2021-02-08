@@ -8,7 +8,8 @@
     "CLEAR": "LIMPIAR",
     "DELETE": "ELIMINAR",
     "EDIT": "EDITAR",
-    "SAVE": "GUARDAR"
+    "SAVE": "GUARDAR",
+    "CONTINUE": "CONTINUAR"
   },
   "ADMIN": {
     "CHALLENGES": {
@@ -36,6 +37,9 @@
 			"REGISTER_LINK": "Enlace de registro"
 		},
     "GAMIFICATION": {
+      "CHELLENGE_COMPLETED": "¡Felicidades has completado el desafío!",
+      "EXP1": "Has adquirido",
+      "EXP2": "experiencia",
       "STATUS_TITLE": "Estado Gamificación",
       "APP_GAMIFIED": "Aplicación gamificada",
       "APP_NOT_GAMIFIED": "Aplicación no gamificada",
