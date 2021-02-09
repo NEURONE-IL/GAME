@@ -15,7 +15,7 @@
         <p class="soft" *ngIf="!searching">Se han encontrado {{documents.length}} resultados.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
-            <mat-card class="cardStyle doc-card">
+            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" >
               <mat-card-content>
                 <h5 class="url-bar">{{doc.url}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
@@ -34,7 +34,7 @@
           </mat-progress-spinner>
           <span>
             {{ "GAME.SEARCH.SEARCHING" | translate }}
-          </span>          
+          </span>
         </div>
       </ng-template>
     </mat-tab>
