@@ -61,7 +61,7 @@ export class ResourceUploadComponent implements OnInit {
         });
       }
     );
-       
+
     this.loading = false;
   }
 
@@ -71,7 +71,7 @@ export class ResourceUploadComponent implements OnInit {
 
   resetForm() {
     this.resourceForm.reset();
-//    this.challenges.length = 0;
+    this.resourceForm.controls['domain'].setValue(this.study);
   }
 
   uploadResource(){
