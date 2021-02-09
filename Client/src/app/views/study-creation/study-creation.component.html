@@ -39,41 +39,30 @@
 			<mat-card-header>
 				<mat-card-subtitle style="margin-bottom: 0%;">{{ "Seleccione horas, minutos y segundos de espera para responder cada desafío" | translate }}:</mat-card-subtitle>
 			</mat-card-header>
-
-
-
 			<mat-grid-list cols="12">
-				<mat-grid-tile colspan="4">
+				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "Horas" }}</mat-label>
 						<mat-select formControlName="hours">
 							<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
-						</mat-select>							
+						</mat-select>	
+						<mat-error *ngIf="studyFormControls.hours.hasError('required')">
+							{{ "ERRORS.REQUIRED" | translate }}
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-				<mat-grid-tile colspan="4">
+				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "Minutos" }}</mat-label>
 						<mat-select formControlName="minutes">
 							<mat-option *ngFor="let minute of minutes" [value]="minute"> {{ minute }} </mat-option>
-						</mat-select>							
+						</mat-select>
+						<mat-error *ngIf="studyFormControls.minutes.hasError('required')">
+							{{ "ERRORS.REQUIRED" | translate }}
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-				<mat-grid-tile colspan="4">
-					<mat-form-field>
-						<mat-label>{{ "Segundos" }}</mat-label>
-						<mat-select formControlName="seconds">
-							<mat-option *ngFor="let second of seconds" [value]="second" > {{ second }}</mat-option>
-						</mat-select>							
-					</mat-form-field>
-				</mat-grid-tile>
-			</mat-grid-list>
-			<mat-grid-list cols="12" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "STUDY.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>      
-				<mat-error *ngIf="studyFormControls.checked.hasError('required') && studyFormControls.checked.touched">
-						{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>
-			</mat-grid-list>			
+			</mat-grid-list>		
 		</form>	
 	</mat-card-content>		
 	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
@@ -86,7 +75,7 @@
 	</mat-card-actions>	
 	<ng-template #elseBlock>
 		<div class="spinnerCard">
-			<mat-progress-spinner color="primary" mode="indeterminate">
+			<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
 			</mat-progress-spinner>
 			<span>
 				{{ "ADMIN.STUDIES.LOADING" | translate }}

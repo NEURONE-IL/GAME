@@ -29,10 +29,9 @@ export class StudyCreationComponent implements OnInit {
     this.studyForm = this.formBuilder.group({
       description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      checked: ['', Validators.required],
-      hours: [''],
-      minutes: [''],
-      seconds: ['']
+      hours: ['', [Validators.required]],
+      minutes: ['', [Validators.required]],
+      seconds: [0]
     });
 
     this.loading = false;

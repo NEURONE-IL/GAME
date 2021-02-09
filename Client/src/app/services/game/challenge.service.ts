@@ -43,18 +43,15 @@ export class ChallengeService {
   }
 
   postChallenge(challenge: any) {
-    /*Includes just the non empty properties and excludes the checked property used for validation*/
-    let cleanChallenge = Object.assign(new Object, challenge);
-    delete cleanChallenge.checked;
     /*Iterates through the object to remove the empty properties*/
-    for (const property in cleanChallenge) {
-      if(cleanChallenge[property] === '' || cleanChallenge[property] === null){
-        delete cleanChallenge[property];
+    for (const property in challenge) {
+      if(challenge[property] === '' || challenge[property] === null){
+        delete challenge[property];
       }
     }
-    console.log(cleanChallenge)
+    console.log(challenge)
     /*Sends the request*/
-    return this.http.post(this.uri, cleanChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+    return this.http.post(this.uri, challenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
   putChallenge(id: string, updatedChallenge: any): Observable<any> {
@@ -93,5 +90,9 @@ export class ChallengeService {
       hintUsed: hintUsed
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+  }
+
+  lastUserAnswer(){
+    return this.http.get(this.uri + 'last-answer', { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 }

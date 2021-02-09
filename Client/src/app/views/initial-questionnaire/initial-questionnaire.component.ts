@@ -1,4 +1,4 @@
-import { EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +21,9 @@ export class InitialQuestionnaireComponent implements OnInit {
               private authService: AuthService,
               public router: Router,
               private toastr: ToastrService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private changeDetector: ChangeDetectorRef              
+              ) { }
 
   questionnaireForm: FormGroup;
   questionnaires: Questionnaire[];
@@ -32,33 +34,33 @@ export class InitialQuestionnaireComponent implements OnInit {
   ngOnInit(): void {
 
     this.questionnaireForm = this.formBuilder.group({
-      marked: new FormArray([]),
-      checked: ['', Validators.required]
+      answers: new FormArray([])
     })
 
     this.questionnaireService.getQuestionnairesByType(this.requiredType)
     .subscribe(response => {
       this.questionnaires = response['questionnaires'];
-      let index=0;
       this.questionnaires.forEach(questionnaire => {
-        questionnaire.questions.forEach(question => {
-          question.options.forEach(option => {
-            option.index=index;
-            this.markedFormArray.push(new FormControl(false));
-            index++;
-          });
-        });
+        for(var i=0; i<questionnaire.questions.length; i++){
+          this.addAnswer();
+        }
       });
+      this.resetForm();
     });
   }
+
+  ngAfterContentChecked() {
+    this.changeDetector.detectChanges();
+  } 
 
   get questionnaireFormControls(): any {
     return this.questionnaireForm['controls'];
   }
 
-  get markedFormArray() {
-    return this.questionnaireForm.controls.marked as FormArray;
-  }
+  addAnswer(): void {
+    const answers = this.questionnaireForm.get('answers') as FormArray;
+    answers.push(new FormControl(['', Validators.required]));
+  }  
 
   resetForm() {
     this.questionnaireForm.reset();
@@ -68,7 +70,7 @@ export class InitialQuestionnaireComponent implements OnInit {
     this.onSaveClick.emit();
     console.log(this.questionnaireForm);
     console.log(this.questionnaires[0]);
-    this.questionnaireService.postAnswers(this.authService.getUser(), this.questionnaires[0], this.questionnaireForm.value.marked)
+    this.questionnaireService.postAnswers(this.authService.getUser(), this.questionnaires[0], this.questionnaireForm.value)
     .subscribe(response => {
         this.toastr.success(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS"), {
           timeOut: 5000,

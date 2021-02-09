@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireService } from '../../services/game/questionnaire.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -27,14 +27,15 @@ export class PreTestQuestionnaireComponent implements OnInit {
               private toastr: ToastrService,
               private translate: TranslateService,
               private gameService: GameService,
-              public router: Router) { }
+              public router: Router,
+              private changeDetector: ChangeDetectorRef
+              ) { }
 
   ngOnInit(): void {
 
     this.question = this.gameService.challenge.question;
     this.questionnaireForm = this.formBuilder.group({
-      answers: new FormArray([]),
-      checked: ['', Validators.required]
+      answers: new FormArray([])
     })
     console.log(this.question);
 
@@ -48,10 +49,13 @@ export class PreTestQuestionnaireComponent implements OnInit {
       });
       this.resetForm();
     });
-
     this.isLoggedIn = this.authService.loggedIn;
     this.user = this.authService.getUser();
   }
+
+  ngAfterContentChecked() {
+    this.changeDetector.detectChanges();
+  }  
 
   get questionnaireFormControls(): any {
     return this.questionnaireForm['controls'];

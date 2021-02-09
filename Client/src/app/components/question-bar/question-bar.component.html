@@ -17,7 +17,7 @@
         <mat-grid-tile colspan="6" rowspan="3">
           <form class="answer-form" [formGroup]="answerForm">
             <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'string'">
-              <mat-label>{{ "GAME.ANSWER_TYPE.STRING" | translate }}</mat-label>
+              <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
               <input matInput formControlName="answer">
               <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
             </mat-form-field>

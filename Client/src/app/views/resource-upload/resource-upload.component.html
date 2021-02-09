@@ -101,12 +101,6 @@
 					</mat-form-field>
 				</mat-grid-tile>
 			</mat-grid-list>
-			<mat-grid-list cols="12" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "UPLOAD.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
-				<mat-error *ngIf="resourceFormControls.checked.hasError('required') && resourceFormControls.checked.touched">
-					{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>
-			</mat-grid-list>
 		</form>
 	</mat-card-content>
 	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
@@ -119,7 +113,7 @@
 	</mat-card-actions>
 	<ng-template #elseBlock>
 		<div class="spinnerCard">
-			<mat-progress-spinner color="primary" mode="indeterminate">
+			<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
 			</mat-progress-spinner>
 			<span>
 				{{ "UPLOAD.LOADING_DOC" | translate }}

@@ -5,29 +5,23 @@
   </mat-card-header>
   <mat-card-content *ngFor="let questionnaire of questionnaires">
     <form [formGroup]="questionnaireForm">
-      <div formArrayName="marked">
+      <div formArrayName="answers">
         <mat-grid-list cols="12" *ngFor="let question of questionnaire.questions; let i = index">
           <div class="label">{{questionnaire.questions[i].number}}. {{questionnaire.questions[i].question}} </div>
           <mat-grid-tile colspan="4">
             <div class="initLabel">
               <ng-container *ngFor="let option of question.options">
                 <mat-grid-list cols="4">
-                  <mat-checkbox [formControlName]="option.index">{{option.option}}</mat-checkbox>
+                  <mat-checkbox required [formControlName]="i">{{option.option}}</mat-checkbox>
                 </mat-grid-list>
               </ng-container>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
       </div>
-			<mat-grid-list cols="4" class="checkbox-section">
-				<mat-checkbox class="checkbox" formControlName="checked" required>{{ "QUESTIONNAIRE.INITIAL.FORM.FIELDS.CHECK" | translate }}</mat-checkbox>
-				<mat-error *ngIf="questionnaireFormControls.checked.hasError('required') && questionnaireFormControls.checked.touched">
-					{{ "ERRORS.CHECK_REQUIRED" | translate }}
-				</mat-error>
-			</mat-grid-list>
     </form>
   </mat-card-content>
-  <mat-card-actions class="cardActions">
+  <mat-card-actions class="cardActions" *ngIf="questionnaires">
     <button mat-raised-button color="primary" class="saveButton" (click)="save()" [disabled]="!questionnaireForm.valid">
       {{ "BUTTONS.SAVE" | translate }}
     </button>

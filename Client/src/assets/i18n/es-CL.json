@@ -8,7 +8,8 @@
     "CLEAR": "LIMPIAR",
     "DELETE": "ELIMINAR",
     "EDIT": "EDITAR",
-    "SAVE": "GUARDAR"
+    "SAVE": "GUARDAR",
+    "CONTINUE": "CONTINUAR"
   },
   "ADMIN": {
     "CHALLENGES": {
@@ -36,6 +37,9 @@
 			"REGISTER_LINK": "Enlace de registro"
 		},
     "GAMIFICATION": {
+      "CHELLENGE_COMPLETED": "¡Felicidades has completado el desafío!",
+      "EXP1": "Has adquirido",
+      "EXP2": "experiencia",
       "STATUS_TITLE": "Estado Gamificación",
       "APP_GAMIFIED": "Aplicación gamificada",
       "APP_NOT_GAMIFIED": "Aplicación no gamificada",
@@ -282,7 +286,7 @@
         "CHECK": "Por favor confirme para continuar",
         "CHALLENGE": "Desafío",
         "LOCALE": "Idioma",
-        "MASKED_URL": "URL enmascarada",
+        "MASKED_URL": "URL visible al usuario",
         "NAME": "Nombre",
         "STUDY": "Estudio",
         "TYPE_OF": "Tipo de recurso",
@@ -337,6 +341,9 @@
       "SUCCESS":"¡Éxito!",
       "TIMED_OUT_ANSWER": "¡Se te ha acabado el tiempo! No has dado una respuesta",
       "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
+    },
+    "SEARCH": {
+      "SEARCHING": "Buscando resultados, por favor espere..."
     }
   }
 }
