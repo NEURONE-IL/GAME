@@ -341,6 +341,9 @@
       "SUCCESS":"¡Éxito!",
       "TIMED_OUT_ANSWER": "¡Se te ha acabado el tiempo! No has dado una respuesta",
       "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
+    },
+    "SEARCH": {
+      "SEARCHING": "Buscando resultados, por favor espere..."
     }
   }
 }

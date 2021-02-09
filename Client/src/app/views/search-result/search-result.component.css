@@ -116,3 +116,7 @@ mat-grid-tile .mat-figure{
   border: 0px;
   box-shadow: 0px 0px 0px 0px;
 }
+
+.spinnerCard{
+	text-align: -webkit-center;
+}

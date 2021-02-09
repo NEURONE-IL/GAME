@@ -12,7 +12,7 @@
   <mat-tab-group>
     <mat-tab label="Todo">
       <ng-template matTabContent>
-        <p class="soft">Se han encontrado {{documents.length}} resultados.</p>
+        <p class="soft" *ngIf="!searching">Se han encontrado {{documents.length}} resultados.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
             <mat-card class="cardStyle doc-card">
@@ -25,9 +25,16 @@
 
             <br>
           </div>
-          <div *ngIf="documents.length <= 0" class="text-center">
+          <div *ngIf="documents.length <= 0 && !searching" class="text-center">
             <h3>No results found for your search</h3>
           </div>
+        </div>
+        <div class="spinnerCard" *ngIf="searching">
+          <mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
+          </mat-progress-spinner>
+          <span>
+            {{ "GAME.SEARCH.SEARCHING" | translate }}
+          </span>          
         </div>
       </ng-template>
     </mat-tab>

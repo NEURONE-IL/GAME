@@ -13,10 +13,12 @@ export class SearchResultComponent implements OnInit {
   locale: string;
   domain: string;
   documents = [];
+  searching: boolean;
   BaseUrl = "http://159.65.100.191:3000/";
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
   ngOnInit(): void {
+    this.searching = true;
     this.route.paramMap
       .subscribe((params: ParamMap) => {
         this.query = params.get('query');
@@ -26,6 +28,7 @@ export class SearchResultComponent implements OnInit {
     this.endpointsService.getDocuments(this.query, this.locale, this.domain)
       .subscribe((data: []) => { // Success
         this.documents = data;
+        this.searching = false;
       },
       (error) => {
         console.error(error);

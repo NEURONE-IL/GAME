@@ -35,7 +35,7 @@
       </div>
     </form>
   </mat-card-content>
-  <mat-card-actions class="cardActions">
+  <mat-card-actions class="cardActions" *ngIf="questionnaires">
     <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
       {{ "BUTTONS.SAVE" | translate }}
     </button>
