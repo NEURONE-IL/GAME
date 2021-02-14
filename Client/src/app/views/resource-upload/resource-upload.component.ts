@@ -43,7 +43,7 @@ export class ResourceUploadComponent implements OnInit {
       task: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       /*NEURONE required*/
       maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
-      relevant: false,
+      relevant: null,
       searchSnippet: '',
       keywords: [[]],
     });
@@ -78,7 +78,7 @@ export class ResourceUploadComponent implements OnInit {
     console.log(resource);
     this.endpointsService.loadDocument(resource).subscribe(
       resource => {
-        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE") + ': ', this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

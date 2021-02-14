@@ -1,38 +1,43 @@
 <mat-card class="study-display-card">
-    <div class="row">
-      <div class="col-md-3" style="padding-top: 10px">
-        <mat-card-header>
-          <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
-          <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{endpoints.frontURL + '/signup/' + study._id}}</mat-card-subtitle>
-          <mat-card-subtitle class="mt-4">{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
-        </mat-card-header>
-      </div>
-      <div class="col-md-4" *ngIf="true">
-        <div class="options" >
-          {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
-          <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
-            <mat-icon>add</mat-icon>
-          </button>
-          {{ "BUTTONS.BACK" | translate }}
-          <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="col-md-5" *ngIf="!createChallenge && challenges.length">
-        <div class="options" style="text-align: right">
-        AGREGAR RECURSO
-        <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
-          <mat-icon>description</mat-icon>
+  <mat-grid-list cols="24">
+    <mat-grid-tile colspan="24">
+      <mat-card-header>
+        <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
+      </mat-card-header>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="24" rowHeight="100px">
+    <mat-grid-tile colspan="9">
+      <mat-card-header>        
+        <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{endpoints.frontURL + '/signup/' + study._id}}</mat-card-subtitle>
+        <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
+      </mat-card-header>
+    </mat-grid-tile>    
+    <mat-grid-tile colspan="7" *ngIf="true">
+      <div class="options" >
+        {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
+        <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
+          <mat-icon>add</mat-icon>
         </button>
-
-          SEARCH
-          <button mat-mini-fab  color="primary"  (click)="search()">
-            <mat-icon>search</mat-icon>
-          </button>
-          </div>
+        {{ "BUTTONS.BACK" | translate }}
+        <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
       </div>
-    </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="8" *ngIf="!createChallenge && challenges.length">
+      <div class="options" style="text-align: right">
+      AGREGAR RECURSO
+      <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
+        <mat-icon>description</mat-icon>
+      </button>
+        SEARCH
+        <button mat-mini-fab  color="primary"  (click)="search()">
+          <mat-icon>search</mat-icon>
+        </button>
+        </div>
+    </mat-grid-tile>
+  </mat-grid-list>
   <div *ngIf="verDocumentos; else challengesPanel">
     <app-resource-upload [study]="study._id"> </app-resource-upload>
   </div>
