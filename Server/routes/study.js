@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+
+const imageStorage = require('../middlewares/imageStorage');
+
 const Study = require('../models/study');
 const Challenge = require('../models/challenge');
 
@@ -76,7 +79,7 @@ router.get('/:study_id/getForSignup', async (req, res) => {
     });
 });
 
-router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBody], async (req, res) => {
+router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.single('file'), studyMiddleware.verifyBody], async (req, res) => {
     let cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
     const study = new Study({
         name: req.body.name,
@@ -86,6 +89,12 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyBod
     if(req.body.description){
         study.description = req.body.description;
     }
+    if(req.file){
+        let image_url = '/api/image/'+req.file.filename;
+        study.image_url = image_url;
+        study.image_id = req.file.id;
+    }
+    console.log(req.file)
     study.save((err, study) => {
         if (err) {
             return res.status(404).json({
