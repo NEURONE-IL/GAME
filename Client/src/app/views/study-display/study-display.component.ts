@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
 import { MatExpansionModule } from '@angular/material/expansion' ;
-import { EndpointsService } from '../../services/endpoints/endpoints.service'
+import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service'
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -14,9 +14,11 @@ import { EndpointsService } from '../../services/endpoints/endpoints.service'
 export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[] = [];
+  resources: Resource[] = [];
   createChallenge: boolean;
   verDocumentos: boolean;
   searchView: boolean;
+  registerLink: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -24,7 +26,7 @@ export class StudyDisplayComponent implements OnInit {
               private studyService: StudyService,
               private toastr: ToastrService,
               private translate: TranslateService,
-              public endpoints: EndpointsService
+              public endpointsService: EndpointsService
               ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class StudyDisplayComponent implements OnInit {
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id')).subscribe(
       response => {
         this.study = response['study'];
+        this.registerLink = this.endpointsService.frontURL + '/signup/' + this.study._id;
       },
       err => {
         this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
@@ -45,10 +48,26 @@ export class StudyDisplayComponent implements OnInit {
     );
 
     this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
-      .subscribe(response => this.challenges = response['challenges']);
+      .subscribe(response => {
+        this.challenges = response['challenges'];
+    });
+
+    this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+      .subscribe(response => {
+        this.resources = response;
+        console.log(this.resources);
+    })
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
+
+  getChallengeResources(challengeId: string){
+    var finalResources = [];
+    var filteredResources = this.resources.filter(resource => resource.task[0] === challengeId && resource.type != 'image');
+    filteredResources.forEach(resource => finalResources.push(resource));
+    return finalResources;
+  }
+
   BackToChallenges(){
     this.createChallenge = false;
     this.verDocumentos = false;
@@ -112,7 +131,7 @@ export class StudyDisplayComponent implements OnInit {
     );
   }
   getClass(type){
-    console.log(type);
+//    console.log(type);
     if (type=="page"){
       return "webPage";
     }

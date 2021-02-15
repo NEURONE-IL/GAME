@@ -1,13 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+export interface Resource {
+  _id: string,
+  date: Date,
+  docName: string,
+  domain: [string],
+  hash: string,
+  keywords: [string],
+  locale: string,
+  relevant: boolean,
+  route: string,
+  searchSnippet: string,
+  task: [string],
+  title: string,
+  type: string,
+  url: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class EndpointsService {
 
- // rootURL = 'http://159.65.100.191:3030/api/';
-   rootURL = 'http://localhost:3090/api/';
+  rootURL = 'http://159.65.100.191:3030/api/';
+ //  rootURL = 'http://localhost:3090/api/';
 //  neuroneURL = 'http://localhost:3000';
   frontURL = 'http://159.65.100.191:4200';
   neuroneURL = 'http://159.65.100.191:3000';

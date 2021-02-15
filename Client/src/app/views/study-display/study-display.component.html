@@ -9,7 +9,7 @@
   <mat-grid-list cols="24" rowHeight="100px">
     <mat-grid-tile colspan="9">
       <mat-card-header>        
-        <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{endpoints.frontURL + '/signup/' + study._id}}</mat-card-subtitle>
+        <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{ registerLink }}</mat-card-subtitle>
         <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
       </mat-card-header>
     </mat-grid-tile>    
@@ -66,7 +66,7 @@
 
     <!-- Another visualiation -->
     <div class="row">
-      <div class="col-md-12" *ngFor="let challenge of challenges">
+      <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
 
           <mat-card-header class="header-challenge">
             <div class="col-md-8">
@@ -122,6 +122,11 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <p>detail</p>
+                <div *ngIf="resources">
+                  <div *ngFor="let resource of getChallengeResources(challenge._id)">
+                    <p> <strong>Título:</strong> {{ resource.title }} | <strong> URL:</strong> {{ resource.url }} </p>
+                  </div>
+                </div>
               </mat-expansion-panel>
 
             </div>
