@@ -16,6 +16,7 @@ export class StudyCreationComponent implements OnInit {
   minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   seconds: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   loading: Boolean;
+  file: File;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,8 +49,14 @@ export class StudyCreationComponent implements OnInit {
   createStudy(){
     this.loading = true;
     let study = this.studyForm.value;
-    console.log(study)
-    this.studyService.postStudy(study).subscribe(
+    let formData = new FormData();
+    formData.append('name', study.name);
+    formData.append('description', study.description);
+    formData.append('hours', study.hours.toString());
+    formData.append('minutes', study.hours.toString());
+    formData.append('seconds', study.seconds.toString());
+    formData.append('file', this.file);
+    this.studyService.postStudy(formData).subscribe(
       study => {
         this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
@@ -66,5 +73,9 @@ export class StudyCreationComponent implements OnInit {
         });
       }
     );
+  }
+
+  handleFileInput(files: FileList) {
+    this.file = files.item(0);
   }
 }

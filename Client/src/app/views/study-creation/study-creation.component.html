@@ -64,6 +64,18 @@
 				</mat-grid-tile>
 			</mat-grid-list>		
 		</form>	
+		<mat-card-header>
+			<mat-card-subtitle style="margin-bottom: 0%;">{{ "Seleccione una imagen (opcional)" | translate }}:</mat-card-subtitle>
+		</mat-card-header>
+		<mat-grid-list cols="12">
+			<mat-grid-tile colspan="6">
+				<input type="file"
+					id="file"
+					(change)="handleFileInput($event.target.files)">
+
+			</mat-grid-tile>
+		</mat-grid-list>	
+
 	</mat-card-content>		
 	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
 		<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid" (click)="createStudy()">
