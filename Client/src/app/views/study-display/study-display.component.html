@@ -27,11 +27,11 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="8" *ngIf="!createChallenge && challenges.length">
       <div class="options" style="text-align: right">
-      AGREGAR RECURSO
+        {{ "ADMIN.ACTIONS.ADD_RESOURCE" | translate }}
       <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
         <mat-icon>description</mat-icon>
       </button>
-        SEARCH
+        {{ "ADMIN.ACTIONS.SEARCH" | translate }}
         <button mat-mini-fab  color="primary"  (click)="search()">
           <mat-icon>search</mat-icon>
         </button>

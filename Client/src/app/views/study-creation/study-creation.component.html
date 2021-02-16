@@ -37,12 +37,12 @@
 				</mat-grid-tile>
 			</mat-grid-list>	
 			<mat-card-header>
-				<mat-card-subtitle style="margin-bottom: 0%;">{{ "Seleccione horas, minutos y segundos de espera para responder cada desafío" | translate }}:</mat-card-subtitle>
+				<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
 			</mat-card-header>
 			<mat-grid-list cols="12">
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "Horas" }}</mat-label>
+						<mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label>
 						<mat-select formControlName="hours">
 							<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
 						</mat-select>	
@@ -53,7 +53,7 @@
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "Minutos" }}</mat-label>
+						<mat-label>{{ "ADMIN.CHALLENGES.MINUTES" | translate }}</mat-label>
 						<mat-select formControlName="minutes">
 							<mat-option *ngFor="let minute of minutes" [value]="minute"> {{ minute }} </mat-option>
 						</mat-select>
@@ -65,7 +65,7 @@
 			</mat-grid-list>		
 		</form>	
 		<mat-card-header>
-			<mat-card-subtitle style="margin-bottom: 0%;">{{ "Seleccione una imagen (opcional)" | translate }}:</mat-card-subtitle>
+			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
 		</mat-card-header>
 		<mat-grid-list cols="12">
 			<mat-grid-tile colspan="6">

@@ -26,7 +26,7 @@
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}</mat-label>
 						<mat-select formControlName="question_type" required>
-							<mat-option *ngFor="let option of questionOptions" [value]="option.value">{{option.show}}</mat-option>
+							<mat-option *ngFor="let option of questionOptions" [value]="option.value">{{option.show | translate}}</mat-option>
 						</mat-select>
 						<mat-error *ngIf="challengeFormControls.question_type.hasError('required')">
 							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
@@ -102,7 +102,7 @@
 					<mat-form-field>
 						<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER_TYPE" | translate }}</mat-label>
 						<mat-select formControlName="answer_type" required>
-							<mat-option *ngFor="let option of answerOptions" [value]="option.value">{{option.show}}</mat-option>
+							<mat-option *ngFor="let option of answerOptions" [value]="option.value">{{option.show | translate}}</mat-option>
 						</mat-select>
 						<mat-error *ngIf="challengeFormControls.answer_type.hasError('required')">
 							{{ "ERRORS.SELECTION_REQUIRED" | translate }}

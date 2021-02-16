@@ -16,16 +16,16 @@ export class ChallengeCreationComponent implements OnInit {
   challengeForm: FormGroup;
   studies: Study[];
   questionOptions = [
-    { id: 1, value: 'page', show: 'Página web' },
-    { id: 2, value: 'image', show: 'Imagen' },
-    { id: 3, value: 'book', show: 'Libro' },
-    { id: 4, value: 'video', show: 'Vídeo' }
+    { id: 1, value: 'page', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.WEB_PAGE" },
+    { id: 2, value: 'image', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.IMAGE" },
+    { id: 3, value: 'book', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.BOOK" },
+    { id: 4, value: 'video', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.VIDEO" }
   ];
   answerOptions = [
-    { id: 1, value: 'string', show: 'Texto' },
-    { id: 2, value: 'number', show: 'Número' },
-    { id: 3, value: 'url', show: 'URL' },
-    { id: 4, value: 'justify', show: 'URL justificada' }
+    { id: 1, value: 'string', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.STRING" },
+    { id: 2, value: 'number', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.NUMBER" },
+    { id: 3, value: 'url', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.URL" },
+    { id: 4, value: 'justify', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.JUSTIFY" }
   ];
   loading: Boolean;
 

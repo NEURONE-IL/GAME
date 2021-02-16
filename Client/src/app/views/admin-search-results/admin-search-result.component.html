@@ -10,9 +10,9 @@
     <hr >
 
   <mat-tab-group>
-    <mat-tab label="Todo">
+    <mat-tab label="{{'ADMIN.SEARCH.ALL' | translate }}">
       <ng-template matTabContent>
-        <p class="soft">Se han encontrado {{documents.length}} resultados.</p>
+        <p class="soft">{{ "ADMIN.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "ADMIN.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
             <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" >
@@ -26,12 +26,12 @@
             <br>
           </div>
           <div *ngIf="documents.length <= 0" class="text-center">
-            <h3>No results found for your search</h3>
+            <h3>{{ "ADMIN.SEARCH.NO_RESULTS" | translate }}</h3>
           </div>
         </div>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Imagenes">
+    <mat-tab label="{{'ADMIN.SEARCH.IMAGES' | translate }}">
       <div class="image-container">
 
         <mat-grid-list cols="12" [gutterSize]="'12px'">
@@ -51,7 +51,7 @@
 
       </div>
     </mat-tab>
-    <mat-tab label="Video"></mat-tab>
+    <mat-tab label="{{'ADMIN.SEARCH.VIDEOS' | translate }}"></mat-tab>
   </mat-tab-group>
 
 

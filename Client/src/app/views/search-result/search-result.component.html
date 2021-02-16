@@ -10,9 +10,9 @@
   <hr >
 
   <mat-tab-group>
-    <mat-tab label="Todo">
+    <mat-tab label="{{'GAME.SEARCH.ALL' | translate }}">
       <ng-template matTabContent>
-        <p class="soft" *ngIf="!searching">Se han encontrado {{documents.length}} resultados.</p>
+        <p class="soft" *ngIf="!searching">{{ "GAME.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "GAME.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
             <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" >
@@ -26,7 +26,7 @@
             <br>
           </div>
           <div *ngIf="documents.length <= 0 && !searching" class="text-center">
-            <h3>No results found for your search</h3>
+            <h3>{{ "GAME.SEARCH.NO_RESULTS" | translate }}</h3>
           </div>
         </div>
         <div class="spinnerCard" *ngIf="searching">
@@ -38,7 +38,7 @@
         </div>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Imagenes">
+    <mat-tab label="{{'GAME.SEARCH.IMAGES' | translate }}">
       <div class="image-container">
 
         <mat-grid-list cols="12" [gutterSize]="'12px'">
@@ -58,7 +58,7 @@
 
       </div>
     </mat-tab>
-    <mat-tab label="Video"></mat-tab>
+    <mat-tab label="{{'GAME.SEARCH.VIDEOS' | translate }}"></mat-tab>
   </mat-tab-group>
 
 </div>

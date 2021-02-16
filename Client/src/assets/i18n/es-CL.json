@@ -12,14 +12,22 @@
     "CONTINUE": "CONTINUAR"
   },
   "ADMIN": {
+    "ACTIONS": {
+      "ADD_RESOURCE": "AGREGAR RECURSO",
+      "SEARCH": "BUSCAR"
+    },
     "CHALLENGES": {
       "ANSWER": "Respuesta",
       "ANSWER_TYPE": "Tipo de respuesta",
+      "COOLDOWN": "Seleccione horas y minutos de espera para responder cada desafío",
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
       "HINT": "Pista",
+      "HOURS": "Horas",
+      "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
+      "MINUTES": "Minutos",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Tipo de pregunta",
       "SECONDS": "Segundos para responder",
@@ -52,6 +60,14 @@
         "SUCCESS_MESSAGE": "Se ha gamificado la aplicación"
       }
     },
+    "SEARCH": {
+      "ALL": "Todo",
+      "FOUND": "Se han encontrado",
+      "IMAGES": "Imágenes",
+      "NO_RESULTS": "No se han encontrado resultados",
+      "RESULTS": "resultados",
+      "VIDEOS": "Vídeos"
+    },
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
   },
@@ -82,6 +98,20 @@
         "STUDY": "Estudio",
         "CREATED_AT": "Creado",
         "UPDATED_AT": "Modificado"
+      },
+      "SELECTS": {
+        "ANSWER_TYPE": {
+          "JUSTIFY": "URL justificada",
+          "NUMBER": "Número",
+          "STRING": "Texto",
+          "URL": "URL"
+        },
+        "QUESTION_TYPE": {
+          "BOOK":"Libro",
+          "IMAGE": "Imagen",
+          "VIDEO":"Vídeo",
+          "WEB_PAGE": "Página web"
+        }
       }
     },
     "SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el sistema",
@@ -89,7 +119,7 @@
     "NO_CHALLENGE": "Aún no se ha registrado ningun desafio.",
     "QUESTION_TYPE": {
       "PAGE": "Pagina web",
-      "VIDEO": "Video",
+      "VIDEO": "Vídeo",
       "IMAGE": "Imagen",
       "DOCUMENT": "Documento"
     },
@@ -344,7 +374,17 @@
       "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
     },
     "SEARCH": {
-      "SEARCHING": "Buscando resultados, por favor espere..."
+      "ALL": "Todo",
+      "FOUND": "Se han encontrado",
+      "IMAGES": "Imágenes",
+      "NO_RESULTS": "No se han encontrado resultados",
+      "RESULTS": "resultados",
+      "SEARCHING": "Buscando resultados, por favor espere...",
+      "VIDEOS": "Vídeos"
+    },
+    "QUESTION_BAR": {
+      "TOOLTIP_ADD": "Agregar a favoritos",
+      "TOOLTIP_REMOVE": "Quitar de favoritos"
     }
   }
 }

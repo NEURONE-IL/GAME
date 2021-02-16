@@ -57,8 +57,8 @@ export class QuestionBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentTooltip1 = 'Agregar a favoritos';
-    this.currentTooltip2 = 'Agregar a favoritos';
+    this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+    this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
   }
 
   ngOnDestroy(): void {
@@ -193,23 +193,23 @@ export class QuestionBarComponent implements OnInit {
         if(this.answerForm.get('url1').value === ''){
           this.answerForm.patchValue({url1: docTitle});
           this.answerForm.patchValue({rawUrl1: docURL});
-          this.currentTooltip1 = 'Quitar de favoritos';
+          this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
         }else{
           this.answerForm.patchValue({url1: ''});
           this.answerForm.patchValue({rawUrl1: ''});
-          this.currentTooltip1 = 'Agregar a favoritos';
+          this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
         }
         break;
       case 2:
         if(this.answerForm.get('url2').value === ''){
           this.answerForm.patchValue({url2: docTitle});
           this.answerForm.patchValue({rawUrl2: docURL});
-          this.currentTooltip2 = 'Quitar de favoritos';
+          this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE")
 
         }else{
           this.answerForm.patchValue({url2: ''});
           this.answerForm.patchValue({rawUrl2: ''});
-          this.currentTooltip2 = 'Agregar a favoritos';
+          this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
         }
         break;
     }

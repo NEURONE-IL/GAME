@@ -8,7 +8,6 @@ import { SessionComponent } from './views/session/session.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
-import { UploadComponent } from './views/upload/upload.component';
 import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
@@ -47,18 +46,6 @@ const routes: Routes = [
         path: 'view-page/:title/:url',
         component: ViewPageComponent,
 //        canActivate: [DirectAccessGuard]
-      }
-    ]
-  },
-  {
-    path: 'upload',
-    component: UploadComponent,
-    //canActivate: [DirectAccessGuard],
-    children: [
-      {
-        path: 'resource',
-        component: ResourceUploadComponent,
-        //canActivate: [DirectAccessGuard],
       }
     ]
   },

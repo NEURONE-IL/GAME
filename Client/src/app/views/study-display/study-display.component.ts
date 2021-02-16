@@ -53,7 +53,7 @@ export class StudyDisplayComponent implements OnInit {
     });
 
     this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
-      .subscribe(response => {
+      .subscribe((response: Resource[]) => {
         this.resources = response;
         console.log(this.resources);
     })
