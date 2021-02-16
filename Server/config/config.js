@@ -1,3 +1,6 @@
+//ROOT
+proccess.env.ROOT = 'http://159.65.100.191:3030'
+
 //PORT
 process.env.PORT = process.env.PORT || 3090;
 

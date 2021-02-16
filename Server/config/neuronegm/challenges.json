@@ -19,6 +19,186 @@
                 }
             ],
             "key": "challenge_login_1"
+        },
+        {
+            "name": "Diez inicio de sesión",
+            "description": "Estudiante entra diez días a la plataforma",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_InicarSesion",
+                    "times_required": 10
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 1000
+                }
+            ],
+            "key": "challenge_login_2"
+        },
+        {
+            "name": "Treinta inicio de sesión",
+            "description": "Estudiante entra treinta días a la plataforma",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_InicarSesion",
+                    "times_required": 30
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 1000
+                }
+            ],
+            "key": "challenge_login_3"
+        },
+        {
+            "name": "Primer desafío completado",
+            "description": "Estudiante completa su primer desafío",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Responderuna",
+                    "times_required": 1
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 200
+                }
+            ],
+            "key": "challenge_answer_1"
+        },
+        {
+            "name": "Cinco desafíos completado",
+            "description": "Estudiante completa cinco desafíos",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Responderuna",
+                    "times_required": 5
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 1000
+                }
+            ],
+            "key": "challenge_answer_2"
+        },
+        {
+            "name": "Quince desafíos completado",
+            "description": "Estudiante completa quince desafíos",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Responderuna",
+                    "times_required": 15
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 3000
+                }
+            ],
+            "key": "challenge_answer_3"
+        },
+        {
+            "name": "Treinta desafíos completado",
+            "description": "Estudiante completa treinta desafíos",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Responderuna",
+                    "times_required": 30
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 5000
+                }
+            ],
+            "key": "challenge_answer_4"
+        },
+        {
+            "name": "Rsponder sin utilizar pistas",
+            "description": "Estudiante responde un desafío sin utilizar pistas",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Respondersin",
+                    "times_required": 15
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 200
+                }
+            ],
+            "key": "challenge_answer_noclue"
+        },
+        {
+            "name": "Rsponder con más de treinta segundos restantes",
+            "description": "Estudiante responde con más de treinta segundos restantes.",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Respondercon",
+                    "times_required": 1
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 200
+                }
+            ],
+            "key": "challenge_answer_seconds1"
+        },
+        {
+            "name": "Rsponder diez desafíos con más de treinta segundos restantes",
+            "description": "Estudiante diez desafíos responde con más de treinta segundos restantes.",
+            "start_date": "2020/01/01",
+            "end_date": "2030/01/01",
+            "actions_required": [
+                {
+                    "action_code": "game_action_Respondercon",
+                    "times_required": 10
+                }
+            ],
+            "challenges_required": [],
+            "points_awards": [
+                {
+                    "point_code": "game_point_Experiencia",
+                    "amount": 1000
+                }
+            ],
+            "key": "challenge_answer_seconds2"
         }
     ]
 }

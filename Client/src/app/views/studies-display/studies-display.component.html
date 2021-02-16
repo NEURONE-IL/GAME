@@ -21,7 +21,7 @@
 							{{study.name}}
 						</mat-card-title>
 					</mat-card-header>
-					<img mat-card-image [src]="getCover(index)">
+					<img mat-card-image [src]="study.image_url">
 					<mat-card-content>
             <div *ngIf="actualStudy==study._id; else studyShortDescription">
               <p *ngIf="study.description">{{study.description}}</p>

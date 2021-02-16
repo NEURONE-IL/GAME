@@ -97,7 +97,8 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
     const pointElement = await GameElement.findOne({key: 'exp_1'});
     const answerAction = await GameElement.findOne({key: 'responder_pregunta_1'});
     const noHintsAction = await GameElement.findOne({key: 'sin_pistas_1'});
-    let distance = await normalizeAndDistance(challenge.answer.toLowerCase(), req.body.answers[0].answer.toLowerCase())
+    let distance = await normalizeAndDistance(challenge.answer.toLowerCase(), req.body.answers[0].answer.toLowerCase());
+    let pointsObtained = await calculatePoints(distance);
     const userChallenge = new UserChallenge({
         user: req.body.user,
         challenge: challenge._id,
@@ -106,7 +107,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         hintUsed: req.body.hintUsed,
         timeLeft: req.body.timeLeft,
         distance: distance,
-        pointsObtained: 100
+        pointsObtained: pointsObtained
     })
     userChallenge.save((err, userChallenge) => {
         if (err) {
@@ -115,7 +116,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
             });
         }
         if(user && user.gm_code && pointElement){
-            let post =  {point_code: pointElement.gm_code, date: userChallenge.createdAt, amount: 100};
+            let post =  {point_code: pointElement.gm_code, date: userChallenge.createdAt, amount: pointsObtained};
             pointService.givePoints(post, user.gm_code, (err, data) => {
                 if(err){
                     console.log(err);
@@ -247,6 +248,16 @@ async function normalizeAndDistance(answer, userAnswer) {
     console.log(normalizedAnswer, normalizedUserAnswer);
     var distance = levenshtein(normalizedAnswer, normalizedUserAnswer);
     return distance;
+}
+
+async function calculatePoints(distance){
+    let base = 100;
+    if(distance >= 16){
+        return 20
+    }
+    else{
+        return base-distance*5;
+    }
 }
 
 module.exports = router;

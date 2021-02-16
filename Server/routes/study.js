@@ -90,7 +90,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
         study.description = req.body.description;
     }
     if(req.file){
-        let image_url = '/api/image/'+req.file.filename;
+        let image_url = process.env.ROOT+'/api/image/'+req.file.filename;
         study.image_url = image_url;
         study.image_id = req.file.id;
     }
