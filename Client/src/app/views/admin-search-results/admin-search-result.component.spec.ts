@@ -22,4 +22,8 @@ describe('AdminSearchResultComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+
 });

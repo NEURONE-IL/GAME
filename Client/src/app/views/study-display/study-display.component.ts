@@ -68,26 +68,6 @@ export class StudyDisplayComponent implements OnInit {
     return finalResources;
   }
 
-  BackToChallenges(){
-    this.createChallenge = false;
-    this.verDocumentos = false;
-    this.searchView = false;
-
-    this.challenges=[];
-    this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
-      .subscribe(response => this.challenges = response['challenges']);
-  }
-
-  CreateChallenge(){
-    this.createChallenge = true;
-
-    /* this.router.navigate(['create/challenge']); */
-
-  }
-
-  BackToStudies(){
-    this.router.navigate(['admin_panel']);
-  }
 
   confirmDelete(id: string){
     confirm(this.translate.instant("ADMIN.CHALLENGES.DELETE_CONFIRMATION")) && this.deleteChallenge(id);
@@ -161,15 +141,5 @@ export class StudyDisplayComponent implements OnInit {
     return date.substr(0,10);
   }
 
-  manageDocuments(){
-    this.verDocumentos = true;
-    this.createChallenge = false;
-    this.searchView = false;
-  }
 
-  search(){
-    this.searchView = true;
-    this.createChallenge = false;
-    this.verDocumentos = false;
-  }
 }

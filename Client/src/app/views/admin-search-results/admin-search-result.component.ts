@@ -34,4 +34,19 @@ export class AdminSearchResultComponent implements OnInit {
         });
   }
 
+
+
+  getParameterByName(url, name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(url);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  getThumbnail(youtubeUrl){
+    let thumb = this.getParameterByName(youtubeUrl, 'v');
+    let thumbUrl= 'http://img.youtube.com/vi/' + thumb + '/default.jpg';
+    return thumbUrl;
+  }
+
 }

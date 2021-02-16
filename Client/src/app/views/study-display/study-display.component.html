@@ -8,134 +8,111 @@
   </mat-grid-list>
   <mat-grid-list cols="24" rowHeight="100px">
     <mat-grid-tile colspan="9">
-      <mat-card-header>        
+      <mat-card-header>
         <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{ registerLink }}</mat-card-subtitle>
         <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
       </mat-card-header>
-    </mat-grid-tile>    
-    <mat-grid-tile colspan="7" *ngIf="true">
-      <div class="options" >
-        {{"" +"ADMIN.CHALLENGES.CREATE" | translate}}
-        <button mat-mini-fab  color="primary"  (click)="CreateChallenge()" [disabled]="createChallenge">
-          <mat-icon>add</mat-icon>
-        </button>
-        {{ "BUTTONS.BACK" | translate }}
-        <button mat-mini-fab  color="default" (click)="createChallenge?BackToChallenges():BackToStudies()">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="8" *ngIf="!createChallenge && challenges.length">
-      <div class="options" style="text-align: right">
-        {{ "ADMIN.ACTIONS.ADD_RESOURCE" | translate }}
-      <button mat-mini-fab  color="primary"  (click)="manageDocuments()">
-        <mat-icon>description</mat-icon>
-      </button>
-        {{ "ADMIN.ACTIONS.SEARCH" | translate }}
-        <button mat-mini-fab  color="primary"  (click)="search()">
-          <mat-icon>search</mat-icon>
-        </button>
-        </div>
     </mat-grid-tile>
   </mat-grid-list>
-  <div *ngIf="verDocumentos; else challengesPanel">
-    <app-resource-upload [study]="study._id"> </app-resource-upload>
-  </div>
-  <ng-template #challengesPanel>
-    <div *ngIf="createChallenge; else searchView1">
-      <app-challenge-creation [study]="study._id"> </app-challenge-creation>
-    </div>
-  </ng-template>
-  <ng-template #searchView1>
-    <div *ngIf="searchView; else challengesView">
-      <div class="searchEngine">
-        <app-admin-search-result [query]="'*'" [domain]="study._id"></app-admin-search-result>
-      </div>
 
-    </div>
-  </ng-template>
-
-  <ng-template #challengesView >
-    <div *ngIf="challenges.length==0; else showChallenges">
-      <mat-label class="emptyText">{{ "CHALLENGE.NO_CHALLENGE" | translate }}</mat-label>
-    </div>
-  </ng-template>
-
-
-  <ng-template #showChallenges>
-
-    <!-- Another visualiation -->
-    <div class="row">
-      <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
-
-          <mat-card-header class="header-challenge">
-            <div class="col-md-8">
-              <mat-card-title class="{{getClass(challenge.question_type)}}">
-                <div class="col-md-8" style="padding-top: 5px">
-                  {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
-                </div>
-                <div class="col-md-4 buttons" style="text-align: right">
-                  <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
-                  <button mat-button (click)="confirmDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
-                </div>
-
-              </mat-card-title>
-            </div>
-            <div class="col-md-4">
-              <mat-card-subtitle>{{ "ADMIN.CHALLENGES.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
-            </div>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="col-md-6">
-              {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
-            </div>
-            <div class="col-md-3">
-              <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </span>
-            </div>
-            <div class="col-md-3">
-               <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
-            </div>
-          </mat-card-content>
-          <mat-card-content>
-            <div class="col-md-6">
-              {{ "ADMIN.CHALLENGES.HINT" | translate }}: {{challenge.hint}}
-            </div>
-            <div class="col-md-3">
-              {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
-            </div>
-            <div class="col-md-3">
-              {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
-            </div>
-          </mat-card-content>
-
-          <mat-card-actions  style="text-align: left">
-            <div>
-              <!--
-              <button mat-button class="{{getClass(challenge.question_type)}}">
-                <mat-icon>add</mat-icon> VER RECURSOS ASOCIADOS
-              </button>
-              -->
-              <mat-expansion-panel>
-                <mat-expansion-panel-header >
-                  <mat-panel-title>
-                    <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> Ver Recursos </span>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <p>detail</p>
-                <div *ngIf="resources">
-                  <div *ngFor="let resource of getChallengeResources(challenge._id)">
-                    <p> <strong>Título:</strong> {{ resource.title }} | <strong> URL:</strong> {{ resource.url }} </p>
+  <!-- Nuevo diseño de Tabs -->
+  <mat-tab-group mat-align-tabs="end">
+    <mat-tab label="DESAFIOS">
+      <ng-template matTabContent>
+        <div class="row ">
+          <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
+            <br>
+            <mat-card-header class="header-challenge">
+              <div class="col-md-8">
+                <mat-card-title class="{{getClass(challenge.question_type)}}">
+                  <div class="col-md-8" style="padding-top: 5px">
+                    {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
                   </div>
-                </div>
-              </mat-expansion-panel>
+                  <div class="col-md-4 buttons" style="text-align: right">
+                    <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
+                    <button mat-button (click)="confirmDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
+                  </div>
 
-            </div>
-          </mat-card-actions>
+                </mat-card-title>
+              </div>
+              <div class="col-md-4">
+                <mat-card-subtitle>{{ "ADMIN.CHALLENGES.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="col-md-6">
+                {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
+              </div>
+              <div class="col-md-3">
+                <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </span>
+              </div>
+              <div class="col-md-3">
+                <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
+              </div>
+            </mat-card-content>
+            <mat-card-content>
+              <div class="col-md-6">
+                {{ "ADMIN.CHALLENGES.HINT" | translate }}: {{challenge.hint}}
+              </div>
+              <div class="col-md-3">
+                {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
+              </div>
+              <div class="col-md-3">
+                {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
+              </div>
+            </mat-card-content>
 
+            <mat-card-actions  style="text-align: left">
+              <div>
+                <!--
+                <button mat-button class="{{getClass(challenge.question_type)}}">
+                  <mat-icon>add</mat-icon> VER RECURSOS ASOCIADOS
+                </button>
+                -->
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header >
+                    <mat-panel-title>
+                      <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> Ver Recursos </span>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p>detail</p>
+                  <div *ngIf="resources">
+                    <div *ngFor="let resource of getChallengeResources(challenge._id)">
+                      <p> <strong>Título:</strong> {{ resource.title }} | <strong> URL:</strong> {{ resource.url }} </p>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+
+              </div>
+            </mat-card-actions>
+
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="CREAR DESAFIOS">
+      <ng-template matTabContent>
+        <app-challenge-creation [study]="study._id"> </app-challenge-creation>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="AGREGAR RECURSOS">
+      <ng-template matTabContent>
+        <app-resource-upload [study]="study._id"> </app-resource-upload>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="VER RECURSOS">
+      <div class="searchEngine">
+        <ng-template matTabContent>
+          <app-admin-search-result [query]="'*'" [domain]="study._id"></app-admin-search-result>
+        </ng-template>
       </div>
-    </div>
+    </mat-tab>
 
-  </ng-template>
+  </mat-tab-group>
+
 </mat-card>
 
 
