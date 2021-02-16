@@ -14,13 +14,14 @@ export class AdminSearchResultComponent implements OnInit {
   @Input() query: string;
   locale: string;
   @Input() domain: string;
-
+  screenHeight: any;
   documents = [];
   BaseUrl = "http://159.65.100.191:3000/";
 
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
   ngOnInit(): void {
+    this.screenHeight = window.innerHeight;
     this.search();
   }
 

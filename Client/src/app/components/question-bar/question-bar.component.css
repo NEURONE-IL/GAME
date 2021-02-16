@@ -18,6 +18,7 @@
 
 .mat-tab-group{
 	transition: max-height .25s ease-in-out;
+  z-index: 1;
 	max-height: 360px;
 	position: fixed;
 	bottom: 0;
