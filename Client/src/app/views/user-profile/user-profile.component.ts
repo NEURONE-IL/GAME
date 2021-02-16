@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageSelectorComponent } from 'src/app/components/image-selector/image-selector.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamificationService } from 'src/app/services/game/gamification.service';
 
@@ -16,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   points
   user
   ranks
-  constructor(private gamificationService: GamificationService,  private authService: AuthService) { }
+  constructor(private gamificationService: GamificationService,  private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
@@ -85,8 +87,15 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-  hola(){
-    console.log("xd")
+  openImageSelector() {
+    const dialogRef = this.dialog.open(ImageSelectorComponent);
+    dialogRef.afterClosed().subscribe(res => {
+      this.gamificationService.changeProfileImage(this.authService.getUser()._id, res).subscribe(response => {
+        this.authService.refreshUser();
+        this.user = this.authService.getUser();
+      })
+      console.log(res)
+    });
   }
   rankings(){
     this.gamificationService.userRankings(this.authService.getUser()._id, 'ranking_exp').subscribe(

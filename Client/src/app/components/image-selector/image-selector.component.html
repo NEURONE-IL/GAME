@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+    <h1 mat-dialog-title>Selecciona una imagen para tu perfil.</h1>
+    <mat-form-field appearance="standard">
+        <mat-select [(ngModel)]="selectedImage">
+          <mat-option *ngFor="let i of images" [value]="i.url">
+            <img with="30" height="30" style="white-space: nowrap; margin-right: 2%; vertical-align: middle;" [src]="i.url">
+            {{i.title}}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="submitForm()">{{"BUTTONS.SAVE" | translate}}</button>
+    <button mat-button (click)="onClickNO()">{{"BUTTONS.BACK" | translate}}</button>
+  </div>

@@ -3,7 +3,8 @@
 <div class="content-container" >
     <div class="container-left">
         <div class="player-image mb8">
-            <img src="/assets/img_avatar.png" class="player-image img" (click)="hola()">
+            <img *ngIf="user.image_url" [src]="user.image_url" class="player-image img" (click)="openImageSelector()">
+            <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="player-image img" (click)="openImageSelector()">
             <ul class="player-status di-b">
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.LAST_NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.last_names}}</span></li>

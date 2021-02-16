@@ -106,6 +106,30 @@ router.put("/:user_id", [verifyToken], async (req, res) => {
   });
 });
 
+router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
+  const _id = req.params.user_id;
+  const image_url = req.body.image_url;
+  await User.findOne({ _id: _id }, (err, user) => {
+    if (err) {
+      return res.status(404).json({
+        err,
+      });
+    }
+    user.image_url = image_url;
+    user.updatedAt = Date.now();
+    user.save((err, user) => {
+      if (err) {
+        return res.status(404).json({
+          err,
+        });
+      }
+      res.status(200).json({
+        user,
+      });
+    });
+  });
+})
+
 router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
 
