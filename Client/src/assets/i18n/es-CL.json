@@ -12,9 +12,11 @@
     "CONTINUE": "CONTINUAR"
   },
   "ADMIN": {
-    "ACTIONS": {
-      "ADD_RESOURCE": "AGREGAR RECURSO",
-      "SEARCH": "BUSCAR"
+    "TABS": {
+      "ADD_RESOURCES": "AGREGAR RECURSO",
+      "CREATE_CHALLENGE": "CREAR DESAFÍOS",
+      "CHALLENGES": "DESAFÍOS",
+      "SHOW_RESOURCES": "VER RECURSOS"
     },
     "CHALLENGES": {
       "ANSWER": "Respuesta",
@@ -22,19 +24,25 @@
       "COOLDOWN": "Seleccione horas y minutos de espera para responder cada desafío",
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
+      "DELETE_RESOURCE": "Eliminar recurso",
       "HINT": "Pista",
       "HOURS": "Horas",
       "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
       "MINUTES": "Minutos",
+      "NO_RESOURCES": "Aún no se han cargado recursos para este desafío",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Tipo de pregunta",
+      "RESOURCE_DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el recurso?",
       "SECONDS": "Segundos para responder",
       "STUDY": "Estudio",
       "STUDY_CHALLENGES": "Desafíos del estudio",
       "CREATED_AT": "Creado",
-      "UPDATED_AT": "Modificado"
+      "SHOW_RESOURCES": "Ver recursos",
+      "TITLE": "Título",
+      "UPDATED_AT": "Modificado",
+      "URL": "URL"      
     },
     "STUDIES": {
       "CREATE": "CREAR ESTUDIO",
@@ -330,9 +338,11 @@
     "TITLE": "Carga de recursos",
     "TOAST": {
       "ERROR": "¡Error!",
-      "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
+      "ERROR_MESSAGE": "No se ha cargado el nuevo recurso",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el nuevo recurso",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha cargado el Recurso"
+      "SUCCESS_MESSAGE": "Se ha cargado el recurso",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el recurso"
     }
   },
   "GAME": {

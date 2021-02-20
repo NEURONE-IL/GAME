@@ -50,8 +50,19 @@ export class EndpointsService {
     cleanResource.domain = cleanResource.domain.split();
     cleanResource.task = cleanResource.task.split();
     let header = new HttpHeaders();
-    header= header.append('Content-Type', 'text/plain');
+    header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'/v1/document/load', cleanResource, {headers: header});
+  }
+
+  deleteDocument(resource: any){
+    let header = new HttpHeaders();
+    header = header.append('Content-Type', 'text/plain');
+    let options = {
+      headers: header,
+      body: resource
+    };
+    console.log('options', options)
+    return this.http.delete(this.neuroneURL+'/v1/document/delete', options);    
   }
 
   /* QUESTIONS */

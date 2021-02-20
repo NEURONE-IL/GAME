@@ -51,11 +51,15 @@ export class StudyCreationComponent implements OnInit {
     let study = this.studyForm.value;
     let formData = new FormData();
     formData.append('name', study.name);
-    formData.append('description', study.description);
+    if(study.description){
+      formData.append('description', study.description);
+    }
     formData.append('hours', study.hours.toString());
     formData.append('minutes', study.hours.toString());
     formData.append('seconds', study.seconds.toString());
-    formData.append('file', this.file);
+    if(this.file){
+      formData.append('file', this.file);
+    }
     this.studyService.postStudy(formData).subscribe(
       study => {
         this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
