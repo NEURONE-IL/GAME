@@ -82,8 +82,6 @@ export class GameService {
               endTime.setSeconds(endTime.getSeconds() + this.challenge.seconds);
               const canContinue = new Date(Date.now()) < endTime ? true : false;
               if (canContinue) {
-                console.log('can continue!');
-                this.stage = 'game';
                 this.challengeStarted();
               }
               else {
@@ -122,16 +120,26 @@ export class GameService {
 
   async challengeStarted() {
     let progress = this.progress;
+    let overwriteSeconds = false;
     progress.challenges.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
-        chProgress.started = true;
-        chProgress.start_time = Date.now();
+        if(!chProgress.started) {
+          chProgress.started = true;
+          chProgress.start_time = Date.now();
+        }
+        else {
+          overwriteSeconds = true;
+        }
       }
     });
-    console.log(progress);
     this.authService.updateProgress({challenges: progress.challenges}).then(() => {
       this.stage = 'gameplay';
-      this.router.navigate(['session/search']);
+      if (overwriteSeconds) {
+        this.router.navigate(['session/search'], { state: { timeLeft: 50 } });
+      }
+      else {
+        this.router.navigate(['session/search']);
+      }
     });
   }
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
-const Role = require("../models/role");
+const Challenge = require('../models/challenge');
 const Study = require("../models/study");
 const UserChallenge = require("../models/userChallenge");
 const UserStudy = require("../models/userStudy");
@@ -9,6 +9,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const bcrypt = require("bcryptjs");
 
 const authMiddleware = require("../middlewares/authMiddleware");
+const { generateProgress } = require("./utils/routeUtils");
 
 router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
   User.find({}, { password: 0 }, (err, users) => {
@@ -133,14 +134,55 @@ router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
 router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
 
-  UserStudy.findOne({ user: userId }, (err, userStudy) => {
+  UserStudy.findOne({ user: userId }, async (err, userStudy) => {
     if (err) {
       return res.status(404).json({
         ok: false,
         err,
       });
     }
-    res.status(200).json(userStudy);
+
+    // If progress not found we generate it now
+    if (!userStudy) {
+      // Find user
+      const user = await User.findOne({ _id: userId }, err => {
+        if (err) {
+          return res.status(404).json({
+            ok: false,
+            err
+          });
+        }
+      });
+
+      // Find study
+      const study = await Study.findOne({ _id: user.study }, err => {
+        if (err) {
+          return res.status(404).json({
+            ok: false,
+            err
+          });
+        }
+      });
+
+      // Find study challenges
+      const challenges = await Challenge.find({ study: study }, err => {
+        if (err) {
+          return res.status(404).json({
+            ok: false,
+            err
+          });
+        }
+      });
+
+      await generateProgress(challenges, user, study).then((progress) => {
+        userStudy = progress;
+        res.status(200).json(userStudy);
+      });
+    }
+    else {
+      console.log('returning response');
+      res.status(200).json(userStudy);
+    }
   });
 });
 

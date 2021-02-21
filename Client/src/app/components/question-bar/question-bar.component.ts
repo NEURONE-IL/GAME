@@ -106,7 +106,13 @@ export class QuestionBarComponent implements OnInit {
     // this.challenge = this.gameService.challenge;
 
     // Set timer data
-    this.timeLeft = this.gameService.challenge.seconds;
+    if(this.router.getCurrentNavigation().extras.state) {
+      console.log("time left: ", this.router.getCurrentNavigation().extras.state.timeLeft);
+      this.timeLeft = this.router.getCurrentNavigation().extras.state.timeLeft;
+    }
+    else {
+      this.timeLeft = this.gameService.challenge.seconds;
+    }
     if(this.timeLeft >= 1000) this.leftValue = '20px';
     if(this.timeLeft < 1000) this.leftValue = '30px';
     if(this.timeLeft < 100) this.leftValue = '40px';
