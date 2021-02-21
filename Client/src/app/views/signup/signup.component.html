@@ -192,7 +192,10 @@
           <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
           <button [disabled]="userSubmitted" type="submit" (click)="save()" mat-raised-button color="primary">{{"SIGNUP.FINISH" | translate}}</button>
         </div>
-        <p *ngIf="userSubmitted">{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
+        <div *ngIf="userSubmitted">
+          <p>{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
+          <button mat-raised-button color="primary" (click)="redirect()"> {{"SIGNUP.GO_HOME" | translate}} </button>
+        </div>          
     </mat-step>
   </mat-horizontal-stepper>
 </div>

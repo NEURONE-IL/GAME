@@ -58,12 +58,7 @@ export class EndpointsService {
   deleteDocument(resource: any){
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
-    let options = {
-      headers: header,
-      body: resource
-    };
-    console.log('options', options)
-    return this.http.delete(this.neuroneURL+'/v1/document/delete', options);
+    return this.http.post(this.neuroneURL+'/v1/document/delete', resource, {headers: header});    
   }
 
   /* QUESTIONS */

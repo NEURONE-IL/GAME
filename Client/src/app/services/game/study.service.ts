@@ -11,7 +11,8 @@ export interface Study {
   gm_code: string,
   cooldown: number,
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
+  image_url: string
 }
 
 @Injectable({
@@ -34,6 +35,10 @@ export class StudyService {
   getStudySignup(id: string): Observable<any> {
     return this.http.get(this.uri+id+'/getForSignup');
   }
+
+  deleteStudy(id: string): Observable<any> {
+    return this.http.delete(this.uri+id);
+  }  
 
   postStudy(study: any): Observable<any> {
     console.log(study)
