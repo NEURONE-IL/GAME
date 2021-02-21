@@ -262,6 +262,7 @@ function addTextToEmail(mailHTML, user, link) {
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.CONFIRM]", "Confirmar cuenta");
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_BUTTON_DOESNT_WORK_TEXT]", "Si el botón no funciona, usa el siguiente link:");
     mailHTML = mailHTML.replace(/%CONFIRMATION_EMAIL.LINK%/g, link);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_LINK_DOESNT_WORK_TEXT]", "Si no puede pinchar el link de arriba, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet.");
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
     return mailHTML;
 }

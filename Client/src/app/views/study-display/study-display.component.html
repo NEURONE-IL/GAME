@@ -1,9 +1,14 @@
 <mat-card class="study-display-card">
   <mat-grid-list cols="24">
-    <mat-grid-tile colspan="24">
+    <mat-grid-tile colspan="12">
       <mat-card-header>
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
       </mat-card-header>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4"></mat-grid-tile>
+    <mat-grid-tile colspan="8">
+      <button mat-raised-button color="primary">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
+      <button mat-raised-button color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="24">
       <mat-card-header>
@@ -25,7 +30,7 @@
                     {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
                   </div>
                   <div class="col-md-4 buttons" style="text-align: right">
-                    <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
+                    <button mat-button>{{ "BUTTONS.EDIT" | translate }} <mat-icon>edit</mat-icon></button>
                     <button mat-button (click)="confirmChallengeDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
                   </div>
 

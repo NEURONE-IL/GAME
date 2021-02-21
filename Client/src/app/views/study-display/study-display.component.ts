@@ -62,6 +62,28 @@ export class StudyDisplayComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
+  confirmStudyDelete(id: string){
+    confirm(this.translate.instant("ADMIN.STUDIES.DELETE_CONFIRMATION")) && this.deleteStudy(id);
+  }  
+
+  deleteStudy(id: string){
+    this.studyService.deleteStudy(id)
+      .subscribe(study => {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE_DELETE"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.router.navigate(['admin_panel']);
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+
   getChallengeResources(challengeId: string){
     var finalResources = [];
     var filteredResources = this.resources.filter(resource => resource.task[0] === challengeId && resource.type != 'image');
