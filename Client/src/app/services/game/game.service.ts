@@ -51,8 +51,21 @@ export class GameService {
   }
 
   finishChallenge() {
-    this.stage = 'summary';
-    this.router.navigate(['start']);
+    let progress = this.progress;
+    progress.challenges.forEach((chProgress) => {
+      if (this.challenge._id == chProgress.challenge) {
+        chProgress.answer_submitted = true;
+      }
+    });
+    this.authService
+      .updateProgress({ challenges: progress.challenges })
+      .then(() => {
+        this.stage = 'summary';
+        this.router.navigate(['start']);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   nextChallenge() {
@@ -72,7 +85,7 @@ export class GameService {
           if (!chProgress.pre_test) {
             this.stage = 'pre-test';
           } else if (chProgress.started) {
-            if (chProgress.start_time != null) {
+            if (chProgress.start_time != null && !chProgress.answer_submitted) {
               let endTime = new Date(chProgress.start_time);
               endTime.setSeconds(endTime.getSeconds() + this.challenge.seconds);
               const canContinue = new Date(Date.now()) < endTime ? true : false;
@@ -134,9 +147,16 @@ export class GameService {
           const chProgress = this.progress.challenges.find(
             (ch) => ch.challenge == this.challenge._id
           );
-          const secondsPassed = (new Date(Date.now()).getTime() - new Date(chProgress.start_time).getTime()) / 1000;
-          const secondsLeft = Math.floor(this.challenge.seconds - secondsPassed);
-          this.router.navigate(['session/search'], { state: { timeLeft: secondsLeft } });
+          const secondsPassed =
+            (new Date(Date.now()).getTime() -
+              new Date(chProgress.start_time).getTime()) /
+            1000;
+          const secondsLeft = Math.floor(
+            this.challenge.seconds - secondsPassed
+          );
+          this.router.navigate(['session/search'], {
+            state: { timeLeft: secondsLeft },
+          });
         } else {
           this.router.navigate(['session/search']);
         }
