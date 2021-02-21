@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'session',
     component: SessionComponent,
-//    canActivate: [DirectAccessGuard],
+    canActivate: [DirectAccessGuard],
     children: [
       {
         path: 'search', // child route path

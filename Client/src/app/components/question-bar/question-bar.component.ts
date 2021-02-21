@@ -62,7 +62,7 @@ export class QuestionBarComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-//    this.clearTimer();
+    this.clearTimer();
   }
 
   clearTimer() {

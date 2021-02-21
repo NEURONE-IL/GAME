@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
               private studyService: StudyService,
               private authService: AuthService,
               public router: Router,
-              private toastr: ToastrService, 
+              private toastr: ToastrService,
               private translate: TranslateService) {
 
     this.courses = SignupConstants.courses;
@@ -76,9 +76,6 @@ export class SignupComponent implements OnInit {
     this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'))
       .subscribe((res) => {
         this.userSubmitted = true;
-//        setTimeout(() => {
-//          this.router.navigate(['/login']);
-//        }, 10000);
       },
       (err) => {
         console.log(err);
@@ -98,9 +95,9 @@ export class SignupComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.validStudy = false;
-        this.isLoadingStudy=false;      
+        this.isLoadingStudy=false;
       }
-    );      
+    );
   }
 
   onRegionChange(regionChange) {
