@@ -23,10 +23,11 @@ export interface Resource {
 })
 export class EndpointsService {
 
-  rootURL = 'http://159.65.100.191:3030/api/';
- //  rootURL = 'http://localhost:3090/api/';
-//  neuroneURL = 'http://localhost:3000';
-  frontURL = 'http://159.65.100.191:4200';
+  //rootURL = 'http://159.65.100.191:3030/api/';
+  rootURL = 'http://localhost:3090/api/';
+  //neuroneURL = 'http://localhost:3000';
+  //frontURL = 'http://159.65.100.191:4200';
+  frontURL = 'http://localhost:4200';
   neuroneURL = 'http://159.65.100.191:3000';
 
   constructor(protected http: HttpClient) { }
@@ -62,7 +63,7 @@ export class EndpointsService {
       body: resource
     };
     console.log('options', options)
-    return this.http.delete(this.neuroneURL+'/v1/document/delete', options);    
+    return this.http.delete(this.neuroneURL+'/v1/document/delete', options);
   }
 
   /* QUESTIONS */

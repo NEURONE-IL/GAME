@@ -77,7 +77,22 @@ export class GameService {
             this.stage = 'pre-test';
           }
           else if (chProgress.started) {
-            this.stage = 'post-test';
+            if (chProgress.start_time!=null) {
+              let endTime = new Date(chProgress.start_time);
+              endTime.setSeconds(endTime.getSeconds() + this.challenge.seconds);
+              const canContinue = new Date(Date.now()) < endTime ? true : false;
+              if (canContinue) {
+                console.log('can continue!');
+                this.stage = 'game';
+                this.challengeStarted();
+              }
+              else {
+                this.stage = 'post-test';
+              }
+            }
+            else {
+              this.stage = 'post-test';
+            }
           }
           else {
             this.stage = 'instructions';
@@ -110,8 +125,10 @@ export class GameService {
     progress.challenges.forEach(chProgress => {
       if(this.challenge._id==chProgress.challenge) {
         chProgress.started = true;
+        chProgress.start_time = Date.now();
       }
     });
+    console.log(progress);
     this.authService.updateProgress({challenges: progress.challenges}).then(() => {
       this.stage = 'gameplay';
       this.router.navigate(['session/search']);
