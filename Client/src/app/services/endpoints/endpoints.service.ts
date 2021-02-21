@@ -23,11 +23,11 @@ export interface Resource {
 })
 export class EndpointsService {
 
-  //rootURL = 'http://159.65.100.191:3030/api/';
-  rootURL = 'http://localhost:3090/api/';
+  rootURL = 'http://159.65.100.191:3030/api/';
+  // rootURL = 'http://localhost:3090/api/';
   //neuroneURL = 'http://localhost:3000';
-  //frontURL = 'http://159.65.100.191:4200';
-  frontURL = 'http://localhost:4200';
+  frontURL = 'http://159.65.100.191:4200';
+  // frontURL = 'http://localhost:4200';
   neuroneURL = 'http://159.65.100.191:3000';
 
   constructor(protected http: HttpClient) { }
@@ -58,7 +58,7 @@ export class EndpointsService {
   deleteDocument(resource: any){
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
-    return this.http.post(this.neuroneURL+'/v1/document/delete', resource, {headers: header});    
+    return this.http.post(this.neuroneURL+'/v1/document/delete', resource, {headers: header});
   }
 
   /* QUESTIONS */
