@@ -9,7 +9,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const bcrypt = require("bcryptjs");
 
 const authMiddleware = require("../middlewares/authMiddleware");
-const { generateProgress } = require("./utils/routeUtils");
+const { generateProgress } = require("../utils/routeUtils");
 
 router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
   User.find({}, { password: 0 }, (err, users) => {
@@ -174,9 +174,16 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
         }
       });
 
-      await generateProgress(challenges, user, study).then((progress) => {
-        userStudy = progress;
-        res.status(200).json(userStudy);
+      await generateProgress(challenges, user, study).then(async (progress) => {
+        await UserStudy.findOne({_id: progress._id}, (err, createdUserStudy) => {
+          if (err) {
+            return res.status(404).json({
+              ok: false,
+              err
+            });
+          }
+          res.status(200).json(createdUserStudy);
+        });
       });
     }
     else {

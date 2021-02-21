@@ -1,9 +1,9 @@
-const Token = require('../../models/token');
-const UserStudy = require('../../models/userStudy');
+const Token = require('../models/token');
+const UserStudy = require('../models/userStudy');
 const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const fs = require('fs');
-const playerService = require('../../services/neuronegm/player');
+const playerService = require('../services/neuronegm/player');
 
 // Creates user study progress
 function generateProgress(challenges, user, study) {

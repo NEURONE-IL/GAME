@@ -15,7 +15,7 @@ const {
   generateProgress,
   saveGMPlayer,
   sendConfirmationEmail,
-} = require("./utils/routeUtils");
+} = require("../utils/routeUtils");
 
 router.post(
   "/register",
