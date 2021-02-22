@@ -38,6 +38,7 @@ export class StudyDisplayComponent implements OnInit {
       response => {
         this.study = response['study'];
         this.registerLink = this.endpointsService.frontURL + '/signup/' + this.study._id;
+        console.log(this.route.snapshot.paramMap.get('study_id'))
       },
       err => {
         this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
@@ -56,9 +57,31 @@ export class StudyDisplayComponent implements OnInit {
       .subscribe((response: Resource[]) => {
         this.resources = response;
         console.log(this.resources);
-    })
+      })
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  confirmStudyDelete(id: string){
+    confirm(this.translate.instant("ADMIN.STUDIES.DELETE_CONFIRMATION")) && this.deleteStudy(id);
+  }  
+
+  deleteStudy(id: string){
+    this.studyService.deleteStudy(id)
+      .subscribe(study => {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE_DELETE"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.router.navigate(['admin_panel']);
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
   }
 
   getChallengeResources(challengeId: string){
@@ -68,8 +91,7 @@ export class StudyDisplayComponent implements OnInit {
     return finalResources;
   }
 
-
-  confirmDelete(id: string){
+  confirmChallengeDelete(id: string){
     confirm(this.translate.instant("ADMIN.CHALLENGES.DELETE_CONFIRMATION")) && this.deleteChallenge(id);
   }
 
@@ -85,6 +107,32 @@ export class StudyDisplayComponent implements OnInit {
       },
       err => {
         this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+
+  confirmResourceDelete(resource: Resource){
+    confirm(this.translate.instant("ADMIN.CHALLENGES.RESOURCE_DELETE_CONFIRMATION")) && this.deleteResource(resource);
+  }  
+
+  deleteResource(resource: Resource){
+    this.endpointsService.deleteDocument(resource)
+      .subscribe(response => {
+        this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+        .subscribe((response: Resource[]) => {
+          this.resources = response;
+          console.log(this.resources);
+        })
+        this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE_DELETE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      },
+      err => {
+        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
@@ -140,6 +188,4 @@ export class StudyDisplayComponent implements OnInit {
   formatDate(date){
     return date.substr(0,10);
   }
-
-
 }

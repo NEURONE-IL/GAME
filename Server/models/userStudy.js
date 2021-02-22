@@ -11,6 +11,8 @@ const UserStudySchema = new Schema({
         pre_test: {type: Boolean, default: false},
         post_test: {type: Boolean, default: false},
         started: {type: Boolean, default: false},
+        start_time: { type: Date, default: undefined },
+        answer_submitted: {type: Boolean, default: false},
         finished: {type: Boolean, default: false},
         _id: false,
         id: false

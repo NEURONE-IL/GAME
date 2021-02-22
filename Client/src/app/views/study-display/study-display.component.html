@@ -1,23 +1,24 @@
 <mat-card class="study-display-card">
   <mat-grid-list cols="24">
-    <mat-grid-tile colspan="24">
+    <mat-grid-tile colspan="12">
       <mat-card-header>
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
       </mat-card-header>
     </mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list cols="24" rowHeight="100px">
-    <mat-grid-tile colspan="9">
+    <mat-grid-tile colspan="4"></mat-grid-tile>
+    <mat-grid-tile colspan="8">
+      <button mat-raised-button color="primary">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
+      <button mat-raised-button color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="24">
       <mat-card-header>
         <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{ registerLink }}</mat-card-subtitle>
-        <mat-card-subtitle>{{ "ADMIN.CHALLENGES.STUDY_CHALLENGES" | translate }}: </mat-card-subtitle>
       </mat-card-header>
     </mat-grid-tile>
   </mat-grid-list>
-
   <!-- Nuevo diseño de Tabs -->
   <mat-tab-group mat-align-tabs="end">
-    <mat-tab label="DESAFIOS">
+    <mat-tab label="{{'ADMIN.TABS.CHALLENGES' | translate }}">
       <ng-template matTabContent>
         <div class="row ">
           <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
@@ -29,8 +30,8 @@
                     {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
                   </div>
                   <div class="col-md-4 buttons" style="text-align: right">
-                    <button mat-button>{{ "BUTTONS.EDIT" | translate }}<mat-icon>edit</mat-icon></button>
-                    <button mat-button (click)="confirmDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
+                    <button mat-button>{{ "BUTTONS.EDIT" | translate }} <mat-icon>edit</mat-icon></button>
+                    <button mat-button (click)="confirmChallengeDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
                   </div>
 
                 </mat-card-title>
@@ -72,38 +73,37 @@
                 <mat-expansion-panel>
                   <mat-expansion-panel-header >
                     <mat-panel-title>
-                      <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> Ver Recursos </span>
+                      <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> {{ "ADMIN.CHALLENGES.SHOW_RESOURCES" | translate }} </span>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <p>detail</p>
                   <div *ngIf="resources">
                     <div *ngFor="let resource of getChallengeResources(challenge._id)">
-                      <p> <strong>Título:</strong> {{ resource.title }} | <strong> URL:</strong> {{ resource.url }} </p>
+                    <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
+                      <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)"> <mat-icon>delete</mat-icon> </button> </p>
                     </div>
                   </div>
+                  <p *ngIf="!getChallengeResources(challenge._id).length"> <strong>{{ "ADMIN.CHALLENGES.NO_RESOURCES" | translate }}</strong> </p>
                 </mat-expansion-panel>
-
               </div>
             </mat-card-actions>
-
           </div>
         </div>
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="CREAR DESAFIOS">
+    <mat-tab label="{{'ADMIN.TABS.CREATE_CHALLENGE' | translate }}">
       <ng-template matTabContent>
         <app-challenge-creation [study]="study._id"> </app-challenge-creation>
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="AGREGAR RECURSOS">
+    <mat-tab label="{{'ADMIN.TABS.ADD_RESOURCES' | translate }}">
       <ng-template matTabContent>
         <app-resource-upload [study]="study._id"> </app-resource-upload>
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="VER RECURSOS">
+    <mat-tab label="{{'ADMIN.TABS.SHOW_RESOURCES' | translate }}">
       <div class="searchEngine">
         <ng-template matTabContent>
           <app-admin-search-result [query]="'*'" [domain]="study._id"></app-admin-search-result>

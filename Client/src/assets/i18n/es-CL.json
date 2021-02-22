@@ -7,14 +7,18 @@
     "BACK": "ATRÁS",
     "CLEAR": "LIMPIAR",
     "DELETE": "ELIMINAR",
+    "DELETE_STUDY": "ELIMINAR ESTUDIO",
     "EDIT": "EDITAR",
+    "EDIT_STUDY": "EDITAR ESTUDIO",
     "SAVE": "GUARDAR",
     "CONTINUE": "CONTINUAR"
   },
   "ADMIN": {
-    "ACTIONS": {
-      "ADD_RESOURCE": "AGREGAR RECURSO",
-      "SEARCH": "BUSCAR"
+    "TABS": {
+      "ADD_RESOURCES": "AGREGAR RECURSO",
+      "CREATE_CHALLENGE": "CREAR DESAFÍOS",
+      "CHALLENGES": "DESAFÍOS",
+      "SHOW_RESOURCES": "VER RECURSOS"
     },
     "CHALLENGES": {
       "ANSWER": "Respuesta",
@@ -22,23 +26,30 @@
       "COOLDOWN": "Seleccione horas y minutos de espera para responder cada desafío",
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
+      "DELETE_RESOURCE": "Eliminar recurso",
       "HINT": "Pista",
       "HOURS": "Horas",
       "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
       "MINUTES": "Minutos",
+      "NO_RESOURCES": "Aún no se han cargado recursos para este desafío",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Tipo de pregunta",
+      "RESOURCE_DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el recurso?",
       "SECONDS": "Segundos para responder",
       "STUDY": "Estudio",
       "STUDY_CHALLENGES": "Desafíos del estudio",
       "CREATED_AT": "Creado",
-      "UPDATED_AT": "Modificado"
+      "SHOW_RESOURCES": "Ver recursos",
+      "TITLE": "Título",
+      "UPDATED_AT": "Modificado",
+      "URL": "URL"      
     },
     "STUDIES": {
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
+      "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el estudio?",
       "HEADER": "Estudio",
       "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
@@ -125,13 +136,13 @@
     },
     "TOAST": {
       "ERROR": "¡Error!",
-      "ERROR_MESSAGE": "No se ha creado el nuevo Desafío",
-      "ERROR_MESSAGE_DELETE": "No se ha eliminado el Desafío",
-      "ERROR_MESSAGE_UPDATE": "No se ha actualizado el Desafío",
+      "ERROR_MESSAGE": "No se ha creado el nuevo desafío",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el desafío",
+      "ERROR_MESSAGE_UPDATE": "No se ha actualizado el desafío",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el Desafío",
-      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el Desafío",
-      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el Desafío"
+      "SUCCESS_MESSAGE": "Se ha creado el desafío",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el desafío",
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el desafío"
     }
   },
   "ERRORS": {
@@ -241,7 +252,8 @@
     "BACK": "Volver",
     "RESET": "Reiniciar",
     "SIGNUP": "Registrarte",
-    "CONFIRMATION_EMAIL_SENT": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam) para confirmar su usuario. Será redirigido a la página inicial en 10 segundos...",
+    "CONFIRMATION_EMAIL_SENT": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam) para confirmar su usuario. En caso de no poder pinchar el enlace contenido en el correo, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet.",
+    "GO_HOME": "Ir a inicio de sesión",
     "FORM": {
       "NAMES": "Nombres",
       "LAST_NAMES": "Apellidos",
@@ -292,10 +304,14 @@
     "TOAST": {
       "ERROR": "¡Error!",
       "ERROR_MESSAGE": "No se ha creado el nuevo estudio",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el estudio",
+      "ERROR_MESSAGE_UPDATE": "No se ha actualizado el estudio",
       "NOT_LOADED_ERROR": "El estudio no han sido cargado",
       "NOT_LOADED_MULTIPLE_ERROR": "Los estudios no han sido cargados",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha creado el estudio"
+      "SUCCESS_MESSAGE": "Se ha creado el estudio",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el estudio",
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio"      
     }
   },
   "UPLOAD": {
@@ -330,9 +346,11 @@
     "TITLE": "Carga de recursos",
     "TOAST": {
       "ERROR": "¡Error!",
-      "ERROR_MESSAGE": "No se ha cargado el nuevo Recurso",
+      "ERROR_MESSAGE": "No se ha cargado el nuevo recurso",
+      "ERROR_MESSAGE_DELETE": "No se ha eliminado el nuevo recurso",
       "SUCCESS": "Éxito!",
-      "SUCCESS_MESSAGE": "Se ha cargado el Recurso"
+      "SUCCESS_MESSAGE": "Se ha cargado el recurso",
+      "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el recurso"
     }
   },
   "GAME": {
