@@ -28,6 +28,7 @@ export class AdminSearchResultComponent implements OnInit {
     this.endpointsService.getDocuments(this.query, this.locale, this.domain)
       .subscribe((data: []) => { // Success
           this.documents = data;
+          this.endpointsService.sort(this.documents, "task1");
         },
         (error) => {
           console.error(error);

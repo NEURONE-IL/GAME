@@ -15,8 +15,15 @@ export class SummaryComponent implements OnInit {
   progress
   nearLevel
   answer
+  connected = false;
   ngOnInit(): void {
-    this.levelProgress();
+    if(this.authService.getUser().gm_code){
+      this.connected = true;
+      this.levelProgress();
+    }
+    else{
+      this.continue();
+    }
   }
 
   levelProgress(){

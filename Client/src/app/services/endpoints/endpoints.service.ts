@@ -39,6 +39,17 @@ export class EndpointsService {
     return this.http.post(this.neuroneURL+'/v1/document/search', post, {headers: header});
   }
 
+  /* SORT */
+  sort(documents, task){
+    for(let i = 1; i < 2; i++){
+      if(task === documents[i].task[0]){
+        this.arraymove(documents, i, 0)
+        break;
+      }
+    }
+    return documents;
+  }
+
   pingNeurone(){
     return this.http.get(this.neuroneURL+'/v1/ping');
   }
@@ -57,5 +68,12 @@ export class EndpointsService {
   /* QUESTIONS */
   getQuestions(){
     return this.http.get(this.rootURL + '/questions');
+  }
+
+
+  arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
   }
 }
