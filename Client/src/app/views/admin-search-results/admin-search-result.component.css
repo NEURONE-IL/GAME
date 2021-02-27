@@ -120,3 +120,7 @@ mat-grid-tile .mat-figure{
 .searchImage{
   width: 250px;
 }
+
+.searchImageMini{
+  width: 100px;
+}

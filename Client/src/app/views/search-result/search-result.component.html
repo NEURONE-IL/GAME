@@ -16,7 +16,41 @@
         <p class="soft" *ngIf="!searching">{{ "GAME.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "GAME.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
-            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]">
+
+            <!--Para imagenes -->
+            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="doc.type && doc.type=='image'">
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-md-2">
+                    <img class="img-fluid thumbnail searchImageMini" src="{{BaseUrl+ doc.img}}">
+                  </div>
+                  <div class="col-md-10">
+                    <h5 class="url-bar">{{doc.url}}</h5>
+                    <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
+                    <p>{{doc.searchSnippet}}</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <!--Para videos-->
+            <mat-card class="cardStyle doc-card"  *ngIf="doc.type && doc.type=='video'">
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-md-2">
+                    <img class="img-fluid thumbnail searchImageMini" src="{{getThumbnail(doc.url)}}">
+                  </div>
+                  <div class="col-md-10">
+                    <h5 class="url-bar">{{doc.url}}</h5>
+                    <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
+                    <p>{{doc.searchSnippet}}</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <!--Para documentos-->
+            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type" >
               <mat-card-content>
                 <h5 class="url-bar">{{doc.url}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
