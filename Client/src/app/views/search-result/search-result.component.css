@@ -1,6 +1,7 @@
 .result-content{
   width: 100%;
-  margin-bottom: 370px;
+  padding-bottom: 370px;
+  z-index: -1;
 }
 
 .toolbar {
@@ -117,6 +118,11 @@ mat-grid-tile .mat-figure{
   box-shadow: 0px 0px 0px 0px;
 }
 
+
 .spinnerCard{
 	text-align: -webkit-center;
+}
+
+.searchImage{
+  width: 250px;
 }

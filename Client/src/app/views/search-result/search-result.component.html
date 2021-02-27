@@ -11,11 +11,12 @@
 
   <mat-tab-group>
     <mat-tab label="{{'GAME.SEARCH.ALL' | translate }}">
+
       <ng-template matTabContent>
         <p class="soft" *ngIf="!searching">{{ "GAME.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "GAME.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
-            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" >
+            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]">
               <mat-card-content>
                 <h5 class="url-bar">{{doc.url}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
@@ -37,15 +38,17 @@
           </span>
         </div>
       </ng-template>
+
+
     </mat-tab>
     <mat-tab label="{{'GAME.SEARCH.IMAGES' | translate }}">
       <div class="image-container">
 
         <mat-grid-list cols="12" [gutterSize]="'12px'" >
           <div *ngFor="let doc of documents">
-            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'">
+            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.route]">
               <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.route]" >
-                <img mat-card-image src="{{BaseUrl+doc.img}}">
+                <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
                   <h5 class="url-bar">{{doc.url}}</h5>
                   <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
