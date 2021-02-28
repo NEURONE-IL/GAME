@@ -72,6 +72,7 @@ export class QuestionBarComponent implements OnInit {
   }
 
   startTimer() {
+    console.log('Seteando timer ahora');
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
