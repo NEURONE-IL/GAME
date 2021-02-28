@@ -28,3 +28,19 @@
 .spinnerCard{
   text-align: -webkit-center;
 }
+
+mat-label{
+  padding-bottom: 10px;
+}
+
+input.mat-input-element {
+  padding-bottom: 10px;
+}
+
+span .mat-select-placeholder{
+  padding-bottom: 10px;
+}
+
+.mat-select {
+  padding-bottom: 10px;
+}

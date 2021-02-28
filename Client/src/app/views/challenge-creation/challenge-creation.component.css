@@ -25,11 +25,27 @@
 	background-color: #FF9800;
 	color: #FFFFFF;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .spinnerCard{
 	text-align: -webkit-center;
+}
+
+mat-label{
+  padding-bottom: 10px;
+}
+
+input.mat-input-element {
+  padding-bottom: 10px;
+}
+
+span .mat-select-placeholder{
+  padding-bottom: 10px;
+}
+
+.mat-select {
+  padding-bottom: 10px;
 }
