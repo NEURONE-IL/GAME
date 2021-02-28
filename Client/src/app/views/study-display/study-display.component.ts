@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
-import { MatExpansionModule } from '@angular/material/expansion' ;
 import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -26,7 +26,8 @@ export class StudyDisplayComponent implements OnInit {
               private studyService: StudyService,
               private toastr: ToastrService,
               private translate: TranslateService,
-              public endpointsService: EndpointsService
+              public endpointsService: EndpointsService,
+              public studyUpdateDialog: MatDialog
               ) { }
 
   ngOnInit(): void {
@@ -158,6 +159,15 @@ export class StudyDisplayComponent implements OnInit {
       }
     );
   }
+
+  showUpdateDialog(): void {
+    const dialogRef = this.studyUpdateDialog.open(StudyUpdateDialogComponent, {
+      width: '250px',
+      data: this.study      
+    });
+    console.log(this.study);
+  }  
+  
   getClass(type){
 //    console.log(type);
     if (type=="page"){
@@ -188,4 +198,12 @@ export class StudyDisplayComponent implements OnInit {
   formatDate(date){
     return date.substr(0,10);
   }
+}
+
+@Component({
+  selector: 'app-study-update-dialog',
+  templateUrl: 'study-update-dialog.component.html',
+})
+export class StudyUpdateDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public study: Study) {}
 }

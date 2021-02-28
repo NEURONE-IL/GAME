@@ -75,6 +75,7 @@
 
 .urlInput{
 	cursor: default;
+	margin-top: 5%;
 }
 
 ::ng-deep .mat-form-field-ripple {
@@ -112,4 +113,3 @@ span .mat-select-placeholder{
 .mat-select {
   padding-bottom: 10px;
 }
-

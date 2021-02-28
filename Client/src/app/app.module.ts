@@ -58,12 +58,12 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ConsentComponent } from './components/consent/consent.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
-import { StudyDisplayComponent } from './views/study-display/study-display.component';
+import { StudyDisplayComponent, StudyUpdateDialogComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
 import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
-import {AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
+import { AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
 import { SummaryComponent } from './views/summary/summary.component';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 
@@ -95,6 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignupComponent,
     AdminPanelComponent,
     StudyDisplayComponent,
+    StudyUpdateDialogComponent,
     StudiesDisplayComponent,
     HintDialogComponent,
     AssentComponent,

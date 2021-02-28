@@ -402,7 +402,8 @@
     },
     "QUESTION_BAR": {
       "TOOLTIP_ADD": "Agregar a favoritos",
-      "TOOLTIP_REMOVE": "Quitar de favoritos"
+      "TOOLTIP_REMOVE": "Quitar de favoritos",
+      "FAVORITES": "Páginas favoritas"
     }
   }
 }
