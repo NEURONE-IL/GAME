@@ -37,7 +37,7 @@ export class SearchResultComponent implements OnInit {
 
   search(){
     if (this.query !== ''){
-      this.router.navigateByUrl('/',{skipLocationChange: true}).then(
+      this.router.navigate(['/session'],{skipLocationChange: true}).then(
         () => this.router.navigate(['session/search-result', this.query, this.locale, this.domain]));
     }
   }
