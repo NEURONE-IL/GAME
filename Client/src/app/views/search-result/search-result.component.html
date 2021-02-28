@@ -18,7 +18,7 @@
           <div *ngFor="let doc of documents">
 
             <!--Para imagenes -->
-            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="doc.type && doc.type=='image'">
+            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page',doc.title, doc.url]" *ngIf="doc.type && doc.type=='image'">
               <mat-card-content>
                 <div class="row">
                   <div class="col-md-2">
@@ -80,8 +80,8 @@
 
         <mat-grid-list cols="12" [gutterSize]="'12px'" >
           <div *ngFor="let doc of documents">
-            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.route]">
-              <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.route]" >
+            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.url]">
+              <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.url]" >
                 <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
                   <h5 class="url-bar">{{doc.url}}</h5>
