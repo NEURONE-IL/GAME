@@ -147,3 +147,56 @@
   top-padding:20px;
   top-margin:20px;
 }
+
+.study-update-card{
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 5%;
+}
+
+.mat-form-field{
+	width: 85%;
+}
+.checkbox-section{
+	margin-top: 5%;
+	text-align: center;
+}
+.checkbox{
+	margin: 0 10px;
+}
+.cardActions{
+	text-align: center;
+	margin-bottom: 5%;
+}
+.saveButton{
+	background-color: #4CAF50;
+	color: #FFFFFF;
+}
+.clearButton{
+	background-color: #FF9800;
+	color: #FFFFFF;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.spinnerCard{
+	text-align: -webkit-center;
+}
+
+mat-label{
+  padding-bottom: 10px;
+}
+
+input.mat-input-element {
+  padding-bottom: 10px;
+}
+
+span .mat-select-placeholder{
+  padding-bottom: 10px;
+}
+
+.mat-select {
+  padding-bottom: 10px;
+}

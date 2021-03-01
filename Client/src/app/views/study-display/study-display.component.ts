@@ -6,6 +6,7 @@ import { Challenge, ChallengeService } from '../../services/game/challenge.servi
 import { Study, StudyService } from '../../services/game/study.service';
 import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -162,7 +163,7 @@ export class StudyDisplayComponent implements OnInit {
 
   showUpdateDialog(): void {
     const dialogRef = this.studyUpdateDialog.open(StudyUpdateDialogComponent, {
-      width: '250px',
+      width: '60%',
       data: this.study      
     });
     console.log(this.study);
@@ -204,6 +205,36 @@ export class StudyDisplayComponent implements OnInit {
   selector: 'app-study-update-dialog',
   templateUrl: 'study-update-dialog.component.html',
 })
-export class StudyUpdateDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public study: Study) {}
+export class StudyUpdateDialogComponent implements OnInit{
+  studyForm: FormGroup;
+  hours: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  seconds: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  loading: Boolean;
+  file: File;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public study: Study, private formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.studyForm = this.formBuilder.group({
+      description: [this.study.description, [Validators.minLength(10), Validators.maxLength(250)]],
+      name: [this.study.name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      hours: [1, [Validators.required]],
+      minutes: [1, [Validators.required]],
+      seconds: [0]
+    });    
+  }
+
+  get studyFormControls(): any {
+    return this.studyForm['controls'];
+  }
+
+  resetForm() {
+    this.studyForm.reset();
+  }  
+
+  handleFileInput(files: FileList) {
+    this.file = files.item(0);
+  }
+  
 }
