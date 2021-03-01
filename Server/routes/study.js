@@ -125,7 +125,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
     })
 });
 
-router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, studyMiddleware.verifyEditBody], async (req, res) => {
+router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.upload.single('file'), studyMiddleware.verifyEditBody], async (req, res) => {
     const _id = req.params.study_id;
     const study = await Study.findOne({_id: _id}, (err, study) => {
         if (err) {
@@ -141,6 +141,14 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, studyMiddleware.v
         }
         if(req.body.hours && req.body.minutes && req.body.seconds ){
             study.cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
+        }
+        if(req.file){
+            if(level.image_id){
+                imageStorage.gfs.delete(level.image_id);
+            }
+            let image_url = process.env.ROOT+'/api/image/'+req.file.filename;
+            study.image_url = image_url;
+            study.image_id = req.file.id;
         }
         study.updatedAt = Date.now();
         study.save((err, study) => {
