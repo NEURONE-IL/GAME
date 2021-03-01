@@ -42,52 +42,54 @@
             </form>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="9" rowspan="1">
+          <mat-grid-tile colspan="1" rowspan="1">
+            <button mat-icon-button (click)="favoriteAction()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+              #tooltip="matTooltip"  
+              [(matTooltip)]="currentTooltip"
+              matTooltipPosition="right"
+              [ngSwitch]="favPage"
+            >
+            <mat-icon *ngSwitchCase="false">star_border</mat-icon>
+            <mat-icon *ngSwitchCase="true">star</mat-icon>
+            </button>                           
+          </mat-grid-tile>          
 
-          <p>{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
+          <mat-grid-tile colspan="3" rowspan="1">
+
+          <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
 
           </mat-grid-tile>
+          
+
+          <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+     
           <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
-          <mat-grid-tile colspan="1" rowspan="1">
-            <button mat-icon-button *ngIf="router.url.includes('view-page') || answerForm.get('url1').value !== ''" (click)="favoriteAction(1)"  style="color: #FF9800 !important"
-              #tooltip="matTooltip"  
-              [(matTooltip)]="currentTooltip1"
-              matTooltipPosition="right"
-            >
-              <mat-icon *ngIf="answerForm.get('url1').value === ''">star_border</mat-icon>
-              <mat-icon *ngIf="answerForm.get('url1').value !== ''">star</mat-icon>
-            </button>
-          </mat-grid-tile>      
 
           <mat-grid-tile colspan="7" rowspan="1">
             <form class="answer-form" [formGroup]="answerForm">          
               <mat-form-field class="input-full-width urlField">
-                <input matInput class="urlInput" formControlName="url1" [readonly]="true">
+                <input matInput formControlName="url1" [readonly]="true">
               </mat-form-field>     
             </form>
           </mat-grid-tile>
+
+          
+          <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
-          <mat-grid-tile colspan="1" rowspan="1">
-            <button mat-icon-button *ngIf="router.url.includes('view-page') || answerForm.get('url2').value !== ''" (click)="favoriteAction(2)"  style="color: #FF9800 !important"
-              #tooltip="matTooltip"  
-              [(matTooltip)]="currentTooltip2"
-              matTooltipPosition="right"
-            >
-            <mat-icon *ngIf="answerForm.get('url2').value === ''">star_border</mat-icon>
-            <mat-icon *ngIf="answerForm.get('url2').value !== ''">star</mat-icon>
-            </button>                           
-          </mat-grid-tile>
 
           <mat-grid-tile colspan="7" rowspan="1">
             <form class="answer-form" [formGroup]="answerForm">          
               <mat-form-field class="input-full-width urlField">
-                <input matInput class="urlInput" formControlName="url2" [readonly]="true">
+                <input matInput formControlName="url2" [readonly]="true">
               </mat-form-field>     
             </form>
           </mat-grid-tile>          
         </ng-template>
+
+        <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
 
         <mat-grid-tile colspan="6" rowspan="1">
           <button *ngIf="true" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >

@@ -70,7 +70,11 @@
 
 .urlField ::ng-deep .mat-form-field-underline {
 	/*hide underline*/
-	display: none;
+	/*display: none;*/
+}
+
+.urlField{
+	margin-top: 2%;
 }
 
 .urlInput{

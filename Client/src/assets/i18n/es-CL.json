@@ -403,7 +403,11 @@
     "QUESTION_BAR": {
       "TOOLTIP_ADD": "Agregar a favoritos",
       "TOOLTIP_REMOVE": "Quitar de favoritos",
-      "FAVORITES": "Páginas favoritas"
+      "FAVORITES": "Páginas favoritas",
+      "TOAST": {
+        "INFO": "Info",
+        "INFO_MESSAGE": "Solo puedes marcar 2 páginas como favoritas por pregunta"
+      }
     }
   }
 }

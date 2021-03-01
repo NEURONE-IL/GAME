@@ -30,13 +30,14 @@ export class QuestionBarComponent implements OnInit {
   value = 100;
   leftValue: string;
 
-  //Tootips
-  currentTooltip1: string;
-  currentTooltip2: string;
+  // Tooltip
+  currentTooltip: string;
 
   // Answer data
   answerForm: FormGroup;
 
+  // Favorite page
+  favPage: boolean;
 
   constructor(public gameService: GameService,
               public hintDialog: MatDialog,
@@ -54,11 +55,16 @@ export class QuestionBarComponent implements OnInit {
     });
     this.loadChallenge();
     this.startTimer();
+    // On router change, checks if a visited page is marked as favorite
+    router.events.subscribe((val) => {
+      if(router.url.includes('view-page')){
+        this.favPage = this.checkFavPage();
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
-    this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
   }
 
   ngOnDestroy(): void {
@@ -178,49 +184,103 @@ export class QuestionBarComponent implements OnInit {
     this.hintUsed = true;
   }
 
-  favoriteAction(index: number): void{
+  favoriteAction(): void{
     //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
     //Get docTitle
     let docTitle = decodeURI(titleArray[5]);
     //Get docURL
-    let rawURL = decodeURIComponent(titleArray[6]);
+    let rawUrl = decodeURIComponent(titleArray[6]);
     //Remove the URL prefix from NEURONE Core
-    const urlArray = rawURL.split('/');
+    const urlArray = rawUrl.split('/');
     let docURL = '';
     for(var i=3; i<urlArray.length; i++){
       docURL += urlArray[i] + '/';
     }
     //Remove the URL postfix from NEURONE Core
     docURL = docURL.replace('/index.html/', '');
-//    console.log(docURL)
-//    console.log(titleArray)
-    switch(index){
-      case 1:
-        if(this.answerForm.get('url1').value === ''){
-          this.answerForm.patchValue({url1: docTitle});
-          this.answerForm.patchValue({rawUrl1: docURL});
-          this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
-        }else{
-          this.answerForm.patchValue({url1: ''});
-          this.answerForm.patchValue({rawUrl1: ''});
-          this.currentTooltip1 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
-        }
-        break;
-      case 2:
-        if(this.answerForm.get('url2').value === ''){
-          this.answerForm.patchValue({url2: docTitle});
-          this.answerForm.patchValue({rawUrl2: docURL});
-          this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE")
-
-        }else{
-          this.answerForm.patchValue({url2: ''});
-          this.answerForm.patchValue({rawUrl2: ''});
-          this.currentTooltip2 = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
-        }
-        break;
+    var checkPage = this.checkPage(docURL);
+    // The page is already marked as favorite in the url1 field
+    if(checkPage === 1){
+      this.answerForm.patchValue({url1: ''});
+      this.answerForm.patchValue({rawUrl1: ''});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+      this.favPage = false;
+//      console.log('En URL 1');
     }
-    console.log(this.answerForm.value);
+    // The page is already marked as favorite in the url2 field
+    else if(checkPage === 2){
+      this.answerForm.patchValue({url2: ''});
+      this.answerForm.patchValue({rawUrl2: ''});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");      
+      this.favPage = false;
+//      console.log('En URL 2');
+    }
+    else{
+    // The page isn't marked as favorite and the url1 field is empty
+      if(this.answerForm.get('url1').value === ''){
+        this.answerForm.patchValue({url1: docTitle});
+        this.answerForm.patchValue({rawUrl1: docURL});
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE"); 
+        this.favPage = true;
+//        console.log('Asignado a URL 1');
+      }
+    // The page isn't marked as favorite and the url2 field is empty
+      else if(this.answerForm.get('url2').value === ''){
+        this.answerForm.patchValue({url2: docTitle});
+        this.answerForm.patchValue({rawUrl2: docURL});
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
+        this.favPage = true;
+//        console.log('Asignado a URL 2');
+      }
+      else{
+    // The page isn't marked as favorite and the url1 and url2 fields aren't empty
+        this.favPage = false;
+//        console.log('Ambos ocupados');
+        this.toastr.info(this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO_MESSAGE"), this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO"), {
+          timeOut: 8000,
+          positionClass: 'toast-top-center'
+        });        
+      }
+    }
+  }
+
+  checkFavPage(){
+    //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
+    const titleArray = window.location.href.split('/');
+    //Get docTitle
+    let docTitle = decodeURI(titleArray[5]);
+    //Get docURL
+    let rawUrl = decodeURIComponent(titleArray[6]);
+    //Remove the URL prefix from NEURONE Core
+    const urlArray = rawUrl.split('/');
+    let docURL = '';
+    for(var i=3; i<urlArray.length; i++){
+      docURL += urlArray[i] + '/';
+    }
+    //Remove the URL postfix from NEURONE Core
+    docURL = docURL.replace('/index.html/', '');  
+    var checkPage = this.checkPage(docURL);
+    if(checkPage === 1 || checkPage === 2){
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE"); 
+      return true;
+    }
+    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD"); 
+    return false;
+  }
+
+
+  checkPage(docURL: string){
+    if(this.answerForm.controls['rawUrl1'].value === docURL && docURL != ''){
+      console.log('Match 1');
+      return 1;
+    }
+    else if(this.answerForm.controls['rawUrl2'].value === docURL && docURL != ''){
+      console.log('Match 2');
+      return 2;
+    }
+    console.log('No match');
+    return 3;
   }
 }
 
