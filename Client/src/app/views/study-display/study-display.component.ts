@@ -66,7 +66,7 @@ export class StudyDisplayComponent implements OnInit {
 
   confirmStudyDelete(id: string){
     confirm(this.translate.instant("ADMIN.STUDIES.DELETE_CONFIRMATION")) && this.deleteStudy(id);
-  }  
+  }
 
   deleteStudy(id: string){
     this.studyService.deleteStudy(id)
@@ -118,7 +118,7 @@ export class StudyDisplayComponent implements OnInit {
 
   confirmResourceDelete(resource: Resource){
     confirm(this.translate.instant("ADMIN.CHALLENGES.RESOURCE_DELETE_CONFIRMATION")) && this.deleteResource(resource);
-  }  
+  }
 
   deleteResource(resource: Resource){
     this.endpointsService.deleteDocument(resource)
@@ -142,6 +142,7 @@ export class StudyDisplayComponent implements OnInit {
     );
   }
 
+
   updateChallenge(id: string, updatedChallenge: string){
     this.challengeService.putChallenge(id, updatedChallenge)
     .subscribe(challenge => {
@@ -164,11 +165,11 @@ export class StudyDisplayComponent implements OnInit {
   showUpdateDialog(): void {
     const dialogRef = this.studyUpdateDialog.open(StudyUpdateDialogComponent, {
       width: '60%',
-      data: this.study      
+      data: this.study
     });
     console.log(this.study);
-  }  
-  
+  }
+
   getClass(type){
 //    console.log(type);
     if (type=="page"){
@@ -199,6 +200,12 @@ export class StudyDisplayComponent implements OnInit {
   formatDate(date){
     return date.substr(0,10);
   }
+  reloadChallenges(){
+    this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
+      .subscribe(response => {
+        this.challenges = response['challenges'];
+      });
+  }
 }
 
 @Component({
@@ -222,7 +229,7 @@ export class StudyUpdateDialogComponent implements OnInit{
       hours: [1, [Validators.required]],
       minutes: [1, [Validators.required]],
       seconds: [0]
-    });    
+    });
   }
 
   get studyFormControls(): any {
@@ -231,10 +238,11 @@ export class StudyUpdateDialogComponent implements OnInit{
 
   resetForm() {
     this.studyForm.reset();
-  }  
+  }
 
   handleFileInput(files: FileList) {
     this.file = files.item(0);
   }
-  
+
 }
+
