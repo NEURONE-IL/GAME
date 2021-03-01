@@ -7,8 +7,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4"></mat-grid-tile>
     <mat-grid-tile colspan="8">
-      <button mat-raised-button color="primary" (click)="showUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
-      <button mat-raised-button color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
+      <button mat-raised-button class="actionButton" color="primary" (click)="showUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
+      <button mat-raised-button class="actionButton" color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="24">
       <mat-card-header>

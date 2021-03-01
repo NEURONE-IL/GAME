@@ -6,6 +6,7 @@
   "BUTTONS": {
     "BACK": "ATRÁS",
     "CLEAR": "LIMPIAR",
+    "CLOSE": "CERRAR",
     "DELETE": "ELIMINAR",
     "DELETE_STUDY": "ELIMINAR ESTUDIO",
     "EDIT": "EDITAR",
@@ -312,6 +313,10 @@
       "SUCCESS_MESSAGE": "Se ha creado el estudio",
       "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el estudio",
       "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio"      
+    },
+    "UPDATE": {
+      "SUBTITLE": "Complete los siguientes campos para editar el estudio en el sistema",
+      "TITLE": "Edición de estudio"      
     }
   },
   "UPLOAD": {
