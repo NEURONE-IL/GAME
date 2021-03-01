@@ -52,7 +52,7 @@
             <!--Para documentos-->
             <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type" >
               <mat-card-content>
-                <h5 class="url-bar">{{doc.url}}</h5>
+                <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
                 <p>{{doc.searchSnippet}}</p>
               </mat-card-content>
