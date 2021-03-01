@@ -54,4 +54,8 @@ export class SearchResultComponent implements OnInit {
     let thumbUrl= 'http://img.youtube.com/vi/' + thumb + '/default.jpg';
     return thumbUrl;
   }
+
+  showShortDescription(description, num){
+    return (description.substr(0, num));
+  }
 }

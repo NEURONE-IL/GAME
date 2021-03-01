@@ -2,7 +2,8 @@
   <mat-card-header>
     <mat-card-title>{{ "STUDY.TITLE" | translate }}</mat-card-title>
     <mat-card-subtitle>{{ "STUDY.SUBTITLE" | translate }}:</mat-card-subtitle>
-	</mat-card-header>	
+	</mat-card-header>
+
 	<mat-card-content>
 		<form [formGroup]="studyForm">
 			<mat-grid-list cols="12">
@@ -19,7 +20,7 @@
 						</mat-error>
 						<mat-error *ngIf="studyFormControls.name.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>												
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
 				<mat-grid-tile colspan="6">
@@ -32,10 +33,10 @@
 						</mat-error>
 						<mat-error *ngIf="studyFormControls.description.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_250" | translate }}
-						</mat-error>							
+						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-			</mat-grid-list>	
+			</mat-grid-list>
 			<mat-card-header>
 				<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
 			</mat-card-header>
@@ -45,7 +46,7 @@
 						<mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label>
 						<mat-select formControlName="hours">
 							<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
-						</mat-select>	
+						</mat-select>
 						<mat-error *ngIf="studyFormControls.hours.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
@@ -62,8 +63,8 @@
 						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-			</mat-grid-list>		
-		</form>	
+			</mat-grid-list>
+		</form>
 		<mat-card-header>
 			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
 		</mat-card-header>
@@ -74,16 +75,17 @@
 					(change)="handleFileInput($event.target.files)">
 
 			</mat-grid-tile>
-		</mat-grid-list>	    
-	</mat-card-content>		
+		</mat-grid-list>
+	</mat-card-content>
+
 	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
-		<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid">
+		<button mat-raised-button class="btn btn-success" [disabled]="!studyForm.valid">
 			{{ "BUTTONS.SAVE" | translate }}
 		</button>
-		<button mat-raised-button class="clearButton" (click)="resetForm()">
+		<button mat-raised-button class="btn btn-primary" (click)="resetForm()">
 			{{ "BUTTONS.CLEAR" | translate }}
 		</button>
-	</mat-card-actions>	
+	</mat-card-actions>
 	<ng-template #elseBlock>
 		<div class="spinnerCard">
 			<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
@@ -92,5 +94,5 @@
 				{{ "ADMIN.STUDIES.LOADING" | translate }}
 			</span>
 		</div>
-	</ng-template>	
+	</ng-template>
 </mat-card>
