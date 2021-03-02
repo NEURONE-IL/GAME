@@ -55,7 +55,15 @@ export class ChallengeService {
   }
 
   putChallenge(id: string, updatedChallenge: any): Observable<any> {
-    return this.http.put(this.uri+id, updatedChallenge);
+    /*Iterates through the object to remove the empty properties*/
+    for (const property in updatedChallenge) {
+      if(updatedChallenge[property] === '' || updatedChallenge[property] === null){
+        delete updatedChallenge[property];
+      }
+    }
+    console.log(updatedChallenge)
+    /*Sends the request*/    
+    return this.http.put(this.uri+id, updatedChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
   deleteChallenge(id: string): Observable<any> {

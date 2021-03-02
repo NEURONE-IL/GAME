@@ -1,0 +1,130 @@
+<mat-card-header>
+	<mat-card-title>{{ "CHALLENGE.TITLE" | translate }}</mat-card-title>
+	<mat-card-subtitle>{{ "CHALLENGE.SUBTITLE" | translate }}:</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+	<form [formGroup]="challengeForm">
+		<mat-grid-list cols="12">
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION" | translate }}</mat-label>
+					<input matInput formControlName="question" required #inputQuestion maxlength="300">
+					<mat-hint align="end">{{inputQuestion.value?.length || 0}}/300</mat-hint>
+					<mat-error *ngIf="challengeFormControls.question.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.question.hasError('minlength')">
+						{{ "ERRORS.MIN_LENGTH_10" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.question.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_300" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}</mat-label>
+					<mat-select formControlName="question_type" required>
+						<mat-option *ngFor="let option of questionOptions" [value]="option.value">{{option.show | translate}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="challengeFormControls.question_type.hasError('required')">
+						{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.SECONDS" | translate }}</mat-label>
+					<input matInput formControlName="seconds" type="number" required #inputSeconds min="30" maxlength="3"
+						oninput="javascript: if (this.value.toString().length > this.maxLength) this.value = parseInt(this.value.toString().slice(0, this.maxLength));"
+					>
+					<mat-hint align="end">{{inputSeconds.value?.length || 0}}/3</mat-hint>
+					<mat-error *ngIf="challengeFormControls.seconds.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.seconds.hasError('min')">
+						{{ "ERRORS.MIN_VALUE_30" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.seconds.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_3" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.MAX_ATTEMPTS" | translate }}</mat-label>
+					<input matInput formControlName="max_attempts" type="number" required #inputMaxAttempts min="1" maxlength="2"
+						oninput="javascript: if (this.value.toString().length > this.maxLength) this.value = parseInt(this.value.toString().slice(0, this.maxLength));"
+					>
+					<mat-hint align="end">{{inputMaxAttempts.value?.length || 0}}/2</mat-hint>
+					<mat-error *ngIf="challengeFormControls.max_attempts.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.max_attempts.hasError('min')">
+						{{ "ERRORS.MIN_VALUE_1" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.max_attempts.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_2" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.HINT" | translate }}</mat-label>
+					<input matInput formControlName="hint" #inputHint maxlength="100">
+					<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
+					<mat-error *ngIf="challengeFormControls.hint.hasError('minlength')">
+						{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.hint.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_100" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER" | translate }}</mat-label>
+					<input matInput formControlName="answer" required #inputAnswer maxlength="300">
+					<mat-hint align="end">{{inputAnswer.value?.length || 0}}/300</mat-hint>
+					<mat-error *ngIf="challengeFormControls.answer.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.answer.hasError('minlength')">
+						{{ "ERRORS.MIN_LENGTH_3" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.answer.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_300" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.ANSWER_TYPE" | translate }}</mat-label>
+					<mat-select formControlName="answer_type" required>
+						<mat-option *ngFor="let option of answerOptions" [value]="option.value">{{option.show | translate}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="challengeFormControls.answer_type.hasError('required')">
+						{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</form>
+</mat-card-content>
+<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
+	<button mat-raised-button class="saveButton" [disabled]="!challengeForm.valid" (click)="updateChallenge(challenge._id)">
+		{{ "BUTTONS.SAVE" | translate }}
+	</button>
+	<button mat-raised-button class="closeButton" color="warn" [mat-dialog-close]="true">
+		{{ "BUTTONS.CLOSE" | translate }} <mat-icon>clear</mat-icon>
+	</button>	
+</mat-card-actions>
+<ng-template #elseBlock>
+	<div class="spinnerCard">
+		<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
+		</mat-progress-spinner>
+		<span>
+			{{ "ADMIN.CHALLENGES.LOADING" | translate }}
+		</span>
+	</div>
+</ng-template>	

@@ -52,15 +52,15 @@ export class StudyService {
     return this.http.post(this.uri, study, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
-  putStudy(studyId: string, study: any): Observable<any> {
+  putStudy(studyId: string, updatedStudy: any): Observable<any> {
     /*Iterates through the object to remove the empty properties*/
-    for (const property in study) {
-      if(!study[property] && property !== 'relevant' && study[property] !== 0){
-        delete study[property];
+    for (const property in updatedStudy) {
+      if(!updatedStudy[property] && property !== 'relevant' && updatedStudy[property] !== 0){
+        delete updatedStudy[property];
       }
     }
-    console.log(study)
+    console.log(updatedStudy)
     /*Sends the request*/  
-    return this.http.put(this.uri+studyId, study, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+    return this.http.put(this.uri+studyId, updatedStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 }

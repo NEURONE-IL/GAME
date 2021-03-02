@@ -58,7 +58,7 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ConsentComponent } from './components/consent/consent.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
-import { StudyDisplayComponent, StudyUpdateDialogComponent } from './views/study-display/study-display.component';
+import { ChallengeUpdateDialogComponent, StudyDisplayComponent, StudyUpdateDialogComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
 import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
@@ -94,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConsentComponent,
     SignupComponent,
     AdminPanelComponent,
+    ChallengeUpdateDialogComponent,
     StudyDisplayComponent,
     StudyUpdateDialogComponent,
     StudiesDisplayComponent,

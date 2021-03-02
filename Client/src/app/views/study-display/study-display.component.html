@@ -7,7 +7,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4"></mat-grid-tile>
     <mat-grid-tile colspan="8">
-      <button mat-raised-button class="actionButton" color="primary" (click)="showUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
+      <button mat-raised-button class="actionButton" color="primary" (click)="showStudyUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
       <button mat-raised-button class="actionButton" color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="24">
@@ -33,7 +33,7 @@
                     {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
                   </div>
                   <div class="col-md-4 buttons" style="text-align: right">
-                    <button mat-button>{{ "BUTTONS.EDIT" | translate }} <mat-icon>edit</mat-icon></button>
+                    <button mat-button (click)="showChallengeUpdateDialog(challenge)">{{ "BUTTONS.EDIT" | translate }} <mat-icon>edit</mat-icon></button>
                     <button mat-button (click)="confirmChallengeDelete(challenge._id)">{{ "BUTTONS.DELETE" | translate }} <mat-icon>delete</mat-icon></button>
                   </div>
 
