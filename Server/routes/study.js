@@ -94,7 +94,6 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
         study.image_url = image_url;
         study.image_id = req.file.id;
     }
-    console.log(req.file)
     study.save((err, study) => {
         if (err) {
             return res.status(404).json({
@@ -136,11 +135,17 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
         if(req.body.name){
             study.name = req.body.name;
         }
+        if(req.body.domain){
+            study.domain = req.body.domain;
+        }
         if(req.body.description){
             study.description = req.body.description;
         }
         if(req.body.hours && req.body.minutes && req.body.seconds ){
             study.cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
+        }
+        if(req.body.cooldown){
+            study.cooldown = req.body.cooldown;
         }
         if(req.file){
             if(level.image_id){
