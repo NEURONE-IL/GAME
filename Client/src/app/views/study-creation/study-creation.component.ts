@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class StudyCreationComponent implements OnInit {
   studyForm: FormGroup;
-  hours: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  hours: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   seconds: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   loading: Boolean;
@@ -30,8 +30,8 @@ export class StudyCreationComponent implements OnInit {
     this.studyForm = this.formBuilder.group({
       description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: ['', [Validators.required]],
-      minutes: ['', [Validators.required]],
+      hours: [''],
+      minutes: [''],
       seconds: [0]
     });
 

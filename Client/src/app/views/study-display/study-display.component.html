@@ -7,8 +7,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4"></mat-grid-tile>
     <mat-grid-tile colspan="8">
-      <button mat-raised-button color="primary" (click)="showUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
-      <button mat-raised-button color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
+      <button mat-raised-button class="actionButton" color="primary" (click)="showUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
+      <button mat-raised-button class="actionButton" color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="24">
       <mat-card-header>
@@ -18,7 +18,10 @@
   </mat-grid-list>
   <!-- Nuevo diseño de Tabs -->
   <mat-tab-group mat-align-tabs="end">
-    <mat-tab label="{{'ADMIN.TABS.CHALLENGES' | translate }}">
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <span (click)="reloadChallenges()"> {{'ADMIN.TABS.CHALLENGES' | translate }} </span>
+      </ng-template>
       <ng-template matTabContent>
         <div class="row ">
           <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">

@@ -66,7 +66,7 @@ export class StudyDisplayComponent implements OnInit {
 
   confirmStudyDelete(id: string){
     confirm(this.translate.instant("ADMIN.STUDIES.DELETE_CONFIRMATION")) && this.deleteStudy(id);
-  }  
+  }
 
   deleteStudy(id: string){
     this.studyService.deleteStudy(id)
@@ -118,7 +118,7 @@ export class StudyDisplayComponent implements OnInit {
 
   confirmResourceDelete(resource: Resource){
     confirm(this.translate.instant("ADMIN.CHALLENGES.RESOURCE_DELETE_CONFIRMATION")) && this.deleteResource(resource);
-  }  
+  }
 
   deleteResource(resource: Resource){
     this.endpointsService.deleteDocument(resource)
@@ -164,11 +164,11 @@ export class StudyDisplayComponent implements OnInit {
   showUpdateDialog(): void {
     const dialogRef = this.studyUpdateDialog.open(StudyUpdateDialogComponent, {
       width: '60%',
-      data: this.study      
+      data: this.study
     });
     console.log(this.study);
-  }  
-  
+  }
+
   getClass(type){
 //    console.log(type);
     if (type=="page"){
@@ -199,11 +199,18 @@ export class StudyDisplayComponent implements OnInit {
   formatDate(date){
     return date.substr(0,10);
   }
+  reloadChallenges(){
+    this.challengeService.getChallengesByStudy(this.route.snapshot.paramMap.get('study_id'))
+      .subscribe(response => {
+        this.challenges = response['challenges'];
+      });
+  }
 }
 
 @Component({
   selector: 'app-study-update-dialog',
   templateUrl: 'study-update-dialog.component.html',
+  styleUrls: ['./study-update-dialog.component.css']
 })
 export class StudyUpdateDialogComponent implements OnInit{
   studyForm: FormGroup;
@@ -213,16 +220,28 @@ export class StudyUpdateDialogComponent implements OnInit{
   loading: Boolean;
   file: File;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public study: Study, private formBuilder: FormBuilder) { }
+  constructor(@Inject(MAT_DIALOG_DATA) 
+    public study: Study, 
+    private formBuilder: FormBuilder,
+    private studyService: StudyService,
+    private toastr: ToastrService,
+    private translate: TranslateService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    /*Gets the cooldown in seconds and converts it to hours and minutes*/
+    let seconds = this.study.cooldown;
+    let hours = Math.trunc(seconds/3600);
+    let minutes = Math.trunc(seconds/60)%60;
+    console.log(seconds, hours, minutes)
+    /*End*/
     this.studyForm = this.formBuilder.group({
       description: [this.study.description, [Validators.minLength(10), Validators.maxLength(250)]],
       name: [this.study.name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [1, [Validators.required]],
-      minutes: [1, [Validators.required]],
+      hours: [hours, [Validators.required]],
+      minutes: [minutes, [Validators.required]],
       seconds: [0]
-    });    
+    });
   }
 
   get studyFormControls(): any {
@@ -231,10 +250,44 @@ export class StudyUpdateDialogComponent implements OnInit{
 
   resetForm() {
     this.studyForm.reset();
-  }  
+  }
+
+  updateStudy(){
+    this.loading = true;
+    let study = this.studyForm.value;
+    let formData = new FormData();
+    formData.append('name', study.name);
+    if(study.description){
+      formData.append('description', study.description);
+    }
+    formData.append('hours', study.hours.toString());
+    formData.append('minutes', study.hours.toString());
+    formData.append('seconds', study.seconds.toString());
+    if(this.file){
+      formData.append('file', this.file);
+    }
+    this.studyService.putStudy(formData).subscribe(
+      study => {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.resetForm();
+        this.loading = false;
+        this.router.navigate(['admin_panel']);
+      },
+      err => {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
 
   handleFileInput(files: FileList) {
     this.file = files.item(0);
   }
-  
+
 }
+

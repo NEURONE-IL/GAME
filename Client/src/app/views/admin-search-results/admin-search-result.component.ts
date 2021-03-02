@@ -51,4 +51,8 @@ export class AdminSearchResultComponent implements OnInit {
     return thumbUrl;
   }
 
+  showShortDescription(description, num){
+    return (description.substr(0, num));
+  }
+
 }

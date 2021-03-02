@@ -1,96 +1,94 @@
-<mat-card mat-dialog-content class="study-update-card">
-  <mat-card-header>
-    <mat-card-title>{{ "STUDY.TITLE" | translate }}</mat-card-title>
-    <mat-card-subtitle>{{ "STUDY.SUBTITLE" | translate }}:</mat-card-subtitle>
-	</mat-card-header>	
-	<mat-card-content>
-		<form [formGroup]="studyForm">
-			<mat-grid-list cols="12">
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "STUDY.FORM.FIELDS.NAME" | translate }}</mat-label>
-						<input matInput formControlName="name" required #inputName maxlength="50">
-						<mat-hint align="end">{{inputName.value?.length || 0}}/50</mat-hint>
-						<mat-error *ngIf="studyFormControls.name.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-						<mat-error *ngIf="studyFormControls.name.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="studyFormControls.name.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_50" | translate }}
-						</mat-error>												
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "STUDY.FORM.FIELDS.DESCRIPTION" | translate }}</mat-label>
-						<input matInput formControlName="description" #inputDescription maxlength="250" ng-required="true">
-						<mat-hint align="end">{{inputDescription.value?.length || 0}}/250</mat-hint>
-						<mat-error *ngIf="studyFormControls.description.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
-						</mat-error>
-						<mat-error *ngIf="studyFormControls.description.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_250" | translate }}
-						</mat-error>							
-					</mat-form-field>
-				</mat-grid-tile>
-			</mat-grid-list>	
-			<mat-card-header>
-				<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
-			</mat-card-header>
-			<mat-grid-list cols="12">
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label>
-						<mat-select formControlName="hours">
-							<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
-						</mat-select>	
-						<mat-error *ngIf="studyFormControls.hours.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "ADMIN.CHALLENGES.MINUTES" | translate }}</mat-label>
-						<mat-select formControlName="minutes">
-							<mat-option *ngFor="let minute of minutes" [value]="minute"> {{ minute }} </mat-option>
-						</mat-select>
-						<mat-error *ngIf="studyFormControls.minutes.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-			</mat-grid-list>		
-		</form>	
+<mat-card-header>
+	<mat-card-title>{{ "STUDY.UPDATE.TITLE" | translate }}</mat-card-title>
+	<mat-card-subtitle>{{ "STUDY.UPDATE.SUBTITLE" | translate }}:</mat-card-subtitle>
+</mat-card-header>	
+<mat-card-content>
+	<form [formGroup]="studyForm">
+		<mat-grid-list cols="12">
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "STUDY.FORM.FIELDS.NAME" | translate }}</mat-label>
+					<input matInput formControlName="name" required #inputName maxlength="50">
+					<mat-hint align="end">{{inputName.value?.length || 0}}/50</mat-hint>
+					<mat-error *ngIf="studyFormControls.name.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+					<mat-error *ngIf="studyFormControls.name.hasError('minlength')">
+						{{ "ERRORS.MIN_LENGTH_3" | translate }}
+					</mat-error>
+					<mat-error *ngIf="studyFormControls.name.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_50" | translate }}
+					</mat-error>												
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "STUDY.FORM.FIELDS.DESCRIPTION" | translate }}</mat-label>
+					<input matInput formControlName="description" #inputDescription maxlength="250" ng-required="true">
+					<mat-hint align="end">{{inputDescription.value?.length || 0}}/250</mat-hint>
+					<mat-error *ngIf="studyFormControls.description.hasError('minlength')">
+						{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
+					</mat-error>
+					<mat-error *ngIf="studyFormControls.description.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_250" | translate }}
+					</mat-error>							
+				</mat-form-field>
+			</mat-grid-tile>
+		</mat-grid-list>	
 		<mat-card-header>
-			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
+			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
 		</mat-card-header>
 		<mat-grid-list cols="12">
 			<mat-grid-tile colspan="6">
-				<input type="file"
-					id="file"
-					(change)="handleFileInput($event.target.files)">
-
+				<mat-form-field>
+					<mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label>
+					<mat-select formControlName="hours">
+						<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
+					</mat-select>	
+					<mat-error *ngIf="studyFormControls.hours.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
 			</mat-grid-tile>
-		</mat-grid-list>	    
-	</mat-card-content>		
-	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
-		<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid">
-			{{ "BUTTONS.SAVE" | translate }}
-		</button>
-		<button mat-raised-button class="clearButton" (click)="resetForm()">
-			{{ "BUTTONS.CLEAR" | translate }}
-		</button>
-	</mat-card-actions>	
-	<ng-template #elseBlock>
-		<div class="spinnerCard">
-			<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
-			</mat-progress-spinner>
-			<span>
-				{{ "ADMIN.STUDIES.LOADING" | translate }}
-			</span>
-		</div>
-	</ng-template>	
-</mat-card>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>{{ "ADMIN.CHALLENGES.MINUTES" | translate }}</mat-label>
+					<mat-select formControlName="minutes">
+						<mat-option *ngFor="let minute of minutes" [value]="minute"> {{ minute }} </mat-option>
+					</mat-select>
+					<mat-error *ngIf="studyFormControls.minutes.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+		</mat-grid-list>		
+	</form>	
+	<mat-card-header>
+		<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
+	</mat-card-header>
+	<mat-grid-list cols="12">
+		<mat-grid-tile colspan="6" class="fileInput">
+			<input type="file"
+				id="file"
+				(change)="handleFileInput($event.target.files)">
+
+		</mat-grid-tile>
+	</mat-grid-list>	    
+</mat-card-content>		
+<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
+	<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid">
+		{{ "BUTTONS.SAVE" | translate }} <mat-icon>save</mat-icon>
+	</button>
+	<button mat-raised-button class="closeButton" color="warn" [mat-dialog-close]="true">
+		{{ "BUTTONS.CLOSE" | translate }} <mat-icon>clear</mat-icon>
+	</button>	
+</mat-card-actions>	
+<ng-template #elseBlock>
+	<div class="spinnerCard">
+		<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
+		</mat-progress-spinner>
+		<span>
+			{{ "ADMIN.STUDIES.LOADING" | translate }}
+		</span>
+	</div>
+</ng-template>	

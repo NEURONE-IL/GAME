@@ -25,7 +25,7 @@
                     <img class="img-fluid thumbnail searchImageMini" src="{{BaseUrl+ doc.img}}">
                   </div>
                   <div class="col-md-10">
-                    <h5 class="url-bar">{{doc.url}}</h5>
+                    <h5 class="url-bar">{{ showShortDescription(doc.docName, 40)}}</h5>
                     <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
                     <p>{{doc.searchSnippet}}</p>
                   </div>
@@ -52,7 +52,7 @@
             <!--Para documentos-->
             <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type" >
               <mat-card-content>
-                <h5 class="url-bar">{{doc.url}}</h5>
+                <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}}</h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
                 <p>{{doc.searchSnippet}}</p>
               </mat-card-content>
@@ -84,7 +84,7 @@
               <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.url]" >
                 <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
-                  <h5 class="url-bar">{{doc.url}}</h5>
+                  <h5 class="url-bar">{{ showShortDescription(doc.docName, 25)}}</h5>
                   <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
                 </mat-card-content>
               </mat-card>
