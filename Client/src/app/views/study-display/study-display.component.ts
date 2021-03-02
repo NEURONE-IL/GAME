@@ -166,11 +166,9 @@ export class StudyDisplayComponent implements OnInit {
       width: '60%',
       data: this.study
     });
-    console.log(this.study);
   }
 
   getClass(type){
-//    console.log(type);
     if (type=="page"){
       return "webPage";
     }
@@ -214,7 +212,7 @@ export class StudyDisplayComponent implements OnInit {
 })
 export class StudyUpdateDialogComponent implements OnInit{
   studyForm: FormGroup;
-  hours: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  hours: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   seconds: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   loading: Boolean;
@@ -226,7 +224,8 @@ export class StudyUpdateDialogComponent implements OnInit{
     private studyService: StudyService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private router: Router) { }
+    private router: Router,
+    public studyUpdateDialog: MatDialog) { }
 
   ngOnInit(): void {
     /*Gets the cooldown in seconds and converts it to hours and minutes*/
@@ -242,6 +241,9 @@ export class StudyUpdateDialogComponent implements OnInit{
       minutes: [minutes, [Validators.required]],
       seconds: [0]
     });
+
+    this.loading = false;
+    console.log(this.studyForm.value, 'form')
   }
 
   get studyFormControls(): any {
@@ -252,7 +254,7 @@ export class StudyUpdateDialogComponent implements OnInit{
     this.studyForm.reset();
   }
 
-  updateStudy(){
+  updateStudy(studyId: string){
     this.loading = true;
     let study = this.studyForm.value;
     let formData = new FormData();
@@ -266,18 +268,24 @@ export class StudyUpdateDialogComponent implements OnInit{
     if(this.file){
       formData.append('file', this.file);
     }
-    this.studyService.putStudy(formData).subscribe(
+    /*Check formData values*/
+    for (var value of formData.entries()) {
+      console.log(value[0]+ ', ' + value[1]); 
+    }
+    /*End check formData values*/
+    this.studyService.putStudy(studyId, formData).subscribe(
       study => {
-        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE_UPDATE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        this.resetForm();
         this.loading = false;
-        this.router.navigate(['admin_panel']);
+        this.studyUpdateDialog.closeAll();
+        this.router.navigate(['/admin-panel'])
+        console.log(study, 'RESPONSE')
       },
       err => {
-        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE_UPDATE"), this.translate.instant("STUDY.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
@@ -288,6 +296,5 @@ export class StudyUpdateDialogComponent implements OnInit{
   handleFileInput(files: FileList) {
     this.file = files.item(0);
   }
-
 }
 

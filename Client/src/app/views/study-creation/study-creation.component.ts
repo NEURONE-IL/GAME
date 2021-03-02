@@ -30,8 +30,8 @@ export class StudyCreationComponent implements OnInit {
     this.studyForm = this.formBuilder.group({
       description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [''],
-      minutes: [''],
+      hours: [0],
+      minutes: [0],
       seconds: [0]
     });
 
@@ -60,6 +60,7 @@ export class StudyCreationComponent implements OnInit {
     if(this.file){
       formData.append('file', this.file);
     }
+    console.log(formData, 'form')
     this.studyService.postStudy(formData).subscribe(
       study => {
         this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {

@@ -76,7 +76,7 @@
 	</mat-grid-list>	    
 </mat-card-content>		
 <mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
-	<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid">
+	<button mat-raised-button class="saveButton" [disabled]="!studyForm.valid" (click)="updateStudy(study._id)">
 		{{ "BUTTONS.SAVE" | translate }} <mat-icon>save</mat-icon>
 	</button>
 	<button mat-raised-button class="closeButton" color="warn" [mat-dialog-close]="true">
