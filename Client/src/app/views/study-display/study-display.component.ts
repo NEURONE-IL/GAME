@@ -224,7 +224,6 @@ export class StudyUpdateDialogComponent implements OnInit{
   studyForm: FormGroup;
   hours: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-  seconds: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   loading: Boolean;
   file: File;
 
@@ -272,9 +271,17 @@ export class StudyUpdateDialogComponent implements OnInit{
     if(study.description){
       formData.append('description', study.description);
     }
-    formData.append('hours', study.hours.toString());
-    formData.append('minutes', study.hours.toString());
-    formData.append('seconds', study.seconds.toString());
+//    if(study.hours !== ''){
+  formData.append('hours', study.hours.toString());
+  //   }else{
+   //    formData.append('hours', '0');
+    // }
+   //  if(study.minutes !== ''){
+       formData.append('minutes', study.minutes.toString());
+   //  }else{
+    //   formData.append('minutes', '0');
+   //  }
+    formData.append('seconds', '0');
     if(this.file){
       formData.append('file', this.file);
     }
