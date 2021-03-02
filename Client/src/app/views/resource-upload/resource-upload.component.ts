@@ -18,8 +18,8 @@ export class ResourceUploadComponent implements OnInit {
   studies: Study[];
   challenges: Challenge[];
   docTypes = [
-    { id: 1, value: 'document', show: 'UPLOAD.ARRAYS.DOC_TYPES.DOCUMENT' },
-    { id: 2, value: 'image', show: 'UPLOAD.ARRAYS.DOC_TYPES.IMAGE' },
+    { id: 1, value: 'document', show: 'UPLOAD.ARRAYS.DOC_TYPES.WEB_PAGE' },
+//    { id: 2, value: 'image', show: 'UPLOAD.ARRAYS.DOC_TYPES.IMAGE' },
     { id: 3, value: 'book', show: 'UPLOAD.ARRAYS.DOC_TYPES.BOOK' },
     { id: 4, value: 'video', show: 'UPLOAD.ARRAYS.DOC_TYPES.VIDEO' }
   ];

@@ -323,9 +323,9 @@
     "ARRAYS": {
       "DOC_TYPES": {
         "BOOK": "Libro",
-        "DOCUMENT": "Documento",
         "IMAGE": "Imagen",
-        "VIDEO": "Vídeo"
+        "VIDEO": "Vídeo",
+        "WEB_PAGE": "Página web"
       },
       "LOCALE_OPTIONS": {
         "ENGLISH": "Inglés",
