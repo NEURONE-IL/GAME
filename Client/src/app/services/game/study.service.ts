@@ -42,24 +42,18 @@ export class StudyService {
 
   postStudy(study: any): Observable<any> {
     console.log(study)
-    /*Iterates through the object to remove the empty properties*/
-    for (const property in study) {
-      if(!study[property] && property !== 'relevant' && study[property] !== 0){
-        delete study[property];
-      }
+    for (var value of study.entries()) {
+      console.log(value[0]+ ', ' + value[1]); 
     }
     /*Sends the request*/
     return this.http.post(this.uri, study, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
   putStudy(studyId: string, updatedStudy: any): Observable<any> {
-    /*Iterates through the object to remove the empty properties*/
-    for (const property in updatedStudy) {
-      if(!updatedStudy[property] && property !== 'relevant' && updatedStudy[property] !== 0){
-        delete updatedStudy[property];
-      }
-    }
-    console.log(updatedStudy)
+    console.log(updatedStudy);
+    for (var value of updatedStudy.entries()) {
+      console.log(value[0]+ ', ' + value[1]); 
+    }    
     /*Sends the request*/  
     return this.http.put(this.uri+studyId, updatedStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

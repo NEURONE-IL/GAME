@@ -45,9 +45,6 @@
 					<mat-select formControlName="hours">
 						<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
 					</mat-select>	
-					<mat-error *ngIf="studyFormControls.hours.hasError('required')">
-						{{ "ERRORS.REQUIRED" | translate }}
-					</mat-error>
 				</mat-form-field>
 			</mat-grid-tile>
 			<mat-grid-tile colspan="6">
@@ -56,9 +53,6 @@
 					<mat-select formControlName="minutes">
 						<mat-option *ngFor="let minute of minutes" [value]="minute"> {{ minute }} </mat-option>
 					</mat-select>
-					<mat-error *ngIf="studyFormControls.minutes.hasError('required')">
-						{{ "ERRORS.REQUIRED" | translate }}
-					</mat-error>
 				</mat-form-field>
 			</mat-grid-tile>
 		</mat-grid-list>		

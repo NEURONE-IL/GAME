@@ -233,7 +233,6 @@ export class StudyUpdateDialogComponent implements OnInit{
     private studyService: StudyService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private router: Router,
     public matDialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -246,9 +245,8 @@ export class StudyUpdateDialogComponent implements OnInit{
     this.studyForm = this.formBuilder.group({
       description: [this.study.description, [Validators.minLength(10), Validators.maxLength(250)]],
       name: [this.study.name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [hours, [Validators.required]],
-      minutes: [minutes, [Validators.required]],
-      seconds: [0]
+      hours: [hours || '', [Validators.required]],
+      minutes: [minutes || '', [Validators.required]]
     });
 
     this.loading = false;
@@ -271,16 +269,16 @@ export class StudyUpdateDialogComponent implements OnInit{
     if(study.description){
       formData.append('description', study.description);
     }
-//    if(study.hours !== ''){
-  formData.append('hours', study.hours.toString());
-  //   }else{
-   //    formData.append('hours', '0');
-    // }
-   //  if(study.minutes !== ''){
-       formData.append('minutes', study.minutes.toString());
-   //  }else{
-    //   formData.append('minutes', '0');
-   //  }
+    if(study.hours !== ''){
+      formData.append('hours', study.hours.toString());
+    }else{
+      formData.append('hours', '0');
+    }
+    if(study.minutes !== ''){
+      formData.append('minutes', study.minutes.toString());
+    }else{
+      formData.append('minutes', '0');
+    }
     formData.append('seconds', '0');
     if(this.file){
       formData.append('file', this.file);

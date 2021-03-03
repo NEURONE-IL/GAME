@@ -80,7 +80,7 @@ router.get('/:study_id/getForSignup', async (req, res) => {
 });
 
 router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.single('file'), studyMiddleware.verifyBody], async (req, res) => {
-    let cooldown = parseInt(req.body.hours*3600) + parseInt(req.body.minutes*60) + parseInt(req.body.seconds);
+    let cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
     const study = new Study({
         name: req.body.name,
         domain: req.body.domain,
@@ -141,8 +141,8 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
         if(req.body.description){
             study.description = req.body.description;
         }
-        if(req.body.hours && req.body.minutes && req.body.seconds ){
-            study.cooldown = parseInt(req.body.hours*3600) + parseInt(req.body.minutes*60) + parseInt(req.body.seconds);
+        if(req.body.hours && req.body.minutes && req.body.seconds){
+            study.cooldown = req.body.hours*3600 + req.body.minutes*60 + req.body.seconds;
         }
         if(req.body.cooldown){
             study.cooldown = req.body.cooldown;

@@ -29,9 +29,8 @@ export class StudyCreationComponent implements OnInit {
     this.studyForm = this.formBuilder.group({
       description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [0],
-      minutes: [0],
-      seconds: [0]
+      hours: [''],
+      minutes: ['']
     });
 
     this.loading = false;
@@ -54,16 +53,16 @@ export class StudyCreationComponent implements OnInit {
     if(study.description){
       formData.append('description', study.description);
     }
-//    if(study.hours !== ''){
+    if(study.hours !== ''){
       formData.append('hours', study.hours.toString());
- //   }else{
-  //    formData.append('hours', '0');
-   // }
-  //  if(study.minutes !== ''){
+   }else{
+      formData.append('hours', '0');
+    }
+    if(study.minutes !== ''){
       formData.append('minutes', study.minutes.toString());
-  //  }else{
-   //   formData.append('minutes', '0');
-  //  }
+    }else{
+      formData.append('minutes', '0');
+    }
     formData.append('seconds', '0');
     if(this.file){
       formData.append('file', this.file);
