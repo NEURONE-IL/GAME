@@ -40,7 +40,7 @@ export class ResourceUploadComponent implements OnInit {
       url: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
       domain: this.study,
       locale: [null, [Validators.required]],
-      task: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      task: [null, []],
       /*NEURONE required*/
       maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
       relevant: null,
@@ -76,6 +76,9 @@ export class ResourceUploadComponent implements OnInit {
     this.loading = true;
     let resource = this.resourceForm.value;
     console.log(resource);
+    if(resource.task === null){
+      resource.task = "dummy";
+    }
     this.endpointsService.loadDocument(resource).subscribe(
       resource => {
         this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
