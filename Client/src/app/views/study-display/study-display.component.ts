@@ -32,7 +32,6 @@ export class StudyDisplayComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    console.log('onInit')
     this.createChallenge = false;
     this.verDocumentos = false;
     this.searchView = false;
@@ -248,9 +247,7 @@ export class StudyUpdateDialogComponent implements OnInit{
       hours: [hours || '', [Validators.required]],
       minutes: [minutes || '', [Validators.required]]
     });
-
     this.loading = false;
-    console.log(this.studyForm.value, 'form')
   }
 
   get studyFormControls(): any {

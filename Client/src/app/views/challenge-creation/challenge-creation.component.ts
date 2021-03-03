@@ -69,8 +69,7 @@ export class ChallengeCreationComponent implements OnInit {
   createChallenge(){
     this.loading = true;
     let challenge = this.challengeForm.value;
-    challenge.study=this.study;
-    console.log(challenge);
+    challenge.study = this.study;
     this.challengeService.postChallenge(challenge).subscribe(
       challenge => {
         this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {

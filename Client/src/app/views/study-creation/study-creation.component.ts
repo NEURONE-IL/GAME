@@ -32,7 +32,6 @@ export class StudyCreationComponent implements OnInit {
       hours: [''],
       minutes: ['']
     });
-
     this.loading = false;
   }
 
@@ -47,7 +46,6 @@ export class StudyCreationComponent implements OnInit {
   createStudy(){
     this.loading = true;
     let study = this.studyForm.value;
-    console.log(study, 'study')
     let formData = new FormData();
     formData.append('name', study.name);
     if(study.description){
@@ -55,7 +53,7 @@ export class StudyCreationComponent implements OnInit {
     }
     if(study.hours !== ''){
       formData.append('hours', study.hours.toString());
-   }else{
+    }else{
       formData.append('hours', '0');
     }
     if(study.minutes !== ''){
@@ -67,7 +65,6 @@ export class StudyCreationComponent implements OnInit {
     if(this.file){
       formData.append('file', this.file);
     }
-    console.log(formData, 'form')
     this.studyService.postStudy(formData).subscribe(
       study => {
         this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
