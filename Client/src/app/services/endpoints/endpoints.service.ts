@@ -29,6 +29,7 @@ export class EndpointsService {
   frontURL = 'http://159.65.100.191:4200';
   // frontURL = 'http://localhost:4200';
   neuroneURL = 'http://159.65.100.191:3000';
+  neuroneFiles = './neuroneFiles/'
 
   constructor(protected http: HttpClient) { }
 

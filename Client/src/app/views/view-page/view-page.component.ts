@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { KmTrackerServiceIframe } from 'src/app/services/logger/km-tracker-iframe.service';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
 
 @Component({
@@ -7,22 +8,34 @@ import { EndpointsService } from '../../services/endpoints/endpoints.service';
   templateUrl: './view-page.component.html',
   styleUrls: ['./view-page.component.css']
 })
-export class ViewPageComponent implements OnInit {
+export class ViewPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private endpoints: EndpointsService) { }
+  constructor(private route: ActivatedRoute, private endpoints: EndpointsService, private iFrameKmTracker: KmTrackerServiceIframe) { }
 
   url: string;
   docUrl: string;
   title: string;
+
+  iframeLoaded = false;
+  pageContent;
 
   ngOnInit(): void {
     this.route.paramMap
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.title = params.get('title');
-        this.docUrl = this.endpoints.neuroneURL + '/' + this.url;
-        console.log(this.docUrl)
+        this.docUrl = this.endpoints.neuroneFiles + this.url;
+        console.log(this.docUrl);
+        console.log('docurl: ',this.docUrl);
       });
+  }
+
+  trackIFrame() {
+    this.iFrameKmTracker.start();
+  }
+
+  ngOnDestroy() {
+    this.iFrameKmTracker.stop();
   }
 
 }

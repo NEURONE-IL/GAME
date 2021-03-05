@@ -14,10 +14,8 @@ export class AppComponent {
   title = 'Question Game';
 
   constructor(public translate: TranslateService,
-              private kmTracker: KmTrackerService,
               private router: Router,
-              private storeLink: StoreLinkService,
-              private gameService: GameService) {
+              private storeLink: StoreLinkService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let visitedLink = {
@@ -52,8 +50,5 @@ export class AppComponent {
     else{
       this.translate.use('es-CL');
     }
-
-    // kmTracker.startTrack();
-    // gameService.loadGameData();
   }
 }

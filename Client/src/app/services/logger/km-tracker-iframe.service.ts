@@ -13,21 +13,18 @@ import { StoreTrackService } from './store-track.service';
 @Injectable({
   providedIn: 'root',
 })
-export class KmTrackerService {
+export class KmTrackerServiceIframe {
   isTracking = false;
   boundFunctions = [];
 
-  constructor(
-    private endpoints: EndpointsService,
-    private storeService: StoreTrackService
-  ) {}
+  constructor(private storeService: StoreTrackService) {}
 
   start() {
     if (!this.isTracking) {
       console.log('-----------------------------------');
-      console.log('START KMtracking service');
+      console.log('START KMtracking Iframe service');
       console.log('-----------------------------------');
-      let targetDoc = window;
+      let targetDoc: any;
 
       let data = {
         w: window,
@@ -35,6 +32,12 @@ export class KmTrackerService {
         e: document.documentElement,
         g: document.getElementsByTagName('body')[0],
       };
+
+      targetDoc =
+        document.getElementById('result-iframe') ||
+        document.getElementsByTagName('iframe')[0];
+
+      targetDoc = targetDoc.contentWindow.document;
 
       this.bindThrottledEvent(
         targetDoc,
@@ -62,16 +65,13 @@ export class KmTrackerService {
   stop() {
     if (this.isTracking) {
       console.log('-----------------------------------');
-      console.log('STOP KMtracking service');
+      console.log('STOP KMtracking Iframe service');
       console.log('-----------------------------------');
-      let targetDoc = window;
+      let targetDoc: any;
 
-      let data = {
-        w: window,
-        d: document,
-        e: document.documentElement,
-        g: document.getElementsByTagName('body')[0],
-      };
+      targetDoc =
+        document.getElementById('result-iframe') ||
+        document.getElementsByTagName('iframe')[0];
 
       this.unbindAll(targetDoc, 'mousemove');
       this.unbindAll(targetDoc, 'scroll');
@@ -119,20 +119,33 @@ export class KmTrackerService {
       gtb = evt.currentTarget.data.g,
       w = window.innerWidth || elm.clientWidth || gtb.clientWidth,
       h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
+      ifm =
+        document.getElementById('result-iframe') ||
+        document.getElementsByTagName('iframe')[0],
       time = Date.now();
 
     let docX = evt.pageX,
       docY = evt.pageY,
       winX = evt.clientX,
       winY = evt.clientY,
-      docW = doc.body.clientWidth,
-      docH = doc.body.clientHeight,
+      // docW = doc.body.clientWidth,
+      // docH = doc.body.clientHeight,
+      docW = ifm.clientWidth,
+      docH = ifm.clientHeight,
       winW = w,
       winH = h;
 
+    const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+      input !== null && input.tagName === 'IFRAME';
+
+    if (isIFrame(ifm) && ifm.contentWindow) {
+      docW = ifm.contentDocument.body.scrollWidth;
+      docH = ifm.contentDocument.body.scrollHeight;
+    }
+
     let clickOutput = {
       type: 'MouseClick',
-      source: 'Window',
+      source: 'Iframe',
       url: doc.URL,
       x_win: winX,
       y_win: winY,
@@ -161,7 +174,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       type: 'KeyDown',
-      source: 'Window',
+      source: 'Iframe',
       which: w,
       keyCode: kc,
       charCode: chc,
@@ -187,7 +200,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       type: 'KeyUp',
-      source: 'Window',
+      source: 'Iframe',
       which: w,
       keyCode: kc,
       charCode: chc,
@@ -214,7 +227,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       type: 'KeyPress',
-      source: 'Window',
+      source: 'Iframe',
       which: w,
       keyCode: kc,
       charCode: chc,
@@ -236,20 +249,33 @@ export class KmTrackerService {
       gtb = evt.currentTarget.data.g,
       w = window.innerWidth || elm.clientWidth || gtb.clientWidth,
       h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
+      ifm =
+        document.getElementById('result-iframe') ||
+        document.getElementsByTagName('iframe')[0],
       time = Date.now();
 
     let docX = evt.pageX,
       docY = evt.pageY,
       winX = evt.clientX,
       winY = evt.clientY,
-      docW = doc.body.clientWidth,
-      docH = doc.body.clientHeight,
+      // docW = doc.body.clientWidth,
+      // docH = doc.body.clientHeight,
+      docW = ifm.clientWidth,
+      docH = ifm.clientHeight,
       winW = w,
       winH = h;
 
+    const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+      input !== null && input.tagName === 'IFRAME';
+
+    if (isIFrame(ifm) && ifm.contentWindow) {
+      docW = ifm.contentDocument.body.scrollWidth;
+      docH = ifm.contentDocument.body.scrollHeight;
+    }
+
     let movementOutput = {
       type: 'MouseMovement',
-      source: 'Window',
+      source: 'Iframe',
       url: doc.URL,
       x_win: winX,
       y_win: winY,
@@ -274,20 +300,33 @@ export class KmTrackerService {
       gtb = evt.currentTarget.data.g,
       w = window.innerWidth || elm.clientWidth || gtb.clientWidth,
       h = window.innerHeight || elm.clientHeight || gtb.clientHeight,
+      ifm =
+        document.getElementById('result-iframe') ||
+        document.getElementsByTagName('iframe')[0],
       time = Date.now();
 
-    let scrollX = window.scrollX,
-      scrollY = window.scrollY,
-      docW = doc.body.clientWidth,
-      docH = doc.body.clientHeight,
+    let scrollX = ifm.scrollLeft,
+      scrollY = ifm.scrollTop,
+      docW = ifm.clientWidth,
+      docH = ifm.clientHeight,
       winW = w,
       winH = h;
+
+    const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+      input !== null && input.tagName === 'IFRAME';
+
+    if (isIFrame(ifm) && ifm.contentWindow) {
+      docW = ifm.contentDocument.body.scrollWidth;
+      docH = ifm.contentDocument.body.scrollHeight;
+      scrollX = ifm.contentWindow.scrollX;
+      scrollY = ifm.contentWindow.scrollY;
+    }
 
     let scrollOutput = {
       userId: 'userId',
       username: 'username',
       type: 'Scroll',
-      source: 'Window',
+      source: 'Iframe',
       url: doc.URL,
       x_scr: scrollX,
       y_scr: scrollY,
