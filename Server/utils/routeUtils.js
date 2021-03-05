@@ -54,7 +54,7 @@ function saveGMPlayer(req, user, study, res) {
 exports.saveGMPlayer = saveGMPlayer;
 // Sends user confirmation email
 // Adapted from: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
-function sendConfirmationEmail(user, res, req) {
+function sendConfirmationEmail(user, userData, res, req) {
 
     // Create a verification token
     const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
@@ -64,7 +64,7 @@ function sendConfirmationEmail(user, res, req) {
         if (err) { return res.status(500).send({ msg: 'TOKEN_ERROR' }); }
 
         // Generate email data
-        const { mailHTML, mailText } = generateEmailData(req, token, user);
+        const { mailHTML, mailText } = generateEmailData(req, token, userData);
 
         // Send the email
         const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.SENDEMAIL_USER, pass: process.env.SENDEMAIL_PASSWORD } });
@@ -76,7 +76,7 @@ function sendConfirmationEmail(user, res, req) {
 }
 exports.sendConfirmationEmail = sendConfirmationEmail;
 // Reads email template and adds custom data
-function generateEmailData(req, token, user) {
+function generateEmailData(req, token, userData) {
     const emailTemplateFile = 'assets/confirmationEmail.html';
     const link = 'http://' + req.headers.host + ':' + process.env.PUBLIC_PORT + '\/confirmation\/' + token.token;
     let mailHTML = null;
@@ -88,20 +88,21 @@ function generateEmailData(req, token, user) {
         mailHTML = data.toString();
     });
     // Add custom text to email
-    mailHTML = addTextToEmail(mailHTML, user, link);
+    mailHTML = addTextToEmail(mailHTML, userData, link);
     return { mailHTML, mailText };
 }
 // Add translated text and user data to email
-function addTextToEmail(mailHTML, user, link) {
+function addTextToEmail(mailHTML, userData, link) {
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.PREHEADER_TEXT]", "Confirme su cuenta:");
-    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]", "Hola " + user.tutor_names.split(" ")[0] + ".");
-    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TEXT]", "Gracias por registrar a " + user.names.split(" ")[0] + " en NEURONE-GAME, "
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TITLE]", "Hola " + userData.tutor_names.split(" ")[0] + ".");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.TEXT]", "Gracias por registrar a " + userData.names.split(" ")[0] + " en NEURONE-GAME, "
         + "antes de ingresar al juego debe confirmar su correo.\n"
         + "Al realizar este paso, también está confirmando que leyó y acepta el consentimiento informado "
         + "presentado en el registro.");
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.CONFIRM]", "Confirmar cuenta");
-    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_BUTTON_DOESNT_WORK_TEXT]", "Si el botón no funciona, usa el siguiente link:");
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_BUTTON_DOESNT_WORK_TEXT]", "Si el botón no funciona, use el siguiente link:");
     mailHTML = mailHTML.replace(/%CONFIRMATION_EMAIL.LINK%/g, link);
+    mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.IF_LINK_DOESNT_WORK_TEXT]", "Si el enlace tampoco funciona, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet:"); 
     mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
     return mailHTML;
 }

@@ -6,16 +6,8 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     confirmed: {type: Boolean, default: false},
-    tutor_names: {type: String },
-    tutor_last_names: {type: String },
-    tutor_phone: {type: String },
     names: {type: String },
     last_names: {type: String },
-    birthday: {type: Date},
-    course: {type: String },
-    institution: {type: String },
-    institution_commune: {type: Number },
-    institution_region: {type: Number },
     password: {type: String, required: true},
     gm_code: {type: String},
     image_url: {type: String},
@@ -23,7 +15,7 @@ const UserSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
-    relation: { type: String }
+    userData: { type: Schema.Types.ObjectId, ref: 'UserData'}
 });
 
 // Sets the createdAt parameter equal to the current time
