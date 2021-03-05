@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const UserData = require("../models/userData");
 const Role = require("../models/role");
 const Study = require("../models/study");
 const Challenge = require("../models/challenge");
@@ -112,13 +113,8 @@ router.post(
       });
     }
 
-    //hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashpassword = await bcrypt.hash(req.body.password, salt);
-
-    //create user
-    const user = new User({
-      email: req.body.email,
+    //create userData
+    const userData = new UserData({
       tutor_names: req.body.tutor_names,
       tutor_last_names: req.body.tutor_last_names,
       tutor_phone: req.body.tutor_phone,
@@ -129,10 +125,31 @@ router.post(
       institution: req.body.institution,
       institution_commune: req.body.institution_commune,
       institution_region: req.body.institution_region,
+      relation: req.body.relation,
+    });          
+
+    //save userData in db
+    userData.save((err, userData) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err
+        })
+      }
+    });
+    
+    //hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashpassword = await bcrypt.hash(req.body.password, salt);
+
+    //create user
+    const user = new User({
+      email: req.body.email,
+      names: req.body.names,
       password: hashpassword,
       role: role._id,
       study: study._id,
-      relation: req.body.relation,
+      userData: userData._id
     });
 
     //save user in db
@@ -157,7 +174,7 @@ router.post(
           saveGMPlayer(req, user, study, res);
 
           // Send confirmation email
-          sendConfirmationEmail(user, res, req);
+          sendConfirmationEmail(user, userData, res, req);
 
           res.status(200).json({
             user,
