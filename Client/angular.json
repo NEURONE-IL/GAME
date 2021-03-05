@@ -87,7 +87,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/neuroneFiles"
             ],
             "styles": [
               "src/styles.css"
