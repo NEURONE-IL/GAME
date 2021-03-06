@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { AuthService } from '../auth/auth.service';
 import { StoreTrackService } from './store-track.service';
 
 /*
@@ -18,7 +18,7 @@ export class KmTrackerService {
   boundFunctions = [];
 
   constructor(
-    private endpoints: EndpointsService,
+    private auth: AuthService,
     private storeService: StoreTrackService
   ) {}
 
@@ -131,6 +131,8 @@ export class KmTrackerService {
       winH = h;
 
     let clickOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'MouseClick',
       source: 'Window',
       url: doc.URL,
@@ -160,6 +162,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyDown',
       source: 'Window',
       which: w,
@@ -186,6 +190,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyUp',
       source: 'Window',
       which: w,
@@ -213,6 +219,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyPress',
       source: 'Window',
       which: w,
@@ -248,6 +256,8 @@ export class KmTrackerService {
       winH = h;
 
     let movementOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'MouseMovement',
       source: 'Window',
       url: doc.URL,
@@ -284,8 +294,8 @@ export class KmTrackerService {
       winH = h;
 
     let scrollOutput = {
-      userId: 'userId',
-      username: 'username',
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'Scroll',
       source: 'Window',
       url: doc.URL,

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { AuthService } from '../auth/auth.service';
 import { EndpointsService } from '../endpoints/endpoints.service';
 import { StoreTrackService } from './store-track.service';
 
@@ -17,7 +18,10 @@ export class KmTrackerServiceIframe {
   isTracking = false;
   boundFunctions = [];
 
-  constructor(private storeService: StoreTrackService) {}
+  constructor(
+    private storeService: StoreTrackService,
+    private auth: AuthService
+  ) {}
 
   start() {
     if (!this.isTracking) {
@@ -144,6 +148,8 @@ export class KmTrackerServiceIframe {
     }
 
     let clickOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'MouseClick',
       source: 'Iframe',
       url: doc.URL,
@@ -173,6 +179,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyDown',
       source: 'Iframe',
       which: w,
@@ -199,6 +207,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyUp',
       source: 'Iframe',
       which: w,
@@ -226,6 +236,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'KeyPress',
       source: 'Iframe',
       which: w,
@@ -274,6 +286,8 @@ export class KmTrackerServiceIframe {
     }
 
     let movementOutput = {
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'MouseMovement',
       source: 'Iframe',
       url: doc.URL,
@@ -323,8 +337,8 @@ export class KmTrackerServiceIframe {
     }
 
     let scrollOutput = {
-      userId: 'userId',
-      username: 'username',
+      userId: this.auth.getUser()._id,
+      username: this.auth.getUser().email,
       type: 'Scroll',
       source: 'Iframe',
       url: doc.URL,
