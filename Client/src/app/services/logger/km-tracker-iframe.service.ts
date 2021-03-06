@@ -18,6 +18,8 @@ export class KmTrackerServiceIframe {
   isTracking = false;
   boundFunctions = [];
 
+  user: any;
+
   constructor(
     private storeService: StoreTrackService,
     private auth: AuthService
@@ -94,6 +96,11 @@ export class KmTrackerServiceIframe {
     elem.addEventListener(evt, fn);
     elem.data = data;
     elem.storeService = this.storeService;
+    this.user = {
+      id: this.auth.getUser()._id,
+      email: this.auth.getUser().email,
+    }
+    elem.user = this.user;
   }
 
   bindThrottledEvent(elem, evt, data, fn, delay) {
@@ -102,6 +109,11 @@ export class KmTrackerServiceIframe {
     elem.addEventListener(evt, throttledFn);
     elem.data = data;
     elem.storeService = this.storeService;
+    this.user = {
+      id: this.auth.getUser()._id,
+      email: this.auth.getUser().email,
+    }
+    elem.user = this.user;
   }
 
   unbindAll(elem, evt) {
@@ -148,8 +160,8 @@ export class KmTrackerServiceIframe {
     }
 
     let clickOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'MouseClick',
       source: 'Iframe',
       url: doc.URL,
@@ -179,8 +191,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyDown',
       source: 'Iframe',
       which: w,
@@ -207,8 +219,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyUp',
       source: 'Iframe',
       which: w,
@@ -236,8 +248,8 @@ export class KmTrackerServiceIframe {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyPress',
       source: 'Iframe',
       which: w,
@@ -286,8 +298,8 @@ export class KmTrackerServiceIframe {
     }
 
     let movementOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'MouseMovement',
       source: 'Iframe',
       url: doc.URL,
@@ -337,8 +349,8 @@ export class KmTrackerServiceIframe {
     }
 
     let scrollOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'Scroll',
       source: 'Iframe',
       url: doc.URL,

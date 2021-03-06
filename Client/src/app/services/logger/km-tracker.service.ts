@@ -17,6 +17,8 @@ export class KmTrackerService {
   isTracking = false;
   boundFunctions = [];
 
+  user: any;
+
   constructor(
     private auth: AuthService,
     private storeService: StoreTrackService
@@ -90,6 +92,11 @@ export class KmTrackerService {
     elem.addEventListener(evt, fn);
     elem.data = data;
     elem.storeService = this.storeService;
+    this.user = {
+      id: this.auth.getUser()._id,
+      email: this.auth.getUser().email,
+    }
+    elem.user = this.user;
   }
 
   bindThrottledEvent(elem, evt, data, fn, delay) {
@@ -98,6 +105,11 @@ export class KmTrackerService {
     elem.addEventListener(evt, throttledFn);
     elem.data = data;
     elem.storeService = this.storeService;
+    this.user = {
+      id: this.auth.getUser()._id,
+      email: this.auth.getUser().email,
+    }
+    elem.user = this.user;
   }
 
   unbindAll(elem, evt) {
@@ -131,8 +143,8 @@ export class KmTrackerService {
       winH = h;
 
     let clickOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'MouseClick',
       source: 'Window',
       url: doc.URL,
@@ -162,8 +174,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyDown',
       source: 'Window',
       which: w,
@@ -190,8 +202,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyUp',
       source: 'Window',
       which: w,
@@ -219,8 +231,8 @@ export class KmTrackerService {
       doc = evt.currentTarget.data.d;
 
     let keyOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'KeyPress',
       source: 'Window',
       which: w,
@@ -256,8 +268,8 @@ export class KmTrackerService {
       winH = h;
 
     let movementOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'MouseMovement',
       source: 'Window',
       url: doc.URL,
@@ -294,8 +306,8 @@ export class KmTrackerService {
       winH = h;
 
     let scrollOutput = {
-      userId: this.auth.getUser()._id,
-      username: this.auth.getUser().email,
+      userId: this.user.id,
+      username: this.user.email,
       type: 'Scroll',
       source: 'Window',
       url: doc.URL,
