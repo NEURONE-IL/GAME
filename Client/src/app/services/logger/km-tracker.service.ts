@@ -144,7 +144,7 @@ export class KmTrackerService {
 
     let clickOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'MouseClick',
       source: 'Window',
       url: doc.URL,
@@ -175,7 +175,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyDown',
       source: 'Window',
       which: w,
@@ -203,7 +203,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyUp',
       source: 'Window',
       which: w,
@@ -232,7 +232,7 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyPress',
       source: 'Window',
       which: w,
@@ -269,7 +269,7 @@ export class KmTrackerService {
 
     let movementOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'MouseMovement',
       source: 'Window',
       url: doc.URL,
@@ -307,7 +307,7 @@ export class KmTrackerService {
 
     let scrollOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'Scroll',
       source: 'Window',
       url: doc.URL,

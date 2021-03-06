@@ -161,7 +161,7 @@ export class KmTrackerServiceIframe {
 
     let clickOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'MouseClick',
       source: 'Iframe',
       url: doc.URL,
@@ -192,7 +192,7 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyDown',
       source: 'Iframe',
       which: w,
@@ -220,7 +220,7 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyUp',
       source: 'Iframe',
       which: w,
@@ -249,7 +249,7 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'KeyPress',
       source: 'Iframe',
       which: w,
@@ -299,7 +299,7 @@ export class KmTrackerServiceIframe {
 
     let movementOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'MouseMovement',
       source: 'Iframe',
       url: doc.URL,
@@ -350,7 +350,7 @@ export class KmTrackerServiceIframe {
 
     let scrollOutput = {
       userId: this.user.id,
-      username: this.user.email,
+      userEmail: this.user.email,
       type: 'Scroll',
       source: 'Iframe',
       url: doc.URL,
