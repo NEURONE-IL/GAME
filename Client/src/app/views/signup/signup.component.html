@@ -52,19 +52,35 @@
           <mat-label>{{"SIGNUP.FORM.EMAIL" | translate}}</mat-label>
           <input matInput formControlName="email" placeholder=""
                  required>
+
+          <!-- email validation -->
           <mat-error *ngIf="tutorFormControls.email.hasError('required')">
             {{"SIGNUP.FORM.ERROR.EMAIL_REQUIRED" | translate}}
           </mat-error>
+
           <mat-error *ngIf="tutorFormControls.email.hasError('email') && !tutorFormControls.email.hasError('required')">
             {{"SIGNUP.FORM.ERROR.EMAIL_INVALID" | translate}}
           </mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="signup-form-field">
+          <!-- email confirmation -->
+          <mat-label>{{"SIGNUP.FORM.EMAIL" | translate}}</mat-label>
+          <input matInput formControlName="emailConfirm" ngValidateEqual="email" placeholder=""
+                 required>
+
+          <mat-error *ngIf="tutorFormControls.emailConfirm!= tutorFormControls.emailConfirm">
+            {{"SIGNUP.FORM.ERROR.EMAIL_DONT_MATCH" | translate}}
+          </mat-error>
+
         </mat-form-field>
         <br>
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.RELATION" | translate}}</mat-label>
           <input matInput formControlName="relation" placeholder=""
                  required>
-          <mat-error *ngIf="tutorFormControls.email.hasError('required')">
+          <mat-error *ngIf="tutorFormControls.relation.hasError('required')">
             {{"SIGNUP.FORM.ERROR.RELATION_REQUIRED" | translate}}
           </mat-error>
         </mat-form-field>
@@ -157,8 +173,11 @@
         <br>
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.PASSWORD" | translate}}</mat-label>
-          <input matInput type="password" name="password" formControlName="password" placeholder=""
+          <input matInput type="password" name="password"  [type]="hide ? 'password' : 'text'" formControlName="password" placeholder=""
                  required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+
+          <!-- PASSWORD VALIDATION -->
           <mat-error *ngIf="studentFormControls.password.hasError('required')">
             {{"SIGNUP.FORM.ERROR.PASSWORD" | translate}}
           </mat-error>
@@ -195,7 +214,7 @@
         <div *ngIf="userSubmitted">
           <p>{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
           <button mat-raised-button color="primary" (click)="redirect()"> {{"SIGNUP.GO_HOME" | translate}} </button>
-        </div>          
+        </div>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

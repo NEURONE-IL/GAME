@@ -45,7 +45,7 @@
       "SHOW_RESOURCES": "Ver recursos",
       "TITLE": "Título",
       "UPDATED_AT": "Modificado",
-      "URL": "URL"      
+      "URL": "URL"
     },
     "STUDIES": {
       "CREATE": "CREAR ESTUDIO",
@@ -288,7 +288,8 @@
         "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
         "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
         "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 4 caracteres y al menos 1 número",
-        "RELATION_REQUIRED": "Debe ingresar su parentesco"
+        "RELATION_REQUIRED": "Debe ingresar su parentesco",
+        "EMAIL_DONT_MATCH": "El email no coincide con la confirmación. Reviselo."
       }
     }
   },
@@ -312,11 +313,11 @@
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha creado el estudio",
       "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el estudio",
-      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio"      
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio"
     },
     "UPDATE": {
       "SUBTITLE": "Complete los siguientes campos para editar el estudio en el sistema",
-      "TITLE": "Edición de estudio"      
+      "TITLE": "Edición de estudio"
     }
   },
   "UPLOAD": {

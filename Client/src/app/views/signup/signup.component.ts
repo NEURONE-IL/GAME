@@ -54,6 +54,7 @@ export class SignupComponent implements OnInit {
       tutor_last_names: ['', [Validators.required, Validators.minLength(3)]],
       relation: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.email, Validators.required]],
+      emailConfirm: ['', [Validators.email, Validators.required]],
       tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{8,}")]]
     });
     this.studentForm = this.formBuilder.group({
@@ -64,8 +65,8 @@ export class SignupComponent implements OnInit {
       institution: ['', Validators.required],
       institution_commune: [{value: '', disabled: true}, Validators.required],
       institution_region: ['', Validators.required],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]],
-      password_confirmation: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{4,32}$/)]]
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{8,32}$/)]],
+      password_confirmation: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{8,32}$/)]]
     });
     console.log(!this.userSubmitted);
   }
@@ -120,4 +121,6 @@ export class SignupComponent implements OnInit {
   get studentFormControls(): any {
     return this.studentForm['controls'];
   }
+
+  hide= true;
 }
