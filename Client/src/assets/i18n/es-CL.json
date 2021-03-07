@@ -261,6 +261,7 @@
       "RUT": "RUT",
       "PHONE_NUMBER": "Número de teléfono",
       "EMAIL": "Correo electrónico (del apoderado/a)",
+      "EMAIL_CONFIRM": "Confirme correo",
       "BIRTHDATE": "Fecha de nacimiento",
       "GRADE": "Curso",
       "SCHOOL": "Colegio",
@@ -287,7 +288,7 @@
         "PASSWORD": "Debe ingresar una contraseña",
         "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
         "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
-        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 4 caracteres y al menos 1 número",
+        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 8 caracteres y al menos 1 número",
         "RELATION_REQUIRED": "Debe ingresar su parentesco",
         "EMAIL_DONT_MATCH": "El email no coincide con la confirmación. Reviselo."
       }

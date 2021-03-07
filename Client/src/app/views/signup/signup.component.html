@@ -66,13 +66,18 @@
 
         <mat-form-field class="signup-form-field">
           <!-- email confirmation -->
-          <mat-label>{{"SIGNUP.FORM.EMAIL" | translate}}</mat-label>
+          <mat-label>{{"SIGNUP.FORM.EMAIL_CONFIRM" | translate}}</mat-label>
           <input matInput formControlName="emailConfirm" ngValidateEqual="email" placeholder=""
                  required>
 
-          <mat-error *ngIf="tutorFormControls.emailConfirm!= tutorFormControls.emailConfirm">
+          <mat-error *ngIf="tutorFormControls.emailConfirm.hasError('required')">
+            {{"SIGNUP.FORM.ERROR.EMAIL_REQUIRED" | translate}}
+          </mat-error>
+
+          <mat-error *ngIf="tutorFormControls.emailConfirm.hasError('notEqual')">
             {{"SIGNUP.FORM.ERROR.EMAIL_DONT_MATCH" | translate}}
           </mat-error>
+
 
         </mat-form-field>
         <br>
