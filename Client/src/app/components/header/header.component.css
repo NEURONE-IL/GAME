@@ -67,7 +67,11 @@
     letter-spacing: 0.2em;
     font-family: Comic Sans MS, sans-serif;
   }
-
   .user-image{
     width: 50px;
+  }
+  .home{
+    font-size: 40px;
+    vertical-align: top;
+
   }
