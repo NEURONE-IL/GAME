@@ -47,4 +47,8 @@ export class GamificationService {
   changeProfileImage(user_id, image_url): Observable<any>{
     return this.http.put(this.uri+'user/'+user_id+'/profileImage', {image_url: image_url});
   }
+
+  notifications(user_id): Observable<any>{
+    return this.http.get(this.uri+'getNotifications/'+user_id );
+  }
 }

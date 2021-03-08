@@ -1,6 +1,24 @@
 <div class="header" role="banner">
   <a class="title-span" href="/">NEURONE GAME</a>
   <div class="spacer"></div>
-  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn">{{user.names}}</a>
+
+  <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="tabledriven">
+    <mat-icon *ngIf="notifications">notifications_active</mat-icon>
+    <mat-icon *ngIf="!notifications">notifications</mat-icon>
+  </button>
+
+  <mat-menu #tabledriven="matMenu">
+    <button *ngIf="menuItems == null" mat-menu-item >Vacío</button>
+    <ng-container *ngFor="let item of menuItems">
+      <button *ngIf=!item.templateName mat-menu-item >{{ item.messageES }}</button>
+      <button *ngIf=item.elementRef  mat-menu-item [matMenuTriggerFor]=item.elementRef>{{ item.messageES }}</button>
+    </ng-container>
+  </mat-menu>
+
+  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn">
+    <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
+    <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="user-image">
+    {{user.names}}
+  </a>
   <button (click)="logout()" mat-button *ngIf="isLoggedIn"><mat-icon>login</mat-icon> {{"LOGOUT.LOGOUT" | translate}}</button>
 </div>

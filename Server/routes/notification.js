@@ -3,6 +3,22 @@ const router = express.Router();
 const Notification = require('../models/notification');
 const User = require('../models/user');
 
+router.get('/getNotifications/:user_id', async(req, res) => {
+    const _id = req.params.user_id;
+    let notifications = await Notification.find({seen: false, user: _id}, err => {
+        if(err){
+            return res.status(400).json({
+            ok: false,
+            err
+            });
+        }
+    }).sort({createdAt: -1})
+    res.status(200).json({
+        notifications
+    });  
+})
+
+
 router.post('/getPoints', async (req, res) => {
     let player = req.body.player;
     if(!player || !player.code){

@@ -17,13 +17,10 @@ export class SummaryComponent implements OnInit {
   answer
   connected = false;
   ngOnInit(): void {
-    if(this.authService.getUser().gm_code){
+    
       this.connected = true;
       this.levelProgress();
-    }
-    else{
-      this.continue();
-    }
+
   }
 
   levelProgress(){

@@ -11,6 +11,12 @@
     font-weight: 600;
   }
 
+
+.mat-icon{
+  margin-right: 5px;
+}
+
+
   .a-1{
     margin-left: 1%;
     font-size: calc(0.5em + 1vmin);
@@ -60,4 +66,8 @@
     font-family: Ubuntu;
     letter-spacing: 0.2em;
     font-family: Comic Sans MS, sans-serif;
+  }
+
+  .user-image{
+    width: 50px;
   }

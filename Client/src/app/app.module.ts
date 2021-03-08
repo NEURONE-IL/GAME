@@ -21,6 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
@@ -66,6 +67,7 @@ import { UserProfileComponent } from './views/user-profile/user-profile.componen
 import { AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
 import { SummaryComponent } from './views/summary/summary.component';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -122,6 +124,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatPaginatorModule,
     MatCardModule,
     MatRadioModule,
+    MatMenuModule,
     MatCheckboxModule,
     MatSelectModule,
     MatCheckboxModule,
