@@ -49,7 +49,7 @@ export class AuthService {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        this.router.navigate(['login']);
+        this.router.navigate(['/']);
       }
       );
   }
@@ -141,7 +141,7 @@ export class AuthService {
     } else {
       // this.router.navigate(['questionnaire/initial']);
       // this.router.navigate(['questionnaire/pre-test']);
-      this.router.navigate(['start']);
+      this.router.navigate(['/user-profile']);
     }
 
 

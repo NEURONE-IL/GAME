@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ImageSelectorComponent } from 'src/app/components/image-selector/image-selector.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamificationService } from 'src/app/services/game/gamification.service';
@@ -18,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   points
   user
   ranks
-  constructor(private gamificationService: GamificationService,  private authService: AuthService, public dialog: MatDialog) { }
+  constructor(private gamificationService: GamificationService,  private authService: AuthService, public dialog: MatDialog, public router: Router) { }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
@@ -125,6 +126,10 @@ export class UserProfileComponent implements OnInit {
         this.rankings();
       }
     })
+  }
+
+  play(){
+    this.router.navigateByUrl('/start');
   }
 
 }

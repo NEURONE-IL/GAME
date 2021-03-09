@@ -19,7 +19,7 @@ export class NotLoggedInGuard implements CanActivate {
           this.router.navigate(['admin_panel']);
         }
         else {
-          this.router.navigate(['start']);
+          this.router.navigate(['user-profile']);
         }
         return false;
       }

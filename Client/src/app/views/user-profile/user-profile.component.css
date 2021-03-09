@@ -8,6 +8,15 @@
     background-color: whitesmoke;
 }
 
+.play-button{
+    width:80%; 
+    margin-left: 5%; 
+    height: 80px; 
+    font-size: 30px; 
+    background-color: orange;
+    color: white;
+}
+
 
 .progressLevelCard{
     width: 100%; 

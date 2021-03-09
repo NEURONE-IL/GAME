@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
-    this.router.navigate(['start']);
   }
 
   showConfirmedToastr() {
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['admin_panel']);
     } else {
       console.log('student');
-      this.router.navigate(['start']);
+      this.router.navigate(['user-profile']);
     }
   }
 

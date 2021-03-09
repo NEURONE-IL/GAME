@@ -3,7 +3,7 @@
 
   <div class="spacer"></div>
 
-  <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="tabledriven">
+  <button *ngIf="isLoggedIn && user.role.name !== 'admin'" mat-icon-button [matMenuTriggerFor]="tabledriven">
     <mat-icon *ngIf="notifications">notifications_active</mat-icon>
     <mat-icon *ngIf="!notifications">notifications</mat-icon>
   </button>
@@ -16,7 +16,7 @@
     </ng-container>
   </mat-menu>
 
-  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn">
+  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name !== 'admin'">
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
     <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="user-image">
     {{user.names}}
