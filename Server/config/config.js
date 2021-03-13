@@ -21,5 +21,9 @@ process.env.URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@localh
 
 process.env.NEURONEGM = 'http://159.65.100.191:3080'
 //process.env.NEURONEGM = 'http://localhost:3080'
+
 //NEURONE GAME CLIENT
 process.env.GAME_CLIENT = 'http://159.65.100.191:4200';
+
+// NEURONE ASSETS PATH
+process.env.NEURONE_DOCS = '/home/neurone/apps/neurone/assets'

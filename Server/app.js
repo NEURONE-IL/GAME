@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const config = require('config'); //we load the db location from the JSON files
 const morgan = require('morgan');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 require('dotenv').config(); //setup custom environment variables
 
 /** Internal modules **/
@@ -113,14 +114,22 @@ app.use('/api/sessionLog', sessionLogRoutes);
 app.use('/api/visitedLink', visitedLinkRoutes);
 app.use('/api/scroll', ScrollRoutes);
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+// Serve neurone docs
+app.use("/assets/", express.static(process.env.NEURONE_DOCS));
+
+// Set client on root
+
+// - Serve static content
+app.use(express.static('public'));
+// - Serve index
+app.get('*',function(req,res){
+  res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
 
 /** Server deployment **/
 app.listen(process.env.PORT, () => {
-    console.log(`Server listening on the port::${process.env.PORT}`);
+    console.log(`NEURONE-GAME listening on the port::${process.env.PORT}`);
 });
 
 /** Export APP for testing **/
