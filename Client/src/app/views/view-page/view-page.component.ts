@@ -29,7 +29,8 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.title = params.get('title');
-        this.docUrl = this.endpoints.neuroneFiles + this.url;
+        this.docUrl = this.endpoints.serverRoot + this.url;
+        this.docUrl = environment.root + '/' + this.path;
         console.log(this.docUrl);
         console.log('docurl: ',this.docUrl);
       });

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 export interface Resource {
   _id: string,
@@ -22,14 +23,10 @@ export interface Resource {
   providedIn: 'root'
 })
 export class EndpointsService {
-
-  rootURL = 'http://159.65.100.191:3030/api/';
-  // rootURL = 'http://localhost:3090/api/';
-  //neuroneURL = 'http://localhost:3000';
-  frontURL = 'http://159.65.100.191:4200';
-  // frontURL = 'http://localhost:4200';
-  neuroneURL = 'http://159.65.100.191:3000';
-  neuroneFiles = './neuroneFiles/'
+  serverRoot = environment.serverRoot:
+  rootURL = environment.apiURL;
+  frontURL = environment.frontURL;
+  neuroneURL = environment.neuroneURL;
 
   constructor(protected http: HttpClient) { }
 
