@@ -1,18 +1,22 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game/game.service';
+import { StoreQueryService } from 'src/app/services/logger/store-query.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-
   query: string;
   locale: string;
   domain: string;
-  constructor(public router: Router, public gameService: GameService) { }
+  constructor(
+    public router: Router,
+    public gameService: GameService,
+    private storeQueryService: StoreQueryService
+  ) {}
 
   ngOnInit(): void {
     const challenge = this.gameService.challenge;
@@ -20,10 +24,21 @@ export class SearchComponent implements OnInit {
     this.domain = challenge.study;
   }
 
-  search(){
-    if(this.query !== ''){
-      this.router.navigate(['session/search-result', this.query, this.locale, this.domain]);
+  search() {
+    if (this.query !== '') {
+      let queryData = {
+        query: this.query,
+        title: document.title,
+        url: this.router.url,
+        localTimeStamp: Date.now(),
+      };
+      this.storeQueryService.postQuery(queryData);
+      this.router.navigate([
+        'session/search-result',
+        this.query,
+        this.locale,
+        this.domain,
+      ]);
     }
   }
-
 }

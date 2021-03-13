@@ -6,17 +6,18 @@ import { EndpointsService } from '../endpoints/endpoints.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StoreLinkService {
+export class StoreQueryService {
 
-  visitedLinkUri = this.endpoints.rootURL + 'visitedLink'
+  queryUri = this.endpoints.rootURL + 'query'
 
   constructor(private http: HttpClient, private endpoints: EndpointsService, private authService: AuthService) { }
 
-  // Save visited link
-  postVisitedLink(data) {
+  // Save query
+  postQuery(data) {
     if(this.authService.loggedIn){
       data.userId = this.authService.getUser()._id;
-      this.http.post(this.visitedLinkUri, data)
+      data.userEmail = this.authService.getUser().email;
+      this.http.post(this.queryUri, data)
       .subscribe((resp: any) => {
         },
         (error) => {
