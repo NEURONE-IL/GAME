@@ -1,1 +1,3 @@
-Client/src/neuroneFiles/*
+Server/client/
+Server/public/
+Server/uploads/
