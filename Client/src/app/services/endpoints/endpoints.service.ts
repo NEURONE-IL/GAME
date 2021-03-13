@@ -23,7 +23,7 @@ export interface Resource {
   providedIn: 'root'
 })
 export class EndpointsService {
-  serverRoot = environment.serverRoot:
+  serverRoot = environment.serverRoot;
   rootURL = environment.apiURL;
   frontURL = environment.frontURL;
   neuroneURL = environment.neuroneURL;
