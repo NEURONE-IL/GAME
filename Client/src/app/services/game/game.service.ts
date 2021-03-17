@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { EndpointsService } from '../endpoints/endpoints.service';
 import { ChallengeService } from './challenge.service';
 
 @Injectable({

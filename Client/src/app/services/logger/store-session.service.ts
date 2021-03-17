@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreSessionService {
 
-  sessionLogUri = this.endpoints.rootURL + 'sessionLog'
+  sessionLogUri = environment.apiURL + 'sessionLog'
 
-  constructor(private http: HttpClient, private endpoints: EndpointsService) { }
+  constructor(private http: HttpClient) { }
 
   // Save session logs
   postSessionLog(data) {

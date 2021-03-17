@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { AuthService } from '../auth/auth.service';
 })
 export class StoreTrackService {
 
-  mouseClickUri = this.endpoints.rootURL + 'mouseClick';
-  mouseCoordinateUri = this.endpoints.rootURL + 'mouseCoordinate';
-  scrollUri = this.endpoints.rootURL + 'scroll';
-  keyStrokeUri = this.endpoints.rootURL + 'keystroke';
+  mouseClickUri = environment.apiURL + 'mouseClick';
+  mouseCoordinateUri = environment.apiURL + 'mouseCoordinate';
+  scrollUri = environment.apiURL + 'scroll';
+  keyStrokeUri = environment.apiURL + 'keystroke';
 
-  constructor(private http: HttpClient, private endpoints: EndpointsService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   // Save mouse clicks
   postMouseClick(data) {

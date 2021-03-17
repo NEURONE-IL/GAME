@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { StoreQueryService } from 'src/app/services/logger/store-query.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class SearchResultComponent implements OnInit {
   domain: string;
   documents = [];
   searching: boolean;
-  BaseUrl = 'http://159.65.100.191:3000/';
+  BaseUrl = environment.neuroneURL;
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,

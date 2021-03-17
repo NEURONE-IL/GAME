@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   serverRoot: 'http://159.65.100.191:3030/',
   apiURL: 'http://159.65.100.191:3030/api/',
-  frontURL: 'http://159.65.100.191:4200',
-  neuroneURL: 'http://159.65.100.191:3000',
+  frontURL: 'http://159.65.100.191:3030/',
+  neuroneURL: 'http://159.65.100.191:3000/',
 };
 
 /*

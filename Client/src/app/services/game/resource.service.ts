@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceService {
 
-  uri = this.endpoints.rootURL + 'document/';
+  uri = environment.apiURL + 'document/';
 
-  constructor(private endpoints: EndpointsService) { }
+  constructor() { }
 
 }

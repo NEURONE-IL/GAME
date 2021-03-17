@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -24,10 +24,9 @@ export interface Challenge {
 })
 export class ChallengeService {
 
-  uri = this.endpoints.rootURL + 'challenge/';
+  uri = environment.apiURL + 'challenge/';
 
   constructor(protected http: HttpClient,
-              private endpoints: EndpointsService,
               private authService: AuthService) { }
 
   getChallenges(): Observable<any> {
@@ -35,7 +34,7 @@ export class ChallengeService {
   }
 
   getChallengesByStudy(studyId: string): Observable<any> {
-    return this.http.get(this.endpoints.rootURL +'challenge/byStudy/'+studyId)
+    return this.http.get(environment.apiURL +'challenge/byStudy/'+studyId)
   }
 
   getChallenge(id: string) {
@@ -62,7 +61,7 @@ export class ChallengeService {
       }
     }
     console.log(updatedChallenge)
-    /*Sends the request*/    
+    /*Sends the request*/
     return this.http.put(this.uri+id, updatedChallenge, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 

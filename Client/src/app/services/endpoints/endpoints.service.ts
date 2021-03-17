@@ -23,9 +23,6 @@ export interface Resource {
   providedIn: 'root'
 })
 export class EndpointsService {
-  serverRoot = environment.serverRoot;
-  rootURL = environment.apiURL;
-  frontURL = environment.frontURL;
   neuroneURL = environment.neuroneURL;
 
   constructor(protected http: HttpClient) { }
@@ -35,7 +32,7 @@ export class EndpointsService {
     const post = JSON.stringify({query: query, locale: locale, domain: domain});
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
-    return this.http.post(this.neuroneURL+'/v1/document/search', post, {headers: header});
+    return this.http.post(this.neuroneURL+'v1/document/search', post, {headers: header});
   }
 
   /* SORT */
@@ -50,7 +47,7 @@ export class EndpointsService {
   }
 
   pingNeurone(){
-    return this.http.get(this.neuroneURL+'/v1/ping');
+    return this.http.get(this.neuroneURL+'v1/ping');
   }
 
   /*uploadDocument*/
@@ -61,20 +58,14 @@ export class EndpointsService {
     cleanResource.task = cleanResource.task.split();
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
-    return this.http.post(this.neuroneURL+'/v1/document/load', cleanResource, {headers: header});
+    return this.http.post(this.neuroneURL+'v1/document/load', cleanResource, {headers: header});
   }
 
   deleteDocument(resource: any){
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
-    return this.http.post(this.neuroneURL+'/v1/document/delete', resource, {headers: header});
+    return this.http.post(this.neuroneURL+'v1/document/delete', resource, {headers: header});
   }
-
-  /* QUESTIONS */
-  getQuestions(){
-    return this.http.get(this.rootURL + '/questions');
-  }
-
 
   arraymove(arr, fromIndex, toIndex) {
     var element = arr[fromIndex];

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { StoreSessionService } from '../logger/store-session.service';
 
 @Injectable({
@@ -11,11 +11,10 @@ import { StoreSessionService } from '../logger/store-session.service';
 })
 export class AuthService {
 
-  uri = this.endpoints.rootURL + 'auth/';
-  userUri = this.endpoints.rootURL + 'user/';
+  uri = environment.apiURL + 'auth/';
+  userUri = environment.apiURL + 'user/';
 
   constructor(private http: HttpClient,private router: Router,
-              private endpoints: EndpointsService,
               private storeSession: StoreSessionService,
               private toastr: ToastrService,
               private translate: TranslateService) {}

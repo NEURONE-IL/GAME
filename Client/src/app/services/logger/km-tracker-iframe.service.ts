@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { AuthService } from '../auth/auth.service';
-import { EndpointsService } from '../endpoints/endpoints.service';
 import { StoreTrackService } from './store-track.service';
 
 /*

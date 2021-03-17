@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreLinkService {
 
-  visitedLinkUri = this.endpoints.rootURL + 'visitedLink'
+  visitedLinkUri = environment.apiURL + 'visitedLink'
 
-  constructor(private http: HttpClient, private endpoints: EndpointsService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   // Save visited link
   postVisitedLink(data) {
