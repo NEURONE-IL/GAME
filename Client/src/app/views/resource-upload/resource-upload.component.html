@@ -9,7 +9,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.NAME" | translate }}</mat-label>
-						<input matInput formControlName="docName" required #inputName maxlength="50">
+						<input matInput knifeAlphanumeric formControlName="docName" required #inputName maxlength="50">
 						<mat-hint align="end">{{inputName.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
@@ -36,7 +36,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.TITLE" | translate }}</mat-label>
-						<input matInput formControlName="title" required #inputType maxlength="50">
+						<input matInput knifeAlphanumeric formControlName="title" required #inputType maxlength="50">
 						<mat-hint align="end">{{inputType.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="resourceFormControls.title.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
