@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreQueryService {
 
-  queryUri = this.endpoints.rootURL + 'query'
+  queryUri = environment.apiURL + 'query'
 
-  constructor(private http: HttpClient, private endpoints: EndpointsService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   // Save query
   postQuery(data) {

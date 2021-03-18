@@ -4,7 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { Study, StudyService } from '../../services/game/study.service';
-import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service'
+import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -39,7 +40,7 @@ export class StudyDisplayComponent implements OnInit {
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id')).subscribe(
       response => {
         this.study = response['study'];
-        this.registerLink = this.endpointsService.frontURL + '/signup/' + this.study._id;
+        this.registerLink = environment.frontURL + 'signup/' + this.study._id;
         console.log(this.route.snapshot.paramMap.get('study_id'))
       },
       err => {
@@ -166,7 +167,7 @@ export class StudyDisplayComponent implements OnInit {
       width: '60%',
       data: this.study
     }).afterClosed()
-    .subscribe(() => this.ngOnInit());    
+    .subscribe(() => this.ngOnInit());
   }
 
   showChallengeUpdateDialog(challenge: Challenge): void {
@@ -175,7 +176,7 @@ export class StudyDisplayComponent implements OnInit {
       data: challenge
     }).afterClosed()
     .subscribe(() => this.ngOnInit());
-  }  
+  }
 
   getClass(type){
     if (type=="page"){
@@ -231,8 +232,8 @@ export class StudyUpdateDialogComponent implements OnInit{
   loading: Boolean;
   file: File;
 
-  constructor(@Inject(MAT_DIALOG_DATA) 
-    public study: Study, 
+  constructor(@Inject(MAT_DIALOG_DATA)
+    public study: Study,
     private formBuilder: FormBuilder,
     private studyService: StudyService,
     private toastr: ToastrService,
@@ -287,7 +288,7 @@ export class StudyUpdateDialogComponent implements OnInit{
     }
     /*Check formData values*/
     for (var value of formData.entries()) {
-      console.log(value[0]+ ', ' + value[1]); 
+      console.log(value[0]+ ', ' + value[1]);
     }
     /*End check formData values*/
     this.studyService.putStudy(studyId, formData).subscribe(
@@ -338,11 +339,11 @@ export class ChallengeUpdateDialogComponent implements OnInit{
 
   constructor(@Inject(MAT_DIALOG_DATA)
     public challenge: Challenge,
-    private formBuilder: FormBuilder, 
-    private router: Router, 
-    private challengeService: ChallengeService, 
-    private studyService: StudyService, 
-    private toastr: ToastrService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private challengeService: ChallengeService,
+    private studyService: StudyService,
+    private toastr: ToastrService,
     private translate: TranslateService,
     public matDialog: MatDialog) { }
 
@@ -369,7 +370,7 @@ export class ChallengeUpdateDialogComponent implements OnInit{
         });
       }
     );
-        
+
     this.loading = false;
   }
 

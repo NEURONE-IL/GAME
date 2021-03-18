@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { KmTrackerServiceIframe } from 'src/app/services/logger/km-tracker-iframe.service';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-page',
@@ -10,7 +11,7 @@ import { EndpointsService } from '../../services/endpoints/endpoints.service';
 })
 export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(private route: ActivatedRoute, private endpoints: EndpointsService, private iFrameKmTracker: KmTrackerServiceIframe) { }
+  constructor(private route: ActivatedRoute, private iFrameKmTracker: KmTrackerServiceIframe) { }
 
   ngAfterViewInit(): void {
     this.isInited = true;
@@ -29,7 +30,7 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((params: ParamMap) => {
         this.url = params.get('url');
         this.title = params.get('title');
-        this.docUrl = this.endpoints.serverRoot + this.url;
+        this.docUrl = environment.serverRoot + this.url;
         console.log(this.docUrl);
         console.log('docurl: ',this.docUrl);
       });

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 export interface Questionnaire {
@@ -17,9 +17,9 @@ export interface Questionnaire {
 })
 export class QuestionnaireService {
 
-  uri = this.endpoints.rootURL + 'questionnaire/';
+  uri = environment.apiURL + 'questionnaire/';
 
-  constructor(protected http: HttpClient, private endpoints: EndpointsService) { }
+  constructor(protected http: HttpClient) { }
 
   getQuestionnaires(): Observable<any> {
     return this.http.get(this.uri);

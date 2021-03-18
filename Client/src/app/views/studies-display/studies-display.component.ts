@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import { Study, StudyService } from '../../services/game/study.service';
 import {Router} from '@angular/router';
-import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class StudiesDisplayComponent implements OnInit {
   studies: Study[] = [];
 
-  constructor(private studyService: StudyService, private router: Router, public endpoints: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private studyService: StudyService, private router: Router, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
 

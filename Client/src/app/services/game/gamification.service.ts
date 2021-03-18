@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EndpointsService } from '../endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamificationService {
 
-  uri = this.endpoints.rootURL;
+  uri = environment.apiURL;
 
-  constructor(protected http: HttpClient, private endpoints: EndpointsService) { }
+  constructor(protected http: HttpClient) { }
 
   gamificationStatus(): Observable<any> {
     return this.http.get(this.uri+'gamification/isGamified');

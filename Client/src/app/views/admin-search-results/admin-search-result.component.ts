@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
+import { environment } from 'src/environments/environment';
 
 let input = Input;
 
@@ -16,7 +17,7 @@ export class AdminSearchResultComponent implements OnInit {
   @Input() domain: string;
   screenHeight: any;
   documents = [];
-  BaseUrl = "http://159.65.100.191:3000/";
+  BaseUrl = environment.neuroneURL;
 
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
