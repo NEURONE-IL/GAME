@@ -86,6 +86,7 @@ export class AuthService {
   }
 
   signup(userData: any, study_id: string) {
+    delete userData.emailConfirm;
     return this.http.post(this.uri + 'register/' + study_id, userData);
   }
 

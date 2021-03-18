@@ -212,6 +212,11 @@ export class StudyDisplayComponent implements OnInit {
       .subscribe(response => {
         this.challenges = response['challenges'];
       });
+    this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+    .subscribe((response: Resource[]) => {
+      this.resources = response;
+      console.log(this.resources);
+    });
   }
 }
 
