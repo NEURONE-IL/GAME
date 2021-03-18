@@ -33,4 +33,7 @@ UserStudySchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('UserStudy', UserStudySchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const UserStudy = myDB.model('UserStudy', UserStudySchema);
+
+module.exports = UserStudy;

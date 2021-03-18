@@ -25,4 +25,7 @@ DocumentSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Document', DocumentSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Document = myDB.model('Document', DocumentSchema);
+
+module.exports = Document;

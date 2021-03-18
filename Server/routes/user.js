@@ -20,7 +20,7 @@ router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
       });
     }
     res.status(200).json({ users });
-  }).populate("role");
+  }).populate({ path: 'role', model: Role} );
 });
 
 router.get(
@@ -36,7 +36,7 @@ router.get(
         });
       }
       res.status(200).json({ user });
-    }).populate("role");
+    }).populate({ path: 'role', model: Role} );
   }
 );
 

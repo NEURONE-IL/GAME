@@ -25,4 +25,7 @@ StudySchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Study', StudySchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Study = myDB.model('Study', StudySchema);
+
+module.exports = Study;

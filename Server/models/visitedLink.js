@@ -24,4 +24,7 @@ VisitedLinkSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('VisitedLink', VisitedLinkSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const VisitedLink = myDB.model('VisitedLink', VisitedLinkSchema);
+
+module.exports = VisitedLink;

@@ -32,4 +32,7 @@ MouseClickSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('MouseClick', MouseClickSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const MouseClick = myDB.model('MouseClick', MouseClickSchema);
+
+module.exports = MouseClick;

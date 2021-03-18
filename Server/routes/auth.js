@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../models/user");
 const UserData = require("../models/userData");
@@ -188,7 +189,11 @@ router.post("/login", async (req, res) => {
   //checking if username exists
   const user = await User.findOne({
     email: req.body.email.toLowerCase(),
-  }).populate("role");
+  }, err => {
+    if(err){
+      res.status(400).send(err)
+    }
+  }).populate( { path: 'role', model: Role} );
   if (!user) res.status(400).send("EMAIL_NOT_FOUND");
   //checking password
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -199,5 +204,7 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   res.header("x-access-token", token).send({ user: user, token: token });
 });
+
+
 
 module.exports = router;

@@ -32,4 +32,7 @@ MouseCoordinateSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('MouseCoordinate', MouseCoordinateSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const MouseCoordinate = myDB.model('MouseCoordinate', MouseCoordinateSchema);
+
+module.exports = MouseCoordinate;

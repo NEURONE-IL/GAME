@@ -28,4 +28,7 @@ NotificationSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Notification', NotificationSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Notification = myDB.model('Notification', NotificationSchema);
+
+module.exports = Notification;

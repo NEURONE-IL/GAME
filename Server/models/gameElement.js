@@ -21,4 +21,7 @@ GameElementSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('GameElement', GameElementSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const GameElement = myDB.model('GameElement', GameElementSchema);
+
+module.exports = GameElement;

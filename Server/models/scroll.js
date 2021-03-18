@@ -30,4 +30,7 @@ ScrollSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Scroll', ScrollSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Scroll = myDB.model('Scroll', ScrollSchema);
+
+module.exports = Scroll;

@@ -24,4 +24,7 @@ QuerySchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Query', QuerySchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Query = myDB.model('Query', QuerySchema);
+
+module.exports = Query;

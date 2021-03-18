@@ -29,4 +29,7 @@ KeystrokeSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Keystroke', KeystrokeSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const KeyStroke = myDB.model('KeyStroke', KeystrokeSchema);
+
+module.exports = KeyStroke;

@@ -19,4 +19,7 @@ RoleSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Role', RoleSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Role = myDB.model('Role', RoleSchema);
+
+module.exports = Role;

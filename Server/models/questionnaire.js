@@ -32,4 +32,7 @@ QuestionnaireSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Questionnaire', QuestionnaireSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Questionnaire = myDB.model('Questionnaire', QuestionnaireSchema);
+
+module.exports = Questionnaire;

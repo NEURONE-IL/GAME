@@ -47,7 +47,7 @@ router.get('/answer/all', [verifyToken], async (req, res) => {
             });
         }
         res.status(200).json({userChallenges});
-    }).populate('user', {password:0}).populate('challenge');
+    }).populate({ path: 'user', model: User} , {password:0}).populate({ path: 'challenge', model: Challenge} );
 })
 
 router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
@@ -73,7 +73,7 @@ router.get('/answer/byId/:answers_id', [verifyToken], async (req, res) => {
             });
         }
         res.status(200).json({userChallenges});
-    }).populate('challenge').populate('user', {password:0});
+    }).populate({ path: 'challenge', model: Challenge} ).populate({ path: 'user', model: User} , {password:0});
 })
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyBody], async (req, res) => {

@@ -249,7 +249,7 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
                 err
             });
         }
-    }).populate('study');
+    }).populate({ path: 'study', model: Study} );
     const rankingName = await GameElement.findOne({type: "leaderboard", key: key}, err => {
         if (err) {
             return res.status(404).json({

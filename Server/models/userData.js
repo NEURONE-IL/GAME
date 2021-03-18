@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 
 const UserDataSchema = new Schema({
+    code: {type: String},
     tutor_names: {type: String },
     tutor_last_names: {type: String },
     tutor_phone: {type: String },
@@ -30,4 +31,7 @@ UserDataSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('UserData', UserDataSchema);
+const myDB = mongoose.connection.useDb('neuronegameuser');
+const UserData = myDB.model('UserData', UserDataSchema);
+
+module.exports = UserData;

@@ -24,4 +24,7 @@ CredentialSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Credential', CredentialSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Credential = myDB.model('Credential', CredentialSchema);
+
+module.exports = Credential;

@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
-    userData: { type: Schema.Types.ObjectId, ref: 'UserData'}
+    code: { type: String}
 });
 
 // Sets the createdAt parameter equal to the current time
@@ -30,4 +30,7 @@ UserSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('User', UserSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const User = myDB.model('User', UserSchema);
+
+module.exports = User;

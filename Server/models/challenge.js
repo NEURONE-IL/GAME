@@ -27,4 +27,7 @@ ChallengeSchema.pre('save', next => {
     next();
 });
 
-module.exports = mongoose.model('Challenge', ChallengeSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Challenge = myDB.model('Challenge', ChallengeSchema);
+
+module.exports = Challenge;

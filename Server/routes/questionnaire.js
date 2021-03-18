@@ -28,7 +28,7 @@ router.get('/answer', [verifyToken], async (req, res) => {
             });
         }
         res.status(200).json({userQuestionnaires});
-    }).populate('user', {password:0}).populate('questionnaire');
+    }).populate({ path: 'user', model: User} , {password:0}).populate({ path: 'questionnaire', model: Questionnaire} );
 })
 
 router.get('/:questionnaire_id', [verifyToken], async (req, res) => {
@@ -67,7 +67,7 @@ router.get('/answer/:answers_id', [verifyToken], async (req, res) => {
             });
         }
         res.status(200).json({userQuestionnaire});
-    }).populate('questionnaire').populate('user', {password:0});
+    }).populate({ path: 'questionnaire', model: Questionnaire} ).populate({ path: 'user', model: User} , {password:0});
 })
 
 router.post('',  [verifyToken, authMiddleware.isAdmin, questionnaireMiddleware.verifyBody], async (req, res) => {

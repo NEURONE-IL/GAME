@@ -6,4 +6,7 @@ const tokenSchema = new mongoose.Schema({
     createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
 });
 
-module.exports = mongoose.model('Token', tokenSchema);
+const myDB = mongoose.connection.useDb('neuronegame');
+const Token = myDB.model('Token', tokenSchema);
+
+module.exports = Token;
