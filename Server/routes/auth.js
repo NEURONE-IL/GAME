@@ -116,6 +116,7 @@ router.post(
 
     //create userData
     const userData = new UserData({
+      email: req.body.email,
       tutor_names: req.body.tutor_names,
       tutor_last_names: req.body.tutor_last_names,
       tutor_phone: req.body.tutor_phone,
@@ -150,7 +151,6 @@ router.post(
       password: hashpassword,
       role: role._id,
       study: study._id,
-      userData: userData._id
     });
 
     //save user in db

@@ -14,6 +14,7 @@ const UserDataSchema = new Schema({
     institution: {type: String },
     institution_commune: {type: Number },
     institution_region: {type: Number },
+    email: {type: String, unique: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     relation: { type: String }
