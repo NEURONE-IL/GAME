@@ -369,7 +369,7 @@
     "STARTPAGE": {
       "INSTRUCTIONS": {
         "TITLE": "Instrucciones del juego",
-        "TEXT": "Al presionar el botón continuar, blah blah blah..."
+        "TEXT": "Al presionar el botón continuar se dará inicio al juego. En este momento empezará a correr el tiempo y tendrás que responder el desafío antes de que este llegue a 0."
       },
       "STARTBUTTON": "Comenzar"
     },
