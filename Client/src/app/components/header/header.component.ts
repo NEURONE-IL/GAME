@@ -19,8 +19,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.loggedIn;
-    this.user = this.authService.getUser();
-    this.getNotifications();
+    if( this.isLoggedIn){
+      this.user = this.authService.getUser();
+      this.getNotifications();
+    }
   }
 
   getNotifications(){
