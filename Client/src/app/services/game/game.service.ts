@@ -37,7 +37,7 @@ export class GameService {
         .toPromise();
       this.challenge = this.challenge.challenge;
       this.fetchUserStage();
-      if (this.stage != 'summary') {
+      if (this.stage != 'summary' && this.stage != 'post-test') {
         this.canPlay = await this.authService.canPlay();
       } else {
         this.canPlay = { canPlay: true };
