@@ -1,0 +1,14 @@
+.session-container {
+  display: flex;
+  flex-flow: column;
+  height: 93%;
+}
+
+.outlet-container {
+  flex: 2;
+  overflow: auto;
+}
+
+.question-bar-wrapper {
+  min-height: max-content;
+}

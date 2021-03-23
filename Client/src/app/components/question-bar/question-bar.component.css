@@ -21,8 +21,8 @@
 	transition: max-height .25s ease-in-out;
   z-index: 2;
 	max-height: 360px;
-	position: fixed;
-	bottom: 0;
+	/* position: fixed; */
+	/* bottom: 0; */
 	width: 100%;
 	background: #f6f6f6;
 }

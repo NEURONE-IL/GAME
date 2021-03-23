@@ -9,6 +9,7 @@ import { GameService } from '../../services/game/game.service';
   styleUrls: ['./session.component.css'],
 })
 export class SessionComponent implements OnInit, OnDestroy {
+
   constructor(
     private gameService: GameService,
     private kmTracker: KmTrackerService
