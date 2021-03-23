@@ -69,13 +69,21 @@ export class ChallengeService {
     return this.http.delete(this.uri+id);
   }
 
-  postAnswer(challenge: any, answer: any, timeLeft: number, hintUsed: boolean) {
+  postAnswer(challenge: any, answer: any, url1: any, url2: any, timeLeft: number, hintUsed: boolean) {
     const formattedAnswer = {
       user: this.authService.getUser(),
       challenge: challenge,
       answers: [
         {
-          answer
+          answer: answer,
+          urls: [
+            {
+              url: url1
+            },
+            {
+              url: url2
+            }
+          ]
         }
       ],
       timeLeft: timeLeft,

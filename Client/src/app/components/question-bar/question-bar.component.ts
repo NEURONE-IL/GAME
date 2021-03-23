@@ -131,8 +131,10 @@ export class QuestionBarComponent implements OnInit {
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer;
     if(answer==null) answer = '';
+    let url1 = this.answerForm.value.rawUrl1;
+    let url2 = this.answerForm.value.rawUrl2;
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswer(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
+    this.challengeService.postAnswer(challenge, answer, url1, url2, this.timeLeft, this.hintUsed).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SUCCESS"), {
           timeOut: 5000,
