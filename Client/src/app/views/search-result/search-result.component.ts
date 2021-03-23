@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
 import { StoreQueryService } from 'src/app/services/logger/store-query.service';
+import { GameService } from 'src/app/services/game/game.service';
 
 @Component({
   selector: 'app-search-result',
@@ -19,6 +20,7 @@ export class SearchResultComponent implements OnInit {
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,
+    public gameService: GameService,
     public router: Router,
     private storeQueryService: StoreQueryService
   ) {}
@@ -36,6 +38,7 @@ export class SearchResultComponent implements OnInit {
         (data: []) => {
           // Success
           this.documents = data;
+          this.documents = this.endpointsService.sort(this.documents, this.gameService.challenge._id)
           this.searching = false;
         },
         (error) => {

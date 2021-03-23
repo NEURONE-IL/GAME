@@ -37,10 +37,12 @@ export class EndpointsService {
 
   /* SORT */
   sort(documents, task){
-    for(let i = 1; i < 2; i++){
-      if(task === documents[i].task[0]){
-        this.arraymove(documents, i, 0)
-        break;
+    if(task !== null){
+      for(let i = 1; i < 2; i++){
+        if(task === documents[i].task[0]){
+          this.arraymove(documents, i, 0)
+          break;
+        }
       }
     }
     return documents;
