@@ -108,6 +108,6 @@ export class ChallengeService {
   }
 
   lastUserAnswer(){
-    return this.http.get(this.uri + 'last-answer', { headers: {'x-access-token': localStorage.getItem('auth_token')} });
+    return this.http.get(this.uri + 'answers/last', { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 }
