@@ -12,7 +12,6 @@ import { GameService } from 'src/app/services/game/game.service';
 })
 export class SearchResultComponent implements OnInit {
   query: string;
-  locale: string;
   domain: string;
   documents = [];
   searching: boolean;
@@ -29,11 +28,10 @@ export class SearchResultComponent implements OnInit {
     this.searching = true;
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.query = params.get('query');
-      this.locale = params.get('locale');
       this.domain = params.get('domain');
     });
     this.endpointsService
-      .getDocuments(this.query, this.locale, this.domain)
+      .getDocuments(this.query, this.domain)
       .subscribe(
         (data: []) => {
           // Success
@@ -62,7 +60,6 @@ export class SearchResultComponent implements OnInit {
           this.router.navigate([
             'session/search-result',
             this.query,
-            this.locale,
             this.domain,
           ])
         );

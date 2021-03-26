@@ -56,7 +56,7 @@ export class StudyDisplayComponent implements OnInit {
         this.challenges = response['challenges'];
     });
 
-    this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+    this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
       .subscribe((response: Resource[]) => {
         this.resources = response;
         console.log(this.resources);
@@ -124,7 +124,7 @@ export class StudyDisplayComponent implements OnInit {
   deleteResource(resource: Resource){
     this.endpointsService.deleteDocument(resource)
       .subscribe(response => {
-        this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+        this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
         .subscribe((response: Resource[]) => {
           this.resources = response;
           console.log(this.resources);
@@ -212,7 +212,7 @@ export class StudyDisplayComponent implements OnInit {
       .subscribe(response => {
         this.challenges = response['challenges'];
       });
-    this.endpointsService.getDocuments('*', 'es-CL', this.route.snapshot.paramMap.get('study_id'))
+    this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
     .subscribe((response: Resource[]) => {
       this.resources = response;
       console.log(this.resources);

@@ -38,7 +38,7 @@ const routes: Routes = [
 //        canActivate: [DirectAccessGuard]
       },
       {
-        path: 'search-result/:query/:locale/:domain',
+        path: 'search-result/:query/:domain',
         component: SearchResultComponent,
 //        canActivate: [DirectAccessGuard]
       },

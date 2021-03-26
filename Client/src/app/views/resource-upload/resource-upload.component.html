@@ -9,7 +9,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.NAME" | translate }}</mat-label>
-						<input matInput knifeAlphanumeric formControlName="docName" required #inputName maxlength="50">
+						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9 -]*" formControlName="docName" required #inputName maxlength="50">
 						<mat-hint align="end">{{inputName.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
@@ -19,6 +19,12 @@
 						</mat-error>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_50" | translate }}
+						</mat-error>
+						<mat-error *ngIf="!resourceFormControls.docName.hasError('required') &&
+															!resourceFormControls.docName.hasError('minlength') && 
+															!resourceFormControls.docName.hasError('maxlength')"
+												ng-show="resourceForm.docName.$error.pattern">
+							{{ "ERRORS.PATTERN" | translate }}
 						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
@@ -36,7 +42,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.TITLE" | translate }}</mat-label>
-						<input matInput knifeAlphanumeric formControlName="title" required #inputType maxlength="50">
+						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9 -]*" formControlName="title" required #inputType maxlength="50">
 						<mat-hint align="end">{{inputType.value?.length || 0}}/50</mat-hint>
 						<mat-error *ngIf="resourceFormControls.title.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
@@ -47,16 +53,11 @@
 						<mat-error *ngIf="resourceFormControls.title.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_50" | translate }}
 						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.LOCALE" | translate }}</mat-label>
-						<mat-select formControlName="locale" required>
-							<mat-option *ngFor="let option of localeOptions" [value]="option.value">{{ option.show | translate }}</mat-option>
-						</mat-select>
-						<mat-error *ngIf="resourceFormControls.locale.hasError('required')">
-							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
+						<mat-error *ngIf="!resourceFormControls.title.hasError('required') &&
+															!resourceFormControls.title.hasError('minlength') && 
+															!resourceFormControls.title.hasError('maxlength')"
+												ng-show="resourceForm.title.$error.pattern">
+							{{ "ERRORS.PATTERN" | translate }}
 						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>

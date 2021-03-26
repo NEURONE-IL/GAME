@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game/game.service';
 import { StoreQueryService } from 'src/app/services/logger/store-query.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +21,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     const challenge = this.gameService.challenge;
-    this.locale = 'es-CL'; //Por el momento va hardcodeado
+    this.locale = environment.locale; //Por el momento va hardcodeado
     this.domain = challenge.study;
   }
 
