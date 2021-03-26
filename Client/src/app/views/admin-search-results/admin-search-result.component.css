@@ -124,3 +124,11 @@ mat-grid-tile .mat-figure{
 .searchImageMini{
   width: 100px;
 }
+
+.doc-card a{
+  font-size: 20px;
+}
+
+.doc-card h5{
+  font-size: 14px;
+}

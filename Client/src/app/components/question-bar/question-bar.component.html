@@ -1,100 +1,121 @@
-<mat-tab-group id="mat-tab" (selectedIndex)=1 (click)="tabhideshow($event)" (selectedTabChange)="onTabChanged()">
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <i class="tab-icon">{{1}}</i>
-    </ng-template>      
-    <div class="panel-container" >
-      <mat-grid-list cols="24" rowHeight="40px">
-        <mat-grid-tile class="question-text" colspan="18" rowspan="3" >
-          {{gameService.challenge.question}}
-        </mat-grid-tile>   
-        <mat-grid-tile colspan="6" rowspan="5">
-          <div>
-            <mat-progress-spinner class="spinner" diameter=120 mode=determinate [value]="value"> </mat-progress-spinner>
-            <div class="counter" [ngStyle]="{'left':leftValue}">{{timeLeft}}</div>
+<div>
+  <div class="row">
+    <div class="col-md-12 questionBar"  (click)="tabhideshow($event)" >
+
+        <mat-icon> {{hide?"expand_less":"expand_more"}}</mat-icon>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-tab-group id="mat-tab" (selectedIndex)=1 (click)="tabhideshow($event)" (selectedTabChange)="onTabChanged()">
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="tab-icon">{{1}}</i>
+
+          </ng-template>
+          <div class="panel-container" >
+            <mat-grid-list cols="24" rowHeight="40px">
+              <mat-grid-tile class="question-text" colspan="18" rowspan="3" >
+                {{gameService.challenge.question}}
+              </mat-grid-tile>
+              <mat-grid-tile colspan="6" rowspan="5">
+                <div>
+                  <mat-progress-spinner class="spinner" diameter=120 mode=determinate [value]="value"> </mat-progress-spinner>
+                  <div class="counter" [ngStyle]="{'left':leftValue}">{{timeLeft}}</div>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="18" rowspan="4" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'; else elseBlock">
+                <form class="answer-form" [formGroup]="answerForm">
+                  <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'string'">
+                    <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
+                    <input matInput formControlName="answer">
+                    <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
+                  </mat-form-field>
+
+                  <mat-form-field class="input-full-width answerField" type="number" required *ngIf="gameService.challenge.answer_type === 'number'">
+                    <mat-label>{{ "GAME.ANSWER_TYPE.NUMBER" | translate }}</mat-label>
+                    <input matInput formControlName="answer">
+                    <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
+                  </mat-form-field>
+                </form>
+              </mat-grid-tile>
+
+              <ng-template #elseBlock>
+                <mat-grid-tile colspan="9" rowspan="4">
+                  <form class="answer-form" [formGroup]="answerForm">
+                    <mat-form-field class="input-full-width answerField">
+                      <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
+                      <input matInput formControlName="answer">
+                      <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
+                    </mat-form-field>
+                  </form>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button mat-icon-button (click)="favoriteAction()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                          #tooltip="matTooltip"
+                          [(matTooltip)]="currentTooltip"
+                          matTooltipPosition="right"
+                          [ngSwitch]="favPage"
+                  >
+                    <mat-icon *ngSwitchCase="false">star_border</mat-icon>
+                    <mat-icon *ngSwitchCase="true">star</mat-icon>
+                  </button>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="3" rowspan="1">
+
+                  <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
+
+                </mat-grid-tile>
+
+
+                <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
+
+                <mat-grid-tile colspan="7" rowspan="1">
+                  <form class="answer-form" [formGroup]="answerForm">
+                    <mat-form-field class="input-full-width urlField">
+                      <input matInput formControlName="url1" [readonly]="true">
+                    </mat-form-field>
+                  </form>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
+
+                <mat-grid-tile colspan="7" rowspan="1">
+                  <form class="answer-form" [formGroup]="answerForm">
+                    <mat-form-field class="input-full-width urlField">
+                      <input matInput formControlName="url2" [readonly]="true">
+                    </mat-form-field>
+                  </form>
+                </mat-grid-tile>
+              </ng-template>
+
+              <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
+
+              <mat-grid-tile colspan="6" rowspan="1">
+                <button *ngIf="true" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >
+                  <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
+                  {{"GAME.HINT.BUTTON" | translate}}
+                </button>
+              </mat-grid-tile>
+            </mat-grid-list>
           </div>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="18" rowspan="4" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'; else elseBlock">
-          <form class="answer-form" [formGroup]="answerForm">
-            <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'string'">
-              <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
-              <input matInput formControlName="answer">
-              <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
-            </mat-form-field>
-
-            <mat-form-field class="input-full-width answerField" type="number" required *ngIf="gameService.challenge.answer_type === 'number'">
-              <mat-label>{{ "GAME.ANSWER_TYPE.NUMBER" | translate }}</mat-label>
-              <input matInput formControlName="answer">
-              <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
-            </mat-form-field>  
-          </form>
-        </mat-grid-tile>
-
-        <ng-template #elseBlock>
-          <mat-grid-tile colspan="9" rowspan="4">
-            <form class="answer-form" [formGroup]="answerForm">          
-              <mat-form-field class="input-full-width answerField">
-                <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
-                <input matInput formControlName="answer">
-                <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon">send</mat-icon>
-              </mat-form-field>
-            </form>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="1" rowspan="1">
-            <button mat-icon-button (click)="favoriteAction()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
-              #tooltip="matTooltip"  
-              [(matTooltip)]="currentTooltip"
-              matTooltipPosition="right"
-              [ngSwitch]="favPage"
-            >
-            <mat-icon *ngSwitchCase="false">star_border</mat-icon>
-            <mat-icon *ngSwitchCase="true">star</mat-icon>
-            </button>                           
-          </mat-grid-tile>          
-
-          <mat-grid-tile colspan="3" rowspan="1">
-
-          <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
-
-          </mat-grid-tile>
-          
-
-          <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
-     
-          <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+        </mat-tab>
+      </mat-tab-group>
 
 
-          <mat-grid-tile colspan="7" rowspan="1">
-            <form class="answer-form" [formGroup]="answerForm">          
-              <mat-form-field class="input-full-width urlField">
-                <input matInput formControlName="url1" [readonly]="true">
-              </mat-form-field>     
-            </form>
-          </mat-grid-tile>
+    </div>
+  </div>
 
-          
-          <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-
-
-          <mat-grid-tile colspan="7" rowspan="1">
-            <form class="answer-form" [formGroup]="answerForm">          
-              <mat-form-field class="input-full-width urlField">
-                <input matInput formControlName="url2" [readonly]="true">
-              </mat-form-field>     
-            </form>
-          </mat-grid-tile>          
-        </ng-template>
-
-        <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-
-
-        <mat-grid-tile colspan="6" rowspan="1">
-          <button *ngIf="true" (click)="showHint()" mat-raised-button color="primary" class="hint-input" >
-            <mat-icon style="margin-right: 3px" matPrefix>help</mat-icon>
-            {{"GAME.HINT.BUTTON" | translate}}
-          </button>            
-        </mat-grid-tile>        
-      </mat-grid-list>
+</div>

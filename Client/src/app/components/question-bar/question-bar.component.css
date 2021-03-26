@@ -117,3 +117,25 @@ span .mat-select-placeholder{
 .mat-select {
   padding-bottom: 10px;
 }
+
+.questionBar{
+
+  padding-top: 10px;
+  padding-bottom: 0px;
+  position: absolute;
+  font-size: large;
+  text-align: center;
+  z-index: 3;
+  cursor: pointer;
+}
+
+
+
+.btn-circle{
+  width: 50px;
+  height: 50px;
+  padding: 7px 10px;
+  border-radius: 25px;
+  font-size: 10px;
+  text-align: center;
+}
