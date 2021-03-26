@@ -17,9 +17,9 @@ export class SummaryComponent implements OnInit {
   answer
   connected = false;
   ngOnInit(): void {
-    
       this.connected = true;
       this.levelProgress();
+      this.getAnswer();
 
   }
 

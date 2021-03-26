@@ -7,7 +7,6 @@
             <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="player-image img" (click)="openImageSelector()">
             <ul class="player-status di-b">
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
-                <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.LAST_NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.last_names}}</span></li>
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.EMAIL" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
             </ul>
             <button mat-button class="play-button" (click)="play()">Jugar <mat-icon>arrow_forward_ios</mat-icon></button>

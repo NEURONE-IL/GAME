@@ -151,16 +151,17 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
     })
 })
 
-router.get('/last-answer', verifyToken, async (req, res)=> {
-    const user_id = req.body.user;
-    UserChallenge({user: user_id}, (err, last_answer) => {
+router.get('/answers/last', verifyToken, async (req, res)=> {
+    const user_id = req.user;
+    console.log(user_id)
+    UserChallenge.find({user: user_id}, (err, last_answer) => {
         if (err) {
             return res.status(404).json({
                 err
             });
         }
         res.status(200).json({
-            last_answer
+            last_answer: last_answer[0]
         });
     }).sort({createdAt: -1});
 })
