@@ -39,7 +39,7 @@ export class EndpointsService {
   sort(documents, task){
     if(task !== null){
       for(let i = 1; i < 2; i++){
-        if(task === documents[i].task[0]){
+        if(documents[i] && task === documents[i].task[0]){
           this.arraymove(documents, i, 0)
           break;
         }

@@ -37,8 +37,7 @@ export class SearchComponent implements OnInit {
       this.router.navigate([
         'session/search-result',
         this.query,
-        this.locale,
-        this.domain,
+        this.domain
       ]);
     }
   }

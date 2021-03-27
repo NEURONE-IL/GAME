@@ -87,10 +87,11 @@ export class ResourceUploadComponent implements OnInit {
         this.loading = false;
       },
       err => {
-        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_" + err.error.msg), this.translate.instant("UPLOAD.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.loading = false;
       }
     );
   }
