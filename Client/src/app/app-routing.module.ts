@@ -80,7 +80,8 @@ const routes: Routes = [
   },
   {
     path: 'user-profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'admin_panel',
