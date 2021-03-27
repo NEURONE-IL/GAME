@@ -22,6 +22,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
@@ -120,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     HttpClientModule,
     FormsModule,
+    MatBadgeModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatCardModule,

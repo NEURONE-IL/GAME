@@ -4,15 +4,14 @@
   <div class="spacer"></div>
 
   <button *ngIf="isLoggedIn && user.role.name !== 'admin'" mat-icon-button [matMenuTriggerFor]="tabledriven">
-    <mat-icon *ngIf="notifications">notifications_active</mat-icon>
-    <mat-icon *ngIf="!notifications">notifications</mat-icon>
+    <mat-icon [matBadge]="notificationsN" matBadgeColor="warn">notifications</mat-icon>
   </button>
 
   <mat-menu #tabledriven="matMenu">
     <button *ngIf="menuItems == null" mat-menu-item >Vacío</button>
     <ng-container *ngFor="let item of menuItems">
-      <button *ngIf=!item.templateName mat-menu-item >{{ item.messageES }}</button>
-      <button *ngIf=item.elementRef  mat-menu-item [matMenuTriggerFor]=item.elementRef>{{ item.messageES }}</button>
+      <span *ngIf=!item.templateName mat-menu-item ><mat-icon>check</mat-icon>{{ item.messageES }}</span>
+      <span *ngIf=item.elementRef  mat-menu-item [matMenuTriggerFor]=item.elementRef><mat-icon>check</mat-icon>{{ item.messageES }}</span>
     </ng-container>
   </mat-menu>
 

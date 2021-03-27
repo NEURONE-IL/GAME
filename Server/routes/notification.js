@@ -21,6 +21,7 @@ router.get('/getNotifications/:user_id', async(req, res) => {
 
 router.post('/getPoints', async (req, res) => {
     let player = req.body.player;
+    console.log("Notification")
     if(!player || !player.code){
         return res.status(400).json({
             ok: false,
@@ -46,6 +47,7 @@ router.post('/getPoints', async (req, res) => {
         user: user._id,
         name: req.body.name,
         type: 'point',
+        seen: false,
         element_code: req.body.point.code,
         messageEN: req.body.messageEN,
         messageES: req.body.messageES,
@@ -60,12 +62,14 @@ router.post('/getPoints', async (req, res) => {
                 err
             });
         }
+        console.log("Notification received!")
         res.status(200).send("Notification received!");
     })
 });
 
 router.post('/challengeCompleted', async (req, res) => {
     let player = req.body.player;
+    console.log("Notification")
     if(!player || !player.code){
         return res.status(400).json({
             ok: false,
@@ -91,6 +95,7 @@ router.post('/challengeCompleted', async (req, res) => {
         user: user._id,
         name: req.body.name,
         type: 'challenge',
+        seen: false,
         element_code: req.body.challenge.code,
         messageEN: req.body.messageEN,
         messageES: req.body.messageES,
@@ -104,12 +109,14 @@ router.post('/challengeCompleted', async (req, res) => {
                 err
             });
         }
+        console.log("Notification received!")
         res.status(200).send("Notification received!");
     })
 });
 
 router.post('/badgeAcquired', async (req, res) => {
     let player = req.body.player;
+    console.log("Notification")
     if(!player || !player.code){
         return res.status(400).json({
             ok: false,
@@ -135,6 +142,7 @@ router.post('/badgeAcquired', async (req, res) => {
         user: user._id,
         name: req.body.name,
         type: 'badge',
+        seen: false,
         element_code: req.body.badge.code,
         messageEN: req.body.messageEN,
         messageES: req.body.messageES,
@@ -148,12 +156,14 @@ router.post('/badgeAcquired', async (req, res) => {
                 err
             });
         }
+        console.log("Notification received!")
         res.status(200).send("Notification received!");
     })
 });
 
 router.post('/levelUp', async (req, res) => {
     let player = req.body.player;
+    console.log("Notification")
     if(!player || !player.code){
         return res.status(400).json({
             ok: false,

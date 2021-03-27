@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   notifications: false;
+  notificationsN = 0;
   menuItems: Array<{messageES: string, elementRef: MatMenu}>;
 
   constructor( private authService: AuthService, private gamificationService: GamificationService) { }
@@ -28,9 +29,11 @@ export class HeaderComponent implements OnInit {
   getNotifications(){
     this.gamificationService.notifications(this.authService.getUser()._id).subscribe(
       response => {
-        let notifications = response;
+        let notifications = response.notifications;
+        console.log(notifications.length)
+        this.notificationsN = notifications.length;
         this.menuItems = [];
-        for(let i = 0; i<notifications.lenght; i++){
+        for(let i = 0; i<notifications.length; i++){
           this.menuItems.push({messageES: notifications[i].messageES, elementRef: null});
         }
       },

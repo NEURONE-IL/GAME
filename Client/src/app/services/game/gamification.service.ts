@@ -49,6 +49,6 @@ export class GamificationService {
   }
 
   notifications(user_id): Observable<any>{
-    return this.http.get(this.uri+'getNotifications/'+user_id );
+    return this.http.get(this.uri+'notification/getNotifications/'+user_id );
   }
 }
