@@ -94,11 +94,12 @@ export class QuestionBarComponent implements OnInit {
     },1000)
   }
 
+  hide= false;
   tabhideshow(event) {
     const x = document.getElementById("mat-tab");
-    if(event.srcElement.classList[0] === "mat-tab-labels" || event.srcElement.classList[0] === "mat-tab-header"){
-      x.classList.toggle('hide');
-    }
+    x.classList.toggle('hide');
+    this.hide= !this.hide;
+
   }
 
   onTabChanged(){
@@ -214,7 +215,7 @@ export class QuestionBarComponent implements OnInit {
     else if(checkPage === 2){
       this.answerForm.patchValue({url2: ''});
       this.answerForm.patchValue({rawUrl2: ''});
-      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");      
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
       this.favPage = false;
 //      console.log('En URL 2');
     }
@@ -223,7 +224,7 @@ export class QuestionBarComponent implements OnInit {
       if(this.answerForm.get('url1').value === ''){
         this.answerForm.patchValue({url1: docTitle});
         this.answerForm.patchValue({rawUrl1: docURL});
-        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE"); 
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
         this.favPage = true;
 //        console.log('Asignado a URL 1');
       }
@@ -242,7 +243,7 @@ export class QuestionBarComponent implements OnInit {
         this.toastr.info(this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO_MESSAGE"), this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO"), {
           timeOut: 8000,
           positionClass: 'toast-top-center'
-        });        
+        });
       }
     }
   }
@@ -261,13 +262,13 @@ export class QuestionBarComponent implements OnInit {
       docURL += urlArray[i] + '/';
     }
     //Remove the URL postfix from NEURONE Core
-    docURL = docURL.replace('/index.html/', '');  
+    docURL = docURL.replace('/index.html/', '');
     var checkPage = this.checkPage(docURL);
     if(checkPage === 1 || checkPage === 2){
-      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE"); 
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
       return true;
     }
-    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD"); 
+    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
     return false;
   }
 

@@ -6,6 +6,8 @@ import { Study, StudyService } from '../../services/game/study.service';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-resource-upload',
@@ -23,10 +25,6 @@ export class ResourceUploadComponent implements OnInit {
     { id: 3, value: 'book', show: 'UPLOAD.ARRAYS.DOC_TYPES.BOOK' },
     { id: 4, value: 'video', show: 'UPLOAD.ARRAYS.DOC_TYPES.VIDEO' }
   ];
-  localeOptions = [
-    { id: 1, value: 'en-US', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.ENGLISH' },
-    { id: 2, value: 'es-CL', show: 'UPLOAD.ARRAYS.LOCALE_OPTIONS.SPANISH' }
-  ];
   loading: Boolean;
 
   constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
@@ -39,7 +37,7 @@ export class ResourceUploadComponent implements OnInit {
       title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       url: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
       domain: this.study,
-      locale: [null, [Validators.required]],
+      locale: environment.locale,
       task: [null, []],
       /*NEURONE required*/
       maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
@@ -89,10 +87,11 @@ export class ResourceUploadComponent implements OnInit {
         this.loading = false;
       },
       err => {
-        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_" + err.error.msg), this.translate.instant("UPLOAD.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.loading = false;
       }
     );
   }

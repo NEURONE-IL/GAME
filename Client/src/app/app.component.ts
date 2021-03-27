@@ -46,7 +46,7 @@ export class AppComponent {
     if(navigator.language.split('-')[0] === 'es'){
       this.translate.use('es-CL');
     }
-    //Si no por defecto se usa la traducción a inglés
+    //Si no por defecto se usa la traducción a inglés(ESPAÑOL?)
     else{
       this.translate.use('es-CL');
     }

@@ -158,6 +158,7 @@
     "MIN_LENGTH_10": "El largo del campo no puede ser menor a 10 caracteres",
     "MIN_VALUE_1": "El valor mínimo del campo es 1",
     "MIN_VALUE_30": "El valor mínimo del campo es 30",
+    "PATTERN": "El campo contine caracteres no permitidos",
     "REQUIRED": "El campo es requerido",
     "SELECTION_REQUIRED": "Debe seleccionar una opción",
     "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres",
@@ -353,6 +354,7 @@
     "TITLE": "Carga de recursos",
     "TOAST": {
       "ERROR": "¡Error!",
+      "ERROR_COULDNT_DOWNLOAD_DOC": "No se ha podido cargar el recurso, por favor intente nuevamente con uno nuevo",
       "ERROR_MESSAGE": "No se ha cargado el nuevo recurso",
       "ERROR_MESSAGE_DELETE": "No se ha eliminado el nuevo recurso",
       "SUCCESS": "Éxito!",

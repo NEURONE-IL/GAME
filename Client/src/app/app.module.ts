@@ -31,7 +31,6 @@ import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { NgKnifeModule } from 'ng-knife';
 
 
 import { AppComponent } from './app.component';
@@ -151,8 +150,7 @@ export function HttpLoaderFactory(http: HttpClient) {
           deps: [HttpClient]
       }
     }),
-    AppRoutingModule,
-    NgKnifeModule
+    AppRoutingModule
   ],
   providers: [EndpointsService,
               GameService,

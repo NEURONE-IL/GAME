@@ -17,42 +17,11 @@
         <div class="documents-container ">
           <div *ngFor="let doc of documents">
 
-            <!--Para imagenes -->
-            <mat-card class="cardStyle doc-card"  *ngIf="doc.type && doc.type=='image'">
-              <mat-card-content>
-                <div class="row">
-                  <div class="col-md-2">
-                    <img class="img-fluid thumbnail searchImageMini" src="{{BaseUrl+ doc.img}}">
-                  </div>
-                  <div class="col-md-10">
-                    <h5 class="url-bar">{{ showShortDescription(doc.docName, 40)}}</h5>
-                    <a  class="document-link">{{doc.title}}</a>
-                    <p>{{doc.searchSnippet}}</p>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-            <!--Para videos-->
-            <mat-card class="cardStyle doc-card"  *ngIf="doc.type && doc.type=='video'">
-              <mat-card-content>
-                <div class="row">
-                  <div class="col-md-2">
-                    <img class="img-fluid thumbnail searchImageMini" src="{{getThumbnail(doc.url)}}" >
-                  </div>
-                  <div class="col-md-10">
-                    <h5 class="url-bar">{{doc.url}}</h5>
-                    <a  class="document-link">{{doc.title}}</a>
-                    <p>{{doc.searchSnippet}}</p>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-            <!--Para documentos-->
+            <!--Para documentos y libros-->
 
-
-            <mat-card class="cardStyle doc-card"  *ngIf="!doc.type" >
+            <mat-card class="cardStyle doc-card"  *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
-                <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}}</h5>
+                <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
                 <a  class="document-link">{{doc.title}}</a>
                 <p>{{doc.searchSnippet}}</p>
               </mat-card-content>

@@ -28,8 +28,8 @@ export class EndpointsService {
   constructor(protected http: HttpClient) { }
 
   /* DOCUMENT RETRIEVER */
-  getDocuments(query, locale, domain){
-    const post = JSON.stringify({query: query, locale: locale, domain: domain});
+  getDocuments(query, domain){
+    const post = JSON.stringify({query: query, locale: environment.locale, domain: domain});
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'v1/document/search', post, {headers: header});
@@ -39,7 +39,7 @@ export class EndpointsService {
   sort(documents, task){
     if(task !== null){
       for(let i = 1; i < 2; i++){
-        if(task === documents[i].task[0]){
+        if(documents[i] && task === documents[i].task[0]){
           this.arraymove(documents, i, 0)
           break;
         }

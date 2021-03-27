@@ -56,7 +56,6 @@ export class SummaryComponent implements OnInit {
 
   async continue(){
     await this.gameService.finishSummary();
-    this.gameService.finishChallenge();
   }
 
 }

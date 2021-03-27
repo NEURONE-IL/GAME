@@ -38,7 +38,7 @@ const routes: Routes = [
 //        canActivate: [DirectAccessGuard]
       },
       {
-        path: 'search-result/:query/:locale/:domain',
+        path: 'search-result/:query/:domain',
         component: SearchResultComponent,
 //        canActivate: [DirectAccessGuard]
       },
@@ -80,7 +80,8 @@ const routes: Routes = [
   },
   {
     path: 'user-profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'admin_panel',

@@ -13,7 +13,6 @@ let input = Input;
 export class AdminSearchResultComponent implements OnInit {
 
   @Input() query: string;
-  locale: string;
   @Input() domain: string;
   screenHeight: any;
   documents = [];
@@ -27,7 +26,7 @@ export class AdminSearchResultComponent implements OnInit {
   }
 
   search(){
-    this.endpointsService.getDocuments(this.query, this.locale, this.domain)
+    this.endpointsService.getDocuments(this.query, this.domain)
       .subscribe((data: []) => { // Success
           this.documents = data;
           this.endpointsService.sort(this.documents, "task1");
@@ -36,8 +35,6 @@ export class AdminSearchResultComponent implements OnInit {
           console.error(error);
         });
   }
-
-
 
   getParameterByName(url, name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
