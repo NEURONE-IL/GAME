@@ -9,7 +9,7 @@
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
                 <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.EMAIL" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
             </ul>
-            <button mat-button class="play-button" (click)="play()">Jugar <mat-icon>arrow_forward_ios</mat-icon></button>
+            <button mat-button class="play-button" (click)="play()" *ngIf="studyOk">{{"USER.PROFILE.PLAY_BTN"  | translate}} <mat-icon>arrow_forward_ios</mat-icon></button>
         </div>
     </div>
     <div class="container-right">
