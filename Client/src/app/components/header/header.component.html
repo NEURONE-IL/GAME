@@ -8,7 +8,7 @@
   </button>
 
   <mat-menu #tabledriven="matMenu">
-    <button *ngIf="menuItems == null" mat-menu-item >Vacío</button>
+    <button *ngIf="menuItems.length == 0" mat-menu-item >Vacío</button>
     <ng-container *ngFor="let item of menuItems">
       <mat-card class="menuitem">
         <p *ngIf=!item.templateName ><mat-icon>check</mat-icon>{{ item.messageES }} </p>
