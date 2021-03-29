@@ -75,3 +75,8 @@
     vertical-align: top;
 
   }
+
+  .menuitem{
+    font-size: small;
+    font-family: Comic Sans MS, sans-serif;
+  }
