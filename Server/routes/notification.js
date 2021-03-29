@@ -18,6 +18,23 @@ router.get('/getNotifications/:user_id', async(req, res) => {
     });  
 })
 
+router.put('/updateNotifications', async(req, res) => {
+    const notifications = req.body.notifications;
+    for(let i = 0; i<notifications.length; i++){
+        await Notification.updateOne({_id: notifications[i]._id }, { $set: {seen: true } }, err=> {
+            if(err){
+                return res.status(400).json({
+                ok: false,
+                err
+                });
+            }
+        })
+    }
+    res.status(200).json({
+        ok: true
+    }); 
+})
+
 
 router.post('/getPoints', async (req, res) => {
     let player = req.body.player;

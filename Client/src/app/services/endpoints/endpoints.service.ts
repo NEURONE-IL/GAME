@@ -29,7 +29,7 @@ export class EndpointsService {
 
   /* DOCUMENT RETRIEVER */
   getDocuments(query, domain){
-    const post = JSON.stringify({query: query, locale: environment.locale, domain: domain});
+    const post = JSON.stringify({query: query, domain: domain});
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'v1/document/search', post, {headers: header});

@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   user: any;
   notifications: false;
   notificationsN = 0;
-  menuItems: Array<{messageES: string, elementRef: MatMenu}>;
+  menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
 
   constructor( private authService: AuthService, private gamificationService: GamificationService) { }
 
@@ -30,12 +30,23 @@ export class HeaderComponent implements OnInit {
     this.gamificationService.notifications(this.authService.getUser()._id).subscribe(
       response => {
         let notifications = response.notifications;
-        console.log(notifications.length)
+        this.notifications = notifications;
         this.notificationsN = notifications.length;
         this.menuItems = [];
         for(let i = 0; i<notifications.length; i++){
-          this.menuItems.push({messageES: notifications[i].messageES, elementRef: null});
+          this.menuItems.push({messageES: notifications[i].messageES, date: notifications[i].acquisitionDate, _id: notifications[i]._id, elementRef: null});
         }
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }
+
+  updateNotifications(){
+    this.gamificationService.updateNotifications(this.notifications).subscribe(
+      response => {
+        console.log("Notifications update");
       },
       err => {
         console.log(err)
