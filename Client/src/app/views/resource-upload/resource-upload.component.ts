@@ -32,9 +32,9 @@ export class ResourceUploadComponent implements OnInit {
   ngOnInit(): void {
     this.getChallengesByStudy(this.study);
     this.resourceForm = this.formBuilder.group({
-      docName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      docName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       type: [null, [Validators.required]],
-      title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       url: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
       domain: this.study,
       locale: environment.locale,
@@ -87,11 +87,20 @@ export class ResourceUploadComponent implements OnInit {
         this.loading = false;
       },
       err => {
-        this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_" + err.error.msg), this.translate.instant("UPLOAD.TOAST.ERROR"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-        this.loading = false;
+        if(err.error.msg === 'COULDNT_DOWNLOAD_DOC'){
+          this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_" + err.error.msg), this.translate.instant("UPLOAD.TOAST.ERROR"), {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+          this.loading = false;
+        }else{
+          this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+          this.loading = false;          
+        }
+        console.log(err);
       }
     );
   }

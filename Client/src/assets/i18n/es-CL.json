@@ -152,6 +152,7 @@
     "MAX_LENGTH_2": "El largo del campo no puede exceder los 2 caracteres",
     "MAX_LENGTH_3": "El largo del campo no puede exceder los 3 caracteres",
     "MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
+    "MAX_LENGTH_100": "El largo del campo no puede exceder los 100 caracteres",
     "MAX_LENGTH_200": "El largo del campo no puede exceder los 200 caracteres",
     "MAX_LENGTH_300": "El largo del campo no puede exceder los 300 caracteres",
     "MIN_LENGTH_3": "El largo del campo no puede ser menor a 3 caracteres",
@@ -290,9 +291,11 @@
         "PASSWORD": "Debe ingresar una contraseña",
         "PASSWORD_CONFIRMATION": "Debe ingresar la confirmación de contraseña",
         "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
-        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 8 caracteres y al menos 1 número",
+        "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 8 caracteres y al menos un número",
         "RELATION_REQUIRED": "Debe ingresar su parentesco",
-        "EMAIL_DONT_MATCH": "El email no coincide con la confirmación. Reviselo."
+        "EMAIL_DONT_MATCH": "El email no coincide con la confirmación. Reviselo.",
+        "EMAIL_ALREADY_USED": "El email que se intenta registrar ya está en uso, intente con uno diferente.",
+        "GENERIC_ERROR": "Ha ocurrido un error, revise los datos e intente nuevamente."
       }
     }
   },

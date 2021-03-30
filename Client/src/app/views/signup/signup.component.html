@@ -214,7 +214,8 @@
       <ng-template matStepLabel>{{"SIGNUP.STEP_DONE" | translate}}</ng-template>
         <div *ngIf="!userSubmitted">
           <p>{{"SIGNUP.DONE_TEXT" | translate}}</p>
-          <button [disabled]="userSubmitted" type="submit" (click)="save()" mat-raised-button color="primary">{{"SIGNUP.FINISH" | translate}}</button>
+          <button mat-raised-button class="stepper-button" color="primary" matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
+          <button [disabled]="userSubmitted" type="submit" (click)="save()" mat-raised-button class="stepper-button" color="primary">{{"SIGNUP.FINISH" | translate}}</button>
         </div>
         <div *ngIf="userSubmitted">
           <p>{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
