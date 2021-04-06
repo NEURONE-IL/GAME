@@ -23,6 +23,11 @@ import { SummaryComponent } from './views/summary/summary.component';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'prefix',
+    redirectTo: 'login',
+  },
+  {
     path: 'start',
     canActivate: [AuthGuard],
     component: StartComponent,
@@ -100,7 +105,7 @@ const routes: Routes = [
       },
     ]
   },
-  { path: '**', redirectTo: '/login' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

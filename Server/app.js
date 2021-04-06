@@ -120,11 +120,11 @@ app.use("/assets/", express.static(process.env.NEURONE_DOCS));
 // Set client on root
 
 // - Serve static content
-// app.use(express.static('public'));
-// // - Serve index
-// app.get('*',function(req,res){
-//   res.sendFile(path.join(__dirname+'/public/index.html'));
-// });
+app.use(express.static('public'));
+// - Serve index
+app.get('*',function(req,res){
+  res.sendFile(path.join(__dirname+'/public/index.html'));
+});
 
 
 /** Server deployment **/
