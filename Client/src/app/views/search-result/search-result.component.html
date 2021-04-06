@@ -54,7 +54,7 @@
                 <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
                   <h5 class="url-bar">{{ showShortDescription(doc.docName, 25)}}</h5>
-                  <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
+                  <a [routerLink]="['/session/view-page', doc.title, doc.url]"  class="document-link">{{doc.title}}</a>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
