@@ -92,7 +92,7 @@ uniqueEmail = async(req, res, next) => {
         if(user){
             return res.status(403).json({
                 ok: false,
-                message: "Email already exists!"
+                message: "EMAIL_ALREADY_USED"
             });
         }
         else{

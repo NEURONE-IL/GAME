@@ -79,6 +79,17 @@ export class SignupComponent implements OnInit {
         this.userSubmitted = true;
       },
       (err) => {
+        if(err.error.message === 'EMAIL_ALREADY_USED'){
+          this.toastr.error(this.translate.instant("SIGNUP.FORM.ERROR.EMAIL_ALREADY_USED"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+            timeOut: 10000,
+            positionClass: 'toast-top-center'
+          })
+        }else{
+          this.toastr.error(this.translate.instant("SIGNUP.FORM.ERROR.GENERIC_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          })          
+        }
         console.log(err);
       });
   }
