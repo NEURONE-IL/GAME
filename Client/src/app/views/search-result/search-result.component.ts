@@ -15,7 +15,7 @@ export class SearchResultComponent implements OnInit {
   domain: string;
   documents = [];
   searching: boolean;
-  BaseUrl = environment.neuroneURL;
+  BaseUrl = environment.serverRoot;
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,

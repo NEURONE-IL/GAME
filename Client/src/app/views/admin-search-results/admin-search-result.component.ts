@@ -16,7 +16,7 @@ export class AdminSearchResultComponent implements OnInit {
   @Input() domain: string;
   screenHeight: any;
   documents = [];
-  BaseUrl = environment.neuroneURL;
+  BaseUrl = environment.serverRoot;
 
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
