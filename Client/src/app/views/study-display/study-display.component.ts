@@ -94,6 +94,13 @@ export class StudyDisplayComponent implements OnInit {
     return finalResources;
   }
 
+  getStudyResources(){
+    var finalResources = [];
+    var filteredResources = this.resources.filter(resource => resource.type != 'image');
+    filteredResources.forEach(resource => finalResources.push(resource));
+    return finalResources;    
+  }
+
   confirmChallengeDelete(id: string){
     confirm(this.translate.instant("ADMIN.CHALLENGES.DELETE_CONFIRMATION")) && this.deleteChallenge(id);
   }
