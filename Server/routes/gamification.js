@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+const Study = require('../models/study')
 const Credential = require('../models/credential');
 const GameElement = require('../models/gameElement');
 
@@ -249,7 +250,14 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
                 err
             });
         }
-    }).populate({ path: 'study', model: Study} );
+    });
+    const study = await Study.findOne({_id: user.study}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    })
     const rankingName = await GameElement.findOne({type: "leaderboard", key: key}, err => {
         if (err) {
             return res.status(404).json({
@@ -258,7 +266,7 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
         }
     })
     console.log(rankingName)
-    await leaderboardService.getLeaderboardByGroup(rankingName.gm_code, {group_code: user.study.gm_code}, (err, leaderboard) => {
+    await leaderboardService.getLeaderboardByGroup(rankingName.gm_code, {group_code: study.gm_code}, (err, leaderboard) => {
         if(err){
             res.status(404).send(err);
         }
