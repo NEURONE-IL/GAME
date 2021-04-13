@@ -126,6 +126,7 @@ function sendConfirmationEmail(user, userData, res, req) {
   });
 }
 exports.sendConfirmationEmail = sendConfirmationEmail;
+
 // Reads email template and adds custom data
 function generateEmailData(req, token, userData) {
   const emailTemplateFile = "assets/confirmationEmail.html";
@@ -154,6 +155,7 @@ function generateEmailData(req, token, userData) {
   mailHTML = addTextToEmail(mailHTML, userData, link);
   return { mailHTML, mailText };
 }
+
 // Add translated text and user data to email
 function addTextToEmail(mailHTML, userData, link) {
   mailHTML = mailHTML.replace(
@@ -187,5 +189,113 @@ function addTextToEmail(mailHTML, userData, link) {
     "Si el enlace tampoco funciona, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet:"
   );
   mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
+  return mailHTML;
+}
+
+
+
+
+
+
+// Sends reset password email
+// Adapted from: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
+function sendResetPasswordEmail(user, res, req) {
+  // Create a verification token
+  const token = new Token({
+    _userId: user._id,
+    token: crypto.randomBytes(16).toString("hex"),
+  });
+
+  // Save the verification token
+  token.save((err) => {
+    if (err) {
+      console.log(err)
+    }
+
+    // Generate email data
+    const { mailHTML, mailText } = generateEmailDataRP(req, token, user);
+
+    // Send the email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.SENDEMAIL_USER,
+        pass: process.env.SENDEMAIL_PASSWORD,
+      },
+    });
+    const mailOptions = {
+      from: "neuronemail2020@gmail.com",
+      to: user.email,
+      subject: "Recupere su contraseña",
+      text: mailText,
+      html: mailHTML,
+    };
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        console.log( err.message );
+      }
+    });
+  });
+}
+exports.sendResetPasswordEmail = sendResetPasswordEmail;
+
+
+// Reads email template and adds custom data
+function generateEmailDataRP(req, token, userData) {
+  const emailTemplateFile = "assets/confirmationEmail.html";
+  const link =
+    "http://" +
+    req.headers.host +
+    ":" +
+    process.env.PUBLIC_PORT +
+    "/user/resetPassword/" +
+    token.token;
+  let mailHTML = null;
+  let mailText =
+    "Hola,\n\n" +
+    "Por favor, recupere su contraseña ingresando siguiente link: \nhttp://" +
+    link +
+    ".\n";
+
+  // Load email template
+  mailHTML = fs.readFileSync(emailTemplateFile, "utf8", (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    mailHTML = data.toString();
+  });
+  // Add custom text to email
+  mailHTML = addTextToEmailRP(mailHTML, userData, link);
+  return { mailHTML, mailText };
+}
+
+// Add translated text and user data to email
+function addTextToEmailRP(mailHTML, userData, link) {
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.PREHEADER_TEXT]",
+    "Recupere su contraseña:"
+  );
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.TITLE]",
+    "Hola " + userData.names + "."
+  );
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.TEXT]",
+      "Para recuperar su contraseña debe acceder al siguiente link:"
+  );
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.CONFIRM]",
+    "Recuperar contraseña"
+  );
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.IF_BUTTON_DOESNT_WORK_TEXT]",
+    "Si el botón no funciona, use el siguiente link:"
+  );
+  mailHTML = mailHTML.replace(/%RESET_PASSWORD.LINK%/g, link);
+  mailHTML = mailHTML.replace(
+    "[RESET_PASSWORD.IF_LINK_DOESNT_WORK_TEXT]",
+    "Si el enlace tampoco funciona, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet:"
+  );
+  mailHTML = mailHTML.replace("[RESET_PASSWORD.GREETINGS]", "¡Saludos!");
   return mailHTML;
 }

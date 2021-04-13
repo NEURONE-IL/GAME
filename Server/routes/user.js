@@ -9,7 +9,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const bcrypt = require("bcryptjs");
 
 const authMiddleware = require("../middlewares/authMiddleware");
-const { generateProgress } = require("../utils/routeUtils");
+const { generateProgress, sendResetPasswordEmail } = require("../utils/routeUtils");
 
 router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
   User.find({}, { password: 0 }, (err, users) => {
@@ -83,6 +83,47 @@ router.post("/changePassword", [verifyToken], async (req, res) => {
     });
   }
 });
+
+router.post("/sendEmailResetPassword/:email", async (req, res) => {
+  const email = req.params.email
+  const user = await User.findOne({email: email}, err => {
+    if (err) {
+      return res.status(404).json({
+        err,
+      });
+    }
+  })
+  console.log(user)
+  // Send confirmation email
+  sendResetPasswordEmail(user, res, req);
+
+  res.status(200).json({
+    ok: true
+  });
+})
+
+router.post("/resetPassword/:token", async (req, res) => {
+  const token = req.params.token;
+  // Find a matching token
+  Token.findOne({ token: providedToken }, function (err, token) {
+    if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
+
+    // If found, find matching user
+    User.findOne({ _id: token._userId }, function (err, user) {
+        if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
+
+        const salt = bcrypt.genSalt(10);
+        user.password = bcrypt.hash(req.body.password, salt);
+        user.save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+          res.send({ message: "Password was updated successfully!" });
+        });
+    });
+});
+})
 
 router.put("/:user_id", [verifyToken], async (req, res) => {
   const _id = req.params.user_id;
