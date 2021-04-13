@@ -150,6 +150,7 @@
   },
   "ERRORS": {
     "CHECK_REQUIRED": "La confirmación es requerida",
+    "MAIL_FORMAT": "Debe ingresar en email válido",
     "MAX_LENGTH_2": "El largo del campo no puede exceder los 2 caracteres",
     "MAX_LENGTH_3": "El largo del campo no puede exceder los 3 caracteres",
     "MAX_LENGTH_50": "El largo del campo no puede exceder los 50 caracteres",
@@ -173,6 +174,7 @@
     "PASSWORD": "Contraseña",
     "ENTER": "Ingresar",
     "REQUIRED": "El campo es requerido",
+    "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
     "TOAST": {
       "ERROR_MESSAGE": "No ha sido posible iniciar sesión.",
       "ERROR_EMAIL_MESSAGE": "Correo no encontrado.",
@@ -182,6 +184,13 @@
       "SUCCESS": "¡Éxito!",
       "USER_CONFIRMED": "Su usuario ha sido confirmado correctamente"
     }
+  },
+  "RECOVERY":{
+    "CANCEL": "Cancelar",
+    "SEND": "Enviar",
+    "TITLE": "Recuperación de contraseña",
+    "NEW_PASSWORD": "Nueva contraseña",
+    "NEW_PASSWORD_CONFIRMATION": "Confirmación de nueva contraseña"
   },
   "QUESTIONNAIRE": {
     "INITIAL": {

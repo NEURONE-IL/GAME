@@ -1,0 +1,41 @@
+.mat-form-field {
+	width: 100%;
+	min-width: 300px;
+}
+
+.main-content{
+	position: absolute;
+	top: 9%;
+	left: 11%;
+	right: 0;
+	width: 79%;
+	height: 89vh;
+}
+
+mat-card-title,
+mat-card-content {
+	display: flex;
+	justify-content: center;
+}
+
+.error {
+	padding: 16px;
+	border: 1px solid red;
+	width: 300px;
+	color: black;
+	background-color: #f66e61;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+	color: black;
+}
+
+.card{
+	width: 400px;
+	height: 300px;
+	margin: auto;
+	margin-top: 12%;
+	border: 1px solid black;
+}

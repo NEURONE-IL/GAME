@@ -54,4 +54,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  showRecovery(){
+    this.router.navigate(['forgot_password']); 
+  }
 }
