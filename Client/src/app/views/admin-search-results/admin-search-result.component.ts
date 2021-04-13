@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,8 @@ let input = Input;
 @Component({
   selector: 'app-admin-search-result',
   templateUrl: './admin-search-result.component.html',
-  styleUrls: ['./admin-search-result.component.css']
+  styleUrls: ['./admin-search-result.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminSearchResultComponent implements OnInit {
 
@@ -18,6 +19,13 @@ export class AdminSearchResultComponent implements OnInit {
   documents = [];
   BaseUrl = environment.serverRoot;
 
+  //paginacion
+  documentsPaginated=[]
+  totalDocuements=0;
+  pages=1;
+  pageIndex=[];
+  activePage=0;
+
   constructor(protected endpointsService: EndpointsService, private route: ActivatedRoute, public router: Router ) { }
 
   ngOnInit(): void {
@@ -25,11 +33,59 @@ export class AdminSearchResultComponent implements OnInit {
     this.search();
   }
 
+  changePageTo(numberOfPageActive){
+    this.activePage=numberOfPageActive-1;
+    console.log("active page= ", this.activePage)
+  }
+  previousPage(){
+    if (this.activePage>0){
+      this.activePage=this.activePage-1;
+    }
+    console.log("active page= ", this.activePage)
+  }
+  nextPage(){
+    if (this.activePage<this.pages-1){
+      this.activePage=this.activePage+1;
+    }
+    console.log("active page= ", this.activePage)
+  }
   search(){
     this.endpointsService.getDocuments(this.query, this.domain)
       .subscribe((data: []) => { // Success
           this.documents = data;
           this.endpointsService.sort(this.documents, "task1");
+
+          //
+          //paginacion
+          //
+          let doc;
+          let documentosTexto=[]
+
+          //se obtienen los documentos que son de texto o pdfs
+          for (doc of this.documents){
+            if (!doc.type || doc.type=='book'){documentosTexto.push(doc)}
+          }
+          //calcula número de paginas de resultados
+          this.pages = Math.floor(documentosTexto.length/10);
+          this.totalDocuements= documentosTexto.length;
+          if(documentosTexto.length%10>0){this.pages=this.pages+1};
+          let pagina=[];
+          for (doc in documentosTexto){
+            pagina.push(documentosTexto[doc])
+            if(pagina.length==10) {
+              this.documentsPaginated.push(pagina);
+              pagina = []
+            }
+          }
+          if(pagina.length>0) {
+            this.documentsPaginated.push(pagina);
+          }
+          console.log("documentos Paginados", this.documentsPaginated)
+          //pageIndex
+        for (let i=0; i<this.pages;i++){
+          this.pageIndex.push(i+1)
+        }
+
         },
         (error) => {
           console.error(error);

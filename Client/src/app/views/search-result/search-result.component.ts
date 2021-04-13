@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,7 @@ import { GameService } from 'src/app/services/game/game.service';
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SearchResultComponent implements OnInit {
   query: string;
@@ -16,6 +17,14 @@ export class SearchResultComponent implements OnInit {
   documents = [];
   searching: boolean;
   BaseUrl = environment.serverRoot;
+
+  //paginacion
+  documentsPaginated=[]
+  totalDocuements=0;
+  pages=1;
+  pageIndex=[];
+  activePage=0;
+
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,
@@ -30,21 +39,74 @@ export class SearchResultComponent implements OnInit {
       this.query = params.get('query');
       this.domain = params.get('domain');
     });
-    this.endpointsService
+    let subscription = this.endpointsService
       .getDocuments(this.query, this.domain)
       .subscribe(
         (data: []) => {
           // Success
           this.documents = data;
+
           this.documents = this.endpointsService.sort(this.documents, this.gameService.challenge._id)
+
+          //
+          //paginacion
+          //
+          let doc;
+          let documentosTexto=[]
+
+          //se obtienen los documentos que son de texto o pdfs
+          for (doc of this.documents){
+            if (!doc.type || doc.type=='book'){documentosTexto.push(doc)}
+          }
+          //calcula número de paginas de resultados
+          this.pages = Math.floor(documentosTexto.length/10);
+          this.totalDocuements= documentosTexto.length;
+          if(documentosTexto.length%10>0){this.pages=this.pages+1};
+          let pagina=[];
+          for (doc in documentosTexto){
+            pagina.push(documentosTexto[doc])
+            if(pagina.length==10) {
+              this.documentsPaginated.push(pagina);
+              pagina = []
+            }
+          }
+          if(pagina.length>0) {
+            this.documentsPaginated.push(pagina);
+          }
+          console.log("documentos Paginados", this.documentsPaginated)
+          //pageIndex
+          for (let i=0; i<this.pages;i++){
+            this.pageIndex.push(i+1)
+          }
+
+          //finalizar loading
           this.searching = false;
+
         },
         (error) => {
           console.error(error);
         }
+
+
       );
   }
 
+  changePageTo(numberOfPageActive){
+    this.activePage=numberOfPageActive-1;
+    console.log("active page= ", this.activePage)
+  }
+  previousPage(){
+    if (this.activePage>0){
+      this.activePage=this.activePage-1;
+    }
+    console.log("active page= ", this.activePage)
+  }
+  nextPage(){
+    if (this.activePage<this.pages-1){
+      this.activePage=this.activePage+1;
+    }
+    console.log("active page= ", this.activePage)
+  }
   search() {
     if (this.query !== '') {
       let queryData = {
@@ -64,6 +126,8 @@ export class SearchResultComponent implements OnInit {
           ])
         );
     }
+
+
   }
 
   getParameterByName(url, name) {

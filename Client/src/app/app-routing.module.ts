@@ -20,6 +20,8 @@ import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
 import { SummaryComponent } from './views/summary/summary.component';
+import { RecoveryComponent } from './views/recovery/recovery.component';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -105,6 +107,16 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'forgot_password',
+    component: ForgotPasswordComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },
+  {
+    path: 'recovery',
+    component: RecoveryComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },  
   { path: '**', redirectTo: 'login' },
 ];
 

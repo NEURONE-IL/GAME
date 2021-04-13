@@ -28,7 +28,11 @@
         <button type="submit" color="primary" mat-raised-button>{{"LOGIN.ENTER" | translate}}</button>
       </div>
 
-
+      <div class="recovery">
+        <p class="innerRecovery" (click)="showRecovery()">
+          {{"LOGIN.FORGOT_PASSWORD" | translate}}
+        </p>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

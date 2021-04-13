@@ -132,3 +132,24 @@ mat-grid-tile .mat-figure{
 .doc-card h5{
   font-size: 14px;
 }
+
+em.hl{
+  font-weight: bold;
+}
+
+.mat-tab-label .pagination {
+  height: 40px;
+  /* padding: 0 24px; */
+  cursor: pointer;
+  /* box-sizing: border-box; */
+  color:red;
+  background-color: #4CAF50;
+  min-width: 40px;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
+  font-weight: bold;
+}

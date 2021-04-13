@@ -13,26 +13,37 @@
     <mat-tab label="{{'GAME.SEARCH.ALL' | translate }}">
 
       <ng-template matTabContent>
-        <p class="soft" *ngIf="!searching">{{ "GAME.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "GAME.SEARCH.RESULTS" | translate }}.</p>
+        <!--Para documentos y libros Paginados con bootstrap-->
+        <div *ngIf="!searching">
+        <p class="soft">{{ "ADMIN.SEARCH.FOUND" | translate }} {{' ' + totalDocuements + ' '}} {{ "ADMIN.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
-          <div *ngFor="let doc of documents">
-
-
-            <!--Para documentos-->
-            <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type || doc.type=='book'">
+          <div *ngFor="let doc of documentsPaginated[activePage]">
+            <!--Para documentos y libros-->
+            <mat-card class="cardStyle doc-card" [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
                 <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
-                <p>{{doc.searchSnippet}}</p>
+                <div class="snippet" [innerHTML]="doc.searchSnippet"></div>
               </mat-card-content>
             </mat-card>
-
             <br>
           </div>
-          <div *ngIf="documents.length <= 0 && !searching" class="text-center">
-            <h3>{{ "GAME.SEARCH.NO_RESULTS" | translate }}</h3>
+          <div *ngIf="documents.length <= 0" class="text-center">
+            <h3>{{ "ADMIN.SEARCH.NO_RESULTS" | translate }}</h3>
           </div>
         </div>
+
+        <nav aria-label="Page navigation example" class="pagination justify-content-center">
+          <ul class="pagination ">
+            <li class="page-item {{activePage==0?'disabled':''}}" (click)="previousPage()"><a class="page-link">Anterior</a></li>
+            <div *ngFor="let i of pageIndex" >
+              <li class="page-item {{activePage==(i-1)?'active':''}}" (click)="changePageTo(i)"><a class="page-link">{{i}}</a></li>
+            </div>
+            <li class="page-item {{activePage==(pages-1)?'disabled':''}}" (click)="nextPage()"><a class="page-link">Siguiente</a></li>
+          </ul>
+        </nav>
+        </div>
+
         <div class="spinnerCard" *ngIf="searching">
           <mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
           </mat-progress-spinner>
@@ -40,6 +51,7 @@
             {{ "GAME.SEARCH.SEARCHING" | translate }}
           </span>
         </div>
+
       </ng-template>
 
 

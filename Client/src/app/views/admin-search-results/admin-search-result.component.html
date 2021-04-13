@@ -11,19 +11,20 @@
     <hr >
 
   <mat-tab-group>
+
     <mat-tab label="{{'ADMIN.SEARCH.ALL' | translate }}">
       <ng-template matTabContent>
-        <p class="soft">{{ "ADMIN.SEARCH.FOUND" | translate }} {{' ' + documents.length + ' '}} {{ "ADMIN.SEARCH.RESULTS" | translate }}.</p>
+        <!--Para documentos y libros Paginados con bootstrap-->
+
+        <p class="soft">{{ "ADMIN.SEARCH.FOUND" | translate }} {{' ' + totalDocuements + ' '}} {{ "ADMIN.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
-          <div *ngFor="let doc of documents">
-
+          <div *ngFor="let doc of documentsPaginated[activePage]">
             <!--Para documentos y libros-->
-
             <mat-card class="cardStyle doc-card"  *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
                 <a  class="document-link">{{doc.title}}</a>
-                <p>{{doc.searchSnippet}}</p>
+                <div class="snippet" [innerHTML]="doc.searchSnippet"></div>
               </mat-card-content>
             </mat-card>
 
@@ -33,8 +34,21 @@
             <h3>{{ "ADMIN.SEARCH.NO_RESULTS" | translate }}</h3>
           </div>
         </div>
+
+        <nav aria-label="Page navigation example" class="pagination justify-content-center">
+          <ul class="pagination ">
+            <li class="page-item {{activePage==0?'disabled':''}}" (click)="previousPage()"><a class="page-link">Anterior</a></li>
+            <div *ngFor="let i of pageIndex" >
+              <li class="page-item {{activePage==(i-1)?'active':''}}" (click)="changePageTo(i)"><a class="page-link">{{i}}</a></li>
+            </div>
+            <li class="page-item {{activePage==(pages-1)?'disabled':''}}" (click)="nextPage()"><a class="page-link">Siguiente</a></li>
+          </ul>
+        </nav>
+
       </ng-template>
     </mat-tab>
+
+
     <mat-tab label="{{'ADMIN.SEARCH.IMAGES' | translate }}">
       <div class="image-container">
 

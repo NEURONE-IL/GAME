@@ -9,7 +9,7 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.NAME" | translate }}</mat-label>
-						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿? -]*" formControlName="docName" required #inputName maxlength="100">
+						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -]*" formControlName="docName" required #inputName maxlength="100">
 						<mat-hint align="end">{{inputName.value?.length || 0}}/100</mat-hint>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}

@@ -67,6 +67,8 @@ import { UserProfileComponent } from './views/user-profile/user-profile.componen
 import { AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
 import { SummaryComponent } from './views/summary/summary.component';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
+import { RecoveryComponent } from './views/recovery/recovery.component';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -106,7 +108,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserProfileComponent,
     AdminSearchResultComponent,
     SummaryComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    RecoveryComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
