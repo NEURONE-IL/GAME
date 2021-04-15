@@ -35,12 +35,13 @@ export class ForgotPasswordComponent implements OnInit {
   }  
 
   recoverPassword(){
-/*    this.recoveryService.recoverPassword(this.forgotPasswordForm.value.email).subscribe(
-      response => {
+    this.recoveryService.recoverPassword(this.forgotPasswordForm.value.email).subscribe(
+      () => {
         this.toastr.success(this.translate.instant("RECOVERY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("RECOVERY.TOAST.SUCCESS"), {
-          timeOut: 5000,
+          timeOut: 10000,
           positionClass: 'toast-top-center'
         });
+        this.router.navigate(['login']);
       },
       err => {
         this.toastr.error(this.translate.instant("RECOVERY.TOAST.ERROR_MESSAGE"), this.translate.instant("RECOVERY.TOAST.ERROR"), {
@@ -48,6 +49,6 @@ export class ForgotPasswordComponent implements OnInit {
           positionClass: 'toast-top-center'
         });      
       }
-    );*/
+    );
   }  
 }
