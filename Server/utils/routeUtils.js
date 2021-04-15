@@ -242,7 +242,7 @@ exports.sendResetPasswordEmail = sendResetPasswordEmail;
 
 // Reads email template and adds custom data
 function generateEmailDataRP(req, token, userData) {
-  const emailTemplateFile = "assets/confirmationEmail.html";
+  const emailTemplateFile = "assets/resetPassword.html";
   const link =
     "http://" +
     req.headers.host +
