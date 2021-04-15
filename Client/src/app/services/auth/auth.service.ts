@@ -14,7 +14,8 @@ export class AuthService {
   uri = environment.apiURL + 'auth/';
   userUri = environment.apiURL + 'user/';
 
-  constructor(private http: HttpClient,private router: Router,
+  constructor(private http: HttpClient,
+              private router: Router,
               private storeSession: StoreSessionService,
               private toastr: ToastrService,
               private translate: TranslateService) {}

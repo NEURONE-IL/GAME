@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { RecoveryService } from '../../services/auth/recovery.service';
@@ -13,9 +13,11 @@ import { RecoveryService } from '../../services/auth/recovery.service';
 export class RecoveryComponent implements OnInit {
 
   recoveryForm: FormGroup;
+  token: string;
 
   constructor(private formBuilder: FormBuilder,
               private recoveryService: RecoveryService,
+              private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrService,
               private translate: TranslateService) { }
@@ -24,7 +26,13 @@ export class RecoveryComponent implements OnInit {
     this.recoveryForm = this.formBuilder.group({
       newPassword: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{8,32}$/)]],
       passwordConfirmation: ['', [Validators.required, Validators.pattern(/^(?=.*\d).{8,32}$/)]]
-    })
+    });
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.token = params.get('token');
+    });    
+
+    console.log(this.token);
   }
 
   goBack(){
@@ -35,9 +43,9 @@ export class RecoveryComponent implements OnInit {
     return this.recoveryForm['controls'];
   }  
 
-  recoverPassword(){
-/*    this.recoveryService.recoverPassword(this.recoveryForm.value.email).subscribe(
-      response => {
+  resetPassword(){
+    this.recoveryService.resetPassword(this.token, this.recoveryForm.value.newPassword).subscribe(
+      () => {
         this.toastr.success(this.translate.instant("RECOVERY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("RECOVERY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
@@ -48,7 +56,7 @@ export class RecoveryComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });      
-      });
-    }*/
+      }
+    );
   }
 }
