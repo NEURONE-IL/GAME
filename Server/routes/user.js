@@ -104,16 +104,16 @@ router.post("/sendEmailResetPassword/:email", async (req, res) => {
 
 router.post("/resetPassword/:token", async (req, res) => {
   const token = req.params.token;
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(req.body.password, salt);
   // Find a matching token
-  Token.findOne({ token: providedToken }, function (err, token) {
-    if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
+  Token.findOne({ token: token }, function (err, token) {
+    if (!token) return res.status(400).send({ type: 'not-token', msg: 'We were unable to find a valid token. Your token my have expired.' });
 
     // If found, find matching user
     User.findOne({ _id: token._userId }, function (err, user) {
         if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
-
-        const salt = bcrypt.genSalt(10);
-        user.password = bcrypt.hash(req.body.password, salt);
+        user.password = password;
         user.save((err) => {
           if (err) {
             res.status(500).send({ message: err });
@@ -122,8 +122,8 @@ router.post("/resetPassword/:token", async (req, res) => {
           res.send({ message: "Password was updated successfully!" });
         });
     });
+  });
 });
-})
 
 router.put("/:user_id", [verifyToken], async (req, res) => {
   const _id = req.params.user_id;
