@@ -9,11 +9,15 @@ import { environment } from 'src/environments/environment';
 export class RecoveryService {
 
   recoverUri = environment.apiURL + 'user/sendEmailResetPassword/';
+  resetPasswordUri = environment.apiURL + 'user/resetPassword/'
 
-  constructor(private http: HttpClient, 
-              private router: Router) { }
+  constructor(private http: HttpClient) { }
   
   recoverPassword(email: string){
     return this.http.post(this.recoverUri + email, {});
+  }
+
+  resetPassword(token: string, newPassword: string){
+    return this.http.post(this.resetPasswordUri + token, {password: newPassword});
   }
 }

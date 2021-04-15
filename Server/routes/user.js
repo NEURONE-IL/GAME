@@ -103,7 +103,7 @@ router.post("/sendEmailResetPassword/:email", async (req, res) => {
 })
 
 router.post("/resetPassword/:token", async (req, res) => {
-  const token = req.params.token;
+  const providedToken = req.params.token;
   // Find a matching token
   Token.findOne({ token: providedToken }, function (err, token) {
     if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });

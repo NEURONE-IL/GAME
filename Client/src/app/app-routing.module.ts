@@ -113,10 +113,10 @@ const routes: Routes = [
     canActivate: [ NotLoggedInGuard ]
   },
   {
-    path: 'recovery',
+    path: 'user/resetPassword/:token',
     component: RecoveryComponent,
-    canActivate: [ NotLoggedInGuard ]
-  },  
+    canActivate: [ NotLoggedInGuard ]    
+  },
   { path: '**', redirectTo: 'login' },
 ];
 
