@@ -5,6 +5,7 @@ const Challenge = require('../models/challenge');
 const Study = require("../models/study");
 const UserChallenge = require("../models/userChallenge");
 const UserStudy = require("../models/userStudy");
+const Token = require("../models/token");
 const verifyToken = require("../middlewares/verifyToken");
 const bcrypt = require("bcryptjs");
 
@@ -93,7 +94,11 @@ router.post("/sendEmailResetPassword/:email", async (req, res) => {
       });
     }
   })
-  console.log(user)
+  if(!user){
+    return res.status(404).json({
+      err: "Email not found"
+    });
+  }
   // Send confirmation email
   sendResetPasswordEmail(user, res, req);
 
