@@ -163,6 +163,8 @@
     "MIN_VALUE_1": "El valor mínimo del campo es 1",
     "MIN_VALUE_30": "El valor mínimo del campo es 30",
     "PATTERN": "El campo contine caracteres no permitidos",
+    "PASSWORD_EQUAL": "Las contraseñas deben ser iguales",
+    "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 8 caracteres y al menos un número",
     "REQUIRED": "El campo es requerido",
     "SELECTION_REQUIRED": "Debe seleccionar una opción",
     "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres",
@@ -196,6 +198,14 @@
       "ERROR": "Error",
       "SUCCESS": "¡Éxito!",
       "SUCCESS_MESSAGE": "Se ha enviado un correo para recuperar su contraseña, por favor revise su bandeja de entrada (o bandeja de spam)."
+    }
+  },
+  "RESET_PASSWORD":{
+    "TOAST": {
+      "ERROR_MESSAGE": "No se ha podido cambiar la contraseña.",
+      "ERROR": "Error",
+      "SUCCESS": "¡Éxito!",
+      "SUCCESS_MESSAGE": "Se ha cambiado éxitosamente la contraseña, a continuación puede utilizarla para iniciar sesión."
     }
   },
   "QUESTIONNAIRE": {

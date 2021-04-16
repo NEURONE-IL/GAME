@@ -46,13 +46,14 @@ export class RecoveryComponent implements OnInit {
   resetPassword(){
     this.recoveryService.resetPassword(this.token, this.recoveryForm.value.newPassword).subscribe(
       () => {
-        this.toastr.success(this.translate.instant("RECOVERY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("RECOVERY.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("RESET_PASSWORD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("RESET_PASSWORD.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.router.navigate(['login']);
       },
       err => {
-        this.toastr.error(this.translate.instant("RECOVERY.TOAST.ERROR_MESSAGE"), this.translate.instant("RECOVERY.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("RESET_PASSWORD.TOAST.ERROR_MESSAGE"), this.translate.instant("RESET_PASSWORD.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });      

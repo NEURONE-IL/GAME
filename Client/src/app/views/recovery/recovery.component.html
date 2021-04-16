@@ -8,22 +8,31 @@
         	<mat-form-field style="margin-top: 5%">
             <mat-label>{{"RECOVERY.NEW_PASSWORD" | translate}}</mat-label>
           	<input type="password" matInput formControlName="newPassword">
-						<mat-error>
-							{{"LOGIN.REQUIRED" | translate}}
+						<mat-error *ngIf="recoveryFormControls.newPassword.hasError('required')">
+							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
+						<mat-error *ngIf="recoveryFormControls.newPassword.hasError('pattern')">
+							{{ "ERRORS.PASSWORD_PATTERN" | translate }}
+						</mat-error>						
 	        </mat-form-field>
   	    </p>
       	<p>
         	<mat-form-field style="margin-top: 5%">
             <mat-label>{{"RECOVERY.NEW_PASSWORD_CONFIRMATION" | translate}}</mat-label>
-          	<input type="password" matInput formControlName="passwordConfirmation">
-						<mat-error>
-							{{"LOGIN.REQUIRED" | translate}}
+          	<input type="password" ngValidateEqual="newPassword" matInput formControlName="passwordConfirmation">
+						<mat-error *ngIf="recoveryFormControls.passwordConfirmation.hasError('required')">
+							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
+						<mat-error *ngIf="recoveryFormControls.passwordConfirmation.hasError('pattern')">
+							{{ "ERRORS.PASSWORD_PATTERN" | translate }}
+						</mat-error>		
+						<mat-error *ngIf="recoveryFormControls.passwordConfirmation.hasError('notEqual')">
+							{{ "ERRORS.PASSWORD_EQUAL" | translate }}
+						</mat-error>						
 	        </mat-form-field>
   	    </p>				
 				<div class="button">
-					<button type="button" (click)="resetPassword()" color="primary" mat-raised-button>{{"RECOVERY.SEND" | translate}}</button>
+					<button type="button" (click)="resetPassword()" [disabled]="!recoveryForm.valid" color="primary" mat-raised-button>{{"RECOVERY.SEND" | translate}}</button>
       	</div>
     	</form>
   	</mat-card-content>
