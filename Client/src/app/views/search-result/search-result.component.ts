@@ -54,6 +54,12 @@ export class SearchResultComponent implements OnInit {
           let doc;
           let documentosTexto=[]
 
+          this.documentsPaginated=[]
+          this.totalDocuements=0;
+          this.pages=1;
+          this.pageIndex=[];
+          this.activePage=0;
+
           //se obtienen los documentos que son de texto o pdfs
           for (doc of this.documents){
             if (!doc.type || doc.type=='book'){documentosTexto.push(doc)}
