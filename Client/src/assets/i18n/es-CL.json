@@ -228,7 +228,7 @@
       }      
     },
     "POST_TEST": {
-      "CHALLENGE": "La pregunta desafío fue",
+      "CHALLENGE": "El desafío fue",
       "ERRORS": {
         "CHECK_REQUIRED": "La confirmación es requerida"
       },
@@ -247,7 +247,7 @@
       }
     },
     "PRE_TEST": {
-      "CHALLENGE": "La pregunta desafío es",
+      "CHALLENGE": "El desafío es",
       "ERRORS": {
         "CHECK_REQUIRED": "La confirmación es requerida"
       },

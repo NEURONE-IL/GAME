@@ -1,0 +1,206 @@
+/*
+Examples questions
+*/
+{
+	"name": "initial",
+	"type": "initial",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+}
+
+{
+	"name": "pre",
+	"type": "pre",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+}
+
+{
+	"name": "post",
+	"type": "post",
+	"questions": [
+		{
+			"question": "Pregunta 1",
+			"number": 1,
+			"options": [
+				{
+					"option": "fácil",
+					"number": 1
+				},
+				{
+					"option": "difícil",
+					"number": 2
+				}				
+			]
+		}
+	]
+}
+/*
+End example questions
+*/
+
+/*
+Real pre-test questions
+*/
+{
+	"name": "pre01",
+	"type": "pre",
+	"questions": [
+		{
+			"question": "Conozco mucho sobre el tema del desafío que voy a realizar",
+			"number": 1,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+
+{
+	"name": "pre02",
+	"type": "pre",
+	"questions": [
+		{
+			"question": "Estoy motivado con el desafío que voy a resolver",
+			"number": 2,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+
+{
+	"name": "pre03",
+	"type": "pre",
+	"questions": [
+		{
+			"question": "El desafío que voy a realizar es difícil",
+			"number": 3 ,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+/*
+End real pre-test questions
+*/
+
+/*
+Real post-test questions
+*/
+{
+	"name": "post01",
+	"type": "post",
+	"questions": [
+		{
+			"question": "Los resultados que alcancé en el desafío fueron buenos",
+			"number": 1,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+
+{
+	"name": "post02",
+	"type": "post",
+	"questions": [
+		{
+			"question": "El desafío que acabo de realizar fue motivante",
+			"number": 2,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+
+{
+	"name": "post03",
+	"type": "post",
+	"questions": [
+		{
+			"question": "El desafío realizado fue difícil",
+			"number": 3,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+/*
+End real post-test questions
+*/
