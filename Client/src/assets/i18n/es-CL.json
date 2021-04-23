@@ -210,16 +210,22 @@
   },
   "QUESTIONNAIRE": {
     "INITIAL": {
-      "TITLE": "Cuestionario inicial",
-      "SUBTITLE": "Responde las siguientes preguntas antes de comenzar",
+      "ERRORS": {
+        "CHECK_REQUIRED": "La confirmación es requerida"
+      },
       "FORM": {
         "FIELDS": {
           "CHECK": "Por favor confirme para continuar"
         }
-      },
-      "ERRORS": {
-        "CHECK_REQUIRED": "La confirmación es requerida"
-      }
+      }, 
+      "SUBTITLE": "Responde las siguientes preguntas antes de comenzar",
+      "TITLE": "Cuestionario inicial",
+      "TOAST": {
+        "ERROR": "¡Error!",
+        "ERROR_MESSAGE": "No se han guardado las respuestas del cuestionario inicial",
+        "SUCCESS": "Éxito!",
+        "SUCCESS_MESSAGE": "Se han guardado las respuestas del cuestionario inicial"
+      }      
     },
     "POST_TEST": {
       "CHALLENGE": "La pregunta desafío fue",

@@ -14,6 +14,10 @@ import { Questionnaire, QuestionnaireService } from 'src/app/services/game/quest
   styleUrls: ['./initial-questionnaire.component.css']
 })
 export class InitialQuestionnaireComponent implements OnInit {
+  questionnaireForm: FormGroup;
+  values: number[] = [1, 2, 3, 4, 5, 6];
+  questionnaires: Questionnaire[];
+  requiredType: string = 'initial';
 
   constructor(private formBuilder: FormBuilder,
               private questionnaireService: QuestionnaireService,
@@ -25,9 +29,6 @@ export class InitialQuestionnaireComponent implements OnInit {
               private changeDetector: ChangeDetectorRef              
               ) { }
 
-  questionnaireForm: FormGroup;
-  questionnaires: Questionnaire[];
-  requiredType: string = 'initial';
   @Output() onSaveClick = new EventEmitter();
 
 
@@ -70,9 +71,9 @@ export class InitialQuestionnaireComponent implements OnInit {
     this.onSaveClick.emit();
     console.log(this.questionnaireForm);
     console.log(this.questionnaires[0]);
-    this.questionnaireService.postAnswers(this.authService.getUser(), this.questionnaires[0], this.questionnaireForm.value)
+    this.questionnaireService.postAnswers(this.authService.getUser(), this.questionnaires[0], this.questionnaireForm.value.answers)
     .subscribe(response => {
-        this.toastr.success(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("QUESTIONNAIRE.INITIAL.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.INITIAL.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
@@ -81,7 +82,7 @@ export class InitialQuestionnaireComponent implements OnInit {
         this.gameService.stage = 'pre-test';
       },
       err => {
-        this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_TEST.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("QUESTIONNAIRE.INITIAL.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.INITIAL.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

@@ -3,14 +3,14 @@
     <mat-card-title>{{ "QUESTIONNAIRE.PRE_TEST.TITLE" | translate }}</mat-card-title>
     <mat-card-subtitle>{{ "QUESTIONNAIRE.PRE_TEST.SUBTITLE" | translate }}:</mat-card-subtitle>
   </mat-card-header>
-  <h4 class="challenge">
-    {{ "QUESTIONNAIRE.PRE_TEST.CHALLENGE" | translate }}:
-  </h4>
-  <p class="challenge-text">{{ question }}</p>
-  <mat-card-content *ngFor="let questionnaire of questionnaires">
+  <p class="challenge-text">{{ "QUESTIONNAIRE.PRE_TEST.CHALLENGE" | translate }}:</p>
+  <h5 class="challenge">
+    {{ question }}
+  </h5>
+  <mat-card-content *ngFor="let questionnaire of questionnaires; let questionIndex = index;">
     <form [formGroup]="questionnaireForm">
-      <div formArrayName="answers">
-        <mat-grid-list cols="12" *ngFor="let question of questionnaire.questions; let index = index">
+      <div formArrayName="answers" *ngFor="let question of questionnaire.questions; let index = index">
+        <mat-grid-list cols="12">
           <div class="label">{{questionnaire.questions[index].number}}. {{questionnaire.questions[index].question}} </div>
           <mat-grid-tile colspan="4">
             <div class="initLabel">
@@ -20,7 +20,7 @@
           <mat-grid-tile colspan="4">
             <mat-radio-group
               required
-              [formControlName]="index">
+              [formControlName]="questionIndex">
               <mat-radio-button class="custom-radio-button" *ngFor="let value of values" [value]="value" required>
                 {{value}}
               </mat-radio-button>

@@ -1,10 +1,17 @@
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+.questionnaire-card{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+.mat-form-field{
+	width: 85%;
 }
 .mat-radio-group {
   margin-left: 2%;
   margin-right: 2%;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
 }
 
 ::ng-deep .mat-radio-label{
@@ -15,19 +22,13 @@
   padding-left: 0px;
 }
 
-.questionnaire-card{
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 5%;
+.mat-error{
+  display: block;
 }
-
 .initLabel{
   margin-left: 50%;
 }​
-.certaintyLabel{
-  margin-top: 5%;
-}
-.difficultyLabel{
+.label{
   margin-top: 5%;
 }
 .checkbox-section{
@@ -53,6 +54,7 @@
   text-align: center;
   font-weight: 500;
   text-decoration: underline;
+  margin-bottom: 5%;
 }
 .challenge-text{
   text-align: center;
