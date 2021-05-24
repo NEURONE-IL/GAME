@@ -23,7 +23,7 @@
             <mat-card class="cardStyle doc-card"  *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
-                <a  class="document-link">{{doc.title}}</a>
+                <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-link">{{doc.title}}</a>
                 <div class="snippet" [innerHTML]="doc.searchSnippet"></div>
               </mat-card-content>
             </mat-card>
@@ -59,7 +59,7 @@
               <img class="img-fluid thumbnail searchImage" src="{{BaseUrl+ doc.img}}">
               <mat-card-content>
                 <h5 class="url-bar">{{ showShortDescription(doc.docName, 25)}}</h5>
-                <a  class="document-link">{{doc.title}}</a>
+                <a [routerLink]="['/view-page', doc.title, doc.url]" class="document-link">{{doc.title}}</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
@@ -78,7 +78,7 @@
               <mat-card class="cardStyle doc-card"   >
                 <mat-card-content>
                   <h5 class="url-bar">{{doc.url}}</h5>
-                  <a   class="document-link">{{doc.title}}</a>
+                  <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-link">{{doc.title}}</a>
                   <p>{{doc.searchSnippet}}</p>
                 </mat-card-content>
               </mat-card>

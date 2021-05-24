@@ -57,6 +57,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'view-page/:title/:url',
+    component: ViewPageComponent,
+  },
+  {
     path: 'create',
     component: CreationComponent,
     canActivate: [ AuthGuard, AdminGuard ],
