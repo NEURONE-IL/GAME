@@ -29,6 +29,8 @@
       "CREATE": "CREAR DESAFÍO",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
       "DELETE_RESOURCE": "Eliminar recurso",
+      "DOC_NAME": "Código",
+      "FALSE": "No",
       "HINT": "Pista",
       "HOURS": "Horas",
       "IMAGE": "Seleccione una imagen (opcional)",
@@ -38,6 +40,7 @@
       "NO_RESOURCES": "Aún no se han cargado recursos para este desafío",
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Recurso que contiene la respuesta",
+      "RELEVANT": "Relevante",
       "RESOURCE_DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el recurso?",
       "SECONDS": "Segundos para responder",
       "STUDY": "Estudio",
@@ -45,6 +48,7 @@
       "CREATED_AT": "Creado",
       "SHOW_RESOURCES": "Ver recursos",
       "TITLE": "Título",
+      "TRUE": "Sí",
       "UPDATED_AT": "Modificado",
       "URL": "URL"
     },
@@ -52,6 +56,7 @@
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
       "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el estudio?",
+      "DELETING_RESOURCES": "Eliminando recurso, por favor espere...",
       "HEADER": "Estudio",
       "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
@@ -209,24 +214,6 @@
     }
   },
   "QUESTIONNAIRE": {
-    "INITIAL": {
-      "ERRORS": {
-        "CHECK_REQUIRED": "La confirmación es requerida"
-      },
-      "FORM": {
-        "FIELDS": {
-          "CHECK": "Por favor confirme para continuar"
-        }
-      }, 
-      "SUBTITLE": "Responde las siguientes preguntas antes de comenzar",
-      "TITLE": "Cuestionario inicial",
-      "TOAST": {
-        "ERROR": "¡Error!",
-        "ERROR_MESSAGE": "No se han guardado las respuestas del cuestionario inicial",
-        "SUCCESS": "Éxito!",
-        "SUCCESS_MESSAGE": "Se han guardado las respuestas del cuestionario inicial"
-      }      
-    },
     "POST_TEST": {
       "CHALLENGE": "El desafío fue",
       "ERRORS": {
