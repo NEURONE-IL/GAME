@@ -10,6 +10,8 @@ const UserSchema = new Schema({
     last_names: {type: String },
     password: {type: String, required: true},
     gm_code: {type: String},
+    cooldown_start: {type: Date},
+    interval_answers: {type: Number},
     image_url: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },

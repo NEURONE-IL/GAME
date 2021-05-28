@@ -273,6 +273,7 @@ router.put("/:user_id/progress", [verifyToken], async (req, res) => {
   });
 });
 
+/*
 router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
 
@@ -311,6 +312,75 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
             });
           }
         });
+    });
+  });
+});
+*/
+
+router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
+  const userId = req.params.user_id;
+
+  User.findById(userId, (err, user) => {
+    if (err) {
+      res.status(500).json(err);
+    }
+    Study.findById(user.study, (err, study) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      const timeNow = new Date(Date.now());
+      const cooldown = study.cooldown;
+      const max_per_interval = study.max_per_interval;
+      if(user.cooldown_start === null){
+        user.cooldown_start = timeNow;
+        user.interval_answers = 0;
+        user.save( err => {
+          if (err) {
+            res.status(500).json(err);
+          }
+          res.status(200).json({
+            latestAnswerDate: timeNow,
+            cooldown: cooldown,
+            timeNow: timeNow,
+            canPlayAtTime: timeNow,
+            canPlay: true,
+          });
+        })
+      }
+      else{
+        const cooldown_start = user.cooldown_start;
+        const interval_answers = user.interval_answers;
+        const canPlayAtTime = new Date(
+          cooldown_start.getTime() + cooldown * 1000
+        );
+        const canPlay = timeNow > canPlayAtTime ? true : false;
+        if(canPlay){
+          user.cooldown_start = timeNow;
+          user.interval_answers = 0;
+          user.save( err => {
+            if (err) {
+              res.status(500).json(err);
+            }
+            res.status(200).json({
+              latestAnswerDate: timeNow,
+              cooldown: cooldown,
+              timeNow: timeNow,
+              canPlayAtTime: canPlayAtTime,
+              canPlay: canPlay,
+            });
+          })
+        }
+        else{
+          const max_attempts_made = interval_answers < max_per_interval ? true : false;
+          res.status(200).json({
+            latestAnswerDate: timeNow,
+            cooldown: cooldown,
+            timeNow: timeNow,
+            canPlayAtTime: canPlayAtTime,
+            canPlay: max_attempts_made,
+          });
+        }
+      }
     });
   });
 });

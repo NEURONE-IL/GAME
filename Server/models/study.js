@@ -7,6 +7,7 @@ const StudySchema = new Schema({
     domain: {type: String},
     gm_code: {type: String},
     cooldown: {type: Number},
+    max_per_interval: {type: Number},
     image_url: {type: String},
     image_id: {type: String},
     createdAt: { type: Date, default: Date.now },

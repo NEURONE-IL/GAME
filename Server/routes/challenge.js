@@ -109,6 +109,8 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         distance: distance,
         pointsObtained: pointsObtained
     })
+    user.interval_answers = user.interval_answers+1;
+    await user.save();
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
