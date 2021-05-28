@@ -153,3 +153,17 @@ em.hl{
   position: relative;
   font-weight: bold;
 }
+
+.document-id{
+
+  font-size: 20px;
+  line-height: 1.3;
+  padding-top: 4px;
+  margin-bottom: 3px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: 400;
+  color: forestgreen;
+}
