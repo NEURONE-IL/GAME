@@ -8,8 +8,7 @@ const schema = Joi.object({
 
     domain: Joi.string(),
 
-    max_per_interval: Joi.number()
-        .required(),
+    max_per_interval: Joi.number(),
 
     hours: Joi.number()
         .required(),
