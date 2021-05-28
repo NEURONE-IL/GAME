@@ -75,8 +75,6 @@ export class GameService {
     const user = this.authService.getUser();
     if (!this.progress.assent) {
       this.stage = 'assent';
-    } else if (!this.progress.initial_questionnaire) {
-      this.stage = 'initial';
     } else {
       this.progress.challenges.forEach((chProgress) => {
         if (chProgress.challenge == this.challenge._id) {

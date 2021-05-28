@@ -71,7 +71,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   }
 
   saveAnswers(){
-    this.questionnaireService.postAnswers(this.user, this.questionnaires[0], this.questionnaireForm.value.answers)
+    this.questionnaireService.postAnswers(this.user, this.questionnaires, this.questionnaireForm.value.answers)
     .subscribe(async response => {
       this.toastr.success(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS"), {
           timeOut: 5000,

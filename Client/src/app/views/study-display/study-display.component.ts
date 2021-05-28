@@ -21,6 +21,7 @@ export class StudyDisplayComponent implements OnInit {
   verDocumentos: boolean;
   searchView: boolean;
   registerLink: string;
+  deletingResource: boolean;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -63,6 +64,8 @@ export class StudyDisplayComponent implements OnInit {
       })
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    this.deletingResource = false;
   }
 
   confirmStudyDelete(id: string){
@@ -129,6 +132,7 @@ export class StudyDisplayComponent implements OnInit {
   }
 
   deleteResource(resource: Resource){
+    this.deletingResource = true;
     this.endpointsService.deleteDocument(resource)
       .subscribe(response => {
         this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
@@ -140,6 +144,7 @@ export class StudyDisplayComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.deletingResource = false;
       },
       err => {
         this.toastr.error(this.translate.instant("UPLOAD.TOAST.ERROR_MESSAGE_DELETE"), this.translate.instant("UPLOAD.TOAST.ERROR"), {

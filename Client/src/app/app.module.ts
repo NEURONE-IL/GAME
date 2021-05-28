@@ -49,7 +49,6 @@ import { EndpointsService } from './services/endpoints/endpoints.service';
 import { ViewPageComponent } from './views/view-page/view-page.component';
 import { SafeurlPipe } from './services/safeurl/safeurl.pipe';
 import { SessionComponent } from './views/session/session.component';
-import { InitialQuestionnaireComponent } from './views/initial-questionnaire/initial-questionnaire.component';
 import { PreTestQuestionnaireComponent } from './views/pre-test-questionnaire/pre-test-questionnaire.component';
 import { PostTestQuestionnaireComponent } from './views/post-test-questionnaire/post-test-questionnaire.component';
 import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
@@ -87,7 +86,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewPageComponent,
     SafeurlPipe,
     SessionComponent,
-    InitialQuestionnaireComponent,
     PreTestQuestionnaireComponent,
     PostTestQuestionnaireComponent,
     ResourceUploadComponent,

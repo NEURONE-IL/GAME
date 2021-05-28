@@ -254,10 +254,6 @@ router.put("/:user_id/progress", [verifyToken], async (req, res) => {
       userStudy.assent = req.body.assent;
     }
 
-    if ("initial_questionnaire" in req.body) {
-      userStudy.initial_questionnaire = req.body.initial_questionnaire;
-    }
-
     if ("challenges" in req.body) {
       userStudy.challenges = req.body.challenges;
     }

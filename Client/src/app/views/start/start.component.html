@@ -30,13 +30,6 @@
   >
     <app-assent></app-assent>
   </div>
-  <!-- Initial questionnaire pending -->
-  <div
-    class="container"
-    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'initial'"
-  >
-    <app-initial-questionnaire></app-initial-questionnaire>
-  </div>
   <!-- Pre-test questionnaire pending -->
   <div
     class="container"

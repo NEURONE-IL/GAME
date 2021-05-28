@@ -140,7 +140,6 @@ export class AuthService {
       console.log('admin');
       this.router.navigate(['admin_panel']);
     } else {
-      // this.router.navigate(['questionnaire/initial']);
       // this.router.navigate(['questionnaire/pre-test']);
       this.router.navigate(['/user-profile']);
     }
