@@ -22,6 +22,8 @@
             <!--Para documentos y libros-->
             <mat-card class="cardStyle doc-card"  *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
+
+                <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-id">Id del documento: {{doc.docName}}</a>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
                 <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-link">{{doc.title}}</a>
                 <div class="snippet" [innerHTML]="doc.searchSnippet"></div>
