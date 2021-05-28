@@ -56,7 +56,17 @@
 						</mat-select>
 					</mat-form-field>
 				</mat-grid-tile>
-			</mat-grid-list>		
+			</mat-grid-list>	
+			<mat-grid-list cols="12">
+				<mat-grid-tile colspan="6">
+					<mat-form-field>
+						<mat-label>{{ "POR INTERVALO" | translate }}</mat-label>
+						<mat-select formControlName="max_per_interval">
+							<mat-option *ngFor="let hour of hours" [value]="hour"> {{ hour }} </mat-option>
+						</mat-select>	
+					</mat-form-field>
+				</mat-grid-tile>
+			</mat-grid-list>				
 		</form>	
 		<mat-card-header>
 			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
