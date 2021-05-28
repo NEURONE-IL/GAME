@@ -84,8 +84,12 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
     const study = new Study({
         name: req.body.name,
         domain: req.body.domain,
+        max_per_interval: 1,
         cooldown: cooldown
     });
+    if(req.body.max_per_interval){
+        study.max_per_interval = req.body.max_per_interval;
+    }
     if(req.body.description){
         study.description = req.body.description;
     }
@@ -140,6 +144,9 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
         }
         if(req.body.description){
             study.description = req.body.description;
+        }
+        if(req.body.max_per_interval){
+            study.max_per_interval = req.body.max_per_interval;
         }
         if(req.body.hours && req.body.minutes && req.body.seconds){
             study.cooldown = req.body.hours*3600 + req.body.minutes*60;

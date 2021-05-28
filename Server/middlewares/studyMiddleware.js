@@ -8,6 +8,9 @@ const schema = Joi.object({
 
     domain: Joi.string(),
 
+    max_per_interval: Joi.number()
+        .required(),
+
     hours: Joi.number()
         .required(),
 
@@ -25,6 +28,8 @@ const editSchema = Joi.object({
     name: Joi.string(),
 
     domain: Joi.string(),
+
+    max_per_interval: Joi.number(),
 
     hours: Joi.number(),
 
