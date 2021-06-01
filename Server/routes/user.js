@@ -328,7 +328,6 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
       const cooldown = study.cooldown;
       const max_per_interval = study.max_per_interval;
       if(!user.cooldown_start){
-        console.log("xd")
         user.cooldown_start = timeNow;
         user.interval_answers = 0;
         user.save( err => {
