@@ -36,6 +36,7 @@
       "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
       "MAX_ATTEMPTS": "Intentos máximos",
+      "MAX_PER_INTERVAL": "Cantidad máxima de desafíos a responder por intervalo de tiempo",
       "MINUTES": "Minutos",
       "NO_RESOURCES": "Aún no se han cargado recursos para este desafío",
       "QUESTION": "Pregunta",

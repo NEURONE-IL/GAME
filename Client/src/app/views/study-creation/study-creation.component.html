@@ -60,8 +60,8 @@
 			<mat-grid-list cols="12">
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
-						<mat-label>{{ "POR INTERVALO" | translate }}</mat-label>
-						<mat-select formControlName="max_per_interval">
+						<mat-label>{{ "ADMIN.CHALLENGES.MAX_PER_INTERVAL" | translate }}</mat-label>
+						<mat-select formControlName="maxPerInterval">
 							<mat-option *ngFor="let maxPer of maxPers" [value]="maxPer"> {{ maxPer }} </mat-option>
 						</mat-select>	
 					</mat-form-field>
