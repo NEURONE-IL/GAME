@@ -28,7 +28,7 @@ export class StudyCreationComponent implements OnInit {
   ngOnInit(): void {
 
     this.studyForm = this.formBuilder.group({
-      description: ['', [Validators.minLength(10), Validators.maxLength(250)]],
+      description: ['', [Validators.minLength(3), Validators.maxLength(250)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       hours: [''],
       minutes: [''],

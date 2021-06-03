@@ -191,7 +191,7 @@ export class QuestionBarComponent implements OnInit {
     //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
     //Get docTitle
-    let docTitle = decodeURI(titleArray[5]);
+    let docTitle = decodeURIComponent(titleArray[5]);
     //Get docURL
     let rawUrl = decodeURIComponent(titleArray[6]);
     //Remove the URL prefix from NEURONE Core
