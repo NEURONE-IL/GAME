@@ -370,7 +370,8 @@
         "STUDY": "Estudio",
         "TYPE_OF": "Tipo de recurso",
         "TITLE": "Título visible al usuario",
-        "URL": "URL"
+        "URL": "URL",
+        "KEYWORDS": "Keywords"
       }
     },
     "LOADING_DOC": "Cargando documento, por favor espere...",
