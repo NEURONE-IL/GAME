@@ -18,7 +18,6 @@
   </mat-grid-list>
   <!-- Nuevo diseño de Tabs -->
   <mat-tab-group mat-align-tabs="end">
-
     <mat-tab >
       <ng-template mat-tab-label>
         <span (click)="reloadChallenges()"> {{'ADMIN.TABS.CHALLENGES' | translate }} </span>
@@ -69,11 +68,6 @@
 
             <mat-card-actions  style="text-align: left">
               <div>
-                <!--
-                <button mat-button class="{{getClass(challenge.question_type)}}">
-                  <mat-icon>add</mat-icon> VER RECURSOS ASOCIADOS
-                </button>
-                -->
                 <mat-expansion-panel>
                   <mat-expansion-panel-header >
                     <mat-panel-title>
@@ -130,22 +124,23 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="{{'ADMIN.TABS.MANAGE_RESOURCES' | translate }}">
-      <div *ngIf="resources">
-        <div *ngFor="let resource of getStudyResources()">
-        <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
-          <p> 
-            <strong>{{ "ADMIN.CHALLENGES.DOC_NAME" | translate }}:</strong> {{ resource.docName }} <strong> / </strong>
-            <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} <strong> / </strong>
-            <strong>{{ "ADMIN.CHALLENGES.RELEVANT" | translate }}:</strong> {{ "ADMIN.CHALLENGES." + resource.relevant.toString().toUpperCase() | translate }} <strong> / </strong>
-            <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} <strong> / </strong>
-            <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)"> 
-              <mat-icon>delete</mat-icon> 
-            </button> 
-          </p>
-        </div>
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <span (click)="refreshResources()"> {{'ADMIN.TABS.MANAGE_RESOURCES' | translate }} </span>
+      </ng-template>
+      <div *ngFor="let resource of filteredResources">
+      <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
+        <p> 
+          <strong>{{ "ADMIN.CHALLENGES.DOC_NAME" | translate }}:</strong> {{ resource.docName }} <strong> / </strong>
+          <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} <strong> / </strong>
+          <strong>{{ "ADMIN.CHALLENGES.RELEVANT" | translate }}:</strong> {{ "ADMIN.CHALLENGES." + resource.relevant.toString().toUpperCase() | translate }} <strong> / </strong>
+          <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} <strong> / </strong>
+          <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)"> 
+            <mat-icon>delete</mat-icon> 
+          </button> 
+        </p>
       </div>
-      <p *ngIf="!getStudyResources().length"> <strong>{{ "ADMIN.CHALLENGES.NO_RESOURCES" | translate }}</strong> </p>
+      <p *ngIf="!filteredResources.length"> <strong>{{ "ADMIN.CHALLENGES.NO_RESOURCES" | translate }}</strong> </p>
       <div class="spinnerCard" *ngIf="deletingResource">
         <mat-progress-spinner color="primary" mode="indeterminate" class="mt-4 mb-4">
         </mat-progress-spinner>

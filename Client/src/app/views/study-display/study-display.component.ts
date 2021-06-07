@@ -17,6 +17,7 @@ export class StudyDisplayComponent implements OnInit {
   study: Study;
   challenges: Challenge[] = [];
   resources: Resource[] = [];
+  filteredResources: Resource[] = [];
   createChallenge: boolean;
   verDocumentos: boolean;
   searchView: boolean;
@@ -61,6 +62,7 @@ export class StudyDisplayComponent implements OnInit {
       .subscribe((response: Resource[]) => {
         this.resources = response;
         console.log(this.resources);
+        this.filteredResources = this.resources.filter(resource => resource.type != 'image');
       })
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -97,11 +99,13 @@ export class StudyDisplayComponent implements OnInit {
     return finalResources;
   }
 
-  getStudyResources(){
-    var finalResources = [];
-    var filteredResources = this.resources.filter(resource => resource.type != 'image');
-    filteredResources.forEach(resource => finalResources.push(resource));
-    return finalResources;    
+  refreshResources(){
+    this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
+      .subscribe((response: Resource[]) => {
+        this.resources = response;
+        this.filteredResources = [];
+        this.filteredResources = this.resources.filter(resource => resource.type != 'image');
+      })    
   }
 
   confirmChallengeDelete(id: string){
@@ -138,7 +142,8 @@ export class StudyDisplayComponent implements OnInit {
         this.endpointsService.getDocuments('*', this.route.snapshot.paramMap.get('study_id'))
         .subscribe((response: Resource[]) => {
           this.resources = response;
-          console.log(this.resources);
+          this.filteredResources = [];
+          this.filteredResources = this.resources.filter(resource => resource.type != 'image');
         })
         this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE_DELETE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
           timeOut: 5000,
