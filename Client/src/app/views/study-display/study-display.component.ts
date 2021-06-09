@@ -245,6 +245,7 @@ export class StudyDisplayComponent implements OnInit {
 export class StudyUpdateDialogComponent implements OnInit{
   studyForm: FormGroup;
   hours: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  maxPers: number[] = [1, 2, 3, 4, 5];
   minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   loading: Boolean;
   file: File;
@@ -267,8 +268,9 @@ export class StudyUpdateDialogComponent implements OnInit{
     this.studyForm = this.formBuilder.group({
       description: [this.study.description, [Validators.minLength(10), Validators.maxLength(250)]],
       name: [this.study.name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [hours || '', [Validators.required]],
-      minutes: [minutes || '', [Validators.required]]
+      hours: [hours || ''],
+      minutes: [minutes || ''],
+      maxPerInterval: [this.study.max_per_interval || '', Validators.required]
     });
     this.loading = false;
   }
@@ -300,6 +302,9 @@ export class StudyUpdateDialogComponent implements OnInit{
       formData.append('minutes', '0');
     }
     formData.append('seconds', '0');
+    if(study.maxPerInterval){
+      formData.append('max_per_interval', study.maxPerInterval);
+    }
     if(this.file){
       formData.append('file', this.file);
     }

@@ -12,7 +12,8 @@ export interface Study {
   cooldown: number,
   createdAt: string,
   updatedAt: string,
-  image_url: string
+  image_url: string,
+  max_per_interval: number
 }
 
 @Injectable({
@@ -50,10 +51,11 @@ export class StudyService {
   }
 
   putStudy(studyId: string, updatedStudy: any): Observable<any> {
-    console.log(updatedStudy);
+    /*
     for (var value of updatedStudy.entries()) {
       console.log(value[0]+ ', ' + value[1]);
     }
+    */
     /*Sends the request*/
     return this.http.put(this.uri+studyId, updatedStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

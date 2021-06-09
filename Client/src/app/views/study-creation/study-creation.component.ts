@@ -63,8 +63,8 @@ export class StudyCreationComponent implements OnInit {
     }else{
       formData.append('minutes', '0');
     }
-    if(study.maxPerInterval){
-      formData.append('max_per_interval', study.maxPerInterval)
+    if(study.max_per_interval){
+      formData.append('max_per_interval', study.max_per_interval)
     }
     formData.append('seconds', '0');
     if(this.file){
