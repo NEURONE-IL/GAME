@@ -15,6 +15,12 @@
         <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{ registerLink }}</mat-card-subtitle>
       </mat-card-header>
     </mat-grid-tile>
+    <mat-grid-tile colspan="24">
+      <mat-card-header>
+        <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }}</mat-card-subtitle>
+        <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">REINICIAR USUARIO <mat-icon>autorenew</mat-icon></button>
+      </mat-card-header>
+    </mat-grid-tile>
   </mat-grid-list>
   <!-- Nuevo diseño de Tabs -->
   <mat-tab-group mat-align-tabs="end">

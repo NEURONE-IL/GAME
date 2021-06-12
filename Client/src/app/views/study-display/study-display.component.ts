@@ -8,6 +8,7 @@ import { EndpointsService, Resource} from '../../services/endpoints/endpoints.se
 import { environment } from 'src/environments/environment';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -28,6 +29,7 @@ export class StudyDisplayComponent implements OnInit {
               private route: ActivatedRoute,
               private challengeService: ChallengeService,
               private studyService: StudyService,
+              private authService: AuthService,
               private toastr: ToastrService,
               private translate: TranslateService,
               public endpointsService: EndpointsService,
@@ -68,6 +70,23 @@ export class StudyDisplayComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     this.deletingResource = false;
+  }
+
+  renewDummy(){
+    this.authService.renewDummy(this.study._id).subscribe(
+      user => {
+        this.toastr.success("USUARIO REVERTIDO CORRECTAMENTE", this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      },
+      err => {
+        this.toastr.error(this.translate.instant("NO SE HA PODIDO REVERTIR USUARIO"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    )
   }
 
   confirmStudyDelete(id: string){

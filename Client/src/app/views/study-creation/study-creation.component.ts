@@ -4,6 +4,7 @@ import { StudyService } from '../../services/game/study.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-study-creation',
@@ -23,7 +24,8 @@ export class StudyCreationComponent implements OnInit {
     private studyService: StudyService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -72,13 +74,23 @@ export class StudyCreationComponent implements OnInit {
     }
     this.studyService.postStudy(formData).subscribe(
       study => {
-        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-        this.resetForm();
-        this.loading = false;
-        this.router.navigate(['admin_panel']);
+        this.authService.signupDummy(study._id).subscribe(
+          user => {
+            this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            });
+            this.resetForm();
+            this.loading = false;
+            this.router.navigate(['admin_panel']);
+          },
+          err => {
+            this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("STUDY.TOAST.ERROR"), {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            });
+          }
+        )
       },
       err => {
         this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("STUDY.TOAST.ERROR"), {

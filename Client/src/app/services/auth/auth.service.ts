@@ -91,6 +91,18 @@ export class AuthService {
     return this.http.post(this.uri + 'register/' + study_id, userData);
   }
 
+  signupDummy(study_id){
+    const user = {
+      email: study_id+"@dummy.com",
+      password: "dummy12345"
+    }
+    return this.http.post(this.uri + 'register/' + study_id, user );
+  }
+
+  renewDummy(study_id){
+    return this.http.get(this.userUri + study_id + '/resetDummy');
+  }
+
   refreshUser() {
     return new Promise((resolve, reject) => {
       this.http.put(this.userUri + this.getUser()._id, {})
