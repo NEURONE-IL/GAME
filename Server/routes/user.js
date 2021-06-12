@@ -396,7 +396,9 @@ router.get("/:study_id/resetDummy", [verifyToken], async (req, res) => {
   const user = await User.findOne({email: study_id+"@dummy.cl"});
   // Delete dummy progress
   await UserStudy.deleteOne({user: user._id},  err => {
-    res.status(500).json(err);
+    if(err){
+      res.status(500).json(err);
+    }
   })
   // Find study challenges
   const challenges = await Challenge.find({ study: study }, (err) => {
