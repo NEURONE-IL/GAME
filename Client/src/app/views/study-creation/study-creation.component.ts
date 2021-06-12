@@ -74,7 +74,7 @@ export class StudyCreationComponent implements OnInit {
     }
     this.studyService.postStudy(formData).subscribe(
       study => {
-        this.authService.signupDummy(study._id).subscribe(
+        this.authService.signupDummy(study.study._id).subscribe(
           user => {
             this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
               timeOut: 5000,

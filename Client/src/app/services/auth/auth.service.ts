@@ -96,7 +96,7 @@ export class AuthService {
       email: study_id+"@dummy.com",
       password: "dummy12345"
     }
-    return this.http.post(this.uri + 'register/' + study_id, user );
+    return this.http.post(this.uri + 'registerDummy/' + study_id, user );
   }
 
   renewDummy(study_id){
