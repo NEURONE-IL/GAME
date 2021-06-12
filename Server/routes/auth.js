@@ -185,6 +185,98 @@ router.post(
   }
 );
 
+router.post(
+  "/registerDummy/:study_id",
+  [authMiddleware.verifyBodyAdmin, authMiddleware.uniqueEmail],
+  async (req, res) => {
+    const study_id = req.params.study_id;
+    if (!isValidObjectId(study_id)) {
+      return res.status(404).json({
+        ok: false,
+        message: "Study doesn't exist!",
+      });
+    }
+
+    // Find student role
+    const role = await Role.findOne({ name: "student" }, (err) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+    });
+
+    // Find study
+    const study = await Study.findOne({ _id: study_id }, (err) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+    });
+
+    // Find study challenges
+    const challenges = await Challenge.find({ study: study }, (err) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+    });
+
+    if (!study) {
+      return res.status(404).json({
+        ok: false,
+        message: "STUDY_NOT_FOUND_ERROR",
+      });
+    }
+    
+    //hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashpassword = await bcrypt.hash(req.body.password, salt);
+
+    //create user
+    const user = new User({
+      email: req.body.email,
+      names: "Dummy",
+      password: hashpassword,
+      confirmed: true,
+      role: role._id,
+      study: study._id,
+    });
+
+    //save user in db
+    user.save((err, user) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+
+      // Generate user study progress entry
+      generateProgress(challenges, user, study)
+        .catch((err) => {
+          return res.status(404).json({
+            ok: false,
+            err,
+          });
+        })
+        .then((progress) => {
+          // Register player in NEURONE-GM
+          saveGMPlayer(req, user, study, res);
+
+          res.status(200).json({
+            user,
+          });
+        });
+    });
+  }
+);
+
 router.post("/login", async (req, res) => {
   //checking if username exists
   const user = await User.findOne({
