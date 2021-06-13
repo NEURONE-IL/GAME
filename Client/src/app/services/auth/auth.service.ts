@@ -99,6 +99,10 @@ export class AuthService {
     return this.http.post(this.uri + 'registerDummy/' + study_id, user );
   }
 
+  findDummy(study_id){
+    return this.http.get(this.userUri + study_id + '/findDummy');
+  }
+
   renewDummy(study_id){
     return this.http.get(this.userUri + study_id + '/resetDummy');
   }

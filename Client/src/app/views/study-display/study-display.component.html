@@ -15,10 +15,16 @@
         <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.REGISTER_LINK" | translate }}: {{ registerLink }}</mat-card-subtitle>
       </mat-card-header>
     </mat-grid-tile>
-    <mat-grid-tile colspan="24">
+    <mat-grid-tile colspan="24" *ngIf="dummyExists">
       <mat-card-header>
         <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }}</mat-card-subtitle>
         <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">REINICIAR USUARIO <mat-icon>autorenew</mat-icon></button>
+      </mat-card-header>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="24" *ngIf="!dummyExists">
+      <mat-card-header>
+        <mat-card-subtitle class="registerLink">Usuario de prueba no creado</mat-card-subtitle>
+        <button mat-raised-button class="actionButton" color="primary" (click)="createDummy()">CREAR USUARIO </button>
       </mat-card-header>
     </mat-grid-tile>
   </mat-grid-list>

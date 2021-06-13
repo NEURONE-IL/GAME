@@ -381,6 +381,26 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
   });
 });
 
+router.get("/:study_id/findDummy", [verifyToken], async (req, res) => {
+  const study_id = req.params.study_id;
+  // Find study
+  const study = await Study.findOne({ _id: study_id }, (err) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+  });
+  // Find User
+  const user = await User.findOne({email: study_id+"@dummy.cl"});
+  const response = user === null;
+  res.status(200).json({
+    ok: true,
+    response
+  });
+});
+
 router.get("/:study_id/resetDummy", [verifyToken], async (req, res) => {
   const study_id = req.params.study_id;
   // Find study

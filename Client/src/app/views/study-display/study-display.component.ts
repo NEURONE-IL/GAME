@@ -21,6 +21,7 @@ export class StudyDisplayComponent implements OnInit {
   filteredResources: Resource[] = [];
   createChallenge: boolean;
   verDocumentos: boolean;
+  dummyExists: boolean = false;
   searchView: boolean;
   registerLink: string;
   deletingResource: boolean;
@@ -46,6 +47,7 @@ export class StudyDisplayComponent implements OnInit {
         this.study = response['study'];
         this.registerLink = environment.frontURL + 'signup/' + this.study._id;
         console.log(this.route.snapshot.paramMap.get('study_id'))
+        this.findDummy();
       },
       err => {
         this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
@@ -70,6 +72,31 @@ export class StudyDisplayComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     this.deletingResource = false;
+  }
+
+  findDummy(){
+    this.authService.findDummy(this.study._id).subscribe(
+      response => {
+        this.dummyExists = response['response'];
+      }
+    )
+  }
+
+  createDummy(){
+    this.authService.signupDummy(this.study._id).subscribe(
+      user => {
+        this.toastr.success("USUARIO CREADO CORRECTAMENTE", this.translate.instant("STUDY.TOAST.SUCCESS"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      },
+      err => {
+        this.toastr.error(this.translate.instant("NO SE HA PODIDO CREAR USUARIO"), this.translate.instant("STUDY.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    )
   }
 
   renewDummy(){
