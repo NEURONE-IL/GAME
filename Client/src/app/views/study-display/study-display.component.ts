@@ -77,7 +77,7 @@ export class StudyDisplayComponent implements OnInit {
   findDummy(){
     this.authService.findDummy(this.study._id).subscribe(
       response => {
-        this.dummyExists = response['response'];
+        this.dummyExists = response['user'];
       }
     )
   }
