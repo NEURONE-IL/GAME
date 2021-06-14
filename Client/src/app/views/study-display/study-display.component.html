@@ -17,9 +17,10 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="24" *ngIf="dummyExists">
       <mat-card-header>
-        <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }} | Password: dummy12345</mat-card-subtitle>
-        <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">REINICIAR USUARIO <mat-icon>autorenew</mat-icon></button>
+        <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }}</mat-card-subtitle>
       </mat-card-header>
+      <mat-card-content> Password: dummy12345 </mat-card-content>
+      <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">REINICIAR USUARIO <mat-icon>autorenew</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="24" *ngIf="!dummyExists">
       <mat-card-header>
