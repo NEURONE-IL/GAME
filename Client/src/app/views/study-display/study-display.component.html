@@ -17,7 +17,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="24" *ngIf="dummyExists">
       <mat-card-header>
-        <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }}</mat-card-subtitle>
+        <mat-card-subtitle class="registerLink">Usuario de prueba: {{ study._id+"@dummy.cl" }} | Password: dummy12345</mat-card-subtitle>
         <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">REINICIAR USUARIO <mat-icon>autorenew</mat-icon></button>
       </mat-card-header>
     </mat-grid-tile>
@@ -89,14 +89,14 @@
                   <div *ngIf="resources">
                     <div *ngFor="let resource of getChallengeResources(challenge._id)">
                     <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
-                      <p> 
+                      <p>
                         <strong>{{ "ADMIN.CHALLENGES.DOC_NAME" | translate }}:</strong> {{ resource.docName }} <strong> / </strong>
                         <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} <strong> / </strong>
                         <strong>{{ "ADMIN.CHALLENGES.RELEVANT" | translate }}:</strong> {{ "ADMIN.CHALLENGES." + resource.relevant.toString().toUpperCase() | translate }} <strong> / </strong>
                         <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} <strong> / </strong>
-                        <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)"> 
-                          <mat-icon>delete</mat-icon> 
-                        </button> 
+                        <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
                       </p>
                     </div>
                   </div>
@@ -142,14 +142,14 @@
       </ng-template>
       <div *ngFor="let resource of filteredResources">
       <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
-        <p> 
+        <p>
           <strong>{{ "ADMIN.CHALLENGES.DOC_NAME" | translate }}:</strong> {{ resource.docName }} <strong> / </strong>
           <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} <strong> / </strong>
           <strong>{{ "ADMIN.CHALLENGES.RELEVANT" | translate }}:</strong> {{ "ADMIN.CHALLENGES." + resource.relevant.toString().toUpperCase() | translate }} <strong> / </strong>
           <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} <strong> / </strong>
-          <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)"> 
-            <mat-icon>delete</mat-icon> 
-          </button> 
+          <button mat-icon-button color="warn" matTooltip="{{ 'ADMIN.CHALLENGES.DELETE_RESOURCE' | translate }}" matTooltipPosition="after" (click)="confirmResourceDelete(resource)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </p>
       </div>
       <p *ngIf="!filteredResources.length"> <strong>{{ "ADMIN.CHALLENGES.NO_RESOURCES" | translate }}</strong> </p>
@@ -159,7 +159,7 @@
         <span>
           {{ "ADMIN.STUDIES.DELETING_RESOURCES" | translate }}
         </span>
-      </div>      
+      </div>
     </mat-tab>
   </mat-tab-group>
 </mat-card>
