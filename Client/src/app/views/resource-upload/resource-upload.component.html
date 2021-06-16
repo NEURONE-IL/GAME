@@ -101,16 +101,13 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.KEYWORDS" | translate }}</mat-label>
-						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -]*" placeholder="noticia, historia, animal" formControlName="keywords" #inputName maxlength="200">
-						<mat-hint align="end">{{inputName.value?.length || 0}}/200</mat-hint>
+						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -]*" placeholder="noticia, historia, animal" formControlName="keywords" #inputKeywords>
+						<mat-hint align="end">{{inputKeywords.value?.length || 0}}</mat-hint>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
 							{{ "ERRORS.REQUIRED" | translate }}
 						</mat-error>
 						<mat-error *ngIf="resourceFormControls.docName.hasError('minlength')">
 							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_200" | translate }}
 						</mat-error>
 						<mat-error *ngIf="!resourceFormControls.docName.hasError('required') &&
 															!resourceFormControls.docName.hasError('minlength') && 

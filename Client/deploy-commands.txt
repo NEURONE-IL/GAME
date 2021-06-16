@@ -1,0 +1,2 @@
+ng build --output-path ../Server/public
+ng build --prod --output-path ../Server/public

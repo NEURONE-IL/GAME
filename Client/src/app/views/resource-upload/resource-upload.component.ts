@@ -43,7 +43,7 @@ export class ResourceUploadComponent implements OnInit {
       maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
       relevant: null,
       searchSnippet: '',
-      keywords: [null, [Validators.minLength(3), Validators.maxLength(200)]],
+      keywords: [null, [Validators.minLength(3)]],
     });
 
     this.studyService.getStudies().subscribe(
