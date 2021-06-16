@@ -400,7 +400,7 @@ router.get("/:study_id/findDummy", async (req, res) => {
   });
 });
 
-router.get("/:study_id/resetDummy", [verifyToken], async (req, res) => {
+router.get("/:study_id/resetDummy", async (req, res) => {
   const study_id = req.params.study_id;
   // Find study
   const study = await Study.findOne({ _id: study_id }, (err) => {
@@ -413,6 +413,14 @@ router.get("/:study_id/resetDummy", [verifyToken], async (req, res) => {
   });
   // Find User
   const user = await User.findOne({email: study_id+"@dummy.cl"});
+  // Delete dummy last answers records
+  user.cooldown_start = null;
+  user.interval_answers = 0;
+  await user.save(err => {
+    if(err){
+      res.status(500).json(err);
+    }
+  });
   // Delete dummy progress
   await UserStudy.deleteOne({user: user._id},  err => {
     if(err){

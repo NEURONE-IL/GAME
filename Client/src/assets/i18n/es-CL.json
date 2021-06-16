@@ -61,7 +61,12 @@
       "HEADER": "Estudio",
       "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
-			"REGISTER_LINK": "Enlace de registro"
+			"REGISTER_LINK": "Enlace de registro",
+      "DUMMY1": "Usuario de prueba:",
+      "DUMMY2": "REINICIAR USUARIO",
+      "DUMMY3": "Usuario de prueba no creado",
+      "DUMMY4": "CREAR USUARIO",
+      "DUMMY5": "Contraseña:"
 		},
     "GAMIFICATION": {
       "CHELLENGE_COMPLETED": "¡Felicidades has completado el desafío!",
