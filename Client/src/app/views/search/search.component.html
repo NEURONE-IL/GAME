@@ -4,5 +4,5 @@
         <mat-icon matSuffix>search</mat-icon>
         <input matInput [(ngModel)]="query" (keydown.enter)="search()">
     </mat-form-field>
-    <button mat-raised-button class="search-button" color="accent" (click)="search()">Buscar</button>
+    <button mat-raised-button class="search-button" color="accent" (click)="search()">{{ "BUTTONS.SEARCH" | translate }}</button>
 </div>
