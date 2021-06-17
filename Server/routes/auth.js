@@ -241,7 +241,7 @@ router.post(
     //create user
     const user = new User({
       email: req.body.email,
-      names: "Dummy",
+      names: req.body.names,
       password: hashpassword,
       confirmed: true,
       role: role._id,

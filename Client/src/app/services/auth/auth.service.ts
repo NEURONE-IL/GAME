@@ -94,6 +94,7 @@ export class AuthService {
   signupDummy(study_id){
     const user = {
       email: study_id+"@dummy.cl",
+      names: "Dummy",
       last_names: "Dummy",
       password: "dummy12345"
     }
