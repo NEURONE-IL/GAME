@@ -4,6 +4,7 @@ import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
 import { StoreQueryService } from 'src/app/services/logger/store-query.service';
 import { GameService } from 'src/app/services/game/game.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-result',
@@ -17,6 +18,7 @@ export class SearchResultComponent implements OnInit {
   documents = [];
   searching: boolean;
   BaseUrl = environment.serverRoot;
+  homeTooltip: string;
 
   //paginacion
   documentsPaginated=[]
@@ -30,7 +32,8 @@ export class SearchResultComponent implements OnInit {
     private route: ActivatedRoute,
     public gameService: GameService,
     public router: Router,
-    private storeQueryService: StoreQueryService
+    private storeQueryService: StoreQueryService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +42,7 @@ export class SearchResultComponent implements OnInit {
       this.query = params.get('query');
       this.domain = params.get('domain');
     });
+    this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP");
     let subscription = this.endpointsService
       .getDocuments(this.query, this.domain)
       .subscribe(

@@ -92,8 +92,9 @@
         <br>
         <mat-form-field class="signup-form-field">
           <mat-label>{{"SIGNUP.FORM.PHONE_NUMBER" | translate}}</mat-label>
-          <input matInput formControlName="tutor_phone" placeholder=""
+          <input matInput formControlName="tutor_phone" placeholder="" type="number"
                  required>
+          <mat-hint>{{"SIGNUP.FORM.PHONE_NUMBER_SUB" | translate}}</mat-hint>
           <mat-error *ngIf="tutorFormControls.tutor_phone.hasError('required')">
             {{"SIGNUP.FORM.ERROR.PHONE_REQUIRED" | translate}}
           </mat-error>
@@ -101,7 +102,7 @@
             {{"SIGNUP.FORM.ERROR.PHONE_INVALID" | translate}}
           </mat-error>
         </mat-form-field>
-        <div class="bottom-stepper-panel">
+        <div class="bottom-stepper-panel mt-4">
           <button mat-raised-button class="stepper-button" color="primary" matStepperPrevious>{{"SIGNUP.BACK" | translate}}</button>
           <button mat-raised-button class="stepper-button" color="primary" matStepperNext>{{"SIGNUP.NEXT" | translate}}</button>
         </div>

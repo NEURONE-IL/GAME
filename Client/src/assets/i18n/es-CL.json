@@ -12,7 +12,8 @@
     "EDIT": "EDITAR",
     "EDIT_STUDY": "EDITAR ESTUDIO",
     "SAVE": "GUARDAR",
-    "CONTINUE": "CONTINUAR"
+    "CONTINUE": "CONTINUAR",
+    "SEARCH": "BUSCAR"
   },
   "ADMIN": {
     "TABS": {
@@ -288,6 +289,7 @@
       "LAST_NAMES": "Apellidos",
       "RUT": "RUT",
       "PHONE_NUMBER": "Número de teléfono",
+      "PHONE_NUMBER_SUB": "(solo para verificar vía telefónica parentesco/relación con el estudiante y autenticidad del registro)",
       "EMAIL": "Correo electrónico (del apoderado/a)",
       "EMAIL_CONFIRM": "Confirme correo",
       "BIRTHDATE": "Fecha de nacimiento",
@@ -437,6 +439,7 @@
       "NO_RESULTS": "No se han encontrado resultados",
       "RESULTS": "resultados",
       "SEARCHING": "Buscando resultados, por favor espere...",
+      "TOOLTIP": "Ir a la página principal del buscador de NEURONE",
       "VIDEOS": "Vídeos"
     },
     "QUESTION_BAR": {

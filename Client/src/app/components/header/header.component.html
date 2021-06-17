@@ -1,9 +1,16 @@
 <div class="header" role="banner">
-  <a class="title-span" href="/">HOME <mat-icon class="home">home</mat-icon></a>
+  <!--
+  <a class="title-span" *ngIf="router.url.toString().includes('session'); else elseBlock" [routerLink]="['/session/search']">NEURONE <mat-icon class="home">home</mat-icon></a>
+  <ng-template #elseBlock>
+    <a class="title-span" [routerLink]="['/user-profile']">NEURONE <mat-icon class="home">home</mat-icon></a>
+  </ng-template>
+  -->
+
+  <!--ADMIN Implementation-->
+  <a class="title-span" *ngIf="isLoggedIn && user.role.name === 'admin'" [routerLink]="['/admin_panel']">HOME <mat-icon class="home">home</mat-icon></a>
 
   <div class="spacer"></div>
-
-  <button *ngIf="isLoggedIn && user.role.name !== 'admin'" mat-icon-button [matMenuTriggerFor]="tabledriven" (click)="updateNotifications()">
+  <button *ngIf="isLoggedIn && user.role.name !== 'admin' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" mat-icon-button [matMenuTriggerFor]="tabledriven" (click)="updateNotifications()">
     <mat-icon [matBadge]="notificationsN" matBadgeColor="warn">notifications</mat-icon>
   </button>
 

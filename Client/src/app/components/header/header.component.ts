@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { GamificationService } from 'src/app/services/game/gamification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   notificationsN = 0;
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
 
-  constructor( private authService: AuthService, private gamificationService: GamificationService) { }
+  constructor( private authService: AuthService, private gamificationService: GamificationService, public router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.loggedIn;
