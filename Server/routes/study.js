@@ -155,8 +155,8 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
             study.cooldown = req.body.cooldown;
         }
         if(req.file){
-            if(level.image_id){
-                imageStorage.gfs.delete(level.image_id);
+            if(study.image_id){
+                imageStorage.gfs.delete(study.image_id);
             }
             let image_url = process.env.ROOT+'/api/image/'+req.file.filename;
             study.image_url = image_url;
