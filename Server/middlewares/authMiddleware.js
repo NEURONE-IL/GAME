@@ -51,6 +51,8 @@ const adminSchema = Joi.object({
 
     repeat_password: Joi.ref('password'),
 
+    names: Joi.string(),
+
     last_names: Joi.string(),
 
     email: Joi.string()
