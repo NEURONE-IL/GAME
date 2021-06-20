@@ -118,7 +118,7 @@ export class SearchResultComponent implements OnInit {
     console.log("active page= ", this.activePage)
   }
   search() {
-    if (this.query !== '') {
+    if (this.query !== '' && this.query!== '*') {
       let queryData = {
         query: this.query,
         title: document.title,
