@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    if (this.query !== '') {
+    if (this.query !== '' && this.query!== '*') {
       let queryData = {
         query: this.query,
         title: document.title,
