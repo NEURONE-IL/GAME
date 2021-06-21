@@ -58,12 +58,8 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (response) => {
           let levels = response;
-          this.actualLevel = levels[0];
-          for (let i = 0; i < levels.length; i++) {
-            if (levels[i].point_threshold < this.actualLevel.point_threshold) {
-              this.actualLevel = levels[i];
-            }
-          }
+          console.log(levels)
+          this.actualLevel = levels[levels.length-1];
         },
         (err) => {
           console.log(err);

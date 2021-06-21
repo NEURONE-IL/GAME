@@ -106,6 +106,7 @@ export class StudyDisplayComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.dummyExists = true;
       },
       err => {
         this.toastr.error(this.translate.instant("NO SE HA PODIDO REVERTIR USUARIO"), this.translate.instant("STUDY.TOAST.ERROR"), {

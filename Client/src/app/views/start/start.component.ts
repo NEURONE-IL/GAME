@@ -21,7 +21,6 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log("Hola")
     await this.gameService.load().then(() => {
       if (!this.gameService.loading) {
         this.kmTracker.start();

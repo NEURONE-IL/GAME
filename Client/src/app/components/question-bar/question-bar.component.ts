@@ -53,6 +53,7 @@ export class QuestionBarComponent implements OnInit {
       rawUrl1: [''],
       rawUrl2: ['']
     });
+
     this.loadChallenge();
     this.startTimer();
     // On router change, checks if a visited page is marked as favorite
