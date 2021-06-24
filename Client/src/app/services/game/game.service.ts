@@ -175,8 +175,18 @@ export class GameService {
   }
 
   async finishSummary() {
+    
+    this.stage = 'play-again';
+  }
+
+  async finishPlayAgain(){
     this.load();
     this.router.navigate(['/']);
+  }
+
+  async continue(){
+    this.load();
+    this.router.navigate(['/start']);
   }
 
   getCurrentChallengeId() {

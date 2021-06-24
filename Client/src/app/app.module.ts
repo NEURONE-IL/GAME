@@ -68,6 +68,7 @@ import { SummaryComponent } from './views/summary/summary.component';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { PlayAgainComponent } from './views/play-again/play-again.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -108,7 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SummaryComponent,
     ImageSelectorComponent,
     RecoveryComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PlayAgainComponent
   ],
   imports: [
     BrowserModule,

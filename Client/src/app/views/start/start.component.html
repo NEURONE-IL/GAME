@@ -59,4 +59,12 @@
   >
     <app-summary></app-summary>
   </div>
+
+  <!-- Play Again -->
+  <div
+    class="container"
+    *ngIf="gameService.canPlay.canPlay && gameService.stage == 'play-again'"
+  >
+    <app-play-again></app-play-again>
+  </div>
 </ng-template>
