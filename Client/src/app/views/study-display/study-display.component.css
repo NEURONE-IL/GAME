@@ -159,3 +159,8 @@
 .spinnerCard{
 	text-align: -webkit-center;
 }
+
+.alert-warning{
+  width: 100%;
+  text-align: center;
+}

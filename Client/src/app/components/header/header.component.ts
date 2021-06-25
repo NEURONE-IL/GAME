@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { GamificationService } from 'src/app/services/game/gamification.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +17,9 @@ export class HeaderComponent implements OnInit {
   notifications: false;
   notificationsN = 0;
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
+  homeTooltip: string;
 
-  constructor( private authService: AuthService, private gamificationService: GamificationService, public router: Router) { }
+  constructor( private authService: AuthService, private gamificationService: GamificationService, public router: Router, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.loggedIn;
@@ -25,6 +27,7 @@ export class HeaderComponent implements OnInit {
       this.user = this.authService.getUser();
       this.getNotifications();
     }
+    this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }
 
   getNotifications(){
@@ -57,6 +60,11 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.authService.confirmLogout();
+  }
+
+  goBack(){
+    console.log('in')
+    window.history.back();
   }
 
 }

@@ -74,12 +74,11 @@
 }
 
 .urlField{
-	margin-top: 2%;
+	/*margin-top: 2%;*/
 }
 
 .urlInput{
 	cursor: default;
-	margin-top: 5%;
 }
 
 ::ng-deep .mat-form-field-ripple {
@@ -107,7 +106,7 @@ mat-label{
 }
 
 input.mat-input-element {
-  padding-bottom: 10px;
+/*  padding-bottom: 10px;*/
 }
 
 span .mat-select-placeholder{

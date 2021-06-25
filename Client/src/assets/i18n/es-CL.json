@@ -14,7 +14,7 @@
     "SAVE": "GUARDAR",
     "CONTINUE": "CONTINUAR",
     "NO": "NO",
-    "YES": "SI",
+    "YES": "SÍ",      
     "SEARCH": "BUSCAR"
   },
   "ADMIN": {
@@ -64,13 +64,15 @@
       "HEADER": "Estudio",
       "LOADING": "Cargando, por favor espere...",
       "NO_DESCRIPTION": "No se ha provisto una descripción para este estudio",
-			"REGISTER_LINK": "Enlace de registro",
+      "REGISTER_LINK": "Enlace de registro",
       "DUMMY1": "Usuario de prueba:",
       "DUMMY2": "REINICIAR USUARIO",
       "DUMMY3": "Usuario de prueba no creado",
       "DUMMY4": "CREAR USUARIO",
-      "DUMMY5": "Contraseña:"
-		},
+      "DUMMY5": "Contraseña:",
+      "DUMMY_ALERT_START": "Importante",
+      "DUMMY_ALERT_END": "Una vez termine de agregar/eliminar desafíos, reinicie el usuario de prueba para que este refleje los cambios realizados"
+    },
     "GAMIFICATION": {
       "CHELLENGE_COMPLETED": "¡Felicidades has completado el desafío!",
       "EXP1": "Has adquirido",
@@ -426,8 +428,8 @@
       "CLOSE": "Cerrar"
     },
     "ANSWER_TYPE": {
-			"JUSTIFY": "Justifica tu respuesta aquí",
-			"NUMBER": "Ingresa el número de tu respuesta aquí",
+            "JUSTIFY": "Justifica tu respuesta aquí",
+            "NUMBER": "Ingresa el número de tu respuesta aquí",
       "TEXT": "Ingresa tu respuesta aquí",
       "URL": "Las páginas que seleccionaste se muestran aquí"
     },
@@ -447,7 +449,9 @@
       "RESULTS": "resultados",
       "SEARCHING": "Buscando resultados, por favor espere...",
       "TOOLTIP": "Ir a la página principal del buscador de NEURONE",
-      "VIDEOS": "Vídeos"
+      "TOOLTIP_BACK": "Volver al buscador de NEURONE",
+      "VIDEOS": "Vídeos",
+      "WEB_PAGES": "Páginas Web"
     },
     "QUESTION_BAR": {
       "CHALLENGE_TYPE": {
@@ -458,12 +462,16 @@
         "URL_END": "una fuente confiable, es decir, una página web, video o libro, que permita responder la siguiente pregunta"
       },      
       "TOOLTIP_ADD": "Agregar a favoritos",
+      "TOOLTIP_ADD_SINGLE": "Marcar como fuente confiable",
       "TOOLTIP_REMOVE": "Quitar de favoritos",
+      "TOOLTIP_REMOVE_SINGLE": "Descartar como fuente confiable",
       "TOOLTIP_SEND": "Enviar respuesta",
+      "FAVORITE": "Fuente elegida",
       "FAVORITES": "Páginas favoritas",
       "TOAST": {
         "INFO": "Info",
-        "INFO_MESSAGE": "Solo puedes marcar 2 páginas como favoritas por pregunta"
+        "INFO_MESSAGE": "Solo puedes marcar 2 páginas como favoritas por pregunta",
+        "INFO_MESSAGE_SINGLE": "Solo puedes marcar 1 fuente como confiable por pregunta"
       }
     }
   }

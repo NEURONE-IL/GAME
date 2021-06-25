@@ -38,6 +38,7 @@
     color: white;
     font-weight: bolder;
     text-shadow: 0 0 20px #4b4949, 0 0 30px #4b4949, 0 0 40px #4b4949, 0 0 50px #4b4949, 0 0 60px #4b4949, 0 0 70px #4b4949, 0 0 80px #4b4949;
+    cursor: pointer;
   }
 
   .spacer {

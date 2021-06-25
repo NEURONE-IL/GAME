@@ -47,7 +47,7 @@
 
               <ng-template #elseBlock>
                 <ng-container *ngIf="gameService.challenge.answer_type === 'justify'; else elseBlock2">
-                  <mat-grid-tile colspan="9" rowspan="4" >
+                  <mat-grid-tile colspan="9" rowspan="3" >
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width answerField">
                         <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
@@ -57,8 +57,18 @@
                     </form>
                   </mat-grid-tile>
 
+                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+                  
+                  <mat-grid-tile colspan="3" rowspan="1">
+                    <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
                   <mat-grid-tile colspan="1" rowspan="1">
-                    <button mat-icon-button (click)="favoriteAction()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                    <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
                             #tooltip="matTooltip"
                             [(matTooltip)]="currentTooltip"
                             matTooltipPosition="right"
@@ -67,16 +77,9 @@
                       <mat-icon *ngSwitchCase="false">star_border</mat-icon>
                       <mat-icon *ngSwitchCase="true">star</mat-icon>
                     </button>
-                  </mat-grid-tile>
+                  </mat-grid-tile>                  
 
-                  <mat-grid-tile colspan="3" rowspan="1">
-                    <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
-                  </mat-grid-tile>
-
-                  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
-                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-
-                  <mat-grid-tile colspan="7" rowspan="1">
+                  <mat-grid-tile colspan="6" rowspan="1">
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width urlField">
                         <input matInput formControlName="url1" [readonly]="true">
@@ -87,6 +90,7 @@
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
+<!--URL2
                   <mat-grid-tile colspan="7" rowspan="1">
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width urlField">
@@ -94,12 +98,18 @@
                       </mat-form-field>
                     </form>
                   </mat-grid-tile>
+-->                  
                 </ng-container>
               </ng-template>
 
               <ng-template #elseBlock2>
+
+                <mat-grid-tile colspan="3" rowspan="1">
+                  <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
+                </mat-grid-tile>
+
                 <mat-grid-tile colspan="1" rowspan="1">
-                  <button mat-icon-button (click)="favoriteAction()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
                           #tooltip="matTooltip"
                           [(matTooltip)]="currentTooltip"
                           matTooltipPosition="right"
@@ -110,13 +120,7 @@
                   </button>
                 </mat-grid-tile>
 
-                <mat-grid-tile colspan="3" rowspan="1">
-                  <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITES" | translate }}:</p>
-                </mat-grid-tile>
-
-                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>                
-
-                <mat-grid-tile colspan="9" rowspan="1">
+                <mat-grid-tile colspan="10" rowspan="1">
                   <form class="answer-form" [formGroup]="answerForm">
                     <mat-form-field class="input-full-width urlField">
                       <input matInput formControlName="url1" [readonly]="true">
@@ -124,7 +128,13 @@
                   </form>
                 </mat-grid-tile>                
 
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                </mat-grid-tile>
+
+<!--URL2
                 <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>                
+
 
                 <mat-grid-tile colspan="9" rowspan="1">
                   <form class="answer-form" [formGroup]="answerForm">
@@ -140,6 +150,7 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="2"></mat-grid-tile>
+-->
               </ng-template>
               
               <!--HINT BUTTON CODE

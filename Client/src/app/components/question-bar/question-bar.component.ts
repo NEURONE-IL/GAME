@@ -66,7 +66,7 @@ export class QuestionBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
     this.sendAnswerTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_SEND");
   }
 
@@ -193,6 +193,51 @@ export class QuestionBarComponent implements OnInit {
     this.hintUsed = true;
   }
 
+  favoriteActionSingle(): void{
+    //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
+    const titleArray = window.location.href.split('/');
+    //Get docTitle
+    let docTitle = decodeURIComponent(titleArray[5]);
+    //Get docURL
+    let rawUrl = decodeURIComponent(titleArray[6]);
+    //Remove the URL prefix from NEURONE Core
+    const urlArray = rawUrl.split('/');
+    let docURL = '';
+    for(var i=3; i<urlArray.length; i++){
+      docURL += urlArray[i] + '/';
+    }
+    //Remove the URL postfix from NEURONE Core
+    docURL = docURL.replace('/index.html/', '');
+    var checkPage = this.checkPageSingle(docURL);
+    if(checkPage === 1){
+      this.answerForm.patchValue({url1: ''});
+      this.answerForm.patchValue({rawUrl1: ''});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
+      this.favPage = false;
+//      console.log('En URL 1');
+    }
+    else{
+    // The page isn't marked as favorite and the url1 field is empty
+      if(this.answerForm.get('url1').value === ''){
+        this.answerForm.patchValue({url1: docTitle});
+        this.answerForm.patchValue({rawUrl1: docURL});
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
+        this.favPage = true;
+//        console.log('Asignado a URL 1');
+        }
+        else{
+      // The page isn't marked as favorite and the url1 and url2 fields aren't empty
+          this.favPage = false;
+  //        console.log('Ambos ocupados');
+          this.toastr.info(this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO_MESSAGE_SINGLE"), this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO"), {
+            timeOut: 8000,
+            positionClass: 'toast-top-center'
+          });
+        }        
+      }    
+  }
+
+
   favoriteAction(): void{
     //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
@@ -213,7 +258,7 @@ export class QuestionBarComponent implements OnInit {
     if(checkPage === 1){
       this.answerForm.patchValue({url1: ''});
       this.answerForm.patchValue({rawUrl1: ''});
-      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
       this.favPage = false;
 //      console.log('En URL 1');
     }
@@ -221,7 +266,7 @@ export class QuestionBarComponent implements OnInit {
     else if(checkPage === 2){
       this.answerForm.patchValue({url2: ''});
       this.answerForm.patchValue({rawUrl2: ''});
-      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
       this.favPage = false;
 //      console.log('En URL 2');
     }
@@ -230,7 +275,7 @@ export class QuestionBarComponent implements OnInit {
       if(this.answerForm.get('url1').value === ''){
         this.answerForm.patchValue({url1: docTitle});
         this.answerForm.patchValue({rawUrl1: docURL});
-        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
         this.favPage = true;
 //        console.log('Asignado a URL 1');
       }
@@ -238,7 +283,7 @@ export class QuestionBarComponent implements OnInit {
       else if(this.answerForm.get('url2').value === ''){
         this.answerForm.patchValue({url2: docTitle});
         this.answerForm.patchValue({rawUrl2: docURL});
-        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
+        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
         this.favPage = true;
 //        console.log('Asignado a URL 2');
       }
@@ -271,10 +316,10 @@ export class QuestionBarComponent implements OnInit {
     docURL = docURL.replace('/index.html/', '');
     var checkPage = this.checkPage(docURL);
     if(checkPage === 1 || checkPage === 2){
-      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE");
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
       return true;
     }
-    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+    this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
     return false;
   }
 
@@ -291,6 +336,16 @@ export class QuestionBarComponent implements OnInit {
 //    console.log('No match');
     return 3;
   }
+
+  checkPageSingle(docURL: string){
+    if(this.answerForm.controls['rawUrl1'].value === docURL && docURL != ''){
+//      console.log('Match 1');
+      return 1;
+    }
+//    console.log('No match');
+    return 3;
+  }  
+
 }
 
 @Component({

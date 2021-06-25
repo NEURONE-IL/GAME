@@ -6,11 +6,21 @@
   </ng-template>
   -->
 
+  <!--Student Implementation-->
+  <a class="title-span" *ngIf="isLoggedIn && user.role.name === 'student' && router.url.toString().includes('view-page')" 
+    (click)="goBack()"
+    #tooltip="matTooltip"
+    [(matTooltip)]="homeTooltip"
+    matTooltipPosition="right"     
+  >
+    NEURONE<mat-icon class="home">home</mat-icon>
+  </a>
+
   <!--ADMIN Implementation-->
   <a class="title-span" *ngIf="isLoggedIn && user.role.name === 'admin'" [routerLink]="['/admin_panel']">HOME <mat-icon class="home">home</mat-icon></a>
 
   <div class="spacer"></div>
-  <button *ngIf="isLoggedIn && user.role.name !== 'admin' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" mat-icon-button [matMenuTriggerFor]="tabledriven" (click)="updateNotifications()">
+  <button *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" mat-icon-button [matMenuTriggerFor]="tabledriven" (click)="updateNotifications()">
     <mat-icon [matBadge]="notificationsN" matBadgeColor="warn">notifications</mat-icon>
   </button>
 
@@ -25,7 +35,7 @@
     </ng-container>
   </mat-menu>
 
-  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name !== 'admin'">
+  <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))">
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
     <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="user-image">
     {{user.names}}

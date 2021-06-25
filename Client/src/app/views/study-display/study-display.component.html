@@ -22,6 +22,11 @@
       <mat-card-content> {{ "ADMIN.STUDIES.DUMMY5" | translate }} dummy12345 </mat-card-content>
       <button mat-raised-button class="actionButton" color="primary" (click)="renewDummy()">{{ "ADMIN.STUDIES.DUMMY2" | translate }} <mat-icon>autorenew</mat-icon></button>
     </mat-grid-tile>
+    <mat-grid-tile colspan="24">
+      <div class="alert alert-warning" role="alert">
+        <strong>{{ "ADMIN.STUDIES.DUMMY_ALERT_START" | translate }}:</strong> {{ "ADMIN.STUDIES.DUMMY_ALERT_END" | translate }}
+      </div>     
+    </mat-grid-tile>
     <mat-grid-tile colspan="24" *ngIf="!dummyExists">
       <mat-card-header>
         <mat-card-subtitle class="registerLink">{{ "ADMIN.STUDIES.DUMMY3" | translate }}</mat-card-subtitle>
