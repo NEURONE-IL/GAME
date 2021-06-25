@@ -150,7 +150,7 @@ router.put("/:user_id", [verifyToken], async (req, res) => {
         user,
       });
     });
-  });
+  }).populate( { path: 'role', model: Role} );
 });
 
 router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
