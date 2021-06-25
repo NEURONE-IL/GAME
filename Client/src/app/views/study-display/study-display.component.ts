@@ -85,13 +85,14 @@ export class StudyDisplayComponent implements OnInit {
   createDummy(){
     this.authService.signupDummy(this.study._id).subscribe(
       user => {
-        this.toastr.success("USUARIO CREADO CORRECTAMENTE", this.translate.instant("STUDY.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.DUMMY_SUCCESS"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
+        this.ngOnInit();
       },
       err => {
-        this.toastr.error(this.translate.instant("NO SE HA PODIDO CREAR USUARIO"), this.translate.instant("STUDY.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.DUMMY_ERROR"), this.translate.instant("STUDY.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
@@ -102,14 +103,14 @@ export class StudyDisplayComponent implements OnInit {
   renewDummy(){
     this.authService.renewDummy(this.study._id).subscribe(
       user => {
-        this.toastr.success("USUARIO REVERTIDO CORRECTAMENTE", this.translate.instant("STUDY.TOAST.SUCCESS"), {
+        this.toastr.success(this.translate.instant("STUDY.TOAST.DUMMY_RESET_SUCCESS"), this.translate.instant("STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
         this.dummyExists = true;
       },
       err => {
-        this.toastr.error(this.translate.instant("NO SE HA PODIDO REVERTIR USUARIO"), this.translate.instant("STUDY.TOAST.ERROR"), {
+        this.toastr.error(this.translate.instant("STUDY.TOAST.DUMMY_RESET_ERROR"), this.translate.instant("STUDY.TOAST.ERROR"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });

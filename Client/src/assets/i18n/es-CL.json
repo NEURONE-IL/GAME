@@ -93,7 +93,8 @@
       "IMAGES": "Imágenes",
       "NO_RESULTS": "No se han encontrado resultados",
       "RESULTS": "resultados",
-      "VIDEOS": "Vídeos"
+      "VIDEOS": "Vídeos",
+      "WEB_PAGES": "Páginas Web"
     },
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
@@ -339,6 +340,10 @@
     "SUBTITLE": "Complete los siguientes campos para crear un nuevo estudio en el sistema",
     "TITLE": "Creación de estudios",
     "TOAST": {
+      "DUMMY_ERROR": "No se ha creado el usuario de prueba",
+      "DUMMY_RESET_ERROR": "No se ha revertido el usuario de prueba",
+      "DUMMY_RESET_SUCCESS": "Usuario de prueba revertido con éxito",
+      "DUMMY_SUCCESS": "Usuario de prueba creado con éxito",
       "ERROR": "¡Error!",
       "ERROR_MESSAGE": "No se ha creado el nuevo estudio",
       "ERROR_MESSAGE_DELETE": "No se ha eliminado el estudio",
@@ -445,8 +450,16 @@
       "VIDEOS": "Vídeos"
     },
     "QUESTION_BAR": {
+      "CHALLENGE_TYPE": {
+        "JUSTIFY_START": "Para la siguiente pregunta, marca con",
+        "JUSTIFY_END": "una fuente confiable, es decir, una página web, video o libro, que contenga la respuesta y explica brevemente por qué la consideras confiable",
+        "STRING_NUMBER": "Escribe la respuesta para la siguiente pregunta",
+        "URL_START": "Marca con",
+        "URL_END": "una fuente confiable, es decir, una página web, video o libro, que permita responder la siguiente pregunta"
+      },      
       "TOOLTIP_ADD": "Agregar a favoritos",
       "TOOLTIP_REMOVE": "Quitar de favoritos",
+      "TOOLTIP_SEND": "Enviar respuesta",
       "FAVORITES": "Páginas favoritas",
       "TOAST": {
         "INFO": "Info",

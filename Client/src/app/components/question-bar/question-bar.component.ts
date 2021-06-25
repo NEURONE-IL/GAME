@@ -32,6 +32,7 @@ export class QuestionBarComponent implements OnInit {
 
   // Tooltip
   currentTooltip: string;
+  sendAnswerTooltip: string;
 
   // Answer data
   answerForm: FormGroup;
@@ -66,6 +67,7 @@ export class QuestionBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD");
+    this.sendAnswerTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_SEND");
   }
 
   ngOnDestroy(): void {
@@ -131,7 +133,10 @@ export class QuestionBarComponent implements OnInit {
   sendAnswer() {
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
-    let answer = this.answerForm.value.answer;
+    let answer = this.answerForm.value.answer.toString();
+    if(this.gameService.challenge.answer_type === 'url'){
+      answer = this.answerForm.value.rawUrl1;
+    }
     if(answer==null) answer = '';
     let url1 = this.answerForm.value.rawUrl1;
     let url2 = this.answerForm.value.rawUrl2;
@@ -276,14 +281,14 @@ export class QuestionBarComponent implements OnInit {
 
   checkPage(docURL: string){
     if(this.answerForm.controls['rawUrl1'].value === docURL && docURL != ''){
-      console.log('Match 1');
+//      console.log('Match 1');
       return 1;
     }
     else if(this.answerForm.controls['rawUrl2'].value === docURL && docURL != ''){
-      console.log('Match 2');
+//      console.log('Match 2');
       return 2;
     }
-    console.log('No match');
+//    console.log('No match');
     return 3;
   }
 }
