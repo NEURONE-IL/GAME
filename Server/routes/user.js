@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Challenge = require('../models/challenge');
+const Role = require("../models/role");
 const Study = require("../models/study");
 const UserChallenge = require("../models/userChallenge");
 const UserStudy = require("../models/userStudy");
@@ -130,27 +131,26 @@ router.post("/resetPassword/:token", async (req, res) => {
   });
 });
 
-router.put("/:user_id", [verifyToken], async (req, res) => {
+router.put("/:user_id", async (req, res) => {
   const _id = req.params.user_id;
-  const user = await User.findOne({ _id: _id }, (err, user) => {
+  const user = await User.findOne({ _id: _id }, (err) => {
     if (err) {
       return res.status(404).json({
         err,
       });
     }
-
-    user.updatedAt = Date.now();
-    user.save((err, user) => {
-      if (err) {
-        return res.status(404).json({
-          err,
-        });
-      }
-      res.status(200).json({
-        user,
+  }).populate({ path: 'role', model: Role} );
+  user.updatedAt = Date.now();
+  user.save((err, user) => {
+    if (err) {
+      return res.status(404).json({
+        err,
       });
+    }
+    res.status(200).json({
+      user,
     });
-  }).populate( { path: 'role', model: Role} );
+  })
 });
 
 router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
