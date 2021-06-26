@@ -80,8 +80,15 @@ export class QuestionBarComponent implements OnInit {
     }
   }
 
+  setTimeLeft(){
+    this.gameService.timeLeft = this.timeLeft;
+  }
+
   startTimer() {
     console.log('Seteando timer ahora');
+    if(this.gameService.timeLeft !== null){
+      this.timeLeft = this.gameService.timeLeft;
+    }
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;

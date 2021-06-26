@@ -12,6 +12,7 @@ export class GameService {
   loading: boolean;
   progress: any;
   canPlay: any;
+  timeLeft: number = null;
 
   constructor(
     private challengeService: ChallengeService,
@@ -58,6 +59,7 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
+        this.timeLeft = null;
         this.stage = 'summary';
         this.router.navigate(['start']);
       })
