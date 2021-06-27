@@ -3,6 +3,9 @@
     "LOGOUT": "Cerrar Sesión",
     "LOGOUT_CONFIRMATION": "¿Está segur@ que desea cerrar la sesión?"
   },
+  "HELP": {
+    "INSTRUCTIONS_TITLE": "Instrucciones del Juego:"
+  },
   "BUTTONS": {
     "BACK": "ATRÁS",
     "CLEAR": "LIMPIAR",

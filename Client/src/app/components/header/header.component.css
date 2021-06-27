@@ -81,3 +81,15 @@
     font-size: small;
     font-family: Comic Sans MS, sans-serif;
   }
+
+  .ngbSlide{
+    color: #666666;
+  }
+  .picsum-img-wrapper{
+    margin-left: 100px;
+
+  }
+
+  .carousel-control-next, .carousel-control-prev {
+    color: #666666;
+  }

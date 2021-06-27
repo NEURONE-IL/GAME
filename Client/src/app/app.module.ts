@@ -69,6 +69,8 @@ import { ImageSelectorComponent } from './components/image-selector/image-select
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PlayAgainComponent } from './views/play-again/play-again.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -154,7 +156,8 @@ export function HttpLoaderFactory(http: HttpClient) {
           deps: [HttpClient]
       }
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [EndpointsService,
               GameService,
