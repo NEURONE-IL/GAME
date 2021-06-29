@@ -421,9 +421,11 @@
     },
     "INACTIVE": {
       "TITLE": "Aún no puedes jugar",
+      "TITLE2": "¡Has completado todos los desafíos del intervalo!",
       "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde.",
       "TIME_NOW": "La hora actual es",
-      "CAN_PLAY_AT": "Puedes volver a jugar a las"
+      "CAN_PLAY_AT": "Puedes volver a jugar a las",
+      "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar de las"
     },
     "HINT": {
       "BUTTON": "Pista",

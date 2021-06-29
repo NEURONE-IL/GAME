@@ -177,8 +177,13 @@ export class GameService {
   }
 
   async finishSummary() {
-    
-    this.stage = 'play-again';
+    let can_play = await this.authService.canPlay();
+    if(can_play["canPlay"]){
+      this.stage = 'play-again';
+    }
+    else{
+      this.stage = 'no-play-again'
+    }
   }
 
   async finishPlayAgain(){

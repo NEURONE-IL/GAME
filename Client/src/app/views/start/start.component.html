@@ -67,4 +67,25 @@
   >
     <app-play-again></app-play-again>
   </div>
+
+  <!-- Can't Play Again -->
+  <div class="center-card" *ngIf="gameService.stage == 'no-play-again'">
+    <mat-card class="card mat-elevation-z8">
+      <mat-card-title>{{ "GAME.INACTIVE.TITLE2" | translate }}</mat-card-title>
+      <mat-card-content>
+        <!-- <p *ngIf="gameService.canPlay.timeNow">
+          {{ "GAME.INACTIVE.TIME_NOW" | translate }}
+          {{ gameService.canPlay.timeNow | date: "shortTime" }}
+        </p> -->
+        <p *ngIf="gameService.canPlay.canPlayAtTime">
+          {{ "GAME.INACTIVE.CAN_PLAY_AT2" | translate }}
+          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
+        </p>
+        <img src="/assets/wait.jpg" style="width: 200px; margin-left: 10%"> 
+        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
+          {{"BUTTONS.CONTINUE" | translate}}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </ng-template>

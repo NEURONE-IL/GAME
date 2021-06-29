@@ -33,8 +33,32 @@ export class SummaryComponent implements OnInit {
             this.nearLevel = this.progress[i];
           }
         }
-        document.getElementById("progressLevel").setAttribute("data-label", this.nearLevel.amount + '/' + this.nearLevel.point_threshold+' '+ this.nearLevel.point.name);
-        document.getElementById("progressValue").style.width = this.nearLevel.amount/this.nearLevel.point_threshold*100+'%'
+        if(this.nearLevel == null){
+          document
+          .getElementById('progressLevel')
+          .setAttribute(
+            'data-label',
+            'MAX'
+          );
+        document.getElementById('progressValue').style.width =
+          100 * 100 +
+          '%';
+        }
+        else{
+          document
+          .getElementById('progressLevel')
+          .setAttribute(
+            'data-label',
+            this.nearLevel.amount +
+              '/' +
+              this.nearLevel.point_threshold +
+              ' ' +
+              this.nearLevel.point.name
+          );
+        document.getElementById('progressValue').style.width =
+          (this.nearLevel.amount / this.nearLevel.point_threshold) * 100 +
+          '%';
+        }
 
       },
       err => {

@@ -13,7 +13,7 @@ import { StudyService } from 'src/app/services/game/study.service';
 })
 export class UserProfileComponent implements OnInit {
   progress;
-  nearLevel;
+  nearLevel = null;
   completedChallenges;
   actualLevel;
   points;
@@ -94,7 +94,19 @@ export class UserProfileComponent implements OnInit {
               this.nearLevel = this.progress[i];
             }
           }
-          document
+          if(this.nearLevel == null){
+            document
+            .getElementById('progressLevel')
+            .setAttribute(
+              'data-label',
+              'MAX'
+            );
+          document.getElementById('progressValue').style.width =
+            100 * 100 +
+            '%';
+          }
+          else{
+            document
             .getElementById('progressLevel')
             .setAttribute(
               'data-label',
@@ -107,6 +119,7 @@ export class UserProfileComponent implements OnInit {
           document.getElementById('progressValue').style.width =
             (this.nearLevel.amount / this.nearLevel.point_threshold) * 100 +
             '%';
+          }
         },
         (err) => {
           console.log(err);
