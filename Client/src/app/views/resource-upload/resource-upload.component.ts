@@ -77,6 +77,9 @@ export class ResourceUploadComponent implements OnInit {
     if(resource.task === null){
       resource.task = "dummy";
     }
+    if(resource.type == "video"){
+      resource.keywords = resource.keywords.split(",")
+    }
     this.endpointsService.loadDocument(resource).subscribe(
       resource => {
         this.toastr.success(this.translate.instant("UPLOAD.TOAST.SUCCESS_MESSAGE"), this.translate.instant("UPLOAD.TOAST.SUCCESS"), {
