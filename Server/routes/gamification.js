@@ -5,6 +5,7 @@ const User = require('../models/user');
 const Study = require('../models/study')
 const Credential = require('../models/credential');
 const GameElement = require('../models/gameElement');
+const UserStudy = require('../models/userStudy');
 
 const connectService = require('../services/neuronegm/connect');
 const playerService = require('../services/neuronegm/player');
@@ -273,6 +274,56 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
         res.status(200).send(leaderboard);
     })
 });
+
+router.get('/userCompleted/:user_id', verifyToken, async (req, res)=> {
+    const _id = req.params.user_id;
+    const userStudy = await UserStudy.findOne({user: _id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    })
+    if(userStudy.finished == null){
+        userStudy.finished = false;
+        await userStudy.save( err => {
+            if (err) {
+                return res.status(404).json({
+                    err
+                });
+            }
+            res.status(200).send(userStudy);
+        })
+    }
+    else if(!userStudy.finished){
+        const challenges = userStudy.challenges;
+        let completed = true;
+        for(let i = 0; i<challenges.length; i++){
+            if(!challenges[i].finished){
+                completed = false;
+                break;
+            }
+        }
+        if(completed){
+            userStudy.finished = true;
+            userStudy.finishedAt = Date.now();
+            await userStudy.save((err, userStudy) => {
+                if (err) {
+                    return res.status(404).json({
+                        err
+                    });
+                }
+                res.status(200).send(userStudy);
+            })
+        }
+        else{
+            res.status(200).send(userStudy);
+        }
+    }
+    else if(userStudy.finished){
+        res.status(200).send(userStudy);
+    }
+})
 
 
 
