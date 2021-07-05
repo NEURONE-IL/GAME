@@ -20,6 +20,9 @@ export class UserProfileComponent implements OnInit {
   user;
   ranks;
   studyOk = false;
+  allCompleted = null;
+  achievementAllCompleted = false;
+  date;
   constructor(
     private gamificationService: GamificationService,
     private authService: AuthService,
@@ -32,6 +35,25 @@ export class UserProfileComponent implements OnInit {
     this.user = this.authService.getUser();
     this.checkStudy();
     this.status();
+  }
+
+  checkAllCompleted() {
+    this.gamificationService
+      .allCompleted(this.authService.getUser()._id)
+      .subscribe(
+        (response) => {
+          this.allCompleted = response;
+          if(this.allCompleted.finished){
+            this.achievementAllCompleted = true;
+            this.date = new Date(
+              this.allCompleted.finishedAt
+            ).toLocaleDateString();
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   getCompletedChallenges() {
@@ -168,6 +190,7 @@ export class UserProfileComponent implements OnInit {
         this.getLevels();
         this.getPoints();
         this.rankings();
+        this.checkAllCompleted();
       }
     });
   }
