@@ -5,6 +5,9 @@ const imageStorage = require('../middlewares/imageStorage');
 
 const Study = require('../models/study');
 const Challenge = require('../models/challenge');
+const UserStudy = require('../models/userStudy');
+const User = require('../models/user');
+const SessionLog = require('../models/sessionLog');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
@@ -187,8 +190,106 @@ router.delete('/:study_id',  [verifyToken, authMiddleware.isAdmin] , async (req,
         res.status(200).json({
             study
         });
-    })
-})
+    });
+});
 
+router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req, res) => {
+    const study_id = req.params.study_id;
+    //Search for every userStudy given te study_id
+    await UserStudy.find({ study: study_id })
+        .exec((err, userStudies) => {
+            if(err){
+                return res.status(404).json({
+                    ok: false,
+                    err
+                });
+            }
+            //Response array defined
+            let responseArray = [];
+            userStudies.forEach(element => {
+                //Get username
+                let username;
+                User.findOne({ _id: element.user })
+                    .exec((err, user) => {
+                        if(err){
+                            res.status(500).json(err);
+                        }
+                        //If user exists
+                        if(user){
+                            username = user.names;
+                            //Get last login date
+                            let lastSession;
+                            SessionLog.findOne({ userId: user._id, state: 'login' }, null, { sort: { 'createdAt': -1 }})
+                                .exec((err, sessionLog) => {
+                                    if(err){
+                                        res.status(500).json(err);
+                                    }
+                                    //If sessionLog exists
+                                    if(sessionLog){
+                                        lastSession = sessionLog.createdAt;
+                                        //Get total study challenges and answered challenges
+                                        let challenges = element.challenges.length;
+                                        let answers = element.challenges.filter((challenge) => challenge.finished === true).length;
+                                        //Compose a response object 
+                                        let responseObject = {
+                                            username: username,
+                                            challenges: challenges,
+                                            answers: answers,
+                                            lastSession: lastSession
+                                        };
+                                        //Add the response object to response array
+                                        responseArray.push(responseObject);	 
+                                        //Returns a JSON with the response array when its length matches the userStudies array length
+                                        if(responseArray.length === userStudies.length){
+                                            res.status(200).json({ 
+                                                responseArray 
+                                            });  
+                                        }    
+                                    }
+                                    //If sessionLog doesn't exist                        
+                                    else{
+                                        //Get total study challenges and answered challenges
+                                        let challenges = element.challenges.length;
+                                        let answers = element.challenges.filter((challenge) => challenge.finished === true).length;                                        
+                                        //Compose a response object with all null properties
+                                        let responseObject = {
+                                            username: username,
+                                            challenges: challenges,
+                                            answers: answers,
+                                            lastSession: null
+                                        };
+                                        //Add the response object to response array
+                                        responseArray.push(responseObject);	 
+                                        //Returns a JSON with the response array when its length matches the userStudies array length
+                                        if(responseArray.length === userStudies.length){
+                                            res.status(200).json({ 
+                                                responseArray 
+                                            });  
+                                        }                                         
+                                    }
+                                });
+                        }
+                        //If user doesn't exist                        
+                        else{
+                            //Compose a response object with all null properties
+                            let responseObject = {
+                                username: null,
+                                challenges: null,
+                                answers: null,
+                                lastSession: null
+                            };
+                            //Add the response object to response array
+                            responseArray.push(responseObject);	 
+                            //Returns a JSON with the response array when its length matches the userStudies array length
+                            if(responseArray.length === userStudies.length){
+                                res.status(200).json({ 
+                                    responseArray 
+                                });  
+                            }                            
+                        }
+                    });
+            })
+        });   
+});
 
 module.exports = router;
