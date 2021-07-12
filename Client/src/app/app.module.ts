@@ -70,6 +70,7 @@ import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PlayAgainComponent } from './views/play-again/play-again.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -151,13 +152,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    MatTableModule
   ],
   providers: [EndpointsService,
               GameService,

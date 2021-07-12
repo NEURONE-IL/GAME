@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,10 @@ import { environment } from 'src/environments/environment';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {MatTable} from '@angular/material/table';
+import {MatSort} from "@angular/material/sort";
+
+
 @Component({
   selector: 'app-study-display',
   templateUrl: './study-display.component.html',
@@ -73,6 +77,38 @@ export class StudyDisplayComponent implements OnInit {
 
     this.deletingResource = false;
   }
+
+  users;
+  loadingUsers;
+  loadUsers(){
+    console.log("USER VIEWER")
+    this.loadingUsers=true;
+    this.studyService.getStudyUserStats(this.study._id).subscribe(
+      response => {
+        this.users = response.responseArray;
+        this.loadingUsers=false;
+      },
+      err => {
+        console.log("ERROR EN LA CARGA")
+        this.loadingUsers=false;
+
+      }
+    );
+
+    console.log(this.users)
+
+  }
+
+  @ViewChild(MatSort) sort: MatSort;
+  ngAfterViewInit() {
+    this.users.sort = this.sort;
+  }
+  columnsToDisplay = ['username', 'challenges', 'lastSession', 'answers'];
+
+
+
+
+  ///
 
   findDummy(){
     this.authService.findDummy(this.study._id).subscribe(
@@ -153,7 +189,7 @@ export class StudyDisplayComponent implements OnInit {
         this.resources = response;
         this.filteredResources = [];
         this.filteredResources = this.resources.filter(resource => resource.type != 'image');
-      })    
+      })
   }
 
   confirmChallengeDelete(id: string){
