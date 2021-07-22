@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -70,6 +70,58 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("game");
     this.router.navigate(['login']);
+  }
+
+  registerAPIKEY(email, names, study, trainer_id, api_key){
+    let headers = new HttpHeaders().set('x-api-key', api_key); // create header object
+    return this.http.post(environment.apiURL+ 'site/registeruser',{email: email, names: names, study: study, trainer_id: trainer_id} ,{headers: headers })
+    .subscribe((resp: any) => {
+      localStorage.setItem('auth_token', resp.token);
+      localStorage.setItem("currentUser",JSON.stringify(resp.user));
+      let sessionLog = {
+        userId: resp.user._id,
+        userEmail: resp.user.email,
+        state: 'login',
+        localTimeStamp: Date.now()
+      }
+      this.storeSession.postSessionLog(sessionLog);
+      this.redirectUserPanel(resp.user.role.name);
+      },
+      (error) => {
+        let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
+        this.toastr.error(error_msg, this.translate.instant("LOGIN.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.router.navigate(['/']);
+      }
+      );
+  }
+
+  loginAPIKEY(study, trainer_id, api_key){
+    let headers = new HttpHeaders().set('x-api-key', api_key); // create header object
+    return this.http.post(environment.apiURL+ 'site/login',{study: study, trainer_id: trainer_id} ,{headers: headers })
+    .subscribe((resp: any) => {
+      localStorage.setItem('auth_token', resp.token);
+      localStorage.setItem("currentUser",JSON.stringify(resp.user));
+      let sessionLog = {
+        userId: resp.user._id,
+        userEmail: resp.user.email,
+        state: 'login',
+        localTimeStamp: Date.now()
+      }
+      this.storeSession.postSessionLog(sessionLog);
+      this.redirectUserPanel(resp.user.role.name);
+      },
+      (error) => {
+        let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
+        this.toastr.error(error_msg, this.translate.instant("LOGIN.TOAST.ERROR"), {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.router.navigate(['/']);
+      }
+      );
   }
 
   public get loggedIn(): boolean {

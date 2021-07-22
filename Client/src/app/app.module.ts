@@ -71,6 +71,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { PlayAgainComponent } from './views/play-again/play-again.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTableModule} from "@angular/material/table";
+import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 
 
 
@@ -113,7 +114,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageSelectorComponent,
     RecoveryComponent,
     ForgotPasswordComponent,
-    PlayAgainComponent
+    PlayAgainComponent,
+    LoginRedirectComponent
   ],
   imports: [
     BrowserModule,
