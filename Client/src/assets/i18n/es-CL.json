@@ -17,7 +17,7 @@
     "SAVE": "GUARDAR",
     "CONTINUE": "CONTINUAR",
     "NO": "NO",
-    "YES": "SÍ",      
+    "YES": "SÍ",
     "SEARCH": "BUSCAR"
   },
   "ADMIN": {
@@ -26,7 +26,15 @@
       "CREATE_CHALLENGE": "CREAR DESAFÍOS",
       "CHALLENGES": "DESAFÍOS",
       "MANAGE_RESOURCES": "GESTIONAR RECURSOS",
-      "SHOW_RESOURCES": "VER RECURSOS"
+      "SHOW_RESOURCES": "VER RECURSOS",
+      "VIEW_USERS":"USUARIOS REGISTRADOS"
+    },
+    "VIEW_USERS": {
+      "USERNAME": "Nombre de Usuario",
+      "CHALLENGES": "No. Desafios Completados",
+      "LASTSESSION": "Ultima conección",
+      "ANSWERS": "Respuestas",
+      "EMPTY": "No ha iniciado sesión"
     },
     "CHALLENGES": {
       "ANSWER": "Respuesta",
@@ -465,7 +473,7 @@
         "STRING_NUMBER": "Escribe la respuesta para la siguiente pregunta",
         "URL_START": "Marca con",
         "URL_END": "una fuente confiable, es decir, una página web, video o libro, que permita responder la siguiente pregunta"
-      },      
+      },
       "TOOLTIP_ADD": "Agregar a favoritos",
       "TOOLTIP_ADD_SINGLE": "Marcar como fuente confiable",
       "TOOLTIP_REMOVE": "Quitar de favoritos",
