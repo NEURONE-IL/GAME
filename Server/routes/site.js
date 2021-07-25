@@ -133,5 +133,17 @@ router.post("/login", verifyAPIKey, async (req, res) => {
     res.header("x-access-token", token).send({ user: user, token: token });
   });
 
+router.get("/study", verifyAPIKey, async (req, res) => {
+  Study.find({}, (err, studys) =>{
+    if(err){
+        return res.status(404).json({
+            ok: false,
+            err
+        });
+    }
+    res.status(200).json({studys});
+  });
+})
+
 
 module.exports = router;
