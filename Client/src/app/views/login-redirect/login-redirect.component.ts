@@ -9,22 +9,37 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginRedirectComponent implements OnInit {
 
+  exist: boolean = false;
   constructor(private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
-    if(this.route.snapshot.paramMap.get('email')){
-      this.register()
-    }
-    else{
-      this.login()
-    }
+    const trainer_id = this.route.snapshot.paramMap.get('trainer_id');
+    this.checkUser(trainer_id);
+  }
+
+  checkUser(trainer_id){
+    this.authService.checkTrainer(trainer_id).subscribe(
+      response => {
+        this.exist = response['user'];
+        if(this.exist){
+          this.login()
+        }
+        else{
+          this.register()
+        }
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
   login(){
     const study = this.route.snapshot.paramMap.get('study');
     const trainer_id = this.route.snapshot.paramMap.get('trainer_id');
-    const api_key = this.route.snapshot.paramMap.get('api_key')
-    this.authService.loginAPIKEY(study, trainer_id, api_key)
+    const api_key = this.route.snapshot.paramMap.get('api_key');
+    const url = this.route.snapshot.paramMap.get('url').replace("-", "/");
+    this.authService.loginAPIKEY(study, trainer_id, api_key, url)
   }
 
   register(){
@@ -33,7 +48,8 @@ export class LoginRedirectComponent implements OnInit {
     const study = this.route.snapshot.paramMap.get('study');
     const trainer_id = this.route.snapshot.paramMap.get('trainer_id');
     const api_key = this.route.snapshot.paramMap.get('api_key')
-    this.authService.registerAPIKEY(email, names, study, trainer_id, api_key)
+    const url = this.route.snapshot.paramMap.get('url').replace("-", "/");
+    this.authService.registerAPIKEY(email, names, study, trainer_id, api_key, url)
   }
 
 }

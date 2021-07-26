@@ -72,9 +72,9 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  registerAPIKEY(email, names, study, trainer_id, api_key){
+  registerAPIKEY(email, names, study, trainer_id, api_key, url){
     let headers = new HttpHeaders().set('x-api-key', api_key); // create header object
-    return this.http.post(environment.apiURL+ 'site/registeruser',{email: email, names: names, study: study, trainer_id: trainer_id} ,{headers: headers })
+    return this.http.post(environment.apiURL+ 'site/registeruser',{email: email, names: names, study: study, trainer_id: trainer_id, url: url} ,{headers: headers })
     .subscribe((resp: any) => {
       localStorage.setItem('auth_token', resp.token);
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
@@ -98,9 +98,9 @@ export class AuthService {
       );
   }
 
-  loginAPIKEY(study, trainer_id, api_key){
+  loginAPIKEY(study, trainer_id, api_key, url){
     let headers = new HttpHeaders().set('x-api-key', api_key); // create header object
-    return this.http.post(environment.apiURL+ 'site/login',{study: study, trainer_id: trainer_id} ,{headers: headers })
+    return this.http.post(environment.apiURL+ 'site/login',{study: study, trainer_id: trainer_id, url: url} ,{headers: headers })
     .subscribe((resp: any) => {
       localStorage.setItem('auth_token', resp.token);
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
@@ -122,6 +122,10 @@ export class AuthService {
         this.router.navigate(['/']);
       }
       );
+  }
+
+  checkTrainer(trainer_id){
+    return this.http.get(environment.apiURL + 'site/user/' + trainer_id);
   }
 
   public get loggedIn(): boolean {

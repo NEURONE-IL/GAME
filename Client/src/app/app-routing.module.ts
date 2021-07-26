@@ -123,11 +123,7 @@ const routes: Routes = [
     canActivate: [ NotLoggedInGuard ]    
   },
   {
-    path: 'login_redirect/:email/:names/:study/:trainer_id/:api_key',
-    component: LoginRedirectComponent
-  }, 
-  {
-    path: 'login_redirect/:study/:trainer_id/:api_key',
+    path: 'login_redirect/:email/:names/:study/:trainer_id/:api_key/:url',
     component: LoginRedirectComponent
   }, 
   { path: '**', redirectTo: 'login' },

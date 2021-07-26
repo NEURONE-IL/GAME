@@ -43,6 +43,7 @@ router.post(
 );
 
 router.post("/registeruser", verifyAPIKey, async (req, res) => {
+    const url = req.body.url;
     // Find student role
     const role = await Role.findOne({ name: "student" }, (err) => {
         if (err) {
@@ -101,11 +102,12 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         // Register player in NEURONE-GM
         saveGMPlayer(req, user, study, res);
 
-        res.header("x-access-token", token).send({ user: user, token: token });
+        res.header("x-access-token", token).send({ user: user, token: token, url: url });
     });
 })
 
 router.post("/login", verifyAPIKey, async (req, res) => {
+    const url = req.body.url;
     //checking if username exists
     const user = await User.findOne({
       trainer_id: req.body.trainer_id,
@@ -130,7 +132,7 @@ router.post("/login", verifyAPIKey, async (req, res) => {
     }
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header("x-access-token", token).send({ user: user, token: token });
+    res.header("x-access-token", token).send({ user: user, token: token, url: url });
   });
 
 router.get("/study", verifyAPIKey, async (req, res) => {
@@ -142,6 +144,19 @@ router.get("/study", verifyAPIKey, async (req, res) => {
         });
     }
     res.status(200).json({studys});
+  });
+})
+
+router.get("/user/:trainer_id", async (req, res) => {
+  const trainer_id = req.params.trainer_id;
+  const user = await User.findOne({trainer_id: trainer_id}, err => {
+    if(err){
+      res.status(400).send(err)
+    }
+  })
+  res.status(200).json({
+    ok: true,
+    user
   });
 })
 
