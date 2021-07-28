@@ -5,9 +5,12 @@ module.exports = function auth(req, res, next){
     const token = req.header('x-api-key');
     //checking token is provided    
     if(!token) return res.status(401).send('No key provided!');
-    const host = req.headers.referer;
+    const host = req.headers.origin;
     Site.findOne({host: host}, (err, site) => {
         if(err || !site){
+            res.status(401).send('Not authorized');
+        }
+        if(!site.confirmed){
             res.status(401).send('Not authorized');
         }
         //checking token

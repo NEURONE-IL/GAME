@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const SiteSchema = new Schema({
     api_key: {type: String, required: true},
     host: {type: String},
+    confirmed: {type: Boolean},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

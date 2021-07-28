@@ -23,10 +23,11 @@ const genKey = () => {
 router.post(
   "/register",
   async (req, res) => {
-    console.log(req.headers.referer);
+    console.log(req.headers.origin);
     const site = new Site({
-        host: req.headers.referer,
-        api_key: genKey()
+        host: req.headers.origin,
+        api_key: genKey(),
+        confirmed: false
       });
     site.save((err, site)=> {
         if(err){
