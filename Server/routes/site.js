@@ -24,12 +24,26 @@ router.post(
   "/register",
   async (req, res) => {
     console.log(req.headers.origin);
-    const site = new Site({
+    const siteExists = await Site.findOne({host: req.headers.origin}, err => {
+      if(err){
+        return res.status(404).json({
+          ok: false,
+          err
+        });   
+      }
+    })
+    if(siteExists){
+      res.status(200).json({
+        site: siteExists
+      });
+    }
+    else{
+      const site = new Site({
         host: req.headers.origin,
         api_key: genKey(),
         confirmed: false
       });
-    site.save((err, site)=> {
+      site.save((err, site)=> {
         if(err){
             return res.status(404).json({
                 ok: false,
@@ -38,8 +52,9 @@ router.post(
         }
         res.status(200).json({
             site
-          });
-    })
+        });
+      })
+    }
   }
 );
 
