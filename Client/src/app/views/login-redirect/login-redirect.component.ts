@@ -38,7 +38,7 @@ export class LoginRedirectComponent implements OnInit {
     const study = this.route.snapshot.paramMap.get('study');
     const trainer_id = this.route.snapshot.paramMap.get('trainer_id');
     const api_key = this.route.snapshot.paramMap.get('api_key');
-    const url = this.route.snapshot.paramMap.get('url').replace("-", "/");
+    const url = this.route.snapshot.paramMap.get('url').split("-").join("/");
     this.authService.loginAPIKEY(study, trainer_id, api_key, url)
   }
 
@@ -48,7 +48,7 @@ export class LoginRedirectComponent implements OnInit {
     const study = this.route.snapshot.paramMap.get('study');
     const trainer_id = this.route.snapshot.paramMap.get('trainer_id');
     const api_key = this.route.snapshot.paramMap.get('api_key')
-    const url = this.route.snapshot.paramMap.get('url').replace("-", "/");
+    const url = this.route.snapshot.paramMap.get('url').split("-").join("/");
     this.authService.registerAPIKEY(email, names, study, trainer_id, api_key, url)
   }
 
