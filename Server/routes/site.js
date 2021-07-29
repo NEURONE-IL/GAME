@@ -70,7 +70,7 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         }
       });
     // Find study 
-    const study = await Study.find({ _id: req.body.study }, (err) => {
+    const study = await Study.findOne({ _id: req.body.study }, (err) => {
       if (err) {
         return res.status(404).json({
           ok: false,
