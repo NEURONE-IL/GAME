@@ -2,7 +2,7 @@
 process.env.ROOT = 'http://159.65.100.191:3030'
 
 //PORT
-process.env.PORT = process.env.PORT || 3090;
+process.env.PORT = process.env.PORT || 3030;
 
 //PUBLIC PORT
 process.env.PUBLIC_PORT = 3030;
