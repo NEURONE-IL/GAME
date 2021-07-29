@@ -112,7 +112,7 @@ function sendConfirmationEmail(user, userData, res, req) {
       },
     });
     const mailOptions = {
-      from: "neuronemail2020@gmail.com",
+      from: "neurone@informatica.usach.cl",
       to: user.email,
       subject: "Verifique su correo",
       text: mailText,
@@ -224,7 +224,7 @@ function sendResetPasswordEmail(user, res, req) {
       },
     });
     const mailOptions = {
-      from: "neuronemail2020@gmail.com",
+      from: "neurone@informatica.usach.cl",
       to: user.email,
       subject: "Recupere su contraseña",
       text: mailText,

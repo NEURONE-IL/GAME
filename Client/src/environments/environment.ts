@@ -1,13 +1,23 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+/*
 export const environment = {
   production: false,
   serverRoot: 'http://159.65.100.191:3030/',
   apiURL: 'http://159.65.100.191:3030/api/',
   frontURL: 'http://159.65.100.191:3030/',
   neuroneURL: 'http://159.65.100.191:3000/',
+  locale: 'es-CL'
+};
+*/
+
+export const environment = {
+  production: false,
+  serverRoot: 'https://trivia.neurone.info:3030/',
+  apiURL: 'https://trivia.neurone.info:3030/api/',
+  frontURL: 'https://trivia.neurone.info:3030/',
+  neuroneURL: 'https://trivia.neurone.info:3000/',
   locale: 'es-CL'
 };
 
