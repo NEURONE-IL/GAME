@@ -22,6 +22,7 @@ import { UserProfileComponent } from './views/user-profile/user-profile.componen
 import { SummaryComponent } from './views/summary/summary.component';
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 
 const routes: Routes = [
   {
@@ -121,6 +122,10 @@ const routes: Routes = [
     component: RecoveryComponent,
     canActivate: [ NotLoggedInGuard ]    
   },
+  {
+    path: 'login_redirect/:email/:names/:study/:trainer_id/:api_key/:url',
+    component: LoginRedirectComponent
+  }, 
   { path: '**', redirectTo: 'login' },
 ];
 

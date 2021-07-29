@@ -33,6 +33,10 @@ export class StudyService {
     return this.http.get(this.uri+id);
   }
 
+  getStudyUserStats(id: string): Observable<any> {
+    return this.http.get(this.uri+id+'/stats');
+  }
+
   getStudySignup(id: string): Observable<any> {
     return this.http.get(this.uri+id+'/getForSignup');
   }

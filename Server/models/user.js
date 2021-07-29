@@ -17,6 +17,7 @@ const UserSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
+    trainer_id: {type: String},
     code: { type: String}
 });
 

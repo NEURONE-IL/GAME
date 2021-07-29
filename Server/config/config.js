@@ -3,7 +3,7 @@
 process.env.ROOT = 'https://trivia.neurone.info:3030'
 
 //PORT
-process.env.PORT = process.env.PORT || 3090;
+process.env.PORT = process.env.PORT || 3030;
 
 //PUBLIC PORT
 process.env.PUBLIC_PORT = 3030;
