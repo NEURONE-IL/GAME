@@ -133,8 +133,6 @@ function generateEmailData(req, token, userData) {
   const link =
     "http://" +
     req.headers.host +
-    ":" +
-    process.env.PUBLIC_PORT +
     "/confirmation/" +
     token.token;
   let mailHTML = null;
@@ -246,8 +244,6 @@ function generateEmailDataRP(req, token, userData) {
   const link =
     "http://" +
     req.headers.host +
-    ":" +
-    process.env.PUBLIC_PORT +
     "/user/resetPassword/" +
     token.token;
   let mailHTML = null;
