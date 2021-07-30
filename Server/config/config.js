@@ -1,6 +1,6 @@
 //ROOT
 //process.env.ROOT = 'http://159.65.100.191:3030'
-process.env.ROOT = 'https://trivia.neurone.info:3030'
+process.env.ROOT = 'https://trivia.neurone.info'
 
 //PORT
 process.env.PORT = process.env.PORT || 3030;
@@ -25,7 +25,7 @@ process.env.NEURONEGM = 'https://trivia.neurone.info:3080'
 
 //NEURONE GAME CLIENT
 //process.env.GAME_CLIENT = 'http://159.65.100.191:3030';
-process.env.GAME_CLIENT = 'https://trivia.neurone.info:3030';
+process.env.GAME_CLIENT = 'https://trivia.neurone.info';
 
 // NEURONE DOCS path
 process.env.NEURONE_DOCS = '/home/neurone/neuroneAssets'
