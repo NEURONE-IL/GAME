@@ -42,7 +42,7 @@ export class AuthService {
         else if (error.error=='INVALID_PASSWORD') {
           error_msg = this.translate.instant("LOGIN.TOAST.ERROR_CREDENTIALS_MESSAGE");
         }
-        else if (error.error='USER_NOT_CONFIRMED') {
+        else if (error.error=='USER_NOT_CONFIRMED') {
           error_msg = this.translate.instant("LOGIN.TOAST.ERROR_USER_NOT_CONFIRMED");
         }
         this.toastr.error(error_msg, this.translate.instant("LOGIN.TOAST.ERROR"), {
