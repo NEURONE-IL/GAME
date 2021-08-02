@@ -100,10 +100,12 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         confirmed: true
     });
     await user.save(err => {
-        return res.status(404).json({
+        if(err){
+          return res.status(404).json({
             ok: false,
             err,
           });   
+        }
     })
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     // Generate user study progress entry
