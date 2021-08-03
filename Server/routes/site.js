@@ -140,14 +140,16 @@ router.post("/login", verifyAPIKey, async (req, res) => {
         res.status(400).send(err)
       }
     })
+    user.cooldown_start = null;
+    user.interval_answers = 0;
     if(user.study !== study._id){
       user.study = study._id;
-      await user.save(err => {
-        if(err){
-          res.status(400).send(err)
-        }
-      });
     }
+    await user.save(err => {
+      if(err){
+        res.status(400).send(err)
+      }
+    });
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.header("x-access-token", token).send({ user: user, token: token, url: url });
