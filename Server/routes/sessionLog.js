@@ -35,6 +35,7 @@ router.get('/:sessionLog_id', [verifyToken] , async (req, res) => {
 
 router.post('',  [verifyToken], async (req, res) => {
     const sessionLog = new SessionLog(req.body);
+    sessionLog.user_agent = (req.get('user-agent'));
     let lastLogin;
     let user;
     let loginAction;

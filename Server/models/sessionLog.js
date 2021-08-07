@@ -6,6 +6,7 @@ const SessionLogSchema = new Schema({
     userEmail: {type: String},
     state: {type: String},
     localTimeStamp: {type: Date},
+    user_agent: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
