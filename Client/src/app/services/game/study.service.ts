@@ -12,6 +12,7 @@ export interface Study {
   cooldown: number,
   createdAt: string,
   updatedAt: string,
+  image_id: string,
   image_url: string,
   max_per_interval: number
 }

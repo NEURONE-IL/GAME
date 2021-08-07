@@ -14,7 +14,7 @@ export class AdminPanelComponent implements OnInit {
 
   constructor(private router: Router, private gamificationService: GamificationService, private toastr: ToastrService, private translate: TranslateService) { }
 
-  StudioSelected;
+  studioSelected;
   gamified: false;
   connected: false;
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class AdminPanelComponent implements OnInit {
     this.router.navigate(['create/challenge']);
   }
   studySelectedHandler(event){
-    this.StudioSelected = true;
+    this.studioSelected = true;
     this.router.navigate([event]);
   }
 
@@ -80,9 +80,9 @@ export class AdminPanelComponent implements OnInit {
     console.log('path', path);
     if(path!= '/admin_panel'){
       console.log('in study');
-      this.StudioSelected = true;
+      this.studioSelected = true;
     }else{
-      this.StudioSelected= false;
+      this.studioSelected= false;
     }
   }
 }

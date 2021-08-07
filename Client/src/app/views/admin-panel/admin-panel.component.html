@@ -15,7 +15,7 @@
 <button mat-raised-button class="gamify-button" color="primary" *ngIf="!gamified && connected" (click)="gamify()" >{{ "ADMIN.GAMIFICATION.GAMIFY_BUTTON" | translate }}</button>
 
 
-<div *ngIf="StudioSelected; else elseBlock" >
+<div *ngIf="studioSelected; else elseBlock" >
   <router-outlet></router-outlet>
 </div>
 <ng-template #elseBlock>
@@ -25,8 +25,3 @@
     </div>
   </div>
 </ng-template>
-
-
-
-
-
