@@ -7,6 +7,9 @@ const SessionLogSchema = new Schema({
     state: {type: String},
     localTimeStamp: {type: Date},
     user_agent: {type: String},
+    browser: {type: String},
+    os: {type: String},
+    device: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
