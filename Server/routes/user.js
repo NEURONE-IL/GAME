@@ -247,8 +247,15 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
 
 router.put("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
-
-  UserStudy.findOne({ user: userId }, (err, userStudy) => {
+  const user = User.findOne({_id: userId}, err => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+  })
+  UserStudy.findOne({ user: user._id, study: user.study }, (err, userStudy) => {
     if (err) {
       return res.status(404).json({
         ok: false,

@@ -182,7 +182,7 @@ export class AuthService {
 
   refreshProgress() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.userUri + this.getUser()._id + '/progress', {})
+      this.http.put(this.userUri + this.getUser()._id + '/progress', {})
       .subscribe((progress: any) => {
         resolve(progress);
       },
