@@ -179,14 +179,14 @@ router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
 
 router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
-  const user = await User.findOne({ _id: _id }, err => {
+  const user = await User.findOne({ _id: userId }, err => {
     if (err) {
       return res.status(404).json({
         err,
       });
     }
   });
-  UserStudy.findOne({ user: userId, study: user.study }, async (err, userStudy) => {
+  UserStudy.findOne({ user: user._id, study: user.study }, async (err, userStudy) => {
     if (err) {
       return res.status(404).json({
         ok: false,
