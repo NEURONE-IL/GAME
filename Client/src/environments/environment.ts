@@ -11,13 +11,22 @@ export const environment = {
   locale: 'es-CL'
 };
 */
-
+/*
 export const environment = {
   production: false,
   serverRoot: 'https://trivia.neurone.info/',
   apiURL: 'https://trivia.neurone.info/api/',
   frontURL: 'https://trivia.neurone.info/',
   neuroneURL: 'https://trivia.neurone.info:3001/',
+  locale: 'es-CL'
+};
+*/
+export const environment = {
+  production: false,
+  serverRoot: 'http://159.89.132.126:3030/',
+  apiURL: 'http://159.89.132.126:3030/api/',
+  frontURL: 'http://159.89.132.126:3030/',
+  neuroneURL: 'http://159.89.132.126:3000/',
   locale: 'es-CL'
 };
 
