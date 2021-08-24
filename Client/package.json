@@ -27,7 +27,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "axios": "^0.21.0",
     "bootstrap": "^4.4.0",
-    "dpacl": "^1.0.0",
+    "dpacl": "1.0.0",
     "lodash": "^4.17.20",
     "ng-validate-equal": "^1.0.4",
     "ng2-pdf-viewer": "^6.3.2",
