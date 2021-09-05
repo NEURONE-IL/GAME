@@ -32,6 +32,7 @@
     "ng-validate-equal": "^1.0.4",
     "ng2-pdf-viewer": "^6.3.2",
     "ng9-rut": "0.0.6",
+    "ngx-audio-player": "^11.0.4",
     "ngx-toastr": "^13.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

@@ -72,6 +72,7 @@ import { PlayAgainComponent } from './views/play-again/play-again.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTableModule} from "@angular/material/table";
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
+import {NgxAudioPlayerModule} from "ngx-audio-player";
 
 
 
@@ -117,52 +118,53 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlayAgainComponent,
     LoginRedirectComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    MatIconModule,
-    MatGridListModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatButtonModule,
-    HttpClientModule,
-    FormsModule,
-    MatBadgeModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatRadioModule,
-    MatMenuModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatStepperModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatListModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    PdfViewerModule,
-    Ng9RutModule,
-    ValidateEqualModule,
-    CommonModule,
-    ToastrModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    AppRoutingModule,
-    NgbModule,
-    MatTableModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTabsModule,
+        MatIconModule,
+        MatGridListModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatButtonModule,
+        HttpClientModule,
+        FormsModule,
+        MatBadgeModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatRadioModule,
+        MatMenuModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatStepperModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatListModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        PdfViewerModule,
+        Ng9RutModule,
+        ValidateEqualModule,
+        CommonModule,
+        ToastrModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        AppRoutingModule,
+        NgbModule,
+        MatTableModule,
+        NgxAudioPlayerModule
+    ],
   providers: [EndpointsService,
               GameService,
               {

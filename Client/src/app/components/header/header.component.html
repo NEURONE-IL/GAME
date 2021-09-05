@@ -35,7 +35,7 @@
     </ng-container>
   </mat-menu>
 
-  <button   *ngIf="isLoggedIn && user.role.name !== 'admin' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" (click)="modalHelp(content)" mat-button>	<mat-icon>help_outline</mat-icon> </button>
+  <button   *ngIf="isLoggedIn && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" (click)="modalHelp(content)" mat-button>	<mat-icon>help_outline</mat-icon> </button>
   <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))">
 
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
@@ -53,29 +53,18 @@
     </button>
   </div>
   <div class="modal-body">
-    <ngb-carousel *ngIf="images">
-      <ng-template ngbSlide>
+    <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="true"
+                      muted="muted" [displayPlaylist]="msaapDisplayPlayList" (trackEnded)="onEnded($event)"
+                      [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
+                      [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist"
+                      [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player>
+
+    <ngb-carousel #carousel [interval]="17000" *ngIf="images" (slide)="onSlide($event)">
+      <ng-template  ngbSlide *ngFor="let image of images">
         <div class="picsum-img-wrapper">
-          <img [src]="images[0]" alt="Random first slide">
+          <img [src]="'/assets/help/'+ image + '.svg'" alt="Random first slide">
         </div>
         <div class="carousel-caption">
-
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[1]" alt="Random second slide">
-        </div>
-        <div class="carousel-caption">
-
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[2]" alt="Random third slide">
-        </div>
-        <div class="carousel-caption">
-
         </div>
       </ng-template>
     </ngb-carousel>
