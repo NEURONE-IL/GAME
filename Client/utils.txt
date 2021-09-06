@@ -1,0 +1,16 @@
+/*
+Client Deploy: In '/GAME/Client' folder execute:
+*/
+ng build --output-path ../Server/public
+ng build --prod --output-path ../Server/public
+
+/*
+MongoDB setup: After successfull connection, open the shell and run:
+*/
+db.createUser(
+  {
+    user: 'neuroneAdmin',
+    pwd: 'DK,V-Dk6-*Pd-PM',
+    roles: [ 'userAdminAnyDatabase', 'readWriteAnyDatabase' ]
+  }
+)

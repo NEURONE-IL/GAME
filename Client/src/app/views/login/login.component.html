@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="back-login" id="page-container">
   <div id="content-wrap">
     <div class="main-content">
@@ -27,14 +26,19 @@
             </mat-form-field>
           </p>
 
-          <div class="button">
-            <button type="submit" color="primary" mat-raised-button>{{"LOGIN.ENTER" | translate}}</button>
-          </div>
 
           <div class="recovery">
-            <p class="innerRecovery" (click)="showRecovery()">
-              {{"LOGIN.FORGOT_PASSWORD" | translate}}
-            </p>
+            <mat-grid-list cols="24" rowHeight="1:3">
+              <mat-grid-tile colspan="16">            <p class="innerRecovery" (click)="showRecovery()">
+                {{"LOGIN.FORGOT_PASSWORD" | translate}}
+              </p></mat-grid-tile>
+              <mat-grid-tile colspan="8">
+                <button type="submit" color="primary" mat-raised-button>{{"LOGIN.ENTER" | translate}}</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+
+
           </div>
         </form>
       </mat-card-content>
