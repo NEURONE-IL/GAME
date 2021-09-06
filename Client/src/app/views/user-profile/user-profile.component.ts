@@ -154,8 +154,8 @@ export class UserProfileComponent implements OnInit {
       this.gamificationService
         .changeProfileImage(this.authService.getUser()._id, res)
         .subscribe((response) => {
-          this.authService.refreshUser();
           this.user = this.authService.getUser();
+          console.log(this.user.image_url)
         });
       console.log(res);
     });

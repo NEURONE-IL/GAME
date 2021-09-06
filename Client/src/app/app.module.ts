@@ -73,6 +73,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTableModule} from "@angular/material/table";
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 import {NgxAudioPlayerModule} from "ngx-audio-player";
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -116,7 +117,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecoveryComponent,
     ForgotPasswordComponent,
     PlayAgainComponent,
-    LoginRedirectComponent
+    LoginRedirectComponent,
+    FooterComponent
   ],
     imports: [
         BrowserModule,
