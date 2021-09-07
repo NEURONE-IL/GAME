@@ -31,8 +31,8 @@
     },
     "VIEW_USERS": {
       "USERNAME": "Nombre de Usuario",
-      "CHALLENGES": "No. Desafios Completados",
-      "LASTSESSION": "Ultima conección",
+      "CHALLENGES": "Nº. Desafios Disponibles",
+      "LAST_SESSION": "Ultima conección",
       "ANSWERS": "Respuestas",
       "EMPTY": "No ha iniciado sesión"
     },
