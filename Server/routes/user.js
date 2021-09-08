@@ -464,4 +464,24 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   });
 });
 
+router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
+  const userId = req.params.user_id;
+
+  User.findById(userId, (err, user) => {
+    if (err) {
+      res.status(500).json(err);
+    }
+    user.has_played = true;
+    user.save( err => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      res.status(200).json({
+        user
+      });
+    })
+  });
+});
+
+
 module.exports = router;

@@ -18,7 +18,8 @@ const UserSchema = new Schema({
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
     study: { type: Schema.Types.ObjectId, ref: 'Study'},
     trainer_id: {type: String},
-    code: { type: String}
+    code: { type: String},
+    has_played: {type: Boolean, default: false}
 });
 
 // Sets the createdAt parameter equal to the current time
