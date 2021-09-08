@@ -8,7 +8,6 @@ export const environment = {
   locale: 'es-CL'
 };
 */
-/*
 export const environment = {
   production: true,
   serverRoot: 'https://trivia.neurone.info/',
@@ -17,7 +16,7 @@ export const environment = {
   neuroneURL: 'https://trivia.neurone.info:3001/',
   locale: 'es-CL'
 };
-*/
+/*
 export const environment = {
   production: true,
   serverRoot: 'http://159.89.132.126:3030/',
@@ -26,3 +25,4 @@ export const environment = {
   neuroneURL: 'http://159.89.132.126:3000/',
   locale: 'es-CL'
 };
+*/
