@@ -52,14 +52,23 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="true"
+  <div class="modal-body" >
+
+    <plyr style="display: block; width: 640px;" plyrType="audio" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrInit)="initPlayer($event)" (plyrPlay)="played($event)"
+    (plyrEnded)="playerEnded()" (plyrTimeUpdate)="captureTimeAndAdvanceSlide()"></plyr>
+
+
+
+    <!--
+     <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="true"
                       muted="muted" [displayPlaylist]="msaapDisplayPlayList" (trackEnded)="onEnded($event)"
                       [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
                       [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist"
                       [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player>
+     -->
 
-    <ngb-carousel #carousel [interval]="17000" *ngIf="images" (slide)="onSlide($event)">
+
+    <ngb-carousel #carousel [interval]="CarrucelInterval" *ngIf="images" (slide)="$event">
       <ng-template  ngbSlide *ngFor="let image of images">
         <div class="picsum-img-wrapper">
           <img [src]="'/assets/help/'+ image + '.svg'" alt="Random first slide">

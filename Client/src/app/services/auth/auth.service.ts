@@ -128,6 +128,11 @@ export class AuthService {
     return this.http.get(environment.apiURL + 'site/user/' + trainer_id);
   }
 
+  hasPlayed(){
+    const id = JSON.parse(localStorage.getItem('currentUser'))._id;
+    return this.http.get(environment.apiURL + 'site/user/' + id + '/has_played');
+  }
+
   public get loggedIn(): boolean {
     return (localStorage.getItem('auth_token') !== null);
   }

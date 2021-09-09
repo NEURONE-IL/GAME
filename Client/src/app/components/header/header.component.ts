@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, AfterViewInit} from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { GamificationService } from 'src/app/services/game/gamification.service';
@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Track } from 'ngx-audio-player';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { PlyrModule } from 'ngx-plyr';
 
 @Component({
   selector: 'app-header',
@@ -22,13 +23,14 @@ export class HeaderComponent implements OnInit {
   notificationsN = 0;
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
   homeTooltip: string;
-
+  firstSession= false;
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
   constructor( private authService: AuthService,
                private gamificationService: GamificationService,
                private modalService: NgbModal,
                private translate: TranslateService,
+               private plyrModule: PlyrModule,
                public router: Router) { }
 
   ngOnInit(): void {
@@ -36,10 +38,17 @@ export class HeaderComponent implements OnInit {
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
       this.getNotifications();
+      this.hasPlayedUser();
     }
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }
 
+  hasPlayedUser(){
+    this.authService.hasPlayed().subscribe((res)=>{
+      console.log("has Played")
+      console.log(res)
+    })
+  }
   getNotifications(){
     this.gamificationService.notifications(this.authService.getUser()._id).subscribe(
       response => {
@@ -79,9 +88,9 @@ export class HeaderComponent implements OnInit {
   }
 
   //Modal de ayuda
-  modalHelp(content){
-    this.modalService.open(content, { size: 'xl' });
-  }
+
+
+
 
   msaapDisplayTitle = false;
   msaapDisplayPlayList = false;
@@ -110,52 +119,49 @@ getTrack(trackName){
   ];
   return lista
 }
-  msaapPlaylist: Track[] = [
+
+
+
+  player: Plyr;
+
+  videoSources: Plyr.Source[] = [
     {
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_1.mp3',
-      duration: 17
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_2.mp3',
-      duration: 18
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_3.mp3',
-      duration: 13
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_4.mp3',
-      duration: 19
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_5.mp3',
-      duration: 8
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_6.mp3',
-      duration: 7
-    },{
-      title: 'Audio One Title',
-      link: '/assets/audio/Instrucciones_Trivia_7.mp3',
-      duration: 6
-    }
+      src: '/assets/audio/voice_instructions_confondo.mp3',
+    },
   ];
 
-  onSlide(e){
-    let slide= this.carousel.activeId;
-    this.carousel.interval= this.msaapPlaylist[slide].duration*1000;
+  played(event: Plyr.PlyrEvent) {
+    console.log('played', event);
 
   }
-  onEnded(e){
-    console.log("fin del track")
-    this.carousel.next(NgbSlideEventSource.ARROW_RIGHT);
-
+  initPlayer($event){
+    this.player = $event
+    this.player.play();
+  }
+  play(): void {
+    this.player.play();
   }
 
-  buttonTest(){
-    this.carousel.next(NgbSlideEventSource.ARROW_RIGHT);
-
+  playerEnded(){
+    this.modalService.dismissAll();
   }
 
+  CarrucelInterval = 100000
+  stopTimes=[17, 34, 48, 66, 75, 82]
+  segmentoActual=0
+  captureTimeAndAdvanceSlide(){
+    let actualTime = this.player.currentTime;
+    if (actualTime > this.stopTimes[this.segmentoActual] ){
+      this.CarrucelInterval = 1000
+    }
+    if (actualTime > this.stopTimes[this.segmentoActual]+1.5 ){
+      this.segmentoActual += 1
+      this.CarrucelInterval = 100000
+    }
+  }
+
+  modalHelp(content){
+    this.modalService.open(content, { size: 'xl' });
+
+  }
 }

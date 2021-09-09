@@ -74,7 +74,7 @@ import {MatTableModule} from "@angular/material/table";
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 import {NgxAudioPlayerModule} from "ngx-audio-player";
 import { FooterComponent } from './components/footer/footer.component';
-
+import { PlyrModule } from 'ngx-plyr';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -165,7 +165,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         AppRoutingModule,
         NgbModule,
         MatTableModule,
-        NgxAudioPlayerModule
+        NgxAudioPlayerModule,
+        PlyrModule
     ],
   providers: [EndpointsService,
               GameService,
