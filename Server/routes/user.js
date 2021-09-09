@@ -430,7 +430,7 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   user.cooldown_start = null;
   user.interval_answers = 0;
   user.has_played = false;
-  await user.save(ersr => {
+  await user.save(err => {
     if(err){
       res.status(500).json(err);
     }
