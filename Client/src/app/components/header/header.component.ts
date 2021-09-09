@@ -40,7 +40,11 @@ export class HeaderComponent implements OnInit {
       this.user = this.authService.getUser();
       this.getNotifications();
       //Aquí llamar al modal
-      this.hasPlayedUser();
+      if(!this.user.has_played){
+        this.firstSession = true;
+        this.modalService.open('content', { size: 'xl' });
+        this.hasPlayedUser();
+      }
     }
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }
@@ -48,10 +52,7 @@ export class HeaderComponent implements OnInit {
   hasPlayedUser(){
     this.authService.hasPlayed().subscribe((res)=>{
       console.log("has Played")
-      if(! res.user.has_played){
-        this.firstSession = true;
-        this.modalService.open('content', { size: 'xl' });
-      }
+      this.authService.refreshUser();
     })
   }
   getNotifications(){
