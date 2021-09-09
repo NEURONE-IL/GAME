@@ -429,7 +429,8 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   // Delete dummy last answers records
   user.cooldown_start = null;
   user.interval_answers = 0;
-  await user.save(err => {
+  user.has_played = false;
+  await user.save(ersr => {
     if(err){
       res.status(500).json(err);
     }
