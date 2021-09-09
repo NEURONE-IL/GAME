@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
   homeTooltip: string;
   firstSession= false;
+
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
   constructor( private authService: AuthService,
@@ -37,8 +38,12 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.loggedIn;
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
-      this.getNotifications();
-      this.hasPlayedUser();
+      this.getNotifications()
+      //Aquí llamar al modal
+      if(!this.user.has_played){
+        //llamar servicio cuando se termine de mostrar el modal.
+        //this.hasPlayedUser(); 
+      }
     }
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }

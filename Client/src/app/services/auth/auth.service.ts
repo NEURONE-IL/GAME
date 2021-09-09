@@ -130,7 +130,7 @@ export class AuthService {
 
   hasPlayed(){
     const id = JSON.parse(localStorage.getItem('currentUser'))._id;
-    return this.http.get(environment.apiURL + 'site/user/' + id + '/has_played');
+    return this.http.get(environment.apiURL + 'user/' + id + '/has_played');
   }
 
   public get loggedIn(): boolean {
