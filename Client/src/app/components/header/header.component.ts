@@ -38,12 +38,9 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.loggedIn;
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
-      this.getNotifications()
+      this.getNotifications();
       //Aquí llamar al modal
-      if(!this.user.has_played){
-        //llamar servicio cuando se termine de mostrar el modal.
-        //this.hasPlayedUser(); 
-      }
+      this.hasPlayedUser();
     }
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }
@@ -51,7 +48,10 @@ export class HeaderComponent implements OnInit {
   hasPlayedUser(){
     this.authService.hasPlayed().subscribe((res)=>{
       console.log("has Played")
-      console.log(res)
+      if(! res.user.has_played){
+        this.firstSession = true;
+        this.modalService.open('content', { size: 'xl' });
+      }
     })
   }
   getNotifications(){
@@ -149,6 +149,7 @@ getTrack(trackName){
 
   playerEnded(){
     this.modalService.dismissAll();
+    this.firstSession = false;
   }
 
   CarrucelInterval = 100000

@@ -128,7 +128,7 @@ export class AuthService {
     return this.http.get(environment.apiURL + 'site/user/' + trainer_id);
   }
 
-  hasPlayed(){
+  hasPlayed(): any{
     const id = JSON.parse(localStorage.getItem('currentUser'))._id;
     return this.http.get(environment.apiURL + 'user/' + id + '/has_played');
   }

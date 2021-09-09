@@ -94,3 +94,12 @@
   .carousel-control-next, .carousel-control-prev {
     color: #666666;
   }
+
+.plyr {
+  align-items: center;
+  direction: ltr;
+  display: flex;
+  max-width: 50%;
+  min-width: 200px;
+  position: relative;
+}
