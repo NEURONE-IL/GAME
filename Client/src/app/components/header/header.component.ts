@@ -15,7 +15,7 @@ import { PlyrModule } from 'ngx-plyr';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   isLoggedIn = false;
   user: any;
@@ -24,8 +24,10 @@ export class HeaderComponent implements OnInit {
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
   homeTooltip: string;
   firstSession= false;
-
+  videoModal= true;
+  finished=false;
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+  @ViewChild('content') myModal;
 
   constructor( private authService: AuthService,
                private gamificationService: GamificationService,
@@ -39,14 +41,23 @@ export class HeaderComponent implements OnInit {
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
       this.getNotifications();
-      //Aquí llamar al modal
-      if(!this.user.has_played){
-        this.firstSession = true;
-        this.modalService.open('content', { size: 'xl' });
-        this.hasPlayedUser();
-      }
     }
+    if(this.user.has_played){
+      this.videoModal= false
+    }
+
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
+  }
+
+  ngAfterViewInit(): void{
+    if(this.videoModal){
+      this.openModal();
+      this.hasPlayedUser();
+    }
+  }
+
+  openModal(){
+    this.modalService.open(this.myModal, { size: 'xl' });
   }
 
   hasPlayedUser(){
@@ -132,7 +143,7 @@ getTrack(trackName){
 
   videoSources: Plyr.Source[] = [
     {
-      src: '/assets/audio/voice_instructions_confondo.mp3',
+      src: '/assets/audio/videoIntro.mp4',
     },
   ];
 
@@ -149,8 +160,9 @@ getTrack(trackName){
   }
 
   playerEnded(){
-    this.modalService.dismissAll();
-    this.firstSession = false;
+    //this.modalService.dismissAll();
+    this.finished = true;
+    this.videoModal = false;
   }
 
   CarrucelInterval = 100000

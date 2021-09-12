@@ -99,7 +99,14 @@
   align-items: center;
   direction: ltr;
   display: flex;
-  max-width: 50%;
+  max-width: 100%;
   min-width: 200px;
   position: relative;
+}
+
+.carousel-control-prev-icon{
+  background-image: url('https://apufpel.com.br/assets/img/seta_prim.png')
+}
+.carousel-control-next-icon{
+  background-image: url('https://apufpel.com.br/assets/img/seta_ult.png')
 }
