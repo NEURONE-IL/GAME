@@ -36,7 +36,7 @@
     </ng-container>
   </mat-menu>
 
-  <button   *ngIf="isLoggedIn && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" (click)="modalHelp(content)" mat-button>	<mat-icon>help_outline</mat-icon> </button>
+  <button *ngIf="isLoggedIn" (click)="openModal()" mat-button>	<mat-icon>help_outline</mat-icon> </button>
   <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))">
 
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
