@@ -34,12 +34,6 @@
     text-shadow: 0 0 20px #888585, 0 0 30px #888585, 0 0 40px #888585, 0 0 50px #888585, 0 0 60px #888585, 0 0 70px #888585, 0 0 80px #888585;
   }
 
-  .title-span:hover {
-    color: white;
-    font-weight: bolder;
-    text-shadow: 0 0 20px #4b4949, 0 0 30px #4b4949, 0 0 40px #4b4949, 0 0 50px #4b4949, 0 0 60px #4b4949, 0 0 70px #4b4949, 0 0 80px #4b4949;
-    cursor: pointer;
-  }
 
   .spacer {
     flex: 1;
@@ -51,11 +45,8 @@
 
   .title-span {
     margin-left: 1.5%;
-    font-size: calc(0.9em + 1vmin);
+    width: 6%;
     margin-right: 3%;
-    color: #9d9d9d;
-    text-decoration: none;
-    font-family: Comic Sans MS, sans-serif;
   }
 
   .name-span {

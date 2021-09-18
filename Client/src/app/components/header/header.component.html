@@ -1,11 +1,9 @@
 <div class="header" role="banner">
 
-  <!--
-  <a class="title-span" *ngIf="router.url.toString().includes('session'); else elseBlock" [routerLink]="['/session/search']">NEURONE <mat-icon class="home">home</mat-icon></a>
-  <ng-template #elseBlock>
-    <a class="title-span" [routerLink]="['/user-profile']">NEURONE <mat-icon class="home">home</mat-icon></a>
-  </ng-template>
-  -->
+
+  <img class="title-span" src="assets/TRIVIA.png" *ngIf="isLoggedIn && user.role.name === 'student' && (router.url.toString().includes('session') || router.url.toString().includes('start'))" 
+  >
+
 
   <!--Student Implementation-->
   <a class="title-span" *ngIf="isLoggedIn && user.role.name === 'student' && router.url.toString().includes('view-page')"
