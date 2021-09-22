@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { GameService } from './services/game/game.service';
-import { KmTrackerService } from './services/logger/km-tracker.service';
 import { StoreLinkService } from './services/logger/store-link.service';
 
 @Component({

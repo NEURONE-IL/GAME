@@ -47,10 +47,10 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{"HELP.INSTRUCTIONS_TITLE" | translate}}</h4>
-    <button *ngIf="videoModal" type="button" class="close" aria-label="Close" (click)="finished?modal.close('Close click'):''">
+    <button *ngIf="videoModal" type="button" class="close" aria-label="Close" (click)="finished?closeModal() && modal.close('Close click'):''">
       <span aria-hidden="true">&times;</span>
     </button>
-    <button *ngIf="!videoModal" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button *ngIf="!videoModal" type="button" class="close" aria-label="Close" (click)="closeModal() && modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -78,10 +78,10 @@
 
   </div>
   <div class="modal-footer" *ngIf="videoModal">
-    <button type="button" class="btn btn-light {{ finished?'':'disabled' }}" (click)="finished?modal.close('Close click'):''" >Close</button>
+    <button type="button" class="btn btn-light {{ finished?'':'disabled' }}" (click)="finished?closeModal() && modal.close('Close click'):''" >Close</button>
   </div>
   <div class="modal-footer" *ngIf="!videoModal">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-light" (click)="closeModal() && modal.close('Close click')">Close</button>
   </div>
 </ng-template>
 

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { KmTrackerServiceIframe } from 'src/app/services/logger/km-tracker-iframe.service';
-import { EndpointsService } from '../../services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
 
 @Component({

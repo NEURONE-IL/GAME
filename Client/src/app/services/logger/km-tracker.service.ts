@@ -56,7 +56,8 @@ export class KmTrackerService {
       this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
       this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
       this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
-
+      this.bindEvent(targetDoc, 'openhelpmodal', data, this.openhelpmodalListener);
+      this.bindEvent(targetDoc, 'closehelpmodal', data, this.closehelpmodalListener);
       this.isTracking = true;
     }
   }
@@ -81,8 +82,9 @@ export class KmTrackerService {
       this.unbindAll(targetDoc, 'keydown');
       this.unbindAll(targetDoc, 'keypress');
       this.unbindAll(targetDoc, 'keyup');
+      this.unbindAll(targetDoc, 'openhelpmodal');
+      this.unbindAll(targetDoc, 'closehelpmodal');
       this.unbindData(targetDoc);
-
       this.isTracking = false;
     }
   }
@@ -218,6 +220,44 @@ export class KmTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postKeyStroke(keyOutput);
   }
+
+  openhelpmodalListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      userEmail: this.user.email,
+      source: 'HelpModal',
+      type: 'OpenHelpModal',
+      localTimestamp: t,
+      url: doc.URL,
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postHelpModalEvent(keyOutput);
+  }
+
+  closehelpmodalListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      userEmail: this.user.email,
+      source: 'HelpModal',
+      type: 'CloseHelpModal',
+      localTimestamp: t,
+      url: doc.URL,
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postHelpModalEvent(keyOutput);
+  }  
 
   keypressListener(evt) {
     evt = evt || event;

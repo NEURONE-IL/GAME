@@ -32,9 +32,9 @@ const queryRoutes = require('./routes/query');
 const sessionLogRoutes = require('./routes/sessionLog');
 const visitedLinkRoutes = require('./routes/visitedLink');
 const ScrollRoutes = require('./routes/scroll');
+const EventRoutes = require('./routes/event');
 
 const Role = require('./models/role');
-const User = require('./models/user');
 
 
 //db connection
@@ -115,6 +115,7 @@ app.use('/api/query', queryRoutes);
 app.use('/api/sessionLog', sessionLogRoutes);
 app.use('/api/visitedLink', visitedLinkRoutes);
 app.use('/api/scroll', ScrollRoutes);
+app.use('/api/event', EventRoutes);
 
 // Serve neurone docs
 app.use("/assets/", express.static(process.env.NEURONE_DOCS));

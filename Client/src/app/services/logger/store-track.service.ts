@@ -12,6 +12,7 @@ export class StoreTrackService {
   mouseCoordinateUri = environment.apiURL + 'mouseCoordinate';
   scrollUri = environment.apiURL + 'scroll';
   keyStrokeUri = environment.apiURL + 'keystroke';
+  eventUri = environment.apiURL + 'event';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -75,4 +76,19 @@ export class StoreTrackService {
         );
       }
   }
+
+  // Save modalEvents
+  postHelpModalEvent(data){
+    if(this.authService.loggedIn){
+      data.userId = this.authService.getUser()._id;
+      this.http.post(this.eventUri, data)
+      .subscribe((resp: any) => {
+        },
+        (error) => {
+          console.log(error);
+        }
+        );
+      }    
+  }
+
 }

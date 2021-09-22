@@ -29,7 +29,16 @@ export const environment = {
   locale: 'es-CL'
 };
 */
-
+/*
+export const environment = {
+  production: false,
+  serverRoot: 'http://localhost:3030/',
+  apiURL: 'http://localhost:3030/api/',
+  frontURL: 'http://localhost:4200/',
+  neuroneURL: 'https://trivia.neurone.info:3001/',
+  locale: 'es-CL'
+};
+*/
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

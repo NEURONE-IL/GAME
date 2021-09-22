@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, AfterViewInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, AfterViewInit} from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { GamificationService } from 'src/app/services/game/gamification.service';
@@ -57,7 +57,19 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   openModal(){
+    /*Dispatch openhelpmodal event*/
+    var evt = new CustomEvent('openhelpmodal');
+    window.dispatchEvent(evt);
+    /*End dispatch openhelpmodal event*/
     this.modalService.open(this.myModal, { size: 'xl' });
+  }
+
+  closeModal(){
+    /*Dispatch closehelpmodal event*/
+    var evt = new CustomEvent('closehelpmodal');
+    window.dispatchEvent(evt);
+    /*End dispatch closehelpmodal event*/
+    return true;
   }
 
   hasPlayedUser(){
