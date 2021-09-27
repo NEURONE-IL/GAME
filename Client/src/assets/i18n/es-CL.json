@@ -361,12 +361,13 @@
       "ERROR_MESSAGE": "No se ha creado el nuevo estudio",
       "ERROR_MESSAGE_DELETE": "No se ha eliminado el estudio",
       "ERROR_MESSAGE_UPDATE": "No se ha actualizado el estudio",
-      "NOT_LOADED_ERROR": "El estudio no han sido cargado",
+      "NOT_LOADED_ERROR": "El estudio no ha sido cargado",
       "NOT_LOADED_MULTIPLE_ERROR": "Los estudios no han sido cargados",
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha creado el estudio",
       "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el estudio",
-      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio"
+      "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio",
+      "WELCOME_ERROR": "El enlace de invitación no es válido, por favor revíselo e intente nuevamente"
     },
     "UPDATE": {
       "SUBTITLE": "Complete los siguientes campos para editar el estudio en el sistema",

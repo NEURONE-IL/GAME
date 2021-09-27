@@ -75,6 +75,7 @@ import { LoginRedirectComponent } from './views/login-redirect/login-redirect.co
 import {NgxAudioPlayerModule} from "ngx-audio-player";
 import { FooterComponent } from './components/footer/footer.component';
 import { PlyrModule } from 'ngx-plyr';
+import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -118,7 +119,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordComponent,
     PlayAgainComponent,
     LoginRedirectComponent,
-    FooterComponent
+    FooterComponent,
+    TriviaHubComponent
   ],
     imports: [
         BrowserModule,

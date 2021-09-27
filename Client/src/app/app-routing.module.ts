@@ -8,7 +8,6 @@ import { SessionComponent } from './views/session/session.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { StartComponent } from './views/start/start.component';
 import { ViewPageComponent } from './views/view-page/view-page.component';
-import { ResourceUploadComponent } from './views/resource-upload/resource-upload.component';
 import { CreationComponent } from './views/creation/creation.component';
 import { ChallengeCreationComponent } from './views/challenge-creation/challenge-creation.component';
 import { StudyCreationComponent } from './views/study-creation/study-creation.component';
@@ -19,10 +18,10 @@ import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
-import { SummaryComponent } from './views/summary/summary.component';
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
+import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
 
 const routes: Routes = [
   {
@@ -30,6 +29,16 @@ const routes: Routes = [
     pathMatch: 'prefix',
     redirectTo: 'login',
   },
+  {
+    path: 'welcome/:study_id',
+    component: TriviaHubComponent,
+    canActivate: [ NotLoggedInGuard ]
+  }, 
+  {
+    path: 'welcome',
+    component: TriviaHubComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },   
   {
     path: 'start',
     canActivate: [AuthGuard],

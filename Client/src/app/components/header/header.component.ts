@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.user = this.authService.getUser();
       this.getNotifications();
     }
-    if(this.user.has_played){
+    if(this.isLoggedIn && this.user.has_played){
       this.videoModal= false
     }
 
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void{
-    if(this.videoModal){
+    if(this.videoModal && this.isLoggedIn){
       this.openModal();
       this.hasPlayedUser();
     }

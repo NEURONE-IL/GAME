@@ -49,7 +49,7 @@ export class StudyDisplayComponent implements OnInit {
     this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id')).subscribe(
       response => {
         this.study = response['study'];
-        this.registerLink = environment.frontURL + 'signup/' + this.study._id;
+        this.registerLink = environment.frontURL + 'welcome/' + this.study._id;
         console.log(this.route.snapshot.paramMap.get('study_id'))
         this.findDummy();
       },
