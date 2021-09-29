@@ -12,6 +12,7 @@ const bcrypt = require("bcryptjs");
 
 const authMiddleware = require("../middlewares/authMiddleware");
 const { generateProgress, sendResetPasswordEmail } = require("../utils/routeUtils");
+const verifyAPIKey = require("../middlewares/verifyAPIKey");
 
 router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
   User.find({}, { password: 0 }, (err, users) => {
@@ -483,6 +484,45 @@ router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
     })
   });
 });
+
+router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
+  const trainer_id = req.params.trainer_id;
+  const user = await User.findOne({trainer_id: trainer_id}, err => {
+    if(err){
+      return res.status(404).json({
+        ok: false,
+        err
+      });
+    }
+  });
+  const userStudies = await UserStudy.find({user: user._id}, err => {
+    if(err){
+      return res.status(404).json({
+        ok: false,
+        err
+      });
+    }
+  }).populate({ path: 'study', model: Study});
+  const progress = [];
+  for(let i = 0; i<userStudies.length; i++){
+    let challenges = userStudies[i].challenges;
+    let counter = 0;
+    for(let j = 0; j<challenges.length; j++){
+      if(challenges[j].finished){
+        counter += 1;
+      }
+    }
+    progress.push({
+      study: userStudies[i].study,
+      challenges: challenges.length,
+      completedChallenges: counter,
+      percentage: counter/challenges.length
+    })
+  }
+  res.status(200).json({
+    progress
+  });
+})
 
 
 module.exports = router;
