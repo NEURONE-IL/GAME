@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Event, ParamMap, Router } from '@angular/router';
 import { EndpointsService } from 'src/app/services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
 import { StoreQueryService } from 'src/app/services/logger/store-query.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-search-result',
@@ -102,21 +103,69 @@ export class SearchResultComponent implements OnInit {
   }
 
   changePageTo(numberOfPageActive){
+    /*Dispatch changepage event*/
+    var evt = new CustomEvent('changepage');
+    window.dispatchEvent(evt);
+    /*End dispatch changepage event*/    
     this.activePage=numberOfPageActive-1;
     console.log("active page= ", this.activePage)
   }
+
   previousPage(){
     if (this.activePage>0){
+      /*Dispatch previouspage event*/
+      var evt = new CustomEvent('previouspage');
+      window.dispatchEvent(evt);
+      /*End dispatch previouspage event*/
       this.activePage=this.activePage-1;
     }
     console.log("active page= ", this.activePage)
   }
+
   nextPage(){
     if (this.activePage<this.pages-1){
+      /*Dispatch nextpage event*/
+      var evt = new CustomEvent('nextpage');
+      window.dispatchEvent(evt);
+      /*End dispatch nextpage event*/
       this.activePage=this.activePage+1;
     }
     console.log("active page= ", this.activePage)
   }
+
+  changeTab(event: MatTabChangeEvent){
+    switch(event.index){
+      case 0:
+        this.changeToWebPagesTab();
+      case 1:
+        this.changeToImagesTab();
+      case 2:
+        this.changeToVideosTab();
+    }
+  }
+
+  changeToWebPagesTab(){
+    console.log('in')
+    /*Dispatch changetowebpagestab event*/
+    var evt = new CustomEvent('changetowebpagestab');
+    window.dispatchEvent(evt);
+    /*End dispatch changetowebpagestab event*/
+  }
+
+  changeToImagesTab(){
+    /*Dispatch changetoimagestab event*/
+    var evt = new CustomEvent('changetoimagestab');
+    window.dispatchEvent(evt);
+    /*End dispatch changetoimagestab event*/
+  }
+
+  changeToVideosTab(){
+    /*Dispatch changetovideostab event*/
+    var evt = new CustomEvent('changetovideostab');
+    window.dispatchEvent(evt);
+    /*End dispatch changetovideostab event*/
+  }
+
   search() {
     if (this.query !== '' && this.query!== '*') {
       let queryData = {
@@ -136,8 +185,6 @@ export class SearchResultComponent implements OnInit {
           ])
         );
     }
-
-
   }
 
   getParameterByName(url, name) {

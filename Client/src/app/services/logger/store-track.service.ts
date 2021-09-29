@@ -77,8 +77,8 @@ export class StoreTrackService {
       }
   }
 
-  // Save modalEvents
-  postHelpModalEvent(data){
+  // Save events
+  postEvent(data){
     if(this.authService.loggedIn){
       data.userId = this.authService.getUser()._id;
       this.http.post(this.eventUri, data)
