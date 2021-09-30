@@ -104,7 +104,7 @@ export class SearchResultComponent implements OnInit {
 
   changePageTo(numberOfPageActive){
     /*Dispatch changepage event*/
-    var evt = new CustomEvent('changepage');
+    var evt = new CustomEvent('changepage', { detail: 'To page ' + numberOfPageActive });
     window.dispatchEvent(evt);
     /*End dispatch changepage event*/    
     this.activePage=numberOfPageActive-1;
@@ -114,9 +114,9 @@ export class SearchResultComponent implements OnInit {
   previousPage(){
     if (this.activePage>0){
       /*Dispatch previouspage event*/
-      var evt = new CustomEvent('previouspage');
+      var evt = new CustomEvent('previouspage', { detail: 'To page ' + this.activePage });
       window.dispatchEvent(evt);
-      /*End dispatch previouspage event*/
+      /*End dispatch previouspage event*/            
       this.activePage=this.activePage-1;
     }
     console.log("active page= ", this.activePage)
@@ -125,9 +125,9 @@ export class SearchResultComponent implements OnInit {
   nextPage(){
     if (this.activePage<this.pages-1){
       /*Dispatch nextpage event*/
-      var evt = new CustomEvent('nextpage');
+      var evt = new CustomEvent('nextpage', { detail: 'To page ' + (this.pages - this.activePage) });
       window.dispatchEvent(evt);
-      /*End dispatch nextpage event*/
+      /*End dispatch nextpage event*/              
       this.activePage=this.activePage+1;
     }
     console.log("active page= ", this.activePage)

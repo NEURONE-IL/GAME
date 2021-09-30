@@ -13,7 +13,7 @@ export class AssentComponent implements OnInit {
 
   assentForm: FormGroup;
   seeMore: Boolean = false;
-  currentText: string = "GAME.ASSENT.BUTTON_MORE"
+  currentText: string = "GAME.ASSENT.DETAILS_SHOW"
   @Output() onSaveClick = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -40,9 +40,9 @@ export class AssentComponent implements OnInit {
   changeButtonState(){
     this.seeMore = !this.seeMore;
     if(this.seeMore){
-      this.currentText = "GAME.ASSENT.BUTTON_LESS";
+      this.currentText = "GAME.ASSENT.DETAILS_HIDE";
     }else{
-      this.currentText = "GAME.ASSENT.BUTTON_MORE";
+      this.currentText = "GAME.ASSENT.DETAILS_SHOW";
     }
     return;
   }

@@ -8,6 +8,7 @@ const EventSchema = new Schema({
     source: {type: String},
     url: {type: String},
     localTimeStamp: {type: Date},
+    detail: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

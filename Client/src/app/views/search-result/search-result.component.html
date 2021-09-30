@@ -39,11 +39,11 @@
 
         <nav aria-label="Page navigation example" class="pagination justify-content-center">
           <ul class="pagination ">
-            <li class="page-item {{activePage==0?'disabled':''}}" (click)="previousPage()"><a class="page-link">Anterior</a></li>
+            <li class="page-item {{activePage==0?'disabled':''}}" (click)="previousPage()"><a class="page-link">{{ "GAME.SEARCH.PREVIOUS" | translate }}</a></li>
             <div *ngFor="let i of pageIndex" >
               <li class="page-item {{activePage==(i-1)?'active':''}}" (click)="changePageTo(i)"><a class="page-link">{{i}}</a></li>
             </div>
-            <li class="page-item {{activePage==(pages-1)?'disabled':''}}" (click)="nextPage()"><a class="page-link">Siguiente</a></li>
+            <li class="page-item {{activePage==(pages-1)?'disabled':''}}" (click)="nextPage()"><a class="page-link">{{ "GAME.SEARCH.NEXT" | translate }}</a></li>
           </ul>
         </nav>
         </div>

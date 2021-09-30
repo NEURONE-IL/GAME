@@ -7,6 +7,7 @@
     "INSTRUCTIONS_TITLE": "Instrucciones del Juego:"
   },
   "BUTTONS": {
+    "ACCEPT": "ACEPTAR",
     "BACK": "ATRÁS",
     "CLEAR": "LIMPIAR",
     "CLOSE": "CERRAR",
@@ -104,7 +105,9 @@
       "ALL": "Todo",
       "FOUND": "Se han encontrado",
       "IMAGES": "Imágenes",
+      "NEXT": "Siguiente",
       "NO_RESULTS": "No se han encontrado resultados",
+      "PREVIOUS": "Anterior",
       "RESULTS": "resultados",
       "VIDEOS": "Vídeos",
       "WEB_PAGES": "Páginas Web"
@@ -418,8 +421,9 @@
   "GAME": {
     "ASSENT": {
       "ACCEPT_TEXT": "Acepto",
-      "BUTTON_LESS": "Ver menos",
-      "BUTTON_MORE": "Ver más",
+      "CHECK_LABEL": "Estoy segur@",
+      "DETAILS_HIDE": "Ocultar detalles",      
+      "DETAILS_SHOW": "Ver detalles",
       "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
       "ERROR": "Debe aceptar participar en el estudio para continuar.",
       "QUESTION": "¿Estás segur@ que quieres participar en este estudio?"
@@ -462,7 +466,9 @@
       "ALL": "Todo",
       "FOUND": "Se han encontrado",
       "IMAGES": "Imágenes",
+      "NEXT": "Siguiente",
       "NO_RESULTS": "No se han encontrado resultados",
+      "PREVIOUS": "Anterior",
       "RESULTS": "resultados",
       "SEARCHING": "Buscando resultados, por favor espere...",
       "TOOLTIP": "Ir a la página principal del buscador de NEURONE",

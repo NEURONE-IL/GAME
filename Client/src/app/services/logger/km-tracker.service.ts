@@ -317,6 +317,7 @@ export class KmTrackerService {
       type: 'ChangePage',
       localTimestamp: t,
       url: doc.URL,
+      detail: evt.detail
     };
 
     // console.log(keyOutput);
@@ -336,6 +337,7 @@ export class KmTrackerService {
       type: 'PreviousPage',
       localTimestamp: t,
       url: doc.URL,
+      detail: evt.detail
     };
 
     // console.log(keyOutput);
@@ -355,6 +357,7 @@ export class KmTrackerService {
       type: 'NextPage',
       localTimestamp: t,
       url: doc.URL,
+      detail: evt.detail
     };
 
     // console.log(keyOutput);

@@ -2,6 +2,7 @@
 //process.env.ROOT = 'http://159.65.100.191:3030';
 process.env.ROOT = 'https://trivia.neurone.info';
 //process.env.ROOT = 'http://159.89.132.126:3030';
+//process.env.ROOT = 'http://localhost:3030';
 
 //PORT
 process.env.PORT = process.env.PORT || 3030;

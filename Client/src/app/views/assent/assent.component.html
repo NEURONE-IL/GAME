@@ -6,8 +6,16 @@
     <br>
     <h3>{{"GAME.ASSENT.QUESTION" | translate}}</h3>
     <br>
+    <div class="see-more-button">
+      <button mat-button (click)="changeButtonState()">
+        {{ currentText | translate }}
+      </button>
+    </div>
+    <br>
+    <app-consent [mode]="'assent'" *ngIf="seeMore"></app-consent>
+    <br>
     <div class="content-center">
-      <mat-checkbox formControlName="assent" required>{{"Estoy segur@" | translate}}</mat-checkbox>
+      <mat-checkbox formControlName="assent" required>{{"GAME.ASSENT.CHECK_LABEL" | translate}}</mat-checkbox>
     </div>
     <div *ngIf="assentFormControls.assent.invalid && (assentFormControls.assent.dirty || assentFormControls.assent.touched)" class="content-center">
       <mat-error *ngIf="assentFormControls.assent.hasError('required')">
@@ -17,14 +25,7 @@
   </form>
   <div class="button-panel content-center">
     <button mat-raised-button color="primary" class="saveButton" (click)="save()" [disabled]="!assentForm.valid">
-      {{ "BUTTONS.SAVE" | translate }}
+      {{ "BUTTONS.ACCEPT" | translate }}
     </button>
   </div>
-  <div class="see-more-button">
-    <button mat-button (click)="changeButtonState()">
-      {{ currentText | translate }}
-    </button>
-  </div>
-  <br>
-  <app-consent [mode]="'assent'" *ngIf="seeMore"></app-consent>  
 </div>
