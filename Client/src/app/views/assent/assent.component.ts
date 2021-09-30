@@ -12,6 +12,8 @@ import { GameService } from 'src/app/services/game/game.service';
 export class AssentComponent implements OnInit {
 
   assentForm: FormGroup;
+  seeMore: Boolean = false;
+  currentText: string = "GAME.ASSENT.BUTTON_MORE"
   @Output() onSaveClick = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -33,6 +35,16 @@ export class AssentComponent implements OnInit {
     console.log(this.assentForm.value);
     this.authService.updateProgress({"assent": true});
     this.gameService.stage = 'pre-test';
+  }
+
+  changeButtonState(){
+    this.seeMore = !this.seeMore;
+    if(this.seeMore){
+      this.currentText = "GAME.ASSENT.BUTTON_LESS";
+    }else{
+      this.currentText = "GAME.ASSENT.BUTTON_MORE";
+    }
+    return;
   }
 
 }

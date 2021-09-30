@@ -417,9 +417,12 @@
   },
   "GAME": {
     "ASSENT": {
-      "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
       "ACCEPT_TEXT": "Acepto",
-      "ERROR": "Debe aceptar el asentimiento informado para continuar."
+      "BUTTON_LESS": "Ver menos",
+      "BUTTON_MORE": "Ver más",
+      "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
+      "ERROR": "Debe aceptar participar en el estudio para continuar.",
+      "QUESTION": "¿Estás segur@ que quieres participar en este estudio?"
     },
     "STARTPAGE": {
       "INSTRUCTIONS": {

@@ -1,17 +1,30 @@
 <div class="container">
+  <div class="content-center">
+    <img height="50%" width="50%" src="assets/TRIVIA.png">
+  </div>
   <form [formGroup]="assentForm">
-    <app-consent [mode]="'assent'"></app-consent>
     <br>
-    <mat-checkbox formControlName="assent" required>{{"GAME.ASSENT.ACCEPT_TEXT" | translate}}</mat-checkbox>
-    <div *ngIf="assentFormControls.assent.invalid && (assentFormControls.assent.dirty || assentFormControls.assent.touched)">
+    <h3>{{"GAME.ASSENT.QUESTION" | translate}}</h3>
+    <br>
+    <div class="content-center">
+      <mat-checkbox formControlName="assent" required>{{"Estoy segur@" | translate}}</mat-checkbox>
+    </div>
+    <div *ngIf="assentFormControls.assent.invalid && (assentFormControls.assent.dirty || assentFormControls.assent.touched)" class="content-center">
       <mat-error *ngIf="assentFormControls.assent.hasError('required')">
         {{"GAME.ASSENT.ERROR" | translate}}
       </mat-error>
     </div>
-</form>
-<div class="button-panel">
-  <button mat-raised-button color="primary" class="saveButton" (click)="save()" [disabled]="!assentForm.valid">
-    {{ "BUTTONS.SAVE" | translate }}
-  </button>
-</div>
+  </form>
+  <div class="button-panel content-center">
+    <button mat-raised-button color="primary" class="saveButton" (click)="save()" [disabled]="!assentForm.valid">
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
+  </div>
+  <div class="see-more-button">
+    <button mat-button (click)="changeButtonState()">
+      {{ currentText | translate }}
+    </button>
+  </div>
+  <br>
+  <app-consent [mode]="'assent'" *ngIf="seeMore"></app-consent>  
 </div>

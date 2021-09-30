@@ -34,3 +34,16 @@ pdf-viewer {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.content-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.see-more-button{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  color: dodgerblue;
+}
