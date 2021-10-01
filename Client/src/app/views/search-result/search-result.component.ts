@@ -125,7 +125,7 @@ export class SearchResultComponent implements OnInit {
   nextPage(){
     if (this.activePage<this.pages-1){
       /*Dispatch nextpage event*/
-      var evt = new CustomEvent('nextpage', { detail: 'To page ' + (this.pages - this.activePage) });
+      var evt = new CustomEvent('nextpage', { detail: 'To page ' + (this.activePage + 2) });
       window.dispatchEvent(evt);
       /*End dispatch nextpage event*/              
       this.activePage=this.activePage+1;
