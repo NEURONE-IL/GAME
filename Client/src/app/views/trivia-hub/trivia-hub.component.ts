@@ -7,7 +7,7 @@ import { Study, StudyService } from 'src/app/services/game/study.service';
 @Component({
   selector: 'app-trivia-hub',
   templateUrl: './index.html',
-  styleUrls: ['./css/style.min.css']
+  styleUrls: ['./css/style.min.css', './trivia-hub.component.css']
 })
 
 /*export class TriviaHubComponent implements OnInit {
@@ -33,7 +33,7 @@ export class TriviaHubComponent implements OnInit {
   study: Study;
   containsStudy: Boolean;
 
-  constructor( private router: Router, 
+  constructor( private router: Router,
                private studyService: StudyService,
                private toastr: ToastrService,
                private translate: TranslateService

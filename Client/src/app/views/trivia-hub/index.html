@@ -12,23 +12,28 @@
 	<link rel="stylesheet" href="./css/style.min.css"/>
 </head>
 <body>
+
+
 	<!-- Hero(extended) navbar -->
-	<div class="navbar navbar--extended">
-		<nav class="nav__mobile"></nav>
-		<div class="container">
-			<div class="navbar__inner">
-				<a href="/" class="navbar__logo">NEURONE Trivia</a>
-				<nav class="navbar__menu">
-					<ul>
-						<li><a href="/welcome#about">Acerca de</a></li>
-						<li><a href="/welcome#participate">Participar</a></li>
-						<li><a href="/welcome#contact">Contacto</a></li>
-					</ul>
-				</nav>
-				<div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a></div>
-			</div>
-		</div>
-	</div>
+
+  <div class="navbar navbar--extended navbar-fixed-top">
+    <nav class=""></nav>
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="/welcome#" class="navbar__logo">NEURONE Trivia</a>
+        <nav class="navbar__menu">
+          <ul>
+            <li><a href="/welcome#about">Acerca de</a></li>
+            <li><a href="/welcome#participate">Participar</a></li>
+            <li><a href="/welcome#contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a></div>
+      </div>
+    </div>
+  </div>
+
+
 	<!-- Hero unit -->
 	<div class="hero">
 		<div class="hero__overlay hero__overlay--gradient"></div>
@@ -133,7 +138,9 @@
 				<h2 class="cta__title">¿Cómo participar?</h2>
 				<p class="cta__sub cta__sub--center">Para participar se necesita (1) un computador de escritorio o notebook y conexión a Internet. (2) Al hacer click en el botón "Participar", el apoderado (padre/tutor) puede registrar al estudiante. (3) Dentro del registro se debe leer y aceptar consentimiento informado (donde se presentan los detalles del estudio) aprobado por Comité de Ética de la Universidad de Santiago de Chile y completar el formulario con los datos solicitados. (4) Los datos correspondientes a correo y contraseña serán empleados por los estudiantes o apoderado para ingresar posteriormente al juego.</p>
 				<a [href]="getStudy()" class="button button__accent" *ngIf="containsStudy">Participar</a>
-				<a class="button button__disabled" disabled *ngIf="!containsStudy">Participar</a>
+        <!--
+        <a class="button button__disabled" disabled *ngIf="!containsStudy">Participar</a>
+        -->
 				<div class="expanded__inner">
 					<div class="expanded__media">
 						<img src="assets/welcome-images/prizes-proposal-2.png" class="expanded__image">

@@ -1,0 +1,9 @@
+
+.navbar {
+  background: rgb(15,15,133);
+  background: linear-gradient(90deg, rgba(15,15,133,1) 0%, rgba(56,91,207,1) 100%);
+}
+
+.navbar__menu{
+  padding-top: 15px;
+}

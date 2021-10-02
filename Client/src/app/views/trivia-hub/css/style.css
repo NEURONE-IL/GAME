@@ -479,7 +479,7 @@ button, .button {
 .button__disabled {
   background-color: gray;
   border-color: gray;
-  color: #fff; 
+  color: #fff;
   cursor: not-allowed; }
   @media (min-width: 992px) {
     .button__delete:hover {
@@ -1409,4 +1409,21 @@ a.text-link {
 
 a.text-link:hover {
   background-color: blue;
+}
+
+.header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  color: white;
+  font-weight: 600;
+}
+
+.navbar {
+  background-color: #463aff;
 }
