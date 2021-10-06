@@ -1,7 +1,7 @@
 <div class="header" role="banner">
 
 
-  <img class="title-span" src="assets/TRIVIA.png" *ngIf="isLoggedIn && user.role.name === 'student' && (router.url.toString().includes('session') || router.url.toString().includes('start'))" 
+  <img class="image-span" src="assets/TRIVIA.png" *ngIf="isLoggedIn && user.role.name === 'student' && !router.url.toString().includes('view-page') && (router.url.toString().includes('session') || router.url.toString().includes('start'))" 
   >
 
 
