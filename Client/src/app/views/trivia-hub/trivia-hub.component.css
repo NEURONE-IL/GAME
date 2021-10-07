@@ -6,4 +6,32 @@
 
 .navbar__menu{
   padding-top: 15px;
+  text-align: right;
 }
+
+a.text-link {
+  text-decoration: underline;
+  transition: background-color 0.33s;
+}
+
+a.text-link:hover {
+  background-color: blue;
+}
+
+div.logo-showcase {
+  padding-top: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.logo1 {
+  max-height: 150px;
+  padding: 5px 5px 5px 5px;
+}
+
+img.logo2 {
+  max-width: 30%;
+  padding: 5px 5px 5px 5px;
+}
+
