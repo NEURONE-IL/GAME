@@ -1,7 +1,7 @@
 {
   "LOGOUT": {
     "LOGOUT": "Cerrar Sesión",
-    "LOGOUT_CONFIRMATION": "¿Está segur@ que desea cerrar la sesión?"
+    "LOGOUT_CONFIRMATION": "¿Está seguro/a que desea cerrar la sesión?"
   },
   "HELP": {
     "INSTRUCTIONS_TITLE": "Instrucciones del Juego:"
@@ -42,7 +42,7 @@
       "ANSWER_TYPE": "Tipo de respuesta",
       "COOLDOWN": "Seleccione horas y minutos de espera para responder cada desafío",
       "CREATE": "CREAR DESAFÍO",
-      "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el desafío?",
+      "DELETE_CONFIRMATION": "¿Está seguro/a que desea eliminar el desafío?",
       "DELETE_RESOURCE": "Eliminar recurso",
       "DOC_NAME": "Código",
       "FALSE": "No",
@@ -57,7 +57,7 @@
       "QUESTION": "Pregunta",
       "QUESTION_TYPE": "Recurso que contiene la respuesta",
       "RELEVANT": "Relevante",
-      "RESOURCE_DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el recurso?",
+      "RESOURCE_DELETE_CONFIRMATION": "¿Está seguro/a que desea eliminar el recurso?",
       "SECONDS": "Segundos para responder",
       "STUDY": "Estudio",
       "STUDY_CHALLENGES": "Desafíos del estudio",
@@ -71,7 +71,7 @@
     "STUDIES": {
       "CREATE": "CREAR ESTUDIO",
       "CURRENT_STUDIES": "Estudios actuales",
-      "DELETE_CONFIRMATION": "¿Está segur@ que desea eliminar el estudio?",
+      "DELETE_CONFIRMATION": "¿Está seguro/a que desea eliminar el estudio?",
       "DELETING_RESOURCES": "Eliminando recurso, por favor espere...",
       "HEADER": "Estudio",
       "LOADING": "Cargando, por favor espere...",
@@ -421,12 +421,12 @@
   "GAME": {
     "ASSENT": {
       "ACCEPT_TEXT": "Acepto",
-      "CHECK_LABEL": "Estoy segur@",
+      "CHECK_LABEL": "Estoy seguro/a",
       "DETAILS_HIDE": "Ocultar detalles",      
       "DETAILS_SHOW": "Ver detalles",
       "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
       "ERROR": "Debe aceptar participar en el estudio para continuar.",
-      "QUESTION": "¿Estás segur@ que quieres participar en este estudio?"
+      "QUESTION": "¿Estás seguro/a que quieres participar en este estudio?"
     },
     "STARTPAGE": {
       "INSTRUCTIONS": {
