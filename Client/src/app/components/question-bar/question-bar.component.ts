@@ -27,7 +27,7 @@ export class QuestionBarComponent implements OnInit {
   // Timer data
   timeLeft: number;
   interval;
-  value = 100;
+  value = localStorage.getItem('value') || 100;
   leftValue: string;
 
   // Tooltip
@@ -71,7 +71,8 @@ export class QuestionBarComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.clearTimer();
+    this.setTimeLeft();
+    localStorage.setItem('value', this.value.toString())
   }
 
   clearTimer() {

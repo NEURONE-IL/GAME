@@ -61,6 +61,7 @@ export class GameService {
       .then(() => {
         this.timeLeft = null;
         this.stage = 'summary';
+        localStorage.setItem('value', "100")
         this.router.navigate(['start']);
       })
       .catch((err) => {
