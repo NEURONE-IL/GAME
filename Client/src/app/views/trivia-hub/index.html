@@ -155,8 +155,10 @@
       <div class="cta__inner">
         <h2 class="cta__title">¿Cómo participar?</h2>
         <p class="cta__sub cta__sub--center">Para participar se necesita (1) un computador de escritorio o notebook y conexión a Internet. (2) Al hacer click en el botón "Participar", el apoderado (padre/tutor) puede registrar al estudiante. (3) Dentro del registro se debe leer y aceptar un consentimiento informado (donde se presentan los detalles del estudio) aprobado por el Comité de Ética de la Universidad de Santiago de Chile y completar el formulario con los datos solicitados. (4) Los datos correspondientes a correo eléctronico y contraseña (se sugiere usar una contraseña exclusiva para este registro que no use habitualmente en otros servicios) serán empleados por los estudiantes o apoderados/tutores para ingresar posteriormente al juego.</p>
-        <a href="/welcome#participate" class="button button__accent">Participar</a>
+				<a [href]="getStudy()" class="button button__accent" *ngIf="containsStudy">Participar</a>
+				<a class="button button__accent" href="/welcome#contact" *ngIf="!containsStudy">Contáctanos</a>
         <!-- Este es el mismo botón de arriba???-->
+        <!-- Fernando: No, este redirige a Trivia.-->
         <div class="expanded__inner">
           <div class="expanded__media">
             <img src="assets/welcome-images/prizes-proposal-2.png" class="expanded__image">
@@ -177,7 +179,7 @@
         </div>
         <div class="expanded__content">
           <h2 class="expanded__title">¿Tienes dudas?</h2>
-          <p class="expanded__text">Si tienes dudas acerca de este estudio o de la investigación que estamos realizando, puedes contactar a Director del Proyecto, Roberto González-Ibáñez, PhD (<i>consultas@trivia.neurone.info</i>)</p>
+          <p class="expanded__text">Si tienes dudas acerca de este estudio o de la investigación que estamos realizando, puedes contactar a Director del Proyecto, Roberto González-Ibáñez, PhD (<i>invitaciones@trivia.neurone.info</i>)</p>
         </div>
       </div>
     </div>
@@ -193,8 +195,11 @@
 							<a href="https://tutelage.interaction-lab.info" target="_blank" class="footer__link">Proyecto FONDECYT Regular N°1201610: TUTELAGE</a>
 						</div>
 						<div class="footer__row">
-							Diseño de esta página creado por <a href="https://twitter.com/ninalimpi" target="_blank" class="footer__link">Katerina Limpitsouni</a> y <a href="https://twitter.com/anges244" target="_blank" class="footer__link">Aggelos Gesoulis</a>
+							Diseño de esta página creado por <a href="https://twitter.com/ninalimpi" target="_blank" class="footer__link">Katerina Limpitsouni</a> y 
 						</div>
+						<div class="footer__row">
+              <a href="https://twitter.com/anges244" target="_blank" class="footer__link">Aggelos Gesoulis</a>
+            </div>
 					</div>
 					<div class="footer__data__item">
 						<div class="footer__row">
