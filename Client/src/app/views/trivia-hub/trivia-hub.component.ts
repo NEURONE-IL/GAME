@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -29,7 +29,7 @@ import { Study, StudyService } from 'src/app/services/game/study.service';
 
 }*/
 
-export class TriviaHubComponent implements OnInit, OnDestroy {
+export class TriviaHubComponent implements OnInit {
   study: Study;
   containsStudy: Boolean;
 
@@ -77,10 +77,6 @@ export class TriviaHubComponent implements OnInit, OnDestroy {
         }
       );
     }
-  }
-
-  ngOnDestroy(): void {
-    localStorage.removeItem('study_id');
   }
 
   getStudy(){
