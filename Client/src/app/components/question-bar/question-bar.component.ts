@@ -129,6 +129,9 @@ export class QuestionBarComponent implements OnInit {
       console.log("time left: ", this.router.getCurrentNavigation().extras.state.timeLeft);
       this.timeLeft = this.router.getCurrentNavigation().extras.state.timeLeft;
     }
+    else if(this.gameService.timeLeft){
+      this.timeLeft = this.gameService.timeLeft;
+    }
     else {
       this.timeLeft = this.gameService.challenge.seconds;
     }
