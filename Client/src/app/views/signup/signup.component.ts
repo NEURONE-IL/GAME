@@ -118,6 +118,7 @@ export class SignupComponent implements OnInit {
   }
 
   redirect(){
+    localStorage.removeItem('study_id');
     this.router.navigate(['/login']);
   }
 

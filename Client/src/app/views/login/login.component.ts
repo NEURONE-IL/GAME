@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
 
   redirectUserPanel(role) {
     console.log('redirect');
+    localStorage.removeItem('study_id');
     if (role=='admin') {
       console.log('admin');
       this.router.navigate(['admin_panel']);
