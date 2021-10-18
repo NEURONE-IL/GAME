@@ -162,7 +162,6 @@ export class KmTrackerService {
 
     let clickOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'MouseClick',
       source: 'Window',
       url: doc.URL,
@@ -193,7 +192,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'KeyDown',
       source: 'Window',
       which: w,
@@ -221,7 +219,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'KeyUp',
       source: 'Window',
       which: w,
@@ -250,7 +247,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'KeyPress',
       source: 'Window',
       which: w,
@@ -274,7 +270,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'HelpModal',
       type: 'OpenHelpModal',
       localTimestamp: t,
@@ -293,7 +288,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'HelpModal',
       type: 'CloseHelpModal',
       localTimestamp: t,
@@ -312,7 +306,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'Pagination',
       type: 'ChangePage',
       localTimestamp: t,
@@ -332,7 +325,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'Pagination',
       type: 'PreviousPage',
       localTimestamp: t,
@@ -352,7 +344,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'Pagination',
       type: 'NextPage',
       localTimestamp: t,
@@ -372,7 +363,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'SearchResultsTabs',
       type: 'ChangeToWebPagesTab',
       localTimestamp: t,
@@ -391,7 +381,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'SearchResultsTabs',
       type: 'ChangeToImagesTab',
       localTimestamp: t,
@@ -410,7 +399,6 @@ export class KmTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       source: 'SearchResultsTabs',
       type: 'ChangeToVideosTab',
       localTimestamp: t,
@@ -442,7 +430,6 @@ export class KmTrackerService {
 
     let movementOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'MouseMovement',
       source: 'Window',
       url: doc.URL,
@@ -480,7 +467,6 @@ export class KmTrackerService {
 
     let scrollOutput = {
       userId: this.user.id,
-      userEmail: this.user.email,
       type: 'Scroll',
       source: 'Window',
       url: doc.URL,

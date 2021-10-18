@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 const EventSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     //userEmail: {type: String},
-    type: {type: String},
     source: {type: String},
     url: {type: String},
     localTimeStamp: {type: Date},
