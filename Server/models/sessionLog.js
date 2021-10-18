@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const SessionLogSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
-    userEmail: {type: String},
     state: {type: String},
     localTimeStamp: {type: Date},
     user_agent: {type: String},

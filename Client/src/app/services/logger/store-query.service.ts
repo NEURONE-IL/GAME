@@ -16,7 +16,6 @@ export class StoreQueryService {
   postQuery(data) {
     if(this.authService.loggedIn){
       data.userId = this.authService.getUser()._id;
-      data.userEmail = this.authService.getUser().email;
       this.http.post(this.queryUri, data)
       .subscribe((resp: any) => {
         },

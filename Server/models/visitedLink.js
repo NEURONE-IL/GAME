@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const VisitedLinkSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
-    userEmail: {type: String},
     state: {type: String},
     title: {type: String},
     url: {type: String},
