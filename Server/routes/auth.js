@@ -293,7 +293,7 @@ router.post("/login", async (req, res) => {
   //check if user is confirmed
   if (!user.confirmed) res.status(400).send("USER_NOT_CONFIRMED");
   //create and assign a token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
   res.header("x-access-token", token).send({ user: user, token: token });
 });
 

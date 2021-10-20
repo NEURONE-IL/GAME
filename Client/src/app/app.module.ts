@@ -76,6 +76,7 @@ import {NgxAudioPlayerModule} from "ngx-audio-player";
 import { FooterComponent } from './components/footer/footer.component';
 import { PlyrModule } from 'ngx-plyr';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
+import { ErrorInterceptor } from './helpers/error-interceptor';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -176,7 +177,12 @@ export function HttpLoaderFactory(http: HttpClient) {
               provide: HTTP_INTERCEPTORS,
               useClass: AuthInterceptorService,
               multi: true
-              }
+              },
+              { 
+              provide: HTTP_INTERCEPTORS,
+              useClass: ErrorInterceptor, 
+              multi: true 
+              },
     ],
   bootstrap: [AppComponent]
 })
