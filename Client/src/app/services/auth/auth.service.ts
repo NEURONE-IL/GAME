@@ -237,4 +237,12 @@ export class AuthService {
       });
     });
   }
+
+  getForward(course){
+    return this.http.get(environment.apiURL + 'forward/' + course);
+  }
+
+  postForward(course, lastLink){
+    return this.http.post(environment.apiURL + 'forward', {course: course, lastLink: lastLink});
+  }
 }

@@ -24,6 +24,7 @@ const sendEmailRoutes = require('./routes/send-email');
 const imageRoutes = require('./routes/image');
 const gamificationRoutes = require('./routes/gamification');
 const notificationRoutes = require('./routes/notification');
+const forwardRoutes = require('./routes/forward');
 
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
@@ -105,6 +106,7 @@ app.use('/api/questionnaire', questionnaireRoutes);
 app.use('/api/image', imageRoutes);
 app.use('/api/gamification', gamificationRoutes);
 app.use('/api/notification', notificationRoutes);
+app.use('/api/forward', forwardRoutes);
 
 app.use('/api/send-email', sendEmailRoutes);
 

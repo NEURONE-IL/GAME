@@ -77,6 +77,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PlyrModule } from 'ngx-plyr';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
 import { ErrorInterceptor } from './helpers/error-interceptor';
+import { ForwardComponent } from './views/forward/forward.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -121,7 +122,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlayAgainComponent,
     LoginRedirectComponent,
     FooterComponent,
-    TriviaHubComponent
+    TriviaHubComponent,
+    ForwardComponent
   ],
     imports: [
         BrowserModule,
