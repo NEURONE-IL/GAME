@@ -4,7 +4,7 @@ const Forward = require('../models/forward');
 
 const verifyToken = require('../middlewares/verifyToken');
 
-router.get('/:course' , [verifyToken], async (req, res) => {
+router.get('/:course' , async (req, res) => {
     const course = req.params.course;
     Forward.findOne({course: course}, (err, forward) =>{
         if(err){
@@ -17,7 +17,7 @@ router.get('/:course' , [verifyToken], async (req, res) => {
     });
 });
 
-router.post('', [verifyToken], async (req, res) => {
+router.post('', async (req, res) => {
     const course = req.body.course;
     const lastLink = req.body.lastLink;
     Forward.findOne({course: course}, (err, forward) =>{

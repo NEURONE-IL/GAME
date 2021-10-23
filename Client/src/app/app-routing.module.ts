@@ -22,6 +22,7 @@ import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
+import { ForwardComponent } from './views/forward/forward.component';
 
 const routes: Routes = [
   {
@@ -134,6 +135,10 @@ const routes: Routes = [
   {
     path: 'login_redirect/:email/:names/:study/:trainer_id/:api_key/:url',
     component: LoginRedirectComponent
+  }, 
+  {
+    path: 'forward/:course',
+    component: ForwardComponent
   }, 
   { path: '**', redirectTo: 'login' },
 ];
