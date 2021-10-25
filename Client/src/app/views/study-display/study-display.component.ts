@@ -87,6 +87,7 @@ export class StudyDisplayComponent implements OnInit {
       response => {
         this.users = response.responseArray;
         this.loadingUsers=false;
+        console.log(response, 'response')
       },
       err => {
         console.log("ERROR EN LA CARGA")

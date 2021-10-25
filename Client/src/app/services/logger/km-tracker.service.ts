@@ -56,16 +56,7 @@ export class KmTrackerService {
       this.bindEvent(targetDoc, 'keydown', data, this.keydownListener);
       this.bindEvent(targetDoc, 'keypress', data, this.keypressListener);
       this.bindEvent(targetDoc, 'keyup', data, this.keyupListener);
-      /*Custom events*/
-      this.bindEvent(targetDoc, 'openhelpmodal', data, this.openhelpmodalListener);
-      this.bindEvent(targetDoc, 'closehelpmodal', data, this.closehelpmodalListener);
-      this.bindEvent(targetDoc, 'changepage', data, this.changepageListener);
-      this.bindEvent(targetDoc, 'previouspage', data, this.previouspageListener);
-      this.bindEvent(targetDoc, 'nextpage', data, this.nextpageListener);
-      this.bindEvent(targetDoc, 'changetowebpagestab', data, this.changetowebpagestabListener);
-      this.bindEvent(targetDoc, 'changetoimagestab', data, this.changetoimagestabListener);
-      this.bindEvent(targetDoc, 'changetovideostab', data, this.changetovideostabListener);
-      /*End custom events*/
+
       this.isTracking = true;
     }
   }
@@ -90,17 +81,8 @@ export class KmTrackerService {
       this.unbindAll(targetDoc, 'keydown');
       this.unbindAll(targetDoc, 'keypress');
       this.unbindAll(targetDoc, 'keyup');
-      /*Custom events*/
-      this.unbindAll(targetDoc, 'openhelpmodal');
-      this.unbindAll(targetDoc, 'closehelpmodal');
-      this.unbindAll(targetDoc, 'changepage');
-      this.unbindAll(targetDoc, 'previouspage');
-      this.unbindAll(targetDoc, 'nextpage');
-      this.unbindAll(targetDoc, 'changetowebpagestab');
-      this.unbindAll(targetDoc, 'changetoimagestab');
-      this.unbindAll(targetDoc, 'changetovideostab');
-      /*End custom events*/
       this.unbindData(targetDoc);
+
       this.isTracking = false;
     }
   }
@@ -261,153 +243,6 @@ export class KmTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postKeyStroke(keyOutput);
   }
-
-  openhelpmodalListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'HelpModal',
-      type: 'OpenHelpModal',
-      localTimestamp: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }
-
-  closehelpmodalListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'HelpModal',
-      type: 'CloseHelpModal',
-      localTimestamp: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }   
-  
-  changepageListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'Pagination',
-      type: 'ChangePage',
-      localTimestamp: t,
-      url: doc.URL,
-      detail: evt.detail
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }      
-
-  previouspageListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'Pagination',
-      type: 'PreviousPage',
-      localTimestamp: t,
-      url: doc.URL,
-      detail: evt.detail
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }
-  
-  nextpageListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'Pagination',
-      type: 'NextPage',
-      localTimestamp: t,
-      url: doc.URL,
-      detail: evt.detail
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }
-
-  changetowebpagestabListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'SearchResultsTabs',
-      type: 'ChangeToWebPagesTab',
-      localTimestamp: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  } 
-  
-  changetoimagestabListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'SearchResultsTabs',
-      type: 'ChangeToImagesTab',
-      localTimestamp: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }
-  
-  changetovideostabListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      source: 'SearchResultsTabs',
-      type: 'ChangeToVideosTab',
-      localTimestamp: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }  
 
   mouseMoveListener(evt) {
     // From http://stackoverflow.com/a/23323821

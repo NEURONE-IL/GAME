@@ -114,7 +114,7 @@ function sendConfirmationEmail(user, userData, res, req) {
     const mailOptions = {
       from: "neurone@informatica.usach.cl",
       to: user.email,
-      subject: "Verifique su correo",
+      subject: "Bienvenido a Trivia - Confirma tu cuenta para participar",
       text: mailText,
       html: mailHTML,
     };
@@ -162,16 +162,14 @@ function addTextToEmail(mailHTML, userData, link) {
   );
   mailHTML = mailHTML.replace(
     "[CONFIRMATION_EMAIL.TITLE]",
-    "Hola " + userData.tutor_names.split(" ")[0] + "."
+    "Hola " + userData.tutor_names.split(" ")[0]
   );
   mailHTML = mailHTML.replace(
     "[CONFIRMATION_EMAIL.TEXT]",
     "Gracias por registrar a " +
       userData.names.split(" ")[0] +
-      " en NEURONE-GAME, " +
-      "antes de ingresar al juego debe confirmar su correo.\n" +
-      "Al realizar este paso, también está confirmando que leyó y acepta el consentimiento informado " +
-      "presentado en el registro."
+      " en TRIVIA. " +
+      "Antes de ingresar al juego debes confirmar la cuenta haciendo click en el siguiente botón:\n"
   );
   mailHTML = mailHTML.replace(
     "[CONFIRMATION_EMAIL.CONFIRM]",

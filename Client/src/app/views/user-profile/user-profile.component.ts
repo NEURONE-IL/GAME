@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ImageSelectorComponent } from 'src/app/components/image-selector/image-selector.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamificationService } from 'src/app/services/game/gamification.service';
 import { StudyService } from 'src/app/services/game/study.service';
+import { ActionsTrackerService } from 'src/app/services/logger/actions-tracker.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   progress;
   nearLevel = null;
   completedChallenges;
@@ -28,13 +29,19 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog,
     public router: Router,
-    private studyService: StudyService
+    private studyService: StudyService,
+    private actionsTracker: ActionsTrackerService
   ) {}
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
     this.checkStudy();
     this.status();
+    this.actionsTracker.start();
+  }
+
+  ngOnDestroy(): void {
+    this.actionsTracker.stop();
   }
 
   checkAllCompleted() {

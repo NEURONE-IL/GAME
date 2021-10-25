@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KmTrackerService } from 'src/app/services/logger/km-tracker.service';
+import { ActionsTrackerService } from 'src/app/services/logger/actions-tracker.service';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
@@ -14,10 +15,12 @@ export class StartComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public gameService: GameService,
-    private kmTracker: KmTrackerService
+    private kmTracker: KmTrackerService,
+    private actionsTracker: ActionsTrackerService
   ) {}
   ngOnDestroy(): void {
     this.kmTracker.stop();
+    this.actionsTracker.stop();
   }
 
   async continue(){
@@ -28,6 +31,7 @@ export class StartComponent implements OnInit, OnDestroy {
     await this.gameService.load().then(() => {
       if (!this.gameService.loading) {
         this.kmTracker.start();
+        this.actionsTracker.start();
         this.loading = false;
       }
     });

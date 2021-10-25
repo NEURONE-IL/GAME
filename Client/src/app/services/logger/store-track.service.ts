@@ -30,7 +30,6 @@ export class StoreTrackService {
     }
   }
 
-
   // Save mouse coordinates
   postMouseCoordinates(data) {
     if(this.authService.loggedIn){
