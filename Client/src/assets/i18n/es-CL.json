@@ -86,7 +86,7 @@
       "DUMMY_ALERT_END": "Una vez termine de agregar/eliminar desafíos, reinicie el usuario de prueba para que este refleje los cambios realizados"
     },
     "GAMIFICATION": {
-      "CHELLENGE_COMPLETED": "¡Felicidades has completado el desafío!",
+      "CHELLENGE_COMPLETED": "¡El desafío ha terminado!",
       "EXP1": "Has adquirido",
       "EXP2": "experiencia",
       "STATUS_TITLE": "Estado Gamificación",
@@ -437,7 +437,7 @@
     },
     "INACTIVE": {
       "TITLE": "Aún no puedes jugar",
-      "TITLE2": "¡Has completado todos los desafíos del intervalo!",
+      "TITLE2": "¡Has terminado todos los desafíos del día!",
       "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde.",
       "TIME_NOW": "La hora actual es",
       "CAN_PLAY_AT": "Puedes volver a jugar a las",

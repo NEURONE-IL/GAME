@@ -18,7 +18,7 @@
           {{ "GAME.INACTIVE.CAN_PLAY_AT" | translate }}
           {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
         </p>
-        <img src="/assets/wait.jpg" style="width: 200px; margin-left: 10%"> 
+        <img src="/assets/clock.gif" style="width: 200px; margin-left: 10%"> 
       </mat-card-content>
     </mat-card>
   </div>
@@ -81,7 +81,7 @@
           {{ "GAME.INACTIVE.CAN_PLAY_AT2" | translate }}
           {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
         </p>
-        <img src="/assets/wait.jpg" style="width: 200px; margin-left: 10%"> 
+        <img src="/assets/clock.gif" style="width: 200px; margin-left: 10%"> 
         <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
           {{"BUTTONS.CONTINUE" | translate}}
         </button>

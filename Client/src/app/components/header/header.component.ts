@@ -86,7 +86,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         this.notificationsN = notifications.length;
         this.menuItems = [];
         for(let i = 0; i<notifications.length; i++){
-          this.menuItems.push({messageES: notifications[i].messageES, date: notifications[i].acquisitionDate, _id: notifications[i]._id, elementRef: null});
+          let message;
+          if(notifications[i].name === 'challengeCompleted'){
+            message = 'Insignia adquirida: '+ notifications[i].messageES.split('Has completado el desafío ')[1];
+          }
+          else if(notifications[i].name === 'givePoints'){
+            let amount = notifications[i].messageES.split('Has recibido ')[1].split(' ')[0]
+            if(amount >= 200){
+              message = notifications[i].messageES + ' por completar un logro'
+            }
+            else {
+              message = notifications[i].messageES + ' por completar un desafío'
+            }
+          }
+          this.menuItems.push({messageES: message, date: notifications[i].acquisitionDate, _id: notifications[i]._id, elementRef: null});
         }
       },
       err => {
@@ -96,6 +109,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   updateNotifications(){
+    this.notificationsN = 0;
     this.gamificationService.updateNotifications(this.notifications).subscribe(
       response => {
         console.log("Notifications update");
