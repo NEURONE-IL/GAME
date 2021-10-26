@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 
 const SessionLogSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
+    studyId: { type: Schema.Types.ObjectId, ref: 'Study'},
+    challengeId: { type: Schema.Types.ObjectId, ref: 'Challenge'},
     //userEmail: {type: String},
     state: {type: String},
     localTimeStamp: {type: Date},

@@ -4,6 +4,8 @@ const { Schema } = mongoose;
 const MouseCoordinateSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     //userEmail: {type: String},
+    studyId: { type: Schema.Types.ObjectId, ref: 'Study'},
+    challengeId: { type: Schema.Types.ObjectId, ref: 'Challenge'},
     type: {type: String},
     source: {type: String},
     url: {type: String},

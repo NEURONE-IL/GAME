@@ -35,6 +35,7 @@ export class GameService {
     // For one challenge at once
     const challengeId = this.getCurrentChallengeId();
     if (challengeId != null) {
+      localStorage.setItem('chall', challengeId);
       this.challenge = await this.challengeService
         .getChallenge(challengeId)
         .toPromise();
@@ -188,6 +189,7 @@ export class GameService {
   }
 
   async finishSummary() {
+    localStorage.removeItem('chall')
     let can_play = await this.authService.canPlay();
     if(can_play["canPlay"]){
       this.stage = 'play-again';
