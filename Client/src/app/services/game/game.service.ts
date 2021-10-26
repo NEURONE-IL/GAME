@@ -13,6 +13,8 @@ export class GameService {
   progress: any;
   canPlay: any;
   timeLeft: number = null;
+  activePage: number= 0;
+
 
   constructor(
     private challengeService: ChallengeService,
@@ -49,6 +51,14 @@ export class GameService {
     this.loading = false;
   }
 
+  setActivePage(activePage){
+    this.activePage= Number(activePage);
+    console.log("the result page is: ", this.activePage);
+
+  }
+  getActivePage(){
+    return this.activePage
+  }
   finishChallenge() {
     let progress = this.progress;
     progress.challenges.forEach((chProgress) => {

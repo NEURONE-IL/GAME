@@ -43,6 +43,7 @@ export class SearchResultComponent implements OnInit {
       this.query = params.get('query');
       this.domain = params.get('domain');
     });
+    this.activePage= this.gameService.getActivePage();
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP");
     let subscription = this.endpointsService
       .getDocuments(this.query, this.domain)
@@ -63,7 +64,6 @@ export class SearchResultComponent implements OnInit {
           this.totalDocuements=0;
           this.pages=1;
           this.pageIndex=[];
-          this.activePage=0;
 
           //se obtienen los documentos que son de texto o pdfs
           for (doc of this.documents){
@@ -106,7 +106,7 @@ export class SearchResultComponent implements OnInit {
     /*Dispatch changepage event*/
     var evt = new CustomEvent('changepage', { detail: 'To page ' + numberOfPageActive });
     window.dispatchEvent(evt);
-    /*End dispatch changepage event*/    
+    /*End dispatch changepage event*/
     this.activePage=numberOfPageActive-1;
     console.log("active page= ", this.activePage)
   }
@@ -116,7 +116,7 @@ export class SearchResultComponent implements OnInit {
       /*Dispatch previouspage event*/
       var evt = new CustomEvent('previouspage', { detail: 'To page ' + this.activePage });
       window.dispatchEvent(evt);
-      /*End dispatch previouspage event*/            
+      /*End dispatch previouspage event*/
       this.activePage=this.activePage-1;
     }
     console.log("active page= ", this.activePage)
@@ -127,7 +127,7 @@ export class SearchResultComponent implements OnInit {
       /*Dispatch nextpage event*/
       var evt = new CustomEvent('nextpage', { detail: 'To page ' + (this.activePage + 2) });
       window.dispatchEvent(evt);
-      /*End dispatch nextpage event*/              
+      /*End dispatch nextpage event*/
       this.activePage=this.activePage+1;
     }
     console.log("active page= ", this.activePage)
