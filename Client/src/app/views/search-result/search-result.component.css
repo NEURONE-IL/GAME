@@ -162,3 +162,7 @@ em.hl{
   position: relative;
   font-weight: bold;
 }
+
+.page-link{
+  cursor: pointer;
+}
