@@ -33,3 +33,6 @@ process.env.GAME_CLIENT = 'https://trivia.neurone.info';
 
 // NEURONE DOCS path
 process.env.NEURONE_DOCS = '/home/neurone/neuroneAssets'
+
+//TIMEZONE
+process.env.TZ = 'America/Santiago';

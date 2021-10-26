@@ -112,7 +112,10 @@ function sendConfirmationEmail(user, userData, res, req) {
       },
     });
     const mailOptions = {
-      from: "neurone@informatica.usach.cl",
+      from: {
+        name: 'TRIVIA',
+        address: 'neurone@informatica.usach.cl'
+      }, 
       to: user.email,
       subject: "Bienvenido a Trivia - Confirma tu cuenta para participar",
       text: mailText,
