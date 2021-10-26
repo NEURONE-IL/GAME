@@ -36,11 +36,12 @@
     </form>
   </mat-card-content>
   <mat-card-actions class="cardActions" *ngIf="questionnaires">
-    <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
-      {{ "BUTTONS.SAVE" | translate }}
-    </button>
+
     <button mat-raised-button color="accent" class="clearButton" (click)="resetForm()">
       {{ "BUTTONS.CLEAR" | translate }}
+    </button>
+    <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
+      {{ "BUTTONS.SAVE" | translate }}
     </button>
   </mat-card-actions>
 </mat-card>

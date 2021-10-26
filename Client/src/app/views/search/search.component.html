@@ -1,7 +1,7 @@
 <div class="search-content">
     <img class="main-logo" src="assets/mainlogo.png">
     <mat-form-field appearance="outline" class="search-box" >
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon matSuffix (click)="search()" style="cursor: pointer;">search</mat-icon>
         <input matInput [(ngModel)]="query" (keydown.enter)="search()">
     </mat-form-field>
     <button mat-raised-button class="search-button" color="accent" (click)="search()">{{ "BUTTONS.SEARCH" | translate }}</button>
