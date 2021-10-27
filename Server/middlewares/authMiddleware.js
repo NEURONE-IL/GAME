@@ -38,10 +38,10 @@ const schema = Joi.object({
     institution: Joi.string()
         .required(),
     
-    institution_commune: Joi.number()
+    institution_commune: Joi.string()
         .required(),
 
-    institution_region: Joi.number()
+    institution_region: Joi.string()
         .required()
 })
 

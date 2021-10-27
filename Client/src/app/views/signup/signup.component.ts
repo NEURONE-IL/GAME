@@ -73,6 +73,8 @@ export class SignupComponent implements OnInit {
 
   save() {
     let userData = Object.assign(this.tutorForm.value, this.studentForm.value);
+    let regionString = this.regions.find(element => element.id = userData.institution_region).name;
+    userData.institution_region = regionString;
     delete userData.password_confirmation;
     this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'))
       .subscribe((res) => {
