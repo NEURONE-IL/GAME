@@ -27,6 +27,7 @@ export class AuthService {
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
       let sessionLog = {
         userId: resp.user._id,
+        studyId: resp.user.study,
         userEmail: resp.user.email,
         state: 'login',
         localTimeStamp: Date.now()
@@ -62,6 +63,8 @@ export class AuthService {
     let sessionLog = {
       userId: this.getUser()._id,
       userEmail: this.getUser().email,
+      studyId: this.getUser().study,
+      challengeId: localStorage.getItem('chall'),
       state: 'logout',
       localTimeStamp: Date.now()
     }

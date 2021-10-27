@@ -16,6 +16,12 @@ export class StoreQueryService {
   postQuery(data) {
     if(this.authService.loggedIn){
       data.userId = this.authService.getUser()._id;
+      if(this.authService.getUser().study){
+        data.studyId = this.authService.getUser().study;
+      }
+      if(localStorage.getItem('chall')){
+        data.challengeId = localStorage.getItem('chall');
+      }
       this.http.post(this.queryUri, data)
       .subscribe((resp: any) => {
         },

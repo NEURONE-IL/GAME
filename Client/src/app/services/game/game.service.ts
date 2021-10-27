@@ -13,6 +13,8 @@ export class GameService {
   progress: any;
   canPlay: any;
   timeLeft: number = null;
+  activePage: number= 0;
+
 
   constructor(
     private challengeService: ChallengeService,
@@ -33,6 +35,7 @@ export class GameService {
     // For one challenge at once
     const challengeId = this.getCurrentChallengeId();
     if (challengeId != null) {
+      localStorage.setItem('chall', challengeId);
       this.challenge = await this.challengeService
         .getChallenge(challengeId)
         .toPromise();
@@ -49,6 +52,14 @@ export class GameService {
     this.loading = false;
   }
 
+  setActivePage(activePage){
+    this.activePage= Number(activePage);
+    console.log("the result page is: ", this.activePage);
+
+  }
+  getActivePage(){
+    return this.activePage
+  }
   finishChallenge() {
     let progress = this.progress;
     progress.challenges.forEach((chProgress) => {
@@ -178,6 +189,7 @@ export class GameService {
   }
 
   async finishSummary() {
+    localStorage.removeItem('chall')
     let can_play = await this.authService.canPlay();
     if(can_play["canPlay"]){
       this.stage = 'play-again';

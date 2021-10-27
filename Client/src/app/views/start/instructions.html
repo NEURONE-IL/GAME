@@ -1,9 +1,17 @@
 <div class="container">
-  <div class='center-container'>
-    <h3>{{"GAME.STARTPAGE.INSTRUCTIONS.TITLE" | translate}}</h3>
-    <p>{{"GAME.STARTPAGE.INSTRUCTIONS.TEXT" | translate}}</p>
+  <div class='row center-container'>
+    <div class="col-md-4">
+      <img src="assets/Neurona%20(1).png" style="width: 80%">
+    </div>
+    <div class="col-md-8">
+      <br>
+      <h3>{{"GAME.STARTPAGE.INSTRUCTIONS.TITLE" | translate}}</h3>
+      <p>{{"GAME.STARTPAGE.INSTRUCTIONS.TEXT" | translate}}</p>
+      <div class='center-container'>
+        <button  class="btn btn-success" style="width: 50%" (click)="doStart()">{{"GAME.STARTPAGE.STARTBUTTON" | translate}}</button>
+      </div>
+    </div>
+
   </div>
-  <div class='center-container'>
-    <button mat-raised-button class="start-button" color="primary" (click)="doStart()">{{"GAME.STARTPAGE.STARTBUTTON" | translate}}</button>
-  </div>
+
 </div>

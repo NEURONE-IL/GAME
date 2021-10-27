@@ -1,9 +1,9 @@
 <div class="result-content">
   <div class="toolbar" >
-    <img class="logo" src="assets/mainlogo.png" [routerLink]="['/session/search']" 
+    <img class="logo" src="assets/mainlogo.png" [routerLink]="['/session/search']"
       #tooltip="matTooltip"
       [(matTooltip)]="homeTooltip"
-      matTooltipPosition="right" 
+      matTooltipPosition="right"
     >
     <mat-form-field appearance="outline" class="search-box" >
       <mat-icon matSuffix (click)="search()" style="cursor: pointer;">search</mat-icon>
@@ -21,12 +21,12 @@
         <div *ngIf="!searching">
         <p class="soft">{{ "ADMIN.SEARCH.FOUND" | translate }} {{' ' + totalDocuements + ' '}} {{ "ADMIN.SEARCH.RESULTS" | translate }}.</p>
         <div class="documents-container ">
-          <div *ngFor="let doc of documentsPaginated[activePage]">
+          <div *ngFor="let doc of documentsPaginated[activePage]; let j = index" [attr.data-index]="j">
             <!--Para documentos y libros-->
-            <mat-card class="cardStyle doc-card" [routerLink]="['/session/view-page', doc.title, doc.route]" *ngIf="!doc.type || doc.type=='book'" >
+            <mat-card class="cardStyle doc-card" [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]" *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
-                <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
+                <a [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]"  class="document-link">{{doc.title}}</a>
                 <div class="snippet" [innerHTML]="doc.searchSnippet"></div>
               </mat-card-content>
             </mat-card>
@@ -40,7 +40,7 @@
         <nav aria-label="Page navigation example" class="pagination justify-content-center">
           <ul class="pagination ">
             <li class="page-item {{activePage==0?'disabled':''}}" (click)="previousPage()"><a class="page-link">{{ "GAME.SEARCH.PREVIOUS" | translate }}</a></li>
-            <div *ngFor="let i of pageIndex" >
+            <div *ngFor="let i of pageIndex; let j = index" [attr.data-index]="j" >
               <li class="page-item {{activePage==(i-1)?'active':''}}" (click)="changePageTo(i)"><a class="page-link">{{i}}</a></li>
             </div>
             <li class="page-item {{activePage==(pages-1)?'disabled':''}}" (click)="nextPage()"><a class="page-link">{{ "GAME.SEARCH.NEXT" | translate }}</a></li>
@@ -64,8 +64,8 @@
       <div class="image-container">
 
         <mat-grid-list cols="12" [gutterSize]="'12px'" >
-          <div *ngFor="let doc of documents">
-            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.url]">
+          <div *ngFor="let doc of documents; let j = index" [attr.data-index]="j">
+            <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.url, {result_index: j, result_page: activePage}]">
               <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.url]" >
                 <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
@@ -83,12 +83,12 @@
     <mat-tab label="{{'GAME.SEARCH.VIDEOS' | translate }}">
       <div class="video-container">
         <mat-grid-list cols="12" [gutterSize]="'12px'">
-          <div *ngFor="let doc of documents">
+          <div *ngFor="let doc of documents; let j = index" [attr.data-index]="j">
             <mat-grid-tile class="video-card"  colspan="12"  *ngIf="doc.type=='video'">
               <div>
-                <img src="{{getThumbnail(doc.url)}}" [routerLink]="['/session/view-page', doc.title, doc.route]" >
+                <img src="{{getThumbnail(doc.url)}}" [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]" >
               </div>
-              <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route]" >
+              <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]" >
                 <mat-card-content>
                   <h5 class="url-bar">{{doc.url}}</h5>
                   <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>

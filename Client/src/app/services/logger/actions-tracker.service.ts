@@ -82,6 +82,7 @@ export class ActionsTrackerService {
     this.user = {
       id: this.auth.getUser()._id,
       email: this.auth.getUser().email,
+      study: this.auth.getUser().study
     }
     elem.user = this.user;
   }
@@ -105,6 +106,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'HelpModal',
       type: 'OpenHelpModal',
       localTimestamp: t,
@@ -123,6 +126,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'HelpModal',
       type: 'CloseHelpModal',
       localTimestamp: t,
@@ -141,6 +146,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'ChangePage',
       localTimestamp: t,
@@ -160,6 +167,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'PreviousPage',
       localTimestamp: t,
@@ -179,6 +188,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'NextPage',
       localTimestamp: t,
@@ -198,6 +209,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToWebPagesTab',
       localTimestamp: t,
@@ -216,6 +229,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToImagesTab',
       localTimestamp: t,
@@ -234,6 +249,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToVideosTab',
       localTimestamp: t,

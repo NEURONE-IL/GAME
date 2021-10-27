@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 
 const KeystrokeSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
+    studyId: { type: Schema.Types.ObjectId, ref: 'Study'},
+    challengeId: { type: Schema.Types.ObjectId, ref: 'Challenge'},
     //userEmail: {type: String},
     type: {type: String},
     source: {type: String},

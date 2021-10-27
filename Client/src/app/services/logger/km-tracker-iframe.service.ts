@@ -98,6 +98,7 @@ export class KmTrackerServiceIframe {
     this.user = {
       id: this.auth.getUser()._id,
       email: this.auth.getUser().email,
+      study: this.auth.getUser().study
     }
     elem.user = this.user;
   }
@@ -111,6 +112,7 @@ export class KmTrackerServiceIframe {
     this.user = {
       id: this.auth.getUser()._id,
       email: this.auth.getUser().email,
+      study: this.auth.getUser().study
     }
     elem.user = this.user;
   }
@@ -160,6 +162,8 @@ export class KmTrackerServiceIframe {
 
     let clickOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'MouseClick',
       source: 'Iframe',
       url: doc.URL,
@@ -190,6 +194,8 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'KeyDown',
       source: 'Iframe',
       which: w,
@@ -217,6 +223,8 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'KeyUp',
       source: 'Iframe',
       which: w,
@@ -245,6 +253,8 @@ export class KmTrackerServiceIframe {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'KeyPress',
       source: 'Iframe',
       which: w,
@@ -294,6 +304,8 @@ export class KmTrackerServiceIframe {
 
     let movementOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'MouseMovement',
       source: 'Iframe',
       url: doc.URL,
@@ -344,6 +356,8 @@ export class KmTrackerServiceIframe {
 
     let scrollOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
       type: 'Scroll',
       source: 'Iframe',
       url: doc.URL,
