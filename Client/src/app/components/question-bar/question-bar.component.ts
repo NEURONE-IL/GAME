@@ -110,7 +110,18 @@ export class QuestionBarComponent implements OnInit {
     const x = document.getElementById("mat-tab");
     x.classList.toggle('hide');
     this.hide= !this.hide;
-
+    if(this.hide){
+      /*Dispatch hidequestionbar event*/
+      var evt = new CustomEvent('hidequestionbar', { detail: 'Hidden with ' + this.timeLeft + ' seconds remaining' });
+      window.dispatchEvent(evt);
+      /*End dispatch hidequestionbar event*/
+    }
+    else{
+      /*Dispatch showquestionbar event*/
+      var evt = new CustomEvent('showquestionbar', { detail: 'Shown with ' + this.timeLeft + ' seconds remaining' });
+      window.dispatchEvent(evt);
+      /*End dispatch showquestionbar event*/      
+    }
   }
 
   onTabChanged(){
@@ -221,6 +232,10 @@ export class QuestionBarComponent implements OnInit {
     docURL = docURL.replace('/index.html/', '');
     var checkPage = this.checkPageSingle(docURL);
     if(checkPage === 1){
+      /*Dispatch unmarkfavoritepage event*/
+      var evt = new CustomEvent('unmarkfavoritepage', { detail: 'Unmark "' + this.answerForm.value.rawUrl1 + '" as favorite page' });
+      window.dispatchEvent(evt);
+      /*End dispatch unmarkfavoritepage event*/      
       this.answerForm.patchValue({url1: ''});
       this.answerForm.patchValue({rawUrl1: ''});
       this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
@@ -230,6 +245,10 @@ export class QuestionBarComponent implements OnInit {
     else{
     // The page isn't marked as favorite and the url1 field is empty
       if(this.answerForm.get('url1').value === ''){
+        /*Dispatch markfavoritepage event*/
+        var evt = new CustomEvent('markfavoritepage', { detail: 'Mark "' + docURL + '" as favorite page' });
+        window.dispatchEvent(evt);
+        /*End dispatch markfavoritepage event*/
         this.answerForm.patchValue({url1: docTitle});
         this.answerForm.patchValue({rawUrl1: docURL});
         this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");

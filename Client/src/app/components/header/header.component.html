@@ -3,18 +3,12 @@
 
   <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && !router.url.toString().includes('view-page') && (router.url.toString().includes('session') || router.url.toString().includes('start'))" 
   >
-
-
   <!--Student Implementation-->
-  <a class="title-span" *ngIf="isLoggedIn && user.role.name === 'student' && router.url.toString().includes('view-page')"
+  <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && router.url.toString().includes('view-page')"
     (click)="goBack()"
     #tooltip="matTooltip"
     [(matTooltip)]="homeTooltip"
-    matTooltipPosition="right"
-  >
-    NEURONE<mat-icon class="home">home</mat-icon>
-  </a>
-
+    matTooltipPosition="right"/>
   <!--ADMIN Implementation-->
   <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'admin'" [routerLink]="['/admin_panel']"/>
 
