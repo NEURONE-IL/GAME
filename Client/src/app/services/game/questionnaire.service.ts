@@ -44,7 +44,7 @@ export class QuestionnaireService {
     return this.http.post(this.uri, questionnaire, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
 
-  postAnswers(user: any, questionnaire: any, questionnaireAnswers: any): Observable<any> {
+  postAnswers(user: any, questionnaire: any, questionnaireAnswers: any, challenge: any, type: string): Observable<any> {
     let answers = [];
       questionnaireAnswers.forEach((answer: number, index: number) => {
         let newAnswer = {
@@ -57,6 +57,8 @@ export class QuestionnaireService {
       let userQuestionnaire = {
         user: user._id,
         questionnaire: questionnaire[0]._id,
+        challenge: challenge._id,
+        type: type,
         answers: answers
       };
       /*Sends the request*/

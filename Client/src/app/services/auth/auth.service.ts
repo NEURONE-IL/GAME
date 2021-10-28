@@ -248,4 +248,9 @@ export class AuthService {
   postForward(course, lastLink){
     return this.http.post(environment.apiURL + 'forward', {course: course, lastLink: lastLink});
   }
+
+  checkEmail(email: string){
+    console.log('check')
+    return this.http.get(this.userUri + 'checkEmailAlreadyUsed/' + email);
+  }
 }

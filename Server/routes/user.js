@@ -522,7 +522,27 @@ router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
   res.status(200).json({
     progress
   });
-})
+});
 
+router.get("/checkEmailAlreadyUsed/:email", async (req, res) => {
+  User.find({ email: req.params.email.toLowerCase() }, (err, user) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+    if (user.length){
+      res.status(200).json({
+        ok: false,
+        message: "EMAIL_ALREADY_USED"
+      });
+    } else {
+      res.status(200).json({
+        message: "EMAIL_UNUSED"
+      });
+    }
+  });
+});
 
 module.exports = router;

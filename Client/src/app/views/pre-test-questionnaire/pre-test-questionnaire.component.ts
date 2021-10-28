@@ -16,7 +16,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   questionnaireForm: FormGroup;
   values: number[] = [1, 2, 3, 4, 5, 6];
   questionnaires: Questionnaire[];
-  requiredType: string = 'pre';
+  requiredType: string = 'pre-test';
   isLoggedIn = false;
   user: any;
   question: string;
@@ -71,7 +71,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   }
 
   saveAnswers(){
-    this.questionnaireService.postAnswers(this.user, this.questionnaires, this.questionnaireForm.value.answers)
+    this.questionnaireService.postAnswers(this.user, this.questionnaires, this.questionnaireForm.value.answers, this.gameService.challenge, this.requiredType)
     .subscribe(async response => {
       this.toastr.success(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.SUCCESS"), {
           timeOut: 5000,

@@ -52,6 +52,12 @@ const answerSchema = Joi.object({
 
     questionnaire: Joi.any()
         .required(),
+
+    challenge: Joi.any()
+        .required(),
+    
+    type: Joi.string()
+        .required(),
     
     answers: Joi.array().items(Joi.object({
         question: Joi.string()

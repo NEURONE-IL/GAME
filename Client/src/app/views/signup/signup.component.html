@@ -63,6 +63,10 @@
             <mat-error *ngIf="tutorFormControls.email.hasError('email') && !tutorFormControls.email.hasError('required')">
               {{"SIGNUP.FORM.ERROR.EMAIL_INVALID" | translate}}
             </mat-error>
+
+            <mat-error *ngIf="tutorFormControls.email.hasError('emailAlreadyUsed')">
+              {{"SIGNUP.FORM.ERROR.EMAIL_ALREADY_USED" | translate}}
+            </mat-error>            
           </mat-form-field>
           <br>
 

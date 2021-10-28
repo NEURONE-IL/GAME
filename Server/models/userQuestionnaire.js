@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const UserQuestionnaireSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     questionnaire: { type: Schema.Types.ObjectId, ref: 'Questionnaire', required: true},
+    challenge: { type: Schema.Types.ObjectId, ref: 'Challenge', required: true},
     type: {type: String},
     answers: [
         {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudyService } from '../../services/game/study.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -7,6 +7,18 @@ import { SignupConstants } from './signup.constants';
 import { getRegiones, getComunasByRegion } from 'dpacl';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+export class EmailAlreadyUsedValidator {
+  static createValidator(authService: AuthService): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+      return authService.checkEmail(control.value).pipe(
+        map((response: any) => response['message'] === 'EMAIL_ALREADY_USED' ? {emailAlreadyUsed: true} : null)
+      );
+    };
+  }
+}
 
 @Component({
   selector: 'app-signup',
@@ -28,7 +40,6 @@ export class SignupComponent implements OnInit {
   communes: any;
 
   userSubmitted = false;
-
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -53,7 +64,7 @@ export class SignupComponent implements OnInit {
       tutor_names: ['', [Validators.required, Validators.minLength(3)]],
       tutor_last_names: ['', [Validators.required, Validators.minLength(3)]],
       relation: ['', [Validators.required, Validators.minLength(1)]],
-      email: ['', [Validators.email, Validators.required]],
+      email: ['', [Validators.email, Validators.required], [EmailAlreadyUsedValidator.createValidator(this.authService)]],
       emailConfirm: ['', [Validators.email, Validators.required]],
       tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{8,}")]]
     });

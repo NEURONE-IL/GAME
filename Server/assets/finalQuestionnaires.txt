@@ -3,7 +3,7 @@ Real pre-test questions
 */
 {
 	"name": "pre01",
-	"type": "pre",
+	"type": "pre-test",
 	"questions": [
 		{
 			"question": "Conozco mucho sobre el tema del desafío que voy a realizar",
@@ -58,7 +58,7 @@ Real post-test questions
 */
 {
 	"name": "postQ01",
-	"type": "post",
+	"type": "post-test",
 	"questions": [
 		{
 			"question": "Los resultados que alcancé en el desafío fueron buenos",
