@@ -443,6 +443,10 @@
       "CAN_PLAY_AT": "Puedes volver a jugar a las",
       "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar de las"
     },
+    "FINISHED": {
+      "TITLE": "¡Has completado todos los desafíos de este estudio!",
+      "MESSAGE": "Al término del estudio durante 2022 informaremos a los ganadores del sorteo. Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info"
+    },
     "HINT": {
       "BUTTON": "Pista",
       "TITLE": "Pista",

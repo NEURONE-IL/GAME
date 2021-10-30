@@ -190,12 +190,24 @@ export class GameService {
 
   async finishSummary() {
     localStorage.removeItem('chall')
-    let can_play = await this.authService.canPlay();
-    if(can_play["canPlay"]){
-      this.stage = 'play-again';
+    let progress = this.progress;
+    let studyFinished = true;
+    progress.challenges.forEach((chProgress) => {
+      if (!chProgress.finished ) {
+        studyFinished = false;
+      }
+    });
+    if(studyFinished){
+      this.stage = 'study-finished';
     }
     else{
-      this.stage = 'no-play-again'
+      let can_play = await this.authService.canPlay();
+      if(can_play["canPlay"]){
+        this.stage = 'play-again';
+      }
+      else{
+        this.stage = 'no-play-again';
+      }
     }
   }
 

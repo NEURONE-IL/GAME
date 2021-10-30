@@ -19,6 +19,9 @@
           {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
         </p>
         <img src="/assets/clock.gif" style="width: 200px; margin-left: 10%"> 
+        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
+          {{"BUTTONS.CONTINUE" | translate}}
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
@@ -88,4 +91,18 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+   <!-- Study Finished -->
+ <div class="center-card" *ngIf="gameService.stage == 'study-finished'">
+  <mat-card class="card mat-elevation-z8">
+    <mat-card-title>{{ "GAME.FINISHED.TITLE" | translate }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ "GAME.FINISHED.MESSAGE" | translate }}</p>
+      <img src="/assets/TRIVIA.png" style="width: 300px; margin-left: 10%"> 
+      <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
+        {{"BUTTONS.CONTINUE" | translate}}
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
 </ng-template>
