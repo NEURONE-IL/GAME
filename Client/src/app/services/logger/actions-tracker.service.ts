@@ -110,7 +110,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'HelpModal',
       type: 'OpenHelpModal',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -130,7 +130,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'HelpModal',
       type: 'CloseHelpModal',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -150,7 +150,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'ChangePage',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -171,7 +171,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'PreviousPage',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -192,7 +192,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'Pagination',
       type: 'NextPage',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -213,7 +213,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToWebPagesTab',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -233,7 +233,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToImagesTab',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -253,7 +253,7 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'SearchResultsTabs',
       type: 'ChangeToVideosTab',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -271,7 +271,7 @@ export class ActionsTrackerService {
       userId: this.user.id,
       source: 'QuestionBar',
       type: 'ShowQuestionBar',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -290,7 +290,7 @@ export class ActionsTrackerService {
       userId: this.user.id,
       source: 'QuestionBar',
       type: 'HideQuestionBar',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -309,7 +309,7 @@ export class ActionsTrackerService {
       userId: this.user.id,
       source: 'QuestionBar',
       type: 'MarkFavoritePage',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -328,7 +328,7 @@ export class ActionsTrackerService {
       userId: this.user.id,
       source: 'QuestionBar',
       type: 'UnmarkFavoritePage',
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
       detail: evt.detail
     };

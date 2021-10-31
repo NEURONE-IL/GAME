@@ -159,7 +159,7 @@ export class KmTrackerService {
       y_doc: docY,
       w_doc: docW,
       h_doc: docH,
-      localTimestamp: time,
+      localTimeStamp: time,
     };
     // console.log(clickOutput);
     evt.currentTarget.storeService.postMouseClick(clickOutput);
@@ -187,7 +187,7 @@ export class KmTrackerService {
       charCode: chc,
       key: key,
       chr: chr,
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
     // console.log(keyOutput);
@@ -216,7 +216,7 @@ export class KmTrackerService {
       charCode: chc,
       key: key,
       chr: chr,
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -246,7 +246,7 @@ export class KmTrackerService {
       charCode: chc,
       key: key,
       chr: chr,
-      localTimestamp: t,
+      localTimeStamp: t,
       url: doc.URL,
     };
 
@@ -288,7 +288,7 @@ export class KmTrackerService {
       y_doc: docY,
       w_doc: docW,
       h_doc: docH,
-      localTimestamp: time,
+      localTimeStamp: time,
     };
 
     // console.log(movementOutput);
@@ -325,7 +325,7 @@ export class KmTrackerService {
       h_win: winH,
       w_doc: docW,
       h_doc: docH,
-      localTimestamp: time,
+      localTimeStamp: time,
     };
     // console.log(scrollOutput);
     evt.currentTarget.storeService.postScroll(scrollOutput);
