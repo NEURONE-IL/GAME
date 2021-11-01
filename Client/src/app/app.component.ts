@@ -15,6 +15,19 @@ export class AppComponent {
               private router: Router,
               private storeLink: StoreLinkService) {
     this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if(localStorage.getItem('lastUrl')){
+          let visitedLink = {
+            url: localStorage.getItem('lastUrl'),
+            state: 'PageExit',
+            title: document.title,
+            localTimeStamp: Date.now()
+          }
+          this.storeLink.postVisitedLink(visitedLink);
+        }
+        localStorage.setItem('lastUrl', event.url)
+      }
+
       if (event instanceof NavigationStart) {
         let visitedLink = {
           url: event.url,
@@ -25,19 +38,10 @@ export class AppComponent {
         this.storeLink.postVisitedLink(visitedLink);
       }
 
-      if (event instanceof NavigationEnd) {
-        let visitedLink = {
-          url: event.url,
-          state: 'PageExit',
-          title: document.title,
-          localTimeStamp: Date.now()
-        }
-        this.storeLink.postVisitedLink(visitedLink);
-      }
-
       if (event instanceof NavigationError) {
           console.log(event.error);
       }
+
   });
     this.translate.addLangs(['es-CL', 'en-US']);
     //Se usa la traducción a español si el navegador está en español

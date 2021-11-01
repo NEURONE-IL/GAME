@@ -32,24 +32,31 @@ export class GameService {
     this.loading = true;
     await this.authService.refreshUser();
     this.progress = await this.authService.refreshProgress();
-    // For one challenge at once
-    const challengeId = this.getCurrentChallengeId();
-    if (challengeId != null) {
-      localStorage.setItem('chall', challengeId);
-      this.challenge = await this.challengeService
-        .getChallenge(challengeId)
-        .toPromise();
-      this.challenge = this.challenge.challenge;
-      this.fetchUserStage();
-      if (this.stage != 'summary' && this.stage != 'post-test') {
-        this.canPlay = await this.authService.canPlay();
-      } else {
-        this.canPlay = { canPlay: true };
-      }
-    } else {
+    if(this.progress.finished){
       this.canPlay = { canPlay: false };
+      this.stage = 'study-finished'
+      this.loading = false;
     }
-    this.loading = false;
+    else{
+      // For one challenge at once
+      const challengeId = this.getCurrentChallengeId();
+      if (challengeId != null) {
+        localStorage.setItem('chall', challengeId);
+        this.challenge = await this.challengeService
+          .getChallenge(challengeId)
+          .toPromise();
+        this.challenge = this.challenge.challenge;
+        this.fetchUserStage();
+        if (this.stage != 'summary' && this.stage != 'post-test') {
+          this.canPlay = await this.authService.canPlay();
+        } else {
+          this.canPlay = { canPlay: true };
+        }
+      } else {
+        this.canPlay = { canPlay: false };
+      }
+      this.loading = false;
+    }
   }
 
   setActivePage(activePage){

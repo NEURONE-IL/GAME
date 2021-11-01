@@ -5,7 +5,7 @@
 </div>
 <ng-template #loaded>
   <!-- Game inactive -->
-  <div class="center-card" *ngIf="!gameService.canPlay.canPlay">
+  <div class="center-card" *ngIf="!gameService.canPlay.canPlay && gameService.stage !== 'study-finished'">
     <mat-card class="card mat-elevation-z8">
       <mat-card-title>{{ "GAME.INACTIVE.TITLE" | translate }}</mat-card-title>
       <mat-card-content>
