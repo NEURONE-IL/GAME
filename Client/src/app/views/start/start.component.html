@@ -5,26 +5,29 @@
 </div>
 <ng-template #loaded>
   <!-- Game inactive -->
-  <div class="center-card" *ngIf="!gameService.canPlay.canPlay && gameService.stage !== 'study-finished'">
-    <mat-card class="card mat-elevation-z8">
-      <mat-card-title>{{ "GAME.INACTIVE.TITLE" | translate }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ "GAME.INACTIVE.MESSAGE" | translate }}</p>
-        <!-- <p *ngIf="gameService.canPlay.timeNow">
-          {{ "GAME.INACTIVE.TIME_NOW" | translate }}
-          {{ gameService.canPlay.timeNow | date: "shortTime" }}
-        </p> -->
+  <div class="center-card" style="margin-top: 5%;" *ngIf="!gameService.canPlay.canPlay && gameService.stage !== 'study-finished' && gameService.stage !== 'no-play-again'">
+    <mat-card class="card mat-elevation-z8"> 
+    <div class='row center-container'>
+      <div class="col-md-4">
+        <img src="assets/Neurona%20(1).png" style="width: 80%">
+      </div>
+      <div class="col-md-8">
+        <br>
+        <h3>{{ "GAME.INACTIVE.MESSAGE" | translate }}</h3>
         <p *ngIf="gameService.canPlay.canPlayAtTime">
           {{ "GAME.INACTIVE.CAN_PLAY_AT" | translate }}
-          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
+          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}{{ "GAME.INACTIVE.CAN_PLAY_AT_FINAL" | translate}}
         </p>
-        <img src="/assets/clock.gif" style="width: 200px; margin-left: 10%"> 
-        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
-          {{"BUTTONS.CONTINUE" | translate}}
-        </button>
-      </mat-card-content>
-    </mat-card>
+        <img src="/assets/clock.gif" style="width: 200px;"> 
+        <div class='center-container'>
+          <button  class="btn btn-success" style="width: 50%" (click)="continue()">{{"BUTTONS.CONTINUE" | translate}}</button>
+        </div>
+      </div>
+  
+    </div>
+   </mat-card>
   </div>
+
 
   <!-- Asentimiento informado pending -->
   <div
@@ -72,25 +75,29 @@
   </div>
 
   <!-- Can't Play Again -->
-  <div class="center-card" *ngIf="gameService.stage == 'no-play-again'">
-    <mat-card class="card mat-elevation-z8">
-      <mat-card-title>{{ "GAME.INACTIVE.TITLE2" | translate }}</mat-card-title>
-      <mat-card-content>
-        <!-- <p *ngIf="gameService.canPlay.timeNow">
-          {{ "GAME.INACTIVE.TIME_NOW" | translate }}
-          {{ gameService.canPlay.timeNow | date: "shortTime" }}
-        </p> -->
-        <p *ngIf="gameService.canPlay.canPlayAtTime">
-          {{ "GAME.INACTIVE.CAN_PLAY_AT2" | translate }}
-          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
-        </p>
-        <img src="/assets/clock.gif" style="width: 200px; margin-left: 10%"> 
-        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="continue()">
-          {{"BUTTONS.CONTINUE" | translate}}
-        </button>
-      </mat-card-content>
-    </mat-card>
+
+  <div class="center-card" style="margin-top: 5%;" *ngIf="gameService.stage == '!no-play-again'">
+    <mat-card class="card mat-elevation-z8"> 
+    <div class='row center-container'>
+      <div class="col-md-4">
+        <img src="assets/Neurona%20(1).png" style="width: 80%">
+      </div>
+      <div class="col-md-8">
+        <br>
+        <h3>{{ "GAME.INACTIVE.TITLE2" | translate }}</h3>
+        <p>{{ "GAME.INACTIVE.CAN_PLAY_AT2" | translate }}
+          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}</p>
+        <img src="/assets/clock.gif" style="width: 200px;"> 
+        <div class='center-container'>
+          <button  class="btn btn-success" style="width: 50%" (click)="continue()">{{"BUTTONS.CONTINUE" | translate}}</button>
+        </div>
+      </div>
+  
+    </div>
+   </mat-card>
   </div>
+
+  
 
    <!-- Study Finished -->
  <div class="center-card" *ngIf="gameService.stage == 'study-finished'">

@@ -438,10 +438,11 @@
     "INACTIVE": {
       "TITLE": "Aún no puedes jugar",
       "TITLE2": "¡Has terminado todos los desafíos del día!",
-      "MESSAGE": "El juego se encuentra desactivado, por favor vuelve más tarde.",
+      "MESSAGE": "El juego se encuentra desactivado.",
       "TIME_NOW": "La hora actual es",
       "CAN_PLAY_AT": "Puedes volver a jugar a las",
-      "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar de las"
+      "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar de las",
+      "CAN_PLAY_AT_FINAL": ", por favor vuelve más tarde."
     },
     "FINISHED": {
       "TITLE": "¡Has completado todos los desafíos de este estudio!",

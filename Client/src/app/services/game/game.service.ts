@@ -208,8 +208,8 @@ export class GameService {
       this.stage = 'study-finished';
     }
     else{
-      let can_play = await this.authService.canPlay();
-      if(can_play["canPlay"]){
+      this.canPlay = await this.authService.canPlay();
+      if(this.canPlay["canPlay"]){
         this.stage = 'play-again';
       }
       else{
