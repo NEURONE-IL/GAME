@@ -58,6 +58,9 @@ const answerSchema = Joi.object({
     challenge: Joi.any()
         .required(),
 
+    userId: Joi.any()
+        .required(),
+
     date: Joi.date(),
 
     timeLeft: Joi.number()

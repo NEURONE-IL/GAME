@@ -255,7 +255,7 @@
       "TOAST": {
         "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas post desafío",
-        "SUCCESS": "Éxito!",
+        "SUCCESS": "¡Guardado!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas post desafío"
       }
     },
@@ -274,7 +274,7 @@
       "TOAST": {
         "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
-        "SUCCESS": "Éxito!",
+        "SUCCESS": "¡Guardado!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas pre desafío"
       }
     }
@@ -463,6 +463,7 @@
       "ERROR":"Error",
       "ERROR_MESSAGE":"No ha sido posible enviar la respuesta",
       "SUCCESS":"¡Éxito!",
+      "SAVED": "¡Guardado!",
       "TIMED_OUT_ANSWER": "¡Se te ha acabado el tiempo! No has dado una respuesta",
       "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
     },

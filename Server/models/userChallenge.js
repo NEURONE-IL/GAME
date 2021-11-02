@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const UserChallengeSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     challenge: { type: Schema.Types.ObjectId, ref: 'Challenge', required: true},
+    studyId: { type: Schema.Types.ObjectId, ref: 'Study'},
     date: {type: Date},
     answers: [
         {

@@ -102,6 +102,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
     const userChallenge = new UserChallenge({
         user: req.body.user,
         challenge: challenge._id,
+        studyId: req.body.studyId,
         date: req.body.date,
         answers: req.body.answers,
         hintUsed: req.body.hintUsed,

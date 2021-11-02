@@ -73,6 +73,7 @@ export class ChallengeService {
     const formattedAnswer = {
       user: this.authService.getUser(),
       challenge: challenge,
+      userId: this.authService.getUser().study,
       answers: [
         {
           answer: answer,
@@ -96,6 +97,7 @@ export class ChallengeService {
     const formattedAnswer = {
       user: this.authService.getUser(),
       challenge: challenge,
+      userId: this.authService.getUser().study,
       answers: [
         {
           answer

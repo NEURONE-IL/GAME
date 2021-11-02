@@ -87,17 +87,17 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         this.menuItems = [];
         for(let i = 0; i<notifications.length; i++){
           let message;
-          if(notifications[i].name === 'challengeCompleted'){
-            message = 'Insignia adquirida: '+ notifications[i].messageES.split('Has completado el desafío ')[1];
-          }
-          else if(notifications[i].name === 'givePoints'){
+          if(notifications[i].name === 'givePoints'){
             let amount = notifications[i].messageES.split('Has recibido ')[1].split(' ')[0]
             if(amount >= 200){
               message = notifications[i].messageES + ' por completar un logro'
             }
             else {
-              message = notifications[i].messageES + ' por completar un desafío'
+              message = notifications[i].messageES + ' por enfrentar un desafío'
             }
+          }
+          else{
+            message = notifications[i].messageES;
           }
           this.menuItems.push({messageES: message, date: notifications[i].acquisitionDate, _id: notifications[i]._id, elementRef: null});
         }
