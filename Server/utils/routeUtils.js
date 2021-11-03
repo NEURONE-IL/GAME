@@ -21,7 +21,7 @@ async function generateProgress(challenges, user, study) {
   challenges.splice(0, 1)
   // If found, we generate another challenges sequence shifting all the positions
   // 1 step to the left according to the latest known sequence.
-  if (lastUserStudy && lastUserStudy.challenges.length === (challenges.length - 2)) {
+  if (lastUserStudy && lastUserStudy.challenges.length === (challenges.length + 2)) {
     challenges = shiftChallenges(lastUserStudy, challenges);
   }
 
