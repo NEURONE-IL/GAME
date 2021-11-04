@@ -229,11 +229,12 @@ export class QuestionBarComponent implements OnInit {
       docURL += urlArray[i] + '/';
     }
     //Remove the URL postfix from NEURONE Core
-    docURL = docURL.replace('/index.html/', '');
-    var checkPage = this.checkPageSingle(docURL);
-    if(checkPage === 1){
+    docURL = docURL.split(';')[0];
+    var finalURL = docURL.replace('/index.html', '');
+    var checkPage = this.checkPageSingle(finalURL);
+    if(checkPage === 1 || checkPage === 3){
       /*Dispatch unmarkfavoritepage event*/
-      var evt = new CustomEvent('unmarkfavoritepage', { detail: 'Unmark "' + this.answerForm.value.rawUrl1 + '" as favorite page' });
+      var evt = new CustomEvent('unmarkfavoritepage', { detail: 'Unmark "' + this.answerForm.value.url1 + '" as favorite page' });
       window.dispatchEvent(evt);
       /*End dispatch unmarkfavoritepage event*/      
       this.answerForm.patchValue({url1: ''});
@@ -242,29 +243,18 @@ export class QuestionBarComponent implements OnInit {
       this.favPage = false;
 //      console.log('En URL 1');
     }
-    else{
-    // The page isn't marked as favorite and the url1 field is empty
-      if(this.answerForm.get('url1').value === ''){
-        /*Dispatch markfavoritepage event*/
-        var evt = new CustomEvent('markfavoritepage', { detail: 'Mark "' + docURL + '" as favorite page' });
-        window.dispatchEvent(evt);
-        /*End dispatch markfavoritepage event*/
-        this.answerForm.patchValue({url1: docTitle});
-        this.answerForm.patchValue({rawUrl1: docURL});
-        this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
-        this.favPage = true;
-//        console.log('Asignado a URL 1');
-        }
-        else{
-      // The page isn't marked as favorite and the url1 and url2 fields aren't empty
-          this.favPage = false;
-  //        console.log('Ambos ocupados');
-          this.toastr.info(this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO_MESSAGE_SINGLE"), this.translate.instant("GAME.QUESTION_BAR.TOAST.INFO"), {
-            timeOut: 8000,
-            positionClass: 'toast-top-center'
-          });
-        }        
-      }    
+    else if(checkPage === 4){
+      // The page isn't marked as favorite and the url1 field isn't empty
+      /*Dispatch markfavoritepage event*/
+      var evt = new CustomEvent('markfavoritepage', { detail: 'Mark "' + finalURL + '" as favorite page' });
+      window.dispatchEvent(evt);
+      /*End dispatch markfavoritepage event*/
+      this.answerForm.patchValue({url1: finalURL});
+      this.answerForm.patchValue({rawUrl1: finalURL});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
+      this.favPage = true;
+//      console.log('Asignado a URL 1');
+    }
   }
 
 
@@ -282,8 +272,8 @@ export class QuestionBarComponent implements OnInit {
       docURL += urlArray[i] + '/';
     }
     //Remove the URL postfix from NEURONE Core
-    docURL = docURL.replace('/index.html/', '');
-    var checkPage = this.checkPage(docURL);
+    var finalURL = docURL.replace('/index.html', '');
+    var checkPage = this.checkPageSingle(finalURL);
     // The page is already marked as favorite in the url1 field
     if(checkPage === 1){
       this.answerForm.patchValue({url1: ''});
@@ -303,16 +293,16 @@ export class QuestionBarComponent implements OnInit {
     else{
     // The page isn't marked as favorite and the url1 field is empty
       if(this.answerForm.get('url1').value === ''){
-        this.answerForm.patchValue({url1: docTitle});
-        this.answerForm.patchValue({rawUrl1: docURL});
+        this.answerForm.patchValue({url1: finalURL});
+        this.answerForm.patchValue({rawUrl1: finalURL});
         this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
         this.favPage = true;
 //        console.log('Asignado a URL 1');
       }
     // The page isn't marked as favorite and the url2 field is empty
       else if(this.answerForm.get('url2').value === ''){
-        this.answerForm.patchValue({url2: docTitle});
-        this.answerForm.patchValue({rawUrl2: docURL});
+        this.answerForm.patchValue({url2: finalURL});
+        this.answerForm.patchValue({rawUrl2: finalURL});
         this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
         this.favPage = true;
 //        console.log('Asignado a URL 2');
@@ -343,7 +333,6 @@ export class QuestionBarComponent implements OnInit {
       docURL += urlArray[i] + '/';
     }
     //Remove the URL postfix from NEURONE Core
-    docURL = docURL.replace('/index.html/', '');
     var checkPage = this.checkPage(docURL);
     if(checkPage === 1 || checkPage === 2){
       this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
@@ -355,25 +344,35 @@ export class QuestionBarComponent implements OnInit {
 
 
   checkPage(docURL: string){
-    if(this.answerForm.controls['rawUrl1'].value === docURL && docURL != ''){
-//      console.log('Match 1');
+    if(this.answerForm.controls['url1'].value){
       return 1;
     }
-    else if(this.answerForm.controls['rawUrl2'].value === docURL && docURL != ''){
-//      console.log('Match 2');
-      return 2;
-    }
-//    console.log('No match');
     return 3;
+//    if(this.answerForm.controls['url1'].value === docURL && docURL != ''){
+//      console.log('Match 1');
+//      return 1;
+//    }
+//    else if(this.answerForm.controls['url2'].value === docURL && docURL != ''){
+//      console.log('Match 2');
+//      return 2;
+//    }
+//    console.log('No match');
+//    return 3;
   }
 
   checkPageSingle(docURL: string){
-    if(this.answerForm.controls['rawUrl1'].value === docURL && docURL != ''){
+    if(this.answerForm.controls['url1'].value === docURL && docURL != ''){
 //      console.log('Match 1');
       return 1;
     }
-//    console.log('No match');
-    return 3;
+    else if(this.answerForm.controls['url1'].value != docURL && this.answerForm.controls['url1'].value != ''){    
+//      console.log('Match 3');
+      return 3;
+    }
+    else{
+//      console.log('Match 4');
+      return 4;
+    }
   }  
 
 }

@@ -12,8 +12,10 @@ const UserChallengeSchema = new Schema({
             urls: [
               {
                 url: {type: String},
+                _id: false
               }
-            ]
+            ],
+            _id: false
         }
     ],
     timeLeft: { type: Number },

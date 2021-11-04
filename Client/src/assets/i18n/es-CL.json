@@ -308,7 +308,7 @@
       "LAST_NAMES": "Apellidos",
       "RUT": "RUT",
       "PHONE_NUMBER": "Número de teléfono",
-      "PHONE_NUMBER_SUB": "(solo para verificar vía telefónica parentesco/relación con el estudiante y autenticidad del registro)",
+      "PHONE_NUMBER_SUB": "(Solo para verificar vía telefónica parentesco/relación con el estudiante y autenticidad del registro)",
       "EMAIL": "Correo electrónico (del apoderado/a)",
       "EMAIL_CONFIRM": "Confirme correo",
       "BIRTHDATE": "Fecha de nacimiento",
@@ -321,6 +321,7 @@
       "COMMUNE": "Comuna del colegio",
       "REGION": "Región del colegio",
       "PASSWORD": "Contraseña de acceso",
+      "PASSWORD_INFO": "(Usa una contraseña que puedas compartir con el estudiante)",
       "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
       "RELATION": "Parentesco con estudiante (Padre, madre, tutor/a, etc.)",
       "ERROR": {
@@ -500,7 +501,7 @@
       "TOOLTIP_REMOVE": "Quitar de favoritos",
       "TOOLTIP_REMOVE_SINGLE": "Desmarcar como fuente confiable",
       "TOOLTIP_SEND": "Enviar respuesta",
-      "FAVORITE": "Fuente elegida",
+      "FAVORITE": "Aquí puedes marcar o desmarcar la fuente",
       "FAVORITES": "Páginas favoritas",
       "TOAST": {
         "INFO": "Info",

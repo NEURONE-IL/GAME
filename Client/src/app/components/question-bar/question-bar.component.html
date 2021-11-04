@@ -61,16 +61,18 @@
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
-                  <mat-grid-tile colspan="3" rowspan="1">
+                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="router.url.includes('view-page')">
                     <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
                   </mat-grid-tile>
 
-                  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="!router.url.includes('view-page')">
+                    <!--Empty-->
+                  </mat-grid-tile>                  
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
                   <mat-grid-tile colspan="1" rowspan="1">
-                    <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                    <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page') || this.answerForm.value.url1" style="color: #FF9800 !important"
                             #tooltip="matTooltip"
                             [(matTooltip)]="currentTooltip"
                             matTooltipPosition="right"
