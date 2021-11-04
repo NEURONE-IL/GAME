@@ -1,8 +1,8 @@
 //ROOT
 //process.env.ROOT = 'http://159.65.100.191:3030';
-//process.env.ROOT = 'https://trivia.neurone.info';
+process.env.ROOT = 'https://trivia.neurone.info';
 //process.env.ROOT = 'http://159.89.132.126:3030';
-process.env.ROOT = 'http://localhost:3030';
+//process.env.ROOT = 'http://localhost:3030';
 
 //PORT
 process.env.PORT = process.env.PORT || 3030;
@@ -17,8 +17,8 @@ process.env.TOKEN_SECRET = 'ady7asdy78'
 process.env.DB_USER = 'neuroneAdmin';
 
 process.env.DB_PWD = 'DK,V-Dk6-*Pd-PM'
-process.env.URI = `mongodb://localhost:27017`;
-//process.env.URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@localhost:27017`;
+//process.env.URI = `mongodb://localhost:27017`;
+process.env.URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@localhost:27017`;
 process.env.USERURI = `mongodb://localhost:27017/neuronegameuser`;
 
 //NEURONE GM
