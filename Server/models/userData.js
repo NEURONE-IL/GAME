@@ -10,6 +10,7 @@ const UserDataSchema = new Schema({
     names: {type: String },
     last_names: {type: String },
     birthday: {type: Date},
+    sex: {type: String},
     course: {type: String },
     institution: {type: String },
     institution_commune: {type: String },

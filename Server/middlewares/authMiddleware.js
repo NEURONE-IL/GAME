@@ -31,7 +31,10 @@ const schema = Joi.object({
 
     birthday: Joi.date()
         .required(),
-    
+
+    sex: Joi.string()
+        .required(),        
+
     course: Joi.string()
         .required(),
 

@@ -57,6 +57,7 @@ export class QuestionnaireService {
       let userQuestionnaire = {
         user: user._id,
         questionnaire: questionnaire[0]._id,
+        study: user.study,
         challenge: challenge._id,
         type: type,
         answers: answers

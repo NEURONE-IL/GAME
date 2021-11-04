@@ -106,6 +106,7 @@ router.post('/answer', [verifyToken, questionnaireMiddleware.verifyAnswerBody], 
     const userQuestionnaire = new UserQuestionnaire({
         user: req.body.user,
         questionnaire: questionnaire._id,
+        study: req.body.study,
         challenge: req.body.challenge,
         type: questionnaire.type,
         answers: req.body.answers
