@@ -14,9 +14,14 @@ async function generateProgress(challenges, user, study) {
     _id: -1,
   });
 
+  // First 2 study challenges always first
+  progress.push({challenge: challenges[0]})
+  progress.push({challenge: challenges[1]})
+  challenges.splice(0, 1)
+  challenges.splice(0, 1)
   // If found, we generate another challenges sequence shifting all the positions
   // 1 step to the left according to the latest known sequence.
-  if (lastUserStudy) {
+  if (lastUserStudy && lastUserStudy.challenges.length === (challenges.length + 2)) {
     challenges = shiftChallenges(lastUserStudy, challenges);
   }
 
@@ -44,6 +49,8 @@ exports.generateProgress = generateProgress;
 // Shift challenges according to latest known user progress document
 function shiftChallenges(lastUserStudy, challenges) {
     const lastChallengesSequence = lastUserStudy.challenges;
+    lastChallengesSequence.splice(0, 1)
+    lastChallengesSequence.splice(0, 1)
     if (lastChallengesSequence.length >= 1) {
         const firstChallenge = lastChallengesSequence[0].challenge;
 
