@@ -1,7 +1,7 @@
 <div class="header" role="banner">
 
 
-  <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && !router.url.toString().includes('view-page') && (router.url.toString().includes('session') || router.url.toString().includes('start'))" 
+  <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && !router.url.toString().includes('view-page') && (router.url.toString().includes('session') || router.url.toString().includes('start'))"
   >
   <!--Student Implementation-->
   <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && router.url.toString().includes('view-page')"
@@ -32,7 +32,7 @@
   <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))">
 
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
-    <img *ngIf="!user.image_url" src="/assets/img_avatar.png" class="user-image">
+    <img *ngIf="!user.image_url" src="/assets/avatar_usuario.png" class="user-image">
     {{user.names}}
   </a>
   <button (click)="logout()" mat-button *ngIf="isLoggedIn"><mat-icon>login</mat-icon> {{"LOGOUT.LOGOUT" | translate}}</button>

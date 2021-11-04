@@ -1,4 +1,4 @@
-import { EventEmitter, Inject, Output } from '@angular/core';
+import {EventEmitter, Inject, Output, ViewEncapsulation} from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -15,7 +15,8 @@ export interface HintData {
 @Component({
   selector: 'app-question-bar',
   templateUrl: './question-bar.component.html',
-  styleUrls: ['./question-bar.component.css']
+  styleUrls: ['./question-bar.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class QuestionBarComponent implements OnInit {
@@ -120,7 +121,7 @@ export class QuestionBarComponent implements OnInit {
       /*Dispatch showquestionbar event*/
       var evt = new CustomEvent('showquestionbar', { detail: 'Shown with ' + this.timeLeft + ' seconds remaining' });
       window.dispatchEvent(evt);
-      /*End dispatch showquestionbar event*/      
+      /*End dispatch showquestionbar event*/
     }
   }
 
@@ -236,7 +237,7 @@ export class QuestionBarComponent implements OnInit {
       /*Dispatch unmarkfavoritepage event*/
       var evt = new CustomEvent('unmarkfavoritepage', { detail: 'Unmark "' + this.answerForm.value.url1 + '" as favorite page' });
       window.dispatchEvent(evt);
-      /*End dispatch unmarkfavoritepage event*/      
+      /*End dispatch unmarkfavoritepage event*/
       this.answerForm.patchValue({url1: ''});
       this.answerForm.patchValue({rawUrl1: ''});
       this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
@@ -365,7 +366,7 @@ export class QuestionBarComponent implements OnInit {
 //      console.log('Match 1');
       return 1;
     }
-    else if(this.answerForm.controls['url1'].value != docURL && this.answerForm.controls['url1'].value != ''){    
+    else if(this.answerForm.controls['url1'].value != docURL && this.answerForm.controls['url1'].value != ''){
 //      console.log('Match 3');
       return 3;
     }
@@ -373,7 +374,7 @@ export class QuestionBarComponent implements OnInit {
 //      console.log('Match 4');
       return 4;
     }
-  }  
+  }
 
 }
 
