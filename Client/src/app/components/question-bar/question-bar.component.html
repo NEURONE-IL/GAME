@@ -47,6 +47,8 @@
                 </form>
               </mat-grid-tile>
 
+              <!--URL Justified Answer type-->
+
               <ng-template #elseBlock>
                 <ng-container *ngIf="gameService.challenge.answer_type === 'justify'; else elseBlock2">
                   <mat-grid-tile colspan="9" rowspan="3" >
@@ -61,14 +63,14 @@
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
-                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="router.url.includes('view-page')">
+                  <mat-grid-tile colspan="8" rowspan="1">
                     <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
                   </mat-grid-tile>
-
+                  <!--
                   <mat-grid-tile colspan="8" rowspan="1" *ngIf="!router.url.includes('view-page')">
-                    <!--Empty-->
+                    Empty!
                   </mat-grid-tile>                  
-
+                  -->
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
                   <mat-grid-tile colspan="1" rowspan="1">
@@ -106,14 +108,18 @@
                 </ng-container>
               </ng-template>
 
+              <!--URL Answer type-->
+
               <ng-template #elseBlock2>
 
-                <mat-grid-tile colspan="3" rowspan="1">
-                  <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
+                <mat-grid-tile colspan="6" rowspan="1">
+                  <p style="margin-top: 5%;">{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
                 </mat-grid-tile>
 
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
                 <mat-grid-tile colspan="1" rowspan="1">
-                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page') || this.answerForm.value.url1" style="color: #FF9800 !important"
                           #tooltip="matTooltip"
                           [(matTooltip)]="currentTooltip"
                           matTooltipPosition="right"
@@ -124,7 +130,7 @@
                   </button>
                 </mat-grid-tile>
 
-                <mat-grid-tile colspan="10" rowspan="1">
+                <mat-grid-tile colspan="6" rowspan="1">
                   <form class="answer-form" [formGroup]="answerForm">
                     <mat-form-field class="input-full-width urlField">
                       <input matInput formControlName="url1" [readonly]="true">
