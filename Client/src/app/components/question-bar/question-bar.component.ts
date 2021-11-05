@@ -15,8 +15,7 @@ export interface HintData {
 @Component({
   selector: 'app-question-bar',
   templateUrl: './question-bar.component.html',
-  styleUrls: ['./question-bar.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./question-bar.component.css']
 })
 
 export class QuestionBarComponent implements OnInit {
