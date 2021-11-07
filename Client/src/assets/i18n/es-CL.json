@@ -491,7 +491,7 @@
     "QUESTION_BAR": {
       "CHALLENGE_TYPE": {
         "JUSTIFY_START": "Para la siguiente pregunta, marca con",
-        "JUSTIFY_END": "una fuente confiable, es decir, una página web, video o libro, que contenga la respuesta y explica brevemente por qué la consideras confiable",
+        "JUSTIFY_END": "una fuente confiable (ej.: página, video, etc.) que contenga la respuesta y explica brevemente por qué la consideras confiable",
         "STRING_NUMBER": "Escribe la respuesta para la siguiente pregunta",
         "URL_START": "Marca con",
         "URL_END": "una fuente confiable, es decir, una página web, video o libro, que permita responder la siguiente pregunta"

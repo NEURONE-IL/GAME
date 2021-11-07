@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
       relation: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.email, Validators.required], [EmailAlreadyUsedValidator.createValidator(this.authService)]],
       emailConfirm: ['', [Validators.email, Validators.required]],
-      tutor_phone: ['', [Validators.required, Validators.pattern("[0-9]{8,}")]]
+      tutor_phone: ['', [Validators.pattern("[0-9]{8,}")]]
     });
     this.studentForm = this.formBuilder.group({
       names: ['', [Validators.required, Validators.minLength(3)]],
