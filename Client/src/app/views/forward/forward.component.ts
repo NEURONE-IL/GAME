@@ -10,9 +10,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class ForwardComponent implements OnInit {
 
   registerLink;
-  cuarto = ['welcome/60ca3081fcac5ccc3b987599', 'welcome/60de210907dec2640f18e915']; 
-  sexto = ['welcome/60de215707dec2640f18e91e', 'welcome/60de221f07dec2640f18e92f'];
-  octavo = ['welcome/60dfd91707dec2640f18e977', 'welcome/60e5e96694cb44de340ff1c6'];
+  cuarto = 'welcome/6183f67e08d3b0434cb409f6'
+  sexto = 'welcome/618404e008d3b0434cb40a5b'
+  octavo = 'welcome/6181d179be68b12ecfa4b532'
+  segundom = 'welcome/61856599500e1adced97938f'
+  tercerocuarto = 'welcome/618565b1500e1adced979396'
   selected;
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
@@ -20,20 +22,28 @@ export class ForwardComponent implements OnInit {
   ngOnInit(): void {
     const course = this.route.snapshot.paramMap.get('course');
     this.selectCourse(course);
-    this.getForward(course);
+
   }
 
   selectCourse(course){
-    if(course === 'cuarto'){
+    if(course === 'Cuarto6183f67e08d3b0434cb409f6'){
       this.selected = this.cuarto
     }
-    if(course === 'sexto'){
+    if(course === 'Sexto618404e008d3b0434cb40a5b'){
       this.selected = this.sexto
     }
-    if(course === 'octavo'){
+    if(course === 'Octavo6181d179be68b12ecfa4b532'){
       this.selected = this.octavo
     }
+    if(course === 'SegundoM61856599500e1adced97938f'){
+      this.selected = this.segundom
+    }
+    if(course === 'TerceroCuarto618565b1500e1adced979396'){
+      this.selected = this.tercerocuarto
+    }
+    this.router.navigate([this.selected]);
   }
+
 
   getForward(course){
     this.authService.getForward(course).subscribe(
