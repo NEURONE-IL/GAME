@@ -38,7 +38,7 @@ export class ForwardComponent implements OnInit {
     if(course === 'SegundoM61856599500e1adced97938f'){
       this.selected = this.segundom
     }
-    if(course === 'TerceroCuarto618565b1500e1adced979396'){
+    if(course === 'TerceroCuartoM618565b1500e1adced979396'){
       this.selected = this.tercerocuarto
     }
     this.router.navigate([this.selected]);
