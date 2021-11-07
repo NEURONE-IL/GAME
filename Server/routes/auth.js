@@ -123,6 +123,7 @@ router.post(
       names: req.body.names,
       last_names: req.body.last_names,
       birthday: req.body.birthday,
+      sex: req.body.sex,
       course: req.body.course,
       institution: req.body.institution,
       institution_commune: req.body.institution_commune,

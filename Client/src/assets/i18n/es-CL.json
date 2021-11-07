@@ -308,15 +308,20 @@
       "LAST_NAMES": "Apellidos",
       "RUT": "RUT",
       "PHONE_NUMBER": "Número de teléfono",
-      "PHONE_NUMBER_SUB": "(solo para verificar vía telefónica parentesco/relación con el estudiante y autenticidad del registro)",
+      "PHONE_NUMBER_SUB": "(Solo para verificar vía telefónica parentesco/relación con el estudiante y autenticidad del registro)",
       "EMAIL": "Correo electrónico (del apoderado/a)",
       "EMAIL_CONFIRM": "Confirme correo",
       "BIRTHDATE": "Fecha de nacimiento",
+      "SEX": "Sexo",
+      "SEX_F": "Femenino",
+      "SEX_M": "Masculino",
+      "SEX_N": "No informar",
       "GRADE": "Curso",
       "SCHOOL": "Colegio",
       "COMMUNE": "Comuna del colegio",
       "REGION": "Región del colegio",
       "PASSWORD": "Contraseña de acceso",
+      "PASSWORD_INFO": "(Usa una contraseña que puedas compartir con el estudiante)",
       "PASSWORD_CONFIRMATION": "Confirmación de contraseña",
       "RELATION": "Parentesco con estudiante (Padre, madre, tutor/a, etc.)",
       "ERROR": {
@@ -330,6 +335,7 @@
         "PHONE_REQUIRED": "Debe ingresar su teléfono",
         "PHONE_INVALID": "Debe ingresar un teléfono válido",
         "BIRTHDATE": "Debe ingresar la fecha de nacimiento",
+        "SEX": "Debe seleccionar el sexo",
         "GRADE": "Debe ingresar el curso",
         "SCHOOL": "Debe ingresar el colegio",
         "REGION": "Debe ingresar la región",
@@ -422,7 +428,7 @@
     "ASSENT": {
       "ACCEPT_TEXT": "Acepto",
       "CHECK_LABEL": "Estoy seguro/a",
-      "DETAILS_HIDE": "Ocultar detalles",      
+      "DETAILS_HIDE": "Ocultar detalles",
       "DETAILS_SHOW": "Ver detalles",
       "DISCLAIMER": "Por favor, lea el siguiente asentimiento informado.",
       "ERROR": "Debe aceptar participar en el estudio para continuar.",
@@ -485,7 +491,7 @@
     "QUESTION_BAR": {
       "CHALLENGE_TYPE": {
         "JUSTIFY_START": "Para la siguiente pregunta, marca con",
-        "JUSTIFY_END": "una fuente confiable, es decir, una página web, video o libro, que contenga la respuesta y explica brevemente por qué la consideras confiable",
+        "JUSTIFY_END": "una fuente confiable (ej.: página, video, etc.) que contenga la respuesta y explica brevemente por qué la consideras confiable",
         "STRING_NUMBER": "Escribe la respuesta para la siguiente pregunta",
         "URL_START": "Marca con",
         "URL_END": "una fuente confiable, es decir, una página web, video o libro, que permita responder la siguiente pregunta"
@@ -495,7 +501,7 @@
       "TOOLTIP_REMOVE": "Quitar de favoritos",
       "TOOLTIP_REMOVE_SINGLE": "Desmarcar como fuente confiable",
       "TOOLTIP_SEND": "Enviar respuesta",
-      "FAVORITE": "Fuente elegida",
+      "FAVORITE": "Aquí puedes marcar o desmarcar la fuente",
       "FAVORITES": "Páginas favoritas",
       "TOAST": {
         "INFO": "Info",

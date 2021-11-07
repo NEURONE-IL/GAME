@@ -230,7 +230,10 @@ function sendResetPasswordEmail(user, res, req) {
       },
     });
     const mailOptions = {
-      from: "neurone@informatica.usach.cl",
+      from: {
+        name: 'TRIVIA',
+        address: 'neurone@informatica.usach.cl'
+      }, 
       to: user.email,
       subject: "Recupere su contraseña",
       text: mailText,
@@ -281,7 +284,7 @@ function addTextToEmailRP(mailHTML, userData, link) {
   );
   mailHTML = mailHTML.replace(
     "[RESET_PASSWORD.TITLE]",
-    "Hola " + userData.names + "."
+    "Hola " + userData.names
   );
   mailHTML = mailHTML.replace(
     "[RESET_PASSWORD.TEXT]",

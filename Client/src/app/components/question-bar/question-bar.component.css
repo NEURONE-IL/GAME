@@ -149,3 +149,43 @@ input[type=number]::-webkit-outer-spin-button {
 .timer {
   color: #3f51b5;
 }
+
+.questionBar {
+  padding-left: 0px;
+  margin-left: 0px;
+  display: inline;
+}
+.mat-tab-label-container {
+  margin-left: 10%;
+}
+
+
+element.style {
+  color: #3f51b5;
+}
+b, strong {
+  font-weight: bolder;
+}
+b, strong {
+  font-weight: bolder;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+user agent stylesheet
+b {
+  font-weight: bold;
+}
+.questionBar[_ngcontent-lqx-c198] {
+  padding-top: 10px;
+  padding-bottom: 0px;
+  position: absolute;
+  font-size: large;
+  text-align: start;
+  left: 2%;
+  z-index: 3;
+  cursor: pointer;
+}

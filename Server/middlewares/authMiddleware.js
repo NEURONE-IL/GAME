@@ -23,15 +23,18 @@ const schema = Joi.object({
     last_names: Joi.string()
         .required(),
     
-    tutor_phone: Joi.string()
-        .required(),
+    tutor_phone: Joi.any(),
+//        .required(),
 
     relation: Joi.string()
         .required(),
 
     birthday: Joi.date()
         .required(),
-    
+
+    sex: Joi.string()
+        .required(),        
+
     course: Joi.string()
         .required(),
 

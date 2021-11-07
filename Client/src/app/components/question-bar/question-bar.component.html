@@ -1,22 +1,48 @@
 <div>
   <div class="row">
-    <div class="col-md-12 questionBar"  (click)="tabhideshow($event)" >
-        <mat-icon> {{hide?"expand_less":"expand_more"}}</mat-icon>
+
+    <div class="col-md-12 questionBar" style="left: 1%;" (click)="tabhideshow($event)" >
+      <div class="row">
+        <div class="col-md-1" style="left: 2%;"><b *ngIf="hide" style="color: #3f51b5">{{timeLeft}} seg. </b></div>
+        <div class="col-md-11"><mat-icon> {{hide?"expand_less":"expand_more"}}</mat-icon></div>
+      </div>
+
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <mat-tab-group id="mat-tab" (selectedIndex)=1 (selectedTabChange)="onTabChanged()">
+      <mat-tab-group id="mat-tab" mat-align-tabs="start" (selectedIndex)=1 (selectedTabChange)="onTabChanged()">
+        <!--
+         <mat-tab *ngIf="hide">
+          <ng-template mat-tab-label> <b style="color: #3f51b5">{{timeLeft}}seg </b> </ng-template>
+        </mat-tab>
+        -->
+
         <mat-tab>
-          <ng-template mat-tab-label *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'">
-            {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.STRING_NUMBER" | translate}}:
+          <ng-template mat-tab-label style="white-space: normal;"
+                       *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'">
+            <div class=" row">
+              <div class="col-md-12 inline-flex" style="white-space: normal;">
+                {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.STRING_NUMBER" | translate}}:
+              </div>
+            </div>
           </ng-template>
-          <ng-template mat-tab-label *ngIf="gameService.challenge.answer_type === 'url'">
-            {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.URL_START" | translate}} <mat-icon>star</mat-icon> {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.URL_END" | translate}}:
+          <ng-template mat-tab-label style="white-space: normal;" *ngIf="gameService.challenge.answer_type === 'url'">
+            <div class=" row">
+              <div class="col-md-12 inline-flex" style="white-space: normal;">
+                {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.URL_START" | translate}} <mat-icon>star</mat-icon> {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.URL_END" | translate}}:
+              </div>
+            </div>
+
           </ng-template>
-          <ng-template mat-tab-label *ngIf="gameService.challenge.answer_type === 'justify'">
-            {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.JUSTIFY_START" | translate}} <mat-icon>star</mat-icon> {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.JUSTIFY_END" | translate}}:
+          <ng-template mat-tab-label style="white-space: normal;" *ngIf="gameService.challenge.answer_type === 'justify'">
+            <div class=" row">
+              <div class="col-md-12 inline-flex" style="white-space: normal;">
+                {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.JUSTIFY_START" | translate}} <mat-icon style="color: #FF9800 !important">star</mat-icon> {{"GAME.QUESTION_BAR.CHALLENGE_TYPE.JUSTIFY_END" | translate}}:
+              </div>
+            </div>
+
           </ng-template>
 
           <div class="panel-container" >
@@ -47,6 +73,8 @@
                 </form>
               </mat-grid-tile>
 
+              <!--URL Justified Answer type-->
+
               <ng-template #elseBlock>
                 <ng-container *ngIf="gameService.challenge.answer_type === 'justify'; else elseBlock2">
                   <mat-grid-tile colspan="9" rowspan="3" >
@@ -61,16 +89,19 @@
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
-                  <mat-grid-tile colspan="3" rowspan="1">
+                  <mat-grid-tile colspan="8" rowspan="1">
                     <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
                   </mat-grid-tile>
-
-                  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+                  <!--
+                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="!router.url.includes('view-page')">
+                    Empty!
+                  </mat-grid-tile>
+                  -->
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
                   <mat-grid-tile colspan="1" rowspan="1">
-                    <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                    <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page') || this.answerForm.value.url1" style="color: #FF9800 !important"
                             #tooltip="matTooltip"
                             [(matTooltip)]="currentTooltip"
                             matTooltipPosition="right"
@@ -104,14 +135,18 @@
                 </ng-container>
               </ng-template>
 
+              <!--URL Answer type-->
+
               <ng-template #elseBlock2>
 
-                <mat-grid-tile colspan="3" rowspan="1">
-                  <p style="margin-top: 10%;">{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
+                <mat-grid-tile colspan="6" rowspan="1">
+                  <p style="margin-top: 5%;">{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
                 </mat-grid-tile>
 
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
                 <mat-grid-tile colspan="1" rowspan="1">
-                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page')" style="color: #FF9800 !important"
+                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page') || this.answerForm.value.url1" style="color: #FF9800 !important"
                           #tooltip="matTooltip"
                           [(matTooltip)]="currentTooltip"
                           matTooltipPosition="right"
@@ -122,7 +157,7 @@
                   </button>
                 </mat-grid-tile>
 
-                <mat-grid-tile colspan="10" rowspan="1">
+                <mat-grid-tile colspan="6" rowspan="1">
                   <form class="answer-form" [formGroup]="answerForm">
                     <mat-form-field class="input-full-width urlField">
                       <input matInput formControlName="url1" [readonly]="true">
@@ -166,9 +201,7 @@
             </mat-grid-list>
           </div>
         </mat-tab>
-        <mat-tab *ngIf="hide">
-          <ng-template mat-tab-label> <b style="color: #3f51b5">{{timeLeft}}seg </b> </ng-template>
-        </mat-tab>
+
       </mat-tab-group>
 
 

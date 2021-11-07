@@ -169,7 +169,7 @@ getTrack(trackName){
 
   videoSources: Plyr.Source[] = [
     {
-      src: '/assets/audio/videoIntro.mp4',
+      src: '/assets/audio/triviaInstrucciones.mp4',
     },
   ];
 
@@ -178,7 +178,7 @@ getTrack(trackName){
 
   }
   initPlayer($event){
-    this.player = $event
+    this.player = $event;
     this.player.play();
   }
   play(): void {
@@ -191,17 +191,17 @@ getTrack(trackName){
     this.videoModal = false;
   }
 
-  CarrucelInterval = 100000
-  stopTimes=[17, 34, 48, 66, 75, 82]
-  segmentoActual=0
+  CarrucelInterval = 100000;
+  stopTimes=[17, 34, 48, 66, 75, 82];
+  segmentoActual=0;
   captureTimeAndAdvanceSlide(){
     let actualTime = this.player.currentTime;
     if (actualTime > this.stopTimes[this.segmentoActual] ){
-      this.CarrucelInterval = 1000
+      this.CarrucelInterval = 1000;
     }
     if (actualTime > this.stopTimes[this.segmentoActual]+1.5 ){
-      this.segmentoActual += 1
-      this.CarrucelInterval = 100000
+      this.segmentoActual += 1;
+      this.CarrucelInterval = 100000;
     }
   }
 
