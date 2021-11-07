@@ -58,9 +58,9 @@ export class SearchResultComponent implements OnInit {
           //paginacion
           //
           let doc;
-          let documentosTexto=[]
+          let documentosTexto=[];
 
-          this.documentsPaginated=[]
+          this.documentsPaginated=[];
           this.totalDocuements=0;
           this.pages=1;
           this.pageIndex=[];
