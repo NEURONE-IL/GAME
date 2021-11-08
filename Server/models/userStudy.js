@@ -15,8 +15,7 @@ const UserStudySchema = new Schema({
         start_time: { type: Date, default: undefined },
         answer_submitted: {type: Boolean, default: false},
         finished: {type: Boolean, default: false},
-        _id: false,
-        id: false
+        _id: false
       }], default: []},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

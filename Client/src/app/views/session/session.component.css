@@ -1,7 +1,6 @@
 .session-container {
   display: flex;
   flex-flow: column;
-  height: 93%;
 }
 
 .outlet-container {
@@ -11,4 +10,8 @@
 
 .question-bar-wrapper {
   min-height: max-content;
+  position: fixed;
+  bottom: 0px;
+  z-index: 1;
+  width: 100%;
 }

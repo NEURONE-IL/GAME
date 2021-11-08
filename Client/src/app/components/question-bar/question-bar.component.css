@@ -68,15 +68,6 @@
 	color: black !important;
 }
 
-.urlField ::ng-deep .mat-form-field-underline {
-	/*hide underline*/
-	/*display: none;*/
-}
-
-.urlField{
-	/*margin-top: 2%;*/
-}
-
 .urlInput{
 	cursor: default;
 }
@@ -103,10 +94,6 @@
 
 mat-label{
   padding-bottom: 10px;
-}
-
-input.mat-input-element {
-/*  padding-bottom: 10px;*/
 }
 
 span .mat-select-placeholder{

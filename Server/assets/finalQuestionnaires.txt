@@ -46,7 +46,21 @@ Real pre-test questions
 					"number": 2
 				}
 			]
-		}        
+		},
+		{
+			"question": "¿Qué tan conteto, alegre, animado o feliz te sientes ahora?",
+			"number": 4 ,
+			"options": [
+				{
+					"option": "Poco o nada",
+					"number": 1
+				},
+				{
+					"option": "Mucho",
+					"number": 2
+				}
+			]
+		}		
 	]
 }
 /*
@@ -101,7 +115,21 @@ Real post-test questions
 					"number": 2
 				}
 			]
-		} 
+		},
+		{
+			"question": "¿Qué tan conteto, alegre, animado o feliz te sientes ahora?",
+			"number": 4 ,
+			"options": [
+				{
+					"option": "Poco o nada",
+					"number": 1
+				},
+				{
+					"option": "Mucho",
+					"number": 2
+				}
+			]
+		}		
 	]
 }
 /*
