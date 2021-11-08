@@ -173,6 +173,7 @@ getTrack(trackName){
     },
   ];
 
+
   played(event: Plyr.PlyrEvent) {
     console.log('played', event);
 
