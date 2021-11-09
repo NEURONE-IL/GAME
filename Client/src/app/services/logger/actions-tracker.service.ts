@@ -42,7 +42,9 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'showquestionbar', data, this.showquestionbarListener);
       this.bindEvent(targetDoc, 'hidequestionbar', data, this.hidequestionbarListener);
       this.bindEvent(targetDoc, 'markfavoritepage', data, this.markfavoritepageListener);
-      this.bindEvent(targetDoc, 'unmarkfavoritepage', data, this.unmarkfavoritepageListener);      
+      this.bindEvent(targetDoc, 'unmarkfavoritepage', data, this.unmarkfavoritepageListener);
+      this.bindEvent(targetDoc, 'pageenter', data, this.pageenterListener);
+      this.bindEvent(targetDoc, 'pageexit', data, this.pageexitListener);
       /*End custom events*/
       this.isTracking = true;
     }
@@ -68,6 +70,8 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'hidequestionbar');
       this.unbindAll(targetDoc, 'markfavoritepage');
       this.unbindAll(targetDoc, 'unmarkfavoritepage');
+      this.unbindAll(targetDoc, 'pageenter');
+      this.unbindAll(targetDoc, 'pageexit');      
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -269,6 +273,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
       source: 'QuestionBar',
       type: 'ShowQuestionBar',
       localTimeStamp: t,
@@ -288,6 +294,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
       source: 'QuestionBar',
       type: 'HideQuestionBar',
       localTimeStamp: t,
@@ -307,6 +315,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
       source: 'QuestionBar',
       type: 'MarkFavoritePage',
       localTimeStamp: t,
@@ -326,6 +336,8 @@ export class ActionsTrackerService {
 
     let keyOutput = {
       userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
       source: 'QuestionBar',
       type: 'UnmarkFavoritePage',
       localTimeStamp: t,
@@ -335,6 +347,48 @@ export class ActionsTrackerService {
 
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
-  }    
+  } 
+  
+  pageenterListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PageEnter',
+      localTimeStamp: t,
+      url: doc.URL,
+      detail: evt.detail
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }  
+
+  pageexitListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PageExit',
+      localTimeStamp: t,
+      url: doc.URL,
+      detail: evt.detail
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }   
 
 }

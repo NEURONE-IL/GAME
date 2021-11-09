@@ -369,7 +369,7 @@ export class KmTrackerServiceIframe {
       h_doc: docH,
       localTimeStamp: time,
     };
-     console.log(scrollOutput);
+    // console.log(scrollOutput);
     evt.currentTarget.storeService.postScroll(scrollOutput);
   }
 }

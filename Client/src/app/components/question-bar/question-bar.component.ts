@@ -48,7 +48,7 @@ export class QuestionBarComponent implements OnInit {
               private toastr: ToastrService,
               private translate: TranslateService) {
     this.answerForm = this.formBuilder.group({
-      answer: ['', Validators.requiredTrue],
+      answer: ['', [Validators.required]],
       url1: [''],
       url2: [''],
       rawUrl1: [''],
@@ -153,6 +153,8 @@ export class QuestionBarComponent implements OnInit {
   }
 
   sendAnswer() {
+    let isValid = this.checkValid();
+    if(!isValid) return;
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer.toString();
@@ -163,7 +165,7 @@ export class QuestionBarComponent implements OnInit {
     let url1 = this.answerForm.value.rawUrl1;
     let url2 = this.answerForm.value.rawUrl2;
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswer(challenge, answer, url1, url2, this.timeLeft, this.hintUsed).subscribe(
+    this.challengeService.postAnswer(challenge, answer, url1, url2, this.timeLeft, this.hintUsed, null).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SAVED"), {
           timeOut: 5000,
@@ -187,9 +189,11 @@ export class QuestionBarComponent implements OnInit {
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer;
+    let url1 = this.answerForm.value.rawUrl1;
+    let url2 = this.answerForm.value.rawUrl2;    
     if(answer==null) answer = '';
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
-    this.challengeService.postAnswerFromTimeOut(challenge, answer, this.timeLeft, this.hintUsed).subscribe(
+    this.challengeService.postAnswer(challenge, answer, url1, url2, this.timeLeft, this.hintUsed, "TIMED_OUT").subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.TIMED_OUT_ANSWER"), this.translate.instant("GAME.TOAST.SAVED"), {
           timeOut: 5000,
@@ -206,6 +210,38 @@ export class QuestionBarComponent implements OnInit {
       }
     );
   }
+
+  checkValid(){
+    if(!this.answerForm.value.answer && (this.gameService.challenge.answer_type === "string" || this.gameService.challenge.answer_type === "number")){
+      this.toastr.warning(this.translate.instant("GAME.TOAST.EMPTY_ANSWER"), this.translate.instant("GAME.TOAST.WARNING"), {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+      return false;
+    }
+    if(!this.answerForm.value.answer && this.gameService.challenge.answer_type === "url"){
+      this.toastr.warning(this.translate.instant("GAME.TOAST.EMPTY_URL"), this.translate.instant("GAME.TOAST.WARNING"), {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+      return false;
+    }
+    if(!this.answerForm.value.url1 && this.gameService.challenge.answer_type === "justify"){
+      this.toastr.warning(this.translate.instant("GAME.TOAST.EMPTY_URL"), this.translate.instant("GAME.TOAST.WARNING"), {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+      return false;
+    }    
+    if(!this.answerForm.value.answer && this.gameService.challenge.answer_type === "justify"){
+      this.toastr.warning(this.translate.instant("GAME.TOAST.EMPTY_JUSTIFY"), this.translate.instant("GAME.TOAST.WARNING"), {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+      return false;
+    }
+    return true;
+  }    
 
   showHint(): void {
     const dialogRef = this.hintDialog.open(HintDialogComponent, {
@@ -319,6 +355,46 @@ export class QuestionBarComponent implements OnInit {
     }
   }
 
+  favoriteActionURL(): void{
+    //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
+    const titleArray = window.location.href.split('/');
+    //Get docTitle
+    let docTitle = decodeURIComponent(titleArray[5]);
+    //Get docURL
+    let rawUrl = decodeURIComponent(titleArray[6]);
+    //Remove the URL prefix from NEURONE Core
+    const urlArray = rawUrl.split('/');
+    let docURL = '';
+    for(var i=3; i<urlArray.length; i++){
+      docURL += urlArray[i] + '/';
+    }
+    //Remove the URL postfix from NEURONE Core
+    docURL = docURL.split(';')[0];
+    var finalURL = docURL.replace('/index.html', '');
+    var checkPage = this.checkPageURL(finalURL);
+    if(checkPage === 1 || checkPage === 3){
+      /*Dispatch unmarkfavoritepage event*/
+      var evt = new CustomEvent('unmarkfavoritepage', { detail: 'Unmark "' + this.answerForm.value.answer + '" as favorite page' });
+      window.dispatchEvent(evt);
+      /*End dispatch unmarkfavoritepage event*/
+      this.answerForm.patchValue({answer: ''});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
+      this.favPage = false;
+//      console.log('En URL 1');
+    }
+    else if(checkPage === 4){
+      // The page isn't marked as favorite and the url1 field isn't empty
+      /*Dispatch markfavoritepage event*/
+      var evt = new CustomEvent('markfavoritepage', { detail: 'Mark "' + finalURL + '" as favorite page' });
+      window.dispatchEvent(evt);
+      /*End dispatch markfavoritepage event*/
+      this.answerForm.patchValue({answer: finalURL});
+      this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_REMOVE_SINGLE");
+      this.favPage = true;
+//      console.log('Asignado a URL 1');
+    }
+  }
+  
   checkFavPage(){
     //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
@@ -374,6 +450,25 @@ export class QuestionBarComponent implements OnInit {
       return 4;
     }
   }
+
+  checkPageURL(docURL: string){
+    if(this.answerForm.controls['answer'].value === docURL && docURL != ''){
+//      console.log('Match 1');
+      return 1;
+    }
+    else if(this.answerForm.controls['answer'].value != docURL && this.answerForm.controls['answer'].value != ''){
+//      console.log('Match 3');
+      return 3;
+    }
+    else{
+//      console.log('Match 4');
+      return 4;
+    }
+  }
+
+  get answerControls(): any {
+    return this.answerForm['controls'];
+  }  
 
 }
 

@@ -55,7 +55,10 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
 
     this.checkStudy();
-    this.regions = this.sortArray(getRegiones());
+    //Sorted by name
+    //this.regions = this.sortArray(getRegiones());
+    //Sorted by geography location
+    this.regions = getRegiones();
 
     this.consentForm = this.formBuilder.group({
       consent: [false, Validators.requiredTrue]

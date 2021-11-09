@@ -69,7 +69,7 @@ export class ChallengeService {
     return this.http.delete(this.uri+id);
   }
 
-  postAnswer(challenge: any, answer: any, url1: any, url2: any, timeLeft: number, hintUsed: boolean) {
+  postAnswer(challenge: any, answer: any, url1: any, url2: any, timeLeft: number, hintUsed: boolean, comment: string) {
     const formattedAnswer = {
       user: this.authService.getUser(),
       challenge: challenge,
@@ -88,23 +88,8 @@ export class ChallengeService {
         }
       ],
       timeLeft: timeLeft,
-      hintUsed: hintUsed
-    }
-    return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
-  }
-
-  postAnswerFromTimeOut(challenge: any, answer: any, timeLeft: number, hintUsed: boolean) {
-    const formattedAnswer = {
-      user: this.authService.getUser(),
-      challenge: challenge,
-      studyId: this.authService.getUser().study,
-      answers: [
-        {
-          answer
-        }
-      ],
-      timeLeft: timeLeft,
-      hintUsed: hintUsed
+      hintUsed: hintUsed,
+      comment: comment
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

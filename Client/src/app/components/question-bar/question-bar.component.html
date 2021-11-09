@@ -63,12 +63,18 @@
                     <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
                     <input matInput formControlName="answer">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                    <mat-error *ngIf="answerControls.answer.hasError('required')">
+                      {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
+                    </mat-error>                    
                   </mat-form-field>
 
                   <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'number'">
                     <mat-label>{{ "GAME.ANSWER_TYPE.NUMBER" | translate }}</mat-label>
                     <input matInput formControlName="answer" type="number">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                    <mat-error *ngIf="answerControls.answer.hasError('required')">
+                      {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
+                    </mat-error>
                   </mat-form-field>
                 </form>
               </mat-grid-tile>
@@ -83,6 +89,9 @@
                         <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
                         <input matInput formControlName="answer">
                         <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                        <mat-error *ngIf="answerControls.answer.hasError('required')">
+                          {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
+                        </mat-error>
                       </mat-form-field>
                     </form>
                   </mat-grid-tile>
@@ -146,7 +155,7 @@
                 <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="1">
-                  <button mat-icon-button (click)="favoriteActionSingle()" *ngIf="router.url.includes('view-page') || this.answerForm.value.url1" style="color: #FF9800 !important"
+                  <button mat-icon-button (click)="favoriteActionURL()" *ngIf="router.url.includes('view-page') || this.answerForm.value.answer" style="color: #FF9800 !important"
                           #tooltip="matTooltip"
                           [(matTooltip)]="currentTooltip"
                           matTooltipPosition="right"
@@ -160,13 +169,16 @@
                 <mat-grid-tile colspan="6" rowspan="1">
                   <form class="answer-form" [formGroup]="answerForm">
                     <mat-form-field class="input-full-width urlField">
-                      <input matInput formControlName="url1" [readonly]="true">
+                      <input matInput formControlName="answer" [readonly]="true">
                     </mat-form-field>
                   </form>
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="1">
                   <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                  <mat-error *ngIf="answerControls.answer.hasError('required')">
+                    {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
+                  </mat-error>                  
                 </mat-grid-tile>
 
 <!--URL2
@@ -184,6 +196,9 @@
                 <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="1">
                   <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
+                  <mat-error *ngIf="answerControls.answer.hasError('required')">
+                    {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
+                  </mat-error>                  
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="2"></mat-grid-tile>
