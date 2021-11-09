@@ -70,11 +70,12 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    /*Dispatch pageexit event*/
-    var evt = new CustomEvent('pageexit', { detail: 'Exit from "' + this.cleanURL + '"' });
-    window.dispatchEvent(evt);
-    /*End dispatch pageexit event*/    
+    if(this.cleanURL){
+      /*Dispatch pageexit event*/
+      var evt = new CustomEvent('pageexit', { detail: 'Exit from "' + this.cleanURL + '"' });
+      window.dispatchEvent(evt);
+      /*End dispatch pageexit event*/    
+    }
     this.iFrameKmTracker.stop();
   }
-
 }
