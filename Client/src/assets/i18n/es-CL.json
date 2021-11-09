@@ -180,6 +180,8 @@
     }
   },
   "ERRORS": {
+    "ANSWER_JUSTIFY_REQUIRED": "Debes justificar tu respuesta",
+    "ANSWER_REQUIRED": "Debes ingresar una respuesta",
     "CHECK_REQUIRED": "La confirmación es requerida",
     "MAIL_FORMAT": "Debe ingresar en email válido",
     "MAX_LENGTH_2": "El largo del campo no puede exceder los 2 caracteres",
@@ -469,13 +471,17 @@
       "URL": "Las páginas que seleccionaste se muestran aquí"
     },
     "TOAST": {
-      "ANSWER_SUBMITTED":"Respuesta enviada correctamente",
-      "ERROR":"Error",
-      "ERROR_MESSAGE":"No ha sido posible enviar la respuesta",
-      "SUCCESS":"¡Éxito!",
-      "SAVED": "¡Guardado!",
+      "ANSWER_SUBMITTED": "Respuesta enviada correctamente",
+      "EMPTY_ANSWER": "Debes ingresar tu respuesta",
+      "EMPTY_JUSTIFY": "Debes justificar tu respuesta",
+      "EMPTY_URL": "Debes seleccionar una fuente confiable",
+      "ERROR": "Error",
+      "ERROR_MESSAGE": "No ha sido posible enviar la respuesta",
+      "SUCCESS": "¡Éxito!",
+      "SAVED": " ¡Guardado!",
       "TIMED_OUT_ANSWER": "¡Se te ha acabado el tiempo! No has dado una respuesta",
-      "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro"
+      "TIMED_OUT_ANSWER_ERROR": "¡Se te ha acabado el tiempo! Ha ocurrido un error al guardar el registro",
+      "WARNING": "¡Advertencia!"
     },
     "SEARCH": {
       "ALL": "Todo",

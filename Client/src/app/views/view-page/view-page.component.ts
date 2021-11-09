@@ -23,10 +23,12 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
   docUrl: string;
   title: string;
   result: string;
+  cleanURL: string;  
 
   iframeLoaded = false;
   isInited = false;
   pageContent;
+
 
   ngOnInit(): void {
     this.route.paramMap
@@ -40,6 +42,25 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log(this.docUrl);
         console.log('docurl: ',this.docUrl);
       });
+      /*Clean URL*/
+      //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
+      const titleArray = window.location.href.split('/');
+      //Get docURL
+      let rawUrl = decodeURIComponent(titleArray[6]);
+      //Remove the URL prefix from NEURONE Core
+      const urlArray = rawUrl.split('/');
+      let docURL = '';
+      for(var i=3; i<urlArray.length; i++){
+        docURL += urlArray[i] + '/';
+      }
+      //Remove the URL postfix from NEURONE Core
+      docURL = docURL.split(';')[0];
+      this.cleanURL = docURL.replace('/index.html', '');
+      /*End Clean URL*/
+      /*Dispatch pageenter event*/
+      var evt = new CustomEvent('pageenter', { detail: 'Enter to "' + this.cleanURL + '"' });
+      window.dispatchEvent(evt);
+      /*End dispatch pageenter event*/
   }
 
   trackIFrame() {
@@ -49,7 +70,12 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
+    if(this.cleanURL){
+      /*Dispatch pageexit event*/
+      var evt = new CustomEvent('pageexit', { detail: 'Exit from "' + this.cleanURL + '"' });
+      window.dispatchEvent(evt);
+      /*End dispatch pageexit event*/    
+    }
     this.iFrameKmTracker.stop();
   }
-
 }

@@ -106,6 +106,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         date: req.body.date,
         answers: req.body.answers,
         hintUsed: req.body.hintUsed,
+        comment: req.body.comment,
         timeLeft: req.body.timeLeft,
         distance: distance,
         pointsObtained: pointsObtained

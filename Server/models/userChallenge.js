@@ -20,6 +20,7 @@ const UserChallengeSchema = new Schema({
     ],
     timeLeft: { type: Number },
     hintUsed: { type: Boolean, default: false},
+    comment: { type: String },
     distance: {type: Number},
     pointsObtained: { type: Number},
     createdAt: { type: Date, default: Date.now },

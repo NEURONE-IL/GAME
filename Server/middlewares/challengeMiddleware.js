@@ -69,6 +69,8 @@ const answerSchema = Joi.object({
     hintUsed: Joi.boolean()
         .required(),
 
+    comment: Joi.any(),
+
     answers: Joi.array().items(Joi.object({
         answer: Joi.string().allow(null, ''),
         urls: Joi.array().items(Joi.object({

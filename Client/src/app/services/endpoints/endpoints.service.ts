@@ -16,7 +16,8 @@ export interface Resource {
   task: [string],
   title: string,
   type: string,
-  url: string
+  url: string,
+  maskedURL: string
 }
 
 @Injectable({

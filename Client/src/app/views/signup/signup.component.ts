@@ -55,6 +55,9 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
 
     this.checkStudy();
+    //Sorted by name
+    //this.regions = this.sortArray(getRegiones());
+    //Sorted by geography location
     this.regions = getRegiones();
 
     this.consentForm = this.formBuilder.group({
@@ -85,7 +88,7 @@ export class SignupComponent implements OnInit {
 
   save() {
     let userData = Object.assign(this.tutorForm.value, this.studentForm.value);
-    let regionString = this.regions.find(element => element.id = userData.institution_region).name;
+    let regionString = this.regions.find(element => element.id === userData.institution_region).name;
     userData.institution_region = regionString;
     delete userData.password_confirmation;
     this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'))
@@ -127,8 +130,13 @@ export class SignupComponent implements OnInit {
   }
 
   onRegionChange(regionChange) {
-    this.communes = getComunasByRegion(regionChange.value);
+    this.communes = this.sortArray(getComunasByRegion(regionChange.value));
     this.studentFormControls.institution_commune.enable();
+  }
+
+  sortArray(array){
+    function compare ( a, b ){ return a.name > b.name ? 1 : -1; };
+    return array.sort( compare );
   }
 
   redirect(){
