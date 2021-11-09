@@ -15,3 +15,9 @@
   z-index: 1;
   width: 100%;
 }
+
+.view-page{
+  display: flex;
+  flex-flow: column;
+  height: 93%;
+}

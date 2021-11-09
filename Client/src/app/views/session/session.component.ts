@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { KmTrackerService } from 'src/app/services/logger/km-tracker.service';
 import { ActionsTrackerService } from 'src/app/services/logger/actions-tracker.service';
 import { GameService } from '../../services/game/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-session',
@@ -14,7 +15,8 @@ export class SessionComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private kmTracker: KmTrackerService,
-    private actionsTracker: ActionsTrackerService
+    private actionsTracker: ActionsTrackerService,
+    public router: Router
   ) {}
   ngOnDestroy(): void {
     this.kmTracker.stop();
