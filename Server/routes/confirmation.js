@@ -17,7 +17,7 @@ router.get('/confirmation/:token', async(req, res)=> {
         // If found, find matching user
         User.findOne({ _id: token._userId }, function (err, user) {
             if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
-            if (user.confirmed) return res.status(400).send({ type: 'USER_ALREADY_CONFIRMED', msg: 'This user has already been confirmed.' });
+            if (user.confirmed) return res.status(200).redirect(process.env.GAME_CLIENT + '/login/alreadyConfirmed');
  
             // Verify and save the user
             user.confirmed = true;
