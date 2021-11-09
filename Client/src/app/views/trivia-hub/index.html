@@ -17,16 +17,23 @@
 	<!-- Hero(extended) navbar -->
 
   <div class="navbar navbar--extended navbar-fixed-top">
-    <nav class=""></nav>
+    <nav class=""> </nav>
     <div class="container">
       <div class="navbar__inner">
         <a href="/welcome#" class="navbar__logo">NEURONE Trivia</a>
+            <nav class="navbar__menu">
+
+              <ul>
+                <li><a href="/welcome#about">Quiero saber más</a></li>
+                <li><a href="/welcome#participate">Participar</a></li>
+                <li><a href="/welcome#contact">Contacto</a></li>
+                <li><a href="https://docs.google.com/document/d/1DrEM7d3tGWBGtiL0sFs_3wrtUTievT1FQW7tliUmArU/edit?usp=sharing" target="_blank">Preguntas Frecuentes</a></li>
+              </ul>
+            </nav>
+
         <nav class="navbar__menu">
-          <ul>
-            <li><a href="/welcome#about">Quiero saber más</a></li>
-            <li><a href="/welcome#participate">Participar</a></li>
-            <li><a href="/welcome#contact">Contacto</a></li>
-            <li><a href="https://docs.google.com/document/d/1DrEM7d3tGWBGtiL0sFs_3wrtUTievT1FQW7tliUmArU/edit?usp=sharing" target="_blank">Preguntas Frecuentes</a></li>
+          <ul style="width: 300px;">
+            <li ><a href="https://trivia.neurone.info/login">Iniciar sesión</a></li>
           </ul>
         </nav>
         <div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a></div>
@@ -41,14 +48,18 @@
 		<div class="hero__mask"></div>
 		<div class="hero__inner">
 			<div class="container">
+
+
+
 				<div class="hero__content">
-					<div class="hero__content__inner" id='navConverter'>
+					<div class="hero__content__inner" id='navConverter' >
             <img src="assets/welcome-images/trivia-negativo.png" class="expanded__image">
-						<h1 class="hero__title">¡Bienvenido(a) a Trivia!</h1>
-						<p class="hero__text">Trivia es un juego del tipo preguntas-respuestas que tiene como propósito poner a prueba las competencias de investigación en línea de los estudiantes, esto en relación a la búsqueda de información, evaluación crítica de fuentes de información y el uso de la información.</p>
-						<a href="/welcome#about" class="button hero__button">Quiero saber más</a>
-						<a href="/welcome#participate" class="button button__accent">Participar</a>
-						<a href="/welcome#contact" class="button hero__button">Contacto</a>
+            <h1 class="hero__title">¡Bienvenido(a) a Trivia!</h1>
+            <p class="hero__text">Trivia es un juego del tipo preguntas-respuestas que tiene como propósito poner a prueba las competencias de investigación en línea de los estudiantes, esto en relación a la búsqueda de información, evaluación crítica de fuentes de información y el uso de la información.</p>
+            <br>
+            <a href="/welcome#about" class="button hero__button">Quiero saber más</a>
+            <a href="/welcome#participate" class="button button__accent">Participar</a>
+            <a href="/welcome#contact" class="button hero__button">Contacto</a>
             <div class="logo-showcase">
               <img src="assets/welcome-images/USACHblanco.png" class="logo2">
               <img src="assets/welcome-images/FONDECYT.png" class="logo2">
@@ -56,6 +67,12 @@
               <img src="assets/welcome-images/ITOblanco.png" class="logo1">
               <img src="assets/welcome-images/tutelage-negativo.png" class="logo2">
             </div>
+
+            <!--
+             <h2 class="cta__title">¿Ya tienes una cuenta?</h2>
+				    <a class="button button__accent" href="https://trivia.neurone.info/login" >Iniciar sesión</a>
+             -->
+
           </div>
 				</div>
 			</div>
@@ -73,7 +90,7 @@
 		<div class="container">
 			<div class="expanded__inner">
 				<div class="expanded__media">
-					<img src="assets/welcome-images/undraw_creation.svg" class="expanded__image">
+          <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources3" (plyrPlay)="played($event)"></plyr>
 				</div>
 				<div class="expanded__content">
 					<h2 class="expanded__title">Nuestra investigación</h2>
@@ -101,7 +118,8 @@
     <div class="container">
       <div class="expanded__inner">
         <div class="expanded__media">
-          <img src="assets/welcome-images/undraw_hello_aeia.svg" class="expanded__image">
+
+          <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources2" (plyrPlay)="played($event)"></plyr>
         </div>
         <div class="expanded__content">
           <h2 class="expanded__title">¿En qué consiste la participación de un estudiante en Trivia?</h2>
@@ -118,7 +136,7 @@
         </div>
         <div class="expanded__content">
           <h2 class="expanded__title">¿Quiénes pueden participar en Trivia?</h2>
-          <p class="expanded__text">Pueden participar estudiantes cursando 4to, 6to y 8vo básico, además de estudiantes de 2do y 4to medio. Se espera contar con la participación de 100 estudiantes por nivel, provenientes de establecimientos públicos, particulares subvencionados y particulares de Chile.</p>
+          <p class="expanded__text">Pueden participar estudiantes cursando 4to, 6to y 8vo básico, además de estudiantes de 2do, 3ro y 4to medio provenientes de establecimientos públicos, particulares subvencionados y particulares de Chile.</p>
         </div>
       </div>
     </div>
@@ -152,11 +170,25 @@
   <!-- Participate -->
   <div class="cta cta--reverse" id="participate">
     <div class="container">
+      <div class="row" style="display: flex; width: 100%; padding-top: 15%;">
+        <div class="col-md-12 centrar">
+          <h2 class="cta__title">¿Cómo participar?</h2>
+        </div>
+        <div class="col-md-6 WelcomeHeaderText">
+          <p class="cta__sub cta__sub--center">Para participar se necesita (1) un computador de escritorio o notebook y conexión a Internet. (2) Al hacer click en el botón "Participar", el apoderado (padre/tutor) puede registrar al estudiante. (3) Dentro del registro se debe leer y aceptar un consentimiento informado (donde se presentan los detalles del estudio) aprobado por el Comité de Ética de la Universidad de Santiago de Chile y completar el formulario con los datos solicitados. (4) Los datos correspondientes a correo eléctronico y contraseña (se sugiere usar una contraseña exclusiva para este registro que no use habitualmente en otros servicios) serán empleados por los estudiantes o apoderados/tutores para ingresar posteriormente al juego.</p>
+          <a [href]="getStudy()" class="button button__accent" *ngIf="containsStudy">Participar</a>
+
+        </div>
+        <div class="col-md-6" >
+          <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrPlay)="played($event)"></plyr>
+        </div>
+        <div class="col-md-12 centrar">
+          <a class="button button__accent" href="/welcome#contact" *ngIf="!containsStudy">Contáctanos</a>
+          <br>
+        </div>
+      </div>
       <div class="cta__inner">
-        <h2 class="cta__title">¿Cómo participar?</h2>
-        <p class="cta__sub cta__sub--center">Para participar se necesita (1) un computador de escritorio o notebook y conexión a Internet. (2) Al hacer click en el botón "Participar", el apoderado (padre/tutor) puede registrar al estudiante. (3) Dentro del registro se debe leer y aceptar un consentimiento informado (donde se presentan los detalles del estudio) aprobado por el Comité de Ética de la Universidad de Santiago de Chile y completar el formulario con los datos solicitados. (4) Los datos correspondientes a correo eléctronico y contraseña (se sugiere usar una contraseña exclusiva para este registro que no use habitualmente en otros servicios) serán empleados por los estudiantes o apoderados/tutores para ingresar posteriormente al juego.</p>
-				<a [href]="getStudy()" class="button button__accent" *ngIf="containsStudy">Participar</a>
-				<a class="button button__accent" href="/welcome#contact" *ngIf="!containsStudy">Contáctanos</a>
+
         <!-- Este es el mismo botón de arriba???-->
         <!-- Fernando: No, este redirige a Trivia.-->
         <div class="expanded__inner">
@@ -167,8 +199,8 @@
             <p class="expanded__text">Al completar la participación en el estudio (responder todas las preguntas siguiendo las reglas del juego), el estudiante concursará automáticamente en el sorteo de una de las 3 giftcards de USD 50 para servicios digitales (a elección). También te invitaremos a la segunda parte del estudio (año 2022) donde los participantes podrán aprender distintas técnicas y estrategias para buscar información de manera efectiva.</p>
           </div>
         </div>
-        <h2 class="cta__title" *ngIf="!containsStudy">¿Ya tienes una cuenta?</h2>
-				<a class="button button__accent" href="" *ngIf="!containsStudy">Iniciar sesión</a>
+        <h2 class="cta__title">¿Ya tienes una cuenta?</h2>
+				<a class="button button__accent" href="https://trivia.neurone.info/login" >Iniciar sesión</a>
       </div>
     </div>
   </div>

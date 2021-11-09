@@ -1,10 +1,14 @@
 <app-header></app-header>
-<div class="session-container">
+<div class="session-container" *ngIf="!router.url.includes('view-page'); else elseBlock">
   <div class="outlet-container">
     <router-outlet></router-outlet>
   </div>
-  <div class="question-bar-wrapper" class="question-bar-wrapper">
-    <app-question-bar></app-question-bar>
-  </div>
 </div>
-
+<div>
+  <ng-template #elseBlock class="view-page">
+    <router-outlet></router-outlet>
+  </ng-template>
+</div>
+<div class="question-bar-wrapper" class="question-bar-wrapper">
+  <app-question-bar></app-question-bar>
+</div>

@@ -11,7 +11,8 @@ const UserQuestionnaireSchema = new Schema({
         {
             question: { type: String, required: true },
             answer: { type: mongoose.Schema.Types.Mixed, required: true },
-            number: { type: Number}
+            number: { type: Number},
+            _id: false
         }
     ],
     createdAt: { type: Date, default: Date.now },

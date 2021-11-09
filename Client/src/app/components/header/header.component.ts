@@ -145,7 +145,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   msaapDisablePositionSlider = true;
 
   images = ["Instrucciones_Trivia_1",
-            "Instrucciones_Trivia_2",
+            "Instrucciones_TriviaA",
+            "Instrucciones_TriviaB",
+            'Instrucciones_TriviaC',
             "Instrucciones_Trivia_3",
             "Instrucciones_Trivia_4",
             "Instrucciones_Trivia_5",
@@ -172,6 +174,7 @@ getTrack(trackName){
       src: '/assets/audio/triviaInstrucciones.mp4',
     },
   ];
+
 
   played(event: Plyr.PlyrEvent) {
     console.log('played', event);

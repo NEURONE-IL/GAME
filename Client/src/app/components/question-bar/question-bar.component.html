@@ -57,7 +57,7 @@
                 </div>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="18" rowspan="4" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'; else elseBlock">
+              <mat-grid-tile colspan="18" rowspan="2" *ngIf="gameService.challenge.answer_type === 'string' || gameService.challenge.answer_type === 'number'; else elseBlock">
                 <form class="answer-form" [formGroup]="answerForm">
                   <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'string'">
                     <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>

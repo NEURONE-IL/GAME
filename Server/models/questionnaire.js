@@ -11,9 +11,11 @@ const QuestionnaireSchema = new Schema({
             options: [
               {
                 option: {type: String, required: true},
-                number: { type: Number}
+                number: { type: Number},
+                _id: false
               }
-            ]            
+            ],
+            _id: false
         }
     ],
     createdAt: { type: Date, default: Date.now },

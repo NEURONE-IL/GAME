@@ -35,3 +35,19 @@ img.logo2 {
   padding: 5px 5px 5px 5px;
 }
 
+
+.WelcomeHeaderText img, h1{
+  text-align: center;
+  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centrar{
+  text-align: center;
+  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

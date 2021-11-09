@@ -1,7 +1,8 @@
 .web-iframe{
-    display: block;
-    /*margin-top: 50px;*/
-  }
+  display: block;
+  max-height: 86.5%;
+  /*margin-top: 50px;*/
+}
 
 .page{
   padding-bottom: 370px;
