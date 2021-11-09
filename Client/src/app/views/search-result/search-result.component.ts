@@ -30,6 +30,9 @@ export class SearchResultComponent implements OnInit {
   activePage=0;
   selected = new FormControl(0);
 
+  documentsWeb = [];
+  documentsVideo = [];
+  documentsImages = [];
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,
@@ -93,6 +96,7 @@ export class SearchResultComponent implements OnInit {
             this.pageIndex.push(i+1)
           }
 
+          this.filterTypes();
           //finalizar loading
           this.searching = false;
 
@@ -153,6 +157,13 @@ export class SearchResultComponent implements OnInit {
     }
   }
 
+
+  filterTypes() {
+    this.documentsVideo = this.documents.filter( x => x.type === 'video');
+    this.documentsImages = this.documents.filter( x => x.type === 'image');
+    this.documentsWeb = this.documents.filter( x => x.type === 'book' || !x.type);
+  }
+
   changeToWebPagesTab(){
     /*Dispatch changetowebpagestab event*/
     var evt = new CustomEvent('changetowebpagestab');
@@ -185,12 +196,14 @@ export class SearchResultComponent implements OnInit {
       this.storeQueryService.postQuery(queryData);
       this.router
         .navigate(['/session'], { skipLocationChange: true })
-        .then(() =>
+        .then(() => {
+          this.gameService.setActivePage(0);
           this.router.navigate([
             'session/search-result',
             this.query,
-            this.domain,
-          ])
+            this.domain]
+            );
+        }
         );
     }
   }
