@@ -62,7 +62,7 @@ router.delete(
 );
 
 router.post("/changePassword", [verifyToken], async (req, res) => {
-  const user = User.findOne({ _id: req.user }, (err) => {
+  const user = await User.findOne({ _id: req.user._id }, (err) => {
     if (err) {
       return res.status(404).json({
         err,
