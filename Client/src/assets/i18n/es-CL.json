@@ -203,7 +203,7 @@
   },
   "LOGIN": {
     "TITLE": "Iniciar sesión",
-    "EMAIL": "Correo electrónico",
+    "EMAIL": "Correo electrónico con que se registró al estudiante",
     "PASSWORD": "Contraseña",
     "ENTER": "Ingresar",
     "REQUIRED": "El campo es requerido",
@@ -215,7 +215,8 @@
       "ERROR_USER_NOT_CONFIRMED": "Por favor, confirme su correo antes de ingresar.",
       "ERROR": "Error",
       "SUCCESS": "¡Éxito!",
-      "USER_CONFIRMED": "Su usuario ha sido confirmado correctamente"
+      "USER_CONFIRMED": "Su usuario ha sido confirmado correctamente",
+      "USER_ALREADY_CONFIRMED": "Su usuario ya ha sido confirmado anteriormente"
     }
   },
   "RECOVERY":{

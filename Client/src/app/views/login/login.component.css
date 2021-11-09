@@ -13,7 +13,7 @@
 
 .mat-form-field {
 	width: 100%;
-	min-width: 300px;
+	min-width: 400px;
 }
 
 .main-content{
@@ -47,7 +47,7 @@ mat-card-content {
 }
 
 .card{
-	width: 400px;
+	width: 500px;
 	height: 300px;
 	margin: auto;
 	margin-top: 12%;

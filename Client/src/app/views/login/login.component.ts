@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
     if(this.router.url === '/login/confirmedOK') {
       this.showConfirmedToastr();
     }
+    else if(this.router.url === '/login/alreadyConfirmed'){
+      this.showAlreadyConfirmed();
+    }
   }
 
   onSubmit(){
@@ -37,6 +40,15 @@ export class LoginComponent implements OnInit {
   showConfirmedToastr() {
     this.translate.get(["LOGIN.TOAST.SUCCESS", "LOGIN.TOAST.USER_CONFIRMED"]).subscribe((res) => {
       this.toastr.success(res["LOGIN.TOAST.USER_CONFIRMED"], res["LOGIN.TOAST.SUCCESS"], {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+    });
+  }
+
+  showAlreadyConfirmed() {
+    this.translate.get(["LOGIN.TOAST.ERROR", "LOGIN.TOAST.USER_ALREADY_CONFIRMED"]).subscribe((res) => {
+      this.toastr.error(res["LOGIN.TOAST.USER_ALREADY_CONFIRMED"], res["LOGIN.TOAST.ERROR"], {
         timeOut: 5000,
         positionClass: 'toast-top-center'
       });
