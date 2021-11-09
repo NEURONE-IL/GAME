@@ -76,7 +76,7 @@ router.post("/changePassword", [verifyToken], async (req, res) => {
   } else {
     //hash password
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(req.body.password, salt);
+    user.password = await bcrypt.hash(req.body.newPassword, salt);
     user.save((err) => {
       if (err) {
         res.status(500).send({ message: err });

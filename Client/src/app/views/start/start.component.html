@@ -16,7 +16,10 @@
         <h3>{{ "GAME.INACTIVE.MESSAGE" | translate }}</h3>
         <p *ngIf="gameService.canPlay.canPlayAtTime">
           {{ "GAME.INACTIVE.CAN_PLAY_AT" | translate }}
-          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}{{ "GAME.INACTIVE.CAN_PLAY_AT_FINAL" | translate}}
+          {{ gameService.canPlay.canPlayAtTime | date: 'dd/MM/yyyy' }}
+          {{ "GAME.INACTIVE.CAN_PLAY_AT1B" | translate }}
+          {{ gameService.canPlay.canPlayAtTime | date: 'shortTime' }}
+          {{ "GAME.INACTIVE.CAN_PLAY_AT_FINAL" | translate}}
         </p>
         <img src="/assets/clock.gif" style="width: 200px;"> 
         <div class='center-container'>
@@ -74,9 +77,9 @@
     <app-play-again></app-play-again>
   </div>
 
-  <!-- Can't Play Again -->
+  <!-- Can't Play Again  -->
 
-  <div class="center-card" style="margin-top: 5%;" *ngIf="gameService.stage == '!no-play-again'">
+  <div class="center-card" style="margin-top: 5%;" *ngIf="gameService.stage == 'no-play-again'" >
     <mat-card class="card mat-elevation-z8"> 
     <div class='row center-container'>
       <div class="col-md-4">
@@ -86,7 +89,10 @@
         <br>
         <h3>{{ "GAME.INACTIVE.TITLE2" | translate }}</h3>
         <p>{{ "GAME.INACTIVE.CAN_PLAY_AT2" | translate }}
-          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}</p>
+          {{ gameService.canPlay.canPlayAtTime | date: 'dd/MM/yyyy' }}
+          {{ "GAME.INACTIVE.CAN_PLAY_AT1B" | translate }}
+          {{ gameService.canPlay.canPlayAtTime | date: "shortTime" }}
+          {{ "GAME.INACTIVE.CAN_PLAY_AT_FINAL2" | translate}}</p>
         <img src="/assets/clock.gif" style="width: 200px;"> 
         <div class='center-container'>
           <button  class="btn btn-success" style="width: 50%" (click)="continue()">{{"BUTTONS.CONTINUE" | translate}}</button>
@@ -96,10 +102,9 @@
     </div>
    </mat-card>
   </div>
-
   
 
-   <!-- Study Finished -->
+   <!-- Study Finished  -->
  <div class="center-card" *ngIf="gameService.stage == 'study-finished'">
   <mat-card class="card mat-elevation-z8">
     <mat-card-title>{{ "GAME.FINISHED.TITLE" | translate }}</mat-card-title>

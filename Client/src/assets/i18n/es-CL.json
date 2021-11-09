@@ -447,9 +447,11 @@
       "TITLE2": "¡Has terminado todos los desafíos del día!",
       "MESSAGE": "El juego se encuentra desactivado.",
       "TIME_NOW": "La hora actual es",
-      "CAN_PLAY_AT": "Puedes volver a jugar a las",
-      "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar de las",
-      "CAN_PLAY_AT_FINAL": ", por favor vuelve más tarde."
+      "CAN_PLAY_AT": "Puedes volver a jugar el",
+      "CAN_PLAY_AT1B": "a las",
+      "CAN_PLAY_AT2": "Tus próximos desafíos estarán disponbiles a contar del",
+      "CAN_PLAY_AT_FINAL": ". Te esperamos para tus próximos desafíos en Trivia.",
+      "CAN_PLAY_AT_FINAL2": ". Te esperamos en Trivia."
     },
     "FINISHED": {
       "TITLE": "¡Has completado todos los desafíos de este estudio!",
