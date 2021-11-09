@@ -13,7 +13,9 @@
 
   <hr >
 
-  <mat-tab-group (selectedTabChange)="changeTab($event)">
+  <mat-tab-group (selectedTabChange)="changeTab($event)"
+                 [selectedIndex]="selected.value"  
+  >
     <mat-tab label="{{'GAME.SEARCH.WEB_PAGES' | translate }}">
 
       <ng-template matTabContent>
