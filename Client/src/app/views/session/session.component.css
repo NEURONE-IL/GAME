@@ -19,5 +19,5 @@
 .view-page{
   display: flex;
   flex-flow: column;
-  height: 93%;
+  max-height: 86.5%;
 }
