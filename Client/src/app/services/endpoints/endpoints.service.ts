@@ -17,7 +17,7 @@ export interface Resource {
   title: string,
   type: string,
   url: string,
-  maskedURL: string
+  maskedUrl: string
 }
 
 @Injectable({

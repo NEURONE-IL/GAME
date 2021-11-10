@@ -40,7 +40,7 @@ export class ResourceUploadComponent implements OnInit {
       locale: environment.locale,
       task: [null, []],
       /*NEURONE required*/
-      maskedURL: [null, [Validators.minLength(5), Validators.maxLength(200)]],
+      maskedUrl: [null, [Validators.minLength(5), Validators.maxLength(200)]],
       relevant: null,
       searchSnippet: '',
       keywords: [null, [Validators.minLength(3)]],

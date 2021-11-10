@@ -80,12 +80,12 @@
 				<mat-grid-tile colspan="6">
 					<mat-form-field>
 						<mat-label>{{ "UPLOAD.FORM.FIELDS.MASKED_URL" | translate }}</mat-label>
-						<input matInput formControlName="maskedURL" #inputMaskedURL maxlength="200">
-						<mat-hint align="end">{{inputMaskedURL.value?.length || 0}}/200</mat-hint>
-						<mat-error *ngIf="resourceFormControls.maskedURL.hasError('minlength')">
+						<input matInput formControlName="maskedUrl" #inputMaskedUrl maxlength="200">
+						<mat-hint align="end">{{inputMaskedUrl.value?.length || 0}}/200</mat-hint>
+						<mat-error *ngIf="resourceFormControls.maskedUrl.hasError('minlength')">
 							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
 						</mat-error>
-						<mat-error *ngIf="resourceFormControls.maskedURL.hasError('maxlength')">
+						<mat-error *ngIf="resourceFormControls.maskedUrl.hasError('maxlength')">
 							{{ "ERRORS.MAX_LENGTH_200" | translate }}
 						</mat-error>
 					</mat-form-field>

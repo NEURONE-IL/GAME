@@ -161,6 +161,8 @@
     },
     "SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el estudio",
     "TITLE": "Creación de desafíos",
+    "SUBTITLE_UPDATE": "Complete los siguientes campos para editar el desafío en el estudio",
+    "TITLE_UPDATE": "Edición de desafíos",    
     "NO_CHALLENGE": "Aún no se ha registrado ningun desafio.",
     "QUESTION_TYPE": {
       "PAGE": "Pagina web",
@@ -304,7 +306,8 @@
     "BACK": "Volver",
     "RESET": "Reiniciar",
     "SIGNUP": "Registrarte",
-    "CONFIRMATION_EMAIL_SENT": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam) para confirmar su usuario. En caso de no poder pinchar el enlace contenido en el correo, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet.",
+    "CONFIRMATION_EMAIL_SENT_START": "Se ha enviado un correo para confirmar su cuenta, por favor revise su bandeja de entrada (o bandeja de spam). ",
+    "CONFIRMATION_EMAIL_SENT_END": "En caso de no poder pinchar el enlace contenido en el correo, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet.",
     "GO_HOME": "Ir a inicio de sesión",
     "FORM": {
       "NAMES": "Nombres",
