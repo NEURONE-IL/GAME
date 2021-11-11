@@ -139,7 +139,7 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
-        this.stage = 'instructions';
+//        this.stage = 'instructions';
       });
   }
 
