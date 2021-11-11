@@ -182,7 +182,7 @@
     }
   },
   "ERRORS": {
-    "ANSWER_JUSTIFY_REQUIRED": "Debes justificar tu respuesta",
+    "ANSWER_JUSTIFY_REQUIRED": "Debes explicar por qué consideras confiable la fuente seleccionada",
     "ANSWER_REQUIRED": "Debes ingresar una respuesta",
     "CHECK_REQUIRED": "La confirmación es requerida",
     "MAIL_FORMAT": "Debe ingresar en email válido",
@@ -255,7 +255,7 @@
           "CHECK": "Por favor confirme para continuar"
         }
       },
-      "SUBTITLE": "Responde las siguientes preguntas sobre el desafío que acabas de responder",
+      "SUBTITLE": "Responde el siguiente cuestionario sobre el desafío que acabas de enfrentar",
       "TITLE": "Cuestionario post-desafío",
       "TOAST": {
         "ERROR": "¡Error!",
@@ -274,7 +274,7 @@
           "CHECK": "Por favor confirme para continuar"
         }
       },
-      "SUBTITLE": "Responde las siguientes preguntas antes de responder el desafío",
+      "SUBTITLE": "Responde el siguiente cuestionario antes de enfrentar el desafío. Procura hacerlo en no más de 1 minuto",
       "TITLE": "Cuestionario pre-desafío",
       "TOAST": {
         "ERROR": "¡Error!",
@@ -468,15 +468,15 @@
       "CLOSE": "Cerrar"
     },
     "ANSWER_TYPE": {
-            "JUSTIFY": "Justifica tu respuesta aquí",
-            "NUMBER": "Ingresa el número de tu respuesta aquí",
+      "JUSTIFY": "Explica por qué consideras confiable la fuente seleccionada",
+      "NUMBER": "Ingresa el número de tu respuesta aquí",
       "TEXT": "Ingresa tu respuesta aquí",
       "URL": "Las páginas que seleccionaste se muestran aquí"
     },
     "TOAST": {
       "ANSWER_SUBMITTED": "Respuesta enviada correctamente",
       "EMPTY_ANSWER": "Debes ingresar tu respuesta",
-      "EMPTY_JUSTIFY": "Debes justificar tu respuesta",
+      "EMPTY_JUSTIFY": "Debes explicar brevemente por qué consideras confiable la fuente seleccionada",
       "EMPTY_URL": "Debes seleccionar una fuente confiable",
       "ERROR": "Error",
       "ERROR_MESSAGE": "No ha sido posible enviar la respuesta",

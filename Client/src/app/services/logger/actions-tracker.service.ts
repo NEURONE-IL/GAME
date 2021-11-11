@@ -45,6 +45,10 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'unmarkfavoritepage', data, this.unmarkfavoritepageListener);
       this.bindEvent(targetDoc, 'pageenter', data, this.pageenterListener);
       this.bindEvent(targetDoc, 'pageexit', data, this.pageexitListener);
+      this.bindEvent(targetDoc, 'pretestquestionnaireenter', data, this.pretestquestionnaireenterListener);
+      this.bindEvent(targetDoc, 'pretestquestionnaireexit', data, this.pretestquestionnaireexitListener);
+      this.bindEvent(targetDoc, 'posttestquestionnaireenter', data, this.posttestquestionnaireenterListener);
+      this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);      
       /*End custom events*/
       this.isTracking = true;
     }
@@ -71,7 +75,11 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'markfavoritepage');
       this.unbindAll(targetDoc, 'unmarkfavoritepage');
       this.unbindAll(targetDoc, 'pageenter');
-      this.unbindAll(targetDoc, 'pageexit');      
+      this.unbindAll(targetDoc, 'pageexit'); 
+      this.unbindAll(targetDoc, 'pretestquestionnaireenter');
+      this.unbindAll(targetDoc, 'pretestquestionnaireexit');         
+      this.unbindAll(targetDoc, 'posttestquestionnaireenter');         
+      this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -390,5 +398,85 @@ export class ActionsTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
   }   
+
+  pretestquestionnaireenterListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PreTestQuestionnaireEnter',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+
+  pretestquestionnaireexitListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PreTestQuestionnaireExit',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+  
+  posttestquestionnaireenterListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PostTestQuestionnaireEnter',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+  
+  posttestquestionnaireexitListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),      
+      source: 'Window',
+      type: 'PostTestQuestionnaireExit',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }  
 
 }

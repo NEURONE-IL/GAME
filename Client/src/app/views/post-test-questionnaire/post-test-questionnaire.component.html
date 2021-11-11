@@ -1,12 +1,13 @@
 <mat-card class="questionnaire-card">
   <mat-card-header>
     <mat-card-title>{{ "QUESTIONNAIRE.POST_TEST.TITLE" | translate }}</mat-card-title>
-    <mat-card-subtitle>{{ "QUESTIONNAIRE.POST_TEST.SUBTITLE" | translate }}:</mat-card-subtitle>
+    <mat-card-title class="instructions">{{ "QUESTIONNAIRE.POST_TEST.SUBTITLE" | translate }}:</mat-card-title>
   </mat-card-header>
+  <br>
   <p class="challenge-text">{{ "QUESTIONNAIRE.POST_TEST.CHALLENGE" | translate }}:</p>
-  <h5 class="challenge">
+  <h4 class="challenge">
     {{ question }}
-  </h5>
+  </h4>
   <mat-card-content *ngIf="questionnaires?.length">
     <form [formGroup]="questionnaireForm">
       <div formArrayName="answers" *ngFor="let question of questionnaires[0].questions; let questionIndex = index">
