@@ -78,6 +78,7 @@ import { PlyrModule } from 'ngx-plyr';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { ForwardComponent } from './views/forward/forward.component';
+import { PostStudyQuestionnaireComponent } from './views/post-study-questionnaire/post-study-questionnaire.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -123,7 +124,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginRedirectComponent,
     FooterComponent,
     TriviaHubComponent,
-    ForwardComponent
+    ForwardComponent,
+    PostStudyQuestionnaireComponent
   ],
     imports: [
         BrowserModule,

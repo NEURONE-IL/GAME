@@ -1,0 +1,45 @@
+<mat-card class="questionnaire-card">
+  <mat-card-header>
+    <mat-card-title>{{ "QUESTIONNAIRE.POST_STUDY.TITLE" | translate }}</mat-card-title>
+    <mat-card-title class="instructions">{{ "QUESTIONNAIRE.POST_STUDY.SUBTITLE" | translate }}:</mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content *ngIf="questionnaires?.length">
+    <form [formGroup]="questionnaireForm">
+      <div formArrayName="answers" *ngFor="let question of questionnaires[0].questions; let questionIndex = index">
+        <mat-grid-list cols="12">
+          <div class="label">{{question.number}}. {{question.question}} </div>
+          <mat-grid-tile colspan="4">
+            <div class="initLabel">
+              {{ question.options[0].option }}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <mat-radio-group
+              required
+              [formControlName]="questionIndex">
+              <mat-radio-button *ngFor="let value of values" [value]="value" required>
+                {{value}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <div style="margin-right: 50%">
+              {{ question.options[1].option }}
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="cardActions" *ngIf="questionnaires">
+
+    <button mat-raised-button color="accent" class="clearButton" (click)="resetForm()">
+      {{ "BUTTONS.CLEAR" | translate }}
+    </button>
+    <button mat-raised-button color="primary" class="saveButton" (click)="saveAnswers()" [disabled]="!questionnaireForm.valid">
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
+  </mat-card-actions>
+  <p></p>
+</mat-card>

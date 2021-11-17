@@ -32,11 +32,16 @@ export class GameService {
     this.loading = true;
     await this.authService.refreshUser();
     this.progress = await this.authService.refreshProgress();
-    if(this.progress.finished){
+    if(this.progress.finished && this.progress.post_study){
       this.canPlay = { canPlay: false };
       this.stage = 'study-finished'
       this.loading = false;
     }
+    else if(this.progress.finished && !this.progress.post_study){
+      this.canPlay = { canPlay: false };
+      this.stage = 'post-study'
+      this.loading = false;
+    }    
     else{
       // For one challenge at once
       const challengeId = this.getCurrentChallengeId();
@@ -195,6 +200,16 @@ export class GameService {
       });
   }
 
+  async finishPostStudy() {
+    let progress = this.progress;
+    this.authService
+      .updateProgress({ post_study: true })
+      .then(() => {
+        this.stage = 'study-finished';
+        this.router.navigate(['start']);
+      });
+  }
+
   async finishSummary() {
     localStorage.removeItem('chall')
     let progress = this.progress;
@@ -205,7 +220,7 @@ export class GameService {
       }
     });
     if(studyFinished){
-      this.stage = 'study-finished';
+      this.stage = 'post-study';
     }
     else{
       this.canPlay = await this.authService.canPlay();

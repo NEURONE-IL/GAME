@@ -105,6 +105,13 @@
    </mat-card>
   </div>
   
+  <!-- Post-study questionnaire pending -->
+  <div
+    class="container"
+    *ngIf="gameService.stage == 'post-study'"
+  >
+    <app-post-study-questionnaire></app-post-study-questionnaire>
+  </div>
 
    <!-- Study Finished  -->
  <div class="center-card" *ngIf="gameService.stage == 'study-finished'">
