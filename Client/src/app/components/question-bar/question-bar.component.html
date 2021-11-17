@@ -175,10 +175,7 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="1">
-                  <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
-                  <mat-error *ngIf="answerControls.answer.hasError('required')">
-                    {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
-                  </mat-error>                  
+                  <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>       
                 </mat-grid-tile>
 
 <!--URL2
