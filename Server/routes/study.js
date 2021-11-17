@@ -82,6 +82,81 @@ router.get('/:study_id/getForSignup', async (req, res) => {
     });
 });
 
+router.get('/:study_id/copy', [verifyToken], async (req, res) => {
+    const _id = req.params.study_id;
+    const study = await Study.findOne({_id: _id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
+    const challenges = await Challenge.find({study: study._id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    })
+    const copy = new Study({
+        name: study.name+' (copy)',
+        description: study.description,
+        domain: study.domain,
+        max_per_interval: study.max_per_interval,
+        cooldown: study.cooldown,
+        image_id: study.image_id,
+        image_url: study.image_url
+    });
+    for(let i = 0; i<challenges.length; i++){
+        let newChallenge = new Challenge({
+            question: challenges[i].question,
+            question_type: challenges[i].question_type,
+            number: challenges[i].number,
+            seconds: challenges[i].seconds,
+            hint: challenges[i].hint,
+            answer_type: challenges[i].answer_type,
+            answer: challenges[i].answer,
+            max_attempts: challenges[i].max_attempts,
+            study: copy._id,
+        })
+        await newChallenge.save(err => {
+            if(err){
+                return res.status(404).json({
+                    err
+                });
+            }
+        })
+    }
+    copy.save((err, copy) => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+        groupService.postGroup({name: copy.name, sourceId: copy._id }, (err, data) => {
+            if(err){
+                res.status(200).json({
+                    copy
+                });
+            }
+            else{
+                copy.gm_code = data.code;
+                copy.save(err => {
+                    if(err){
+                        return res.status(404).json({
+                            ok: false,
+                            err
+                        });
+                    }
+                    res.status(200).json({
+                        copy
+                    });
+                })
+            }
+        });
+    })
+})
+
 router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.single('file'), studyMiddleware.verifyBody], async (req, res) => {
     let cooldown = req.body.hours*3600 + req.body.minutes*60;
     const study = new Study({

@@ -15,10 +15,14 @@ async function generateProgress(challenges, user, study) {
   });
 
   // First 2 study challenges always first
-  progress.push({challenge: challenges[0]})
-  progress.push({challenge: challenges[1]})
-  challenges.splice(0, 1)
-  challenges.splice(0, 1)
+  if(challenges.length >= 1){
+    progress.push({challenge: challenges[0]})
+    challenges.splice(0, 1)
+  }
+  if(challenges.length >= 1){
+    progress.push({challenge: challenges[0]})
+    challenges.splice(0, 1)
+  }
   // If found, we generate another challenges sequence shifting all the positions
   // 1 step to the left according to the latest known sequence.
   if (lastUserStudy && lastUserStudy.challenges.length === (challenges.length + 2)) {
