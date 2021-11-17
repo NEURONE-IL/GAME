@@ -51,6 +51,10 @@ export class PreTestQuestionnaireComponent implements OnInit {
     });
     this.isLoggedIn = this.authService.loggedIn;
     this.user = this.authService.getUser();
+    /*Dispatch pretestquestionnaireenter event*/
+    var evt = new CustomEvent('pretestquestionnaireenter');
+    window.dispatchEvent(evt);
+    /*End dispatch pretestquestionnaireenter event*/
   }
 
   ngAfterContentChecked() {
@@ -79,6 +83,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
         });
         this.resetForm();
         await this.gameService.finishPreTest();
+        this.gameService.challengeStarted();
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR"), {
@@ -88,4 +93,11 @@ export class PreTestQuestionnaireComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy(){
+    /*Dispatch pretestquestionnaireexit event*/
+    var evt = new CustomEvent('pretestquestionnaireexit');
+    window.dispatchEvent(evt);
+    /*End dispatch pretestquestionnaireexit event*/    
+  }  
 }

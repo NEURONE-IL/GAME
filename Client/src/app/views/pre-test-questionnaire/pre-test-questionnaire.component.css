@@ -40,6 +40,7 @@
 }
 .cardActions{
   text-align: center;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 .saveButton{
@@ -59,4 +60,16 @@
 .challenge-text{
   text-align: center;
   font-weight: 500;
+}
+.instructions{
+  font-weight: 400;
+  text-decoration: underline;
+  margin-bottom: 5%;
+}
+.footer{
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  margin: 5%;
+  color: #007bff;  
 }

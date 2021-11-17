@@ -6,6 +6,7 @@ import { StoreQueryService } from 'src/app/services/logger/store-query.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search-result',
@@ -27,7 +28,11 @@ export class SearchResultComponent implements OnInit {
   pages=1;
   pageIndex=[];
   activePage=0;
+  selected = new FormControl(0);
 
+  documentsWeb = [];
+  documentsVideo = [];
+  documentsImages = [];
   constructor(
     protected endpointsService: EndpointsService,
     private route: ActivatedRoute,
@@ -45,6 +50,7 @@ export class SearchResultComponent implements OnInit {
     });
     this.activePage= this.gameService.getActivePage();
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP");
+    this.setTab();
     let subscription = this.endpointsService
       .getDocuments(this.query, this.domain)
       .subscribe(
@@ -90,6 +96,7 @@ export class SearchResultComponent implements OnInit {
             this.pageIndex.push(i+1)
           }
 
+          this.filterTypes();
           //finalizar loading
           this.searching = false;
 
@@ -136,16 +143,28 @@ export class SearchResultComponent implements OnInit {
   changeTab(event: MatTabChangeEvent){
     switch(event.index){
       case 0:
+        localStorage.setItem('lastTab', 'webpages');
         this.changeToWebPagesTab();
+        break;
       case 1:
+        localStorage.setItem('lastTab', 'images');
         this.changeToImagesTab();
+        break;
       case 2:
+        localStorage.setItem('lastTab', 'videos');
         this.changeToVideosTab();
+        break;
     }
   }
 
+
+  filterTypes() {
+    this.documentsVideo = this.documents.filter( x => x.type === 'video');
+    this.documentsImages = this.documents.filter( x => x.type === 'image');
+    this.documentsWeb = this.documents.filter( x => x.type === 'book' || !x.type);
+  }
+
   changeToWebPagesTab(){
-    console.log('in')
     /*Dispatch changetowebpagestab event*/
     var evt = new CustomEvent('changetowebpagestab');
     window.dispatchEvent(evt);
@@ -177,12 +196,14 @@ export class SearchResultComponent implements OnInit {
       this.storeQueryService.postQuery(queryData);
       this.router
         .navigate(['/session'], { skipLocationChange: true })
-        .then(() =>
+        .then(() => {
+          this.gameService.setActivePage(0);
           this.router.navigate([
             'session/search-result',
             this.query,
-            this.domain,
-          ])
+            this.domain]
+            );
+        }
         );
     }
   }
@@ -204,5 +225,21 @@ export class SearchResultComponent implements OnInit {
 
   showShortDescription(description, num) {
     return description.substr(0, num);
+  }
+
+  setTab(){
+    var lastTab = localStorage.getItem('lastTab')
+    switch (lastTab) {
+      case 'webpages':
+        this.selected.setValue(0);        
+        break;
+      case 'images':
+        this.selected.setValue(1);          
+        break;
+      case 'videos':
+        this.selected.setValue(2);          
+        break;
+    }
+    localStorage.removeItem('lastTab');    
   }
 }

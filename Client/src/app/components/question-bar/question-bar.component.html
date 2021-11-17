@@ -83,7 +83,21 @@
 
               <ng-template #elseBlock>
                 <ng-container *ngIf="gameService.challenge.answer_type === 'justify'; else elseBlock2">
-                  <mat-grid-tile colspan="9" rowspan="3" >
+
+
+                  <mat-grid-tile colspan="8" rowspan="1">
+                    <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
+                  </mat-grid-tile>
+                  <!--
+                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="!router.url.includes('view-page')">
+                    Empty!
+                  </mat-grid-tile>
+                  -->
+
+                  
+                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+
+                  <mat-grid-tile colspan="8" rowspan="3" >
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width answerField">
                         <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
@@ -94,18 +108,7 @@
                         </mat-error>
                       </mat-form-field>
                     </form>
-                  </mat-grid-tile>
-
-                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-
-                  <mat-grid-tile colspan="8" rowspan="1">
-                    <p>{{ "GAME.QUESTION_BAR.FAVORITE" | translate }}:</p>
-                  </mat-grid-tile>
-                  <!--
-                  <mat-grid-tile colspan="8" rowspan="1" *ngIf="!router.url.includes('view-page')">
-                    Empty!
-                  </mat-grid-tile>
-                  -->
+                  </mat-grid-tile>                  
 
                   <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
@@ -121,16 +124,13 @@
                     </button>
                   </mat-grid-tile>
 
-                  <mat-grid-tile colspan="6" rowspan="1">
+                  <mat-grid-tile colspan="7" rowspan="1">
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width urlField">
                         <input matInput formControlName="url1" [readonly]="true">
                       </mat-form-field>
                     </form>
                   </mat-grid-tile>
-
-                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-                  <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
 
 <!--URL2
                   <mat-grid-tile colspan="7" rowspan="1">

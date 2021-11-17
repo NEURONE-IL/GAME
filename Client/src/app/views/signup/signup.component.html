@@ -239,8 +239,10 @@
             <button [disabled]="userSubmitted" type="submit" (click)="save()" mat-raised-button class="stepper-button" color="primary">{{"SIGNUP.FINISH" | translate}}</button>
           </div>
           <div *ngIf="userSubmitted">
-            <p>{{"SIGNUP.CONFIRMATION_EMAIL_SENT" | translate}}</p>
-            <button mat-raised-button color="primary" (click)="redirect()"> {{"SIGNUP.GO_HOME" | translate}} </button>
+            <h5><strong>{{"SIGNUP.CONFIRMATION_EMAIL_SENT_START" | translate}}</strong>{{"SIGNUP.CONFIRMATION_EMAIL_SENT_END" | translate}}</h5>
+            <div class="content-center">
+              <img height="50%" width="50%" src="assets/TRIVIA.png">
+            </div>  
           </div>
       </mat-step>
     </mat-horizontal-stepper>

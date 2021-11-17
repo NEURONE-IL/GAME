@@ -86,6 +86,11 @@ export class StudyDisplayComponent implements OnInit {
     this.studyService.getStudyUserStats(this.study._id).subscribe(
       response => {
         this.users = response.responseArray;
+        this.users.forEach(element => {
+          if(element.lastSession){
+            element.lastSession = new Date(element.lastSession).toLocaleString('es-CL');
+          }
+        });
         this.loadingUsers=false;
         console.log(response, 'response')
       },

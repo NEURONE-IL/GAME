@@ -51,6 +51,10 @@ export class PostTestQuestionnaireComponent implements OnInit {
     });
     this.isLoggedIn = this.authService.loggedIn;
     this.user = this.authService.getUser();
+    /*Dispatch posttestquestionnaireenter event*/
+    var evt = new CustomEvent('posttestquestionnaireenter');
+    window.dispatchEvent(evt);
+    /*End dispatch posttestquestionnaireenter event*/    
   }
 
   ngAfterContentChecked() {
@@ -89,4 +93,11 @@ export class PostTestQuestionnaireComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy(){
+    /*Dispatch posttestquestionnaireexit event*/
+    var evt = new CustomEvent('posttestquestionnaireexit');
+    window.dispatchEvent(evt);
+    /*End dispatch posttestquestionnaireexit event*/    
+  }  
 }

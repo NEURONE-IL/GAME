@@ -13,7 +13,9 @@
 
   <hr >
 
-  <mat-tab-group (selectedTabChange)="changeTab($event)">
+  <mat-tab-group (selectedTabChange)="changeTab($event)"
+                 [selectedIndex]="selected.value"  
+  >
     <mat-tab label="{{'GAME.SEARCH.WEB_PAGES' | translate }}">
 
       <ng-template matTabContent>
@@ -64,9 +66,9 @@
       <div class="image-container">
 
         <mat-grid-list cols="12" [gutterSize]="'12px'" >
-          <div *ngFor="let doc of documents; let j = index" [attr.data-index]="j">
+          <div *ngFor="let doc of documentsImages; let j = index" [attr.data-index]="j">
             <mat-grid-tile class="image-card"  colspan="3" rowspan="3"  *ngIf="doc.type=='image'" [routerLink]="['/session/view-page', doc.title, doc.url, {result_index: j, result_page: activePage}]">
-              <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.url]" >
+              <mat-card class="cardStyle" [routerLink]="['/session/view-page', doc.title, doc.url, {result_index: j, result_page: activePage}]" >
                 <img  class="img-fluid thumbnail searchImage"   src="{{BaseUrl+doc.img}}">
                 <mat-card-content>
                   <h5 class="url-bar">{{ showShortDescription(doc.docName, 25)}}</h5>
@@ -83,15 +85,15 @@
     <mat-tab label="{{'GAME.SEARCH.VIDEOS' | translate }}">
       <div class="video-container">
         <mat-grid-list cols="12" [gutterSize]="'12px'">
-          <div *ngFor="let doc of documents; let j = index" [attr.data-index]="j">
+          <div *ngFor="let doc of documentsVideo; let k = index" >
             <mat-grid-tile class="video-card"  colspan="12"  *ngIf="doc.type=='video'">
               <div>
-                <img src="{{getThumbnail(doc.url)}}" [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]" >
+                <img src="{{getThumbnail(doc.url)}}" [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: k, result_page: activePage}]" >
               </div>
-              <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: j, result_page: activePage}]" >
+              <mat-card class="cardStyle doc-card"  [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: k, result_page: activePage}]" >
                 <mat-card-content>
                   <h5 class="url-bar">{{doc.url}}</h5>
-                  <a [routerLink]="['/session/view-page', doc.title, doc.route]"  class="document-link">{{doc.title}}</a>
+                  <a [routerLink]="['/session/view-page', doc.title, doc.route, {result_index: k, result_page: activePage}]"  class="document-link">{{doc.title}}</a>
                   <p>{{doc.searchSnippet}}</p>
                 </mat-card-content>
               </mat-card>
