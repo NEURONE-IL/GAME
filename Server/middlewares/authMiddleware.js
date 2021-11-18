@@ -45,6 +45,9 @@ const schema = Joi.object({
         .required(),
 
     institution_region: Joi.string()
+        .required(),
+
+    registered_via: Joi.string()
         .required()
 })
 

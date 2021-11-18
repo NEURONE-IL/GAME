@@ -129,6 +129,7 @@ router.post(
       institution_commune: req.body.institution_commune,
       institution_region: req.body.institution_region,
       relation: req.body.relation,
+      registered_via: req.body.registered_via
     });          
 
     //save userData in db
@@ -152,6 +153,7 @@ router.post(
       password: hashpassword,
       role: role._id,
       study: study._id,
+      registered_via: req.body.registered_via
     });
 
     //save user in db

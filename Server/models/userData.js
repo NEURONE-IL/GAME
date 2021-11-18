@@ -18,7 +18,8 @@ const UserDataSchema = new Schema({
     email: {type: String, unique: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    relation: { type: String }
+    relation: { type: String },
+    registered_via: { type: String }
 });
 
 // Sets the createdAt parameter equal to the current time

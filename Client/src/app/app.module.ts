@@ -70,12 +70,13 @@ import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PlayAgainComponent } from './views/play-again/play-again.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatTableModule} from "@angular/material/table";
+import { MatTableModule } from "@angular/material/table";
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
-import {NgxAudioPlayerModule} from "ngx-audio-player";
+import { NgxAudioPlayerModule } from "ngx-audio-player";
 import { FooterComponent } from './components/footer/footer.component';
 import { PlyrModule } from 'ngx-plyr';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
+import { TriviaHubOpenComponent } from './views/trivia-hub-open/trivia-hub-open.component';
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { ForwardComponent } from './views/forward/forward.component';
 import { PostStudyQuestionnaireComponent } from './views/post-study-questionnaire/post-study-questionnaire.component';
@@ -124,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginRedirectComponent,
     FooterComponent,
     TriviaHubComponent,
+    TriviaHubOpenComponent,
     ForwardComponent,
     PostStudyQuestionnaireComponent
   ],

@@ -15,11 +15,12 @@ const UserSchema = new Schema({
     image_url: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    role: { type: Schema.Types.ObjectId, ref: 'Role', required: true},
-    study: { type: Schema.Types.ObjectId, ref: 'Study'},
+    role: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
+    study: { type: Schema.Types.ObjectId, ref: 'Study' },
     trainer_id: {type: String},
-    code: { type: String},
-    has_played: {type: Boolean, default: false}
+    code: {type: String},
+    has_played: {type: Boolean, default: false},
+    registered_via: {type: String}
 });
 
 // Sets the createdAt parameter equal to the current time

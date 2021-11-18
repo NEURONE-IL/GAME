@@ -3,33 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Study, StudyService } from 'src/app/services/game/study.service';
-import {PlyrModule} from "ngx-plyr";
-
+import { PlyrModule } from "ngx-plyr";
 
 @Component({
   selector: 'app-trivia-hub',
   templateUrl: './index.html',
   styleUrls: ['./css/style.min.css', './trivia-hub.component.css']
 })
-
-/*export class TriviaHubComponent implements OnInit {
-  containsStudy: Boolean;
-
-  constructor( private router: Router) { }
-
-  ngOnInit(): void {
-    if(this.router.url.toString().split("/").length > 2){
-      this.containsStudy = true;
-    }
-  }
-
-  getStudy(){
-    let urlArray = this.router.url.toString().split("/");
-    let study = urlArray[urlArray.length - 1]
-    return '/signup/' + study;
-  }
-
-}*/
 
 export class TriviaHubComponent implements OnInit {
   study: Study;
@@ -62,6 +42,7 @@ export class TriviaHubComponent implements OnInit {
              ) { }
 
   ngOnInit(): void {
+    localStorage.setItem('registeredVia', 'InstitutionalInvitation');
     let study = this.route.snapshot.paramMap.get('study_id');
     if(study){
       this.studyService.getStudy(study).subscribe(
