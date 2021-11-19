@@ -1,51 +1,46 @@
 [
 	{
 		"_id": 1,
-		"name": "3º Básico",
-		"link": "https://trivia.neurone.info/signup/6183f67e08d3b0434cb409f6"
-	},
-	{
-		"_id": 2,
 		"name": "4º Básico",
 		"link": "https://trivia.neurone.info/signup/6183f67e08d3b0434cb409f6"
 	},
 	{
-		"_id": 3,
+		"_id": 2,
 		"name": "5º Básico",
 		"link": "https://trivia.neurone.info/signup/618404e008d3b0434cb40a5b"
 	},
 	{
-		"_id": 4,
+		"_id": 3,
 		"name": "6º Básico",
 		"link": "https://trivia.neurone.info/signup/618404e008d3b0434cb40a5b"
 	},
 	{
-		"_id": 5,
+		"_id": 4,
 		"name": "7º Básico",
 		"link": "https://trivia.neurone.info/signup/6181d179be68b12ecfa4b532"
 	},
 	{
-		"_id": 6,
+		"_id": 5,
 		"name": "8º Básico",
 		"link": "https://trivia.neurone.info/signup/6181d179be68b12ecfa4b532"
 	},
 	{
-		"_id": 7,
+		"_id": 6,
 		"name": "1º Medio",
 		"link": "https://trivia.neurone.info/signup/61856599500e1adced97938f"
 	},
 	{
-		"_id": 8,
+		"_id": 7,
 		"name": "2º Medio",
 		"link": "https://trivia.neurone.info/signup/61856599500e1adced97938f"
 	},
 	{
-		"_id": 9,
+		"_id": 8,
 		"name": "3º Medio",
 		"link": "https://trivia.neurone.info/signup/618565b1500e1adced979396"
 	},
 	{
-		"_id": 10,
+		"_id": 9,
 		"name": "4º Medio",
 		"link": "https://trivia.neurone.info/signup/618565b1500e1adced979396"
 	}
