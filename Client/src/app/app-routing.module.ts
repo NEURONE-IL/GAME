@@ -42,7 +42,7 @@ const routes: Routes = [
     canActivate: [ NotLoggedInGuard ]
   },
   {
-    path: 'open-invitation',
+    path: 'participa',
     component: TriviaHubOpenComponent,
     canActivate: [ NotLoggedInGuard ]
   },  
