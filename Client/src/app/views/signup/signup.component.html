@@ -149,9 +149,9 @@
           <mat-form-field class="signup-form-field">
             <mat-label>{{"SIGNUP.FORM.SEX" | translate}}</mat-label>
             <mat-select formControlName="sex">
-              <mat-option value="F">{{ "SIGNUP.FORM.SEX_F" | translate }}</mat-option>
-              <mat-option value="M">{{ "SIGNUP.FORM.SEX_M" | translate }}</mat-option>
-              <mat-option value="N">{{ "SIGNUP.FORM.SEX_N" | translate }}</mat-option>
+              <mat-option value="Mujer">{{ "SIGNUP.FORM.SEX_F" | translate }}</mat-option>
+              <mat-option value="Hombre">{{ "SIGNUP.FORM.SEX_M" | translate }}</mat-option>
+              <mat-option value="NoInforma">{{ "SIGNUP.FORM.SEX_N" | translate }}</mat-option>
             </mat-select>
             <mat-error *ngIf="studentFormControls.sex.hasError('required')">
               {{"SIGNUP.FORM.ERROR.SEX" | translate}}
