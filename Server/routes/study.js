@@ -8,6 +8,7 @@ const Challenge = require('../models/challenge');
 const UserStudy = require('../models/userStudy');
 const User = require('../models/user');
 const SessionLog = require('../models/sessionLog');
+const StudyAssistant = require('../models/studyAssistant');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const studyMiddleware = require('../middlewares/studyMiddleware');
@@ -365,6 +366,116 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                     });
             })
         });   
+});
+
+router.get('/:study_id/assistant', async (req, res) => {
+    let study_id = req.params.study_id;
+    const study = await Study.findOne({_id: study_id}, err => {
+        if (err) {
+            return res.status(404).json({
+                ok: false,
+                err: 'Study not found!'
+            });
+        }
+    });
+    if(!study){
+        return res.status(404).json({
+            ok: false,
+            err: 'Study not found!'
+        });
+    }
+    else{
+        StudyAssistant.findOne({study: study._id}, (err, studyAssistant) => {
+            if (err) {
+                return res.status(404).json({
+                    ok: false,
+                    err: 'Study not found!'
+                });
+            }
+            else{
+                res.status(200).json({
+                    ok: true,
+                    studyAssistant
+                });
+            }
+        });
+    }
+});
+
+router.post('/:study_id/assistant', async (req, res) => {
+    let study_id = req.params.study_id;
+    const study = await Study.findOne({_id: study_id}, err => {
+        if (err) {
+            return res.status(404).json({
+                ok: false,
+                err: 'Study not found!'
+            });
+        }
+    });
+    if(!study){
+        return res.status(404).json({
+            ok: false,
+            err: 'Study not found!'
+        });
+    }
+    else{
+        const studyAssistant = new StudyAssistant({
+            study: study._id,
+            assistant: req.body.assistant
+        })
+        studyAssistant.save((err, studyAssistant)=> {
+            if(err){
+                return res.status(404).json({
+                    ok: false,
+                    err,
+                  });   
+            }
+            res.status(200).json({
+                ok: true,
+                studyAssistant
+            });
+        })
+    }
+});
+
+router.put('/:study_id/assistant', async (req, res) => {
+    let study_id = req.params.study_id;
+    const study = await Study.findOne({_id: study_id}, err => {
+        if (err) {
+            return res.status(404).json({
+                ok: false,
+                err: 'Study not found!'
+            });
+        }
+    });
+    if(!study){
+        return res.status(404).json({
+            ok: false,
+            err: 'Study not found!'
+        });
+    }
+    else{
+        const studyAssistant = await StudyAssistant.findOne({study: study._id}, err => {
+            if (err) {
+                return res.status(404).json({
+                    err: 'Study not found!'
+                });
+            }
+        });
+        studyAssistant.assistant = req.body.assistant;
+        studyAssistant.save((err, studyAssistant)=> {
+            if(err){
+                return res.status(404).json({
+                    ok: false,
+                    err,
+                  });   
+            }
+            res.status(200).json({
+                ok: true,
+                studyAssistant
+            });
+          })
+    }
 });
 
 module.exports = router;
