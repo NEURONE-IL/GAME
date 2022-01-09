@@ -272,6 +272,10 @@ router.put("/:user_id/progress", [verifyToken], async (req, res) => {
       userStudy.challenges = req.body.challenges;
     }
 
+    if ("post_study" in req.body) {
+      userStudy.post_study = req.body.post_study;
+    }
+
     userStudy.save((err, userStudy) => {
       if (err) {
         return res.status(500).json({

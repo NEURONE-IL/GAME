@@ -22,6 +22,7 @@ import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
+import { TriviaHubOpenComponent } from './views/trivia-hub-open/trivia-hub-open.component';
 import { ForwardComponent } from './views/forward/forward.component';
 
 const routes: Routes = [
@@ -39,7 +40,12 @@ const routes: Routes = [
     path: 'welcome',
     component: TriviaHubComponent,
     canActivate: [ NotLoggedInGuard ]
-  },   
+  },
+  {
+    path: 'participa',
+    component: TriviaHubOpenComponent,
+    canActivate: [ NotLoggedInGuard ]
+  },  
   {
     path: 'start',
     canActivate: [AuthGuard],

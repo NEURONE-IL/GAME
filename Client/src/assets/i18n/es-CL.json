@@ -245,6 +245,24 @@
     }
   },
   "QUESTIONNAIRE": {
+    "POST_STUDY": {
+      "ERRORS": {
+        "CHECK_REQUIRED": "La confirmación es requerida"
+      },
+      "FORM": {
+        "FIELDS": {
+          "CHECK": "Por favor confirme para continuar"
+        }
+      },
+      "SUBTITLE": "Responde el siguiente cuestionario sobre tu participación en Trivia",
+      "TITLE": "Cuestionario post participación",
+      "TOAST": {
+        "ERROR": "¡Error!",
+        "ERROR_MESSAGE": "No se han guardado las respuestas post participación",
+        "SUCCESS": "¡Guardado!",
+        "SUCCESS_MESSAGE": "Se han guardado las respuestas post participación"
+      }
+    },
     "POST_TEST": {
       "CHALLENGE": "El desafío fue",
       "ERRORS": {
@@ -256,7 +274,7 @@
         }
       },
       "SUBTITLE": "Responde el siguiente cuestionario sobre el desafío que acabas de enfrentar",
-      "TITLE": "Cuestionario post-desafío",
+      "TITLE": "Cuestionario post desafío",
       "TOAST": {
         "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas post desafío",
@@ -275,7 +293,7 @@
         }
       },
       "SUBTITLE": "Responde el siguiente cuestionario antes de enfrentar el desafío. Procura hacerlo en no más de 1 minuto",
-      "TITLE": "Cuestionario pre-desafío",
+      "TITLE": "Cuestionario pre desafío",
       "TOAST": {
         "ERROR": "¡Error!",
         "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
@@ -461,6 +479,10 @@
     "FINISHED": {
       "TITLE": "¡Has completado todos los desafíos de este estudio!",
       "MESSAGE": "Al término del estudio durante 2022 informaremos a los ganadores del sorteo. Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info"
+    },
+    "PLAY_AGAIN": {
+      "CONTINUE_1": "Aún te quedan desafíos disponibles para realizar",
+      "CONTINUE_2": "¿Continuar?"
     },
     "HINT": {
       "BUTTON": "Pista",

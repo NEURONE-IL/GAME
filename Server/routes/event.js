@@ -44,7 +44,6 @@ router.post('',  [verifyToken], async (req, res) => {
     })
 });
 
-
 router.delete('/:event_id',  [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
     const _id = req.params.event_id;
     Event.deleteOne({_id: _id}, (err, event) => {

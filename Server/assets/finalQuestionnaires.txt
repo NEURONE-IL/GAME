@@ -2,7 +2,7 @@
 Real pre-test questions
 */
 {
-	"name": "pre01",
+	"name": "preTest01",
 	"type": "pre-test",
 	"questions": [
 		{
@@ -71,7 +71,7 @@ End real pre-test questions
 Real post-test questions
 */
 {
-	"name": "postQ01",
+	"name": "postTestQ01",
 	"type": "post-test",
 	"questions": [
 		{
@@ -134,4 +134,45 @@ Real post-test questions
 }
 /*
 End real post-test questions
+*/
+
+/*
+Real post-study questions
+*/
+{
+	"name": "postStudyQ01",
+	"type": "post-study",
+	"questions": [
+		{
+			"question": "Fue una experiencia muy positiva (agradable, interesante, motivante, entretenida)",
+			"number": 1,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		},
+		{
+			"question": "Volvería a jugar en Trivia para enfrentar nuevos desafíos",
+			"number": 2,
+			"options": [
+				{
+					"option": "Muy en desacuerdo",
+					"number": 1
+				},
+				{
+					"option": "Muy de acuerdo",
+					"number": 2
+				}
+			]
+		}
+	]
+}
+/*
+End real post-study questions
 */

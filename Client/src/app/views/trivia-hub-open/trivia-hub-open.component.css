@@ -50,3 +50,34 @@ img.logo2 {
   margin-left: auto;
   margin-right: auto;
 }
+
+.button__disabled {
+  background-color: gray;
+  border-color: gray;
+  color: #fff;
+  cursor: not-allowed; }
+  @media (min-width: 992px) {
+    .button__delete:hover {
+      background-color: gray;
+      border-color: gray;
+      color: #fff; } }
+
+.button:disabled {
+  opacity: 0.25;
+  pointer-events: none; }
+
+::ng-deep .mat-form-field-flex{
+  background-color: rgb(167, 186, 243) !important;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.label{
+  font-size: larger;
+  font-weight: 500;
+  padding: auto;
+}
+
+::ng-deep .mat-form-field-infix { bottom: .10em!important; }

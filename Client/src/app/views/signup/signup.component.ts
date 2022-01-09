@@ -86,10 +86,15 @@ export class SignupComponent implements OnInit {
     console.log(!this.userSubmitted);
   }
 
+  ngOnDestroy(): void {
+    localStorage.removeItem('registeredVia');
+  }
+
   save() {
     let userData = Object.assign(this.tutorForm.value, this.studentForm.value);
     let regionString = this.regions.find(element => element.id === userData.institution_region).name;
     userData.institution_region = regionString;
+    userData.registered_via = localStorage.getItem('registeredVia');
     delete userData.password_confirmation;
     this.authService.signup(userData, this.route.snapshot.paramMap.get('study_id'))
       .subscribe((res) => {

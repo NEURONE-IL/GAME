@@ -1,0 +1,270 @@
+<div class="trivia-hub">
+  <!DOCTYPE html>
+  <html lang='es'>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>NEURONE Trivia</title>
+    <meta name="description" content="Trivia: Hacia el desarrollo y evaluación de competencias informacionales de manera lúdica."/>
+    <meta name="keywords" content="Tirivia, NEURONE, TUTELAGE, Alfabetización Informacional, FONDECYT, Educación, Recuperación de Información."/>
+    <meta name="author" content="InTeractiOn Research Lab"/>
+    <meta name="robots" content="index,nofollow"/>
+    <link rel="stylesheet" href="./css/style.min.css"/>
+  </head>
+  <body>
+  
+  
+    <!-- Hero(extended) navbar -->
+  
+    <div class="navbar navbar--extended navbar-fixed-top">
+      <nav class=""> </nav>
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="/participa#" class="navbar__logo">NEURONE Trivia</a>
+              <nav class="navbar__menu">
+  
+                <ul>
+                  <li><a href="/participa#about">Quiero saber más</a></li>
+                  <li><a href="/participa#participate">Participar</a></li>
+                  <li><a href="/participa#contact">Contacto</a></li>
+                  <li><a href="https://docs.google.com/document/d/1DrEM7d3tGWBGtiL0sFs_3wrtUTievT1FQW7tliUmArU/edit?usp=sharing" target="_blank">Preguntas Frecuentes</a></li>
+                </ul>
+              </nav>
+  
+          <nav class="navbar__menu">
+            <ul style="width: 300px;">
+              <li ><a href="https://trivia.neurone.info/login">Iniciar sesión</a></li>
+            </ul>
+          </nav>
+          <div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a></div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Hero unit -->
+    <div class="hero">
+      <div class="hero__overlay hero__overlay--gradient"></div>
+      <div class="hero__mask"></div>
+      <div class="hero__inner">
+        <div class="container">
+  
+  
+  
+          <div class="hero__content">
+            <div class="hero__content__inner" id='navConverter' >
+              <img src="assets/welcome-images/trivia-negativo.png" class="expanded__image">
+              <h1 class="hero__title">¡Bienvenido(a) a Trivia!</h1>
+              <p class="hero__text">Trivia es un juego del tipo preguntas-respuestas que tiene como propósito poner a prueba las competencias de investigación en línea de los estudiantes, esto en relación a la búsqueda de información, evaluación crítica de fuentes de información y el uso de la información.</p>
+              <br>
+              <a href="/participa#about" class="button hero__button">Quiero saber más</a>
+              <a href="/participa#participate" class="button button__accent">Participar</a>
+              <a href="/participa#contact" class="button hero__button">Contacto</a>
+              <div class="logo-showcase">
+                <img src="assets/welcome-images/USACHblanco.png" class="logo2">
+                <img src="assets/welcome-images/FONDECYT.png" class="logo2">
+                <img src="assets/welcome-images/DIINFblanco.png" class="logo2">
+                <img src="assets/welcome-images/ITOblanco.png" class="logo1">
+                <img src="assets/welcome-images/tutelage-negativo.png" class="logo2">
+              </div>
+  
+              <!--
+               <h2 class="cta__title">¿Ya tienes una cuenta?</h2>
+              <a class="button button__accent" href="https://trivia.neurone.info/login" >Iniciar sesión</a>
+               -->
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__sub">
+      <span id="scrollToNext" class="scroll">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class='hero__sub__down' fill="currentColor" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M256,298.3L256,298.3L256,298.3l174.2-167.2c4.3-4.2,11.4-4.1,15.8,0.2l30.6,29.9c4.4,4.3,4.5,11.3,0.2,15.5L264.1,380.9c-2.2,2.2-5.2,3.2-8.1,3c-3,0.1-5.9-0.9-8.1-3L35.2,176.7c-4.3-4.2-4.2-11.2,0.2-15.5L66,131.3c4.4-4.3,11.5-4.4,15.8-0.2L256,298.3z"/></svg>
+      </span>
+    </div>
+  
+  
+    <!-- About -->
+    <div class="expanded landing__section" id="about">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources3" (plyrPlay)="played($event)"></plyr>
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">Nuestra investigación</h2>
+            <p class="expanded__text">Trivia forma parte del proyecto de investigación TUTELAGE (FONDECYT Regular N°1201610), cuyo objetivo es contribuir al desarrollo y evaluación de la Alfabetización Informacional en estudiantes de enseñanza básica y media. El proyecto, dirigido por el Dr. Roberto González-Ibáñez, es conducido por un equipo interdisciplinario de investigadores y educadores que forman parte del Laboratorio de Investigación InTeractiOn del Departamento de Ingeniería Informática, Universidad de Santiago de Chile. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="expanded landing__section">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <img src="assets/welcome-images/undraw_design.svg" class="expanded__image">
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">Alfabetización Informacional y Competencias de Investigación en Línea</h2>
+            <p class="expanded__text">Las competencias de investigación en línea se refieren a los saberes, actitudes y habilidades que permiten a un individuo buscar información en la Web, evaluar críticamente las fuentes de información, identificar ideas claves y hacer uso efectivo de la información. Estas competencias se enmarcan dentro de la Alfabetización Informacional, cuya evaluación y desarrollo resulta fundamental para enfrentar los desafíos del siglo XXI, una era caracterizada por la abundancia de contenidos (documentos, páginas Web, videos, imágenes, audios) y un acceso a ellos facilitado en parte por los avances tecnológicos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expanded landing__section">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+  
+            <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources2" (plyrPlay)="played($event)"></plyr>
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">¿En qué consiste la participación de un estudiante en Trivia?</h2>
+            <p class="expanded__text">Trivia es el clásico juego de preguntas y respuestas. En Trivia los estudiantes (sin ayuda de terceros) deben encontrar las respuestas a un total de 6 a 10 preguntas relativas a temáticas contextualizadas en su nivel escolar usando únicamente los recursos provistos por el sistema. El tiempo total de participación en Trivia es de apróximadamente 30 a 60 minutos distribuidos en bloques de entre 5 a 10 minutos en un periodo de máximo 2 a 3 semanas. De esta manera los estudiantes podrán jugar en distintos momentos respondiendo un máximo de 2 desafíos por día. Para encontrar las respuestas a las preguntas, los estudiantes deben utilizar únicamente los recursos provistos dentro del juego, que incluye un buscador llamado NEURONE y contenidos habilitados (preguntas, páginas Web, videos, imágenes, instrucciones, cuestionarios). Trivia ofrece un entorno seguro con contenido cuidadosamente seleccionado y verificado por nuestro equipo de investigación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expanded landing__section">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <img src="assets/welcome-images/undraw_fans.svg" class="expanded__image">
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">¿Quiénes pueden participar en Trivia?</h2>
+            <p class="expanded__text">Pueden participar estudiantes cursando 4to, 6to y 8vo básico, además de estudiantes de 2do, 3ro y 4to medio provenientes de establecimientos públicos, particulares subvencionados y particulares de Chile.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expanded landing__section">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <img src="assets/welcome-images/undraw_tabs.svg" class="expanded__image">
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">Invitaciones para Participar</h2>
+            <p class="expanded__text">Para participar se debe contar con una invitación dirigida a padres/apoderado(a)s/tutore(a)s. Las invitaciones serán enviadas a través de establecimientos escolares asociados. Si no cuentas con una invitación y le interesa que su pupilo/estudiante/hijo(a) participe del estudio, envíe un correo a invitaciones@trivia.neurone.info con su solicitud.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expanded landing__section">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <img src="assets/welcome-images/undraw_everywhere.svg" class="expanded__image">
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">Aprende y contribuye a la ciencia jugando</h2>
+            <p class="expanded__text">Hemos diseñado Trivia para que los estudiantes puedan aprender y a la vez contribuir a la ciencia de una manera entretenida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Participate -->
+    <div class="cta cta--reverse" id="participate">
+      <div class="container">
+        <div class="row" style="display: flex; width: 100%; padding-top: 3%;">
+          <div class="col-md-12 centrar">
+            <h2 class="cta__title">¿Cómo participar?</h2>
+          </div>
+          <div class="col-md-6 WelcomeHeaderText">
+            <p class="cta__sub cta__sub--center">Para participar se necesita (1) un computador de escritorio o notebook y conexión a Internet. (2) Al hacer click en el botón "Participar", el apoderado (padre/tutor) puede registrar al estudiante. (3) Dentro del registro se debe leer y aceptar un consentimiento informado (donde se presentan los detalles del estudio) aprobado por el Comité de Ética de la Universidad de Santiago de Chile y completar el formulario con los datos solicitados. (4) Los datos correspondientes a correo eléctronico y contraseña (se sugiere usar una contraseña exclusiva para este registro que no use habitualmente en otros servicios) serán empleados por los estudiantes o apoderados/tutores para ingresar posteriormente al juego.</p>
+          </div>
+          <div class="col-md-6" >
+            <plyr style="display: block; " plyrType="video" plyrTitle="Audio" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrPlay)="played($event)"></plyr>
+          </div>
+        </div>
+        <div class="col-md-12 centrar">
+          <h2 class="cta__title">Elige tu curso y regístrate</h2>
+          <mat-grid-list cols="2" rowHeight="8:1">
+            <mat-grid-tile>
+              <mat-form-field appearance="standar" style="width: 50%; margin-left: 50%; margin-top: 2%; text-align: center;">
+                <mat-label class="label">Elige tu curso</mat-label>
+                <mat-select [(ngModel)]="courseSelected">
+                  <mat-option *ngFor="let study of studiesLinks" [value]="study.link"> {{ study.name }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <a class="button button__accent" style="margin-right: 50%; margin-top: 2%;" [href]="courseSelected" *ngIf="courseSelected">Participar</a>
+              <a class="button button__disabled" disabled style="margin-right: 50%; margin-top: 2%;" *ngIf="!courseSelected">Participar</a>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>    
+        <br>
+        <br>
+        <div class="cta__inner">
+          <!-- Este es el mismo botón de arriba???-->
+          <!-- Fernando: No, este redirige a Trivia.-->
+          <div class="expanded__inner">
+            <div class="expanded__media">
+              <img src="assets/welcome-images/prizes-proposal-2.png" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+              <p class="expanded__text">Al completar la participación en el estudio (responder todas las preguntas siguiendo las reglas del juego), el estudiante concursará automáticamente en el sorteo de una de las 3 giftcards de USD 50 para servicios digitales (a elección). También te invitaremos a la segunda parte del estudio (año 2022) donde los participantes podrán aprender distintas técnicas y estrategias para buscar información de manera efectiva.</p>
+            </div>
+          </div>
+          <br>
+          <h2 class="cta__title">¿Ya tienes una cuenta?</h2>
+          <a class="button button__accent" href="https://trivia.neurone.info/login" >Iniciar sesión</a>
+        </div>
+      </div>
+    </div>
+    <!-- Contact -->
+    <div class="expanded landing__section" id="contact">
+      <div class="container">
+        <div class="expanded__inner">
+          <div class="expanded__media">
+            <img src="assets/welcome-images/together.svg" class="expanded__image">
+          </div>
+          <div class="expanded__content">
+            <h2 class="expanded__title">¿Tienes dudas?</h2>
+            <p class="expanded__text">Si tienes dudas acerca de este estudio o de la investigación que estamos realizando, puedes contactar a Director del Proyecto, Roberto González-Ibáñez, PhD (<i>invitaciones@trivia.neurone.info</i>)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer footer--dark" id="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <a href="/" class="footer__textLogo">Trivia</a>
+          <div class="footer__data">
+            <div class="footer__data__item">
+              <div class="footer__row">
+                <a href="http://tutelage.interaction-lab.info" target="_blank" class="footer__link">Proyecto FONDECYT Regular N°1201610: TUTELAGE</a>
+              </div>
+              <div class="footer__row">
+                Diseño de esta página creado por <a href="https://twitter.com/ninalimpi" target="_blank" class="footer__link">Katerina Limpitsouni</a> y
+              </div>
+              <div class="footer__row">
+                <a href="https://twitter.com/anges244" target="_blank" class="footer__link">Aggelos Gesoulis</a>
+              </div>
+            </div>
+            <div class="footer__data__item">
+              <div class="footer__row">
+                <a href="http://interaction-lab.info" target="_blank" class="footer__link">InTeractiOn Research Lab</a>
+              </div>
+              <div class="footer__row">
+                <a href="http://www.informatica.usach.cl" target="_blank" class="footer__link">Departamento de Ingeniería Informática USACH</a>
+              </div>
+              <div class="footer__row">
+                <a href="https://www.usach.cl/" target="_blank" class="footer__link">Universidad de Santiago de Chile</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src='js/app.min.js'></script>
+  </body>
+  </html>
+  </div>
+  

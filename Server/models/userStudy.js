@@ -7,6 +7,7 @@ const UserStudySchema = new Schema({
     assent: {type: Boolean, default: false},
     finished: {type: Boolean, default: false},
     finishedAt: { type: Date},
+    post_study: {type: Boolean, default: false},    
     challenges: { type: [{
         challenge: {type: Schema.Types.ObjectId, ref: 'Challenge'},
         pre_test: {type: Boolean, default: false},

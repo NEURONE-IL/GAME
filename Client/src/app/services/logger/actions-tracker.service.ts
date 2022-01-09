@@ -48,7 +48,9 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'pretestquestionnaireenter', data, this.pretestquestionnaireenterListener);
       this.bindEvent(targetDoc, 'pretestquestionnaireexit', data, this.pretestquestionnaireexitListener);
       this.bindEvent(targetDoc, 'posttestquestionnaireenter', data, this.posttestquestionnaireenterListener);
-      this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);      
+      this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);  
+      this.bindEvent(targetDoc, 'poststudyquestionnaireenter', data, this.poststudyquestionnaireenterListener);
+      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);    
       /*End custom events*/
       this.isTracking = true;
     }
@@ -80,6 +82,8 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'pretestquestionnaireexit');         
       this.unbindAll(targetDoc, 'posttestquestionnaireenter');         
       this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
+      this.unbindAll(targetDoc, 'poststudyquestionnaireenter');         
+      this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -471,6 +475,44 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),      
       source: 'Window',
       type: 'PostTestQuestionnaireExit',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }  
+
+  poststudyquestionnaireenterListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      source: 'Window',
+      type: 'PostStudyQuestionnaireEnter',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+  
+  poststudyquestionnaireexitListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,  
+      source: 'Window',
+      type: 'PostStudyQuestionnaireExit',
       localTimeStamp: t,
       url: doc.URL
     };

@@ -9,7 +9,7 @@ const schema = Joi.object({
     repeat_password: Joi.ref('password'),
 
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'cl'] } }),
+        .required().email({ tlds: { allow: false } }),
 
     tutor_names: Joi.string()
         .required(),
@@ -45,6 +45,9 @@ const schema = Joi.object({
         .required(),
 
     institution_region: Joi.string()
+        .required(),
+
+    registered_via: Joi.string()
         .required()
 })
 
@@ -59,7 +62,7 @@ const adminSchema = Joi.object({
     last_names: Joi.string(),
 
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'cl'] } }),
+        .email({ tlds: { allow: false } }),
 })
 
 verifyBody = async (req, res, next) => {
