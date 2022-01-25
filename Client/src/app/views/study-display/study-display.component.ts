@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -6,12 +6,11 @@ import { Challenge, ChallengeService } from '../../services/game/challenge.servi
 import { Study, StudyService } from '../../services/game/study.service';
 import { EndpointsService, Resource} from '../../services/endpoints/endpoints.service';
 import { environment } from 'src/environments/environment';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import {MatTable} from '@angular/material/table';
-import {MatSort} from "@angular/material/sort";
-
+import { MatSort } from "@angular/material/sort";
+import { StudyUpdateComponent } from '../study-update/study-update.component';
+import { ChallengeUpdateComponent } from '../challenge-update/challenge-update.component';
 
 @Component({
   selector: 'app-study-display',
@@ -270,7 +269,7 @@ export class StudyDisplayComponent implements OnInit {
   }
 
   showStudyUpdateDialog(): void {
-    const dialogRef = this.matDialog.open(StudyUpdateDialogComponent, {
+    const dialogRef = this.matDialog.open(StudyUpdateComponent, {
       width: '60%',
       data: this.study
     }).afterClosed()
@@ -278,7 +277,7 @@ export class StudyDisplayComponent implements OnInit {
   }
 
   showChallengeUpdateDialog(challenge: Challenge): void {
-    const dialogRef = this.matDialog.open(ChallengeUpdateDialogComponent, {
+    const dialogRef = this.matDialog.open(ChallengeUpdateComponent, {
       width: '60%',
       data: challenge
     }).afterClosed()
@@ -324,192 +323,5 @@ export class StudyDisplayComponent implements OnInit {
       this.resources = response;
       console.log(this.resources);
     });
-  }
-}
-
-@Component({
-  selector: 'app-study-update-dialog',
-  templateUrl: 'study-update-dialog.component.html',
-  styleUrls: ['./study-update-dialog.component.css']
-})
-export class StudyUpdateDialogComponent implements OnInit{
-  studyForm: FormGroup;
-  hours: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  maxPers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-  minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-  loading: Boolean;
-  file: File;
-
-  constructor(@Inject(MAT_DIALOG_DATA)
-    public study: Study,
-    private formBuilder: FormBuilder,
-    private studyService: StudyService,
-    private toastr: ToastrService,
-    private translate: TranslateService,
-    public matDialog: MatDialog) { }
-
-  ngOnInit(): void {
-    /*Gets the cooldown in seconds and converts it to hours and minutes*/
-    let seconds = this.study.cooldown;
-    let hours = Math.trunc(seconds/3600);
-    let minutes = Math.trunc(seconds/60)%60;
-    console.log(seconds, hours, minutes)
-    /*End*/
-    this.studyForm = this.formBuilder.group({
-      description: [this.study.description, [Validators.minLength(10), Validators.maxLength(250)]],
-      name: [this.study.name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      hours: [hours || ''],
-      minutes: [minutes || ''],
-      maxPerInterval: [this.study.max_per_interval || '', Validators.required]
-    });
-    this.loading = false;
-  }
-
-  get studyFormControls(): any {
-    return this.studyForm['controls'];
-  }
-
-  resetForm() {
-    this.studyForm.reset();
-  }
-
-  updateStudy(studyId: string){
-    this.loading = true;
-    let study = this.studyForm.value;
-    let formData = new FormData();
-    formData.append('name', study.name);
-    if(study.description){
-      formData.append('description', study.description);
-    }
-    if(study.hours !== ''){
-      formData.append('hours', study.hours.toString());
-    }else{
-      formData.append('hours', '0');
-    }
-    if(study.minutes !== ''){
-      formData.append('minutes', study.minutes.toString());
-    }else{
-      formData.append('minutes', '0');
-    }
-    formData.append('seconds', '0');
-    if(study.maxPerInterval){
-      formData.append('max_per_interval', study.maxPerInterval);
-    }
-    if(this.file){
-      formData.append('file', this.file);
-    }
-    /*Check formData values*/
-    for (var value of formData.entries()) {
-      console.log(value[0]+ ', ' + value[1]);
-    }
-    /*End check formData values*/
-    this.studyService.putStudy(studyId, formData).subscribe(
-      study => {
-        this.toastr.success(this.translate.instant("STUDY.TOAST.SUCCESS_MESSAGE_UPDATE") + ': ' + study['study'].name, this.translate.instant("STUDY.TOAST.SUCCESS"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-        this.loading = false;
-        this.matDialog.closeAll();
-      },
-      err => {
-        this.toastr.error(this.translate.instant("STUDY.TOAST.ERROR_MESSAGE_UPDATE"), this.translate.instant("STUDY.TOAST.ERROR"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-      }
-    );
-  }
-
-  handleFileInput(files: FileList) {
-    this.file = files.item(0);
-  }
-}
-
-@Component({
-  selector: 'app-challenge-update-dialog',
-  templateUrl: 'challenge-update-dialog.component.html',
-  styleUrls: ['./challenge-update-dialog.component.css']
-})
-export class ChallengeUpdateDialogComponent implements OnInit{
-  @Input() study: string;
-  challengeForm: FormGroup;
-  studies: Study[];
-  questionOptions = [
-    { id: 1, value: 'page', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.WEB_PAGE" },
-    { id: 2, value: 'image', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.IMAGE" },
-    { id: 3, value: 'book', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.BOOK" },
-    { id: 4, value: 'video', show: "CHALLENGE.FORM.SELECTS.QUESTION_TYPE.VIDEO" }
-  ];
-  answerOptions = [
-    { id: 1, value: 'string', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.STRING" },
-    { id: 2, value: 'number', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.NUMBER" },
-    { id: 3, value: 'url', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.URL" },
-    { id: 4, value: 'justify', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.JUSTIFY" }
-  ];
-  loading: Boolean;
-
-  constructor(@Inject(MAT_DIALOG_DATA)
-    public challenge: Challenge,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private challengeService: ChallengeService,
-    private studyService: StudyService,
-    private toastr: ToastrService,
-    private translate: TranslateService,
-    public matDialog: MatDialog) { }
-
-  ngOnInit(): void {
-
-    this.challengeForm = this.formBuilder.group({
-      question: [this.challenge.question, [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
-      question_type: [this.challenge.question_type, Validators.required],
-      seconds: [this.challenge.seconds, [Validators.required, Validators.maxLength(3), Validators.min(30)]],
-      max_attempts: [this.challenge.max_attempts, [Validators.required, Validators.maxLength(2), Validators.min(1)]],
-      hint: [this.challenge.hint, [Validators.minLength(5), Validators.maxLength(100)]],
-      answer_type: [this.challenge.answer_type, [Validators.minLength(3), Validators.maxLength(50)]],
-      answer: [this.challenge.answer, [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
-    });
-
-    this.studyService.getStudies().subscribe(
-      response => {
-        this.studies = response['studys'];
-      },
-      err => {
-        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_MULTIPLE_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-      }
-    );
-
-    this.loading = false;
-  }
-
-  get challengeFormControls(): any {
-    return this.challengeForm['controls'];
-  }
-
-  updateChallenge(challengeId: string){
-    this.loading = true;
-    let challenge = this.challengeForm.value;
-    challenge.study = this.challenge.study;
-    console.log(challenge);
-    this.challengeService.putChallenge(challengeId, challenge).subscribe(
-      challenge => {
-        this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE_UPDATE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-        this.loading = false;
-        this.matDialog.closeAll();
-      },
-      err => {
-        this.toastr.error(this.translate.instant("CHALLENGE.TOAST.ERROR_MESSAGE_UPDATE"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-      }
-    );
   }
 }

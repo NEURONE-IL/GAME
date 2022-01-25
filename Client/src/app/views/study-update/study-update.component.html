@@ -27,7 +27,7 @@
 					<input matInput formControlName="description" #inputDescription maxlength="250" ng-required="true">
 					<mat-hint align="end">{{inputDescription.value?.length || 0}}/250</mat-hint>
 					<mat-error *ngIf="studyFormControls.description.hasError('minlength')">
-						{{ "ERRORS.UNREQUIRED_MIN_LENGTH_10" | translate }}
+						{{ "ERRORS.UNREQUIRED_MIN_LENGTH_3" | translate }}
 					</mat-error>
 					<mat-error *ngIf="studyFormControls.description.hasError('maxlength')">
 						{{ "ERRORS.MAX_LENGTH_250" | translate }}

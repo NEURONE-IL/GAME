@@ -58,7 +58,7 @@ import { CreationComponent } from './views/creation/creation.component';
 import { ConsentComponent } from './components/consent/consent.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
-import { ChallengeUpdateDialogComponent, StudyDisplayComponent, StudyUpdateDialogComponent } from './views/study-display/study-display.component';
+import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { StudiesDisplayComponent } from './views/studies-display/studies-display.component';
 import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
@@ -80,6 +80,8 @@ import { TriviaHubOpenComponent } from './views/trivia-hub-open/trivia-hub-open.
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { ForwardComponent } from './views/forward/forward.component';
 import { PostStudyQuestionnaireComponent } from './views/post-study-questionnaire/post-study-questionnaire.component';
+import { ChallengeUpdateComponent } from './views/challenge-update/challenge-update.component';
+import { StudyUpdateComponent } from './views/study-update/study-update.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -108,9 +110,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConsentComponent,
     SignupComponent,
     AdminPanelComponent,
-    ChallengeUpdateDialogComponent,
+    ChallengeUpdateComponent,
     StudyDisplayComponent,
-    StudyUpdateDialogComponent,
+    StudyUpdateComponent,
     StudiesDisplayComponent,
     HintDialogComponent,
     AssentComponent,

@@ -202,8 +202,9 @@
     "PASSWORD_PATTERN": "La contraseña debe tener un mínimo de 8 caracteres y al menos un número",
     "REQUIRED": "El campo es requerido",
     "SELECTION_REQUIRED": "Debe seleccionar una opción",
-    "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres",
-    "UNREQUIRED_MIN_LENGTH_5": "El campo puede quedar vacío o tener un largo de al menos 5 caracteres"
+    "UNREQUIRED_MIN_LENGTH_5": "El campo puede quedar vacío o tener un largo de al menos 5 caracteres",
+    "UNREQUIRED_MIN_LENGTH_3": "El campo puede quedar vacío o tener un largo de al menos 3 caracteres",
+    "UNREQUIRED_MIN_LENGTH_10": "El campo puede quedar vacío o tener un largo de al menos 10 caracteres"
   },
   "LOGIN": {
     "TITLE": "Iniciar sesión",
