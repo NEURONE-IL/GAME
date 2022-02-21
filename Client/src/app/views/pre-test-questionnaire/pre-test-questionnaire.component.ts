@@ -26,7 +26,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
               private authService: AuthService,
               private toastr: ToastrService,
               private translate: TranslateService,
-              private gameService: GameService,
+              public gameService: GameService,
               public router: Router,
               private changeDetector: ChangeDetectorRef
               ) { }

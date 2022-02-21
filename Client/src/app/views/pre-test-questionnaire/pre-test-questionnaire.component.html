@@ -35,7 +35,10 @@
         </mat-grid-list>
       </div>
     </form>
-    <h5 class="footer"><mat-icon>info</mat-icon>Recuerda que para participar del sorteo, sólo debes usar Trivia para enfrentar el desafío</h5>
+    <h5 class="footer" *ngIf="!gameService.authService.getUser().trainer_id; else elseBlock"><mat-icon>info</mat-icon> {{ "QUESTIONNAIRE.PRE_TEST.WARNING" | translate }} </h5>
+    <ng-template #elseBlock>
+      <h5 class="footer"><mat-icon>info</mat-icon> {{ "QUESTIONNAIRE.PRE_TEST.WARNING_EXTERNAL" | translate }} </h5>
+    </ng-template>
   </mat-card-content>
   <mat-card-actions class="cardActions" *ngIf="questionnaires">
 

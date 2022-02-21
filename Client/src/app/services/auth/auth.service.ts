@@ -33,7 +33,7 @@ export class AuthService {
         localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
-      this.redirectUserPanel(resp.user.role.name);
+      this.redirectUserPanel(resp.user.role.name, false);
       },
       (error) => {
         let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
@@ -89,7 +89,7 @@ export class AuthService {
         localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
-      this.redirectUserPanel(resp.user.role.name);
+      this.redirectUserPanel(resp.user.role.name, true);
       },
       (error) => {
         let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
@@ -115,7 +115,7 @@ export class AuthService {
         localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
-      this.redirectUserPanel(resp.user.role.name);
+      this.redirectUserPanel(resp.user.role.name, true);
       },
       (error) => {
         let error_msg = this.translate.instant("LOGIN.TOAST.ERROR_MESSAGE");
@@ -217,16 +217,18 @@ export class AuthService {
     });
   }
 
-  redirectUserPanel(role) {
+  redirectUserPanel(role, external) {
     console.log('redirect');
     if (role=='admin') {
       console.log('admin');
       this.router.navigate(['admin_panel']);
     } else {
-      // this.router.navigate(['questionnaire/pre-test']);
-      this.router.navigate(['/user-profile']);
+      if(external){
+        this.router.navigate(['/start']);
+      }else{
+        this.router.navigate(['/user-profile']);
+      }
     }
-
 
   }
 

@@ -15,6 +15,7 @@
     "DELETE_STUDY": "ELIMINAR ESTUDIO",
     "EDIT": "EDITAR",
     "EDIT_STUDY": "EDITAR ESTUDIO",
+    "END": "FINALIZAR",
     "SAVE": "GUARDAR",
     "CONTINUE": "CONTINUAR",
     "NO": "NO",
@@ -300,7 +301,9 @@
         "ERROR_MESSAGE": "No se han guardado las respuestas pre desafío",
         "SUCCESS": "¡Guardado!",
         "SUCCESS_MESSAGE": "Se han guardado las respuestas pre desafío"
-      }
+      },
+      "WARNING": "Recuerda que para participar del sorteo, sólo debes usar Trivia para enfrentar el desafío",
+      "WARNING_EXTERNAL": "Recuerda que sólo debes usar Trivia para enfrentar el desafío"
     }
   },
   "SIGNUP": {
@@ -479,7 +482,8 @@
     },
     "FINISHED": {
       "TITLE": "¡Has completado todos los desafíos de este estudio!",
-      "MESSAGE": "Al término del estudio durante 2022 informaremos a los ganadores del sorteo. Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info"
+      "MESSAGE": "Al término del estudio durante 2022 informaremos a los ganadores del sorteo. Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info",
+      "MESSAGE_EXTERNAL": "Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info"
     },
     "PLAY_AGAIN": {
       "CONTINUE_1": "Aún te quedan desafíos disponibles para realizar",

@@ -19,7 +19,7 @@ export class GameService {
   constructor(
     private challengeService: ChallengeService,
     public router: Router,
-    private authService: AuthService
+    public authService: AuthService
   ) {}
 
   async load() {
@@ -83,7 +83,12 @@ export class GameService {
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
         this.timeLeft = null;
-        this.stage = 'summary';
+        if(!this.authService.getUser().trainer_id){
+          this.stage = 'summary';
+        }
+        else{
+          this.finishSummary();
+        }
         localStorage.setItem('value', "100")
         this.router.navigate(['start']);
       })
@@ -196,12 +201,17 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
-        this.stage = 'summary';
+        if(!this.authService.getUser().trainer_id){
+          this.stage = 'summary';
+        }
+        else{
+          this.finishSummary();
+          this.continue();
+        }
       });
   }
 
   async finishPostStudy() {
-    let progress = this.progress;
     this.authService
       .updateProgress({ post_study: true })
       .then(() => {
@@ -220,6 +230,7 @@ export class GameService {
       }
     });
     if(studyFinished){
+      await this.authService.updateProgress({ finished: true });
       this.stage = 'post-study';
     }
     else{

@@ -19,7 +19,6 @@ export class PostStudyQuestionnaireComponent implements OnInit {
   requiredType: string = 'post-study';
   isLoggedIn = false;
   user: any;
-  question: string;
 
   constructor(private formBuilder: FormBuilder,
               private questionnaireService: QuestionnaireService,
@@ -33,11 +32,9 @@ export class PostStudyQuestionnaireComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.question = this.gameService.challenge.question;
     this.questionnaireForm = this.formBuilder.group({
       answers: new FormArray([])
     })
-    console.log(this.question);
 
     this.questionnaireService.getQuestionnairesByType(this.requiredType)
     .subscribe(response => {
@@ -75,14 +72,14 @@ export class PostStudyQuestionnaireComponent implements OnInit {
   }
 
   saveAnswers(){
-    this.questionnaireService.postAnswers(this.user, this.questionnaires, this.questionnaireForm.value.answers, this.gameService.challenge, this.requiredType)
+    this.questionnaireService.postAnswers(this.user, this.questionnaires, this.questionnaireForm.value.answers, null, this.requiredType)
     .subscribe(async response => {
         this.toastr.success(this.translate.instant("QUESTIONNAIRE.POST_STUDY.TOAST.SUCCESS_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_STUDY.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        await this.gameService.finishPostStudy();     
+          await this.gameService.finishPostStudy();
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.POST_STUDY.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.POST_STUDY.TOAST.ERROR"), {

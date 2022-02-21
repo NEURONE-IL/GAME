@@ -35,7 +35,7 @@
     <img *ngIf="!user.image_url" src="/assets/avatar_usuario.png" class="user-image">
     {{user.names}}
   </a>
-  <button (click)="logout()" mat-button *ngIf="isLoggedIn"><mat-icon>login</mat-icon> {{"LOGOUT.LOGOUT" | translate}}</button>
+  <button (click)="logout()" mat-button *ngIf="isLoggedIn && !user.trainer_id"><mat-icon>login</mat-icon> {{"LOGOUT.LOGOUT" | translate}}</button>
 </div>
 
 <ng-template #content let-modal>

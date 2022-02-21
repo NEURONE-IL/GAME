@@ -27,6 +27,10 @@ export class StartComponent implements OnInit, OnDestroy {
     await this.gameService.finishPlayAgain();
   }
 
+  logout(){
+    this.gameService.authService.logout();
+  }
+
   async ngOnInit(): Promise<void> {
     await this.gameService.load().then(() => {
       if (!this.gameService.loading) {

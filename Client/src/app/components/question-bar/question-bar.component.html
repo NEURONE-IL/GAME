@@ -61,7 +61,7 @@
                 <form class="answer-form" [formGroup]="answerForm">
                   <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'string'">
                     <mat-label>{{ "GAME.ANSWER_TYPE.TEXT" | translate }}</mat-label>
-                    <input matInput formControlName="answer">
+                    <input matInput formControlName="answer" (keydown.enter)="sendAnswer()">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
                     <mat-error *ngIf="answerControls.answer.hasError('required')">
                       {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
@@ -70,7 +70,7 @@
 
                   <mat-form-field class="input-full-width answerField" required *ngIf="gameService.challenge.answer_type === 'number'">
                     <mat-label>{{ "GAME.ANSWER_TYPE.NUMBER" | translate }}</mat-label>
-                    <input matInput formControlName="answer" type="number">
+                    <input matInput formControlName="answer" (keydown.enter)="sendAnswer()" type="number">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
                     <mat-error *ngIf="answerControls.answer.hasError('required')">
                       {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
@@ -101,7 +101,7 @@
                     <form class="answer-form" [formGroup]="answerForm">
                       <mat-form-field class="input-full-width answerField">
                         <mat-label>{{ "GAME.ANSWER_TYPE.JUSTIFY" | translate }}</mat-label>
-                        <input matInput formControlName="answer">
+                        <input matInput formControlName="answer" (keydown.enter)="sendAnswer()">
                         <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
                         <mat-error *ngIf="answerControls.answer.hasError('required')">
                           {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}

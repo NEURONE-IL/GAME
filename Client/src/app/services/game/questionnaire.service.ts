@@ -54,11 +54,19 @@ export class QuestionnaireService {
         }
         answers.push(newAnswer);
       });
+      /*Differentiation for PostStudyQuesttionnaire*/
+      let challengeId: string;
+      if(challenge){
+        challengeId = challenge._id
+      }else{
+        challengeId = null;
+      }
+      /*End Differentiation for PostStudyQuesttionnaire*/
       let userQuestionnaire = {
         user: user._id,
         questionnaire: questionnaire[0]._id,
         study: user.study,
-        challenge: challenge._id,
+        challenge: challengeId,
         type: type,
         answers: answers
       };

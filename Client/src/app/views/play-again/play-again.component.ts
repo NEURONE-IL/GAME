@@ -9,7 +9,7 @@ import { GameService } from 'src/app/services/game/game.service';
 })
 export class PlayAgainComponent implements OnInit {
 
-  constructor(private gameService: GameService, private authService: AuthService) { }
+  constructor(private gameService: GameService, public authService: AuthService) { }
 
   ngOnInit(): void {
 

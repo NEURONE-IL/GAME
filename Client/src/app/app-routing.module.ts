@@ -17,6 +17,7 @@ import { StudyDisplayComponent } from './views/study-display/study-display.compo
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
+import { AsExternalServiceGuard } from './helpers/as-external-service.guard';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
@@ -114,7 +115,7 @@ const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent,
-    canActivate: [ AuthGuard ]
+    canActivate: [ AuthGuard, AsExternalServiceGuard ]
   },
   {
     path: 'admin_panel',
