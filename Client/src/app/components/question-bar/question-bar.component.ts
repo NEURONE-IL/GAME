@@ -7,6 +7,8 @@ import { ChallengeService } from 'src/app/services/game/challenge.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { StudyService } from 'src/app/services/game/study.service';
 
 export interface HintData {
   text: string;
@@ -29,6 +31,7 @@ export class QuestionBarComponent implements OnInit {
   interval;
   value = localStorage.getItem('value') || 100;
   leftValue: string;
+  assistantUrl: string;
 
   // Tooltip
   currentTooltip: string;
@@ -46,7 +49,9 @@ export class QuestionBarComponent implements OnInit {
               public challengeService: ChallengeService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private authService: AuthService,
+              private studyService: StudyService) {
     this.answerForm = this.formBuilder.group({
       answer: ['', [Validators.required]],
       url1: [''],
@@ -54,7 +59,6 @@ export class QuestionBarComponent implements OnInit {
       rawUrl1: [''],
       rawUrl2: ['']
     });
-
     this.loadChallenge();
     this.startTimer();
     // On router change, checks if a visited page is marked as favorite
@@ -68,6 +72,7 @@ export class QuestionBarComponent implements OnInit {
   ngOnInit(): void {
     this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
     this.sendAnswerTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_SEND");
+    this.assistant();
   }
 
   ngOnDestroy(): void {
@@ -464,6 +469,17 @@ export class QuestionBarComponent implements OnInit {
 //      console.log('Match 4');
       return 4;
     }
+  }
+
+  assistant(){
+    let study = this.authService.getUser().study;
+    this.studyService.getAssistant(study).subscribe( response => {
+      let assistant = response['studyAssistant'].assistant;
+      if(assistant){
+        this.assistantUrl = `http://va.neurone.info/assistant/${assistant}/${this.authService.getUser()._id}/Trivia/${study}/challenge`;
+      }
+    })
+    
   }
 
   get answerControls(): any {

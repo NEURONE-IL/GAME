@@ -221,3 +221,9 @@
   </div>
 
 </div>
+
+<iframe with="800px" height="500px" frameborder="0"
+    *ngIf="assistantUrl"
+    style="overflow: hidden; margin: 10px; bottom: 15px; right: 15px; position: fixed"
+    [src]="assistantUrl | safeurl"
+    title="Virtual Asist"></iframe>

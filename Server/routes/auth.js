@@ -289,12 +289,12 @@ router.post("/login", async (req, res) => {
       res.status(400).send(err)
     }
   }).populate( { path: 'role', model: Role} );
-  if (!user) res.status(400).send("EMAIL_NOT_FOUND");
+  if (!user) return res.status(400).send("EMAIL_NOT_FOUND");
   //checking password
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) res.status(400).send("INVALID_PASSWORD");
+  if (!validPass) return res.status(400).send("INVALID_PASSWORD");
   //check if user is confirmed
-  if (!user.confirmed) res.status(400).send("USER_NOT_CONFIRMED");
+  if (!user.confirmed) return res.status(400).send("USER_NOT_CONFIRMED");
   //create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
   res.header("x-access-token", token).send({ user: user, token: token });

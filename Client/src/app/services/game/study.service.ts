@@ -64,4 +64,8 @@ export class StudyService {
     /*Sends the request*/
     return this.http.put(this.uri+studyId, updatedStudy, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }
+
+  getAssistant(studyId: string){
+    return this.http.get(this.uri+studyId+'/assistant');
+  }
 }
