@@ -28,7 +28,11 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   logout(){
-    this.gameService.authService.logout();
+    this.gameService.authService.logoutAPI_KEY();
+  }
+
+  returnTrainer(){
+    window.location.href = localStorage.getItem('return_url');
   }
 
   async ngOnInit(): Promise<void> {

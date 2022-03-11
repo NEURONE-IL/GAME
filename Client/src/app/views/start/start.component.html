@@ -113,25 +113,42 @@
     <app-post-study-questionnaire></app-post-study-questionnaire>
   </div>
 
-   <!-- Study Finished  -->
- <div class="center-card" *ngIf="gameService.stage == 'study-finished'">
-  <mat-card class="card mat-elevation-z8">
-    <mat-card-title>{{ "GAME.FINISHED.TITLE" | translate }}</mat-card-title>
-    <mat-card-content>
-      <p *ngIf="!gameService.authService.getUser().trainer_id; else elseBlock">{{ "GAME.FINISHED.MESSAGE" | translate }}</p>
-      <ng-template #elseBlock>
-        <p>{{ "GAME.FINISHED.MESSAGE_EXTERNAL" | translate }}</p>
-      </ng-template>
-      <img src="/assets/TRIVIA.png" style="width: 300px; margin-left: 10%"> 
-      <button mat-raised-button color="primary" style="margin-left: 20%" *ngIf="!gameService.authService.getUser().trainer_id; else elseBlock2" (click)="continue()">
-        {{"BUTTONS.CONTINUE" | translate}}
-      </button>
-      <ng-template #elseBlock2>
-        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="logout()">
-          {{"BUTTONS.END" | translate}}
+  <!-- Study Finished NORMAL/TRAINER -->
+  <div class="center-card" *ngIf="gameService.stage == 'study-finished' && gameService.getUrl() !== 'https://trivia.neurone.info/participa'">
+    <mat-card class="card mat-elevation-z8">
+      <mat-card-title *ngIf="!gameService.authService.getUser().trainer_id">{{ "GAME.FINISHED.TITLE" | translate }}</mat-card-title>
+      <mat-card-title *ngIf="gameService.authService.getUser().trainer_id">{{ "GAME.FINISHED.STAGE_TITLE" | translate }}</mat-card-title>
+      <mat-card-content>
+        <p *ngIf="!gameService.authService.getUser().trainer_id; else elseBlock">{{ "GAME.FINISHED.MESSAGE" | translate }}</p>
+        <ng-template #elseBlock>
+          <p>{{ "GAME.FINISHED.MESSAGE_TRAINER" | translate }}</p>
+        </ng-template>
+        <img src="/assets/TRIVIA.png" style="width: 300px; margin-left: 10%"> 
+        <button mat-raised-button color="primary" style="margin-left: 20%" *ngIf="!gameService.authService.getUser().trainer_id; else elseBlock2" (click)="continue()">
+          {{"BUTTONS.CONTINUE" | translate}}
         </button>
-      </ng-template>
-    </mat-card-content>
-  </mat-card>
-</div>
+        <ng-template #elseBlock2>
+          <button mat-raised-button color="primary" style="margin-left: 20%" (click)="logout()">
+            {{"BUTTONS.END" | translate}}
+          </button>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Study Finished AS SERVICE, NOT TRAINER -->
+  <div class="center-card" *ngIf="gameService.stage == 'study-finished' && gameService.getUrl() === 'https://trivia.neurone.info/participa'">
+    <mat-card class="card mat-elevation-z8">
+      <mat-card-title>{{ "GAME.FINISHED.TITLE" | translate }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ "GAME.FINISHED.MESSAGE_EXTERNAL_1" | translate }}</p>
+        <p>{{ "GAME.FINISHED.MESSAGE_EXTERNAL_2" | translate }}</p>
+        <img src="/assets/TRIVIA.png" style="width: 300px; margin-left: 10%"> 
+        <button mat-raised-button color="primary" style="margin-left: 20%" (click)="logout()">
+          {{"BUTTONS.MORE" | translate}}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 </ng-template>

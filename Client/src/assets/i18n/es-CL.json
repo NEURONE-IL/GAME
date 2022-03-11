@@ -18,9 +18,11 @@
     "END": "FINALIZAR",
     "SAVE": "GUARDAR",
     "CONTINUE": "CONTINUAR",
+    "MORE": "SABER MÁS",
     "NO": "NO",
     "YES": "SÍ",
-    "SEARCH": "BUSCAR"
+    "SEARCH": "BUSCAR",
+    "TRAINER_RETURN": "IR A TRAINER"    
   },
   "ADMIN": {
     "TABS": {
@@ -481,9 +483,12 @@
       "CAN_PLAY_AT_FINAL2": ". Te esperamos en Trivia."
     },
     "FINISHED": {
-      "TITLE": "¡Has completado todos los desafíos de este estudio!",
+      "TITLE": "¡Felicitaciones! Has completado todos los desafíos de este estudio",
+      "STAGE_TITLE": "¡Felicitaciones! Has completado esta etapa",
       "MESSAGE": "Al término del estudio durante 2022 informaremos a los ganadores del sorteo. Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info",
-      "MESSAGE_EXTERNAL": "Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info"
+      "MESSAGE_EXTERNAL_1": "Muchas gracias por tu participación. Si tienes dudas puedes escribirnos a consultas@trivia.neurone.info.",
+      "MESSAGE_EXTERNAL_2": "Si te interesa seguir repondiendo nuevos desafíos, te invitamos a registrarte pinchando el botón de abajo.",
+      "MESSAGE_TRAINER": "Vuelve a Trainer y sigue completando etapas. Pincha el botón de abajo para continuar."
     },
     "PLAY_AGAIN": {
       "CONTINUE_1": "Aún te quedan desafíos disponibles para realizar",

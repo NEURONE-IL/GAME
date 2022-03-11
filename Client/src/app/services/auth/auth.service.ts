@@ -76,12 +76,28 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
+  logoutAPI_KEY() {
+    let sessionLog = {
+      userId: this.getUser()._id,
+      userEmail: this.getUser().email,
+      studyId: this.getUser().study,
+      challengeId: localStorage.getItem('chall'),
+      state: 'logout',
+      localTimeStamp: Date.now()
+    }
+    this.storeSession.postSessionLog(sessionLog);
+    var returnUrl = localStorage.getItem('return_url');
+    localStorage.clear();
+    window.location.href = returnUrl;
+  }
+
   registerAPIKEY(email, names, study, trainer_id, api_key, url){
     let headers = new HttpHeaders().set('x-api-key', api_key); // create header object
     return this.http.post(environment.apiURL+ 'site/registeruser',{email: email, names: names, last_names: names, study: study, trainer_id: trainer_id, url: url} ,{headers: headers })
     .subscribe((resp: any) => {
       localStorage.setItem('auth_token', resp.token);
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
+      localStorage.setItem('return_url', url);
       let sessionLog = {
         userId: resp.user._id,
         userEmail: resp.user.email,
@@ -108,6 +124,7 @@ export class AuthService {
     .subscribe((resp: any) => {
       localStorage.setItem('auth_token', resp.token);
       localStorage.setItem("currentUser",JSON.stringify(resp.user));
+      localStorage.setItem('return_url', url);
       let sessionLog = {
         userId: resp.user._id,
         userEmail: resp.user.email,
