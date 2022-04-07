@@ -87,7 +87,6 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         });
       }
     });
-    console.log(challenges)
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(genKey(), salt);
     const user = new User({
@@ -97,6 +96,7 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         role: role._id,
         study: study._id,
         trainer_id: req.body.trainer_id,
+        trainer_return_url: url,
         confirmed: true
     });
     await user.save(err => {

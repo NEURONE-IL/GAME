@@ -205,8 +205,7 @@ export class GameService {
           this.stage = 'summary';
         }
         else{
-          this.finishSummary();
-          this.continue();
+          window.location.href = this.authService.getUser().trainer_return_url;
         }
       });
   }
@@ -246,7 +245,13 @@ export class GameService {
 
   async finishPlayAgain(){
     this.load();
-    this.router.navigate(['/']);
+    const user = this.authService.getUser();
+    if(user.trainer_id !== null){
+      window.location.href = user.trainer_return_url;
+    }
+    else{
+      this.router.navigate(['/']);
+    }
   }
 
   async continue(){
