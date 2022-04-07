@@ -268,4 +268,9 @@ export class GameService {
     if (challenge != null) return challenge.challenge;
     else return null;
   }
+
+  getUrl(){
+    return localStorage.getItem('return_url');
+  }
+
 }
