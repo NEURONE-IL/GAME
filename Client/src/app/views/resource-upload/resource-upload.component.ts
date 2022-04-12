@@ -1,7 +1,6 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
-import { ResourceService } from '../../services/game/resource.service';
 import { Study, StudyService } from '../../services/game/study.service';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { ToastrService } from 'ngx-toastr';
@@ -27,7 +26,7 @@ export class ResourceUploadComponent implements OnInit {
   ];
   loading: Boolean;
 
-  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.getChallengesByStudy(this.study);
