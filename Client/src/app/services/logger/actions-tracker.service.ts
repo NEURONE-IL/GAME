@@ -375,7 +375,8 @@ export class ActionsTrackerService {
       type: 'PageEnter',
       localTimeStamp: t,
       url: doc.URL,
-      detail: evt.detail
+      detail: evt.detail.detail,
+      docId: evt.detail.docId
     };
 
     // console.log(keyOutput);
@@ -396,7 +397,8 @@ export class ActionsTrackerService {
       type: 'PageExit',
       localTimeStamp: t,
       url: doc.URL,
-      detail: evt.detail
+      detail: evt.detail.detail,
+      docId: evt.detail.docId
     };
 
     // console.log(keyOutput);

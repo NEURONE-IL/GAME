@@ -10,6 +10,7 @@ const EventSchema = new Schema({
     url: {type: String},
     localTimeStamp: {type: Date},
     detail: { type: String },
+    docId: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
