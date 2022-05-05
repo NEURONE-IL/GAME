@@ -78,6 +78,9 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         });
       }
     });
+    if(!study){
+      return res.status(404).send('Study not found!');
+    }
     // Find study challenges
     const challenges = await Challenge.find({ study: study._id }, (err) => {
       if (err) {
