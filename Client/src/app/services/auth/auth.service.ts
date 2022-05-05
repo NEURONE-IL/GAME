@@ -60,6 +60,7 @@ export class AuthService {
   }
 
   logout() {
+    let trainer_id = this.getUser().trainer_id;
     let sessionLog = {
       userId: this.getUser()._id,
       userEmail: this.getUser().email,
@@ -72,8 +73,10 @@ export class AuthService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem("currentUser");
     localStorage.removeItem("game");
-    localStorage.removeItem('lastUrl')
-    this.router.navigate(['login']);
+    localStorage.removeItem('lastUrl');
+    if(!trainer_id){
+      this.router.navigate(['login']);
+    }
   }
 
   logoutAPI_KEY() {

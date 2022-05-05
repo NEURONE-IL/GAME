@@ -41,7 +41,7 @@ router.post(
       const site = new Site({
         host: req.headers.origin,
         api_key: genKey(),
-        confirmed: false
+        confirmed: true
       });
       site.save((err, site)=> {
         if(err){

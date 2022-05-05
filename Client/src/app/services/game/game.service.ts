@@ -247,6 +247,7 @@ export class GameService {
     this.load();
     const user = this.authService.getUser();
     if(user.trainer_id !== null){
+      this.authService.logout();
       window.location.href = user.trainer_return_url;
     }
     else{
