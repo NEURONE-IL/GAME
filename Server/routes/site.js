@@ -33,7 +33,7 @@ router.post(
       }
     })
     if(siteExists){
-      res.status(200).json({
+      return res.status(200).json({
         site: siteExists
       });
     }
@@ -50,7 +50,7 @@ router.post(
                 err,
               });   
         }
-        res.status(200).json({
+        return res.status(200).json({
             site
         });
       })
@@ -118,7 +118,7 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         })
         .then((progress) => {
         // Register player in NEURONE-GM
-        saveGMPlayer(req, user, study, res);
+        //saveGMPlayer(req, user, study, res);
 
         res.header("x-access-token", token).send({ user: user, token: token, url: url });
     });
@@ -126,18 +126,19 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
 
 router.post("/login", verifyAPIKey, async (req, res) => {
     const url = req.body.url;
+    console.log(url)
     //checking if username exists
     const user = await User.findOne({
       trainer_id: req.body.trainer_id,
     }, err => {
       if(err){
-        res.status(400).send(err)
+        return res.status(400).send(err)
       }
     }).populate( { path: 'role', model: Role} );
-    if (!user) res.status(400).send("ID_NOT_FOUND");
+    if (!user) return res.status(400).send("ID_NOT_FOUND");
     const study = await Study.findOne({_id: req.body.study}, err => {
       if(err){
-        res.status(400).send(err)
+        return res.status(400).send(err)
       }
     })
     user.cooldown_start = null;
@@ -147,12 +148,12 @@ router.post("/login", verifyAPIKey, async (req, res) => {
     }
     await user.save(err => {
       if(err){
-        res.status(400).send(err)
+        return res.status(400).send(err)
       }
     });
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header("x-access-token", token).send({ user: user, token: token, url: url });
+    return res.header("x-access-token", token).send({ user: user, token: token, url: url });
   });
 
 router.get("/study", verifyAPIKey, async (req, res) => {
@@ -171,10 +172,10 @@ router.get("/user/:trainer_id", async (req, res) => {
   const trainer_id = req.params.trainer_id;
   const user = await User.findOne({trainer_id: trainer_id}, err => {
     if(err){
-      res.status(400).send(err)
+      return res.status(400).send(err)
     }
   })
-  res.status(200).json({
+  return res.status(200).json({
     ok: true,
     user
   });

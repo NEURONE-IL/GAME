@@ -523,12 +523,14 @@ router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
     }
     progress.push({
       study: userStudies[i].study,
+      finished: userStudies[i].finished,
+      finishedAt: userStudies[i].finishedAt,
       challenges: challenges.length,
       completedChallenges: counter,
       percentage: counter/challenges.length
     })
   }
-  res.status(200).json({
+  return res.status(200).json({
     progress
   });
 });
