@@ -24,6 +24,7 @@
     "js-levenshtein": "^1.1.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15",
+    "mongoose-long": "^0.5.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^4.2.0",
