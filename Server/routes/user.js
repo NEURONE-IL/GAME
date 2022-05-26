@@ -560,6 +560,12 @@ router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
       });
     }
   });
+  if(!user){
+    return res.status(404).json({
+      ok: false,
+      err: "EMAIL_ALREADY_USED"
+    });
+  }
   const userStudies = await UserStudy.find({user: user._id}, err => {
     if(err){
       return res.status(404).json({
