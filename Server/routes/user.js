@@ -22,7 +22,7 @@ router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
         err,
       });
     }
-    res.status(200).json({ users });
+    return status(200).json({ users });
   }).populate({ path: 'role', model: Role} );
 });
 
@@ -38,7 +38,7 @@ router.get(
           err,
         });
       }
-      res.status(200).json({ user });
+      return res.status(200).json({ user });
     }).populate({ path: 'role', model: Role} );
   }
 );
@@ -54,7 +54,7 @@ router.delete(
           err,
         });
       }
-      res.status(200).json({
+      return res.status(200).json({
         user,
       });
     });
@@ -72,17 +72,17 @@ router.post("/changePassword", [verifyToken], async (req, res) => {
   //checking password
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
-    res.status(400).send("Invalid password!");
+    return res.status(400).send("Invalid password!");
   } else {
     //hash password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(req.body.newPassword, salt);
+    user.updatedAt = Date.now();
     user.save((err) => {
       if (err) {
-        res.status(500).send({ message: err });
-        return;
+        return res.status(500).send({ message: err });
       }
-      res.send({ message: "Password was updated successfully!" });
+      return res.send({ message: "Password was updated successfully!" });
     });
   }
 });
@@ -104,7 +104,7 @@ router.post("/sendEmailResetPassword/:email", async (req, res) => {
   // Send confirmation email
   sendResetPasswordEmail(user, res, req);
 
-  res.status(200).json({
+  return res.status(200).json({
     ok: true
   });
 })
@@ -121,12 +121,12 @@ router.post("/resetPassword/:token", async (req, res) => {
     User.findOne({ _id: token._userId }, function (err, user) {
         if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
         user.password = password;
+        user.updatedAt = Date.now();
         user.save((err) => {
           if (err) {
-            res.status(500).send({ message: err });
-            return;
+            return res.status(500).send({ message: err });
           }
-          res.send({ message: "Password was updated successfully!" });
+          return res.send({ message: "Password was updated successfully!" });
         });
     });
   });
@@ -148,7 +148,7 @@ router.put("/:user_id", async (req, res) => {
         err,
       });
     }
-    res.status(200).json({
+    return res.status(200).json({
       user,
     });
   })
@@ -171,7 +171,7 @@ router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
           err,
         });
       }
-      res.status(200).json({
+      return res.status(200).json({
         user,
       });
     });
@@ -235,13 +235,13 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
               err
             });
           }
-          res.status(200).json(createdUserStudy);
+          return res.status(200).json(createdUserStudy);
         });
       });
     }
     else {
       console.log('returning response');
-      res.status(200).json(userStudy);
+      return res.status(200).json(userStudy);
     }
   });
 });
@@ -280,6 +280,7 @@ router.put("/:user_id/progress", [verifyToken], async (req, res) => {
       userStudy.finished = req.body.finished;
       userStudy.finishedAt = Date.now();
     }
+    userStudy.updatedAt = Date.now();
 
     userStudy.save((err, userStudy) => {
       if (err) {
@@ -341,11 +342,11 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
 
   User.findById(userId, (err, user) => {
     if (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
     Study.findById(user.study, (err, study) => {
       if (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       }
       const timeNow = new Date(Date.now());
       const cooldown = study.cooldown;
@@ -353,6 +354,7 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
       if(!user.cooldown_start){
         user.cooldown_start = timeNow;
         user.interval_answers = 0;
+        user.updatedAt = Date.now();
         user.save( err => {
           if (err) {
             res.status(500).json(err);
@@ -376,11 +378,12 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
         if(canPlay){
           user.cooldown_start = timeNow;
           user.interval_answers = 0;
+          user.updatedAt = Date.now();
           user.save( err => {
             if (err) {
-              res.status(500).json(err);
+              return res.status(500).json(err);
             }
-            res.status(200).json({
+            return res.status(200).json({
               latestAnswerDate: timeNow,
               cooldown: cooldown,
               timeNow: timeNow,
@@ -391,7 +394,7 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
         }
         else{
           const max_attempts_made = interval_answers < max_per_interval ? true : false;
-          res.status(200).json({
+          return res.status(200).json({
             latestAnswerDate: timeNow,
             cooldown: cooldown,
             timeNow: timeNow,
@@ -417,7 +420,7 @@ router.get("/:study_id/findDummy", async (req, res) => {
   });
   // Find User
   const user = await User.findOne({email: study_id+"@dummy.cl"});
-  res.status(200).json({
+  return res.status(200).json({
     ok: true,
     user
   });
@@ -440,6 +443,7 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   user.cooldown_start = null;
   user.interval_answers = 0;
   user.has_played = false;
+  user.updatedAt = Date.now();
   await user.save(err => {
     if(err){
       res.status(500).json(err);
@@ -475,19 +479,71 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   });
 });
 
+router.get("/:trainer_id/resetTrainerUser", async (req, res) => {
+  const trainer_id = req.params.trainer_id;
+  // Find User
+  const user = await User.findOne({trainer_id: trainer_id}, err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  });
+  if(!user){
+    return res.status(400).send('User not found!');
+  }
+  // Delete user last answers records
+  user.cooldown_start = null;
+  user.interval_answers = 0;
+  user.has_played = false;
+  user.updatedAt = Date.now();
+  await user.save(err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  });
+  // Delete user progress
+  await UserStudy.deleteOne({user: user._id},  err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  })
+  // Find study challenges
+  const challenges = await Challenge.find({ study: study }, (err) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+  });
+  // Generate user study progress entry
+  generateProgress(challenges, user, study)
+  .catch((err) => {
+    return res.status(404).json({
+      ok: false,
+      err,
+    });
+  })
+  .then((progress) => {
+    return res.status(200).json({
+      user,
+    });
+  });
+});
+
+
 router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
 
   User.findById(userId, (err, user) => {
     if (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
     user.has_played = true;
     user.save( err => {
       if (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       }
-      res.status(200).json({
+      return res.status(200).json({
         user
       });
     })
@@ -544,12 +600,12 @@ router.get("/checkEmailAlreadyUsed/:email", async (req, res) => {
       });
     }
     if (user.length){
-      res.status(200).json({
+      return res.status(200).json({
         ok: false,
         message: "EMAIL_ALREADY_USED"
       });
     } else {
-      res.status(200).json({
+      return res.status(200).json({
         message: "EMAIL_UNUSED"
       });
     }

@@ -13,7 +13,7 @@ router.get('/getNotifications/:user_id', async(req, res) => {
             });
         }
     }).sort({createdAt: -1})
-    res.status(200).json({
+    return res.status(200).json({
         notifications
     });  
 })
@@ -30,7 +30,7 @@ router.put('/updateNotifications', async(req, res) => {
             }
         })
     }
-    res.status(200).json({
+    return res.status(200).json({
         ok: true
     }); 
 })
@@ -80,13 +80,12 @@ router.post('/getPoints', async (req, res) => {
             });
         }
         console.log("Notification received!")
-        res.status(200).send("Notification received!");
+        return res.status(200).send("Notification received!");
     })
 });
 
 router.post('/challengeCompleted', async (req, res) => {
     let player = req.body.player;
-    console.log("Notification")
     if(!player || !player.code){
         return res.status(400).json({
             ok: false,
@@ -126,8 +125,7 @@ router.post('/challengeCompleted', async (req, res) => {
                 err
             });
         }
-        console.log("Notification received!")
-        res.status(200).send("Notification received!");
+        return res.status(200).send("Notification received!");
     })
 });
 
@@ -173,8 +171,7 @@ router.post('/badgeAcquired', async (req, res) => {
                 err
             });
         }
-        console.log("Notification received!")
-        res.status(200).send("Notification received!");
+        return res.status(200).send("Notification received!");
     })
 });
 
@@ -219,7 +216,7 @@ router.post('/levelUp', async (req, res) => {
                 err
             });
         }
-        res.status(200).send("Notification received!");
+        return res.status(200).send("Notification received!");
     })
 });
 

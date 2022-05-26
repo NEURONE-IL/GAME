@@ -23,7 +23,7 @@ router.get('' ,  [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({studys});
+        return res.status(200).json({studys});
     });
 })
 
@@ -36,7 +36,7 @@ router.get('/:study_id', async (req, res) => {
                 err
             });
         }
-        res.status(200).json({study});
+        return res.status(200).json({study});
     });
 });
 
@@ -71,7 +71,7 @@ router.get('/:study_id/getForSignup', async (req, res) => {
                         msg: "NO_CHALLENGES_IN_STUDY"
                     });
                 }
-                res.status(200).json({study:study});
+                return res.status(200).json({study:study});
             });
         }
         else {
@@ -136,12 +136,13 @@ router.get('/:study_id/copy', [verifyToken], async (req, res) => {
         }
         groupService.postGroup({name: copy.name, sourceId: copy._id }, (err, data) => {
             if(err){
-                res.status(200).json({
+                return res.status(200).json({
                     copy
                 });
             }
             else{
                 copy.gm_code = data.code;
+                copy.updatedAt = Date.now();
                 copy.save(err => {
                     if(err){
                         return res.status(404).json({
@@ -149,7 +150,7 @@ router.get('/:study_id/copy', [verifyToken], async (req, res) => {
                             err
                         });
                     }
-                    res.status(200).json({
+                    return res.status(200).json({
                         copy
                     });
                 })
@@ -177,6 +178,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
         study.image_url = image_url;
         study.image_id = req.file.id;
     }
+    study.updatedAt = Date.now();
     study.save((err, study) => {
         if (err) {
             return res.status(404).json({
@@ -185,7 +187,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
         }
         groupService.postGroup({name: req.body.name, sourceId: study._id }, (err, data) => {
             if(err){
-                res.status(200).json({
+                return res.status(200).json({
                     study
                 });
             }
@@ -198,7 +200,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
                             err
                         });
                     }
-                    res.status(200).json({
+                    return res.status(200).json({
                         study
                     });
                 })
@@ -248,7 +250,7 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
                     err
                 });
             }
-            res.status(200).json({
+            return res.status(200).json({
                 study
             });
         })
@@ -263,7 +265,7 @@ router.delete('/:study_id',  [verifyToken, authMiddleware.isAdmin] , async (req,
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             study
         });
     });
@@ -288,7 +290,7 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                 User.findOne({ _id: element.user })
                     .exec((err, user) => {
                         if(err){
-                            res.status(500).json(err);
+                            return res.status(500).json(err);
                         }
                         //If user exists
                         if(user){
@@ -298,7 +300,7 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                             SessionLog.findOne({ userId: user._id, state: 'login' }, null, { sort: { 'createdAt': -1 }})
                                 .exec((err, sessionLog) => {
                                     if(err){
-                                        res.status(500).json(err);
+                                        return res.status(500).json(err);
                                     }
                                     //If sessionLog exists
                                     if(sessionLog){
@@ -317,7 +319,7 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                                         responseArray.push(responseObject);	 
                                         //Returns a JSON with the response array when its length matches the userStudies array length
                                         if(responseArray.length === userStudies.length){
-                                            res.status(200).json({ 
+                                            return res.status(200).json({ 
                                                 responseArray 
                                             });  
                                         }    
@@ -338,7 +340,7 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                                         responseArray.push(responseObject);	 
                                         //Returns a JSON with the response array when its length matches the userStudies array length
                                         if(responseArray.length === userStudies.length){
-                                            res.status(200).json({ 
+                                            return res.status(200).json({ 
                                                 responseArray 
                                             });  
                                         }                                         
@@ -358,7 +360,7 @@ router.get('/:study_id/stats', [verifyToken, authMiddleware.isAdmin], async (req
                             responseArray.push(responseObject);	 
                             //Returns a JSON with the response array when its length matches the userStudies array length
                             if(responseArray.length === userStudies.length){
-                                res.status(200).json({ 
+                                return res.status(200).json({ 
                                     responseArray 
                                 });  
                             }                            
@@ -393,7 +395,7 @@ router.get('/:study_id/assistant', async (req, res) => {
                 });
             }
             else{
-                res.status(200).json({
+                return res.status(200).json({
                     ok: true,
                     studyAssistant
                 });
@@ -430,7 +432,7 @@ router.post('/:study_id/assistant', async (req, res) => {
                     err,
                   });   
             }
-            res.status(200).json({
+            return res.status(200).json({
                 ok: true,
                 studyAssistant
             });
@@ -463,6 +465,7 @@ router.put('/:study_id/assistant', async (req, res) => {
             }
         });
         studyAssistant.assistant = req.body.assistant;
+        studyAssistant.updatedAt = Date.now();
         studyAssistant.save((err, studyAssistant)=> {
             if(err){
                 return res.status(404).json({
@@ -470,7 +473,7 @@ router.put('/:study_id/assistant', async (req, res) => {
                     err,
                   });   
             }
-            res.status(200).json({
+            return res.status(200).json({
                 ok: true,
                 studyAssistant
             });

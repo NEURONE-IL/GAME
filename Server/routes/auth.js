@@ -58,7 +58,7 @@ router.post(
           err,
         });
       }
-      res.status(200).json({
+      return res.status(200).json({
         user,
       });
     });
@@ -180,7 +180,7 @@ router.post(
           // Send confirmation email
           sendConfirmationEmail(user, userData, res, req);
 
-          res.status(200).json({
+          return res.status(200).json({
             user,
           });
         });
@@ -272,7 +272,7 @@ router.post(
           // Register player in NEURONE-GM
           saveGMPlayer(req, user, study, res);
 
-          res.status(200).json({
+          return res.status(200).json({
             user,
           });
         });
@@ -286,7 +286,7 @@ router.post("/login", async (req, res) => {
     email: req.body.email.toLowerCase(),
   }, err => {
     if(err){
-      res.status(400).send(err)
+      return res.status(400).send(err)
     }
   }).populate( { path: 'role', model: Role} );
   if (!user) return res.status(400).send("EMAIL_NOT_FOUND");
@@ -297,7 +297,7 @@ router.post("/login", async (req, res) => {
   if (!user.confirmed) return res.status(400).send("USER_NOT_CONFIRMED");
   //create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
-  res.header("x-access-token", token).send({ user: user, token: token });
+  return res.header("x-access-token", token).send({ user: user, token: token });
 });
 
 

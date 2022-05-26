@@ -21,7 +21,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({challenges});
+        return res.status(200).json({challenges});
     });
 })
 
@@ -34,7 +34,7 @@ router.get('/:challenge_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({challenge});
+        return res.status(200).json({challenge});
     });
 });
 
@@ -46,7 +46,7 @@ router.get('/answer/all', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({userChallenges});
+        return res.status(200).json({userChallenges});
     }).populate({ path: 'user', model: User} , {password:0}).populate({ path: 'challenge', model: Challenge} );
 })
 
@@ -59,7 +59,7 @@ router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({challenges});
+        return res.status(200).json({challenges});
     })
 });
 
@@ -72,7 +72,7 @@ router.get('/answer/byId/:answers_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({userChallenges});
+        return res.status(200).json({userChallenges});
     }).populate({ path: 'challenge', model: Challenge} ).populate({ path: 'user', model: User} , {password:0});
 })
 
@@ -84,7 +84,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             challenge
         });
     })
@@ -92,8 +92,20 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
 
 router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
     const _id = req.body.challenge;
-    const challenge = await Challenge.findOne({_id: _id});
-    const user = await User.findOne({_id: req.body.user});
+    const challenge = await Challenge.findOne({_id: _id}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
+    const user = await User.findOne({_id: req.body.user}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
     const pointElement = await GameElement.findOne({key: 'exp_1'});
     const answerAction = await GameElement.findOne({key: 'responder_pregunta_1'});
     const noHintsAction = await GameElement.findOne({key: 'sin_pistas_1'});
@@ -112,7 +124,14 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         pointsObtained: pointsObtained
     })
     user.interval_answers = user.interval_answers+1;
-    await user.save();
+    user.updatedAt = Date.now();
+    await user.save(err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
@@ -133,7 +152,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
                 if(err){
                     console.log(err);
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     user
                 });
             });
@@ -144,12 +163,12 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
                 if(err){
                     console.log(err);
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     user
                 });
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             userChallenge
         });
     })
@@ -157,14 +176,13 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
 
 router.get('/answers/last', verifyToken, async (req, res)=> {
     const user_id = req.user;
-    console.log(user_id)
     UserChallenge.find({user: user_id}, (err, last_answer) => {
         if (err) {
             return res.status(404).json({
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             last_answer: last_answer[0]
         });
     }).sort({createdAt: -1});
@@ -172,7 +190,7 @@ router.get('/answers/last', verifyToken, async (req, res)=> {
 
 router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyEditBody], async (req, res) => {
     const _id = req.params.challenge_id;
-    const challenge = await Challenge.findOne({_id: _id}, (err, challenge) => {
+    Challenge.findOne({_id: _id}, (err, challenge) => {
         if (err) {
             return res.status(404).json({
                 err
@@ -212,7 +230,7 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
                     err
                 });
             }
-            res.status(200).json({
+            return res.status(200).json({
                 challenge
             });
         })
@@ -227,7 +245,7 @@ router.delete('/:challenge_id',  [verifyToken, authMiddleware.isAdmin] , async (
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             challenge
         });
     })
@@ -241,7 +259,7 @@ router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , asy
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             userChallenge
         });
     })

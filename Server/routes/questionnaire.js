@@ -15,7 +15,7 @@ router.get('', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({questionnaires});
+        return res.status(200).json({questionnaires});
     });
 })
 
@@ -27,7 +27,7 @@ router.get('/answer', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({userQuestionnaires});
+        return res.status(200).json({userQuestionnaires});
     }).populate({ path: 'user', model: User} , {password:0}).populate({ path: 'questionnaire', model: Questionnaire} );
 })
 
@@ -40,7 +40,7 @@ router.get('/:questionnaire_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({questionnaire});
+        return res.status(200).json({questionnaire});
     });
 });
 
@@ -53,7 +53,7 @@ router.get('/byType/:type', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({questionnaires});
+        return res.status(200).json({questionnaires});
     })
 });
 
@@ -66,7 +66,7 @@ router.get('/answer/:answers_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({userQuestionnaire});
+        return res.status(200).json({userQuestionnaire});
     }).populate({ path: 'questionnaire', model: Questionnaire} ).populate({ path: 'user', model: User} , {password:0});
 })
 
@@ -83,7 +83,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, questionnaireMiddleware.v
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             questionnaire
         });
     })
@@ -147,7 +147,7 @@ router.put('/:questionnaire_id', [verifyToken, authMiddleware.isAdmin, questionn
                     err
                 });
             }
-            res.status(200).json({
+            return res.status(200).json({
                 questionnaire
             });
         })
@@ -162,7 +162,7 @@ router.delete('/:questionnaire_id',  [verifyToken, authMiddleware.isAdmin] , asy
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             questionnaire
         });
     })
@@ -176,7 +176,7 @@ router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , asy
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             userQuestionnaire
         });
     })

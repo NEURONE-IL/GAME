@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({scrolls});
+        return res.status(200).json({scrolls});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:scroll_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({scroll});
+        return res.status(200).json({scroll});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             scroll
         });
     })
@@ -53,7 +53,7 @@ router.delete('/:scroll_id',  [verifyToken, authMiddleware.isAdmin] , async (req
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             scroll
         });
     })

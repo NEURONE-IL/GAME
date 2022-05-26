@@ -123,7 +123,7 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         // Register player in NEURONE-GM
         //saveGMPlayer(req, user, study, res);
 
-        res.header("x-access-token", token).send({ user: user, token: token, url: url });
+        return res.header("x-access-token", token).send({ user: user, token: token, url: url });
     });
 })
 
@@ -167,7 +167,7 @@ router.get("/study", verifyAPIKey, async (req, res) => {
             err
         });
     }
-    res.status(200).json({studys});
+    return res.status(200).json({studys});
   });
 })
 

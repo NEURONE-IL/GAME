@@ -17,7 +17,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({sessionLogs});
+        return res.status(200).json({sessionLogs});
     });
 })
 
@@ -30,7 +30,7 @@ router.get('/:sessionLog_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        res.status(200).json({sessionLog});
+        return res.status(200).json({sessionLog});
     });
 });
 
@@ -65,7 +65,7 @@ router.post('',  [verifyToken], async (req, res) => {
                     if(err){
                         console.log(err);
                     }
-                    res.status(200).json({
+                    return res.status(200).json({
                         sessionLog
                     });
                 });
@@ -75,19 +75,19 @@ router.post('',  [verifyToken], async (req, res) => {
                     if(err){
                         console.log(err);
                     }
-                    res.status(200).json({
+                    return res.status(200).json({
                         sessionLog
                     });
                 });
             }
             else{
-                res.status(200).json({
+                return res.status(200).json({
                     sessionLog
                 });
             }
         }
         else{
-            res.status(200).json({
+            return res.status(200).json({
                 sessionLog
             });
         }
@@ -103,7 +103,7 @@ router.delete('/:sessionLog_id',  [verifyToken, authMiddleware.isAdmin] , async 
                 err
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             sessionLog
         });
     })

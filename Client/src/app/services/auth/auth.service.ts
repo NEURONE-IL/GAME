@@ -74,8 +74,7 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("game");
     localStorage.removeItem('lastUrl');
-    if(trainer_id === null){
-      console.log("Hola")
+    if(!trainer_id){
       this.router.navigate(['login']);
     }
   }
