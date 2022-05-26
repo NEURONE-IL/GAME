@@ -79,6 +79,10 @@ export class GameService {
         chProgress.answer_submitted = true;
       }
     });
+    /*Dispatch finishchallenge event*/
+    var evt = new CustomEvent('finishchallenge');
+    window.dispatchEvent(evt);
+    /*End dispatch finishchallenge event*/
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
@@ -155,6 +159,10 @@ export class GameService {
         if (!chProgress.started) {
           chProgress.started = true;
           chProgress.start_time = Date.now();
+          /*Dispatch startchallenge event*/
+          var evt = new CustomEvent('startchallenge');
+          window.dispatchEvent(evt);
+          /*End dispatch startchallenge event*/          
         } else {
           overwriteSeconds = true;
         }

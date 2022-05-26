@@ -23,6 +23,7 @@ const UserChallengeSchema = new Schema({
     comment: { type: String },
     distance: {type: Number},
     pointsObtained: { type: Number},
+    localTimeStamp: { type: Date },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

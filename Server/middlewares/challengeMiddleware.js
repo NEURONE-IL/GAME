@@ -76,7 +76,10 @@ const answerSchema = Joi.object({
         urls: Joi.array().items(Joi.object({
             url: Joi.string().allow(null, '')
         }))
-    }))
+    })),
+
+    localTimeStamp: Joi.any()
+        .required()
 })
 
 verifyBody = async (req, res, next) => {

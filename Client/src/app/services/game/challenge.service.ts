@@ -89,7 +89,8 @@ export class ChallengeService {
       ],
       timeLeft: timeLeft,
       hintUsed: hintUsed,
-      comment: comment
+      comment: comment,
+      localTimeStamp: Date.now()
     }
     return this.http.post(this.uri + 'answer/', formattedAnswer, { headers: {'x-access-token': localStorage.getItem('auth_token')} });
   }

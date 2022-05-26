@@ -121,7 +121,8 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         comment: req.body.comment,
         timeLeft: req.body.timeLeft,
         distance: distance,
-        pointsObtained: pointsObtained
+        pointsObtained: pointsObtained,
+        localTimeStamp: req.body.localTimeStamp
     })
     user.interval_answers = user.interval_answers+1;
     user.updatedAt = Date.now();
