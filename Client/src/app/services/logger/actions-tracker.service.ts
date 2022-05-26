@@ -50,7 +50,10 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'posttestquestionnaireenter', data, this.posttestquestionnaireenterListener);
       this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);  
       this.bindEvent(targetDoc, 'poststudyquestionnaireenter', data, this.poststudyquestionnaireenterListener);
-      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);    
+      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);
+      this.bindEvent(targetDoc, 'sendanswer', data, this.sendanswerListener);
+      this.bindEvent(targetDoc, 'startchallenge', data, this.startchallengeListener);
+      this.bindEvent(targetDoc, 'finishchallenge', data, this.finishchallengeListener);
       /*End custom events*/
       this.isTracking = true;
     }
@@ -84,6 +87,9 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireenter');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
+      this.unbindAll(targetDoc, 'sendanswer');
+      this.unbindAll(targetDoc, 'startchallenge');
+      this.unbindAll(targetDoc, 'finishchallenge');
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -522,5 +528,65 @@ export class ActionsTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
   }  
+
+  sendanswerListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'QuestionBar',
+      type: 'SendAnswer',
+      localTimeStamp: t,
+      url: doc.URL,
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }  
+
+  startchallengeListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'QuestionBar',
+      type: 'StartChallenge',
+      localTimeStamp: t,
+      url: doc.URL,
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  } 
+  
+  finishchallengeListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'QuestionBar',
+      type: 'FinishChallenge',
+      localTimeStamp: t,
+      url: doc.URL,
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }   
 
 }

@@ -155,6 +155,10 @@ export class GameService {
         if (!chProgress.started) {
           chProgress.started = true;
           chProgress.start_time = Date.now();
+          /*Dispatch startchallenge event*/
+          var evt = new CustomEvent('startchallenge');
+          window.dispatchEvent(evt);
+          /*End dispatch startchallenge event*/          
         } else {
           overwriteSeconds = true;
         }

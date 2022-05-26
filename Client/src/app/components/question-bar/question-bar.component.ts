@@ -149,7 +149,7 @@ export class QuestionBarComponent implements OnInit {
       this.timeLeft = this.gameService.timeLeft;
     }
     else {
-      this.timeLeft = this.gameService.challenge.seconds;
+      this.timeLeft = this.gameService.challenge.seconds;  
     }
     if(this.timeLeft >= 1000) this.leftValue = '20px';
     if(this.timeLeft < 1000) this.leftValue = '30px';
@@ -170,6 +170,10 @@ export class QuestionBarComponent implements OnInit {
     let url1 = this.answerForm.value.rawUrl1;
     let url2 = this.answerForm.value.rawUrl2;
     // this.challengeService.postAnswer(challenge, answer, this.timeLeft);
+    /*Dispatch sendanswer event*/
+    var evt = new CustomEvent('sendanswer');
+    window.dispatchEvent(evt);
+    /*End dispatch sendanswer event*/
     this.challengeService.postAnswer(challenge, answer, url1, url2, this.timeLeft, this.hintUsed, null).subscribe(
       () => {
         this.toastr.success(this.translate.instant("GAME.TOAST.ANSWER_SUBMITTED"), this.translate.instant("GAME.TOAST.SAVED"), {
@@ -177,6 +181,10 @@ export class QuestionBarComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.clearTimer();
+        /*Dispatch finishchallenge event*/
+        var evt = new CustomEvent('finishchallenge');
+        window.dispatchEvent(evt);
+        /*End dispatch finishchallenge event*/         
         this.gameService.finishChallenge();
       },
       err => {
