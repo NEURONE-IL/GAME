@@ -180,11 +180,7 @@ export class QuestionBarComponent implements OnInit {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        this.clearTimer();
-        /*Dispatch finishchallenge event*/
-        var evt = new CustomEvent('finishchallenge');
-        window.dispatchEvent(evt);
-        /*End dispatch finishchallenge event*/         
+        this.clearTimer();         
         this.gameService.finishChallenge();
       },
       err => {

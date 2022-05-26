@@ -79,6 +79,10 @@ export class GameService {
         chProgress.answer_submitted = true;
       }
     });
+    /*Dispatch finishchallenge event*/
+    var evt = new CustomEvent('finishchallenge');
+    window.dispatchEvent(evt);
+    /*End dispatch finishchallenge event*/
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
