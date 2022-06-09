@@ -17,6 +17,7 @@ const ScrollSchema = new Schema({
     w_doc: {type: Number},
     h_doc: {type: Number},
     localTimeStamp: {type: Date},
+    localTimeStampNumber: { type: Long },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     createdAtNumber: { type: Long, default: Date.now },

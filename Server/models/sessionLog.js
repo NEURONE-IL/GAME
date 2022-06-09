@@ -9,6 +9,7 @@ const SessionLogSchema = new Schema({
     challengeId: { type: Schema.Types.ObjectId, ref: 'Challenge'},
     state: {type: String},
     localTimeStamp: {type: Date},
+    localTimeStampNumber: { type: Long },
     user_agent: {type: String},
     browser: {type: String},
     os: {type: String},

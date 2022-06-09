@@ -30,7 +30,8 @@ export class AuthService {
         studyId: resp.user.study,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now()
+        localTimeStamp: Date.now(),
+        localTimeStampNumber: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, false);
@@ -67,7 +68,8 @@ export class AuthService {
       studyId: this.getUser().study,
       challengeId: localStorage.getItem('chall'),
       state: 'logout',
-      localTimeStamp: Date.now()
+      localTimeStamp: Date.now(),
+      localTimeStampNumber: Date.now()
     }
     this.storeSession.postSessionLog(sessionLog);
     localStorage.removeItem('auth_token');
@@ -86,7 +88,8 @@ export class AuthService {
       studyId: this.getUser().study,
       challengeId: localStorage.getItem('chall'),
       state: 'logout',
-      localTimeStamp: Date.now()
+      localTimeStamp: Date.now(),
+      localTimeStampNumber: Date.now()      
     }
     this.storeSession.postSessionLog(sessionLog);
     var returnUrl = localStorage.getItem('return_url');
@@ -105,7 +108,8 @@ export class AuthService {
         userId: resp.user._id,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now()
+        localTimeStamp: Date.now(),
+        localTimeStampNumber: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, true);
@@ -132,7 +136,8 @@ export class AuthService {
         userId: resp.user._id,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now()
+        localTimeStamp: Date.now(),
+        localTimeStampNumber: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, true);

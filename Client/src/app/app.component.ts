@@ -21,7 +21,8 @@ export class AppComponent {
             url: localStorage.getItem('lastUrl'),
             state: 'PageExit',
             title: document.title,
-            localTimeStamp: Date.now()
+            localTimeStamp: Date.now(),
+            localTimeStampNumber: Date.now()
           }
           this.storeLink.postVisitedLink(visitedLink);
         }
@@ -33,7 +34,8 @@ export class AppComponent {
           url: event.url,
           state: 'PageEnter',
           title: document.title,
-          localTimeStamp: Date.now()
+          localTimeStamp: Date.now(),
+          localTimeStampNumber: Date.now()
         }
         this.storeLink.postVisitedLink(visitedLink);
       }

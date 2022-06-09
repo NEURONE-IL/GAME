@@ -192,6 +192,7 @@ export class SearchResultComponent implements OnInit {
         title: document.title,
         url: this.router.url,
         localTimeStamp: Date.now(),
+        localTimeStampNumber: Date.now()
       };
       this.storeQueryService.postQuery(queryData);
       this.router

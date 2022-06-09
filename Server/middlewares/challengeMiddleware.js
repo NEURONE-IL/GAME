@@ -79,6 +79,9 @@ const answerSchema = Joi.object({
     })),
 
     localTimeStamp: Joi.any()
+        .required(),
+
+    localTimeStampNumber: Joi.any()
         .required()
 })
 

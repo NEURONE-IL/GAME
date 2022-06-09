@@ -133,6 +133,7 @@ export class ActionsTrackerService {
       source: 'HelpModal',
       type: 'OpenHelpModal',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -153,6 +154,7 @@ export class ActionsTrackerService {
       source: 'HelpModal',
       type: 'CloseHelpModal',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -173,6 +175,7 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'ChangePage',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -194,6 +197,7 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'PreviousPage',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -215,6 +219,7 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'NextPage',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -236,6 +241,7 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToWebPagesTab',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -256,6 +262,7 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToImagesTab',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -276,6 +283,7 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToVideosTab',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -296,6 +304,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'ShowQuestionBar',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -317,6 +326,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'HideQuestionBar',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -338,6 +348,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'MarkFavoritePage',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -359,6 +370,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'UnmarkFavoritePage',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -380,6 +392,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PageEnter',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail.detail,
       docId: evt.detail.docId
@@ -402,6 +415,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PageExit',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail.detail,
       docId: evt.detail.docId
@@ -424,6 +438,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PreTestQuestionnaireEnter',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -444,6 +459,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PreTestQuestionnaireExit',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -464,6 +480,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostTestQuestionnaireEnter',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -484,6 +501,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostTestQuestionnaireExit',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -503,6 +521,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostStudyQuestionnaireEnter',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -522,6 +541,7 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostStudyQuestionnaireExit',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -542,6 +562,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'SendAnswer',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -562,6 +583,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'StartChallenge',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -582,6 +604,7 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'FinishChallenge',
       localTimeStamp: t,
+      localTimeStampNumber: t,
       url: doc.URL,
     };
 

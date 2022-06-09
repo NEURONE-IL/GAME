@@ -16,6 +16,7 @@ const KeystrokeSchema = new Schema({
     key: {type: String},
     chr: {type: String},
     localTimeStamp: {type: Date},
+    localTimeStampNumber: { type: Long },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     createdAtNumber: { type: Long, default: Date.now },
