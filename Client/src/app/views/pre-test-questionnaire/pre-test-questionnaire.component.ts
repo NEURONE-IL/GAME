@@ -83,7 +83,6 @@ export class PreTestQuestionnaireComponent implements OnInit {
         });
         this.resetForm();
         await this.gameService.finishPreTest();
-        this.gameService.challengeStarted();
       },
       err => {
         this.toastr.error(this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR_MESSAGE"), this.translate.instant("QUESTIONNAIRE.PRE_TEST.TOAST.ERROR"), {

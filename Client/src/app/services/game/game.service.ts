@@ -109,7 +109,7 @@ export class GameService {
         if (chProgress.challenge == this.challenge._id) {
           if (!chProgress.pre_test) {
             this.stage = 'pre-test';
-          } else if (chProgress.started) {
+          } else {
             if (chProgress.start_time != null && !chProgress.answer_submitted) {
               let endTime = new Date(chProgress.start_time);
               endTime.setSeconds(endTime.getSeconds() + this.challenge.seconds);
@@ -123,8 +123,6 @@ export class GameService {
             } else {
               this.stage = 'post-test';
             }
-          } else {
-            this.stage = 'instructions';
           }
         }
       });
@@ -147,7 +145,7 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
-//        this.stage = 'instructions';
+        this.challengeStarted();
       });
   }
 
