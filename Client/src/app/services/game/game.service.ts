@@ -226,7 +226,7 @@ export class GameService {
     });
     if(studyFinished){
       await this.authService.updateProgress({ finished: true });
-      if(user.trainer_id !== null){
+      if(user.trainer_id){
         this.authService.logout();
         window.location.href = user.trainer_return_url;
       }
@@ -240,7 +240,7 @@ export class GameService {
         this.stage = 'play-again';
       }
       else{
-        if(user.trainer_id !== null){
+        if(user.trainer_id){
           this.authService.logout();
           window.location.href = user.trainer_return_url;
         }
@@ -254,7 +254,7 @@ export class GameService {
   async finishPlayAgain(){
     this.load();
     const user = this.authService.getUser();
-    if(user.trainer_id !== null){
+    if(user.trainer_id){
       this.authService.logout();
       window.location.href = user.trainer_return_url;
     }
