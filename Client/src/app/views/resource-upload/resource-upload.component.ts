@@ -1,6 +1,7 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
+import { ResourceService } from '../../services/game/resource.service';
 import { Study, StudyService } from '../../services/game/study.service';
 import { Challenge, ChallengeService } from '../../services/game/challenge.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,6 @@ import { environment } from 'src/environments/environment';
 export class ResourceUploadComponent implements OnInit {
   @Input() study: string;
   resourceForm: FormGroup;
-  studies: Study[];
   challenges: Challenge[];
   docTypes = [
     { id: 1, value: 'document', show: 'UPLOAD.ARRAYS.DOC_TYPES.WEB_PAGE' },
@@ -26,7 +26,7 @@ export class ResourceUploadComponent implements OnInit {
   ];
   loading: Boolean;
 
-  constructor(private formBuilder: FormBuilder, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private resourceService: ResourceService, private studyService: StudyService, private challengeService: ChallengeService, private endpointsService: EndpointsService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.getChallengesByStudy(this.study);
@@ -45,18 +45,6 @@ export class ResourceUploadComponent implements OnInit {
       keywords: [null, [Validators.minLength(3)]],
     });
 
-    this.studyService.getStudies().subscribe(
-      response => {
-        this.studies = response['studys'];
-      },
-      err => {
-        this.toastr.error(this.translate.instant("STUDY.TOAST.NOT_LOADED_MULTIPLE_ERROR"), this.translate.instant("CHALLENGE.TOAST.ERROR"), {
-          timeOut: 5000,
-          positionClass: 'toast-top-center'
-        });
-      }
-    );
-
     this.loading = false;
   }
 
@@ -72,7 +60,6 @@ export class ResourceUploadComponent implements OnInit {
   uploadResource(){
     this.loading = true;
     let resource = this.resourceForm.value;
-    console.log(resource);
     if(resource.task === null){
       resource.task = "dummy";
     }

@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({mouseCoordinates});
+        res.status(200).json({mouseCoordinates});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:mouseCoordinate_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({mouseCoordinate});
+        res.status(200).json({mouseCoordinate});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             mouseCoordinate
         });
     })
@@ -53,7 +53,7 @@ router.delete('/:mouseCoordinate_id',  [verifyToken, authMiddleware.isAdmin] , a
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             mouseCoordinate
         });
     })

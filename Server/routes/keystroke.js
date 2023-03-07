@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({keystrokes});
+        res.status(200).json({keystrokes});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:keystroke_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({keystroke});
+        res.status(200).json({keystroke});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             keystroke
         });
     })
@@ -53,7 +53,7 @@ router.delete('/:keystroke_id',  [verifyToken, authMiddleware.isAdmin] , async (
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             keystroke
         });
     })

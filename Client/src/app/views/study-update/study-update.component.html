@@ -1,5 +1,14 @@
 <mat-card-header>
-	<mat-card-title>{{ "STUDY.UPDATE.TITLE" | translate }}</mat-card-title>
+	<mat-card-title style="margin-bottom: 5% !important">{{ "STUDY.UPDATE.TITLE" | translate }}</mat-card-title>
+	<div *ngIf="edit_users[0] === user._id" class="spacer"></div>
+	<mat-chip-list>
+		<mat-chip *ngIf="edit_users[0] === user._id" selected [color]="timer_color" >
+			<mat-icon>access_alarm</mat-icon>
+			{{timer}}
+		</mat-chip>
+	</mat-chip-list>
+</mat-card-header>
+<mat-card-header>
 	<mat-card-subtitle>{{ "STUDY.UPDATE.SUBTITLE" | translate }}:</mat-card-subtitle>
 </mat-card-header>	
 <mat-card-content>
@@ -36,7 +45,7 @@
 			</mat-grid-tile>
 		</mat-grid-list>	
 		<mat-card-header>
-			<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
+			<mat-card-subtitle style="margin-bottom: 1%; margin-top: 1%;">{{ "ADMIN.CHALLENGES.COOLDOWN" | translate }}:</mat-card-subtitle>
 		</mat-card-header>
 		<mat-grid-list cols="12">
 			<mat-grid-tile colspan="6">
@@ -65,15 +74,102 @@
 					</mat-select>	
 				</mat-form-field>
 			</mat-grid-tile>
+		<!--Inicio Cambio Vale: Se agrega select para manejar la privacidad de un estudio y para agregar colaboradores-->
+
+			<!--mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>Idioma *</mat-label>
+					<mat-select formControlName="language">
+						<mat-option *ngFor="let leng of languages" [value]="leng._id"> {{ leng.name }} </mat-option>
+					</mat-select>
+					<mat-error *ngIf="studyFormControls.language.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>Nivel *</mat-label>
+					<mat-select formControlName="levels" multiple>
+						<mat-option *ngFor="let level of levels" [value]="level">{{level}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="studyFormControls.levels.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>Competencia *</mat-label>
+					<mat-select formControlName="competences" multiple>
+						<mat-option *ngFor="let competence of competences" [value]="competence._id">{{competence.name}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="studyFormControls.competences.hasError('required')">
+						{{ "ERRORS.REQUIRED" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile-->	
 		</mat-grid-list>
+		<mat-card-header>
+			<mat-card-subtitle style="margin-bottom: 1%;margin-top: 1%">Seleccione las opciones de privacidad de su estudio</mat-card-subtitle>
+		</mat-card-header>
+		<mat-grid-list cols="12">
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
+					<mat-label>Privacidad</mat-label>
+					<mat-select formControlName="privacy">
+						<mat-option *ngFor="let priva of privacies" [value]="priva.value"> {{ priva.privacy }} </mat-option>
+					</mat-select>	
+				</mat-form-field>
+			</mat-grid-tile>
+			</mat-grid-list>
+			<mat-card-header>
+				<mat-card-subtitle style="margin-bottom: 0%;">Añada etiquetas relacionadas a su estudio</mat-card-subtitle>
+			</mat-card-header>
+			<mat-grid-list  cols="12">
+				<mat-grid-tile colspan="10" rowspan="2">
+					<mat-form-field style="width: 92%;">
+						<mat-label>Agregar Etiquetas</mat-label>
+						<mat-chip-list #chipList aria-label="Tags Selection" formControlName="tags">
+							<mat-chip
+								*ngFor="let tag of tags"
+								(removed)="removeTag(tag)">
+								{{tag}}
+									<mat-icon matChipRemove>cancel</mat-icon>
+							</mat-chip>
+						<input
+							#collaboratorsInput
+							placeholder="Escriba una etiqueta y presione Enter o Añadir para ir añadirla"
+							type="text" 
+							formControlName="tags"
+							[matChipInputFor]="chipList"
+							(matChipInputTokenEnd)="addTag()">
+						</mat-chip-list>
+						<mat-error *ngIf="studyFormControls.tags.hasError('minlength')">
+							Ingrese una etiqueta válida
+						</mat-error>
+						<mat-error *ngIf="studyFormControls.tags.hasError('maxlength')">
+							La etiqueta no puede tener más de 15 caracteres
+						</mat-error>
+						<mat-error *ngIf="studyFormControls.tags.hasError('tagExist')">
+							El tag ya se encuentra en la lista
+						</mat-error>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile colspan="2">
+					<button mat-flat-button [disabled]="this.studyForm.status === 'DISABLED' || (!studyFormControls.tags.valid || !studyFormControls.tags.value)" (click)="addTag()" class="saveButton">Añadir <mat-icon>add</mat-icon></button>
+				</mat-grid-tile>
+			</mat-grid-list>
+	<!--Fin Cambio Vale-->	
 	</form>	
 	<mat-card-header>
-		<mat-card-subtitle style="margin-bottom: 0%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
+		<mat-card-subtitle style="margin-bottom: 1%; margin-top: 10%;">{{ "ADMIN.CHALLENGES.IMAGE" | translate }}:</mat-card-subtitle>
 	</mat-card-header>
 	<mat-grid-list cols="12">
 		<mat-grid-tile colspan="6" class="fileInput">
 			<input type="file"
 				id="file"
+				[disabled]="this.studyForm.status === 'DISABLED'"
 				(change)="handleFileInput($event.target.files)">
 
 		</mat-grid-tile>

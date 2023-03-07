@@ -1,0 +1,43 @@
+::ng-deep .search-adventures-bar .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+}
+
+::ng-deep .search-adventures-bar .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+}
+
+::ng-deep .search-adventures-bar .mat-form-field-wrapper {
+  padding-bottom: 0;
+  box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+  border-radius: 28px 28px 28px 28px !important;
+}
+
+::ng-deep .search-adventures-bar .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(161, 161, 161)!important;
+  opacity: 0.35!important;
+}
+
+::ng-deep .search-adventures-bar .mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
+  border-top-width: 5px;
+}
+.search-bar-card{
+  padding: 6px 0px 6px 0px !important;
+}
+.button-customize{
+  font-size: 17px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-left: 2%;
+}
+
+.search-bar-div{
+  display: flex; 
+  align-items:center;
+  justify-content: center;
+}
+
+.clearButton{
+	background-color: #FF9800;
+	color: #FFFFFF;
+}

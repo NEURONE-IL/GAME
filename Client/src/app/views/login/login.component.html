@@ -9,7 +9,7 @@
           <p>
             <mat-form-field style="margin-top: 5%">
                 <mat-label>{{"LOGIN.EMAIL" | translate}}</mat-label>
-              <input type="text" matInput formControlName="email">
+              <input type="text" matInput formControlName="email" placeholder="Correo">
               <mat-error>
                 {{"LOGIN.REQUIRED" | translate}}
               </mat-error>
@@ -19,7 +19,7 @@
           <p>
             <mat-form-field>
               <mat-label>{{"LOGIN.PASSWORD" | translate}}</mat-label>
-              <input type="password" matInput formControlName="password">
+              <input type="password" matInput formControlName="password" placeholder="Contraseña">
               <mat-error>
                 {{"LOGIN.REQUIRED" | translate}}
               </mat-error>

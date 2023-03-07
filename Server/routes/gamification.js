@@ -29,13 +29,13 @@ router.get('/isGamified', verifyToken, async (req, res) => {
         }
     });
     if(!credential){
-       return res.status(200).send({gamified: false, connected: false, message: "NEURONE-GM isn't connected!"});
+        res.status(200).send({gamified: false, connected: false, message: "NEURONE-GM isn't connected!"});
     }
     if(credential.gamified){
-       return res.status(200).send({gamified: true, connected: true, message: "The app is gamified!"});
+        res.status(200).send({gamified: true, connected: true, message: "The app is gamified!"});
     }
     else{
-       return res.status(200).send({gamified: false, connected: true, message: "The app isn't gamified!"});
+        res.status(200).send({gamified: false, connected: true, message: "The app isn't gamified!"});
     }
 });
 
@@ -81,10 +81,10 @@ router.get('/gamify', verifyToken, async (req, res) => {
                 });
             }
         });
-        return res.status(200).send({ok: true, message: "Gamification part 1 completed!"});
+        res.status(200).send({ok: true, message: "Gamification part 1 completed!"});
     }
     else{
-        return res.status(400).send("Can't gamify!");
+        res.status(400).send("Can't gamify!");
     }
 })
 
@@ -131,10 +131,10 @@ router.get('/gamifyDependent', verifyToken, async (req, res) => {
                 });
             }
         })
-        return res.status(200).send({ok: true, message: "Gamification completed!"});
+        res.status(200).send({ok: true, message: "Gamification completed!"});
     }
     else{
-        return res.status(400).send("Can't gamify!");
+        res.status(400).send("Can't gamify!");
     }
 })
 
@@ -150,9 +150,9 @@ router.get('/userPoints/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayersPoints(user.gm_code, (err, points) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(points);
+        res.status(200).send(points);
     })
 });
 
@@ -167,9 +167,9 @@ router.get('/userLevels/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayerLevels(user.gm_code, (err, levels) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(levels);
+        res.status(200).send(levels);
     })
 });
 
@@ -184,9 +184,9 @@ router.get('/userLevelProgress/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayerLevelProgress(user.gm_code, (err, levels) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(levels);
+        res.status(200).send(levels);
     })
 });
 
@@ -201,9 +201,9 @@ router.get('/userBadges/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayersBadges(user.gm_code, (err, badges) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(badges);
+        res.status(200).send(badges);
     })
 });
 
@@ -218,9 +218,9 @@ router.get('/userChallenges/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayerChallenges(user.gm_code, (err, challenges) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(challenges);
+        res.status(200).send(challenges);
     })
 });
 
@@ -235,9 +235,9 @@ router.get('/userActions/:user_id' , verifyToken, async (req, res) => {
     });
     await playerService.getPlayerActions(user.gm_code, (err, challenges) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-       return  res.status(200).send(challenges);
+        res.status(200).send(challenges);
     })
 });
 
@@ -269,9 +269,9 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
     console.log(rankingName)
     await leaderboardService.getLeaderboardByGroup(rankingName.gm_code, {group_code: study.gm_code}, (err, leaderboard) => {
         if(err){
-            return res.status(404).send(err);
+            res.status(404).send(err);
         }
-        return res.status(200).send(leaderboard);
+        res.status(200).send(leaderboard);
     })
 });
 
@@ -292,7 +292,7 @@ router.get('/userCompleted/:user_id', verifyToken, async (req, res)=> {
                     err
                 });
             }
-            return res.status(200).send(userStudy);
+            res.status(200).send(userStudy);
         })
     }
     else if(!userStudy.finished){
@@ -313,15 +313,15 @@ router.get('/userCompleted/:user_id', verifyToken, async (req, res)=> {
                         err
                     });
                 }
-                return res.status(200).send(userStudy);
+                res.status(200).send(userStudy);
             })
         }
         else{
-            return res.status(200).send(userStudy);
+            res.status(200).send(userStudy);
         }
     }
     else if(userStudy.finished){
-        return res.status(200).send(userStudy);
+        res.status(200).send(userStudy);
     }
 })
 

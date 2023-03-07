@@ -21,7 +21,6 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   url: string;
   docUrl: string;
-  docId: string;
   title: string;
   result: string;
   cleanURL: string;  
@@ -50,8 +49,6 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
     /*Clean URL*/
     //URL example: http://localhost:4200/session/view-page/2004%20Bahrain%20Grand%20Prix/assets%2FdownloadedDocs%2FBahrain%2Fen.wikipedia.org%2Fwiki%2F2004_Bahrain_Grand_Prix%2Findex.html
     const titleArray = window.location.href.split('/');
-    //Get docTitle
-    this.docId = decodeURIComponent(titleArray[5]);
     //Get docURL
     let rawUrl = decodeURIComponent(titleArray[6]);
     //Remove the URL prefix from NEURONE Core
@@ -65,7 +62,7 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cleanURL = docURL.replace('/index.html', '');
     /*End Clean URL*/
     /*Dispatch pageenter event*/
-    var evt = new CustomEvent('pageenter', { detail: { detail: 'Enter to "' + this.cleanURL + '"', docId: this.docId } });
+    var evt = new CustomEvent('pageenter', { detail: 'Enter to "' + this.cleanURL + '"' });
     window.dispatchEvent(evt);
     /*End dispatch pageenter event*/    
   }
@@ -73,7 +70,7 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
   dispatchPageExit(){
     if(this.cleanURL){
       /*Dispatch pageexit event*/
-      var evt = new CustomEvent('pageexit', { detail: { detail: 'Exit from "' + this.cleanURL + '"', docId: this.docId } });
+      var evt = new CustomEvent('pageexit', { detail: 'Exit from "' + this.cleanURL + '"' });
       window.dispatchEvent(evt);
       /*End dispatch pageexit event*/    
     }    

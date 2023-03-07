@@ -2,17 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatChipsModule} from '@angular/material/chips'; 
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -23,6 +25,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonToggleModule} from '@angular/material/button-toggle'
+
+
+import { getDutchPaginatorIntl } from './components/paginatorInt/CustomPaginatorConfiguration';
 
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
@@ -82,7 +88,11 @@ import { ForwardComponent } from './views/forward/forward.component';
 import { PostStudyQuestionnaireComponent } from './views/post-study-questionnaire/post-study-questionnaire.component';
 import { ChallengeUpdateComponent } from './views/challenge-update/challenge-update.component';
 import { StudyUpdateComponent } from './views/study-update/study-update.component';
-
+import { StudiesSearchComponent } from './views/studies-search/studies-search.component';
+import { StudiesSearchResultsComponent } from './views/studies-search-results/studies-search-results.component';
+import { StudySearchDisplayComponent } from './views/study-search-display/study-search-display.component';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -129,7 +139,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     TriviaHubComponent,
     TriviaHubOpenComponent,
     ForwardComponent,
-    PostStudyQuestionnaireComponent
+    PostStudyQuestionnaireComponent,
+    StudiesSearchComponent,
+    StudiesSearchResultsComponent,
+    StudySearchDisplayComponent,
+    SearchBarComponent
   ],
     imports: [
         BrowserModule,
@@ -143,7 +157,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatButtonModule,
         HttpClientModule,
         FormsModule,
+        MatAutocompleteModule,
         MatBadgeModule,
+        MatChipsModule,
         ReactiveFormsModule,
         MatPaginatorModule,
         MatCardModule,
@@ -152,6 +168,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatCheckboxModule,
         MatSelectModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
+        MatButtonToggleModule,
         MatStepperModule,
         MatNativeDateModule,
         MatDatepickerModule,
@@ -160,6 +178,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDialogModule,
         MatExpansionModule,
         MatProgressBarModule,
+        MatPaginatorModule,
         MatTooltipModule,
         PdfViewerModule,
         Ng9RutModule,
@@ -177,7 +196,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         MatTableModule,
         NgxAudioPlayerModule,
-        PlyrModule
+        PlyrModule,
     ],
   providers: [EndpointsService,
               GameService,
@@ -191,6 +210,7 @@ export function HttpLoaderFactory(http: HttpClient) {
               useClass: ErrorInterceptor, 
               multi: true 
               },
+              { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }
     ],
   bootstrap: [AppComponent]
 })

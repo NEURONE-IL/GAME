@@ -1,7 +1,7 @@
+const { any, boolean } = require('joi');
 const mongoose = require('mongoose');
-require('mongoose-long')(mongoose);
-const { Types: { Long } } = mongoose;
 const { Schema } = mongoose;
+
 
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
@@ -13,14 +13,10 @@ const UserSchema = new Schema({
     cooldown_start: {type: Date},
     interval_answers: {type: Number},
     image_url: {type: String},
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
-    createdAtNumber: { type: Long, default: Date.now },
-    updatedAtNumber: { type: Long, default: Date.now },    
+    createdAt: { type: Date, default: Date.now},
+    updatedAt: { type: Date, default: Date.now},
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
-    study: { type: Schema.Types.ObjectId, ref: 'Study' },
     trainer_id: {type: String},
-    trainer_return_url: {type: String},
     code: {type: String},
     has_played: {type: Boolean, default: false},
     registered_via: {type: String}
@@ -31,11 +27,9 @@ UserSchema.pre('save', next => {
     now = new Date();
     if(!this.createdAt) {
       this.createdAt = now;
-    	this.createdAtNumber = Date.now;
     }
     if(!this.updatedAt) {
       this.updatedAt = now;
-    	this.updatedAtNumber = Date.now;
     }
     next();
 });

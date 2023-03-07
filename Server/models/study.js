@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-require('mongoose-long')(mongoose);
-const { Types: { Long } } = mongoose;
 const { Schema } = mongoose;
 
 const StudySchema = new Schema({
@@ -12,10 +10,23 @@ const StudySchema = new Schema({
     max_per_interval: {type: Number},
     image_url: {type: String},
     image_id: {type: String},
+
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
+    collaborators:[{
+      user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+      invitation: {type: String, default: 'Pendiente'}
+      }],
+    privacy: {type: Boolean, default: true},
+    type: {type: String, default: 'own'},
+    tags: {type: [String]},
+    edit: {type: [String], default: []},
+
+    levels: {type:[String], required:true},
+    competences: {type: [{ type: Schema.Types.ObjectId, ref: 'Competence'}], required:true},
+    language: { type: Schema.Types.ObjectId, ref: 'Language', required: true},
+
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
-    createdAtNumber: { type: Long, default: Date.now },
-    updatedAtNumber: { type: Long, default: Date.now }    
+    updatedAt: { type: Date, default: Date.now }
 });
 
 // Sets the createdAt parameter equal to the current time
@@ -23,11 +34,9 @@ StudySchema.pre('save', next => {
     now = new Date();
     if(!this.createdAt) {
       this.createdAt = now;
-    	this.createdAtNumber = Date.now;
     }
     if(!this.updatedAt) {
       this.updatedAt = now;
-    	this.updatedAtNumber = Date.now;
     }
     next();
 });

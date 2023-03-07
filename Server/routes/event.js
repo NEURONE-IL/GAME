@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({events});
+        res.status(200).json({events});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:event_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({event});
+        res.status(200).json({event});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             event
         });
     })
@@ -52,7 +52,7 @@ router.delete('/:event_id',  [verifyToken, authMiddleware.isAdmin] , async (req,
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             event
         });
     })

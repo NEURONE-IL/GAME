@@ -1,0 +1,41 @@
+<mat-card class="studies-search-results-card">
+  <mat-card-content>
+    <div *ngIf="studies.length > 0">
+      <p style="font-size: 18px; font-weight:300;" *ngIf="actualQuery === 'all'">Mostrando todos los estudios públicos</p>
+      <p style="font-size: 18px; font-weight:300;" *ngIf="actualQuery != 'all'">Mostrando resultados para "<b>{{actualQuery}}"</b></p>
+    </div>
+    <div *ngIf="studies.length === 0" style="padding-bottom: 1% !important;">
+      <p style="font-size: 18px; font-weight:300; text-align: center;">No se encontraron resultados para "<b>{{actualQuery}}"</b>
+    </div>
+    <mat-grid-list cols="12" [gutterSize]="'12px'">
+			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" (mouseover)="fullStudy(study)" (mouseout)="shortStudy(study)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title style="font-size: 18px;">
+							{{study.name}}
+						</mat-card-title>  
+					</mat-card-header>
+          <div class="user-info">
+            <mat-icon style="color: gray; font-size: 17px;" mat-card-avatar>person</mat-icon>
+            <mat-card-subtitle style="margin-bottom: 0%"> {{ study.user.names + ' '+study.user.last_names }}
+            </mat-card-subtitle>  
+          </div>   
+                  
+					<img mat-card-image *ngIf="study.image_url" [src]="study.image_url">
+					<img mat-card-image *ngIf="!study.image_url" [src]="getCover(index)">
+					<mat-card-content>
+            <div *ngIf="actualStudy==study._id; else studyShortDescription">
+              <p *ngIf="study.description">{{study.description}}</p>
+            </div>
+						<ng-template #studyShortDescription>
+              <p *ngIf="study.description">{{showShortDescription(study.description)}}</p>
+            </ng-template>
+						<p *ngIf="!study.description">{{ "ADMIN.STUDIES.NO_DESCRIPTION" | translate}}</p>
+					</mat-card-content>
+				</mat-card>
+			</mat-grid-tile>
+		</mat-grid-list>
+</mat-card-content>
+<mat-divider *ngIf="studies.length > 0"></mat-divider>
+<mat-paginator *ngIf="studies.length > 0" #studiesPaginator style="font-size: 17px;" [length]="paginator?.totalDocs" [pageSize]="paginator?.perPages" (page)="pageTurn($event)" aria-label="Seleccionar página"> </mat-paginator>
+</mat-card>

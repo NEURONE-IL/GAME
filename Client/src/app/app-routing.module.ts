@@ -16,6 +16,7 @@ import { StudiesDisplayComponent } from './views/studies-display/studies-display
 import { StudyDisplayComponent } from './views/study-display/study-display.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { AdminGuard } from './helpers/admin.guard';
+import { ProtectStudyEditionGuard } from './helpers/protect-study-edition.guard';
 import { NotLoggedInGuard } from './helpers/not-logged-in.guard';
 import { AsExternalServiceGuard } from './helpers/as-external-service.guard';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
@@ -25,6 +26,9 @@ import { LoginRedirectComponent } from './views/login-redirect/login-redirect.co
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
 import { TriviaHubOpenComponent } from './views/trivia-hub-open/trivia-hub-open.component';
 import { ForwardComponent } from './views/forward/forward.component';
+import { StudiesSearchComponent } from './views/studies-search/studies-search.component';
+import { StudiesSearchResultsComponent } from './views/studies-search-results/studies-search-results.component';
+import { StudySearchDisplayComponent } from './views/study-search-display/study-search-display.component';
 
 const routes: Routes = [
   {
@@ -94,6 +98,21 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'studies_search',
+    component: StudiesSearchComponent,
+    canActivate: [ AuthGuard, AdminGuard ],
+    children: [
+      {
+        path: 'results/:term',
+        component: StudiesSearchResultsComponent
+      },
+      {
+        path: 'study/:study_id',
+        component: StudySearchDisplayComponent
+      }
+    ]
+  },
+  {
     path: 'login',
     component: LoginComponent,
     canActivate: [ NotLoggedInGuard ]
@@ -130,7 +149,7 @@ const routes: Routes = [
       {
         path: 'study/:study_id',
         component: StudyDisplayComponent,
-        //canActivate: [ AuthGuard, AdminGuard ],
+        canActivate: [ ProtectStudyEditionGuard ],
       },
     ]
   },

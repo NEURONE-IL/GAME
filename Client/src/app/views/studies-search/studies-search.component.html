@@ -1,0 +1,30 @@
+<app-header></app-header>
+<mat-card class="studies-search-results-card">
+  <app-search-bar [componentReference]="resultsComponent"></app-search-bar>
+    <!--mat-card-content>
+        <mat-grid-list cols="12" class="component-align">
+          <mat-grid-tile colspan="8">
+            <div class="search-studies-bar" style="width: 95%;">
+              <mat-form-field style="font-size:16px ;" appearance="outline">
+                <mat-icon matPrefix >search</mat-icon>
+                <input style="padding-left: 10px;" type="search" matInput placeholder="Buscar Estudios de la Comunidad" name= "search" [(ngModel)]= "search" (keyup.enter)="searchStudies(search)">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <button class="button-customize" (click)="searchStudies(search)" mat-raised-button color="primary">Buscar 
+              <mat-icon>search</mat-icon>
+            </button>
+            <button class="button-customize" (click)="searchStudies('all')" style="margin-left: 5%;" mat-raised-button color="primary">Ver todos
+              <mat-icon>auto_awesome_motion</mat-icon>
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content-->
+  </mat-card>
+<div class="back-login" id="page-container">
+    <div id="content-wrap">
+        <router-outlet (activate)="onActivate($event)" ></router-outlet>   
+    </div>
+    <app-footer></app-footer>     
+</div>

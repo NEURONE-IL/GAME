@@ -50,10 +50,7 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'posttestquestionnaireenter', data, this.posttestquestionnaireenterListener);
       this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);  
       this.bindEvent(targetDoc, 'poststudyquestionnaireenter', data, this.poststudyquestionnaireenterListener);
-      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);
-      this.bindEvent(targetDoc, 'sendanswer', data, this.sendanswerListener);
-      this.bindEvent(targetDoc, 'startchallenge', data, this.startchallengeListener);
-      this.bindEvent(targetDoc, 'finishchallenge', data, this.finishchallengeListener);
+      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);    
       /*End custom events*/
       this.isTracking = true;
     }
@@ -87,9 +84,6 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireenter');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
-      this.unbindAll(targetDoc, 'sendanswer');
-      this.unbindAll(targetDoc, 'startchallenge');
-      this.unbindAll(targetDoc, 'finishchallenge');
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -133,7 +127,6 @@ export class ActionsTrackerService {
       source: 'HelpModal',
       type: 'OpenHelpModal',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -154,7 +147,6 @@ export class ActionsTrackerService {
       source: 'HelpModal',
       type: 'CloseHelpModal',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -175,7 +167,6 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'ChangePage',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -197,7 +188,6 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'PreviousPage',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -219,7 +209,6 @@ export class ActionsTrackerService {
       source: 'Pagination',
       type: 'NextPage',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -241,7 +230,6 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToWebPagesTab',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -262,7 +250,6 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToImagesTab',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -283,7 +270,6 @@ export class ActionsTrackerService {
       source: 'SearchResultsTabs',
       type: 'ChangeToVideosTab',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
 
@@ -304,7 +290,6 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'ShowQuestionBar',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -326,7 +311,6 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'HideQuestionBar',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -348,7 +332,6 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'MarkFavoritePage',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -370,7 +353,6 @@ export class ActionsTrackerService {
       source: 'QuestionBar',
       type: 'UnmarkFavoritePage',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
       detail: evt.detail
     };
@@ -392,10 +374,8 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PageEnter',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
-      detail: evt.detail.detail,
-      docId: evt.detail.docId
+      detail: evt.detail
     };
 
     // console.log(keyOutput);
@@ -415,10 +395,8 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PageExit',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
-      detail: evt.detail.detail,
-      docId: evt.detail.docId
+      detail: evt.detail
     };
 
     // console.log(keyOutput);
@@ -438,7 +416,6 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PreTestQuestionnaireEnter',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -459,7 +436,6 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PreTestQuestionnaireExit',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -480,7 +456,6 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostTestQuestionnaireEnter',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -501,7 +476,6 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostTestQuestionnaireExit',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -521,7 +495,6 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostStudyQuestionnaireEnter',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
@@ -541,75 +514,11 @@ export class ActionsTrackerService {
       source: 'Window',
       type: 'PostStudyQuestionnaireExit',
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL
     };
 
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
   }  
-
-  sendanswerListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      studyId: this.user.study,
-      challengeId: localStorage.getItem('chall'),
-      source: 'QuestionBar',
-      type: 'SendAnswer',
-      localTimeStamp: t,
-      localTimeStampNumber: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }  
-
-  startchallengeListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      studyId: this.user.study,
-      challengeId: localStorage.getItem('chall'),
-      source: 'QuestionBar',
-      type: 'StartChallenge',
-      localTimeStamp: t,
-      localTimeStampNumber: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  } 
-  
-  finishchallengeListener(evt){
-    evt = evt || event;
-
-    let t = Date.now(),
-    doc = evt.currentTarget.data.d;
-
-    let keyOutput = {
-      userId: this.user.id,
-      studyId: this.user.study,
-      challengeId: localStorage.getItem('chall'),
-      source: 'QuestionBar',
-      type: 'FinishChallenge',
-      localTimeStamp: t,
-      localTimeStampNumber: t,
-      url: doc.URL,
-    };
-
-    // console.log(keyOutput);
-    evt.currentTarget.storeService.postEvent(keyOutput);
-  }   
 
 }

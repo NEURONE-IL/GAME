@@ -6,6 +6,18 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { StoreSessionService } from '../logger/store-session.service';
 
+export interface User {
+  _id: string,
+  email: string,
+  names: string,
+  last_names: string,
+  has_played: boolean,
+  role: {
+    _id: string,
+    name: string,
+  },
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,14 +36,15 @@ export class AuthService {
     this.http.post(this.uri + 'login', {email: email,password: password})
     .subscribe((resp: any) => {
       localStorage.setItem('auth_token', resp.token);
-      localStorage.setItem("currentUser",JSON.stringify(resp.user));
+      let user = resp.user;
+      delete user.password;
+      localStorage.setItem("currentUser",JSON.stringify(user));
       let sessionLog = {
         userId: resp.user._id,
         studyId: resp.user.study,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now(),
-        localTimeStampNumber: Date.now()
+        localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, false);
@@ -61,24 +74,20 @@ export class AuthService {
   }
 
   logout() {
-    let trainer_id = this.getUser().trainer_id;
     let sessionLog = {
       userId: this.getUser()._id,
       userEmail: this.getUser().email,
       studyId: this.getUser().study,
       challengeId: localStorage.getItem('chall'),
       state: 'logout',
-      localTimeStamp: Date.now(),
-      localTimeStampNumber: Date.now()
+      localTimeStamp: Date.now()
     }
     this.storeSession.postSessionLog(sessionLog);
     localStorage.removeItem('auth_token');
     localStorage.removeItem("currentUser");
     localStorage.removeItem("game");
-    localStorage.removeItem('lastUrl');
-    if(!trainer_id){
-      this.router.navigate(['login']);
-    }
+    localStorage.removeItem('lastUrl')
+    this.router.navigate(['login']);
   }
 
   logoutAPI_KEY() {
@@ -88,8 +97,7 @@ export class AuthService {
       studyId: this.getUser().study,
       challengeId: localStorage.getItem('chall'),
       state: 'logout',
-      localTimeStamp: Date.now(),
-      localTimeStampNumber: Date.now()      
+      localTimeStamp: Date.now()
     }
     this.storeSession.postSessionLog(sessionLog);
     var returnUrl = localStorage.getItem('return_url');
@@ -108,8 +116,7 @@ export class AuthService {
         userId: resp.user._id,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now(),
-        localTimeStampNumber: Date.now()
+        localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, true);
@@ -136,8 +143,7 @@ export class AuthService {
         userId: resp.user._id,
         userEmail: resp.user.email,
         state: 'login',
-        localTimeStamp: Date.now(),
-        localTimeStampNumber: Date.now()
+        localTimeStamp: Date.now()
       }
       this.storeSession.postSessionLog(sessionLog);
       this.redirectUserPanel(resp.user.role.name, true);
@@ -179,6 +185,16 @@ export class AuthService {
   signup(userData: any, study_id: string) {
     delete userData.emailConfirm;
     return this.http.post(this.uri + 'register/' + study_id, userData);
+  }
+
+  getUserById(user_id){
+    return this.http.get(this.userUri+user_id);
+  }
+  getUserByRole(user_id, role_id){
+    return this.http.get(this.userUri+'getUserByRole/'+user_id+'/'+role_id);
+  }
+  getUserbyEmail(user_email){
+    return this.http.get(this.userUri+'getUserbyEmail/'+user_email);
   }
 
   signupDummy(study_id){

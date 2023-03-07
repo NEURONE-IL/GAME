@@ -1,6 +1,4 @@
 <div class="header" role="banner">
-
-
   <img class="image-span" src="assets/TRIVIA-NEGATIVO.png" *ngIf="isLoggedIn && user.role.name === 'student' && !router.url.toString().includes('view-page') && (router.url.toString().includes('session') || router.url.toString().includes('start'))"
   >
   <!--Student Implementation-->
@@ -16,7 +14,6 @@
   <button *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))" mat-icon-button [matMenuTriggerFor]="tabledriven" (click)="updateNotifications()">
     <mat-icon [matBadge]="notificationsN" matBadgeColor="warn">notifications</mat-icon>
   </button>
-
   <mat-menu #tabledriven="matMenu">
     <button *ngIf="menuItems?.length == 0" mat-menu-item >Vacío</button>
     <ng-container *ngFor="let item of menuItems">
@@ -28,13 +25,81 @@
     </ng-container>
   </mat-menu>
 
-  <button *ngIf="isLoggedIn" (click)="openModal()" mat-button>	<mat-icon>help_outline</mat-icon> </button>
+  <button *ngIf="isLoggedIn && user.role.name === 'admin'" mat-icon-button [matMenuTriggerFor]="adminNotificationTable" (click)="getAdminNotification()">
+    <mat-icon [matBadge]="adminNotificationN >0 ? adminNotificationN: null" matBadgeColor="warn">notifications</mat-icon>
+  </button>
+  <mat-menu #adminNotificationTable="matMenu" xPosition="before" (close)="updateAdminNotifications()">
+    <button *ngIf="newNotificationsAdmin?.length == 0" mat-menu-item >No existen notificaciones nuevas</button>
+    
+    <ng-container *ngFor="let item of newNotificationsAdmin; index as i" >
+      <mat-card (click)="$event.stopPropagation()" class="notificationMenu mat-elevation-z0">
+        <div class="userInfo">
+          <mat-icon style="font-size: 12px;height:12px !important;vertical-align: top;">person</mat-icon>
+          <mat-card-subtitle style="font-size: 12px;margin-bottom: 0%">{{item.userFrom.names + ' '+ item.userFrom.last_names}}</mat-card-subtitle>
+        </div>
+        <p style="margin-top: 0%;margin-bottom: 3%" *ngIf=!item.templateName >{{ item.description }} </p>
+        <div *ngIf="(item.type === 'invitation' || item.type === 'collabRequest') && item.invitation.status == 'Pendiente'" style="margin-bottom: 5%;">
+          <button mat-flat-button class="acceptButton" (click)="acceptInvitation(item)" color="success" >Aceptar</button>
+          <button mat-flat-button class="rejectButton" (click)="rejectInvitation(item)" color="warn">Rechazar</button>
+          <button mat-flat-button class="rejectButton" (click)="redirectStudy(item.invitation.study._id)" color="primary">Ver</button>
+        </div>
+
+        <div>
+          <mat-card-subtitle *ngIf="(item.type === 'invitation' || item.type === 'collabRequest') && item.invitation.status != 'Pendiente'" class="statusInfo" >Invitación {{' ' +item.invitation.status }} </mat-card-subtitle>
+        </div>
+        
+        <div class="date-notification-info">
+          <mat-icon *ngIf="item.type === 'invitation' || item.type === 'collabRequest' || item.type === 'invitation_response'" style="font-size: 12px; height: 12px;">email</mat-icon>
+          <mat-icon *ngIf="item.type === 'clone'" style="font-size: 12px; height: 12px;">content_copy</mat-icon>
+          <mat-card-subtitle style="font-size: 11px;margin-bottom: 0%">{{item.createdAt.split(' ')[0] + ' ' + item.createdAt.split(' ')[1] }}</mat-card-subtitle>
+        </div>
+
+
+      <mat-divider *ngIf="!(i == newNotificationsAdmin?.length-1)"></mat-divider>
+      </mat-card>
+    </ng-container>
+    <button *ngIf="oldNotificationsAdmin?.length > 0" mat-raised-button style="width: 100%; margin-bottom: 1%;" (click)="$event.stopPropagation(); showOldNotifications = !showOldNotifications">{{showOldNotifications? 'Ocultar Anteriores': 'Ver Anteriores'}} <mat-icon>{{showOldNotifications? 'remove': 'add'}}</mat-icon> </button>
+    <div *ngIf="showOldNotifications">
+      <ng-container *ngFor="let item of oldNotificationsAdmin; index as i">
+        <mat-card (click)="$event.stopPropagation()" class="notificationMenu mat-elevation-z0">
+          <div class="userInfo">
+            <mat-icon style="font-size: 12px;height:12px !important;vertical-align: top;">person</mat-icon>
+            <mat-card-subtitle style="font-size: 12px;margin-bottom: 0%">{{item.userFrom.names + ' '+ item.userFrom.last_names}}</mat-card-subtitle>
+          </div>
+          <p style="margin-top: 0%;margin-bottom: 3%" *ngIf=!item.templateName >{{ item.description }} </p>
+          <div >
+          <mat-card-subtitle *ngIf="item.type === 'invitation' || item.type === 'collabRequest'" class="statusInfo" >Invitación {{' ' +item.invitation.status }} </mat-card-subtitle>
+          </div>
+          <div class="date-notification-info">
+            <mat-icon *ngIf="item.type === 'invitation' || item.type === 'collabRequest' || item.type === 'invitation_response'" style="font-size: 12px; height: 12px;">email</mat-icon>
+          <mat-icon *ngIf="item.type === 'clone'" style="font-size: 12px; height: 12px;">content_copy</mat-icon>
+            <mat-card-subtitle style="font-size: 11px;margin-bottom: 0%">{{item.createdAt.split(' ')[0] + ' ' + item.createdAt.split(' ')[1] }}</mat-card-subtitle>
+          </div>
+
+        <mat-divider *ngIf="!(i == oldNotificationsAdmin?.length-1)"></mat-divider>
+        </mat-card>
+      </ng-container>
+  </div>
+  </mat-menu>
+  <a mat-button *ngIf="isLoggedIn && user.role.name === 'admin'" 
+    [href]="demoLink" target="_blank"
+    [matTooltip]="'Acceder a una demostración de uso de la plataforma'">	
+    <mat-icon>help_outline</mat-icon> 
+  </a>
+  
+  <button *ngIf="isLoggedIn && user.role.name !== 'admin'" (click)="openModal()" mat-button>	<mat-icon>help_outline</mat-icon> </button>
   <a class="name-span"  href="/user-profile" *ngIf="isLoggedIn && user.role.name === 'student' && !(router.url.toString().includes('session') || router.url.toString().includes('start'))">
 
     <img *ngIf="user.image_url" [src]="user.image_url" class="user-image">
     <img *ngIf="!user.image_url" src="/assets/avatar_usuario.png" class="user-image">
     {{user.names}}
   </a>
+  <div class="button-panel" *ngIf="isLoggedIn && user.role.name === 'admin'">
+    <button mat-button color="white" style="pointer-events:none">
+      <mat-icon>account_circle</mat-icon>
+      {{ user.names + ' ' +user.last_names }}
+    </button>
+  </div>
   <button (click)="logout()" mat-button *ngIf="isLoggedIn && !user.trainer_id"><mat-icon>login</mat-icon> {{"LOGOUT.LOGOUT" | translate}}</button>
 </div>
 
