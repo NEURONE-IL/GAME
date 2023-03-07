@@ -1,0 +1,51 @@
+<mat-card class="search-bar-card mat-elevation-z0">
+  <mat-grid-list cols="12">
+    <div class="search-bar-div">
+      <div class="search-adventures-bar" style="width: 50%">
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-icon matPrefix >search</mat-icon>
+          <input style="padding-left: 5px;" type="search" matInput placeholder="Buscar estudios de la Comunidad" name= "search" [(ngModel)]= "search" (keyup.enter)="searchFlows(this.search)">
+        </mat-form-field>
+      </div>
+      <!--button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="this.name !== 'results'">
+        <mat-icon 
+          [ngStyle]="{'color':(this.name !== 'results')? 'gray':'#3f51b5'}"
+          [matTooltip]="(this.name !== 'results')? 'Realice una búsqueda para aplicar filtros':'Filtrar resultados'">filter_list</mat-icon>
+      </button-->
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="competencesFilter">
+          <mat-icon>category</mat-icon>
+          <span>Competencias</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="levelsFilter">
+          <mat-icon>equalizer</mat-icon>
+          <span>Niveles</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="languagesFilter">
+          <mat-icon>language</mat-icon>
+          <span>Idioma</span>
+        </button>
+        <mat-divider></mat-divider>
+        <div style="display: flex; justify-content:center">
+          <button color="primary" style="margin-right: 0;" mat-raised-button style="transform: scale(0.8);" (click)="filterFlows(true)">Aplicar</button>
+          <button class="clearButton" style="margin-left: 0;" mat-raised-button style="transform: scale(0.8);" (click)="filterFlows(false)">Limpiar</button>
+        </div>
+      </mat-menu>
+      <mat-menu #competencesFilter="matMenu" >
+        <mat-checkbox color="primary" *ngFor="let competence of competences;" [(ngModel)]="competence.check" [value]="competence.name" (click)="$event.stopPropagation();" (change)="addCompetence($event)" class="mat-menu-item">{{competence.name}}</mat-checkbox>   
+      </mat-menu>
+      <mat-menu #levelsFilter="matMenu">
+        <mat-checkbox color="primary" *ngFor="let level of levels;" [(ngModel)]="level.check" [value]="level.name" (click)="$event.stopPropagation();" (change)="addLevel($event)" class="mat-menu-item">{{level.name}}</mat-checkbox> 
+      </mat-menu>
+      <mat-menu #languagesFilter="matMenu">
+        <mat-checkbox color="primary" *ngFor="let language of languages;" [(ngModel)]="language.check" [value]="language.name" (click)="$event.stopPropagation();" (change)="addLanguage($event)" class="mat-menu-item">{{language.name}}</mat-checkbox> 
+      </mat-menu>
+      <button class="button-customize" color="primary" mat-raised-button (click)="searchFlows(this.search)">Buscar
+        <mat-icon>search</mat-icon>
+      </button>
+      <button class="button-customize" color="primary" mat-raised-button (click)="searchFlows('all')">Ver todos
+        <mat-icon>auto_awesome_motion</mat-icon>
+      </button>
+    </div>
+  </mat-grid-list>
+</mat-card>

@@ -26,7 +26,8 @@ const schema = Joi.object({
         .required(),
 
     max_attempts: Joi.number()
-        .required()
+        .required(),
+    
         
 })
 
@@ -48,7 +49,9 @@ const editSchema = Joi.object({
 
     study: Joi.any(),
 
-    max_attempts: Joi.number()
+    max_attempts: Joi.number(),
+    
+    user_edit: Joi.string()
 })
 
 const answerSchema = Joi.object({
@@ -76,13 +79,7 @@ const answerSchema = Joi.object({
         urls: Joi.array().items(Joi.object({
             url: Joi.string().allow(null, '')
         }))
-    })),
-
-    localTimeStamp: Joi.any()
-        .required(),
-
-    localTimeStampNumber: Joi.any()
-        .required()
+    }))
 })
 
 verifyBody = async (req, res, next) => {

@@ -3,6 +3,7 @@ const multer = require('multer');
 const crypto = require('crypto');
 const path = require('path');
 const GridFsStorage = require('multer-gridfs-storage');
+require('../config/config');
 
 const imageStorage = {};
 

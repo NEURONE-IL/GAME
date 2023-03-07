@@ -3,6 +3,7 @@ const router = express.Router();
 const Challenge = require('../models/challenge');
 const User = require('../models/user');
 const UserChallenge = require('../models/userChallenge');
+const StudySearch = require('../models/studySearch');
 const GameElement = require('../models/gameElement');
 const levenshtein = require('../node_modules/js-levenshtein');
 const normalize = require('../node_modules/normalize-diacritics');
@@ -13,6 +14,56 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const challengeMiddleware = require('../middlewares/challengeMiddleware');
 const verifyToken = require('../middlewares/verifyToken');
 
+const {EventEmitter} = require('events');
+var AsyncLock = require('async-lock');
+var lock = new AsyncLock();
+
+updateChallengeStudySearch = async (study_id) => {
+    try {
+      //Encontrar el studySearch
+      console.log(study_id)
+      const studySearch = await StudySearch.findOne({study:study_id}, err =>{
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+      });
+
+      //Encontrar los challenges asociados
+      const challenges = await Challenge.find({study: study_id}, err => {
+        if(err){
+          return res.status(404).json({
+              ok: false,
+              err
+          });
+        }
+      })
+
+      //Update
+      let challengeArr = [];
+      await challenges.forEach( challenge => {
+        challengeArr.push(challenge.question)
+      })
+      studySearch.challenges = challengeArr;
+
+      studySearch.save(err => {
+        if(err){
+            return res.status(404).json({
+                err
+            });
+        }
+      })
+    }
+    catch (err) {
+        return res.status(400).json({
+            ok: false,
+            err
+        });
+    }
+};
+
 router.get('', [verifyToken] , async (req, res) => {
     Challenge.find({}, (err, challenges) =>{
         if(err){
@@ -21,7 +72,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({challenges});
+        res.status(200).json({challenges});
     });
 })
 
@@ -34,7 +85,7 @@ router.get('/:challenge_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({challenge});
+        res.status(200).json({challenge});
     });
 });
 
@@ -46,7 +97,7 @@ router.get('/answer/all', [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({userChallenges});
+        res.status(200).json({userChallenges});
     }).populate({ path: 'user', model: User} , {password:0}).populate({ path: 'challenge', model: Challenge} );
 })
 
@@ -59,7 +110,7 @@ router.get('/byStudy/:study_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({challenges});
+        res.status(200).json({challenges});
     })
 });
 
@@ -72,7 +123,7 @@ router.get('/answer/byId/:answers_id', [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({userChallenges});
+        res.status(200).json({userChallenges});
     }).populate({ path: 'challenge', model: Challenge} ).populate({ path: 'user', model: User} , {password:0});
 })
 
@@ -84,7 +135,8 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
                 err
             });
         }
-        return res.status(200).json({
+        updateChallengeStudySearch(challenge.study);
+        res.status(200).json({
             challenge
         });
     })
@@ -92,20 +144,8 @@ router.post('',  [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verif
 
 router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], async (req, res)=> {
     const _id = req.body.challenge;
-    const challenge = await Challenge.findOne({_id: _id}, err => {
-        if (err) {
-            return res.status(404).json({
-                err
-            });
-        }
-    });
-    const user = await User.findOne({_id: req.body.user}, err => {
-        if (err) {
-            return res.status(404).json({
-                err
-            });
-        }
-    });
+    const challenge = await Challenge.findOne({_id: _id});
+    const user = await User.findOne({_id: req.body.user});
     const pointElement = await GameElement.findOne({key: 'exp_1'});
     const answerAction = await GameElement.findOne({key: 'responder_pregunta_1'});
     const noHintsAction = await GameElement.findOne({key: 'sin_pistas_1'});
@@ -121,18 +161,10 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
         comment: req.body.comment,
         timeLeft: req.body.timeLeft,
         distance: distance,
-        pointsObtained: pointsObtained,
-        localTimeStamp: req.body.localTimeStamp
+        pointsObtained: pointsObtained
     })
     user.interval_answers = user.interval_answers+1;
-    user.updatedAt = Date.now();
-    await user.save(err => {
-        if (err) {
-            return res.status(404).json({
-                err
-            });
-        }
-    });
+    await user.save();
     userChallenge.save((err, userChallenge) => {
         if (err) {
             return res.status(404).json({
@@ -153,7 +185,7 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
                 if(err){
                     console.log(err);
                 }
-                return res.status(200).json({
+                res.status(200).json({
                     user
                 });
             });
@@ -164,12 +196,12 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
                 if(err){
                     console.log(err);
                 }
-                return res.status(200).json({
+                res.status(200).json({
                     user
                 });
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             userChallenge
         });
     })
@@ -177,21 +209,128 @@ router.post('/answer', [verifyToken, challengeMiddleware.verifyAnswerBody], asyn
 
 router.get('/answers/last', verifyToken, async (req, res)=> {
     const user_id = req.user;
+    console.log(user_id)
     UserChallenge.find({user: user_id}, (err, last_answer) => {
         if (err) {
             return res.status(404).json({
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             last_answer: last_answer[0]
         });
     }).sort({createdAt: -1});
 })
 
+router.get('/editStatus/:challenge_id/:user_id', async (req, res) => {
+    console.log('Event Source for Study Edit Challenges');
+
+    var Stream = new EventEmitter();    
+    const _challenge_id_event = req.params.challenge_id;       
+    const _user_challenge_id_event = req.params.user_id;
+
+    res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+    });
+
+    Stream.on('push', function(event, data){
+        res.write('event: '+ String(event)+'\n'+'data: ' + JSON.stringify(data)+"\n\n");
+    })
+
+    var id = setInterval(async function(){
+        const challenge = await Challenge.findOne({_id:_challenge_id_event}, (err) => {
+            if (err) {
+                return res.status(404).json({
+                    err
+                });
+            }
+        });
+        Stream.emit('push','message',{currentUsers: challenge.edit});
+
+        if(challenge.edit[0] == _user_challenge_id_event){
+            if(challenge.edit.length == 1)
+                Stream.removeAllListeners();
+            clearInterval(id);
+        }
+    }, 10000); 
+});
+
+router.put('/requestEdit/:challenge_id', [verifyToken, authMiddleware.isAdmin], async (req, res) => {
+    
+    const _challengeRequestEdit = req.params.challenge_id;
+    const _userRequestEditChall = req.body.user;
+
+    console.log(_userRequestEditChall + ' arrived');
+    console.log(_challengeRequestEdit + ' challenge');
+
+    lock.acquire(_challengeRequestEdit, async function(done) {
+        console.log(_userRequestEditChall + ' acquire');
+        
+        const challenge = await Challenge.findOne({_id:_challengeRequestEdit}, err => {
+            if (err) {
+                return res.status(404).json({
+                    err
+                });
+            }
+        });
+        challenge.edit.push(_userRequestEditChall)
+        challenge.save(err => {
+            if(err){
+                return res.status(404).json({
+                    ok: false,
+                    err
+                });
+            }
+            res.status(200).json({users: challenge.edit});
+        })
+        //await delay(5); //Para probar
+        done(challenge.edit)
+        
+    }, async function(edit) {
+        const index = edit.indexOf(_userRequestEditChall); 
+        console.log('Position to edit: ', (index+1));
+        console.log('Lock free...')
+    })
+})
+
+router.put('/releaseChallenge/:challenge_id', [verifyToken, authMiddleware.isAdmin], async (req, res) => {
+    console.log('releaseEntrando')
+    const _challengeRelease = req.params.challenge_id;
+    const _userChallengeRelease = req.body.user;
+    
+    console.log('challenge',_challengeRelease);
+    console.log('user',_userChallengeRelease);
+
+    const challenge = await Challenge.findOne({_id:_challengeRelease}, err => {
+        if (err) {
+            return res.status(404).json({
+                err
+            });
+        }
+    });
+
+    const result = challenge.edit.filter(x => x !== _userChallengeRelease);
+    challenge.edit = result;
+
+    challenge.save(err => {
+        if(err){
+            return res.status(404).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({users: challenge.edit});
+    })
+    //await delay(5); Para probar
+        
+})
+
 router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMiddleware.verifyEditBody], async (req, res) => {
     const _id = req.params.challenge_id;
-    Challenge.findOne({_id: _id}, (err, challenge) => {
+    const _user_edit = req.params.user_edit;
+    const challenge = await Challenge.findOne({_id: _id}, (err, challenge) => {
         if (err) {
             return res.status(404).json({
                 err
@@ -231,7 +370,11 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
                     err
                 });
             }
-            return res.status(200).json({
+            const result = challenge.edit.filter(x => x !== _user_edit);
+            challenge.edit = result;
+            
+            updateChallengeStudySearch(challenge.study);
+            res.status(200).json({
                 challenge
             });
         })
@@ -240,13 +383,15 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
 
 router.delete('/:challenge_id',  [verifyToken, authMiddleware.isAdmin] , async (req, res) => {
     const _id = req.params.challenge_id;
-    Challenge.deleteOne({_id: _id}, (err, challenge) => {
+    Challenge.findOneAndDelete({_id: _id}, (err, challenge) => {
         if (err) {
             return res.status(404).json({
                 err
             });
         }
-        return res.status(200).json({
+        console.log(challenge)
+        updateChallengeStudySearch(challenge.study)
+        res.status(200).json({
             challenge
         });
     })
@@ -260,7 +405,7 @@ router.delete('/answer/:answer_id',  [verifyToken, authMiddleware.isAdmin] , asy
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             userChallenge
         });
     })

@@ -1,0 +1,53 @@
+.studies-search-results-card{
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 1.5%;
+  padding-bottom: 0% !important;
+}
+.button-row{
+  margin-left: 20px;
+}
+
+.button-row .mat-button-base {
+  margin: 12px 15px 15px 0;
+}
+.component-align{
+  margin-left: 7%;
+  margin-right: 7%;
+}
+.mat-form-field{
+	width: 100%;
+}
+
+::ng-deep .search-studies-bar .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 25px !important;
+}
+
+::ng-deep .search-studies-bar .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+}
+
+::ng-deep .search-studies-bar .mat-form-field-wrapper {
+  padding-bottom: 0;
+  box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+  border-radius: 28px 28px 28px 28px !important;
+}
+
+::ng-deep .search-studies-bar .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(161, 161, 161)!important;
+  opacity: 0.35!important;
+}
+::ng-deep .search-studies-bar .mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
+  border-top-width: 5px;
+}
+.button-customize{
+  font-size: 17px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.user-info{
+  display: flex; 
+  align-items: center;
+  margin-left: -7%;
+}

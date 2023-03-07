@@ -176,7 +176,6 @@ export class KmTrackerServiceIframe {
       w_doc: docW,
       h_doc: docH,
       localTimeStamp: time,
-      localTimeStampNumber: time
     };
     // console.log(clickOutput);
     evt.currentTarget.storeService.postMouseClick(clickOutput);
@@ -205,7 +204,6 @@ export class KmTrackerServiceIframe {
       key: key,
       chr: chr,
       localTimeStamp: t,
-      localTimeStampNumber: t,
       url: doc.URL,
     };
     // console.log(keyOutput);
@@ -235,8 +233,7 @@ export class KmTrackerServiceIframe {
       key: key,
       chr: chr,
       localTimeStamp: t,
-      localTimeStampNumber: t,
-      url: doc.URL
+      url: doc.URL,
     };
 
     // console.log(keyOutput);
@@ -266,8 +263,7 @@ export class KmTrackerServiceIframe {
       key: key,
       chr: chr,
       localTimeStamp: t,
-      localTimeStampNumber: t,
-      url: doc.URL
+      url: doc.URL,
     };
 
     // console.log(keyOutput);
@@ -322,7 +318,6 @@ export class KmTrackerServiceIframe {
       w_doc: docW,
       h_doc: docH,
       localTimeStamp: time,
-      localTimeStampNumber: time
     };
 
     // console.log(movementOutput);
@@ -373,7 +368,6 @@ export class KmTrackerServiceIframe {
       w_doc: docW,
       h_doc: docH,
       localTimeStamp: time,
-      localTimeStampNumber: time
     };
     // console.log(scrollOutput);
     evt.currentTarget.storeService.postScroll(scrollOutput);

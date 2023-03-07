@@ -64,7 +64,7 @@
                     <input matInput formControlName="answer" (keydown.enter)="sendAnswer()">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
                     <mat-error *ngIf="answerControls.answer.hasError('required')">
-                      {{ "ERRORS.ANSWER_REQUIRED" | translate }}
+                      {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
                     </mat-error>                    
                   </mat-form-field>
 
@@ -73,7 +73,7 @@
                     <input matInput formControlName="answer" (keydown.enter)="sendAnswer()" type="number">
                     <mat-icon matSuffix (click)="sendAnswer()" class="submit-icon" #tooltip="matTooltip" [(matTooltip)]="sendAnswerTooltip">send</mat-icon>
                     <mat-error *ngIf="answerControls.answer.hasError('required')">
-                      {{ "ERRORS.ANSWER_REQUIRED" | translate }}
+                      {{ "ERRORS.ANSWER_JUSTIFY_REQUIRED" | translate }}
                     </mat-error>
                   </mat-form-field>
                 </form>

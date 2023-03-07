@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({mouseClicks});
+        res.status(200).json({mouseClicks});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:mouseClick_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({mouseClick});
+        res.status(200).json({mouseClick});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             mouseClick
         });
     })
@@ -53,7 +53,7 @@ router.delete('/:mouseClick_id',  [verifyToken, authMiddleware.isAdmin] , async 
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             mouseClick
         });
     })

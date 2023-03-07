@@ -1,8 +1,9 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { GamificationService } from 'src/app/services/game/gamification.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
@@ -12,11 +13,13 @@ import { GamificationService } from 'src/app/services/game/gamification.service'
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(private router: Router, private gamificationService: GamificationService, private toastr: ToastrService, private translate: TranslateService) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private gamificationService: GamificationService, private toastr: ToastrService, private translate: TranslateService, private authService: AuthService,) { }
 
   studioSelected;
   gamified: false;
   connected: false;
+  search : string ="";
+
   ngOnInit(): void {
     this.checkPath();
     this.gamificationStatus();
@@ -43,6 +46,9 @@ export class AdminPanelComponent implements OnInit {
         console.log(err)
       }
     );
+  }
+  getPublicStudies(param: string){
+    this.router.navigate(['studies_search/results/'+param]);
   }
 
   gamify(){
@@ -77,9 +83,9 @@ export class AdminPanelComponent implements OnInit {
 
   checkPath(){
     let path= this.router.url;
-    console.log('path', path);
+    //console.log('path', path);
     if(path!= '/admin_panel'){
-      console.log('in study');
+      //console.log('in study');
       this.studioSelected = true;
     }else{
       this.studioSelected= false;

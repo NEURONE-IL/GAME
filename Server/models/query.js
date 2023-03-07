@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-require('mongoose-long')(mongoose);
-const { Types: { Long } } = mongoose;
 const { Schema } = mongoose;
 
 const QuerySchema = new Schema({
@@ -11,23 +9,18 @@ const QuerySchema = new Schema({
     title: {type: String},
     url: {type: String},
     localTimeStamp: {type: Date},
-    localTimeStampNumber: { type: Long },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
-    createdAtNumber: { type: Long, default: Date.now },
-    updatedAtNumber: { type: Long, default: Date.now }
+    updatedAt: { type: Date, default: Date.now }
 });
 
 // Sets the createdAt parameter equal to the current time
 QuerySchema.pre('save', next => {
     now = new Date();
     if(!this.createdAt) {
-    	this.createdAt = now;
-    	this.createdAtNumber = Date.now;
+      this.createdAt = now;
     }
     if(!this.updatedAt) {
-    	this.updatedAt = now;
-    	this.updatedAtNumber = Date.now;
+      this.updatedAt = now;
     }
     next();
 });

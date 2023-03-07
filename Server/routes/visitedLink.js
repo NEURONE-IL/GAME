@@ -13,7 +13,7 @@ router.get('', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({visitedLinks});
+        res.status(200).json({visitedLinks});
     });
 })
 
@@ -26,7 +26,7 @@ router.get('/:visitedLink_id', [verifyToken] , async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({visitedLink});
+        res.status(200).json({visitedLink});
     });
 });
 
@@ -38,7 +38,7 @@ router.post('',  [verifyToken], async (req, res) => {
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             visitedLink
         });
     })
@@ -53,7 +53,7 @@ router.delete('/:visitedLink_id',  [verifyToken, authMiddleware.isAdmin] , async
                 err
             });
         }
-        return res.status(200).json({
+        res.status(200).json({
             visitedLink
         });
     })

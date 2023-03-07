@@ -1,0 +1,175 @@
+<mat-card-header *ngIf="study" class="user-data-display">
+  <div mat-card-avatar class="example-header-image"></div>
+  <mat-card-title>{{study.user.names + ' '+ study.user.last_names}}</mat-card-title>
+  <mat-card-subtitle class="study-description">{{study.user.email}}</mat-card-subtitle>
+</mat-card-header>
+<div *ngIf="!notActualCollaborator" class="coll-info-div">
+  <button mat-flat-button class="coll-info-button"> 
+    <mat-icon color="primary">handshake</mat-icon>
+    <span>Es colaborador</span>
+  </button>
+</div>
+<mat-card class="study-display-card">
+  <mat-grid-list cols="24">
+    <mat-grid-tile colspan="12">
+      <mat-card-header>
+        <mat-card-title *ngIf="study">{{study.name}}</mat-card-title>
+      </mat-card-header>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="notActualCollaborator?4:8"></mat-grid-tile>
+      <mat-grid-tile [colspan]="notActualCollaborator?8:4">
+        <button mat-raised-button class="actionButton" color="primary" (click)="confirmCloneStudy()">Clonar Estudio <mat-icon>content_copy</mat-icon></button>
+        <button mat-raised-button *ngIf="notActualCollaborator" class="actionButton" color="primary" [ngStyle]="{'pointer-events': existingInvitation? 'none': 'all'}" (click)="confirmCollaborateRequest()">{{existingInvitation? 'Solicitud Pendiente': 'Solicitar Colaborar'}}  <mat-icon>handshake</mat-icon></button>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="24">
+      <mat-grid-tile colspan="24">
+        <mat-card-header>
+          <mat-card-subtitle *ngIf="study" class="study-description">{{study.description}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="study" colspan="24" rowspan="1" style="padding-bottom: 3%">
+        <mat-card-header>
+        <!--mat-card-subtitle  class="study-description" style="margin-bottom: 3%;padding-top: 0%;">
+          {{'Niveles: '}}
+        <mat-button-toggle-group class="competence-info" name="fontStyle" *ngFor="let level of study.levels; index as i;">
+          <mat-button-toggle value="i">{{level}}</mat-button-toggle>
+        </mat-button-toggle-group>
+        </mat-card-subtitle>
+        <mat-card-subtitle class="study-description" style="margin-bottom: 0%">
+          {{'Competencias: '}}
+        <mat-button-toggle-group class="competence-info" name="fontStyle" *ngFor="let comp of study.competences; index as i;">
+          <mat-button-toggle value="i">{{comp.name}}</mat-button-toggle>
+        </mat-button-toggle-group>
+        </mat-card-subtitle-->
+        <mat-card-subtitle class="study-description" style="padding-top: 0% !important;">
+          <mat-chip-list style="margin-left: 3%;" aria-label="Tag List">
+            <mat-chip *ngFor="let tag of study.tags">{{tag}}</mat-chip>
+          </mat-chip-list>  
+        </mat-card-subtitle>
+      </mat-card-header>        
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-card-content style="border: none;" *ngIf="loadingClone; else cloneProcess">
+    <div style="margin:0 auto; margin-top: 5%;">
+      <mat-spinner style="margin:0 auto;"></mat-spinner>
+        <mat-card-subtitle style="margin:0 auto; margin-top:10%">El estudio está siendo clonado</mat-card-subtitle>
+    </div>
+  </mat-card-content>
+
+
+  <!-- Nuevo diseño de Tabs -->
+  <ng-template #cloneProcess>
+  <mat-tab-group mat-align-tabs="start" style="margin-top: 2%;">
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <span (click)="reloadChallenges()"> {{'ADMIN.TABS.CHALLENGES' | translate }} </span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="row ">
+          <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
+            <br>
+            <mat-card-header class="header-challenge">
+              <div class="col-md-8">
+                <mat-card-title class="{{getClass(challenge.question_type)}}">
+                  <div class="col-md-8" style="padding-top: 5px">
+                    {{ "ADMIN.CHALLENGES.QUESTION" | translate }}: {{challenge.question}}
+                  </div>
+
+                </mat-card-title>
+              </div>
+              <div class="col-md-4">
+                <mat-card-subtitle>{{ "ADMIN.CHALLENGES.QUESTION_TYPE" | translate }}: {{getClassQuestion(challenge.question_type)| translate }} </mat-card-subtitle>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="col-md-6">
+                {{ "ADMIN.CHALLENGES.ANSWER" | translate }}: {{challenge.answer}}
+              </div>
+              <div class="col-md-3">
+                <mat-icon>alarm</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.SECONDS" | translate }}: {{challenge.seconds}} </span>
+              </div>
+              <div class="col-md-3">
+                <mat-icon>cached</mat-icon><span class="aligned-with-icon">{{ "ADMIN.CHALLENGES.MAX_ATTEMPTS" | translate }}: {{challenge.max_attempts}}</span>
+              </div>
+            </mat-card-content>
+            <mat-card-content>
+              <div class="col-md-6">
+                {{ "ADMIN.CHALLENGES.HINT" | translate }}: {{challenge.hint}}
+              </div>
+              <div class="col-md-3">
+                {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
+              </div>
+              <div class="col-md-3">
+                {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions  style="text-align: left">
+              <div>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header >
+                    <mat-panel-title>
+                      <mat-icon class="{{getClass(challenge.question_type)+'Button'}}">add_circle</mat-icon> <span style="padding-left: 40px" class="aligned-with-icon"> {{ "ADMIN.CHALLENGES.SHOW_RESOURCES" | translate }} </span>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div *ngIf="resources">
+                    <div *ngFor="let resource of getChallengeResources(challenge._id)">
+                    <!--  <p> <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} | <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} | <button mat-stroked-button color="warn"><strong>{{ "ADMIN.CHALLENGES.DELETE_RESOURCE" | translate }}</strong><mat-icon>delete</mat-icon></button> </p>  -->
+                      <p>
+                        <strong>{{ "ADMIN.CHALLENGES.DOC_NAME" | translate }}:</strong> {{ resource.docName.split('clone')[0] }} <strong> / </strong>
+                        <strong>{{ "ADMIN.CHALLENGES.TITLE" | translate }}:</strong> {{ resource.title }} <strong> / </strong>
+                        <strong>{{ "ADMIN.CHALLENGES.RELEVANT" | translate }}:</strong> {{ "ADMIN.CHALLENGES." + resource.relevant.toString().toUpperCase() | translate }} <strong> / </strong>
+                        <strong>{{ "ADMIN.CHALLENGES.URL" | translate }}:</strong> {{ resource.url }} <strong> / </strong>
+                      </p>
+                    </div>
+                  </div>
+                  <p *ngIf="!getChallengeResources(challenge._id).length"> <strong>{{ "ADMIN.CHALLENGES.NO_RESOURCES" | translate }}</strong> </p>
+                  <div class="spinnerCard" *ngIf="deletingResource">
+                    <mat-progress-spinner color="primary" mode="indeterminate" class="mt-4 mb-4">
+                    </mat-progress-spinner>
+                    <span>
+                      {{ "ADMIN.STUDIES.DELETING_RESOURCES" | translate }}
+                    </span>
+                  </div>
+                </mat-expansion-panel>
+              </div>
+            </mat-card-actions>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="{{'ADMIN.TABS.SHOW_RESOURCES' | translate }}">
+      <div class="searchEngine">
+        <ng-template matTabContent>
+          <app-admin-search-result [query]="'*'" [domain]="study._id"></app-admin-search-result>
+        </ng-template>
+      </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="collaboratorsExist" label="COLABORADORES">
+ 
+      <table mat-table [dataSource]="filterCollaborators" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="icon" sticky>
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element"> <mat-icon color="primary">account_circle</mat-icon></td>
+        </ng-container>
+        <ng-container matColumnDef="fullname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.user.names + ' '+element.user.last_names}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo</th>
+          <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayCollaborators"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplayCollaborators;"></tr>
+      </table>
+      <!--div *ngIf="users==null && !loadingUsers">
+        <p>Aun no se han registrado usuarios a este estudio</p>
+      </div-->
+    </mat-tab>
+  </mat-tab-group>
+  </ng-template>
+</mat-card>

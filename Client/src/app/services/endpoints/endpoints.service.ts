@@ -59,7 +59,7 @@ export class EndpointsService {
     delete cleanResource.checked;
     cleanResource.domain = cleanResource.domain.split();
     cleanResource.task = cleanResource.task.split();
-    cleanResource.locale = environment.locale;
+    cleanResource.locale = environment.locale;    
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'text/plain');
     return this.http.post(this.neuroneURL+'v1/document/load', cleanResource, {headers: header});

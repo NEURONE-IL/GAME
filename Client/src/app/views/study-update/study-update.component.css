@@ -1,6 +1,6 @@
 .mat-form-field{
 	width: 85%;
-	margin: 5%;
+	height: 100%;
 }
 .fileInput input{
 	width: 85%;
@@ -52,4 +52,8 @@ span .mat-select-placeholder{
 
 .mat-select {
   padding-bottom: 10px;
+}
+
+.spacer {
+	flex: 1;
 }

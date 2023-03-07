@@ -49,3 +49,9 @@ span .mat-select-placeholder{
 .mat-select {
   padding-bottom: 10px;
 }
+
+.addButton{
+  background-color: #4CAF50;
+  color: #FFFFFF;
+}
+

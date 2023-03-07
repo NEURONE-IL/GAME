@@ -1,12 +1,36 @@
 <app-header></app-header>
 
-
 <div id="page-container">
   <div id="content-wrap">
     <mat-card class="studies-display-card">
       <mat-card-header>
         <mat-card-title>{{ "" +    "ADMIN.TITLE" | translate }}</mat-card-title>
       </mat-card-header>
+      <div>
+        <app-search-bar></app-search-bar>
+      </div>
+      <!--mat-card-content>
+        <form class="example-form">
+          <mat-grid-list cols="12" style="margin-left: 9%; margin-right:9%">
+            <mat-grid-tile colspan="7">
+              <div class="search-studies-bar" style="width: 95%;">
+                <mat-form-field appearance="outline">
+                    <mat-icon matPrefix >search</mat-icon>
+                  <input style="padding-left: 5px;" type="search" matInput placeholder="Buscar Estudios de la Comunidad" name= "search" [(ngModel)]= "search" (keyup.enter)="getPublicStudies(this.search)">
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5">
+              <button class="button-customize"  mat-raised-button color="primary" (click)="getPublicStudies(this.search)">Buscar
+                <mat-icon>search</mat-icon>
+              </button>
+              <button class="button-customize" style="margin-left: 5%" mat-raised-button color="primary" (click)="getPublicStudies('all')">Ver todos
+                <mat-icon>auto_awesome_motion</mat-icon>
+              </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </mat-card-content-->
     </mat-card>
 
     <h5 class="status">{{ "ADMIN.GAMIFICATION.STATUS_TITLE" | translate }}:
@@ -14,10 +38,10 @@
       <span *ngIf="!gamified && connected" class="notok">{{ "ADMIN.GAMIFICATION.APP_NOT_GAMIFIED" | translate }}</span>
       <span *ngIf="!gamified && !connected" class="notok">{{ "ADMIN.GAMIFICATION.APP_NOT_CONNECTED" | translate }}</span>
     </h5>
-
     <button mat-raised-button class="gamify-button" color="primary" *ngIf="!gamified && connected" (click)="gamify()" >{{ "ADMIN.GAMIFICATION.GAMIFY_BUTTON" | translate }}</button>
-
-
+    
+    <h6 class="studies-title">{{ "ADMIN.STUDIESTITLE" | translate }}</h6>
+    
     <div *ngIf="studioSelected; else elseBlock" >
       <router-outlet></router-outlet>
     </div>

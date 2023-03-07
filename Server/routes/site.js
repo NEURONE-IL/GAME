@@ -33,7 +33,7 @@ router.post(
       }
     })
     if(siteExists){
-      return res.status(200).json({
+      res.status(200).json({
         site: siteExists
       });
     }
@@ -41,7 +41,7 @@ router.post(
       const site = new Site({
         host: req.headers.origin,
         api_key: genKey(),
-        confirmed: true
+        confirmed: false
       });
       site.save((err, site)=> {
         if(err){
@@ -50,7 +50,7 @@ router.post(
                 err,
               });   
         }
-        return res.status(200).json({
+        res.status(200).json({
             site
         });
       })
@@ -78,9 +78,6 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         });
       }
     });
-    if(!study){
-      return res.status(404).send('Study not found!');
-    }
     // Find study challenges
     const challenges = await Challenge.find({ study: study._id }, (err) => {
       if (err) {
@@ -90,6 +87,7 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         });
       }
     });
+    console.log(challenges)
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(genKey(), salt);
     const user = new User({
@@ -99,7 +97,6 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         role: role._id,
         study: study._id,
         trainer_id: req.body.trainer_id,
-        trainer_return_url: url,
         confirmed: true
     });
     await user.save(err => {
@@ -121,27 +118,26 @@ router.post("/registeruser", verifyAPIKey, async (req, res) => {
         })
         .then((progress) => {
         // Register player in NEURONE-GM
-        //saveGMPlayer(req, user, study, res);
+        saveGMPlayer(req, user, study, res);
 
-        return res.header("x-access-token", token).send({ user: user, token: token, url: url });
+        res.header("x-access-token", token).send({ user: user, token: token, url: url });
     });
 })
 
 router.post("/login", verifyAPIKey, async (req, res) => {
     const url = req.body.url;
-    console.log(url)
     //checking if username exists
     const user = await User.findOne({
       trainer_id: req.body.trainer_id,
     }, err => {
       if(err){
-        return res.status(400).send(err)
+        res.status(400).send(err)
       }
     }).populate( { path: 'role', model: Role} );
-    if (!user) return res.status(400).send("ID_NOT_FOUND");
+    if (!user) res.status(400).send("ID_NOT_FOUND");
     const study = await Study.findOne({_id: req.body.study}, err => {
       if(err){
-        return res.status(400).send(err)
+        res.status(400).send(err)
       }
     })
     user.cooldown_start = null;
@@ -151,12 +147,12 @@ router.post("/login", verifyAPIKey, async (req, res) => {
     }
     await user.save(err => {
       if(err){
-        return res.status(400).send(err)
+        res.status(400).send(err)
       }
     });
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    return res.header("x-access-token", token).send({ user: user, token: token, url: url });
+    res.header("x-access-token", token).send({ user: user, token: token, url: url });
   });
 
 router.get("/study", verifyAPIKey, async (req, res) => {
@@ -167,7 +163,7 @@ router.get("/study", verifyAPIKey, async (req, res) => {
             err
         });
     }
-    return res.status(200).json({studys});
+    res.status(200).json({studys});
   });
 })
 
@@ -175,10 +171,10 @@ router.get("/user/:trainer_id", async (req, res) => {
   const trainer_id = req.params.trainer_id;
   const user = await User.findOne({trainer_id: trainer_id}, err => {
     if(err){
-      return res.status(400).send(err)
+      res.status(400).send(err)
     }
   })
-  return res.status(200).json({
+  res.status(200).json({
     ok: true,
     user
   });

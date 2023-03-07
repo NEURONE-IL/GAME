@@ -39,6 +39,8 @@ router.post(
     const user = new User({
       email: req.body.email.toLowerCase(),
       password: hashpassword,
+      names: req.body.names,
+      last_names: req.body.last_names,
       role: role._id,
     });
     await neuronegmService.connectGM(
@@ -58,7 +60,7 @@ router.post(
           err,
         });
       }
-      return res.status(200).json({
+      res.status(200).json({
         user,
       });
     });
@@ -180,7 +182,7 @@ router.post(
           // Send confirmation email
           sendConfirmationEmail(user, userData, res, req);
 
-          return res.status(200).json({
+          res.status(200).json({
             user,
           });
         });
@@ -272,7 +274,7 @@ router.post(
           // Register player in NEURONE-GM
           saveGMPlayer(req, user, study, res);
 
-          return res.status(200).json({
+          res.status(200).json({
             user,
           });
         });
@@ -282,11 +284,10 @@ router.post(
 
 router.post("/login", async (req, res) => {
   //checking if username exists
-  const user = await User.findOne({
-    email: req.body.email.toLowerCase(),
-  }, err => {
+  const user = await User.findOne(
+    {email: req.body.email.toLowerCase()}, err => {
     if(err){
-      return res.status(400).send(err)
+      res.status(400).send(err)
     }
   }).populate( { path: 'role', model: Role} );
   if (!user) return res.status(400).send("EMAIL_NOT_FOUND");
@@ -297,7 +298,7 @@ router.post("/login", async (req, res) => {
   if (!user.confirmed) return res.status(400).send("USER_NOT_CONFIRMED");
   //create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
-  return res.header("x-access-token", token).send({ user: user, token: token });
+  res.header("x-access-token", token).send({ user: user, token: token });
 });
 
 

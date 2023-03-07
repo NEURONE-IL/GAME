@@ -1,5 +1,14 @@
 <mat-card-header>
-	<mat-card-title>{{ "CHALLENGE.TITLE_UPDATE" | translate }}</mat-card-title>
+	<mat-card-title style="margin-bottom: 5% !important">{{ "CHALLENGE.TITLE_UPDATE" | translate }}</mat-card-title>
+	<div *ngIf="edit_users[0] === user._id" class="spacer"></div>
+	<mat-chip-list>
+		<mat-chip *ngIf="edit_users[0] === user._id" selected [color]="timer_color" >
+			<mat-icon>access_alarm</mat-icon>
+			{{timer}}
+		</mat-chip>
+</mat-chip-list>
+</mat-card-header>
+<mat-card-header>
 	<mat-card-subtitle>{{ "CHALLENGE.SUBTITLE_UPDATE" | translate }}:</mat-card-subtitle>
 </mat-card-header>
 <mat-card-content>

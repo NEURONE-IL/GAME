@@ -16,16 +16,11 @@ export class SummaryComponent implements OnInit {
   nearLevel
   answer
   connected = false;
-  async ngOnInit(){
-    let user = this.authService.getUser();
-    if(user.trainer_id !== null){
-      await this.gameService.finishSummary();
-    }
-    else{
+  ngOnInit(): void {
       this.connected = true;
       this.levelProgress();
       this.getAnswer();
-    }
+
   }
 
   levelProgress(){

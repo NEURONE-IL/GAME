@@ -7,10 +7,10 @@ module.exports = function auth(req, res, next){
     if(!token) return res.status(401).send('No key provided!');
     Site.findOne({api_key: token}, (err, site) => {
         if(err || !site){
-            return res.status(401).send('Not authorized');
+            res.status(401).send('Not authorized');
         }
         if(!site.confirmed){
-            return res.status(401).send('Not authorized');
+            res.status(401).send('Not authorized');
         }
         //checking token
         if(token === site.api_key){
@@ -18,7 +18,7 @@ module.exports = function auth(req, res, next){
             next();
         }
         else{
-            return res.status(400).send('Invalid key!');
+            res.status(400).send('Invalid key!');
         }
     })
 }

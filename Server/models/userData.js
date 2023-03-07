@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-require('mongoose-long')(mongoose);
-const { Types: { Long } } = mongoose;
 const { Schema } = mongoose;
+
 
 const UserDataSchema = new Schema({
     code: {type: String},
@@ -19,8 +18,6 @@ const UserDataSchema = new Schema({
     email: {type: String, unique: true},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    createdAtNumber: { type: Long, default: Date.now },
-    updatedAtNumber: { type: Long, default: Date.now },    
     relation: { type: String },
     registered_via: { type: String }
 });
@@ -30,11 +27,9 @@ UserDataSchema.pre('save', next => {
     now = new Date();
     if(!this.createdAt) {
       this.createdAt = now;
-    	this.createdAtNumber = Date.now;
     }
     if(!this.updatedAt) {
       this.updatedAt = now;
-    	this.updatedAtNumber = Date.now;
     }
     next();
 });

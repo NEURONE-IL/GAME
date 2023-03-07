@@ -82,7 +82,7 @@ export class PostTestQuestionnaireComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
         this.resetForm();
-        this.gameService.finishPostTest();
+        await this.gameService.finishPostTest();
         this.gameService.finishChallenge();
       },
       err => {

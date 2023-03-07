@@ -8,6 +8,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Track } from 'ngx-audio-player';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { PlyrModule } from 'ngx-plyr';
+import { ToastrService } from 'ngx-toastr';
+import { InvitationService, Invitation } from 'src/app/services/admin/invitation.service';
+import { Notification, NotificationService } from 'src/app/services/admin/notification.service';
+import { notThisUser } from 'src/app/views/study-creation/study-creation.component';
 
 @Component({
   selector: 'app-header',
@@ -20,12 +24,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isLoggedIn = false;
   user: any;
   notifications: false;
+  showOldNotifications:boolean = false;
   notificationsN = 0;
+  adminNotificationN = 0;
   menuItems: Array<{messageES: string, date: string, _id: string, elementRef: MatMenu}>;
+  notificationsAdmin: Notification[];
+  newNotificationsAdmin: Notification[];
+  oldNotificationsAdmin: Notification[] = [];
   homeTooltip: string;
   firstSession= false;
   videoModal= true;
   finished=false;
+  search: String =""; //
+  demoLink: String = "https://youtu.be/-rGoBqoStrE";
+
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
   @ViewChild('content') myModal;
 
@@ -34,17 +46,22 @@ export class HeaderComponent implements OnInit, AfterViewInit {
                private modalService: NgbModal,
                private translate: TranslateService,
                private plyrModule: PlyrModule,
-               public router: Router) { }
+               private toastr: ToastrService,
+               public router: Router,
+               private invitationService: InvitationService,
+               private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.loggedIn;
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
       this.getNotifications();
+      this.getAdminNotification();
     }
     if(this.isLoggedIn && this.user.has_played){
       this.videoModal= false
     }
+
 
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP_BACK");
   }
@@ -77,6 +94,40 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       console.log("has Played")
       this.authService.refreshUser();
     })
+  }
+  getAdminNotification(){
+    this.notificationService.getNotificationByUser(this.authService.getUser()._id).subscribe(
+      response => {
+        this.notificationsAdmin = response.notifications;
+        var activeNotification = 0;
+        this.oldNotificationsAdmin = [];
+        this.newNotificationsAdmin = [];
+
+        this.notificationsAdmin.forEach( not => {
+          let d = new Date(not.createdAt);
+          let date = d.getDate() + (d.getMonth() < 10 ? '/0' : '/') + (d.getMonth() + 1) + '/' + d.getFullYear();          
+          let hour = (d.getHours() < 10 ? '0' : '') +d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') +d.getMinutes();
+          not.createdAt = date + ' ' + hour;
+          if(not.seen === false){
+            activeNotification++;
+            this.newNotificationsAdmin.push(not);
+          }
+          else{
+            if ((not.type === 'invitation' || not.type === 'collabRequest') && not.invitation.status === 'Pendiente'){
+              this.newNotificationsAdmin.push(not);
+            }
+            else{
+              this.oldNotificationsAdmin.push(not);
+            }
+          }
+          
+        })
+        this.adminNotificationN = activeNotification;
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
   getNotifications(){
     this.gamificationService.notifications(this.authService.getUser()._id).subscribe(
@@ -118,6 +169,80 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         console.log(err)
       }
     );
+  }
+
+  updateAdminNotifications(){
+    const seen = this.notificationsAdmin.some(not => not.seen == false);
+    this.showOldNotifications = false;
+    if(seen){
+      this.notificationService.seeNotification(this.notificationsAdmin[0]).subscribe(
+        response => {
+          this.getAdminNotification();
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    }
+    else{
+      this.getAdminNotification();
+    }
+  }
+
+  acceptInvitation(item: Notification){
+    this.invitationService.acceptInvitation(item.invitation, item.type).subscribe(
+      response => {
+        if(item.type ==='invitation'){
+          this.toastr.success("Ahora es colaborador del estudio: "+ response.invitation.study.name+'. Puede revisarlo en la pestaña Colaboraciones','Éxito', {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+        }
+        else{
+          this.toastr.success(response.invitation.user.names+' '  +response.invitation.user.last_names + " ahora es colaborador de su estudio: "+ response.invitation.study.name,'Éxito', {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+        }
+        
+        this.getAdminNotification();
+      },
+      err => {
+        console.log(err)
+        this.toastr.error("Ha ocurrido un error al aceptar, intente más tarde", "Error", {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+  rejectInvitation(item: Notification){
+    this.invitationService.rejectInvitation(item.invitation, item.type).subscribe(
+      response => {
+        if(item.type === 'invitation')
+          this.toastr.success("Ha rechazado la invitación a colaborar en el estudio: "+ response.invitation.study.name,"Éxito", {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+        else
+          this.toastr.success("Ha rechazado la colaboración de: " + response.invitation.user.names+' '  +response.invitation.user.last_names + " en el estudio: "+ response.invitation.study.name,"Éxito", {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+        this.getAdminNotification();
+      },
+      err => {
+        console.log(err)
+        this.toastr.error("Ha ocurrido un error al rechazar, intente más tarde","Error", {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+  }
+  redirectStudy(study_id: string){
+    this.router.navigate(['/studies_search/study/'+study_id])
+
   }
 
   logout(){

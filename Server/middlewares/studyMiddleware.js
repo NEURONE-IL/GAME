@@ -20,6 +20,20 @@ const schema = Joi.object({
         .required(),
     
     description: Joi.string(),
+   
+    user: Joi.any().required(),
+
+    privacy: Joi.boolean(),
+
+    collaborators: Joi.string(),
+
+    tags: Joi.string(),
+    
+    levels: Joi.string(),
+
+    competences: Joi.string(),
+    
+    language: Joi.string(),
 })
 
 const editSchema = Joi.object({
@@ -37,6 +51,22 @@ const editSchema = Joi.object({
     seconds: Joi.number(),
     
     description: Joi.string(),
+
+    privacy: Joi.boolean(),
+
+    collaborators: Joi.string(),
+    
+    tags: Joi.string(),
+
+    user_edit: Joi.string(),
+
+    levels: Joi.string(),
+
+    competences: Joi.string(),
+    
+    language: Joi.string(),
+
+
 })
 
 verifyBody = async (req, res, next) => {

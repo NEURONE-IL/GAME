@@ -49,3 +49,6 @@ span .mat-select-placeholder{
 .mat-select {
   padding-bottom: 10px;
 }
+.spacer {
+	flex: 1;
+}

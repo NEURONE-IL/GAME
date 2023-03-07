@@ -79,14 +79,16 @@ export class GameService {
         chProgress.answer_submitted = true;
       }
     });
-    /*Dispatch finishchallenge event*/
-    var evt = new CustomEvent('finishchallenge');
-    window.dispatchEvent(evt);
-    /*End dispatch finishchallenge event*/
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
         this.timeLeft = null;
+        if(!this.authService.getUser().trainer_id){
+          this.stage = 'summary';
+        }
+        else{
+          this.finishSummary();
+        }
         localStorage.setItem('value', "100")
         this.router.navigate(['start']);
       })
@@ -109,7 +111,7 @@ export class GameService {
         if (chProgress.challenge == this.challenge._id) {
           if (!chProgress.pre_test) {
             this.stage = 'pre-test';
-          } else {
+          } else if (chProgress.started) {
             if (chProgress.start_time != null && !chProgress.answer_submitted) {
               let endTime = new Date(chProgress.start_time);
               endTime.setSeconds(endTime.getSeconds() + this.challenge.seconds);
@@ -123,6 +125,8 @@ export class GameService {
             } else {
               this.stage = 'post-test';
             }
+          } else {
+            this.stage = 'instructions';
           }
         }
       });
@@ -145,7 +149,7 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
-        this.challengeStarted();
+//        this.stage = 'instructions';
       });
   }
 
@@ -157,10 +161,6 @@ export class GameService {
         if (!chProgress.started) {
           chProgress.started = true;
           chProgress.start_time = Date.now();
-          /*Dispatch startchallenge event*/
-          var evt = new CustomEvent('startchallenge');
-          window.dispatchEvent(evt);
-          /*End dispatch startchallenge event*/          
         } else {
           overwriteSeconds = true;
         }
@@ -201,7 +201,13 @@ export class GameService {
     this.authService
       .updateProgress({ challenges: progress.challenges })
       .then(() => {
-        this.stage = 'summary';
+        if(!this.authService.getUser().trainer_id){
+          this.stage = 'summary';
+        }
+        else{
+          this.finishSummary();
+          this.continue();
+        }
       });
   }
 
@@ -218,7 +224,6 @@ export class GameService {
     localStorage.removeItem('chall')
     let progress = this.progress;
     let studyFinished = true;
-    const user = this.authService.getUser();
     progress.challenges.forEach((chProgress) => {
       if (!chProgress.finished ) {
         studyFinished = false;
@@ -226,13 +231,7 @@ export class GameService {
     });
     if(studyFinished){
       await this.authService.updateProgress({ finished: true });
-      if(user.trainer_id){
-        this.authService.logout();
-        window.location.href = user.trainer_return_url;
-      }
-      else{
-        this.stage = 'post-study';
-      }
+      this.stage = 'post-study';
     }
     else{
       this.canPlay = await this.authService.canPlay();
@@ -240,27 +239,14 @@ export class GameService {
         this.stage = 'play-again';
       }
       else{
-        if(user.trainer_id){
-          this.authService.logout();
-          window.location.href = user.trainer_return_url;
-        }
-        else{
-          this.stage = 'no-play-again';
-        }
+        this.stage = 'no-play-again';
       }
     }
   }
 
   async finishPlayAgain(){
     this.load();
-    const user = this.authService.getUser();
-    if(user.trainer_id){
-      this.authService.logout();
-      window.location.href = user.trainer_return_url;
-    }
-    else{
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
   }
 
   async continue(){

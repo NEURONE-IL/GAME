@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit,OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -6,13 +6,14 @@ import { Challenge, ChallengeService } from '../../services/game/challenge.servi
 import { Study, StudyService } from '../../services/game/study.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService, User } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-challenge-update',
   templateUrl: 'challenge-update.component.html',
   styleUrls: ['./challenge-update.component.css']
 })
-export class ChallengeUpdateComponent implements OnInit{
+export class ChallengeUpdateComponent implements OnInit,OnDestroy{
   @Input() study: string;
   challengeForm: FormGroup;
   studies: Study[];
@@ -29,6 +30,12 @@ export class ChallengeUpdateComponent implements OnInit{
     { id: 4, value: 'justify', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.JUSTIFY" }
   ];
   loading: Boolean;
+  user: User;
+  edit_users : String[] = [];
+  edit_minutes: number = 3;
+  timer_id: NodeJS.Timeout;
+  timer: string = '3:00';
+  timer_color: string = 'primary';
 
   constructor(@Inject(MAT_DIALOG_DATA)
     public challenge: Challenge,
@@ -36,12 +43,15 @@ export class ChallengeUpdateComponent implements OnInit{
     private router: Router,
     private challengeService: ChallengeService,
     private studyService: StudyService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private translate: TranslateService,
     public matDialog: MatDialog) { }
 
   ngOnInit(): void {
 
+    this.challengeService.closeEventSource();
+    this.user = this.authService.getUser();
     this.challengeForm = this.formBuilder.group({
       question: [this.challenge.question, [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
       question_type: [this.challenge.question_type, Validators.required],
@@ -52,6 +62,8 @@ export class ChallengeUpdateComponent implements OnInit{
       answer: [this.challenge.answer, [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
     });
 
+    this.requestEdit();
+    
     this.studyService.getStudies().subscribe(
       response => {
         this.studies = response['studys'];
@@ -66,6 +78,35 @@ export class ChallengeUpdateComponent implements OnInit{
 
     this.loading = false;
   }
+  ngOnDestroy(): void{
+    clearInterval(this.timer_id);
+    this.releaseChallenge();
+    this.challengeService.closeEventSource();
+  }
+  @HostListener('window:beforeunload', ['$event'])
+  doSomething($event){
+    this.ngOnDestroy();
+  }
+
+  countdown(){
+    let time: number = this.edit_minutes * 60 - 1;
+    //let time: number = 10;
+    this.timer_id = setInterval(() => {
+      if(time >= 0){
+        const minutes = Math.floor(time / 60);
+        var seconds = time % 60;
+        var displaySeconds = (seconds < 10) ? "0" + seconds : seconds;
+        this.timer = minutes + ":" + displaySeconds;
+        time--;
+        if(time == 60)
+          this.timer_color = 'warn';
+      }
+      else{
+        this.matDialog.closeAll();
+        clearInterval(this.timer_id);
+      }
+    }, 1000);
+  }
 
   get challengeFormControls(): any {
     return this.challengeForm['controls'];
@@ -75,7 +116,7 @@ export class ChallengeUpdateComponent implements OnInit{
     this.loading = true;
     let challenge = this.challengeForm.value;
     challenge.study = this.challenge.study;
-    console.log(challenge);
+    challenge.user_edit = this.authService.getUser()._id;
     this.challengeService.putChallenge(challengeId, challenge).subscribe(
       challenge => {
         this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE_UPDATE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
@@ -92,5 +133,89 @@ export class ChallengeUpdateComponent implements OnInit{
         });
       }
     );
+  }
+  requestEdit(){
+    let user_id = this.authService.getUser()._id;
+    this.challengeService.requestForEdit(this.challenge._id,{user:user_id}).subscribe(
+      response => {
+        this.edit_users = response.users;
+        this.updateStatusForm(1)
+        if(this.edit_users[0] != user_id){
+          this.challengeService.getServerSentEvent(this.challenge._id, user_id).subscribe(
+            response => {
+              let data = JSON.parse(response.data);
+              this.edit_users = data.currentUsers;
+              console.log('edit_users: ',this.edit_users);
+              if(this.edit_users[0] === user_id){
+                this.updateStatusForm(0);
+                this.challengeService.closeEventSource();
+              }
+            },
+            err => {
+              console.log(err)
+            });
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+  releaseChallenge(){
+    let user_id = this.authService.getUser()._id;
+    this.challengeService.releaseForEdit(this.challenge._id, {user:user_id}).subscribe(
+      challenge => {
+        console.log('Challenge Release');
+        this.matDialog.closeAll();
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }
+  getChallenge(){
+    this.challengeService.getChallenge(this.challenge._id).subscribe(
+      response => {
+        console.log(response.challenge);
+        this.challenge = response.challenge;
+        this.updateChallengeField();
+    }, 
+    err => {
+      console.log(err)
+    })
+  }
+  updateStatusForm(state: number){
+    let user_id = this.authService.getUser()._id;
+    if(!(this.edit_users[0] === user_id)){
+      console.log('No puede editar');
+      this.challengeForm.disable();
+      this.toastr.warning('El desafío está siendo editado por alguien más, una vez que el usuario termine, podrá editarlo', 'Advertencia', {
+        timeOut: 5000,
+        positionClass: 'toast-top-center'
+      });
+    }
+    else if(this.edit_users[0] === user_id){
+      console.log('Puede editar!')
+      this.countdown();
+      this.challengeForm.enable();
+      
+      if(state != 1){
+        this.getChallenge();
+        this.toastr.info('El desafío puede ser editado ahora', 'Información', {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    }
+  }
+  updateChallengeField(){
+    this.challengeForm.controls['question'].setValue(this.challenge.question);
+    this.challengeForm.controls['question_type'].setValue(this.challenge.question_type);
+    this.challengeForm.controls['seconds'].setValue(this.challenge.seconds);
+    this.challengeForm.controls['max_attempts'].setValue(this.challenge.max_attempts);
+    this.challengeForm.controls['hint'].setValue(this.challenge.hint);
+    this.challengeForm.controls['answer_type'].setValue(this.challenge.answer_type);
+    this.challengeForm.controls['answer'].setValue(this.challenge.answer);
+    
   }
 }

@@ -1,4 +1,4 @@
-<mat-card class="summary-card" >
+<mat-card class="summary-card" *ngIf="!this.authService.getUser().trainer_id">
   <mat-card-content >
     <h2>{{ "GAME.PLAY_AGAIN.CONTINUE_1" | translate }}</h2>
     <h2>{{ "GAME.PLAY_AGAIN.CONTINUE_2" | translate }}</h2>

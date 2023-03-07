@@ -1,15 +1,13 @@
 .studies-display-card{
 	margin-left: 10%;
 	margin-right: 10%;
-	margin-top: 5%;
+	margin-top: 2%;
 }
 
 mat-card{
 /**/
 	align-self: flex-start;
 }
-
-
 
 .study-card:hover{
 	cursor: pointer;
@@ -33,4 +31,20 @@ mat-card{
 .registerLink{
 	font-weight: 500;
 	font-size: xx-small;
+}
+
+.studies-tab{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+}
+.studies-tittle{
+  display: flex; 
+  align-items: center;
+  margin-left: -6%;
+}
+.user-info{
+  display: flex; 
+  align-items: center;
+  margin-left: -7%;
 }

@@ -23,7 +23,7 @@
             <mat-card class="cardStyle doc-card"  *ngIf="!doc.type || doc.type=='book'" >
               <mat-card-content>
 
-                <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-id">Id del documento: {{doc.docName}}</a>
+                <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-id">Id del documento: {{doc.docName.split('clone')[0]}}</a>
                 <h5 >Keywords: [{{doc.keywords}}]</h5>
                 <h5 class="url-bar">{{ showShortDescription(doc.url, 75)}} <b>{{ doc.type=='book'? "PDF":""}}</b></h5>
                 <a [routerLink]="['/view-page', doc.title, doc.route]" class="document-link">{{doc.title}}</a>

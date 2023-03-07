@@ -10,6 +10,7 @@ const path = require('path');
 require('dotenv').config(); //setup custom environment variables
 
 /** Internal modules **/
+require('./config/config');
 const authRoutes = require('./routes/auth');
 const siteRoutes = require('./routes/site');
 const confirmationRoutes = require('./routes/confirmation');
@@ -25,6 +26,13 @@ const gamificationRoutes = require('./routes/gamification');
 const notificationRoutes = require('./routes/notification');
 const forwardRoutes = require('./routes/forward');
 
+const historyRoutes = require('./routes/history');
+const invitationRoutes = require('./routes/invitation');
+const adminNotificationRoutes = require('./routes/adminNotification');
+const studySearchRoutes = require('./routes/studySearch');
+const competencesRoutes = require('./routes/competence');
+const languagesRoutes = require('./routes/language');
+
 const keystrokeRoutes = require('./routes/keystroke');
 const mouseClickRoutes = require('./routes/mouseClick');
 const mouseCoordinateRoutes = require('./routes/mouseCoordinate');
@@ -34,8 +42,12 @@ const visitedLinkRoutes = require('./routes/visitedLink');
 const ScrollRoutes = require('./routes/scroll');
 const EventRoutes = require('./routes/event');
 
-const Role = require('./models/role');
 
+const Role = require('./models/role');
+const Study = require('./models/study');
+const Challenge = require('./models/challenge');
+const Competence = require('./models/competence');
+const Language = require('./models/language');
 
 //db connection
 
@@ -43,11 +55,43 @@ const Role = require('./models/role');
 mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");
+        //cleanEdit();
         initial();
+        //addCompetences();
+        //addLanguages();
     });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
+async function cleanEdit(){
+    const studies = await Study.find({}, (err, studies) => {
+        if(err){
+            console.log(err)
+        }
+    })
+    studies.forEach(async study => {
+        study.edit = [];
+        study.save(err => {
+            if(err){
+                console.log(err)
+            }
+        })
+    })
+
+    challenges = await Challenge.find({}, (err, challenges) => {
+        if(err){
+            console.log(err)
+        }
+    })
+    challenges.forEach(async challenge => {
+        challenge.edit = [];
+        challenge.save(err => {
+            if(err){
+                console.log(err)
+            }
+        })
+    })
+}
 
 async function initial() {
      Role.estimatedDocumentCount((err, count) => {
@@ -75,6 +119,45 @@ async function initial() {
     });
 
 }
+
+/*async function addCompetences() {
+    const currentCompetences = ['Búsqueda', 'Localización', 'Evaluación Crítica', 'Síntesis', 'Comunicación']
+    Competence.estimatedDocumentCount(async (err, count) => {
+        if (!err && count === 0) {
+            currentCompetences.forEach(element => {
+                new Competence({
+                    name: element
+                }).save(err => {
+                    if (err) {
+                        console.log("error", err);
+                    }
+     
+                    console.log("added %s to competences collection",element);
+                });
+            });
+        }
+   });
+
+}
+async function addLanguages() {
+    const currentLanguages = ['Español', 'Inglés']
+    Language.estimatedDocumentCount(async (err, count) => {
+        if (!err && count === 0) {
+            currentLanguages.forEach(element => {
+                new Language({
+                    name: element
+                }).save(err => {
+                    if (err) {
+                        console.log("error", err);
+                    }
+     
+                    console.log("added %s to languages collection",element);
+                });
+            });
+        }
+   });
+
+}*/
 
 /** Express setup **/
 const app = express();
@@ -107,6 +190,12 @@ app.use('/api/gamification', gamificationRoutes);
 app.use('/api/notification', notificationRoutes);
 app.use('/api/forward', forwardRoutes);
 
+app.use('/api/history', historyRoutes);
+app.use('/api/invitation', invitationRoutes);
+app.use('/api/adminNotification', adminNotificationRoutes);
+app.use('/api/competence', competencesRoutes);
+app.use('/api/language', languagesRoutes);
+
 app.use('/api/send-email', sendEmailRoutes);
 
 app.use('/api/keystroke', keystrokeRoutes);
@@ -117,6 +206,10 @@ app.use('/api/sessionLog', sessionLogRoutes);
 app.use('/api/visitedLink', visitedLinkRoutes);
 app.use('/api/scroll', ScrollRoutes);
 app.use('/api/event', EventRoutes);
+
+app.use('/api/studySearch', studySearchRoutes);
+
+
 
 // Serve neurone docs
 app.use("/assets/", express.static(process.env.NEURONE_DOCS));
