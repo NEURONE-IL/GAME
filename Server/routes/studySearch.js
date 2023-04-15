@@ -116,7 +116,7 @@ router.post('/loadStudies', /*[verifyToken, authMiddleware.isAdmin],*/ async (re
             err
         });
     }
-  }).populate({path:'user', model: User}).populate({path:'competences', model:Competence}).populate({path:'language', model:Language});
+  }).populate({path:'user', model: User}).populate({path:'language', model:Language});
 
   await studies.forEach(async study => {
     

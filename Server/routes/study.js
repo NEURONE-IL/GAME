@@ -442,7 +442,7 @@ router.post('',  [verifyToken, authMiddleware.isAdmin,  imageStorage.upload.sing
 
       } 
       if(study.privacy == false){
-        await study.populate({path:'user', model:User}).populate({path:'competences', model:Competence}).populate({path:'language', model:Language}).execPopulate();
+        await study.populate({path:'user', model:User}).populate({path:'language', model:Language}).execPopulate();
         createStudySearch(study, [],'createStudy');
 
         }   
@@ -674,7 +674,7 @@ router.put('/:study_id', [verifyToken, authMiddleware.isAdmin, imageStorage.uplo
                     err
                 });
             }
-            await study.populate({path:'user', model:User}).populate({path:'competences', model:Competence}).populate({path:'language', model:Language}).execPopulate();
+            await study.populate({path:'user', model:User}).populate({path:'language', model:Language}).execPopulate();
             
             if(study.privacy == true && privacyChange)
               deleteStudySeach(study._id);
