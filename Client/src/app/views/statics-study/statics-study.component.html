@@ -1,0 +1,33 @@
+<mat-card class="form-container">
+        <form>
+            <h4>Selecciona la métrica</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>Listado de métricas</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="metric">
+                    <mat-option *ngFor="let metric of metrics" [value]="metric.value">
+                        {{metric.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <p> Métrica seleccionada: {{selectedValue}} </p>
+        </form>
+</mat-card>
+<mat-card class="form-container">
+        <div class="pdf-container">
+            <div class="pdf-viewer">
+                <div class="pdf-border">
+                    <img src="../assets/dashboard.jpg" alt="Mi imagen">
+                </div>
+            </div>
+            <div class="pdf-buttons">
+                <button class="pdf-excel-button">
+                    <img src="../assets/excel-logo.png" alt="Excel">
+                    Descargar Excel
+                </button>
+                <button class="pdf-pdf-button">
+                    <img src="../assets/pdf-logo.png" alt="PDF">
+                    Descargar PDF
+                </button>
+            </div>
+        </div>
+</mat-card>

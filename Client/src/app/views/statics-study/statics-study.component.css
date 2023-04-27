@@ -1,0 +1,110 @@
+
+
+.form-container {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 1%;
+}
+
+.pdf-viewer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdf-border {
+    width: 80%;
+    height: 700px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pdf-border img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.pdf-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.pdf-buttons button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.pdf-buttons button:hover {
+    cursor: pointer;
+}
+
+.pdf-excel-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pdf-pdf-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pdf-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+.pdf-container .pdf-viewer {
+    width: 90%;
+}
+
+.pdf-container .pdf-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 100px;
+    /* Ajusta el margen derecho */
+    margin-left: -10px;
+    /* Ajusta el margen izquierdo */
+}
+
+.pdf-container .pdf-buttons button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.pdf-container .pdf-buttons button:hover {
+    cursor: pointer;
+}
+
+.pdf-container .pdf-excel-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pdf-container .pdf-pdf-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}

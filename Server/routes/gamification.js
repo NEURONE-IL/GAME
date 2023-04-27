@@ -265,7 +265,12 @@ router.get('/userRankings/:user_id/:key' , verifyToken, async (req, res) => {
                 err
             });
         }
-    })
+    });
+    if (!rankingName) {
+        return res.status(404).json({
+            err: "Ranking name not found"
+        });
+    }
     console.log(rankingName)
     await leaderboardService.getLeaderboardByGroup(rankingName.gm_code, {group_code: study.gm_code}, (err, leaderboard) => {
         if(err){

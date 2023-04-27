@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { Study, StudyService } from '../../services/game/study.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ export class StudiesDisplayComponent implements OnInit {
   studies: Study[] = [];
   user: User;
   noStudies: boolean = false;
-  indexTab:number = 0;
+  indexTab: number = 0;
 
   constructor(private studyService: StudyService, private router: Router, private toastr: ToastrService, private translate: TranslateService, private authService: AuthService) { }
 
@@ -22,14 +22,14 @@ export class StudiesDisplayComponent implements OnInit {
     this.user = this.authService.getUser();
     this.getAllStudiesByUser();
 
-      
+
   }
   //Se traen los estudios de un usuario filtrando por privacidad
-  getAllStudiesByUser(){
+  getAllStudiesByUser() {
     this.studyService.getStudiesByUser(this.user._id).subscribe(
-      response => { 
+      response => {
         this.studies = response['studies'];
-        if(this.studies.length <= 0)
+        if (this.studies.length <= 0)
           this.noStudies = true
         else
           this.noStudies = false
@@ -44,11 +44,11 @@ export class StudiesDisplayComponent implements OnInit {
     );
   }
   getStudiesByPrivacy(priv): void {
-    let params = {user: this.user._id, privacy: priv};
+    let params = { user: this.user._id, privacy: priv };
     this.studyService.getStudiesByUserByPrivacy(params).subscribe(
       response => {
         this.studies = response['studies'];
-        if(!(this.studies.length > 0) )
+        if (!(this.studies.length > 0))
           this.noStudies = true;
         else
           this.noStudies = false;
@@ -62,11 +62,11 @@ export class StudiesDisplayComponent implements OnInit {
     );
   }
   getStudiesByType(type: string): void {
-    let params = {user: this.user._id, type: type};
+    let params = { user: this.user._id, type: type };
     this.studyService.getStudiesByUserByType(params).subscribe(
       response => {
         this.studies = response['studies'];
-        if(!(this.studies.length > 0) )
+        if (!(this.studies.length > 0))
           this.noStudies = true;
         else
           this.noStudies = false;
@@ -84,7 +84,7 @@ export class StudiesDisplayComponent implements OnInit {
     this.studyService.getStudiesByUserCollaboration(this.user._id).subscribe(
       response => {
         this.studies = response['studies'];
-        if(!(this.studies.length > 0) )
+        if (!(this.studies.length > 0))
           this.noStudies = true;
         else
           this.noStudies = false;
@@ -97,67 +97,75 @@ export class StudiesDisplayComponent implements OnInit {
       }
     );
   }
-  getCover(index: number): string{
-    return '../../../assets/study-images/Study0' + (index%8+1) + '.jpg';
+  getCover(index: number): string {
+    return '../../../assets/study-images/Study0' + (index % 8 + 1) + '.jpg';
   }
 
-  CreateStudy(){
+  CreateStudy() {
     this.router.navigate(['create/study']);
   }
 
-  @Output() studySelected: EventEmitter<string>= new EventEmitter();
-  clickedStudy(id){
-    let link = '/admin_panel/study/'+ id;
-    this.studySelected.emit(link);
-    /* this.router.navigate([link]); */
+  @Output() studySelected: EventEmitter<string> = new EventEmitter();
+  clickedStudy(id) {
+    if (this.indexTab === 5) {
+      let link = `/admin_panel/study/${id}/statics`;
+      this.router.navigate([link]);
+    } else {
+      let link = `/admin_panel/study/${id}`;
+      this.router.navigate([link]);
+    }
   }
 
-  actualStudy='';
-  fullStudy(study){
-    this.actualStudy= study._id;
+  actualStudy = '';
+  fullStudy(study) {
+    this.actualStudy = study._id;
   }
 
-  shortStudy(study){
-    this.actualStudy= '';
+  shortStudy(study) {
+    this.actualStudy = '';
   }
 
-  showShortDescription(description){
-      return (description.substr(0, 40));
+  showShortDescription(description) {
+    return (description.substr(0, 40));
   }
 
   //Se despliegan eventos según el tab seleccionado
   onTabClick(event) {
     let index = event.index
     this.indexTab = index;
-    switch(index) { 
-      case 0: { 
-        this.getAllStudiesByUser(); 
-        break; 
-      } 
+    switch (index) {
+      case 0: {
+        this.getAllStudiesByUser();
+        break;
+      }
       case 1: { //Privados
         var privacy = true;
-        this.getStudiesByPrivacy(privacy); 
-        break; 
-      } 
+        this.getStudiesByPrivacy(privacy);
+        break;
+      }
       case 2: { //Publicos
         var privacy = false;
-        this.getStudiesByPrivacy(privacy); 
-        break; 
-      } 
-      case 3: { 
+        this.getStudiesByPrivacy(privacy);
+        break;
+      }
+      case 3: {
         var type = 'clone'
         this.getStudiesByType(type)
         console.log('1');
-        break; 
+        break;
       }
-      case 4: { 
+      case 4: {
         this.getStudiesByCollaboration();
-        break; 
+        break;
       }
-      default: { 
-         //statements; 
-         break; 
-      } 
-   }
+      case 5: {
+        this.getAllStudiesByUser();
+        break;
+      }
+      default: {
+        //statements; 
+        break;
+      }
+    }
   }
 }

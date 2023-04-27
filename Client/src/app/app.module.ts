@@ -93,6 +93,7 @@ import { StudiesSearchResultsComponent } from './views/studies-search-results/st
 import { StudySearchDisplayComponent } from './views/study-search-display/study-search-display.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { StaticsStudyComponent } from './views/statics-study/statics-study.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -143,7 +144,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudiesSearchComponent,
     StudiesSearchResultsComponent,
     StudySearchDisplayComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    StaticsStudyComponent
   ],
     imports: [
         BrowserModule,

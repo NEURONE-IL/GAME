@@ -1,64 +1,81 @@
 <app-header></app-header>
 <div id="page-container">
     <div id="content-wrap">
-    <div class="content-container" >
-        <div class="container-left">
-            <div class="player-image mb8">
-                <img *ngIf="user.image_url" [src]="user.image_url" class="player-image img" >
-                <img *ngIf="!user.image_url" src="/assets/avatar_usuario.png" class="player-image img" >
-                <ul class="player-status di-b">
-                    <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span></li>
-                    <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.EMAIL" | translate}}:</span> <span class="player-status-value di-ib fr">{{user.email}}</span></li>
-                </ul>
-                <button mat-button class="play-button" (click)="play()" *ngIf="studyOk">{{"USER.PROFILE.PLAY_BTN"  | translate}} <mat-icon>arrow_forward_ios</mat-icon></button>
-            </div>
-        </div>
-        <div class="container-right">
-            <h2 class="h2">{{"USER.PROFILE.YOUR_PROFILE" | translate}}</h2>
-            <div class="user-statistics">
-                <div class="stats">
-                    <h5 class="h5">{{"USER.PROFILE.ACTUAL_TITLE" | translate}}</h5>
-                    <li class="clear m0"><span class="player-status-value di-ib fl large">{{actualLevel?.level.name}}</span></li>
-                </div>
-                <div class="stats">
-                    <h5 class="h5">{{"USER.PROFILE.TOTAL_EXP" | translate}}</h5>
-                    <li class="clear m0"><span class="player-status-value di-ib fl large" *ngIf="points && points.length > 0">{{points[0].amount}} {{points[0].point.abbreviation}}</span></li>
+        <div class="content-container">
+            <div class="container-left">
+                <div class="player-image mb8">
+                    <img *ngIf="user.image_url" [src]="user.image_url" class="player-image img">
+                    <img *ngIf="!user.image_url" src="/assets/avatar_usuario.png" class="player-image img">
+                    <ul class="player-status di-b">
+                        <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.NAMES" |
+                                translate}}:</span> <span class="player-status-value di-ib fr">{{user.names}}</span>
+                        </li>
+                        <li class="clear"><span class="player-status-title di-ib fl">{{"USER.PROFILE.EMAIL" |
+                                translate}}:</span> <span class="player-status-value di-ib fr">{{user.email}}</span>
+                        </li>
+                    </ul>
+                    <button mat-button class="play-button" (click)="play()" *ngIf="studyOk">{{"USER.PROFILE.PLAY_BTN" |
+                        translate}} <mat-icon>arrow_forward_ios</mat-icon></button>
                 </div>
             </div>
-            <div class="user-statistics">
-                <div class="stats">
-                    <h5 class="h5">{{"USER.PROFILE.NEXT_LEVEL_PROGRESS" | translate}}</h5>
-                    <mat-card class="progressLevelCard" >
-                        <p  class="large" style="display: inline-block;">{{nearLevel?.level.name}}</p>
-                        <div id="progressLevel" class="progress large">
-                            <span id="progressValue" class="value large"></span>
-                        </div>
-                    </mat-card>
+            <div class="container-right">
+                <h2 class="h2">{{"USER.PROFILE.YOUR_PROFILE" | translate}}</h2>
+                <div class="user-statistics">
+                    <div class="stats">
+                        <h5 class="h5">{{"USER.PROFILE.ACTUAL_TITLE" | translate}}</h5>
+                        <li class="clear m0"><span
+                                class="player-status-value di-ib fl large">{{actualLevel?.level.name}}</span></li>
+                    </div>
+                    <div class="stats">
+                        <h5 class="h5">{{"USER.PROFILE.TOTAL_EXP" | translate}}</h5>
+                        <li class="clear m0"><span class="player-status-value di-ib fl large"
+                                *ngIf="points && points.length > 0">{{points[0].amount}}
+                                {{points[0].point.abbreviation}}</span></li>
+                    </div>
                 </div>
-            </div>
-            <div class="user-statistics">
-                <div class="stats">
-                    <h5 class="h5">{{"USER.PROFILE.RANKINGS" | translate}}</h5>
-                    <li class="clear m0" *ngFor="let rank of ranks"><span class="player-status-value di-ib fl large">{{rank}}</span></li>
-                </div>
-            </div>
-            <div class="user-statistics">
-                <div class="stats">
-                    <h5 class="h5">{{"USER.PROFILE.ACHIEVEMENTS_COMPLETED" | translate}}</h5>
-                    <div>
-                        <mat-card *ngFor="let chall of completedChallenges"class="challengeCard" >
-                            <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">
-                            <p class="large" style="display: inline-block; margin-left: 2%; width: 85%">{{chall.challenge.name}} <span style="float: right;">{{chall.dateDisplay}}</span></p>
-                        </mat-card>
-                        <mat-card *ngIf="achievementAllCompleted" class="challengeCard" >
-                            <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">
-                            <p class="large" style="display: inline-block; margin-left: 2%; width: 85%">Todos los desafíos completados <span style="float: right;">{{date}}</span></p>
+                <div class="user-statistics">
+                    <div class="stats">
+                        <h5 class="h5">{{"USER.PROFILE.NEXT_LEVEL_PROGRESS" | translate}}</h5>
+                        <mat-card class="progressLevelCard">
+                            <p class="large" style="display: inline-block;">{{nearLevel?.level.name}}</p>
+                            <div id="progressLevel" class="progress large">
+                                <span id="progressValue" class="value large"></span>
+                            </div>
                         </mat-card>
                     </div>
                 </div>
+                <div class="user-statistics">
+                    <div class="stats">
+                        <h5 class="h5">{{"USER.PROFILE.RANKINGS" | translate}}</h5>
+                        <li class="clear m0" *ngFor="let rank of ranks"><span
+                                class="player-status-value di-ib fl large">{{rank}}</span></li>
+                    </div>
+                </div>
+                <div class="user-statistics">
+                    <div class="stats">
+                        <h5 class="h5">{{"USER.PROFILE.ACHIEVEMENTS_COMPLETED" | translate}}</h5>
+                        <div>
+                            <mat-card *ngFor="let chall of completedChallenges" class="challengeCard">
+                                <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">
+                                <p class="large" style="display: inline-block; margin-left: 2%; width: 85%">
+                                    {{chall.challenge.name}} <span style="float: right;">{{chall.dateDisplay}}</span>
+                                </p>
+                            </mat-card>
+                            <mat-card *ngIf="achievementAllCompleted" class="challengeCard">
+                                <img src="/assets/achievement.png" style="height: 30px; display: inline-block;">
+                                <p class="large" style="display: inline-block; margin-left: 2%; width: 85%">Todos los
+                                    desafíos completados <span style="float: right;">{{date}}</span></p>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                <a (click)="redirectToStatistics()" class="user-statistics">
+                    <div class="stats">
+                      <h5 class="h5">Estadísticas</h5>
+                    </div>
+                  </a>                  
             </div>
         </div>
-    </div>
     </div>
     <app-footer></app-footer>
 </div>

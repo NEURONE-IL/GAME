@@ -5,12 +5,13 @@
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
       </mat-card-header>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="userOwner?4:3"></mat-grid-tile>
-    <mat-grid-tile [colspan]="userOwner?8:9">
+    <mat-grid-tile [colspan]="userOwner?3:3"></mat-grid-tile>
+    <mat-grid-tile [colspan]="userOwner?9:9">
       <button mat-raised-button class="actionButton" color="primary" (click)="showStudyUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
       <button mat-raised-button *ngIf="userOwner" class="actionButton" color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
       <button mat-raised-button *ngIf="!(userOwner)" class="actionButton" color="warn" (click)="confirmCollaborationLeft()">DEJAR COLABORACIÓN <mat-icon>do_not_touch</mat-icon></button>
-    </mat-grid-tile>
+      <button mat-raised-button class="actionButton mat-start" color="primary" (click)="staticsLeft(this.study._id)">ESTADÍSTICAS <mat-icon>trending_up</mat-icon></button>
+    </mat-grid-tile>    
   </mat-grid-list>
   <mat-grid-list cols="24">
     <mat-grid-tile colspan="24">

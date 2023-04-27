@@ -261,6 +261,9 @@ export class StudyDisplayComponent implements OnInit {
     this.router.navigate(['/admin_panel']);
 
   }
+  staticsLeft(studyId: string){
+    this.router.navigate([`/admin_panel/study/${studyId}/statics`]);
+  }
   deleteStudy(id: string){
     this.studyService.deleteStudy(id)
       .subscribe(study => {
