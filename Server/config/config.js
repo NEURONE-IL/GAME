@@ -17,7 +17,7 @@ process.env.TOKEN_SECRET = 'ady7asdy78'
 process.env.DB_USER = 'neuroneAdmin';
 
 process.env.DB_PWD = 'DK,V-Dk6-*Pd-PM'
-process.env.URI = `mongodb://root:example@localhost:27017`;
+process.env.URI = "mongodb://localhost:27017";
 //process.env.URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@localhost:27017`;
 process.env.USERURI = `mongodb://localhost:27017/neuronegameuser`;
 
