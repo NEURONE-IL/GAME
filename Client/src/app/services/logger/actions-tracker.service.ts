@@ -50,7 +50,8 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'posttestquestionnaireenter', data, this.posttestquestionnaireenterListener);
       this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);  
       this.bindEvent(targetDoc, 'poststudyquestionnaireenter', data, this.poststudyquestionnaireenterListener);
-      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);    
+      this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);
+      this.bindEvent(targetDoc, 'firstchallengecompleted', data, this.firstchallengecompletedListener);
       /*End custom events*/
       this.isTracking = true;
     }
@@ -84,6 +85,7 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireenter');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
+      this.unbindAll(targetDoc, 'firstchallengecompleted');
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -520,5 +522,24 @@ export class ActionsTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
   }  
+
+  firstchallengecompletedListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,  
+      source: 'Window',
+      type: 'FirstChallengeCompleted',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  } 
 
 }
