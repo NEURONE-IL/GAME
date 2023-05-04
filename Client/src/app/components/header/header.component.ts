@@ -55,8 +55,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.isLoggedIn = this.authService.loggedIn;
     if( this.isLoggedIn){
       this.user = this.authService.getUser();
-      this.getNotifications();
-      this.getAdminNotification();
+      if(this.user.role.name === 'student'){
+        this.getNotifications();
+      }else{
+        this.getAdminNotification();
+      }
     }
     if(this.isLoggedIn && this.user.has_played){
       this.videoModal= false
@@ -241,6 +244,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     );
   }
   redirectStudy(study_id: string){
+    console.log(study_id)
     this.router.navigate(['/studies_search/study/'+study_id])
 
   }

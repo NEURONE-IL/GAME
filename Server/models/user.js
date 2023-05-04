@@ -16,7 +16,9 @@ const UserSchema = new Schema({
     createdAt: { type: Date, default: Date.now},
     updatedAt: { type: Date, default: Date.now},
     role: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
+    study: { type: Schema.Types.ObjectId, ref: 'Study' },
     trainer_id: {type: String},
+    trainer_return_url: {type: String},
     code: {type: String},
     has_played: {type: Boolean, default: false},
     registered_via: {type: String}

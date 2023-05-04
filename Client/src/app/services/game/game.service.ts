@@ -192,6 +192,19 @@ export class GameService {
 
   async finishPostTest() {
     let progress = this.progress;
+    /*Comprobar si es el primer challenge completado*/
+    let counter = 0;
+    progress.challenges.forEach((chProgress) => {
+      if(chProgress.finished == true){
+        counter++;
+      }
+    });
+    if(counter == 0){
+      /*Dispatch firstchallengecompleted event*/
+      var evt = new CustomEvent('firstchallengecompleted');
+      window.dispatchEvent(evt);
+      /*End dispatch firstchallengecompleted event*/          
+    }
     progress.challenges.forEach((chProgress) => {
       if (this.challenge._id == chProgress.challenge) {
         chProgress.post_test = true;
