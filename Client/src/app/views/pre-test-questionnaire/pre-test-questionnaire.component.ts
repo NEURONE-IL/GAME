@@ -20,6 +20,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   question: string;
+  progress: any;
 
   constructor(private formBuilder: FormBuilder,
               private questionnaireService: QuestionnaireService,
@@ -51,6 +52,7 @@ export class PreTestQuestionnaireComponent implements OnInit {
     });
     this.isLoggedIn = this.authService.loggedIn;
     this.user = this.authService.getUser();
+    this.getProgress();
     /*Dispatch pretestquestionnaireenter event*/
     var evt = new CustomEvent('pretestquestionnaireenter');
     window.dispatchEvent(evt);
@@ -60,6 +62,10 @@ export class PreTestQuestionnaireComponent implements OnInit {
   ngAfterContentChecked() {
     this.changeDetector.detectChanges();
   }  
+
+  async getProgress(){
+    this.progress = await this.authService.refreshProgress();
+  }
 
   get questionnaireFormControls(): any {
     return this.questionnaireForm['controls'];
@@ -98,6 +104,24 @@ export class PreTestQuestionnaireComponent implements OnInit {
     /*Dispatch pretestquestionnaireexit event*/
     var evt = new CustomEvent('pretestquestionnaireexit');
     window.dispatchEvent(evt);
-    /*End dispatch pretestquestionnaireexit event*/    
+    /*End dispatch pretestquestionnaireexit event*/
+    let counter = 0;
+    let progress = this.progress;    
+    progress.challenges.forEach((chProgress) => {
+      if(chProgress.finished == true){
+        counter++;
+      }
+    });
+    if(counter == 0){
+      /*Dispatch firstchallengestarted event*/
+      var evt = new CustomEvent('firstchallengestarted');
+      window.dispatchEvent(evt);
+      /*End dispatch firstchallengestarted event*/          
+    }else{
+      /*Dispatch challengestarted event*/
+      var evt = new CustomEvent('challengestarted');
+      window.dispatchEvent(evt);
+      /*End dispatch challengestarted event*/                
+    }
   }  
 }
