@@ -20,6 +20,7 @@ export class PostTestQuestionnaireComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   question: string;
+  progress: any;
 
   constructor(private formBuilder: FormBuilder,
               private questionnaireService: QuestionnaireService,
@@ -51,14 +52,39 @@ export class PostTestQuestionnaireComponent implements OnInit {
     });
     this.isLoggedIn = this.authService.loggedIn;
     this.user = this.authService.getUser();
-    /*Dispatch posttestquestionnaireenter event*/
-    var evt = new CustomEvent('posttestquestionnaireenter');
-    window.dispatchEvent(evt);
-    /*End dispatch posttestquestionnaireenter event*/    
+    this.getProgress().then(() => {
+      /*Comprobar si es el primer challenge completado*/
+      let counter = 0;
+      let progress = this.progress;
+      progress.challenges.forEach((chProgress) => {
+        if(chProgress.finished == true){
+          counter++;
+        }
+      });
+      if(counter == 0){
+        /*Dispatch firstchallengecompleted event*/
+        var evt = new CustomEvent('firstchallengecompleted');
+        window.dispatchEvent(evt);
+        /*End dispatch firstchallengecompleted event*/          
+      }else{
+        /*Dispatch challengecompleted event*/
+        var evt = new CustomEvent('challengecompleted');
+        window.dispatchEvent(evt);
+        /*End dispatch challengecompleted event*/         
+      }    
+      /*Dispatch posttestquestionnaireenter event*/
+      var evt = new CustomEvent('posttestquestionnaireenter');
+      window.dispatchEvent(evt);
+      /*End dispatch posttestquestionnaireenter event*/
+    });
   }
 
   ngAfterContentChecked() {
     this.changeDetector.detectChanges();
+  }  
+
+  async getProgress(){
+    this.progress = await this.authService.refreshProgress();
   }  
 
   get questionnaireFormControls(): any {

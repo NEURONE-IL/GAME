@@ -51,7 +51,10 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'posttestquestionnaireexit', data, this.posttestquestionnaireexitListener);  
       this.bindEvent(targetDoc, 'poststudyquestionnaireenter', data, this.poststudyquestionnaireenterListener);
       this.bindEvent(targetDoc, 'poststudyquestionnaireexit', data, this.poststudyquestionnaireexitListener);
+      this.bindEvent(targetDoc, 'firstchallengestarted', data, this.firstchallengestartedListener);
       this.bindEvent(targetDoc, 'firstchallengecompleted', data, this.firstchallengecompletedListener);
+      this.bindEvent(targetDoc, 'challengestarted', data, this.challengestartedListener);
+      this.bindEvent(targetDoc, 'challengecompleted', data, this.challengecompletedListener);
       /*End custom events*/
       this.isTracking = true;
     }
@@ -85,6 +88,7 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'posttestquestionnaireexit');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireenter');         
       this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
+      this.unbindAll(targetDoc, 'firstchallengestarted');
       this.unbindAll(targetDoc, 'firstchallengecompleted');
       /*End custom events*/
       this.unbindData(targetDoc);
@@ -523,6 +527,26 @@ export class ActionsTrackerService {
     evt.currentTarget.storeService.postEvent(keyOutput);
   }  
 
+  firstchallengestartedListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'), 
+      source: 'Window',
+      type: 'FirstChallengeStarted',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+
   firstchallengecompletedListener(evt){
     evt = evt || event;
 
@@ -532,6 +556,7 @@ export class ActionsTrackerService {
     let keyOutput = {
       userId: this.user.id,
       studyId: this.user.study,  
+      challengeId: localStorage.getItem('chall'),
       source: 'Window',
       type: 'FirstChallengeCompleted',
       localTimeStamp: t,
@@ -541,5 +566,45 @@ export class ActionsTrackerService {
     // console.log(keyOutput);
     evt.currentTarget.storeService.postEvent(keyOutput);
   } 
+
+  challengestartedListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study, 
+      challengeId: localStorage.getItem('chall'), 
+      source: 'Window',
+      type: 'ChallengeStarted',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+
+  challengecompletedListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'Window',
+      type: 'ChallengeCompleted',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }   
 
 }
