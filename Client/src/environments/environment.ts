@@ -10,15 +10,15 @@ export const environment = {
   neuroneURL: 'http://159.65.100.191:3000/',
   locale: 'es-CL'
 };
-*/
-/*export const environment = {
+
+export const environment = {
   production: false,
   serverRoot: 'https://trivia.neurone.info/',
   apiURL: 'https://trivia.neurone.info/api/',
   frontURL: 'https://trivia.neurone.info/',
   neuroneURL: 'https://trivia.neurone.info:3001/',
   locale: 'es-CL'
-};*/
+};
 /*
 export const environment = {
   production: false,
@@ -32,9 +32,9 @@ export const environment = {
 
 export const environment = {
   production: false,
-  serverRoot: 'http://localhost:3030/',
-  apiURL: 'http://localhost:3030/api/',
-  frontURL: 'http://localhost:4200/',
+  serverRoot: 'https://trivia2.neurone.info/',
+  apiURL: 'https://trivia2.neurone.info/api/',
+  frontURL: 'https://trivia2.neurone.info/',
   neuroneURL: 'https://trivia2.neurone.info:3001/',
   locale: 'es-CL'
 };

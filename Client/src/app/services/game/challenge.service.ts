@@ -18,7 +18,8 @@ export interface Challenge {
   study: string,
   resources: Resource[],
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
+  question_code: string
 }
 
 @Injectable({

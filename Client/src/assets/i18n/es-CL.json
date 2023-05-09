@@ -137,6 +137,7 @@
     "FORM": {
       "FIELDS": {
         "ANSWER": "Respuesta",
+        "QUESTION_CODE": "Código pregunta",
         "ANSWER_TYPE": "Tipo de respuesta",
         "CHECK": "Por favor confirme para continuar",
         "HINT": "Pista",
