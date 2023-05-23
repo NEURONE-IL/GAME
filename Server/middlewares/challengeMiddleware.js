@@ -8,6 +8,8 @@ const schema = Joi.object({
 
     question_type: Joi.string()
     .required(),        
+
+    question_code: Joi.string(),
     
     number: Joi.number(),
     
@@ -36,6 +38,8 @@ const editSchema = Joi.object({
     question: Joi.string(),
 
     question_type: Joi.string(),
+
+    question_code: Joi.string(),
 
     number: Joi.number(),
     

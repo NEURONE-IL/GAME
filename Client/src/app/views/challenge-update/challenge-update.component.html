@@ -32,6 +32,19 @@
 			</mat-grid-tile>
 			<mat-grid-tile colspan="6">
 				<mat-form-field>
+					<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION_CODE" | translate }}</mat-label>
+					<input matInput formControlName="question_code" #inputHint maxlength="100">
+					<mat-hint align="end">{{inputHint.value?.length || 0}}/100</mat-hint>
+					<mat-error *ngIf="challengeFormControls.question_code.hasError('minlength')">
+						{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
+					</mat-error>
+					<mat-error *ngIf="challengeFormControls.question_code.hasError('maxlength')">
+						{{ "ERRORS.MAX_LENGTH_100" | translate }}
+					</mat-error>
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile colspan="6">
+				<mat-form-field>
 					<mat-label>{{ "CHALLENGE.FORM.FIELDS.QUESTION_TYPE" | translate }}</mat-label>
 					<mat-select formControlName="question_type" required>
 						<mat-option *ngFor="let option of questionOptions" [value]="option.value">{{option.show | translate}}</mat-option>

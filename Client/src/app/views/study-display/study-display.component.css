@@ -151,6 +151,10 @@
 .actionButton{
   margin: 2%;
 }
+.loadingButton{
+  margin: 2%;
+  padding: 8px 10%;
+}
 
 .manage{
   margin-top: 5%;

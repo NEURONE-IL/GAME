@@ -76,6 +76,7 @@ export class StudyDisplayComponent implements OnInit {
   edit_minutes: number = 3;
 
   emailFormControl: FormControl;
+  loadingClone: boolean = false;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -567,6 +568,42 @@ export class StudyDisplayComponent implements OnInit {
     .subscribe((response: Resource[]) => {
       this.resources = response;
     });
+  }
+  confirmCloneStudy(){
+    confirm("¿Seguro/a que desea clonar este estudio?") && this.cloneStudy();
+  }
+  cloneStudy(){
+    this.loadingClone = true;
+    let user_id = this.user._id
+    this.studyService.copyStudy(this.study._id,user_id).subscribe(
+      response => {
+        console.log(response)
+        this.authService.signupDummy(response['copy']._id).subscribe(
+          user => {
+            console.log('Se creó el usuario de prueba',user)
+          },
+          err => {
+            console.log('Error al crear el usuario de prueba',err)
+
+          }
+        )
+        this.loadingClone = false;
+        let link = '/admin_panel/study/'+response.copy._id ;
+        this.toastr.success("El estudio ha sido clonado exitosamente, los recursos pueden tardar unos minutos en cargarse","Éxito",{
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.router.navigate([link]);
+        this.loadingClone = false;
+      },
+      err => {
+        this.toastr.error("El estudio seleccionado no ha podido ser clonado", "Error en la clonación", {
+          timeOut: 5000,
+          positionClass: 'toast-top-center'
+        });
+        this.loadingClone = false;
+      }
+    );
   }
 
 }

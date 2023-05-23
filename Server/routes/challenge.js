@@ -341,7 +341,10 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
         }
         if(req.body.question_type){
             challenge.question_type = req.body.question_type;
-        }        
+        }
+        if(req.body.question_code){
+            challenge.question_code = req.body.question_code;
+        }          
         if(req.body.seconds){
             challenge.seconds = req.body.seconds;
         }

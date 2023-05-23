@@ -60,6 +60,7 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
       hint: [this.challenge.hint, [Validators.minLength(5), Validators.maxLength(100)]],
       answer_type: [this.challenge.answer_type, [Validators.minLength(3), Validators.maxLength(50)]],
       answer: [this.challenge.answer, [Validators.required, Validators.minLength(1), Validators.maxLength(300)]],
+      question_code: [this.challenge.question_code, [Validators.minLength(1), Validators.maxLength(100)]],
     });
 
     this.requestEdit();

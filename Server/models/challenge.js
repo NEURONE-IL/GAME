@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const ChallengeSchema = new Schema({
     question: {type: String, required: true},
     question_type: {type: String, required: true},
+    question_code: {type: String},
     number: {type: Number},
     seconds: {type: Number, required: true},
     hint: {type: String},
