@@ -109,10 +109,12 @@ export class StudiesDisplayComponent implements OnInit {
   clickedStudy(id) {
     if (this.indexTab === 5) {
       let link = `/admin_panel/study/${id}/statics`;
-      this.router.navigate([link]);
+      this.studySelected.emit(link);
+      //this.router.navigate([link]);
     } else {
       let link = `/admin_panel/study/${id}`;
-      this.router.navigate([link]);
+      this.studySelected.emit(link);
+      //this.router.navigate([link]);
     }
   }
 

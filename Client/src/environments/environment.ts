@@ -35,7 +35,7 @@ export const environment = {
   serverRoot: 'http://localhost:3030/',
   apiURL: 'http://localhost:3030/api/',
   frontURL: 'http://localhost:4200/',
-  neuroneURL: 'https://trivia2.neurone.info:3001/',
+  neuroneURL: 'https://trivia2.neurone.info:3005/',
   locale: 'es-CL'
 };
 
