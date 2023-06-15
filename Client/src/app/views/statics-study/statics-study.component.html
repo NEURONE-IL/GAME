@@ -1,33 +1,45 @@
-<mat-card class="form-container">
+<div class="container">
+    <mat-card class="form-container">
         <form>
-            <h4>Selecciona la métrica</h4>
-            <mat-form-field appearance="fill">
-                <mat-label>Listado de métricas</mat-label>
-                <mat-select [(ngModel)]="selectedValue" name="metric">
-                    <mat-option *ngFor="let metric of metrics" [value]="metric.value">
-                        {{metric.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <h4>Métricas</h4>
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedValue" name="metric" class="metrics-group">
+                <mat-radio-button *ngFor="let metric of metrics" [value]="metric.value">
+                    {{metric.viewValue}}
+                </mat-radio-button>
+            </mat-radio-group>
             <p> Métrica seleccionada: {{selectedValue}} </p>
         </form>
-</mat-card>
-<mat-card class="form-container">
+    </mat-card>
+    
+    <mat-card class="form-container">
+        <form>
+            <h4>Estudiantes</h4>
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student" class="metrics-group">
+                <mat-radio-button *ngFor="let student of students" [value]="student.value">
+                  {{student.viewValue}}
+                </mat-radio-button>
+              </mat-radio-group>
+              <p> Estudiante seleccionado/a: {{selectedStudent}} </p>
+        </form>
+    </mat-card>
+
+    <mat-card class="form-container-metrics">
         <div class="pdf-container">
             <div class="pdf-viewer">
                 <div class="pdf-border">
                     <img src="../assets/dashboard.jpg" alt="Mi imagen">
                 </div>
+                <div class="pdf-buttons">
+                    <button class="pdf-excel-button">
+                        <img src="../assets/excel-logo.png" alt="Excel">
+                        <span>Descargar Excel</span>
+                    </button>
+                    <button class="pdf-pdf-button">
+                        <img src="../assets/pdf-logo.png" alt="PDF">
+                        <span>Descargar PDF</span>
+                    </button>
+                </div>
             </div>
-            <div class="pdf-buttons">
-                <button class="pdf-excel-button">
-                    <img src="../assets/excel-logo.png" alt="Excel">
-                    Descargar Excel
-                </button>
-                <button class="pdf-pdf-button">
-                    <img src="../assets/pdf-logo.png" alt="PDF">
-                    Descargar PDF
-                </button>
-            </div>
-        </div>
-</mat-card>
+        </div>        
+    </mat-card>
+</div>

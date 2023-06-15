@@ -285,6 +285,29 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   });
 });
 
+router.get("/getUsersByStudy/:study_id", async (req, res) => {
+  console.log('entraaaaaaaaaaaaaaaaaaaaaA????????')
+  const study_id = req.params.study_id;
+  UserStudy.find({ study: study_id }, (err, userStudies) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+    let userIds = userStudies.map(userStudy => userStudy.user);
+    User.find({ _id: { $in: userIds } }, { password: 0 }, (err, users) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+      res.status(200).json({ users });
+    }).populate({ path: 'role', model: Role });
+  });
+});
+
 router.put("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
   const user = await User.findOne({_id: userId}, err => {

@@ -299,4 +299,8 @@ export class AuthService {
     console.log('check')
     return this.http.get(this.userUri + 'checkEmailAlreadyUsed/' + email);
   }
+
+  getUsersByStudy(idstudy: string){
+    return this.http.get(this.userUri + 'getUsersByStudy/' + idstudy);
+  }
 }
