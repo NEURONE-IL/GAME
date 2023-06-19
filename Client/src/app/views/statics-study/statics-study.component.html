@@ -2,7 +2,8 @@
     <mat-card class="form-container">
         <form>
             <h4>Métricas</h4>
-            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedValue" name="metric" class="metrics-group">
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedValue" name="metric"
+                class="metrics-group" (change)="onMetricChange($event.value)">
                 <mat-radio-button *ngFor="let metric of metrics" [value]="metric.value">
                     {{metric.viewValue}}
                 </mat-radio-button>
@@ -10,16 +11,17 @@
             <p> Métrica seleccionada: {{selectedValue}} </p>
         </form>
     </mat-card>
-    
+
     <mat-card class="form-container">
         <form>
             <h4>Estudiantes</h4>
-            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student" class="metrics-group">
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student"
+                class="metrics-group" (change)="onStudentChange($event.value)">
                 <mat-radio-button *ngFor="let student of students" [value]="student.value">
-                  {{student.viewValue}}
+                    {{student.viewValue}}
                 </mat-radio-button>
-              </mat-radio-group>
-              <p> Estudiante seleccionado/a: {{selectedStudent}} </p>
+            </mat-radio-group>
+            <p> Estudiante seleccionado/a: {{selectedStudent}} </p>
         </form>
     </mat-card>
 
@@ -27,7 +29,30 @@
         <div class="pdf-container">
             <div class="pdf-viewer">
                 <div class="pdf-border">
-                    <img src="../assets/dashboard.jpg" alt="Mi imagen">
+                    <!-- Primer gráfico -->
+                    <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme" [legend]="linearChartOptions.legend"
+                        [showXAxisLabel]="linearChartOptions.showXAxisLabel" [showYAxisLabel]="linearChartOptions.showYAxisLabel" [xAxis]="linearChartOptions.xAxis"
+                        [yAxis]="linearChartOptions.yAxis" [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" [timeline]="linearChartOptions.timeline"
+                        *ngIf="chartsVisible" [results]="linearChartOptions.single">
+                    </ngx-charts-line-chart>
+
+                    <!-- Segundo gráfico -->
+                    <div class="pdf-row">
+
+                        <ngx-charts-pie-chart [view]="circularChartOptions.view"
+                            [scheme]="circularChartOptions.colorScheme" *ngIf="chartsVisible" [results]="circularChartOptions.single"
+                            [gradient]="circularChartOptions.gradient" [legend]="circularChartOptions.showLegend"
+                            [legendPosition]="circularChartOptions.legendPosition"
+                            [labels]="circularChartOptions.showLabels" [doughnut]="circularChartOptions.isDoughnut">
+                        </ngx-charts-pie-chart>
+                        <ngx-charts-bar-vertical [view]="barChartOptions.view" [scheme]="barChartOptions.colorScheme"
+                        *ngIf="chartsVisible" [results]="barChartOptions.single" [gradient]="barChartOptions.gradient"
+                            [xAxis]="barChartOptions.showXAxis" [yAxis]="barChartOptions.showYAxis"
+                            [legend]="barChartOptions.showLegend" [showXAxisLabel]="barChartOptions.showXAxisLabel"
+                            [showYAxisLabel]="barChartOptions.showYAxisLabel" [xAxisLabel]="barChartOptions.xAxisLabel"
+                            [yAxisLabel]="barChartOptions.yAxisLabel">
+                        </ngx-charts-bar-vertical>
+                    </div>
                 </div>
                 <div class="pdf-buttons">
                     <button class="pdf-excel-button">
@@ -40,6 +65,6 @@
                     </button>
                 </div>
             </div>
-        </div>        
+        </div>
     </mat-card>
 </div>

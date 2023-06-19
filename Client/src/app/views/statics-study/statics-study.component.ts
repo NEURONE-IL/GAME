@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChangeDetectorRef } from '@angular/core';
+import { originalSingle } from './data'
 interface Metric {
   value: string;
   viewValue: string;
@@ -19,11 +21,62 @@ interface Student {
   styleUrls: ['./statics-study.component.css']
 })
 export class StaticsStudyComponent implements OnInit {
+
+  selectedMetric: string;
+  chartsVisible = false;
+  originalSingle: any = [
+  ];
+
+  barChartOptions: any = {
+    single: [...this.originalSingle],
+    view: [450, 330],
+    showXAxis: true,
+    showYAxis: true,
+    gradient: false,
+    showLegend: true,
+    colorScheme: {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    }
+  };
+
+  circularChartOptions: any = {
+    single: [...this.originalSingle],
+    view: [450, 350],
+    gradient: true,
+    showLegend: true,
+    showLabels: true,
+    isDoughnut: false,
+    legendPosition: 'right',
+    colorScheme: {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    }
+  };
+
+  linearChartOptions: any = {
+    single: [...this.originalSingle],
+    view: [900, 350],
+    legend: true,
+    showLabels: true,
+    animations: true,
+    xAxis: true,
+    yAxis: true,
+    showYAxisLabel: false,
+    showXAxisLabel: false,
+    xAxisLabel: 'Year',
+    yAxisLabel: 'Population',
+    timeline: true,
+
+    colorScheme: {
+      domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+    }
+  }
   study$: any; // Variable para almacenar el estudio obtenido del servicio
   idStudy: string; // Variable para almacenar el id del estudio
   students: Student[] = [];
-  selectedStudent: string;
-  constructor(private authService: AuthService, private route: ActivatedRoute) { }
+  selectedStudent = 'todos';
+  constructor(private authService: AuthService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {
+    Object.assign(this, { originalSingle });
+  }
 
   ngOnInit(): void {
     this.idStudy = this.route.snapshot.paramMap.get('study_id'); // Obtiene el id del estudio de la ruta
@@ -34,7 +87,7 @@ export class StaticsStudyComponent implements OnInit {
 
   getStudyData(id: string): void {
     this.authService.getUsersByStudy(id).subscribe(
-      (studyData:any) => {
+      (studyData: any) => {
         this.study$ = studyData;
         // procesar los datos del estudio para obtener los estudiantes
         this.students = studyData.users.map(user => {
@@ -43,6 +96,10 @@ export class StaticsStudyComponent implements OnInit {
             viewValue: user.names,
           };
         });
+
+        // Agregar la opción "Todos" al inicio de la lista de estudiantes
+        this.students.unshift({ value: 'todos', viewValue: 'Todos' });
+        console.log(this.students)
       },
       (error) => {
         console.error(error);
@@ -50,28 +107,88 @@ export class StaticsStudyComponent implements OnInit {
     );
   }
 
+  onStudentChange(value: string): void {
+    this.selectedStudent = value;
+    this.updateChartData();
+    this.cdRef.detectChanges();
+  }
+
+
+  onMetricChange(value: string): void {
+    this.selectedMetric = value;
+    this.updateChartData();
+    this.cdRef.detectChanges();
+  }
+
+  updateChartData(): void {
+    let filteredData;
+    if (this.selectedMetric === 'Todos') {
+      filteredData = [...this.originalSingle];  // Muestra todos los datos si se selecciona 'Todos'
+    } else {
+      filteredData = this.originalSingle.filter(data => data.type === this.selectedMetric);
+    }
+  
+    if (this.selectedStudent !== 'todos') {
+      filteredData = filteredData.filter(data => data.userId === this.selectedStudent);
+    }
+  
+    // Group by 'userId'
+    let groupedData = filteredData.reduce((groups, data) => {
+      let group = groups[data.userId] || [];
+      group.push(data);
+      groups[data.userId] = group;
+      return groups;
+    }, {});
+  
+    // Map the grouped data to the structure that ngx-charts expects
+    let barAndCircularChartData = [];
+    let linearChartData = [];
+    for (let userId in groupedData) {
+      let userName = this.students.find(student => student.value === userId)?.viewValue || userId;
+  
+      // For bar and circular charts, we can still use the maximum 'value'
+      let maxValue = Math.max(...groupedData[userId].map(data => data.value));
+      barAndCircularChartData.push({
+        name: userName,
+        value: maxValue
+      });
+  
+      // For the linear chart, we create a series with each data point
+      linearChartData.push({
+        name: userName,
+        series: groupedData[userId].map((data, index) => ({
+          name: index.toString(),  // Using the index as the 'name' for each data point
+          value: data.value
+        }))
+      });
+    }
+  
+    this.barChartOptions.single = barAndCircularChartData;
+    this.circularChartOptions.single = barAndCircularChartData;
+    this.linearChartOptions.single = linearChartData;
+    
+    this.chartsVisible = this.barChartOptions.single.length > 0;
+    console.log(this.chartsVisible)
+    console.log(this.barChartOptions.single)
+    console.log(this.circularChartOptions.single)
+    console.log(this.linearChartOptions.single)
+    this.cdRef.markForCheck();
+  }  
+
+
   selectedValue: string;
   selectedCar: string;
 
   metrics: Metric[] = [
-    { value: 'Total Coverage', viewValue: 'Documentos Visitados' }, //NNúmero total de documentos diferentes visitados por el participante
-    { value: 'Relevant Coverage', viewValue: 'Documentos Relevantes' }, //Número de documentos relevantes recuperados por el participante
-    { value: 'Precision', viewValue: 'Precision' }, // Relación entre el número de documentos relevantes encontrados y el universo total de documentos diferentes visitados
-    { value: 'Recall', viewValue: 'Recall' }, // Relación entre el número de documentos relevantes encontrados y el universo total de documentos relevantes
-    { value: 'F-score', viewValue: 'F-Score' }, // Media armónica entre las métricas Precision y Recall
-    { value: 'Useful-coverage', viewValue: 'Useful Coverage' }, // Número de documentos diferentes visitados durante un período superior a un cierto número de segundos, por defecto treinta
-    { value: 'Number-queries', viewValue: 'Number of Queries' }, // Número de consultas realizadas por cada participante
-    { value: 'Coverage-effectiveness', viewValue: 'Coverage Effectiveness' }, // Relación entre el número de documentos visitados en un tiempo superior a treinta segundos y el universo total de documentos visitados
-    { value: 'Query-effectiveness', viewValue: 'Query Effectiveness' }, // Relación entre Coverage Effectiveness y Number of Queries. Esto permite medir la eficiencia asociada al proceso de búsqueda seguido por el usuario
-    { value: 'Active-bookmarks', viewValue: 'Active Bookmarks' }, //Número total de documentos recuperados por el participante, incluidos los relevantes y no relevantes
-    { value: 'Search-score', viewValue: 'Search Score' }, //Relación entre el número de documentos marcados que son relevantes y todos los marcados por el usuario. En una escala de 0 a 5, con una puntuación de 3,5 se aprueba al participante
-    { value: 'Total-page-stay', viewValue: 'Total Page Stay' }, // Tiempo total en segundos que el participante permanece en documentos
-    { value: 'Page-stay', viewValue: 'Page Stay' }, // Tiempo total en segundos que el participante estuvo en el último documento visitado
-    { value: 'Query-entropy', viewValue: 'Query Entropy' }, // Mide la frecuencia de cada una de las palabras de la consulta de tal forma que aquellas que menos se repiten aportan más información
-    { value: 'Writing-time-query', viewValue: 'Writing Time Query' }, //Tiempo total en segundos utilizado por el participante en el proceso de escritura de todas las consultas realizadas
-    { value: 'Total-query-modification', viewValue: 'Total Query Modification' }, // Número de modificaciones realizadas a las consultas en el proceso de escritura en la etapa de búsqueda
-    { value: 'If-quotes', viewValue: 'If Quotes' }, // Indica si la última consulta formulada posee comillas (1.0) o no (0.0)
-    { value: 'First-query-time', viewValue: 'First Query Time' }, // Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta
+    { value: 'totalcover', viewValue: 'Totalcover' }, //NNúmero total de documentos diferentes visitados por el participante
+    { value: 'bmrelevant', viewValue: 'Bmrelevant' }, //Número de documentos relevantes recuperados por el participante
+    { value: 'precision', viewValue: 'Precision' }, // Relación entre el número de documentos relevantes encontrados y el universo total de documentos diferentes visitados
+    { value: 'totalpagestay', viewValue: 'Total Page Stay' }, // Tiempo total en segundos que el participante permanece en documentos
+    { value: 'pagestay', viewValue: 'Page Stay' }, // Tiempo total en segundos que el participante estuvo en el último documento visitado
+    { value: 'writingtime', viewValue: 'Writing Time Query' }, //Tiempo total en segundos utilizado por el participante en el proceso de escritura de todas las consultas realizadas
+    { value: 'ifquotes', viewValue: 'If Quotes' }, // Indica si la última consulta formulada posee comillas (1.0) o no (0.0)
+    { value: 'firstquerytime', viewValue: 'First Query Time' }, // Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta
+    { value: 'challengestarted', viewValue: 'Challenge Started' },
   ];
 
 }
