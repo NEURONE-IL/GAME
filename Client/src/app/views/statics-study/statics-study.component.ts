@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChangeDetectorRef } from '@angular/core';
 import { originalSingle } from './data'
+import * as XLSX from 'xlsx';
 interface Metric {
   value: string;
   viewValue: string;
@@ -191,4 +192,18 @@ export class StaticsStudyComponent implements OnInit {
     { value: 'challengestarted', viewValue: 'Challenge Started' },
   ];
 
+
+  downloadExcel(): void {
+    /* Genera un objeto de libro de trabajo */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+    /* Genera una hoja de trabajo */
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.originalSingle);
+
+    /* Agrega la hoja de trabajo al libro de trabajo */
+    XLSX.utils.book_append_sheet(wb, ws, 'Métricas');
+
+    /* Guarda el archivo */
+    XLSX.writeFile(wb, 'metricas.xlsx');
+  }
 }
