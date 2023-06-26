@@ -22,6 +22,9 @@ export interface HintData {
 
 export class QuestionBarComponent implements OnInit {
 
+  // Utils
+  blockAnswer = false;
+
   // Challenge data
   hintUsed = false;
   hintActive = false;
@@ -158,8 +161,15 @@ export class QuestionBarComponent implements OnInit {
   }
 
   sendAnswer() {
+    if(this.blockAnswer){
+      return;
+    }
+    this.blockAnswer = true;
     let isValid = this.checkValid();
-    if(!isValid) return;
+    if(!isValid){
+      this.blockAnswer = false;
+      return;
+    } 
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer.toString();
