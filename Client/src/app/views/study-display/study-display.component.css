@@ -196,6 +196,8 @@ table {
 ::ng-deep .buttons-align  .mat-figure {
   justify-content: end !important;
 }
-.header-text {
-  padding-top: 10px;
+.header-text .mat-card-title {
+  line-height: 22px;
+  padding: 0px;
+  margin: 0px;
 }
