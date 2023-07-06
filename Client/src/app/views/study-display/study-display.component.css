@@ -28,6 +28,7 @@
 .actions{
 	justify-content: flex-end;
 }
+
 ::ng-deep mat-grid-tile.mat-grid-tile .mat-figure {
 	align-items: center;
 	justify-content: flex-start;
@@ -191,4 +192,10 @@ table {
 }
 ::ng-deep .competence-info .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
   line-height: 20px !important;
+}
+::ng-deep .buttons-align  .mat-figure {
+  justify-content: end !important;
+}
+.header-text {
+  padding-top: 10px;
 }

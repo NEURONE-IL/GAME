@@ -1,12 +1,11 @@
 <mat-card class="study-display-card">
   <mat-grid-list cols="24">
-    <mat-grid-tile colspan="12">
-      <mat-card-header>
+    <mat-grid-tile colspan="8">
+      <mat-card-header class="header-text">
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
       </mat-card-header>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="2"></mat-grid-tile>
-    <mat-grid-tile [colspan]="10">
+    <mat-grid-tile colspan="16" class="buttons-align">
       <button *ngIf="!loadingClone; else cargandoClone" mat-raised-button class="actionButton" color="primary" (click)="confirmCloneStudy()">
         CLONAR ESTUDIO <mat-icon>content_copy</mat-icon>
       </button>
