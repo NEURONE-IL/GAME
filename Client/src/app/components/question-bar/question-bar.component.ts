@@ -75,7 +75,7 @@ export class QuestionBarComponent implements OnInit {
   ngOnInit(): void {
     this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
     this.sendAnswerTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_SEND");
-    this.assistant();
+    //this.assistant();
   }
 
   ngOnDestroy(): void {
@@ -481,6 +481,7 @@ export class QuestionBarComponent implements OnInit {
     }
   }
 
+  /*
   assistant(){
     let study = this.authService.getUser().study;
     this.studyService.getAssistant(study).subscribe( response => {
@@ -490,6 +491,12 @@ export class QuestionBarComponent implements OnInit {
       }
     })
     
+  }*/
+
+  minimized = false;
+
+  minimize(){
+    this.minimized = !this.minimized;
   }
 
   get answerControls(): any {
