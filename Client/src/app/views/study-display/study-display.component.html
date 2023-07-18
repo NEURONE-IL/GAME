@@ -79,6 +79,7 @@
       <ng-template mat-tab-label>
         <span (click)="reloadChallenges()"> {{'ADMIN.TABS.CHALLENGES' | translate }} </span>
       </ng-template>
+        
       <ng-template matTabContent>
         <div class="row ">
           <div class="col-md-12" *ngFor="let challenge of challenges; let index = index;">
@@ -120,6 +121,13 @@
               </div>
               <div class="col-md-3">
                 {{ "ADMIN.CHALLENGES.UPDATED_AT" | translate }}: {{formatDate(challenge.updatedAt)}}
+              </div>
+              </mat-card-content>
+              <mat-card-content *ngIf="challenge.messages">
+              <div class="ql-container col-md-12" style="border-width: 0;">
+                Mensajes: 
+                <div class="ql-editor" [innerHTML]="transformHtml(challenge.messages)">
+                </div>
               </div>
             </mat-card-content>
 

@@ -14,7 +14,7 @@ import { StudyUpdateComponent } from '../study-update/study-update.component';
 import { ChallengeUpdateComponent } from '../challenge-update/challenge-update.component';
 import { MatTable } from '@angular/material/table';
 import { History, HistoryService } from '../../services/admin/history.service';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 export interface Section {
   name: string;
@@ -87,7 +87,8 @@ export class StudyDisplayComponent implements OnInit {
               private toastr: ToastrService,
               private translate: TranslateService,
               public endpointsService: EndpointsService,
-              public matDialog: MatDialog
+              public matDialog: MatDialog,
+              private sanitizer: DomSanitizer
               ) { }
 
   ngOnInit(): void {
@@ -601,6 +602,9 @@ export class StudyDisplayComponent implements OnInit {
         this.loadingClone = false;
       }
     );
+  }
+  transformHtml(htmlTextWithStyle): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(htmlTextWithStyle);
   }
 
 }
