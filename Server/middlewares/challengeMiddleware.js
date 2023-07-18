@@ -30,6 +30,8 @@ const schema = Joi.object({
     max_attempts: Joi.number()
         .required(),
     
+    messages: Joi.string()
+    
         
 })
 
@@ -55,7 +57,9 @@ const editSchema = Joi.object({
 
     max_attempts: Joi.number(),
     
-    user_edit: Joi.string()
+    user_edit: Joi.string(),
+    
+    messages: Joi.string()
 })
 
 const answerSchema = Joi.object({

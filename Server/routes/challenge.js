@@ -366,6 +366,13 @@ router.put('/:challenge_id', [verifyToken, authMiddleware.isAdmin, challengeMidd
         if(req.body.max_attempts){
             challenge.max_attempts = req.body.max_attempts;
         }
+        if(req.body.messages){
+            if(req.body.messages === '-')
+                challenge.messages = '';
+            else
+                challenge.messages = req.body.messages;
+        }
+        
         challenge.updatedAt = Date.now();
         challenge.save((err, challenge) => {
             if (err) {

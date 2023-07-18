@@ -132,6 +132,15 @@
 			</mat-grid-tile>
 		</mat-grid-list>
 	</form>
+	<mat-grid-list cols="12" >
+		<mat-grid-tile colspan="12">
+			<mat-slide-toggle [checked]="hasMessages"  (change)="showRichText($event)" color="primary">Agregar mensajes de ayuda</mat-slide-toggle>
+		</mat-grid-tile>
+		
+	</mat-grid-list>
+	<mat-grid-list cols="12" [hidden]="!hasMessages">
+		<div id="editor"></div>
+	</mat-grid-list>
 </mat-card-content>
 <mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
 	<button mat-raised-button class="saveButton" [disabled]="!challengeForm.valid" (click)="updateChallenge(challenge._id)">
