@@ -496,7 +496,25 @@ export class QuestionBarComponent implements OnInit {
   minimized = false;
 
   minimize(){
+    if(this.minimized){
+      /*Dispatch openassistantmodal event*/
+      var evt = new CustomEvent('openassistantmodal');
+      window.dispatchEvent(evt);
+      /*End dispatch openassistantmodal event*/
+    }else{
+      /*Dispatch closeassistantmodal event*/
+      var evt = new CustomEvent('closeassistantmodal');
+      window.dispatchEvent(evt);
+      /*End dispatch closeassistantmodal event*/
+    }
     this.minimized = !this.minimized;
+  }
+
+  registrarClick(){
+    /*Dispatch clickassistantmodal event*/
+    var evt = new CustomEvent('clickassistantmodal');
+    window.dispatchEvent(evt);
+    /*End dispatch clickassistantmodal event*/    
   }
 
   get answerControls(): any {
