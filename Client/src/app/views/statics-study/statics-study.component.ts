@@ -211,11 +211,55 @@ export class StaticsStudyComponent implements OnInit {
   }
 
   downloadExcel(): void {
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.originalSingle);
-    XLSX.utils.book_append_sheet(wb, ws, 'Métricas');
-    XLSX.writeFile(wb, 'metricas.xlsx');
+  const studentsData: Record<string, Record<string, number>> = {};
+
+  for (const metric of this.metrics) {
+    const metricData = this.originalSingle.filter(data => data.type === metric.value);
+    for (const data of metricData) {
+      if (!studentsData[data.userId]) {
+        studentsData[data.userId] = {};
+      }
+      if (!studentsData[data.userId][metric.value] || data.value > studentsData[data.userId][metric.value]) {
+        studentsData[data.userId][metric.value] = data.value;
+      }
+    }
   }
+
+  const worksheetData: any[] = [];
+  const headerRow: any[] = ['Estudiante', ...this.metrics.map(metric => metric.viewValue)];
+
+  worksheetData.push(headerRow);
+
+  for (const studentId in studentsData) {
+    const studentRow: any[] = [this.getStudentNameById(studentId)];
+    for (const metric of this.metrics) {
+      const value = studentsData[studentId][metric.value] || '';
+      studentRow.push(value);
+    }
+    worksheetData.push(studentRow);
+  }
+
+  const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+  // Ajustar el ancho de las columnas
+  const columnWidths: number[] = [20]; // Ancho de la primera columna (Estudiante)
+  for (let i = 0; i < this.metrics.length; i++) {
+    columnWidths.push(15); // Ancho de las columnas de métricas
+  }
+  worksheet['!cols'] = columnWidths.map(width => ({ width }));
+
+  const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Métricas');
+  XLSX.writeFile(workbook, 'metricas.xlsx');
+}
+  
+  getStudentNameById(userId: string): string {
+    if (userId === 'todos') {
+      return 'Todos';
+    }
+    const student = this.students.find(student => student.value === userId);
+    return student ? student.viewValue : '';
+  } 
 
   async downloadPDF(): Promise<void> {
     Swal.fire({
