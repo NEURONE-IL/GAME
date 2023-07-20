@@ -29,6 +29,8 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.4.0",
     "dpacl": "1.0.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "lodash": "^4.17.20",
     "lunr": "^2.3.9",
     "ng-validate-equal": "^1.0.4",
@@ -39,6 +41,7 @@
     "ngx-toastr": "^13.1.0",
     "plyr": "^3.6.8",
     "rxjs": "~6.5.4",
+    "sweetalert2": "^11.7.18",
     "tslib": "^1.10.0",
     "xlsx": "^0.18.5",
     "zone.js": "~0.10.2"

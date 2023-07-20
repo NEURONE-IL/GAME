@@ -303,4 +303,8 @@ export class AuthService {
   getUsersByStudy(idstudy: string){
     return this.http.get(this.userUri + 'getUsersByStudy/' + idstudy);
   }
+  
+  getMetricsByStudy(idstudy: string){
+    return this.http.get(this.userUri + 'getMetricsByStudy/' + idstudy);
+  }
 }

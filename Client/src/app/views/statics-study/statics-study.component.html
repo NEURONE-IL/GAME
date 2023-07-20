@@ -2,35 +2,35 @@
     <mat-card class="form-container">
         <form>
             <h4>Métricas</h4>
-            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedValue" name="metric"
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedMetric" name="metric"
                 class="metrics-group" (change)="onMetricChange($event.value)">
                 <mat-radio-button *ngFor="let metric of metrics" [value]="metric.value">
                     {{metric.viewValue}}
                 </mat-radio-button>
             </mat-radio-group>
-            <p> Métrica seleccionada: {{selectedValue}} </p>
+            <p> Métrica seleccionada: {{selectedMetric}} </p>
         </form>
     </mat-card>
 
     <mat-card class="form-container">
         <form>
-            <h4>Estudiantes</h4>
-            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student"
-                class="metrics-group" (change)="onStudentChange($event.value)">
-                <mat-radio-button *ngFor="let student of students" [value]="student.value">
-                    {{student.viewValue}}
-                </mat-radio-button>
-            </mat-radio-group>
-            <p> Estudiante seleccionado/a: {{selectedStudent}} </p>
+          <h4>Estudiantes</h4>
+          <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student" class="metrics-group"
+            (change)="onStudentChange($event.value)">
+            <mat-radio-button *ngFor="let student of students" [value]="student.value">
+              {{student.viewValue}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <p> Estudiante seleccionado/a: {{getSelectedStudentName()}} </p>
         </form>
-    </mat-card>
+      </mat-card>      
 
     <mat-card class="form-container-metrics">
         <div class="pdf-container">
             <div class="pdf-viewer">
-                <div class="pdf-border">
+                <div id="pdf-border" class="pdf-border">
                     <!-- Primer gráfico -->
-                    <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme" [legend]="linearChartOptions.legend"
+                    <ngx-charts-line-chart [attr.id]="selectedMetric" [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme" [legend]="linearChartOptions.legend"
                         [showXAxisLabel]="linearChartOptions.showXAxisLabel" [showYAxisLabel]="linearChartOptions.showYAxisLabel" [xAxis]="linearChartOptions.xAxis"
                         [yAxis]="linearChartOptions.yAxis" [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" [timeline]="linearChartOptions.timeline"
                         *ngIf="chartsVisible" [results]="linearChartOptions.single">
@@ -39,13 +39,13 @@
                     <!-- Segundo gráfico -->
                     <div class="pdf-row">
 
-                        <ngx-charts-pie-chart [view]="circularChartOptions.view"
+                        <ngx-charts-pie-chart [attr.id]="selectedMetric" [view]="circularChartOptions.view"
                             [scheme]="circularChartOptions.colorScheme" *ngIf="chartsVisible" [results]="circularChartOptions.single"
                             [gradient]="circularChartOptions.gradient" [legend]="circularChartOptions.showLegend"
                             [legendPosition]="circularChartOptions.legendPosition"
                             [labels]="circularChartOptions.showLabels" [doughnut]="circularChartOptions.isDoughnut">
                         </ngx-charts-pie-chart>
-                        <ngx-charts-bar-vertical [view]="barChartOptions.view" [scheme]="barChartOptions.colorScheme"
+                        <ngx-charts-bar-vertical [attr.id]="selectedMetric" [view]="barChartOptions.view" [scheme]="barChartOptions.colorScheme"
                         *ngIf="chartsVisible" [results]="barChartOptions.single" [gradient]="barChartOptions.gradient"
                             [xAxis]="barChartOptions.showXAxis" [yAxis]="barChartOptions.showYAxis"
                             [legend]="barChartOptions.showLegend" [showXAxisLabel]="barChartOptions.showXAxisLabel"
@@ -59,7 +59,7 @@
                         <img src="../assets/excel-logo.png" alt="Excel">
                         <span>Descargar Excel</span>
                       </button>
-                    <button class="pdf-pdf-button">
+                      <button class="pdf-pdf-button" (click)="downloadPDF()">
                         <img src="../assets/pdf-logo.png" alt="PDF">
                         <span>Descargar PDF</span>
                     </button>
