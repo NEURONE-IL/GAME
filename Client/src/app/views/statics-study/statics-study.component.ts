@@ -226,35 +226,78 @@ export class StaticsStudyComponent implements OnInit {
         Swal.showLoading();
       }
     });
-
+  
     const mergedPdf = new jsPDF();
-
+  
+    const metricDescriptions = {
+      totalcover: 'Número total de documentos diferentes visitados por el participante',
+      bmrelevant: 'Número de documentos relevantes recuperados por el participante',
+      precision: 'Relación entre el número de documentos relevantes encontrados y el universo total de documentos diferentes visitados',
+      recall: 'Relación entre el número de documentos relevantes encontrados y el universo total de documentos relevantes',
+      f1: 'Media armónica entre las métricas Precision y Recall',
+      usfcover: 'Número de documentos diferentes visitados durante un período superior a un cierto número de segundos, por defecto treinta',
+      numqueries: 'Número de consultas realizadas por cada participante',
+      ceffectiveness: 'Relación entre el número de documentos visitados en un tiempo superior a treinta segundos y el universo total de documentos visitados',
+      qeffectiveness: 'Relación entre Coverage Effectiveness y Number of Queries. Esto permite medir la eficiencia asociada al proceso de búsqueda seguido por el usuario',
+      activebm: 'Número total de documentos recuperados por el participante, incluidos los relevantes y no relevantes',
+      score: 'Relación entre el número de documentos marcados que son relevantes y todos los marcados por el usuario. En una escala de 0 a 5, con una puntuación de 3,5 se aprueba al participante',
+      totalpagestay: 'Tiempo total en segundos que el participante permanece en documentos',
+      pagestay: 'Tiempo total en segundos que el participante estuvo en el último documento visitado',
+      entropy: 'Mide la frecuencia de cada una de las palabras de la consulta de tal forma que aquellas que menos se repiten aportan más información',
+      writingtime: 'Tiempo total en segundos utilizado por el participante en el proceso de escritura de todas las consultas realizadas',
+      modquery: 'Número de modificaciones realizadas a las consultas en el proceso de escritura en la etapa de búsqueda',
+      ifquotes: 'Indica si la última consulta formulada posee comillas (1.0) o no (0.0)',
+      firstquerytime: 'Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta',
+      challengestarted: 'Indica si el participante ha iniciado el reto'
+    };
+    
+  
     for (let i = 0; i < this.metrics.length; i++) {
       const metric = this.metrics[i];
-
+  
       this.onMetricChange(metric.value);
       await this.cdRef.detectChanges();
-
+  
       const data = document.getElementById('pdf-border');
-
+  
       if (data) {
+        if (i > 0) {
+          mergedPdf.addPage();
+        }
+  
+        await this.delay(1000); // Agrega un retraso de 1 segundo (puedes ajustar el tiempo según tus necesidades)
+  
         const canvas = await html2canvas(data);
         const imgWidth = 208;
         const pageHeight = 295;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         const imgData = canvas.toDataURL('image/png');
-
-        if (i > 0) {
-          mergedPdf.addPage();
-        }
-
-        mergedPdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+  
+        // Agregar nombre de la métrica como texto al principio de la página
+        mergedPdf.setFontSize(12);
+        mergedPdf.text(metric.viewValue, 10, 20);
+  
+        // Agregar descripción de la métrica en español
+        const description = metricDescriptions[metric.value];
+        mergedPdf.setFontSize(10);
+        const splitDescription = mergedPdf.splitTextToSize(description, 180);
+        mergedPdf.text(splitDescription,10, 30);
+  
+        // Agregar la imagen debajo del nombre y descripción de la métrica
+        mergedPdf.addImage(imgData, 'PNG', 0, 60, imgWidth, imgHeight);
       }
     }
-
+  
     Swal.close();
     mergedPdf.save('metricas.pdf');
   }
+  
+  
+
+  delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 
   getSelectedStudentName(): string {
     if (this.selectedStudent === 'todos') {
@@ -263,5 +306,5 @@ export class StaticsStudyComponent implements OnInit {
     const selectedStudent = this.students.find(student => student.value === this.selectedStudent);
     return selectedStudent ? selectedStudent.viewValue : '';
   }
-  
+
 }
