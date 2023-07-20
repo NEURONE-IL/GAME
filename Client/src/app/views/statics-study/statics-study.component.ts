@@ -250,7 +250,10 @@ export class StaticsStudyComponent implements OnInit {
       firstquerytime: 'Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta',
       challengestarted: 'Indica si el participante ha iniciado el reto'
     };
-    
+  
+    // Agregar portada con el título "Reporte Estudio"
+    mergedPdf.setFontSize(24);
+    mergedPdf.text('Reporte Estudio', mergedPdf.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
   
     for (let i = 0; i < this.metrics.length; i++) {
       const metric = this.metrics[i];
@@ -275,13 +278,13 @@ export class StaticsStudyComponent implements OnInit {
   
         // Agregar nombre de la métrica como texto al principio de la página
         mergedPdf.setFontSize(12);
-        mergedPdf.text(metric.viewValue, 10, 20);
+        mergedPdf.text(metric.viewValue, 10, 30);
   
         // Agregar descripción de la métrica en español
         const description = metricDescriptions[metric.value];
         mergedPdf.setFontSize(10);
         const splitDescription = mergedPdf.splitTextToSize(description, 180);
-        mergedPdf.text(splitDescription,10, 30);
+        mergedPdf.text(splitDescription, 10, 40);
   
         // Agregar la imagen debajo del nombre y descripción de la métrica
         mergedPdf.addImage(imgData, 'PNG', 0, 60, imgWidth, imgHeight);
