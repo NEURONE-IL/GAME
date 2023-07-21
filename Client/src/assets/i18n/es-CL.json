@@ -22,7 +22,8 @@
     "NO": "NO",
     "YES": "SÍ",
     "SEARCH": "BUSCAR",
-    "TRAINER_RETURN": "IR A TRAINER"    
+    "TRAINER_RETURN": "IR A TRAINER",
+    "STATICS": "ESTADÍSTICAS"    
   },
   "ADMIN": {
     "TABS": {

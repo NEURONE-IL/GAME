@@ -1,12 +1,12 @@
 <mat-card class="study-display-card">
   <mat-grid-list cols="24">
-    <mat-grid-tile colspan="12">
+    <mat-grid-tile colspan="8">
       <mat-card-header>
         <mat-card-title *ngIf="study">{{ "ADMIN.STUDIES.HEADER" | translate }}: {{study.name}}</mat-card-title>
       </mat-card-header>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2"></mat-grid-tile>
-    <mat-grid-tile [colspan]="10">
+    <mat-grid-tile [colspan]="12">
       <button *ngIf="!loadingClone; else cargandoClone" mat-raised-button class="actionButton" color="primary" (click)="confirmCloneStudy()">
         CLONAR ESTUDIO <mat-icon>content_copy</mat-icon>
       </button>
@@ -18,7 +18,7 @@
       <button mat-raised-button class="actionButton" color="primary" (click)="showStudyUpdateDialog()">{{ "BUTTONS.EDIT_STUDY" | translate }} <mat-icon>edit</mat-icon></button>
       <button mat-raised-button *ngIf="userOwner" class="actionButton" color="warn" (click)="confirmStudyDelete(study._id)">{{ "BUTTONS.DELETE_STUDY" | translate }} <mat-icon>delete</mat-icon></button>
       <button mat-raised-button *ngIf="!(userOwner)" class="actionButton" color="warn" (click)="confirmCollaborationLeft()">DEJAR COLABORACIÓN <mat-icon>do_not_touch</mat-icon></button>
-      <button mat-raised-button class="actionButton mat-start" color="primary" (click)="staticsLeft(this.study._id)">ESTADÍSTICAS <mat-icon>trending_up</mat-icon></button>
+      <button mat-raised-button class="actionButton mat-start" color="primary" (click)="staticsLeft(this.study._id)">{{ "BUTTONS.STATICS" | translate }} <mat-icon>trending_up</mat-icon></button>
     </mat-grid-tile>    
   </mat-grid-list>
   <mat-grid-list cols="24">
