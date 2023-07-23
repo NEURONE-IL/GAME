@@ -180,9 +180,9 @@ b {
 
 
 .assistant{
-  width: 366px;
+  width: 300px;
   background-color: white;
-  height: 500px;
+  max-height: 600px;
   border: 1px solid #6e6d6d45;
   border-radius: 5px;
   position: fixed;
@@ -232,7 +232,7 @@ hr{
 }
 
 .assistant-content{
-  padding: 10px 15px;
+  padding: 0;
 }
 
 .minimize{
@@ -250,4 +250,20 @@ hr{
   top: 9vh;
   right: 3vh;
   cursor: pointer;
+}
+
+br{
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 1000px) {
+  .assistant {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .assistant {
+    width: 220px;
+  }
 }

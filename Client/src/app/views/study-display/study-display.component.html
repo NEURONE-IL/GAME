@@ -113,8 +113,11 @@
               </div>
             </mat-card-content>
             <mat-card-content>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 {{ "ADMIN.CHALLENGES.HINT" | translate }}: {{challenge.hint}}
+              </div>
+              <div class="col-md-3">
+                {{ "ADMIN.CHALLENGES.QUESTION_CODE" | translate }}: {{challenge.question_code}}
               </div>
               <div class="col-md-3">
                 {{ "ADMIN.CHALLENGES.CREATED_AT" | translate }}: {{formatDate(challenge.createdAt)}}
