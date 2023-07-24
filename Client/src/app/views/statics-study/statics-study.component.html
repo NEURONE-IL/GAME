@@ -14,39 +14,140 @@
 
     <mat-card class="form-container">
         <form>
-          <h4>Estudiantes</h4>
-          <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student" class="metrics-group"
-            (change)="onStudentChange($event.value)">
-            <mat-radio-button *ngFor="let student of students" [value]="student.value">
-              {{student.viewValue}}
-            </mat-radio-button>
-          </mat-radio-group>
-          <p> Estudiante seleccionado/a: {{getSelectedStudentName()}} </p>
+            <h4>Estudiantes</h4>
+            <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student"
+                class="metrics-group" (change)="onStudentChange($event.value)">
+                <mat-radio-button *ngFor="let student of students" [value]="student.value">
+                    {{student.viewValue}}
+                </mat-radio-button>
+            </mat-radio-group>
+            <p> Estudiante seleccionado/a: {{getSelectedStudentName()}} </p>
         </form>
-      </mat-card>      
+    </mat-card>
 
     <mat-card class="form-container-metrics">
         <div class="pdf-container">
             <div class="pdf-viewer">
                 <div id="pdf-border" class="pdf-border">
-                    <!-- Primer gráfico -->
-                    <ngx-charts-line-chart [attr.id]="selectedMetric" [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme" [legend]="linearChartOptions.legend"
-                        [showXAxisLabel]="linearChartOptions.showXAxisLabel" [showYAxisLabel]="linearChartOptions.showYAxisLabel" [xAxis]="linearChartOptions.xAxis"
-                        [yAxis]="linearChartOptions.yAxis" [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" [timeline]="linearChartOptions.timeline"
-                        *ngIf="chartsVisible" [results]="linearChartOptions.single">
+                    <ngx-charts-line-chart
+                        *ngIf="selectedMetric !== 'totalcover' && selectedMetric !== 'challengestarted' && selectedMetric !== 'bmrelevant'
+                        && selectedMetric !== 'precision' && selectedMetric !== 'totalpagestay' && selectedMetric !== 'pagestay'
+                        && selectedMetric !== 'writingtime' && selectedMetric !== 'ifquotes' && selectedMetric !== 'firstquerytime'
+                        && chartsVisible"
+                        [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
                     </ngx-charts-line-chart>
+
+                    <!-- Mostrar gráfico de tarjeta numérica si la métrica seleccionada es 'totalcover' o 'challengestarted' -->
+                    <div *ngIf="selectedMetric === 'totalcover' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Número total de documentos diferentes visitados por el participante</h6>
+                        <ngx-charts-number-card [attr.id]="selectedMetric" [view]="numberCardOptions.view"
+                            [scheme]="numberCardOptions.colorScheme" [results]="numberCardOptions.single"
+                            [cardColor]="numberCardOptions.cardColor">
+                        </ngx-charts-number-card>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'precision' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Relación entre el número de documentos relevantes encontrados y el universo total de documentos diferentes visitados</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'totalpagestay' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Tiempo total en segundos que el participante permanece en documentos</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'pagestay' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Tiempo total en segundos que el participante estuvo en el último documento visitado</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'writingtime' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Tiempo total en segundos utilizado por el participante en el proceso de escritura de todas las consultas realizadas</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'ifquotes' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Indica si la última consulta formulada posee comillas (1.0) o no (0.0)</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'firstquerytime' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+
+                    <div *ngIf="selectedMetric === 'bmrelevant' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Número de documentos relevantes recuperados por el participante</h6>
+                        <ngx-charts-line-chart [view]="linearChartOptions.view" [scheme]="linearChartOptions.colorScheme"
+                        [results]="linearChartOptions.single" [gradient]="linearChartOptions.gradient"
+                        [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
+                        [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
+                        [showYAxisLabel]="linearChartOptions.showYAxisLabel"
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                    </ngx-charts-line-chart>
+                    </div>
+                    <!-- Mostrar lista de estudiantes que han iniciado el reto si la métrica seleccionada es 'challengestarted' -->
+                    <div *ngIf="selectedMetric === 'challengestarted' && chartsVisible">
+                        <h6 style="margin-top: 40px;">Estudiantes que han iniciado el reto</h6>
+                        <ngx-charts-number-card [attr.id]="selectedMetric" [view]="numberCardOptions.view"
+                            [scheme]="numberCardOptions.colorScheme" [results]="numberCardOptions.single"
+                            [cardColor]="numberCardOptions.cardColor">
+                        </ngx-charts-number-card>
+                    </div>
 
                     <!-- Segundo gráfico -->
                     <div class="pdf-row">
-
                         <ngx-charts-pie-chart [attr.id]="selectedMetric" [view]="circularChartOptions.view"
-                            [scheme]="circularChartOptions.colorScheme" *ngIf="chartsVisible" [results]="circularChartOptions.single"
-                            [gradient]="circularChartOptions.gradient" [legend]="circularChartOptions.showLegend"
+                            [scheme]="circularChartOptions.colorScheme" *ngIf="chartsVisible"
+                            [results]="circularChartOptions.single" [gradient]="circularChartOptions.gradient"
+                            [legend]="circularChartOptions.showLegend"
                             [legendPosition]="circularChartOptions.legendPosition"
                             [labels]="circularChartOptions.showLabels" [doughnut]="circularChartOptions.isDoughnut">
                         </ngx-charts-pie-chart>
-                        <ngx-charts-bar-vertical [attr.id]="selectedMetric" [view]="barChartOptions.view" [scheme]="barChartOptions.colorScheme"
-                        *ngIf="chartsVisible" [results]="barChartOptions.single" [gradient]="barChartOptions.gradient"
+                        <ngx-charts-bar-vertical [attr.id]="selectedMetric" [view]="barChartOptions.view"
+                            [scheme]="barChartOptions.colorScheme" *ngIf="chartsVisible"
+                            [results]="barChartOptions.single" [gradient]="barChartOptions.gradient"
                             [xAxis]="barChartOptions.showXAxis" [yAxis]="barChartOptions.showYAxis"
                             [legend]="barChartOptions.showLegend" [showXAxisLabel]="barChartOptions.showXAxisLabel"
                             [showYAxisLabel]="barChartOptions.showYAxisLabel" [xAxisLabel]="barChartOptions.xAxisLabel"
@@ -58,8 +159,8 @@
                     <button class="pdf-excel-button" (click)="downloadExcel()">
                         <img src="../assets/excel-logo.png" alt="Excel">
                         <span>Descargar Excel</span>
-                      </button>
-                      <button class="pdf-pdf-button" (click)="downloadPDF()">
+                    </button>
+                    <button class="pdf-pdf-button" (click)="downloadPDF()">
                         <img src="../assets/pdf-logo.png" alt="PDF">
                         <span>Descargar PDF</span>
                     </button>

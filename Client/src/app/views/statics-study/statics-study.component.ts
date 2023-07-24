@@ -68,9 +68,35 @@ export class StaticsStudyComponent implements OnInit {
     yAxisLabel: 'Population',
     timeline: true,
     colorScheme: {
-      domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+      domain: [
+        '#5AA454', '#E44D25', '#CFC0BB', '#7AA3E5', '#A8385D', '#AAE3F5',
+        '#9B7653', '#67032F', '#B5E2FA', '#ACE5EE', '#00FF00', '#FF00FF',
+        '#FFFF00', '#0000FF', '#800000', '#808000', '#008000', '#800080',
+        '#008080', '#000080', '#FDB813', '#C04000', '#C08040', '#00C0C0',
+        '#4000C0', '#C000C0', '#404080', '#80C0C0', '#8080C0', '#C0C080',
+        '#3F3F3F', '#7F7F7F', '#BFBFBF', '#FFFFFF', '#FF4500', '#7FFF00',
+        '#D2691E', '#8A2BE2', '#7FFF00', '#DAA520'
+    ]
     }
   };
+
+  numberCardOptions: any = {
+    single: [...this.originalSingle],
+    view: [900, 330],  // configura el tamaño según tus necesidades
+    colorScheme: {
+      domain: [
+        '#5AA454', '#E44D25', '#CFC0BB', '#7AA3E5', '#A8385D', '#AAE3F5',
+        '#9B7653', '#67032F', '#B5E2FA', '#ACE5EE', '#00FF00', '#FF00FF',
+        '#FFFF00', '#0000FF', '#800000', '#808000', '#008000', '#800080',
+        '#008080', '#000080', '#FDB813', '#C04000', '#C08040', '#00C0C0',
+        '#4000C0', '#C000C0', '#404080', '#80C0C0', '#8080C0', '#C0C080',
+        '#3F3F3F', '#7F7F7F', '#BFBFBF', '#FFFFFF', '#FF4500', '#7FFF00',
+        '#D2691E', '#8A2BE2', '#7FFF00', '#DAA520'
+    ]
+    },
+    cardColor: '#232837'
+  };
+
 
   study$: any;
   idStudy: string;
@@ -163,7 +189,7 @@ export class StaticsStudyComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  updateChartData(): void {
+    updateChartData(): void {
     let filteredData;
     if (this.selectedMetric === 'Todos') {
       filteredData = [...this.originalSingle];
@@ -184,14 +210,23 @@ export class StaticsStudyComponent implements OnInit {
 
     let barAndCircularChartData = [];
     let linearChartData = [];
+    
     for (let userId in groupedData) {
       let userName = this.students.find(student => student.value === userId)?.viewValue || userId;
 
       let maxValue = Math.max(...groupedData[userId].map(data => data.value));
-      barAndCircularChartData.push({
+      
+      let chartDataItem = {
         name: userName,
         value: maxValue
-      });
+      };
+
+      // Add extra field if the selectedMetric is 'challengestarted'
+      if (this.selectedMetric === 'challengestarted') {
+        chartDataItem.name = `${userName} ha iniciado reto`;
+      }
+
+      barAndCircularChartData.push(chartDataItem);
 
       linearChartData.push({
         name: userName,
@@ -204,11 +239,13 @@ export class StaticsStudyComponent implements OnInit {
 
     this.barChartOptions.single = barAndCircularChartData;
     this.circularChartOptions.single = barAndCircularChartData;
+    this.numberCardOptions.single = barAndCircularChartData;
     this.linearChartOptions.single = linearChartData;
 
     this.chartsVisible = this.barChartOptions.single.length > 0;
     this.cdRef.markForCheck();
   }
+
 
   downloadExcel(): void {
   const studentsData: Record<string, Record<string, number>> = {};
@@ -295,10 +332,6 @@ export class StaticsStudyComponent implements OnInit {
       challengestarted: 'Indica si el participante ha iniciado el reto'
     };
   
-    // Agregar portada con el título "Reporte Estudio"
-    mergedPdf.setFontSize(24);
-    mergedPdf.text('Reporte Estudio', mergedPdf.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
-  
     for (let i = 0; i < this.metrics.length; i++) {
       const metric = this.metrics[i];
   
@@ -308,9 +341,13 @@ export class StaticsStudyComponent implements OnInit {
       const data = document.getElementById('pdf-border');
   
       if (data) {
-        if (i > 0) {
+        if (i !== 0) { // Agrega una nueva página solo si no es la primera métrica
           mergedPdf.addPage();
         }
+  
+        // Agregar título "Reporte Estudio" en cada página
+        mergedPdf.setFontSize(24);
+        mergedPdf.text('Reporte Estudio', mergedPdf.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
   
         await this.delay(1000); // Agrega un retraso de 1 segundo (puedes ajustar el tiempo según tus necesidades)
   
@@ -322,16 +359,16 @@ export class StaticsStudyComponent implements OnInit {
   
         // Agregar nombre de la métrica como texto al principio de la página
         mergedPdf.setFontSize(12);
-        mergedPdf.text(metric.viewValue, 10, 30);
+        mergedPdf.text(metric.viewValue, 10, 60);
   
         // Agregar descripción de la métrica en español
         const description = metricDescriptions[metric.value];
         mergedPdf.setFontSize(10);
         const splitDescription = mergedPdf.splitTextToSize(description, 180);
-        mergedPdf.text(splitDescription, 10, 40);
+        mergedPdf.text(splitDescription, 10, 70);
   
         // Agregar la imagen debajo del nombre y descripción de la métrica
-        mergedPdf.addImage(imgData, 'PNG', 0, 60, imgWidth, imgHeight);
+        mergedPdf.addImage(imgData, 'PNG', 0, 90, imgWidth, imgHeight);
       }
     }
   
