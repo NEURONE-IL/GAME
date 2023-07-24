@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import Swal from 'sweetalert2';
+import { StudyService } from 'src/app/services/game/study.service';
 
 interface Metric {
   value: string;
@@ -102,7 +103,7 @@ export class StaticsStudyComponent implements OnInit {
   idStudy: string;
   students: Student[] = [];
   selectedStudent = 'todos';
-
+  study: any;
   allMetrics: Metric[] = [
     { value: 'totalcover', viewValue: 'Totalcover' },
     { value: 'bmrelevant', viewValue: 'Bmrelevant' },
@@ -116,11 +117,20 @@ export class StaticsStudyComponent implements OnInit {
   ];
   metrics: any;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {
+  constructor(private authService: AuthService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef,
+    private studyService: StudyService,) {
   }
 
   ngOnInit(): void {
     this.idStudy = this.route.snapshot.paramMap.get('study_id');
+    this.studyService.getStudy(this.route.snapshot.paramMap.get('study_id')).subscribe(
+      response => {
+        this.study = response['study'].name;
+      },
+      err => {
+        console.log('error')
+      }
+    );
     this.getStudyData(this.idStudy);
     this.getMetricsData(this.idStudy);
   }
@@ -136,6 +146,7 @@ export class StaticsStudyComponent implements OnInit {
           };
         });
         this.students.unshift({ value: 'todos', viewValue: 'Todos' });
+        console.log(this.students)
       },
       (error) => {
         console.error(error);
@@ -299,6 +310,8 @@ export class StaticsStudyComponent implements OnInit {
   } 
 
   async downloadPDF(): Promise<void> {
+    const studyName = this.study; 
+  
     Swal.fire({
       title: 'Generando PDF',
       text: 'Por favor, espera...',
@@ -331,7 +344,15 @@ export class StaticsStudyComponent implements OnInit {
       firstquerytime: 'Indica de forma progresiva (cada 1 segundo aproximadamente) cuanto tiempo (en segundos) lleva el estudiante sin hacer la primera consulta',
       challengestarted: 'Indica si el participante ha iniciado el reto'
     };
+    
+    let filteredData;
   
+    if (this.selectedStudent !== 'todos') {
+      filteredData = this.originalSingle.filter(data => data.userId === this.selectedStudent);
+    } else {
+      filteredData = this.originalSingle;
+    }
+    
     for (let i = 0; i < this.metrics.length; i++) {
       const metric = this.metrics[i];
   
@@ -359,7 +380,7 @@ export class StaticsStudyComponent implements OnInit {
   
         // Agregar nombre de la métrica como texto al principio de la página
         mergedPdf.setFontSize(12);
-        mergedPdf.text(metric.viewValue, 10, 60);
+        mergedPdf.text(`${metric.viewValue} (${metric.value})`, 10, 60);
   
         // Agregar descripción de la métrica en español
         const description = metricDescriptions[metric.value];
@@ -373,8 +394,9 @@ export class StaticsStudyComponent implements OnInit {
     }
   
     Swal.close();
-    mergedPdf.save('metricas.pdf');
+    mergedPdf.save(`${studyName}_metricas.pdf`);
   }
+  
   
   
 

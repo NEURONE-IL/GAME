@@ -42,7 +42,6 @@
                         [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
                     </ngx-charts-line-chart>
 
-                    <!-- Mostrar gráfico de tarjeta numérica si la métrica seleccionada es 'totalcover' o 'challengestarted' -->
                     <div *ngIf="selectedMetric === 'totalcover' && chartsVisible">
                         <h6 style="margin-top: 40px;">Número total de documentos diferentes visitados por el participante</h6>
                         <ngx-charts-number-card [attr.id]="selectedMetric" [view]="numberCardOptions.view"
@@ -127,7 +126,6 @@
                         [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
                     </ngx-charts-line-chart>
                     </div>
-                    <!-- Mostrar lista de estudiantes que han iniciado el reto si la métrica seleccionada es 'challengestarted' -->
                     <div *ngIf="selectedMetric === 'challengestarted' && chartsVisible">
                         <h6 style="margin-top: 40px;">Estudiantes que han iniciado el reto</h6>
                         <ngx-charts-number-card [attr.id]="selectedMetric" [view]="numberCardOptions.view"
