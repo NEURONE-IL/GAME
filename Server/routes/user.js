@@ -319,17 +319,14 @@ router.get("/getMetricsByStudy/:study_id", async (req, res) => {
   const study_id = req.params.study_id;
 
   try {
-    // Primero, se obtienen todos los usuarios asociados con este estudio
     const users = await User.find({ study: study_id });
 
     if (!users.length) {
       return res.status(404).json({ status: 404, message: "Users not found" });
     }
 
-    // Se obtiene solo los userId de los usuarios
     const userIds = users.map(user => user._id);
 
-    // Luego, encuentra todas las métricas asociadas con estos usuarios
     const metrics = await Metrics.find({ userId: { $in: userIds } });
 
     if (!metrics.length) {
