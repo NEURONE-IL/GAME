@@ -33,9 +33,9 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
   loading: Boolean;
   user: User;
   edit_users : String[] = [];
-  edit_minutes: number = 3;
+  edit_minutes: number = 5;
   timer_id: NodeJS.Timeout;
-  timer: string = '3:00';
+  timer: string = '5:00';
   timer_color: string = 'primary';
   quill: Quill;
   hasMessages = false;
