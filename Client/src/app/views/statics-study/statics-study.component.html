@@ -1,7 +1,13 @@
 <div class="container">
     <mat-card class="form-container">
         <form>
-            <h4>Métricas</h4>
+            <div style="display: flex; align-items: center;">
+                <h4>Métricas</h4>
+                <a mat-button target="_blank" style="margin-bottom: 10px;"
+                  [matTooltip]="'Seleccione alguna métrica a visualizar'">	
+                  <mat-icon>help_outline</mat-icon> 
+                </a>
+              </div>
             <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedMetric" name="metric"
                 class="metrics-group" (change)="onMetricChange($event.value)">
                 <mat-radio-button *ngFor="let metric of metrics" [value]="metric.value">
@@ -14,7 +20,13 @@
 
     <mat-card class="form-container">
         <form>
-            <h4>Estudiantes</h4>
+            <div style="display: flex; align-items: center;">
+                <h4>Estudiantes</h4>
+                <a mat-button target="_blank" style="margin-bottom: 10px;"
+                  [matTooltip]="'Seleccione al estudiante a visualizar'">	
+                  <mat-icon>help_outline</mat-icon> 
+                </a>
+              </div>
             <mat-radio-group aria-label="Selecciona una métrica" [(ngModel)]="selectedStudent" name="student"
                 class="metrics-group" (change)="onStudentChange($event.value)">
                 <mat-radio-button *ngFor="let student of students" [value]="student.value">
@@ -39,14 +51,14 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
 
                     <div *ngIf="selectedMetric === 'totalcover' && chartsVisible">
                         <h6 style="margin-top: 40px;">Número total de documentos diferentes visitados por el participante</h6>
                         <ngx-charts-number-card [attr.id]="selectedMetric" [view]="numberCardOptions.view"
                             [scheme]="numberCardOptions.colorScheme" [results]="numberCardOptions.single"
-                            [cardColor]="numberCardOptions.cardColor">
+                            [cardColor]="numberCardOptions.cardColor" legendTitle="Estudiante">
                         </ngx-charts-number-card>
                     </div>
 
@@ -57,7 +69,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -68,7 +80,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -79,7 +91,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -90,7 +102,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -101,7 +113,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -112,7 +124,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
 
@@ -123,7 +135,7 @@
                         [xAxis]="linearChartOptions.xAxis" [yAxis]="linearChartOptions.yAxis"
                         [legend]="linearChartOptions.legend" [showXAxisLabel]="linearChartOptions.showXAxisLabel"
                         [showYAxisLabel]="linearChartOptions.showYAxisLabel"
-                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel">
+                        [xAxisLabel]="linearChartOptions.xAxisLabel" [yAxisLabel]="linearChartOptions.yAxisLabel" legendTitle="Estudiante">
                     </ngx-charts-line-chart>
                     </div>
                     <div *ngIf="selectedMetric === 'challengestarted' && chartsVisible">
@@ -141,7 +153,7 @@
                             [results]="circularChartOptions.single" [gradient]="circularChartOptions.gradient"
                             [legend]="circularChartOptions.showLegend"
                             [legendPosition]="circularChartOptions.legendPosition"
-                            [labels]="circularChartOptions.showLabels" [doughnut]="circularChartOptions.isDoughnut">
+                            [labels]="circularChartOptions.showLabels" [doughnut]="circularChartOptions.isDoughnut" legendTitle="Estudiante">
                         </ngx-charts-pie-chart>
                         <ngx-charts-bar-vertical [attr.id]="selectedMetric" [view]="barChartOptions.view"
                             [scheme]="barChartOptions.colorScheme" *ngIf="chartsVisible"
@@ -149,7 +161,7 @@
                             [xAxis]="barChartOptions.showXAxis" [yAxis]="barChartOptions.showYAxis"
                             [legend]="barChartOptions.showLegend" [showXAxisLabel]="barChartOptions.showXAxisLabel"
                             [showYAxisLabel]="barChartOptions.showYAxisLabel" [xAxisLabel]="barChartOptions.xAxisLabel"
-                            [yAxisLabel]="barChartOptions.yAxisLabel">
+                            [yAxisLabel]="barChartOptions.yAxisLabel" legendTitle="Estudiante">
                         </ngx-charts-bar-vertical>
                     </div>
                 </div>
