@@ -609,6 +609,7 @@ router.get("/:trainer_id/resetTrainerUser", async (req, res) => {
   user.interval_answers = 0;
   user.has_played = false;
   user.updatedAt = Date.now();
+  const study = user.study
   await user.save(err => {
     if(err){
       return res.status(500).json(err);
