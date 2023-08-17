@@ -593,4 +593,55 @@ router.get("/checkEmailAlreadyUsed/:email", async (req, res) => {
   });
 });
 
+router.get("/:trainer_id/resetTrainerUser", async (req, res) => {
+  const trainer_id = req.params.trainer_id;
+  // Find User
+  const user = await User.findOne({trainer_id: trainer_id}, err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  });
+  if(!user){
+    return res.status(400).send('User not found!');
+  }
+  // Delete user last answers records
+  user.cooldown_start = null;
+  user.interval_answers = 0;
+  user.has_played = false;
+  user.updatedAt = Date.now();
+  await user.save(err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  });
+  // Delete user progress
+  await UserStudy.deleteOne({user: user._id},  err => {
+    if(err){
+      return res.status(500).json(err);
+    }
+  })
+  // Find study challenges
+  const challenges = await Challenge.find({ study: study }, (err) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+  });
+  // Generate user study progress entry
+  generateProgress(challenges, user, study)
+  .catch((err) => {
+    return res.status(404).json({
+      ok: false,
+      err,
+    });
+  })
+  .then((progress) => {
+    return res.status(200).json({
+      user,
+    });
+  });
+});
+
 module.exports = router;
