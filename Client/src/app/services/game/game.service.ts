@@ -120,10 +120,20 @@ export class GameService {
                 this.stage = 'gameplay';
                 this.challengeStarted();
               } else {
-                this.stage = 'post-test';
+                if(this.challenge.simple){
+                  this.finishPostTest();
+                  this.finishChallenge();                  
+                }else{
+                  this.stage = 'post-test';
+                }
               }
             } else {
-              this.stage = 'post-test';
+              if(this.challenge.simple){
+                this.finishPostTest();
+                this.finishChallenge();                  
+              }else{
+                this.stage = 'post-test';
+              }
             }
           } else {
             this.stage = 'instructions';

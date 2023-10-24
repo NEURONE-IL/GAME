@@ -16,6 +16,7 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchResultComponent implements OnInit {
   query: string;
+  queryAPI: string;
   domain: string;
   documents = [];
   searching: boolean;
@@ -46,13 +47,14 @@ export class SearchResultComponent implements OnInit {
     this.searching = true;
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.query = params.get('query');
+      this.queryAPI = params.get('query').replace("?", "").replace("*", "").replace("~", "");
       this.domain = params.get('domain');
     });
     this.activePage= this.gameService.getActivePage();
     this.homeTooltip = this.translate.instant("GAME.SEARCH.TOOLTIP");
     this.setTab();
     let subscription = this.endpointsService
-      .getDocuments(this.query, this.domain)
+      .getDocuments(this.queryAPI, this.domain)
       .subscribe(
         (data: []) => {
           // Success

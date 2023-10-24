@@ -34,7 +34,13 @@ export class AssentComponent implements OnInit {
   save() {
     console.log(this.assentForm.value);
     this.authService.updateProgress({"assent": true});
-    this.gameService.stage = 'pre-test';
+    if(this.gameService.challenge.simple){
+      this.gameService.stage = 'gameplay';
+      this.gameService.finishPreTest();
+      this.gameService.challengeStarted();      
+    } else {
+      this.gameService.stage = 'pre-test';
+    }
   }
 
   changeButtonState(){
