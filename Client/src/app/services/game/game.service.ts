@@ -110,7 +110,13 @@ export class GameService {
       this.progress.challenges.forEach((chProgress) => {
         if (chProgress.challenge == this.challenge._id) {
           if (!chProgress.pre_test) {
-            this.stage = 'pre-test';
+            if(this.challenge.simple){
+              this.stage = 'gameplay';
+              this.finishPreTest();
+              this.challengeStarted();      
+            } else {
+              this.stage = 'pre-test';
+            }
           } else if (chProgress.started) {
             if (chProgress.start_time != null && !chProgress.answer_submitted) {
               let endTime = new Date(chProgress.start_time);
