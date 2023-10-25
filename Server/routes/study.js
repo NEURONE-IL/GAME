@@ -387,8 +387,8 @@ router.post(
     let cooldown = req.body.hours * 3600 + req.body.minutes * 60;
     let collaborators = JSON.parse(req.body.collaborators);
     let tags = JSON.parse(req.body.tags);
-    let levels = JSON.parse(req.body.levels);
-    let competences = JSON.parse(req.body.competences);
+    // let levels = JSON.parse(req.body.levels);
+    // let competences = JSON.parse(req.body.competences);
     const study = new Study({
       name: req.body.name,
       domain: req.body.domain,
@@ -400,7 +400,6 @@ router.post(
       type: "own",
       collaborators: collaborators,
       tags: tags,
-      levels: [],
       language: "62b4c40b75c8e419c58e884e"
       //levels: levels,
       //language: req.body.language,

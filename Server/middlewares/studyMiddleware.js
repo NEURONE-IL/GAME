@@ -24,11 +24,11 @@ const schema = Joi.object({
 
   tags: Joi.string(),
 
-  // levels: Joi.string(),
+  levels: Joi.string(),
 
-  // competences: Joi.string(),
+  competences: Joi.string(),
 
-  // language: Joi.string(),
+  language: Joi.string()
 });
 
 const editSchema = Joi.object({
@@ -54,11 +54,11 @@ const editSchema = Joi.object({
 
   user_edit: Joi.string(),
 
-  // levels: Joi.string(),
+  levels: Joi.string(),
 
-  // competences: Joi.string(),
+  competences: Joi.string(),
 
-  // language: Joi.string(),
+  language: Joi.string()
 });
 
 verifyBody = async (req, res, next) => {
@@ -68,7 +68,7 @@ verifyBody = async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       ok: false,
-      err,
+      err
     });
   }
 };
@@ -80,14 +80,14 @@ verifyEditBody = async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       ok: false,
-      err,
+      err
     });
   }
 };
 
 const authMiddleware = {
   verifyBody,
-  verifyEditBody,
+  verifyEditBody
 };
 
 module.exports = authMiddleware;
