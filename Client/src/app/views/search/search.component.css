@@ -5,12 +5,12 @@
 }
 
 .main-logo{
-    width: 30%;
+    width: 450px;
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 10vh;
 }
 
 ::ng-deep .mat-form-field-infix{
@@ -20,7 +20,7 @@
 }
 
 .search-box{
-    width: 30%;
+    width: 450px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +28,7 @@
 }
 
 .search-button{
-    width: 10%;
+    width: 120px;
     height: 3%;
     display: block;
     margin-left: auto;

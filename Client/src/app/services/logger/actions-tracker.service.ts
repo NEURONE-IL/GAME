@@ -55,6 +55,9 @@ export class ActionsTrackerService {
       this.bindEvent(targetDoc, 'firstchallengecompleted', data, this.firstchallengecompletedListener);
       this.bindEvent(targetDoc, 'challengestarted', data, this.challengestartedListener);
       this.bindEvent(targetDoc, 'challengecompleted', data, this.challengecompletedListener);
+      this.bindEvent(targetDoc, 'openassistantmodal', data, this.openassistantmodalListener);
+      this.bindEvent(targetDoc, 'closeassistantmodal', data, this.closeassistantmodalListener);
+      this.bindEvent(targetDoc, 'clickassistantmodal', data, this.clickassistantmodalListener);      
       /*End custom events*/
       this.isTracking = true;
     }
@@ -90,6 +93,9 @@ export class ActionsTrackerService {
       this.unbindAll(targetDoc, 'poststudyquestionnaireexit');
       this.unbindAll(targetDoc, 'firstchallengestarted');
       this.unbindAll(targetDoc, 'firstchallengecompleted');
+      this.unbindAll(targetDoc, 'openassistantmodal');
+      this.unbindAll(targetDoc, 'closeassistantmodal');
+      this.unbindAll(targetDoc, 'clickassistantmodal');
       /*End custom events*/
       this.unbindData(targetDoc);
       this.isTracking = false;
@@ -599,6 +605,66 @@ export class ActionsTrackerService {
       challengeId: localStorage.getItem('chall'),
       source: 'Window',
       type: 'ChallengeCompleted',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }   
+
+  openassistantmodalListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'AssistantModal',
+      type: 'OpenAssistantModal',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }
+
+  closeassistantmodalListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'AssistantModal',
+      type: 'CloseAssistantModal',
+      localTimeStamp: t,
+      url: doc.URL
+    };
+
+    // console.log(keyOutput);
+    evt.currentTarget.storeService.postEvent(keyOutput);
+  }  
+
+  clickassistantmodalListener(evt){
+    evt = evt || event;
+
+    let t = Date.now(),
+    doc = evt.currentTarget.data.d;
+
+    let keyOutput = {
+      userId: this.user.id,
+      studyId: this.user.study,
+      challengeId: localStorage.getItem('chall'),
+      source: 'AssistantModal',
+      type: 'ClickAssistantModal',
       localTimeStamp: t,
       url: doc.URL
     };

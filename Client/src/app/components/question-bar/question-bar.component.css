@@ -177,3 +177,93 @@ b {
   z-index: 3;
   cursor: pointer;
 }
+
+
+.assistant{
+  width: 300px;
+  background-color: white;
+  max-height: 600px;
+  border: 1px solid #6e6d6d45;
+  border-radius: 5px;
+  position: fixed;
+  z-index: 9;
+  top: 9vh;
+  right: 3vh;
+  box-shadow: 0 0 2px #000;
+}
+
+.assistant-header{
+  height: 80px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.assistant-info{
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+
+.assistant-name{
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.assistant-subtitle{
+  font-size: 13px;
+  font-weight: 100;
+  color: #333;
+}
+
+hr{
+  height: 1px;
+  background-color: #6e6d6d45;
+  opacity: 1;
+  margin:0;
+}
+
+.assistant-img{
+  width: 54px;
+  height: 70px;
+  margin-right: 10px;
+}
+
+.assistant-content{
+  padding: 0;
+}
+
+.minimize{
+  width: 20px;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: auto;
+}
+
+.assistant-icon{
+  position: fixed;
+  z-index: 9;
+  top: 9vh;
+  right: 3vh;
+  cursor: pointer;
+}
+
+br{
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 1000px) {
+  .assistant {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .assistant {
+    width: 220px;
+  }
+}

@@ -49,3 +49,6 @@ span .mat-select-placeholder{
 .mat-select {
   padding-bottom: 10px;
 }
+::ng-deep .editorQuill .mat-figure {
+	display: block !important;
+}

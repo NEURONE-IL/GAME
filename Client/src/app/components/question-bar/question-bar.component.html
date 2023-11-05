@@ -222,8 +222,25 @@
 
 </div>
 
-<iframe with="800px" height="500px" frameborder="0"
-    *ngIf="assistantUrl"
-    style="overflow: hidden; margin: 10px; bottom: 15px; right: 15px; position: fixed"
-    [src]="assistantUrl | safeurl"
-    title="Virtual Asist"></iframe>
+<div class="assistant" *ngIf="!minimized && messages" >
+  <div class="assistant-header">
+      <img src="/assets/Neurona (1).png" class="assistant-img">
+      <div class="assistant-info">
+          <div class="assistant-name">Neuronita</div>
+          <div class="assistant-subtitle">Asistente virtual</div>
+      </div>
+      <img src="/assets/minimize.png" class="minimize" (click)="minimize()">
+  </div>
+  <hr>
+  <div (click)="registrarClick()" class="assistant-content">
+    <div class="ql-container" style="border-width: 0;">
+      <div class="ql-editor" [innerHTML]="transformHtml(messages)">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="assistant-icon" *ngIf="minimized" (click)="minimize()">
+  <img src="/assets/Neurona (1).png" width="80px">
+  <img src="/assets/mensajero.png" width="40px" style="margin-bottom: 60px; margin-left: -10px;">
+</div>
+

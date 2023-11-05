@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StudyService } from 'src/app/services/game/study.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 export interface HintData {
   text: string;
@@ -22,9 +23,13 @@ export interface HintData {
 
 export class QuestionBarComponent implements OnInit {
 
+  // Utils
+  blockAnswer = false;
+
   // Challenge data
   hintUsed = false;
   hintActive = false;
+  messages = null;
 
   // Timer data
   timeLeft: number;
@@ -51,7 +56,8 @@ export class QuestionBarComponent implements OnInit {
               private toastr: ToastrService,
               private translate: TranslateService,
               private authService: AuthService,
-              private studyService: StudyService) {
+              private studyService: StudyService,
+              private sanitizer: DomSanitizer) {
     this.answerForm = this.formBuilder.group({
       answer: ['', [Validators.required]],
       url1: [''],
@@ -72,7 +78,7 @@ export class QuestionBarComponent implements OnInit {
   ngOnInit(): void {
     this.currentTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_ADD_SINGLE");
     this.sendAnswerTooltip = this.translate.instant("GAME.QUESTION_BAR.TOOLTIP_SEND");
-    this.assistant();
+    //this.assistant();
   }
 
   ngOnDestroy(): void {
@@ -139,7 +145,7 @@ export class QuestionBarComponent implements OnInit {
   loadChallenge() {
     // Get challenge
     // this.challenge = this.gameService.challenge;
-
+    this.messages = this.gameService.challenge.messages;
     // Set timer data
     if(this.router.getCurrentNavigation().extras.state) {
       console.log("time left: ", this.router.getCurrentNavigation().extras.state.timeLeft);
@@ -158,8 +164,15 @@ export class QuestionBarComponent implements OnInit {
   }
 
   sendAnswer() {
+    if(this.blockAnswer){
+      return;
+    }
+    this.blockAnswer = true;
     let isValid = this.checkValid();
-    if(!isValid) return;
+    if(!isValid){
+      this.blockAnswer = false;
+      return;
+    } 
     // Add code to submit answer to server
     const challenge = this.gameService.challenge;
     let answer = this.answerForm.value.answer.toString();
@@ -471,6 +484,7 @@ export class QuestionBarComponent implements OnInit {
     }
   }
 
+  /*
   assistant(){
     let study = this.authService.getUser().study;
     this.studyService.getAssistant(study).subscribe( response => {
@@ -480,11 +494,39 @@ export class QuestionBarComponent implements OnInit {
       }
     })
     
+  }*/
+
+  minimized = false;
+
+  minimize(){
+    if(this.minimized){
+      /*Dispatch openassistantmodal event*/
+      var evt = new CustomEvent('openassistantmodal');
+      window.dispatchEvent(evt);
+      /*End dispatch openassistantmodal event*/
+    }else{
+      /*Dispatch closeassistantmodal event*/
+      var evt = new CustomEvent('closeassistantmodal');
+      window.dispatchEvent(evt);
+      /*End dispatch closeassistantmodal event*/
+    }
+    this.minimized = !this.minimized;
+  }
+
+  registrarClick(){
+    /*Dispatch clickassistantmodal event*/
+    var evt = new CustomEvent('clickassistantmodal');
+    window.dispatchEvent(evt);
+    /*End dispatch clickassistantmodal event*/    
   }
 
   get answerControls(): any {
     return this.answerForm['controls'];
   }  
+
+  transformHtml(htmlTextWithStyle): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(htmlTextWithStyle);
+  }
 
 }
 

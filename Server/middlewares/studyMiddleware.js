@@ -1,103 +1,93 @@
-const Joi = require('joi');
-const Study = require('../models/study');
+const Joi = require("joi");
+const Study = require("../models/study");
 
 const schema = Joi.object({
-    
-    name: Joi.string()
-        .required(),
+  name: Joi.string().required(),
 
-    domain: Joi.string(),
+  domain: Joi.string(),
 
-    max_per_interval: Joi.number(),
+  max_per_interval: Joi.number(),
 
-    hours: Joi.number()
-        .required(),
+  hours: Joi.number().required(),
 
-    minutes: Joi.number()
-        .required(),
-    
-    seconds: Joi.number()
-        .required(),
-    
-    description: Joi.string(),
-   
-    user: Joi.any().required(),
+  minutes: Joi.number().required(),
 
-    privacy: Joi.boolean(),
+  seconds: Joi.number().required(),
 
-    collaborators: Joi.string(),
+  description: Joi.string(),
 
-    tags: Joi.string(),
-    
-    levels: Joi.string(),
+  user: Joi.any().required(),
 
-    competences: Joi.string(),
-    
-    language: Joi.string(),
-})
+  privacy: Joi.boolean(),
+
+  collaborators: Joi.string(),
+
+  tags: Joi.string(),
+
+  levels: Joi.string(),
+
+  competences: Joi.string(),
+
+  language: Joi.string()
+});
 
 const editSchema = Joi.object({
-    
-    name: Joi.string(),
+  name: Joi.string(),
 
-    domain: Joi.string(),
+  domain: Joi.string(),
 
-    max_per_interval: Joi.number(),
+  max_per_interval: Joi.number(),
 
-    hours: Joi.number(),
+  hours: Joi.number(),
 
-    minutes: Joi.number(),
-    
-    seconds: Joi.number(),
-    
-    description: Joi.string(),
+  minutes: Joi.number(),
 
-    privacy: Joi.boolean(),
+  seconds: Joi.number(),
 
-    collaborators: Joi.string(),
-    
-    tags: Joi.string(),
+  description: Joi.string(),
 
-    user_edit: Joi.string(),
+  privacy: Joi.boolean(),
 
-    levels: Joi.string(),
+  collaborators: Joi.string(),
 
-    competences: Joi.string(),
-    
-    language: Joi.string(),
+  tags: Joi.string(),
 
+  user_edit: Joi.string(),
 
-})
+  levels: Joi.string(),
+
+  competences: Joi.string(),
+
+  language: Joi.string()
+});
 
 verifyBody = async (req, res, next) => {
-    try {
-        const validation = await schema.validateAsync(req.body);
-        next();
-    }
-    catch (err) {
-        return res.status(400).json({
-            ok: false,
-            err
-        });
-     }
+  try {
+    const validation = await schema.validateAsync(req.body);
+    next();
+  } catch (err) {
+    return res.status(400).json({
+      ok: false,
+      err
+    });
+  }
 };
 
 verifyEditBody = async (req, res, next) => {
-    try {
-        const validation = await editSchema.validateAsync(req.body);
-        next();
-    }
-    catch (err) {
-        return res.status(400).json({
-            ok: false,
-            err
-        });
-     }
+  try {
+    const validation = await editSchema.validateAsync(req.body);
+    next();
+  } catch (err) {
+    return res.status(400).json({
+      ok: false,
+      err
+    });
+  }
 };
 
 const authMiddleware = {
-    verifyBody,
-    verifyEditBody
+  verifyBody,
+  verifyEditBody
 };
 
 module.exports = authMiddleware;

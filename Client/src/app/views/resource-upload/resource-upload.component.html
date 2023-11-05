@@ -2,142 +2,231 @@
   <mat-card-header>
     <mat-card-title>{{ "UPLOAD.TITLE" | translate }}</mat-card-title>
     <mat-card-subtitle>{{ "UPLOAD.SUBTITLE" | translate }}:</mat-card-subtitle>
-	</mat-card-header>
-	<mat-card-content>
-		<form [formGroup]="resourceForm">
-			<mat-grid-list cols="12">
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.NAME" | translate }}</mat-label>
-						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -_\u00BA\u00B0]*" formControlName="docName" required #inputName maxlength="100">
-						<mat-hint align="end">{{inputName.value?.length || 0}}/100</mat-hint>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_100" | translate }}
-						</mat-error>
-						<mat-error *ngIf="!resourceFormControls.docName.hasError('required') &&
-															!resourceFormControls.docName.hasError('minlength') && 
-															!resourceFormControls.docName.hasError('maxlength')"
-												ng-show="resourceForm.docName.$error.pattern">
-							{{ "ERRORS.PATTERN" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.TYPE_OF" | translate }}</mat-label>
-						<mat-select formControlName="type" required>
-							<mat-option *ngFor="let type of docTypes" [value]="type.value">{{ type.show | translate }}</mat-option>
-						</mat-select>
-						<mat-error *ngIf="resourceFormControls.type.hasError('required')">
-							{{ "ERRORS.SELECTION_REQUIRED" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.TITLE" | translate }}</mat-label>
-						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿? -_\u00BA\u00B0]*" formControlName="title" required #inputType maxlength="100">
-						<mat-hint align="end">{{inputType.value?.length || 0}}/100</mat-hint>
-						<mat-error *ngIf="resourceFormControls.title.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.title.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.title.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_100" | translate }}
-						</mat-error>
-						<mat-error *ngIf="!resourceFormControls.title.hasError('required') &&
-															!resourceFormControls.title.hasError('minlength') && 
-															!resourceFormControls.title.hasError('maxlength')"
-												ng-show="resourceForm.title.$error.pattern">
-							{{ "ERRORS.PATTERN" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.URL" | translate }}</mat-label>
-						<input matInput formControlName="url" required #inputURL maxlength="200">
-						<mat-hint align="end">{{inputURL.value?.length || 0}}/200</mat-hint>
-						<mat-error *ngIf="resourceFormControls.url.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.url.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_5" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.url.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_200" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.MASKED_URL" | translate }}</mat-label>
-						<input matInput formControlName="maskedUrl" #inputMaskedUrl maxlength="200">
-						<mat-hint align="end">{{inputMaskedUrl.value?.length || 0}}/200</mat-hint>
-						<mat-error *ngIf="resourceFormControls.maskedUrl.hasError('minlength')">
-							{{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.maskedUrl.hasError('maxlength')">
-							{{ "ERRORS.MAX_LENGTH_200" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.CHALLENGE" | translate }}</mat-label>
-						<mat-select formControlName="task">
-							<mat-option *ngFor="let challenge of challenges" #Challenge [value]="challenge._id">{{challenge.question}}</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-form-field>
-						<mat-label>{{ "UPLOAD.FORM.FIELDS.KEYWORDS" | translate }}</mat-label>
-						<input matInput pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -]*" placeholder="noticia, historia, animal" formControlName="keywords" #inputKeywords>
-						<mat-hint align="end">{{inputKeywords.value?.length || 0}}</mat-hint>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('required')">
-							{{ "ERRORS.REQUIRED" | translate }}
-						</mat-error>
-						<mat-error *ngIf="resourceFormControls.docName.hasError('minlength')">
-							{{ "ERRORS.MIN_LENGTH_3" | translate }}
-						</mat-error>
-						<mat-error *ngIf="!resourceFormControls.docName.hasError('required') &&
-															!resourceFormControls.docName.hasError('minlength') && 
-															!resourceFormControls.docName.hasError('maxlength')"
-												ng-show="resourceForm.docName.$error.pattern">
-							{{ "ERRORS.PATTERN" | translate }}
-						</mat-error>
-					</mat-form-field>
-				</mat-grid-tile>
-				<mat-grid-tile colspan="6">
-					<mat-checkbox formControlName="relevant" labelPosition="before">{{ "UPLOAD.FORM.FIELDS.RELEVANT_DOC" | translate }}</mat-checkbox>
-				</mat-grid-tile>				
-			</mat-grid-list>
-		</form>
-	</mat-card-content>
-	<mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
-		<button mat-raised-button class="saveButton" [disabled]="!resourceForm.valid" (click)="uploadResource()">
-			{{ "BUTTONS.SAVE" | translate }}
-		</button>
-		<button mat-raised-button class="clearButton" (click)="resetForm()">
-			{{ "BUTTONS.CLEAR" | translate }}
-		</button>
-	</mat-card-actions>
-	<ng-template #elseBlock>
-		<div class="spinnerCard">
-			<mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
-			</mat-progress-spinner>
-			<span>
-				{{ "UPLOAD.LOADING_DOC" | translate }}
-			</span>
-		</div>
-	</ng-template>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="resourceForm">
+      <mat-grid-list cols="12">
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{ "UPLOAD.FORM.FIELDS.NAME" | translate }}</mat-label>
+            <input
+              matInput
+              pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -_\u00BA\u00B0]*"
+              formControlName="docName"
+              required
+              #inputName
+              maxlength="100"
+            />
+            <mat-hint align="end"
+              >{{ inputName.value?.length || 0 }}/100</mat-hint
+            >
+            <mat-error
+              *ngIf="resourceFormControls.docName.hasError('required')"
+            >
+              {{ "ERRORS.REQUIRED" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="resourceFormControls.docName.hasError('minlength')"
+            >
+              {{ "ERRORS.MIN_LENGTH_3" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="resourceFormControls.docName.hasError('maxlength')"
+            >
+              {{ "ERRORS.MAX_LENGTH_100" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="
+                !resourceFormControls.docName.hasError('required') &&
+                !resourceFormControls.docName.hasError('minlength') &&
+                !resourceFormControls.docName.hasError('maxlength')
+              "
+              ng-show="resourceForm.docName.$error.pattern"
+            >
+              {{ "ERRORS.PATTERN" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{
+              "UPLOAD.FORM.FIELDS.TYPE_OF" | translate
+            }}</mat-label>
+            <mat-select formControlName="type" required>
+              <mat-option *ngFor="let type of docTypes" [value]="type.value">{{
+                type.show | translate
+              }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="resourceFormControls.type.hasError('required')">
+              {{ "ERRORS.SELECTION_REQUIRED" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{ "UPLOAD.FORM.FIELDS.TITLE" | translate }}</mat-label>
+            <input
+              matInput
+              pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿? -_\u00BA\u00B0]*"
+              formControlName="title"
+              required
+              #inputType
+              maxlength="100"
+            />
+            <mat-hint align="end"
+              >{{ inputType.value?.length || 0 }}/100</mat-hint
+            >
+            <mat-error *ngIf="resourceFormControls.title.hasError('required')">
+              {{ "ERRORS.REQUIRED" | translate }}
+            </mat-error>
+            <mat-error *ngIf="resourceFormControls.title.hasError('minlength')">
+              {{ "ERRORS.MIN_LENGTH_3" | translate }}
+            </mat-error>
+            <mat-error *ngIf="resourceFormControls.title.hasError('maxlength')">
+              {{ "ERRORS.MAX_LENGTH_100" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="
+                !resourceFormControls.title.hasError('required') &&
+                !resourceFormControls.title.hasError('minlength') &&
+                !resourceFormControls.title.hasError('maxlength')
+              "
+              ng-show="resourceForm.title.$error.pattern"
+            >
+              {{ "ERRORS.PATTERN" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{ "UPLOAD.FORM.FIELDS.URL" | translate }}</mat-label>
+            <input
+              matInput
+              formControlName="url"
+              required
+              #inputURL
+              maxlength="200"
+            />
+            <mat-hint align="end"
+              >{{ inputURL.value?.length || 0 }}/200</mat-hint
+            >
+            <mat-error *ngIf="resourceFormControls.url.hasError('required')">
+              {{ "ERRORS.REQUIRED" | translate }}
+            </mat-error>
+            <mat-error *ngIf="resourceFormControls.url.hasError('minlength')">
+              {{ "ERRORS.MIN_LENGTH_5" | translate }}
+            </mat-error>
+            <mat-error *ngIf="resourceFormControls.url.hasError('maxlength')">
+              {{ "ERRORS.MAX_LENGTH_200" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{
+              "UPLOAD.FORM.FIELDS.MASKED_URL" | translate
+            }}</mat-label>
+            <input
+              matInput
+              formControlName="maskedUrl"
+              #inputMaskedUrl
+              maxlength="200"
+            />
+            <mat-hint align="end"
+              >{{ inputMaskedUrl.value?.length || 0 }}/200</mat-hint
+            >
+            <mat-error
+              *ngIf="resourceFormControls.maskedUrl.hasError('minlength')"
+            >
+              {{ "ERRORS.UNREQUIRED_MIN_LENGTH_5" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="resourceFormControls.maskedUrl.hasError('maxlength')"
+            >
+              {{ "ERRORS.MAX_LENGTH_200" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{
+              "UPLOAD.FORM.FIELDS.CHALLENGE" | translate
+            }}</mat-label>
+            <mat-select formControlName="task">
+              <mat-option
+                *ngFor="let challenge of challenges"
+                #Challenge
+                [value]="challenge._id"
+                >{{ challenge.question }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-form-field>
+            <mat-label>{{
+              "UPLOAD.FORM.FIELDS.KEYWORDS" | translate
+            }}</mat-label>
+            <input
+              matInput
+              pattern="[a-zA-ZÀ-ÿ\u00f1\u00d10-9,.:;'\u0022!¡¿?() -]*"
+              placeholder="noticia, historia, animal"
+              formControlName="keywords"
+              #inputKeywords
+            />
+            <mat-hint align="end">{{
+              inputKeywords.value?.length || 0
+            }}</mat-hint>
+            <mat-error
+              *ngIf="resourceFormControls.docName.hasError('required')"
+            >
+              {{ "ERRORS.REQUIRED" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="resourceFormControls.docName.hasError('minlength')"
+            >
+              {{ "ERRORS.MIN_LENGTH_3" | translate }}
+            </mat-error>
+            <mat-error
+              *ngIf="
+                !resourceFormControls.docName.hasError('required') &&
+                !resourceFormControls.docName.hasError('minlength') &&
+                !resourceFormControls.docName.hasError('maxlength')
+              "
+              ng-show="resourceForm.docName.$error.pattern"
+            >
+              {{ "ERRORS.PATTERN" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+          <mat-checkbox formControlName="relevant" labelPosition="before">{{
+            "UPLOAD.FORM.FIELDS.RELEVANT_DOC" | translate
+          }}</mat-checkbox>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="cardActions" *ngIf="!loading; else elseBlock">
+    <button
+      mat-raised-button
+      class="saveButton"
+      [disabled]="!resourceForm.valid"
+      (click)="uploadResource()"
+    >
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
+    <button mat-raised-button class="clearButton" (click)="resetForm()">
+      {{ "BUTTONS.CLEAR" | translate }}
+    </button>
+  </mat-card-actions>
+  <ng-template #elseBlock>
+    <div class="spinnerCard">
+      <mat-progress-spinner color="primary" mode="indeterminate" class="mb-4">
+      </mat-progress-spinner>
+      <span>
+        {{ "UPLOAD.LOADING_DOC" | translate }}
+      </span>
+    </div>
+  </ng-template>
 </mat-card>

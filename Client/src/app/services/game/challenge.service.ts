@@ -12,6 +12,7 @@ export interface Challenge {
   number: number,
   seconds: number,
   hint: string,
+  messages: string,
   answer_type: string,
   answer: string,
   max_attempts: string,

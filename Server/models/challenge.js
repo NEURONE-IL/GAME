@@ -13,6 +13,7 @@ const ChallengeSchema = new Schema({
     max_attempts: {type: Number, required:true},
     study: { type: Schema.Types.ObjectId, ref: 'Study', required: true},
     edit: {type: [String], default: []},
+    messages: {type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

@@ -5,6 +5,7 @@ import { Study, StudyService } from '../../services/game/study.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import Quill from 'quill';
 
 @Component({
   selector: 'app-challenge-creation',
@@ -28,11 +29,13 @@ export class ChallengeCreationComponent implements OnInit {
     { id: 4, value: 'justify', show: "CHALLENGE.FORM.SELECTS.ANSWER_TYPE.JUSTIFY" }
   ];
   loading: Boolean;
+  quill: Quill;
+  hasMessages = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private challengeService: ChallengeService, private studyService: StudyService, private toastr: ToastrService, private translate: TranslateService) { }
 
   ngOnInit(): void {
-
+    
     this.challengeForm = this.formBuilder.group({
       question: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
       question_type: ['', Validators.required],
@@ -55,7 +58,27 @@ export class ChallengeCreationComponent implements OnInit {
         });
       }
     );
+    var options = {
+      //debug: 'info',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons        
+          //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'link'],
+          //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent        
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          [{ 'align': [] }],
         
+          ['clean']                                         // remove formatting button
+        ]
+      },
+      placeholder: 'Ingrese sus mensajes aquí',
+      theme: 'snow'
+    };
+    this.quill = new Quill('#editor', options);
     this.loading = false;
   }
 
@@ -65,20 +88,28 @@ export class ChallengeCreationComponent implements OnInit {
 
   resetForm() {
     this.challengeForm.reset();
+    this.quill.root.innerHTML = '';
+    this.hasMessages = false;
   }
 
-  createChallenge(){
+  createChallenge(){    
     this.loading = true;
     let challenge = this.challengeForm.value;
     challenge.study = this.study;
+    if(this.hasMessages)
+      challenge.messages = this.quill.root.innerHTML
+    else {
+      challenge.messages = ''
+    }
+    console.log(challenge);
     this.challengeService.postChallenge(challenge).subscribe(
       challenge => {
         this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
           timeOut: 5000,
           positionClass: 'toast-top-center'
         });
-        /* this.router.navigate(['/admin_panel']); */
         this.resetForm();
+        
         this.loading = false;
       },
       err => {
@@ -88,5 +119,8 @@ export class ChallengeCreationComponent implements OnInit {
         });
       }
     );
+  }
+  showRichText(event){
+    this.hasMessages = event.checked
   }
 }

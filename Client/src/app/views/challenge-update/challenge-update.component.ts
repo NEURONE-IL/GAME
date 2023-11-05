@@ -7,6 +7,7 @@ import { Study, StudyService } from '../../services/game/study.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, User } from 'src/app/services/auth/auth.service';
+import Quill from 'quill';
 
 @Component({
   selector: 'app-challenge-update',
@@ -32,10 +33,12 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
   loading: Boolean;
   user: User;
   edit_users : String[] = [];
-  edit_minutes: number = 3;
+  edit_minutes: number = 5;
   timer_id: NodeJS.Timeout;
-  timer: string = '3:00';
+  timer: string = '5:00';
   timer_color: string = 'primary';
+  quill: Quill;
+  hasMessages = false;
 
   constructor(@Inject(MAT_DIALOG_DATA)
     public challenge: Challenge,
@@ -52,6 +55,7 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
 
     this.challengeService.closeEventSource();
     this.user = this.authService.getUser();
+    let messages = 
     this.challengeForm = this.formBuilder.group({
       question: [this.challenge.question, [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
       question_type: [this.challenge.question_type, Validators.required],
@@ -64,6 +68,8 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
     });
 
     this.requestEdit();
+
+    
     
     this.studyService.getStudies().subscribe(
       response => {
@@ -76,7 +82,31 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
         });
       }
     );
-
+    var options = {
+      //debug: 'info',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons        
+          //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'link'],
+          //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent        
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+        
+          ['clean']                                         // remove formatting button
+        ]
+      },
+      placeholder: 'Ingrese sus mensajes aquí',
+      theme: 'snow'
+    };
+    this.quill = new Quill('#editor', options);
+    if(this.challenge.messages){
+      this.quill.root.innerHTML = this.challenge.messages
+      this.hasMessages = true
+    }
     this.loading = false;
   }
   ngOnDestroy(): void{
@@ -118,6 +148,14 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
     let challenge = this.challengeForm.value;
     challenge.study = this.challenge.study;
     challenge.user_edit = this.authService.getUser()._id;
+    if(this.hasMessages){
+      challenge.messages = this.quill.root.innerHTML
+      if(!challenge.messages)
+        challenge.messages = '-'
+    }
+    else {
+      challenge.messages = '-'
+    }
     this.challengeService.putChallenge(challengeId, challenge).subscribe(
       challenge => {
         this.toastr.success(this.translate.instant("CHALLENGE.TOAST.SUCCESS_MESSAGE_UPDATE") + ': ' + challenge['challenge'].question, this.translate.instant("CHALLENGE.TOAST.SUCCESS"), {
@@ -218,5 +256,9 @@ export class ChallengeUpdateComponent implements OnInit,OnDestroy{
     this.challengeForm.controls['answer_type'].setValue(this.challenge.answer_type);
     this.challengeForm.controls['answer'].setValue(this.challenge.answer);
     
+  }
+
+  showRichText(event){
+    this.hasMessages = event.checked
   }
 }

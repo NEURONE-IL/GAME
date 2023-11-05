@@ -56,9 +56,9 @@ export class StudyUpdateComponent implements OnInit,OnDestroy{
   levels: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   competences: any[];
 
-  edit_minutes: number = 3;
+  edit_minutes: number = 5;
   timer_id: NodeJS.Timeout;
-  timer: string = '3:00';
+  timer: string = '5:00';
   timer_color: string = 'primary';  
 
   constructor(

@@ -24,13 +24,13 @@
 	<mat-card-content *ngIf="!noStudies">
 		<mat-grid-list cols="12" [gutterSize]="'12px'">
 			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" (mouseover)="fullStudy(study)" (mouseout)="shortStudy(study)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >
-				<mat-card>
+				<mat-card class="study-list-card">
 					<div class="studies-tittle">
 						<mat-icon *ngIf="study.privacy; else studyPublic" style="font-size: 23px;" color="primary">lock_outlined</mat-icon>
 						<ng-template #studyPublic> 
 							<mat-icon style="color: #1fa510; font-size: 23px;" >lock_open_outlined</mat-icon>
 						</ng-template>
-						<mat-card-title style="font-size: 20px; margin-bottom: 0%; margin-left: 5%;">
+						<mat-card-title style="font-size: 20px; margin-bottom: 0%; margin-left: 2%;">
 							{{study.name}}
 						</mat-card-title>
 					</div>

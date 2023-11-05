@@ -51,6 +51,7 @@
       "DOC_NAME": "Código",
       "FALSE": "No",
       "HINT": "Pista",
+      "QUESTION_CODE":"Código pregunta",
       "HOURS": "Horas",
       "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
