@@ -32,10 +32,10 @@ export const environment = {
 
 export const environment = {
   production: false,
-  serverRoot: 'https://trivia2.neurone.info/',
-  apiURL: 'https://trivia2.neurone.info/api/',
-  frontURL: 'https://trivia2.neurone.info/',
-  neuroneURL: 'https://trivia2.neurone.info:3001/',
+  serverRoot: 'http://localhost:3030/',
+  apiURL: 'http://localhost:3030/api/',
+  frontURL: 'http://localhost:4200/',
+  neuroneURL: 'https://trivia2.neurone.info:3005/',
   locale: 'es-CL'
 };
 

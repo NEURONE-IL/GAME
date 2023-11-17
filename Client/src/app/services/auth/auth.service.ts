@@ -33,8 +33,10 @@ export class AuthService {
               private translate: TranslateService) {}
 
   login(email: string, password: string) {
+    
     this.http.post(this.uri + 'login', {email: email,password: password})
     .subscribe((resp: any) => {
+      console.log(resp)
       localStorage.setItem('auth_token', resp.token);
       let user = resp.user;
       delete user.password;
@@ -296,5 +298,13 @@ export class AuthService {
   checkEmail(email: string){
     console.log('check')
     return this.http.get(this.userUri + 'checkEmailAlreadyUsed/' + email);
+  }
+
+  getUsersByStudy(idstudy: string){
+    return this.http.get(this.userUri + 'getUsersByStudy/' + idstudy);
+  }
+  
+  getMetricsByStudy(idstudy: string){
+    return this.http.get(this.userUri + 'getMetricsByStudy/' + idstudy);
   }
 }

@@ -29,6 +29,7 @@ import { ForwardComponent } from './views/forward/forward.component';
 import { StudiesSearchComponent } from './views/studies-search/studies-search.component';
 import { StudiesSearchResultsComponent } from './views/studies-search-results/studies-search-results.component';
 import { StudySearchDisplayComponent } from './views/study-search-display/study-search-display.component';
+import { StaticsStudyComponent } from './views/statics-study/statics-study.component';
 
 const routes: Routes = [
   {
@@ -134,7 +135,12 @@ const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent,
-    canActivate: [ AuthGuard, AsExternalServiceGuard ]
+    canActivate: [AuthGuard, AsExternalServiceGuard]
+  },
+  {
+    path: 'statistics/:user_id',
+    component: StaticsStudyComponent,
+    canActivate: [AuthGuard, AsExternalServiceGuard]
   },
   {
     path: 'admin_panel',
@@ -149,6 +155,11 @@ const routes: Routes = [
       {
         path: 'study/:study_id',
         component: StudyDisplayComponent,
+        canActivate: [ ProtectStudyEditionGuard ],
+      },
+      {
+        path: 'study/:study_id/statics',
+        component: StaticsStudyComponent,
         canActivate: [ ProtectStudyEditionGuard ],
       },
     ]

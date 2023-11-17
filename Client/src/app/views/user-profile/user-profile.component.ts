@@ -44,6 +44,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.actionsTracker.stop();
   }
 
+  redirectToStatistics() {
+    const userId = this.user._id;
+    this.router.navigate(['/statistics', userId]);
+  }
   checkAllCompleted() {
     this.gamificationService
       .allCompleted(this.authService.getUser()._id)
@@ -87,7 +91,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       .subscribe(
         (response) => {
           let levels = response;
-          console.log(levels)
+          console.log(levels[0].player.sourceId)
           this.actualLevel = levels[levels.length-1];
         },
         (err) => {

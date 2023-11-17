@@ -7,6 +7,7 @@ const Study = require("../models/study");
 const UserChallenge = require("../models/userChallenge");
 const UserStudy = require("../models/userStudy");
 const Token = require("../models/token");
+const Metrics = require("../models/metrics")
 const verifyToken = require("../middlewares/verifyToken");
 const bcrypt = require("bcryptjs");
 
@@ -23,7 +24,7 @@ router.get("", [verifyToken, authMiddleware.isAdmin], async (req, res) => {
       });
     }
     res.status(200).json({ users });
-  }).populate({ path: 'role', model: Role} );
+  }).populate({ path: 'role', model: Role });
 });
 
 //Obtener un usuario por su ID
@@ -40,23 +41,23 @@ router.get(
         });
       }
       res.status(200).json({ user });
-    }).populate({ path: 'role', model: Role} );
+    }).populate({ path: 'role', model: Role });
   }
 );
 
 router.get("/getUserByEmail/:user_email", async (req, res) => {
   //checking if email exists
   const user = await User.findOne(
-    {email: req.params.user_email.toLowerCase()},{password: 0}, err => {
-    if(err){
-      res.status(400).send(err)
-    }
-  }).populate( { path: 'role', model: Role} );
-  if (!user) return res.status(400).json({status: 400, message: "EMAIL_NOT_FOUND"})
+    { email: req.params.user_email.toLowerCase() }, { password: 0 }, err => {
+      if (err) {
+        res.status(400).send(err)
+      }
+    }).populate({ path: 'role', model: Role });
+  if (!user) return res.status(400).json({ status: 400, message: "EMAIL_NOT_FOUND" })
   //checking role
-  if (user.role.name !== 'admin' ) return res.status(400).json({status: 400, message: "ROLE_INCORRECT"});
+  if (user.role.name !== 'admin') return res.status(400).json({ status: 400, message: "ROLE_INCORRECT" });
   //checking confirmed
-  if (!user.confirmed) return res.status(400).json({status: 400, message: "USER_NOT_CONFIRMED"});
+  if (!user.confirmed) return res.status(400).json({ status: 400, message: "USER_NOT_CONFIRMED" });
   res.status(200).json({ user });
 });
 
@@ -67,10 +68,10 @@ router.get(
   async (req, res) => {
     const user_id = req.params.user_id;
     const role_id = req.params.user_role;
-    User.find( {
-      _id: { $ne:user_id }, 
+    User.find({
+      _id: { $ne: user_id },
       role: role_id
-      }, { password: 0 }, (err, user) => {
+    }, { password: 0 }, (err, user) => {
       if (err) {
         return res.status(404).json({
           ok: false,
@@ -78,7 +79,7 @@ router.get(
         });
       }
       res.status(200).json({ user });
-    }).populate({ path: 'role', model: Role} );
+    }).populate({ path: 'role', model: Role });
   }
 );
 
@@ -128,14 +129,14 @@ router.post("/changePassword", [verifyToken], async (req, res) => {
 
 router.post("/sendEmailResetPassword/:email", async (req, res) => {
   const email = req.params.email
-  const user = await User.findOne({email: email}, err => {
+  const user = await User.findOne({ email: email }, err => {
     if (err) {
       return res.status(404).json({
         err,
       });
     }
   })
-  if(!user){
+  if (!user) {
     return res.status(404).json({
       err: "Email not found"
     });
@@ -158,15 +159,15 @@ router.post("/resetPassword/:token", async (req, res) => {
 
     // If found, find matching user
     User.findOne({ _id: token._userId }, function (err, user) {
-        if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
-        user.password = password;
-        user.save((err) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-          res.send({ message: "Password was updated successfully!" });
-        });
+      if (!user) return res.status(400).send({ type: 'USER_NOT_FOUND', msg: 'We were unable to find a user for this token.' });
+      user.password = password;
+      user.save((err) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.send({ message: "Password was updated successfully!" });
+      });
     });
   });
 });
@@ -179,7 +180,7 @@ router.put("/:user_id", async (req, res) => {
         err,
       });
     }
-  }).populate({ path: 'role', model: Role} );
+  }).populate({ path: 'role', model: Role });
   user.updatedAt = Date.now();
   user.save((err, user) => {
     if (err) {
@@ -219,7 +220,7 @@ router.put("/:user_id/profileImage", [verifyToken], async (req, res) => {
 
 router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
-  const user = await User.findOne({ _id: userId }, { password: 0 },err => {
+  const user = await User.findOne({ _id: userId }, { password: 0 }, err => {
     if (err) {
       return res.status(404).json({
         err,
@@ -267,7 +268,7 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
       });
 
       await generateProgress(challenges, user, study).then(async (progress) => {
-        await UserStudy.findOne({_id: progress._id}, (err, createdUserStudy) => {
+        await UserStudy.findOne({ _id: progress._id }, (err, createdUserStudy) => {
           if (err) {
             return res.status(404).json({
               ok: false,
@@ -285,9 +286,64 @@ router.get("/:user_id/progress", [verifyToken], async (req, res) => {
   });
 });
 
+router.get("/getUsersByStudy/:study_id", async (req, res) => {
+  const study_id = req.params.study_id;
+  UserStudy.find({ study: study_id }, (err, userStudies) => {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    }
+    let userIds = userStudies.map(userStudy => userStudy.user);
+    User.find({ _id: { $in: userIds } }, { password: 0 }, (err, users) => {
+      if (err) {
+        return res.status(404).json({
+          ok: false,
+          err,
+        });
+      }
+      const formattedUsers = users.map(user => {
+        console.log(user)
+        return {
+          _id: user._id,
+          names: user.names
+        };
+      });
+      res.status(200).json({ users: formattedUsers });
+    }).populate({ path: 'role', model: Role });
+  });
+});
+
+router.get("/getMetricsByStudy/:study_id", async (req, res) => {
+  const study_id = req.params.study_id;
+
+  try {
+    const users = await User.find({ study: study_id });
+
+    if (!users.length) {
+      return res.status(404).json({ status: 404, message: "Users not found" });
+    }
+
+    const userIds = users.map(user => user._id);
+
+    const metrics = await Metrics.find({ userId: { $in: userIds } });
+
+    if (!metrics.length) {
+      return res.status(404).json({ status: 404, message: "Metrics not found" });
+    }
+
+    res.status(200).json(metrics);
+
+  } catch (error) {
+    console.error(`Error: ${error}`);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.put("/:user_id/progress", [verifyToken], async (req, res) => {
   const userId = req.params.user_id;
-  const user = await User.findOne({_id: userId}, err => {
+  const user = await User.findOne({ _id: userId }, err => {
     if (err) {
       return res.status(404).json({
         ok: false,
@@ -389,10 +445,10 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
       const timeNow = new Date(Date.now());
       const cooldown = study.cooldown;
       const max_per_interval = study.max_per_interval;
-      if(!user.cooldown_start){
+      if (!user.cooldown_start) {
         user.cooldown_start = timeNow;
         user.interval_answers = 0;
-        user.save( err => {
+        user.save(err => {
           if (err) {
             res.status(500).json(err);
           }
@@ -405,17 +461,17 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
           });
         })
       }
-      else{
+      else {
         const cooldown_start = user.cooldown_start;
         const interval_answers = user.interval_answers;
         const canPlayAtTime = new Date(
           cooldown_start.getTime() + cooldown * 1000
         );
         const canPlay = timeNow > canPlayAtTime ? true : false;
-        if(canPlay){
+        if (canPlay) {
           user.cooldown_start = timeNow;
           user.interval_answers = 0;
-          user.save( err => {
+          user.save(err => {
             if (err) {
               res.status(500).json(err);
             }
@@ -428,7 +484,7 @@ router.get("/:user_id/can_play", [verifyToken], async (req, res) => {
             });
           })
         }
-        else{
+        else {
           const max_attempts_made = interval_answers < max_per_interval ? true : false;
           res.status(200).json({
             latestAnswerDate: timeNow,
@@ -455,7 +511,7 @@ router.get("/:study_id/findDummy", async (req, res) => {
     }
   });
   // Find User
-  const user = await User.findOne({email: study_id+"@dummy.cl"});
+  const user = await User.findOne({ email: study_id + "@dummy.cl" });
   res.status(200).json({
     ok: true,
     user
@@ -474,19 +530,19 @@ router.get("/:study_id/resetDummy", async (req, res) => {
     }
   });
   // Find User
-  const user = await User.findOne({email: study_id+"@dummy.cl"});
+  const user = await User.findOne({ email: study_id + "@dummy.cl" });
   // Delete dummy last answers records
   user.cooldown_start = null;
   user.interval_answers = 0;
   user.has_played = false;
   await user.save(err => {
-    if(err){
+    if (err) {
       res.status(500).json(err);
     }
   });
   // Delete dummy progress
-  await UserStudy.deleteOne({user: user._id},  err => {
-    if(err){
+  await UserStudy.deleteOne({ user: user._id }, err => {
+    if (err) {
       res.status(500).json(err);
     }
   })
@@ -501,17 +557,17 @@ router.get("/:study_id/resetDummy", async (req, res) => {
   });
   // Generate user study progress entry
   generateProgress(challenges, user, study)
-  .catch((err) => {
-    return res.status(404).json({
-      ok: false,
-      err,
+    .catch((err) => {
+      return res.status(404).json({
+        ok: false,
+        err,
+      });
+    })
+    .then((progress) => {
+      res.status(200).json({
+        user,
+      });
     });
-  })
-  .then((progress) => {
-    res.status(200).json({
-      user,
-    });
-  });
 });
 
 router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
@@ -522,7 +578,7 @@ router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
       res.status(500).json(err);
     }
     user.has_played = true;
-    user.save( err => {
+    user.save(err => {
       if (err) {
         res.status(500).json(err);
       }
@@ -535,28 +591,28 @@ router.get("/:user_id/has_played", [verifyToken], async (req, res) => {
 
 router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
   const trainer_id = req.params.trainer_id;
-  const user = await User.findOne({trainer_id: trainer_id}, err => {
-    if(err){
+  const user = await User.findOne({ trainer_id: trainer_id }, err => {
+    if (err) {
       return res.status(404).json({
         ok: false,
         err
       });
     }
   });
-  const userStudies = await UserStudy.find({user: user._id}, err => {
-    if(err){
+  const userStudies = await UserStudy.find({ user: user._id }, err => {
+    if (err) {
       return res.status(404).json({
         ok: false,
         err
       });
     }
-  }).populate({ path: 'study', model: Study});
+  }).populate({ path: 'study', model: Study });
   const progress = [];
-  for(let i = 0; i<userStudies.length; i++){
+  for (let i = 0; i < userStudies.length; i++) {
     let challenges = userStudies[i].challenges;
     let counter = 0;
-    for(let j = 0; j<challenges.length; j++){
-      if(challenges[j].finished){
+    for (let j = 0; j < challenges.length; j++) {
+      if (challenges[j].finished) {
         counter += 1;
       }
     }
@@ -564,7 +620,7 @@ router.get("/:trainer_id/advance", verifyAPIKey, async (req, res) => {
       study: userStudies[i].study,
       challenges: challenges.length,
       completedChallenges: counter,
-      percentage: counter/challenges.length
+      percentage: counter / challenges.length
     })
   }
   res.status(200).json({
@@ -580,7 +636,7 @@ router.get("/checkEmailAlreadyUsed/:email", async (req, res) => {
         err,
       });
     }
-    if (user.length){
+    if (user.length) {
       res.status(200).json({
         ok: false,
         message: "EMAIL_ALREADY_USED"

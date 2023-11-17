@@ -1,0 +1,84 @@
+.container {
+    display: inline-flex;
+    margin-left: 150px;  /* Elimina los márgenes */
+    width: 100%;  /* Asegura que el contenedor ocupe todo el espacio horizontal disponible */
+}
+
+.form-container {
+    margin: 1% 1% 0 1%;  /* Reducir el margen a 1% */
+    width: 25%;  /* Aumentar el ancho para compensar la reducción del margen */
+}
+
+.form-container-metrics {
+    margin: 1% 0% 0 1%;  /* Reducir el margen derecho a 0, agregar un pequeño margen a la izquierda */
+    width: 100%;  /* Cambiar el ancho a 100% para ocupar todo el espacio disponible */
+}
+
+.metrics-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-viewer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 1100px;
+}
+
+
+.pdf-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 10px;
+    margin-bottom: 500px;
+}
+
+.pdf-border {
+    width: 90%;
+    height: 700px;
+    border: 1px solid rgb(151, 151, 151);
+    display: flex;
+    flex-direction: column;  /* Cambiar de row a column */
+    justify-content: center;
+    align-items: start;
+}
+
+.pdf-row {
+    display: flex;
+    flex-direction: row;  /* Cambiar de row a column */
+    justify-content: center;
+    align-items: start;
+}
+
+.pdf-border img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.pdf-buttons button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.pdf-buttons button:hover {
+    cursor: pointer;
+}
+
+.pdf-excel-button img, .pdf-pdf-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pdf-container {
+    position: relative;
+    width: 100%;  /* Cambiar el ancho a 100% */
+}
