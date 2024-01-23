@@ -1,0 +1,12 @@
+.display-flex {
+  display: flex;
+  /* justify-content: center; */
+}
+
+.closeButton {
+  background-color: #b00020;
+  color: #ffffff;
+}
+.no-padding-table {
+  padding-left: 0px !important;
+}
