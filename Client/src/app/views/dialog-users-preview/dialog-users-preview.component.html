@@ -1,0 +1,38 @@
+<mat-card class="mat-elevation-z0" style="padding: 0">
+  <mat-card-header>
+    <mat-card-title>Previsualización de usuarios</mat-card-title>
+  </mat-card-header>
+</mat-card>
+<mat-dialog-content class="no-padding-table">
+  <mat-table
+    *ngIf="users.length > 0"
+    [dataSource]="users"
+    class="mat-elevation-z0"
+  >
+    <!-- Position Column -->
+    <!-- <ng-container matColumnDef="position">
+			<mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+		</ng-container> -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button class="closeButton" (click)="closeDialog()">
+    {{ "BUTTONS.CLOSE" | translate }}
+  </button>
+</mat-dialog-actions>

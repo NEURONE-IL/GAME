@@ -1,0 +1,84 @@
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+.display-grid {
+  display: grid;
+  justify-content: center;
+}
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  border: 1px solid red;
+  width: 300px;
+  color: black;
+  background-color: #f66e61;
+}
+
+.button-register-user {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  margin-top: 20px;
+}
+
+.preview-button {
+  background-color: #ff9800;
+  margin-right: 5px;
+  color: #ffffff;
+}
+
+.card {
+  margin: auto;
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+.title-span {
+  margin-left: 1.5%;
+  font-size: calc(0.9em + 1vmin);
+  margin-right: 3%;
+  color: #9d9d9d;
+  text-decoration: none;
+  font-family: Comic Sans MS, sans-serif;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 9%;
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  color: white;
+  font-weight: 600;
+}
+
+.recovery p {
+  text-align: center;
+  line-height: 100px;
+  color: #3f51b5;
+}
+
+.innerRecovery:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.button-icon-right {
+  margin-left: 10px;
+}
+
+.closeButton {
+  background-color: #b00020;
+  color: #ffffff;
+}

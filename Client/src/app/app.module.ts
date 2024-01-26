@@ -2,53 +2,63 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatChipsModule} from '@angular/material/chips'; 
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatListModule} from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatButtonToggleModule} from '@angular/material/button-toggle'
-
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatPaginatorModule,
+  MatPaginatorIntl,
+} from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { getDutchPaginatorIntl } from './components/paginatorInt/CustomPaginatorConfiguration';
 
-
-import { AuthInterceptorService } from './services/auth/auth-interceptor.service'
-import { PdfViewerModule }  from  'ng2-pdf-viewer';
+import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Ng9RutModule } from 'ng9-rut';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
-
 import { AppComponent } from './app.component';
-import { HintDialogComponent, QuestionBarComponent } from './components/question-bar/question-bar.component';
+import {
+  HintDialogComponent,
+  QuestionBarComponent,
+} from './components/question-bar/question-bar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoginComponent } from './views/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { StartComponent, StartInstructionsComponent } from './views/start/start.component';
+import {
+  StartComponent,
+  StartInstructionsComponent,
+} from './views/start/start.component';
 import { SearchComponent } from './views/search/search.component';
 import { SearchResultComponent } from './views/search-result/search-result.component';
 import { EndpointsService } from './services/endpoints/endpoints.service';
@@ -69,16 +79,16 @@ import { StudiesDisplayComponent } from './views/studies-display/studies-display
 import { AssentComponent } from './views/assent/assent.component';
 import { GameService } from './services/game/game.service';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
-import { AdminSearchResultComponent} from './views/admin-search-results/admin-search-result.component';
+import { AdminSearchResultComponent } from './views/admin-search-results/admin-search-result.component';
 import { SummaryComponent } from './views/summary/summary.component';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 import { RecoveryComponent } from './views/recovery/recovery.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PlayAgainComponent } from './views/play-again/play-again.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatTableModule } from "@angular/material/table";
+import { MatTableModule } from '@angular/material/table';
 import { LoginRedirectComponent } from './views/login-redirect/login-redirect.component';
-import { NgxAudioPlayerModule } from "ngx-audio-player";
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { FooterComponent } from './components/footer/footer.component';
 import { PlyrModule } from 'ngx-plyr';
 import { TriviaHubComponent } from './views/trivia-hub/trivia-hub.component';
@@ -91,8 +101,10 @@ import { StudyUpdateComponent } from './views/study-update/study-update.componen
 import { StudiesSearchComponent } from './views/studies-search/studies-search.component';
 import { StudiesSearchResultsComponent } from './views/studies-search-results/studies-search-results.component';
 import { StudySearchDisplayComponent } from './views/study-search-display/study-search-display.component';
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { UserCreationFormComponent } from './views/user-creation-form/user-creation-form.component';
+import { DialogUsersPreviewComponent } from './views/dialog-users-preview/dialog-users-preview.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -143,75 +155,78 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudiesSearchComponent,
     StudiesSearchResultsComponent,
     StudySearchDisplayComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    UserCreationFormComponent,
+    DialogUsersPreviewComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatTabsModule,
-        MatIconModule,
-        MatGridListModule,
-        MatProgressSpinnerModule,
-        MatInputModule,
-        MatButtonModule,
-        HttpClientModule,
-        FormsModule,
-        MatAutocompleteModule,
-        MatBadgeModule,
-        MatChipsModule,
-        ReactiveFormsModule,
-        MatPaginatorModule,
-        MatCardModule,
-        MatRadioModule,
-        MatMenuModule,
-        MatCheckboxModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatSlideToggleModule,
-        MatButtonToggleModule,
-        MatStepperModule,
-        MatNativeDateModule,
-        MatDatepickerModule,
-        MatListModule,
-        MatSelectModule,
-        MatDialogModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-        MatPaginatorModule,
-        MatTooltipModule,
-        PdfViewerModule,
-        Ng9RutModule,
-        ValidateEqualModule,
-        CommonModule,
-        ToastrModule.forRoot(),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
-        AppRoutingModule,
-        NgbModule,
-        MatTableModule,
-        NgxAudioPlayerModule,
-        PlyrModule,
-    ],
-  providers: [EndpointsService,
-              GameService,
-              {
-              provide: HTTP_INTERCEPTORS,
-              useClass: AuthInterceptorService,
-              multi: true
-              },
-              { 
-              provide: HTTP_INTERCEPTORS,
-              useClass: ErrorInterceptor, 
-              multi: true 
-              },
-              { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }
-    ],
-  bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatIconModule,
+    MatGridListModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatButtonModule,
+    HttpClientModule,
+    FormsModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatChipsModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatRadioModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    MatStepperModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatListModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    PdfViewerModule,
+    Ng9RutModule,
+    ValidateEqualModule,
+    CommonModule,
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    AppRoutingModule,
+    NgbModule,
+    MatTableModule,
+    NgxAudioPlayerModule,
+    PlyrModule,
+  ],
+  providers: [
+    EndpointsService,
+    GameService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+    { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

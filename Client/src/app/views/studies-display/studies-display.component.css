@@ -1,60 +1,61 @@
-.studies-display-card{
-	margin-left: 10%;
-	margin-right: 10%;
-	margin-top: 2%;
+.studies-display-card {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
 }
 .study-list-card {
-  padding-left:8px;
-  padding-right:8px;
-  margin:5px;
-  border-radius:15px
-
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 5px;
+  border-radius: 15px;
 }
 
 .study-list-card:hover {
   cursor: pointer;
-	box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.8);
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.8);
 }
 
 ::ng-deep .study-list-card .mat-card-image {
   padding: 8px !important;
 }
 
-mat-card{
-/**/
-	align-self: flex-start;
+mat-card {
+  /**/
+  align-self: flex-start;
 }
 
-
-.options{
+.options {
   text-align: right;
   padding-right: 5%;
   padding-left: 5%;
 }
-.options button{
+.options button {
   margin: 10px;
 }
 
-.emptyText{
-  padding-left: 15px
+.actions-display {
+  display: flex;
+}
+.emptyText {
+  padding-left: 15px;
 }
 
-.registerLink{
-	font-weight: 500;
-	font-size: xx-small;
+.registerLink {
+  font-weight: 500;
+  font-size: xx-small;
 }
 
-.studies-tab{
+.studies-tab {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 1%;
 }
-.studies-tittle{
-  display: flex; 
+.studies-tittle {
+  display: flex;
   align-items: center;
 }
-.user-info{
-  display: flex; 
+.user-info {
+  display: flex;
   align-items: center;
   margin-left: -7%;
 }

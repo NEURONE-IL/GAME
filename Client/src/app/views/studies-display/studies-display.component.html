@@ -1,56 +1,102 @@
 <mat-tab-group class="studies-tab" (selectedTabChange)="onTabClick($event)">
-	<mat-tab label="Todos"></mat-tab>
-	<mat-tab label="Privados"></mat-tab>
-	<mat-tab label="Públicos"></mat-tab>
-	<mat-tab label="Clonados"></mat-tab>
-	<mat-tab  label="Colaboraciones"></mat-tab>
+  <mat-tab label="Todos"></mat-tab>
+  <mat-tab label="Privados"></mat-tab>
+  <mat-tab label="Públicos"></mat-tab>
+  <mat-tab label="Clonados"></mat-tab>
+  <mat-tab label="Colaboraciones"></mat-tab>
 </mat-tab-group>
-<mat-card class="studies-display-card" >  
-	<div class="row">
-		<div class="col-md-9" style="padding-top: 10px">
-			<mat-card-subtitle *ngIf="!noStudies">{{ "ADMIN.SUBTITLE" | translate }}:</mat-card-subtitle>
-			<mat-card-subtitle *ngIf="noStudies">No hay estudios para mostrar en esta pestaña</mat-card-subtitle>
-		</div>
-		<div class="col-md-3">
-			<div class="options" >
-				{{"" +"ADMIN.STUDIES.CREATE" | translate}}
-				<button mat-mini-fab color="primary" (click)="CreateStudy()">
-					<mat-icon>add</mat-icon>
-				</button>
-			</div>
-		</div>
+<mat-card class="studies-display-card">
+  <div class="row">
+    <div class="col-md-6" style="padding-top: 10px">
+      <mat-card-subtitle *ngIf="!noStudies"
+        >{{ "ADMIN.SUBTITLE" | translate }}:</mat-card-subtitle
+      >
+      <mat-card-subtitle *ngIf="noStudies"
+        >No hay estudios para mostrar en esta pestaña</mat-card-subtitle
+      >
+    </div>
+    <div class="col-md-6 actions-display">
+      <div class="options">
+        {{ "" + "ADMIN.STUDIES.CREATE" | translate }}
+        <button mat-mini-fab color="primary" (click)="CreateStudy()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="options">
+        CREAR USUARIOS
+        <button mat-mini-fab color="primary" (click)="openPreview()">
+          <mat-icon>person_add_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- <div class="col-md-3">
+      <div class="options">
+        CREAR USUARIOS
+        <button mat-mini-fab color="primary" (click)="CreateStudy()">
+          <mat-icon>person-add-alt</mat-icon>
+        </button>
+      </div>
+    </div> -->
   </div>
-	<mat-card-content *ngIf="!noStudies">
-		<mat-grid-list cols="12" [gutterSize]="'12px'">
-			<mat-grid-tile class="study-card"  (click)="clickedStudy(study._id)" (mouseover)="fullStudy(study)" (mouseout)="shortStudy(study)" colspan="3" rowspan="4" *ngFor="let study of studies; let index = index" >
-				<mat-card class="study-list-card">
-					<div class="studies-tittle">
-						<mat-icon *ngIf="study.privacy; else studyPublic" style="font-size: 23px;" color="primary">lock_outlined</mat-icon>
-						<ng-template #studyPublic> 
-							<mat-icon style="color: #1fa510; font-size: 23px;" >lock_open_outlined</mat-icon>
-						</ng-template>
-						<mat-card-title style="font-size: 20px; margin-bottom: 0%; margin-left: 2%;">
-							{{study.name}}
-						</mat-card-title>
-					</div>
-					<div *ngIf="indexTab == 4" class="user-info">
-						<mat-icon style="color: gray; font-size: 17px;" mat-card-avatar>person</mat-icon>
-						<mat-card-subtitle style="margin-bottom: 0%"> {{ study.user.names + ' '+study.user.last_names }}
-						</mat-card-subtitle>  
-					</div> 
-					<img mat-card-image *ngIf="study.image_url" [src]="study.image_url">
-					<img mat-card-image *ngIf="!study.image_url" [src]="getCover(index)">
-					<mat-card-content>
-            <div *ngIf="actualStudy==study._id; else studyShortDescription">
-              <p *ngIf="study.description">{{study.description}}</p>
-            </div>
-						<ng-template #studyShortDescription>
-              <p *ngIf="study.description">{{showShortDescription(study.description)}}</p>
+  <mat-card-content *ngIf="!noStudies">
+    <mat-grid-list cols="12" [gutterSize]="'12px'">
+      <mat-grid-tile
+        class="study-card"
+        (click)="clickedStudy(study._id)"
+        (mouseover)="fullStudy(study)"
+        (mouseout)="shortStudy(study)"
+        colspan="3"
+        rowspan="4"
+        *ngFor="let study of studies; let index = index"
+      >
+        <mat-card class="study-list-card">
+          <div class="studies-tittle">
+            <mat-icon
+              *ngIf="study.privacy; else studyPublic"
+              style="font-size: 23px"
+              color="primary"
+              >lock_outlined</mat-icon
+            >
+            <ng-template #studyPublic>
+              <mat-icon style="color: #1fa510; font-size: 23px"
+                >lock_open_outlined</mat-icon
+              >
             </ng-template>
-						<p *ngIf="!study.description">{{ "ADMIN.STUDIES.NO_DESCRIPTION" | translate}}</p>
-					</mat-card-content>
-				</mat-card>
-			</mat-grid-tile>
-		</mat-grid-list>
-	</mat-card-content>
+            <mat-card-title
+              style="font-size: 20px; margin-bottom: 0%; margin-left: 2%"
+            >
+              {{ study.name }}
+            </mat-card-title>
+          </div>
+          <div *ngIf="indexTab == 4" class="user-info">
+            <mat-icon style="color: gray; font-size: 17px" mat-card-avatar
+              >person</mat-icon
+            >
+            <mat-card-subtitle style="margin-bottom: 0%">
+              {{ study.user.names + " " + study.user.last_names }}
+            </mat-card-subtitle>
+          </div>
+          <img mat-card-image *ngIf="study.image_url" [src]="study.image_url" />
+          <img
+            mat-card-image
+            *ngIf="!study.image_url"
+            [src]="getCover(index)"
+          />
+          <mat-card-content>
+            <div *ngIf="actualStudy == study._id; else studyShortDescription">
+              <p *ngIf="study.description">{{ study.description }}</p>
+            </div>
+            <ng-template #studyShortDescription>
+              <p *ngIf="study.description">
+                {{ showShortDescription(study.description) }}
+              </p>
+            </ng-template>
+            <p *ngIf="!study.description">
+              {{ "ADMIN.STUDIES.NO_DESCRIPTION" | translate }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
 </mat-card>

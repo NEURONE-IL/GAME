@@ -1,0 +1,381 @@
+<mat-card class="mat-elevation-z0" style="padding: 0">
+  <mat-card-header>
+    <mat-card-title>Formulario para creación de usuarios</mat-card-title>
+  </mat-card-header>
+</mat-card>
+<mat-dialog-content width="1000">
+  <mat-tab-group
+    mat-align-tabs="start"
+    mat-stretch-tabs
+    (selectedTabChange)="onTabChange($event)"
+  >
+    <mat-tab id="userCreation">
+      <ng-template mat-tab-label>
+        <span> CREAR USUARIOS </span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="main-content">
+          <mat-card-content class="display-grid">
+            <form [formGroup]="userCreateForm" (ngSubmit)="registerUsers()">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <!--mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label-->
+                    <mat-label>Estudio</mat-label>
+                    <mat-select formControlName="paramStudy">
+                      <mat-option
+                        *ngFor="let study of studies"
+                        [value]="study._id"
+                      >
+                        {{ study.name + " - ID: " + study._id }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Prefijo Correo</mat-label>
+                    <input
+                      type="text"
+                      placeholder="userColegio"
+                      matInput
+                      formControlName="paramEmailPrefix"
+                    />
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailPrefix.hasError(
+                          'required'
+                        )
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailPrefix.hasError(
+                          'pattern'
+                        )
+                      "
+                    >
+                      Ingrese un prefijo de correo válido
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailPrefix.hasError(
+                          'maxlength'
+                        )
+                      "
+                    >
+                      Se permite máximo 30 caracteres
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Sufijo Correo</mat-label>
+                    <input
+                      type="text"
+                      placeholder="correo.com"
+                      matInput
+                      formControlName="paramEmailSubfix"
+                    />
+                    <span matPrefix>{{ "@" }}</span>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailSubfix.hasError(
+                          'required'
+                        )
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailSubfix.hasError(
+                          'maxlength'
+                        )
+                      "
+                    >
+                      Se permite máximo 30 caracteres
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramEmailSubfix.hasError(
+                          'pattern'
+                        )
+                      "
+                    >
+                      Ingrese un sufijo de correo válido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Número Inicial</mat-label>
+                    <input
+                      type="number"
+                      matInput
+                      formControlName="paramStart"
+                    />
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramStart.hasError('required')
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="userCreateFormControls.paramStart.hasError('min')"
+                    >
+                      El valor mínimo es 1
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Cantidad de usuarios</mat-label>
+                    <input
+                      type="number"
+                      matInput
+                      formControlName="paramUsers"
+                    />
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramUsers.hasError('required')
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="userCreateFormControls.paramUsers.hasError('min')"
+                    >
+                      El valor mínimo es 1
+                    </mat-error>
+                    <mat-error
+                      *ngIf="userCreateFormControls.paramUsers.hasError('max')"
+                    >
+                      El valor máximo es 50
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="paramName" />
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramName.hasError('required')
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramName.hasError('maxlength')
+                      "
+                    >
+                      Se permite máximo 50 caracteres
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Institucion</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="paramInstitution"
+                    />
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramInstitution.hasError(
+                          'required'
+                        )
+                      "
+                    >
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        userCreateFormControls.paramInstitution.hasError(
+                          'maxlength'
+                        )
+                      "
+                    >
+                      Se permite máximo 75 caracteres
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <!-- <mat-form-field>
+                <mat-label>Cumpleaños</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="paramBirthdayYear"
+                />
+                <mat-error> {{ "ERRORS.REQUIRED" | translate }}</mat-error>
+              </mat-form-field> -->
+                  <mat-form-field>
+                    <!--mat-label>{{ "ADMIN.CHALLENGES.HOURS" | translate }}</mat-label-->
+                    <mat-label>Cumpleaños (Año)</mat-label>
+                    <mat-select formControlName="paramBirthdayYear">
+                      <mat-option *ngFor="let year of years" [value]="year">
+                        {{ year }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Curso</mat-label>
+                    <mat-select formControlName="paramCourse">
+                      <mat-option
+                        *ngFor="let course of courses"
+                        [value]="course.value"
+                      >
+                        {{ course.display }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Región</mat-label>
+                    <mat-select
+                      formControlName="paramRegion"
+                      (selectionChange)="onRegionChange($event)"
+                    >
+                      <mat-option
+                        *ngFor="let region of regions"
+                        [value]="region.id"
+                      >
+                        {{ region.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Comuna</mat-label>
+                    <mat-select formControlName="paramCommune">
+                      <mat-option
+                        *ngFor="let commune of communes"
+                        [value]="commune.id"
+                      >
+                        {{ commune.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                      {{ "ERRORS.REQUIRED" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+            <div class="button-register-user">
+              <button
+                mat-raised-button
+                class="closeButton"
+                (click)="closeDialog()"
+              >
+                {{ "BUTTONS.CLOSE" | translate }}
+              </button>
+              <div>
+                <button
+                  class="preview-button"
+                  mat-raised-button
+                  [disabled]="!userCreateForm.valid"
+                  (click)="openPreview()"
+                >
+                  Previsualizar
+                  <mat-icon class="button-icon-right">remove_red_eye</mat-icon>
+                </button>
+                <button
+                  type="submit"
+                  color="primary"
+                  (click)="registerUsers()"
+                  mat-raised-button
+                >
+                  Registrar Usuarios
+                  <mat-icon class="button-icon-right">group_add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab id="downloadFiles">
+      <ng-template mat-tab-label>
+        <span> USUARIOS GENERADOS </span>
+      </ng-template>
+
+      <ng-template matTabContent>
+        <mat-card class="card mat-elevation-z8">
+          <mat-card-title>Lista de archivos descargables</mat-card-title>
+          <mat-card-content *ngIf="!loadingFiles; else cargandoArchivos">
+            <mat-table
+              [dataSource]="files"
+              class="mat-elevation-z0"
+              style="width: 100%"
+            >
+              <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <div>
+                    <mat-chip-list class="mat-chip-list-stacked chipClass">
+                      <mat-chip
+                        color="primary"
+                        style="cursor: pointer"
+                        (click)="descargarDocumento(element.nombre)"
+                      >
+                        <mat-icon class="button-chip-left"
+                          >file_download</mat-icon
+                        >
+                        {{ element.nombre }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha">
+                <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element.fecha }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row
+                *matHeaderRowDef="displayedColumns"
+              ></mat-header-row>
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+          </mat-card-content>
+          <ng-template #cargandoArchivos>
+            <div class="spinner-class">
+              <mat-spinner></mat-spinner>
+            </div>
+          </ng-template>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
