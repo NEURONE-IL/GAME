@@ -16,6 +16,8 @@ import { SignupConstants } from '../signup/signup.constants';
 import { getRegiones, getComunasByRegion } from 'dpacl';
 import { DialogUsersPreviewComponent } from 'src/app/views/dialog-users-preview/dialog-users-preview.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
+import FileSaver from 'file-saver';
 @Component({
   selector: 'app-user-creation-form',
   templateUrl: './user-creation-form.component.html',
@@ -31,6 +33,10 @@ export class UserCreationFormComponent implements OnInit {
   selectedRegion: any;
   communes: any;
   region = new FormControl('', Validators.required);
+  loadingCreation: Boolean = false;
+  loadingFiles: Boolean = false;
+  files: any[] = [];
+  displayedColumns: string[] = ['nombre', 'fecha'];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -113,27 +119,56 @@ export class UserCreationFormComponent implements OnInit {
       this.userCreateForm.markAllAsTouched();
       return;
     }
-
-    this.authService.createMultipleUsers(this.userCreateForm).subscribe(
-      (response) => {
-        console.log(response);
-        this.toastr.error(
-          'Los usuarios han sido creados exitosamente',
-          'Usuarios Creados',
-          {
+    let form = {
+      paramAdminId: this.user._id,
+      paramEmailPrefix: this.userCreateForm.value.paramEmailPrefix,
+      paramEmailSubfix: this.userCreateForm.value.paramEmailSubfix,
+      paramName: this.userCreateForm.value.paramName,
+      paramInstitution: this.userCreateForm.value.paramInstitution,
+      paramBirthdayYear: this.userCreateForm.value.paramBirthdayYear,
+      paramCourse: this.userCreateForm.value.paramCourse,
+      paramCommune: this.userCreateForm.value.paramCommune,
+      paramRegion: this.userCreateForm.value.paramRegion,
+      paramStart: this.userCreateForm.value.paramStart,
+      paramUsers: this.userCreateForm.value.paramUsers,
+    };
+    this.loadingCreation = true;
+    this.authService
+      .createMultipleUsers(form, this.userCreateForm.value.paramStudy)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          if (response['code'] !== 'success') {
+            this.toastr.error(
+              'Ocurrió un error al crear los usuarios',
+              'Error',
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-center',
+              }
+            );
+            return;
+          }
+          this.toastr.success(
+            'Los usuarios han sido creados exitosamente',
+            'Usuarios Creados',
+            {
+              timeOut: 5000,
+              positionClass: 'toast-top-center',
+            }
+          );
+          this.descargarDocumento(response['nombre']);
+          this.loadingCreation = false;
+        },
+        (err) => {
+          console.error(err);
+          this.toastr.error('Ocurrió un error al crear los usuarios', 'Error', {
             timeOut: 5000,
             positionClass: 'toast-top-center',
-          }
-        );
-      },
-      (err) => {
-        console.error(err);
-        this.toastr.error('Ocurrió un error al crear los usuarios', 'Error', {
-          timeOut: 5000,
-          positionClass: 'toast-top-center',
-        });
-      }
-    );
+          });
+          this.loadingCreation = false;
+        }
+      );
   }
 
   onRegionChange(regionChange: any) {
@@ -150,5 +185,58 @@ export class UserCreationFormComponent implements OnInit {
   }
   closeDialog() {
     this.matDialog.getDialogById('app-user-creation-form').close();
+  }
+  descargarDocumento(nombre: string) {
+    const uriBase = environment.serverRoot + this.user._id + '/' + nombre;
+    FileSaver.saveAs(uriBase, nombre);
+  }
+
+  onTabChange(event: any): void {
+    if (event.index === 1) {
+      this.getFileList();
+    }
+  }
+
+  getFileList() {
+    this.loadingFiles = true;
+    this.authService.getUsersCSV(this.user._id).subscribe(
+      (response) => {
+        console.log('files', response);
+        let files = response['files'];
+        this.files = files.map((file) => {
+          const timestampMatch = file.match(/_(\d+)\.csv/);
+          if (timestampMatch) {
+            const timestamp = parseInt(timestampMatch[1], 10);
+            const fechaCreacion = new Date(timestamp);
+            // Convierte el timestamp a una fecha formateada
+            const dd = String(fechaCreacion.getDate()).padStart(2, '0');
+            const mm = String(fechaCreacion.getMonth() + 1).padStart(2, '0'); // ¡Recuerda que los meses están basados en cero!
+            const yyyy = fechaCreacion.getFullYear();
+            const hh = String(fechaCreacion.getHours()).padStart(2, '0');
+            const min = String(fechaCreacion.getMinutes()).padStart(2, '0');
+
+            const fecha = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+            return { nombre: file, fecha };
+          } else {
+            return { nombre: file, fecha: 'Sin Fecha' };
+          }
+        });
+        console.log(this.files);
+        this.loadingFiles = false;
+      },
+      (err) => {
+        this.loadingFiles = false;
+
+        console.error(err);
+        this.toastr.error(
+          'Ocurrió un error al obtener los archivos creados',
+          'Error',
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-center',
+          }
+        );
+      }
+    );
   }
 }

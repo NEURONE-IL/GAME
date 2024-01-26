@@ -350,7 +350,10 @@ export class AuthService {
     return this.http.get(this.userUri + 'checkEmailAlreadyUsed/' + email);
   }
 
-  createMultipleUsers(params: any): Observable<any> {
-    return this.http.post(this.uri + 'registerMultiple ', params);
+  createMultipleUsers(params: any, study_id: string): Observable<any> {
+    return this.http.post(this.uri + 'registerMultiple/' + study_id, params);
+  }
+  getUsersCSV(user_id: string): Observable<any> {
+    return this.http.get(this.uri + 'getUserFiles/' + user_id);
   }
 }
