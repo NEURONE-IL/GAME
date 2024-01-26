@@ -22,7 +22,7 @@
     "NO": "NO",
     "YES": "SÍ",
     "SEARCH": "BUSCAR",
-    "TRAINER_RETURN": "IR A TRAINER"    
+    "TRAINER_RETURN": "IR A TRAINER"
   },
   "ADMIN": {
     "TABS": {
@@ -31,7 +31,7 @@
       "CHALLENGES": "DESAFÍOS",
       "MANAGE_RESOURCES": "GESTIONAR RECURSOS",
       "SHOW_RESOURCES": "VER RECURSOS",
-      "VIEW_USERS":"USUARIOS REGISTRADOS"
+      "VIEW_USERS": "USUARIOS REGISTRADOS"
     },
     "VIEW_USERS": {
       "USERNAME": "Nombre de Usuario",
@@ -50,7 +50,7 @@
       "DOC_NAME": "Código",
       "FALSE": "No",
       "HINT": "Pista",
-      "QUESTION_CODE":"Código pregunta",
+      "QUESTION_CODE": "Código pregunta",
       "HOURS": "Horas",
       "IMAGE": "Seleccione una imagen (opcional)",
       "LOADING": "Cargando, por favor espere...",
@@ -116,7 +116,7 @@
       "VIDEOS": "Vídeos",
       "WEB_PAGES": "Páginas Web"
     },
-    "STUDIESTITLE":"Mis estudios",
+    "STUDIESTITLE": "Mis estudios",
     "SUBTITLE": "Seleccione un estudio para ver los desafíos que este contiene",
     "TITLE": "Panel de Administrador"
   },
@@ -158,9 +158,9 @@
           "URL": "URL"
         },
         "QUESTION_TYPE": {
-          "BOOK":"Libro",
+          "BOOK": "Libro",
           "IMAGE": "Imagen",
-          "VIDEO":"Vídeo",
+          "VIDEO": "Vídeo",
           "WEB_PAGE": "Página web"
         }
       }
@@ -168,7 +168,7 @@
     "SUBTITLE": "Complete los siguientes campos para crear un nuevo desafío en el estudio",
     "TITLE": "Creación de desafíos",
     "SUBTITLE_UPDATE": "Complete los siguientes campos para editar el desafío en el estudio",
-    "TITLE_UPDATE": "Edición de desafíos",    
+    "TITLE_UPDATE": "Edición de desafíos",
     "NO_CHALLENGE": "Aún no se ha registrado ningun desafio.",
     "QUESTION_TYPE": {
       "PAGE": "Pagina web",
@@ -230,7 +230,7 @@
       "USER_ALREADY_CONFIRMED": "Su usuario ya ha sido confirmado anteriormente"
     }
   },
-  "RECOVERY":{
+  "RECOVERY": {
     "CANCEL": "Cancelar",
     "SEND": "Enviar",
     "TITLE": "Recuperación de contraseña",
@@ -243,7 +243,7 @@
       "SUCCESS_MESSAGE": "Se ha enviado un correo para recuperar su contraseña, por favor revise su bandeja de entrada (o bandeja de spam)."
     }
   },
-  "RESET_PASSWORD":{
+  "RESET_PASSWORD": {
     "TOAST": {
       "ERROR_MESSAGE": "No se ha podido cambiar la contraseña.",
       "ERROR": "Error",
@@ -403,13 +403,17 @@
       "ERROR_MESSAGE": "No se ha creado el nuevo estudio",
       "ERROR_MESSAGE_DELETE": "No se ha eliminado el estudio",
       "ERROR_MESSAGE_UPDATE": "No se ha actualizado el estudio",
+      "EMAIL_ALREADY_USED_MULTIPLE": "Uno de los correos que desea registrar ya está en uso por otro usuario",
+      "EMAIL_ALREADY_USED_MULTIPLE_TITLE": "Correo Existente",
       "NOT_LOADED_ERROR": "El estudio no ha sido cargado",
       "NOT_LOADED_MULTIPLE_ERROR": "Los estudios no han sido cargados",
       "SUCCESS": "Éxito!",
       "SUCCESS_MESSAGE": "Se ha creado el estudio",
       "SUCCESS_MESSAGE_DELETE": "Se ha eliminado el estudio",
       "SUCCESS_MESSAGE_UPDATE": "Se ha actualizado el estudio",
-      "WELCOME_ERROR": "El enlace de invitación no es válido, por favor revíselo e intente nuevamente"
+      "WELCOME_ERROR": "El enlace de invitación no es válido, por favor revíselo e intente nuevamente",
+      "REGISTER_MULTIPLE_SUCCESS": "Se han registrado los usuarios de prueba con éxito",
+      "REGISTER_MULTIPLE_SUCCESS_TITLE": "Usuarios Registrados"
     },
     "UPDATE": {
       "SUBTITLE": "Complete los siguientes campos para editar el estudio en el sistema",

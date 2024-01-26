@@ -16,7 +16,11 @@
       <ng-template matTabContent>
         <div class="main-content">
           <mat-card-content class="display-grid">
-            <form [formGroup]="userCreateForm" (ngSubmit)="registerUsers()">
+            <form
+              [formGroup]="userCreateForm"
+              (ngSubmit)="registerUsers()"
+              style="padding-top: 10px"
+            >
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field>
@@ -306,6 +310,7 @@
                   <mat-icon class="button-icon-right">remove_red_eye</mat-icon>
                 </button>
                 <button
+                  *ngIf="!loadingCreation; else creando"
                   type="submit"
                   color="primary"
                   (click)="registerUsers()"
@@ -314,6 +319,16 @@
                   Registrar Usuarios
                   <mat-icon class="button-icon-right">group_add</mat-icon>
                 </button>
+                <ng-template #creando>
+                  <button
+                    mat-raised-button
+                    disabled
+                    class="loadingButton"
+                    color="primary"
+                  >
+                    <mat-spinner diameter="20"> </mat-spinner>
+                  </button>
+                </ng-template>
               </div>
             </div>
           </mat-card-content>
@@ -330,6 +345,7 @@
           <mat-card-title>Lista de archivos descargables</mat-card-title>
           <mat-card-content *ngIf="!loadingFiles; else cargandoArchivos">
             <mat-table
+              *ngIf="!loadingFiles && files.length > 0; else sinArchivos"
               [dataSource]="files"
               class="mat-elevation-z0"
               style="width: 100%"
@@ -368,12 +384,24 @@
                 *matRowDef="let row; columns: displayedColumns"
               ></mat-row>
             </mat-table>
+            <ng-template #sinArchivos>
+              No se han generado archivos de creación de usuarios
+            </ng-template>
           </mat-card-content>
           <ng-template #cargandoArchivos>
             <div class="spinner-class">
               <mat-spinner></mat-spinner>
             </div>
           </ng-template>
+          <div class="button-register-user">
+            <button
+              mat-raised-button
+              class="closeButton"
+              (click)="closeDialog()"
+            >
+              Cerrar
+            </button>
+          </div>
         </mat-card>
       </ng-template>
     </mat-tab>

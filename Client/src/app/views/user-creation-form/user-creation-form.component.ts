@@ -132,41 +132,57 @@ export class UserCreationFormComponent implements OnInit {
       paramStart: this.userCreateForm.value.paramStart,
       paramUsers: this.userCreateForm.value.paramUsers,
     };
+
     this.loadingCreation = true;
     this.authService
       .createMultipleUsers(form, this.userCreateForm.value.paramStudy)
       .subscribe(
         (response) => {
-          console.log(response);
-          if (response['code'] !== 'success') {
-            this.toastr.error(
-              'Ocurrió un error al crear los usuarios',
-              'Error',
-              {
-                timeOut: 5000,
-                positionClass: 'toast-top-center',
-              }
-            );
-            return;
-          }
           this.toastr.success(
-            'Los usuarios han sido creados exitosamente',
-            'Usuarios Creados',
+            this.translate.instant('STUDY.TOAST.REGISTER_MULTIPLE_SUCCESS'),
+            this.translate.instant(
+              'STUDY.TOAST.REGISTER_MULTIPLE_SUCCESS_TITLE'
+            ),
             {
               timeOut: 5000,
               positionClass: 'toast-top-center',
             }
           );
           this.descargarDocumento(response['nombre']);
+          this.userCreateForm.reset();
           this.loadingCreation = false;
         },
         (err) => {
-          console.error(err);
-          this.toastr.error('Ocurrió un error al crear los usuarios', 'Error', {
-            timeOut: 5000,
-            positionClass: 'toast-top-center',
-          });
           this.loadingCreation = false;
+
+          // console.error('err', err);
+          // let error = err.error.message;
+          if (err === 'EMAIL_ALREADY_USED_MULTIPLE') {
+            let email = err.error.email;
+            this.toastr.error(
+              this.translate.instant(
+                'STUDY.TOAST.EMAIL_ALREADY_USED_MULTIPLE'
+              ) /*+
+                ' ' +
+                email,*/,
+              this.translate.instant(
+                'STUDY.TOAST.EMAIL_ALREADY_USED_MULTIPLE_TITLE'
+              ),
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-center',
+              }
+            );
+            return;
+          } else
+            this.toastr.error(
+              'Ocurrió un error al crear los usuarios ' + err,
+              'Error',
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-center',
+              }
+            );
         }
       );
   }

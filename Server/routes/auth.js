@@ -18,7 +18,7 @@ const { isValidObjectId } = require("mongoose");
 const {
   generateProgress,
   saveGMPlayer,
-  sendConfirmationEmail,
+  sendConfirmationEmail
 } = require("../utils/routeUtils");
 
 router.post(
@@ -30,7 +30,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -43,7 +43,7 @@ router.post(
       password: hashpassword,
       names: req.body.names,
       last_names: req.body.last_names,
-      role: role._id,
+      role: role._id
     });
     await neuronegmService.connectGM(
       req.body.email,
@@ -59,11 +59,11 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
       res.status(200).json({
-        user,
+        user
       });
     });
   }
@@ -77,7 +77,7 @@ router.post(
     if (!isValidObjectId(study_id)) {
       return res.status(404).json({
         ok: false,
-        message: "Study doesn't exist!",
+        message: "Study doesn't exist!"
       });
     }
 
@@ -86,7 +86,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -96,7 +96,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -106,7 +106,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -114,7 +114,7 @@ router.post(
     if (!study) {
       return res.status(404).json({
         ok: false,
-        message: "STUDY_NOT_FOUND_ERROR",
+        message: "STUDY_NOT_FOUND_ERROR"
       });
     }
 
@@ -134,7 +134,7 @@ router.post(
       institution_region: req.body.institution_region,
       relation: req.body.relation,
       registered_via: req.body.registered_via
-    });          
+    });
 
     //save userData in db
     userData.save((err, userData) => {
@@ -142,10 +142,10 @@ router.post(
         return res.status(404).json({
           ok: false,
           err
-        })
+        });
       }
     });
-    
+
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(req.body.password, salt);
@@ -165,7 +165,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
 
@@ -174,7 +174,7 @@ router.post(
         .catch((err) => {
           return res.status(404).json({
             ok: false,
-            err,
+            err
           });
         })
         .then((progress) => {
@@ -185,7 +185,7 @@ router.post(
           sendConfirmationEmail(user, userData, res, req);
 
           res.status(200).json({
-            user,
+            user
           });
         });
     });
@@ -200,7 +200,7 @@ router.post(
     if (!isValidObjectId(study_id)) {
       return res.status(404).json({
         ok: false,
-        message: "Study doesn't exist!",
+        message: "Study doesn't exist!"
       });
     }
 
@@ -209,7 +209,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -219,7 +219,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -229,7 +229,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
     });
@@ -237,10 +237,10 @@ router.post(
     if (!study) {
       return res.status(404).json({
         ok: false,
-        message: "STUDY_NOT_FOUND_ERROR",
+        message: "STUDY_NOT_FOUND_ERROR"
       });
     }
-    
+
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(req.body.password, salt);
@@ -252,7 +252,7 @@ router.post(
       password: hashpassword,
       confirmed: true,
       role: role._id,
-      study: study._id,
+      study: study._id
     });
 
     //save user in db
@@ -260,7 +260,7 @@ router.post(
       if (err) {
         return res.status(404).json({
           ok: false,
-          err,
+          err
         });
       }
 
@@ -269,7 +269,7 @@ router.post(
         .catch((err) => {
           return res.status(404).json({
             ok: false,
-            err,
+            err
           });
         })
         .then((progress) => {
@@ -277,7 +277,7 @@ router.post(
           saveGMPlayer(req, user, study, res);
 
           res.status(200).json({
-            user,
+            user
           });
         });
     });
@@ -287,11 +287,13 @@ router.post(
 router.post("/login", async (req, res) => {
   //checking if username exists
   const user = await User.findOne(
-    {email: req.body.email.toLowerCase()}, err => {
-    if(err){
-      res.status(400).send(err)
+    { email: req.body.email.toLowerCase() },
+    (err) => {
+      if (err) {
+        res.status(400).send(err);
+      }
     }
-  }).populate( { path: 'role', model: Role} );
+  ).populate({ path: "role", model: Role });
   if (!user) return res.status(400).send("EMAIL_NOT_FOUND");
   //checking password
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -299,7 +301,9 @@ router.post("/login", async (req, res) => {
   //check if user is confirmed
   if (!user.confirmed) return res.status(400).send("USER_NOT_CONFIRMED");
   //create and assign a token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: "12h"
+  });
   res.header("x-access-token", token).send({ user: user, token: token });
 });
 
@@ -359,7 +363,7 @@ router.post(
       "public/" +
       req.body.paramAdminId +
       "/" +
-      study .name +
+      study.name +
       "_" +
       momento +
       ".csv";
@@ -387,7 +391,12 @@ router.post(
         id += i;
       }
 
-      let email = (req.body.paramEmailPrefix + id + '@' + req.body.paramEmailSubfix).toLowerCase();
+      let email = (
+        req.body.paramEmailPrefix +
+        id +
+        "@" +
+        req.body.paramEmailSubfix
+      ).toLowerCase();
       let password = Math.floor(1000 + Math.random() * 9000) + "";
 
       /*create userData*/
@@ -451,7 +460,7 @@ router.post(
             //            sendConfirmationEmail(user, userData, res, req);
           });
 
-        fs.appendFile(
+        fs.appendFileSync(
           fileName,
           JSON.stringify(user.email + "," + password) + "\n",
           (err) => {
@@ -478,7 +487,9 @@ router.get(
   "/getUserFiles/:user_id",
   [verifyToken, authMiddleware.isAdmin],
   async (req, res) => {
-    const files = fs.readdirSync("public/" + req.params.user_id);
+    let files = [];
+    if (fs.existsSync("public/" + req.params.user_id))
+      files = fs.readdirSync("public/" + req.params.user_id);
 
     return res.status(200).json({
       files: files

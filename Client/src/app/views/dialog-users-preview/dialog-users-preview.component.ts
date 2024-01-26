@@ -16,9 +16,7 @@ export class DialogUsersPreviewComponent implements OnInit, OnDestroy {
     public data: any,
     private router: Router,
     public matDialog: MatDialog
-  ) {
-    console.log(this.data);
-  }
+  ) {}
 
   ngOnInit(): void {
     let start = this.data.paramStart;
@@ -26,7 +24,7 @@ export class DialogUsersPreviewComponent implements OnInit, OnDestroy {
     let sufix = this.data.paramEmailSubfix;
     let prefix = this.data.paramEmailPrefix;
     let name = this.data.paramName;
-    for (let i = start; i <= end; i++) {
+    for (let i = start; i < end; i++) {
       let id = '';
       if (i < 10) {
         id += '00' + i;
