@@ -428,7 +428,7 @@ router.post(
         /*Generate user study progress entry*/
         await generateProgress(challenges, user, study);
 
-        fs.appendFileSyncSync(
+        fs.appendFileSync(
           fileName,
           JSON.stringify(user.email + "," + password) + "\n"
         );
