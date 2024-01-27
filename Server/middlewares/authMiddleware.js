@@ -181,9 +181,17 @@ isAdmin = async(req, res, next) => {
 }
 
 uniqueEmailMultiple = async (req, res, next) => {
+
+    if(req.body.paramUsers > 50){
+      return res.status(400).json({
+        ok: false,
+        message: "PARAM_USERS_GREATER_50"
+      });
+    }
+
     let emailUsado = false;
     let emailEnConflicto;
-  
+    
     for (
       let i = req.body.paramStart;
       i < req.body.paramStart + req.body.paramUsers;
