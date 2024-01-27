@@ -33,7 +33,7 @@ export class UserCreationFormComponent implements OnInit {
   selectedRegion: any;
   communes: any;
   region = new FormControl('', Validators.required);
-  loadingCreation: Boolean = true;
+  loadingCreation: Boolean = false;
   loadingFiles: Boolean = false;
   files: any[] = [];
   displayedColumns: string[] = ['nombre', 'fecha'];
