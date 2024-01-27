@@ -33,7 +33,7 @@ export class UserCreationFormComponent implements OnInit {
   selectedRegion: any;
   communes: any;
   region = new FormControl('', Validators.required);
-  loadingCreation: Boolean = false;
+  loadingCreation: Boolean = true;
   loadingFiles: Boolean = false;
   files: any[] = [];
   displayedColumns: string[] = ['nombre', 'fecha'];
@@ -154,17 +154,16 @@ export class UserCreationFormComponent implements OnInit {
         },
         (err) => {
           this.loadingCreation = false;
-
-          // console.error('err', err);
-          // let error = err.error.message;
-          if (err === 'EMAIL_ALREADY_USED_MULTIPLE') {
+          console.error('err', err);
+          let error = err.error.message;
+          if (error === 'EMAIL_ALREADY_USED_MULTIPLE') {
             let email = err.error.email;
             this.toastr.error(
               this.translate.instant(
                 'STUDY.TOAST.EMAIL_ALREADY_USED_MULTIPLE'
-              ) /*+
+              ) +
                 ' ' +
-                email,*/,
+                email,
               this.translate.instant(
                 'STUDY.TOAST.EMAIL_ALREADY_USED_MULTIPLE_TITLE'
               ),
@@ -176,7 +175,7 @@ export class UserCreationFormComponent implements OnInit {
             return;
           } else
             this.toastr.error(
-              'Ocurrió un error al crear los usuarios ' + err,
+              'Ocurrió un error al crear los usuarios ' + error,
               'Error',
               {
                 timeOut: 5000,

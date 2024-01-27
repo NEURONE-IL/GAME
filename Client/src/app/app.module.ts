@@ -220,11 +220,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: AuthInterceptorService,
       multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorInterceptor,
+    //   multi: true,
+    // },
     { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() },
   ],
   bootstrap: [AppComponent],
