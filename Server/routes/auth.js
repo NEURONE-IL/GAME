@@ -309,164 +309,132 @@ router.post(
   async (req, res) => {
     const study_id = req.params.study_id;
 
-    if (!isValidObjectId(study_id)) {
-      return res.status(404).json({
-        ok: false,
-        message: "STUDY_NOT_FOUND_ERROR"
-      });
-    }
+    try{
 
-    /*Find student role*/
-    const role = await Role.findOne({ name: "student" }, (err) => {
-      if (err) {
+      if (!isValidObjectId(study_id)) {
+        return res.status(404).json({
+          ok: false,
+          message: "STUDY_NOT_FOUND_ERROR"
+        });
+      }
+
+      /*Find student role*/
+      const role = await Role.findOne({ name: "student" });
+      if (!role) {
         return res.status(404).json({
           ok: false,
           err
         });
       }
-    });
 
-    /*Find study*/
-    const study = await Study.findOne({ _id: study_id }, (err) => {
-      if (err) {
+      /*Find study*/
+      const study = await Study.findOne({ _id: study_id });
+      if (!study) {
+        return res.status(404).json({
+          ok: false,
+          message: "STUDY_NOT_FOUND_ERROR"
+        });
+      }
+
+      /*Find study challenges*/
+      const challenges = await Challenge.find({ study: study });
+      if (!challenges) {
         return res.status(404).json({
           ok: false,
           err
         });
-      }
-    });
+      }    
 
-    /*Find study challenges*/
-    const challenges = await Challenge.find({ study: study }, (err) => {
-      if (err) {
-        return res.status(404).json({
-          ok: false,
-          err
+      createDirIfNotExists("public/" + req.body.paramAdminId);
+      const momento = Date.now();
+      const fileName =
+        "public/" +
+        req.body.paramAdminId +
+        "/" +
+        study .name +
+        "_" +
+        momento +
+        ".csv";
+      fs.writeFileSync(
+        fileName,
+        JSON.stringify("email" + "," + "password") + "\n"
+      );
+
+      let inicio = 0 + req.body.paramStart;
+      let cantidadElementos = 0 +req.body.paramUsers;
+
+      let miArray = Array.from({ length: cantidadElementos }, (_, index) => inicio + index);
+
+      for await (const i of miArray){
+
+        let id = "";
+        if (i < 10) {
+          id += "00" + i;
+        } else if (i >= 10 && i < 100) {
+          id += "0" + i;
+        } else {
+          id += i;
+        }
+
+        let email = (req.body.paramEmailPrefix + id + '@' + req.body.paramEmailSubfix).toLowerCase();
+        let password = Math.floor(1000 + Math.random() * 9000) + "";
+
+        /*create userData*/
+        const userData = new UserData({
+          email: email,
+          tutor_names: "NombreTutor",
+          tutor_last_names: "ApellidoTutor",
+          tutor_phone: null,
+          names: req.body.paramName + id,
+          last_names: ".",
+          birthday: new Date(req.body.paramBirthdayYear).toUTCString(),
+          course: req.body.paramCourse,
+          institution: req.body.paramInstitution,
+          institution_commune: req.body.paramCommune,
+          institution_region: req.body.paramRegion,
+          relation: "Tutor"
         });
-      }
-    });
 
-    if (!study) {
-      return res.status(404).json({
-        ok: false,
-        message: "STUDY_NOT_FOUND_ERROR"
-      });
-    }
+        /*save userData in DB*/
+        await userData.save();
 
-    createDirIfNotExists("public/" + req.body.paramAdminId);
-    const momento = Date.now();
-    const fileName =
-      "public/" +
-      req.body.paramAdminId +
-      "/" +
-      study .name +
-      "_" +
-      momento +
-      ".csv";
-    fs.writeFileSync(
-      fileName,
-      JSON.stringify("email" + "," + "password") + "\n",
-      (err) => {
-        if (err) {
-          throw err;
-        }
-      }
-    );
+        /*Hash password*/
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
 
-    for (
-      let i = 0 + req.body.paramStart;
-      i < req.body.paramUsers + req.body.paramStart;
-      i++
-    ) {
-      let id = "";
-      if (i < 10) {
-        id += "00" + i;
-      } else if (i >= 10 && i < 100) {
-        id += "0" + i;
-      } else {
-        id += i;
-      }
+        /*Create user*/
+        const user = new User({
+          email: email,
+          names: req.body.paramName,
+          password: hashPassword,
+          role: role._id,
+          study: study._id,
+          confirmed: true
+        });
 
-      let email = (req.body.paramEmailPrefix + id + '@' + req.body.paramEmailSubfix).toLowerCase();
-      let password = Math.floor(1000 + Math.random() * 9000) + "";
-
-      /*create userData*/
-      const userData = new UserData({
-        email: email,
-        tutor_names: "NombreTutor",
-        tutor_last_names: "ApellidoTutor",
-        tutor_phone: null,
-        names: req.body.paramName + id,
-        last_names: ".",
-        birthday: new Date(req.body.paramBirthdayYear).toUTCString(),
-        course: req.body.paramCourse,
-        institution: req.body.paramInstitution,
-        institution_commune: req.body.paramCommune,
-        institution_region: req.body.paramRegion,
-        relation: "Tutor"
-      });
-
-      /*save userData in DB*/
-      userData.save((err, userData) => {
-        if (err) {
-          return res.status(404).json({
-            ok: false,
-            err
-          });
-        }
-      });
-
-      /*Hash password*/
-      const salt = await bcrypt.genSalt(10);
-      const hashPassword = await bcrypt.hash(password, salt);
-
-      /*Create user*/
-      const user = new User({
-        email: email,
-        names: req.body.paramName,
-        password: hashPassword,
-        role: role._id,
-        study: study._id,
-        confirmed: true
-      });
-
-      /*Save user in DB*/
-      user.save((err, user) => {
-        if (err) {
-          return res.status(404).json({
-            ok: false,
-            err
-          });
-        }
-
+        /*Save user in DB*/
+        await user.save();
+        
         /*Generate user study progress entry*/
-        generateProgress(challenges, user, study)
-          .catch((err) => {
-            return res.status(404).json({
-              ok: false
-            });
-          })
-          .then((progress) => {
-            /*Send confirmation email*/
-            //            sendConfirmationEmail(user, userData, res, req);
-          });
+        await generateProgress(challenges, user, study);
 
-        fs.appendFile(
+        fs.appendFileSync(
           fileName,
-          JSON.stringify(user.email + "," + password) + "\n",
-          (err) => {
-            if (err) {
-              throw err;
-            }
-          }
-        );
-      });
-    }
+          JSON.stringify(user.email + "," + password) + "\n");
+      }
 
-    return res.status(200).json({
-      message: "REGISTER_MULTIPLE_SUCCESS",
-      nombre: study.name + "_" + momento + ".csv"
-    });
+      return res.status(200).json({
+        message: "REGISTER_MULTIPLE_SUCCESS",
+        nombre: study.name + "_" + momento + ".csv"
+      });
+
+    } catch (e){
+      return res.status(500).json({
+        message: "INTERNAL_SERVER_ERROR",
+        ok: false,
+        error: e 
+      });
+    }      
   }
 );
 
