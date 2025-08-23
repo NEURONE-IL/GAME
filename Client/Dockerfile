@@ -19,4 +19,4 @@ COPY --from=build /app/dist ./dist
 
 EXPOSE 4200
 
-CMD ["serve", "-s", "dist", "-l", "4200"]
+CMD ["serve", "-s", "dist/NEURONE-GAME", "-l", "4200"]
