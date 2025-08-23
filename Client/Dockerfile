@@ -1,5 +1,5 @@
 # Usar imagen base de Node para construir la app
-FROM node:18-alpine AS build
+FROM node:14-alpine AS build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Usar imagen base de Node.js para servir la app
-FROM node:18-alpine
+FROM node:14-alpine
 
 WORKDIR /app
 RUN npm install -g serve
