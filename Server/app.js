@@ -50,8 +50,9 @@ const Competence = require('./models/competence');
 const Language = require('./models/language');
 
 //db connection
-
-//mongoose.connect('mongodb://admin:admin@localhost:27017/neurone-game', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+console.log('Trivia Server connecting to MongoDB...');
+console.log('DB_USER:', process.env.DB_USER);
+console.log('Connection string:', `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game`);
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game`,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");
@@ -59,6 +60,9 @@ mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:2
         initial();
         //addCompetences();
         //addLanguages();
+    })
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
     });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
