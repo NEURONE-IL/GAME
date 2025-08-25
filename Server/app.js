@@ -52,8 +52,8 @@ const Language = require('./models/language');
 //db connection
 console.log('Trivia Server connecting to MongoDB...');
 console.log('DB_USER:', process.env.DB_USER);
-console.log('Connection string:', `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game`);
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game`,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+console.log('Connection string:', `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game?authSource=admin`);
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game?authSource=admin`,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(()=>{
         console.log("Successfully connect to MongoDB.");
         //cleanEdit();
