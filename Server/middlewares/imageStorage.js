@@ -17,7 +17,7 @@ conn.once('open', function () {
 })
 
 const storage = new GridFsStorage({
-    db: mongoose.connection,
+    url: `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@mongo:27017/neurone-game?authSource=admin`,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
