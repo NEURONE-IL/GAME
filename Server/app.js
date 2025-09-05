@@ -214,18 +214,17 @@ app.use('/api/event', EventRoutes);
 app.use('/api/studySearch', studySearchRoutes);
 
 
+// To fix ENOENT errors it needs to comment this out:
 
 // Serve neurone docs
-app.use("/assets/", express.static(process.env.NEURONE_DOCS));
+//app.use("/assets/", express.static(process.env.NEURONE_DOCS));
 
 // Set client on root
 
 // - Serve static content
-app.use(express.static('public'));
+//app.use(express.static('public'));
 // - Serve index
-app.get('*',function(req,res){
-  res.sendFile(path.join(__dirname+'/public/index.html'));
-});
+//app.get('*',function(req,res){res.sendFile(path.join(__dirname+'/public/index.html'));});
 
 
 /** Server deployment **/

@@ -38,7 +38,9 @@ export class ViewPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.result = params.get('result_index');
         this.gameService.setActivePage(params.get('result_page'));
         console.log("RESULT", this.result);
-        this.docUrl = environment.serverRoot + this.url;
+        // To fix ENOENT errors it needs to replace serverRoot by neuroneURL
+        // this.docUrl = environment.serverRoot + this.url;
+        this.docUrl = environment.neuroneURL + this.url;
         console.log(this.docUrl);
         console.log('docurl: ',this.docUrl);
       });
