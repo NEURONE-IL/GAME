@@ -199,6 +199,10 @@ function addTextToEmail(mailHTML, userData, link) {
     "Si el enlace tampoco funciona, por favor cópielo y péguelo en una nueva pestaña de su navegador de internet:"
   );
   mailHTML = mailHTML.replace("[CONFIRMATION_EMAIL.GREETINGS]", "¡Saludos!");
+  
+  // Replace logo URL with GAME_CLIENT environment variable
+  mailHTML = mailHTML.replace("[LOGO_URL]", process.env.GAME_CLIENT);
+  
   return mailHTML;
 }
 
