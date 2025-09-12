@@ -10,10 +10,10 @@ export const environment = {
 */
 export const environment = {
   production: true,
-  serverRoot: 'https://trivia.neurone.info/',
-  apiURL: 'https://trivia.neurone.info/api/',
-  frontURL: 'https://trivia.neurone.info/',
-  neuroneURL: 'https://trivia.neurone.info:3001/',
+  serverRoot: 'https://bogano.diinf.usach.cl/',
+  apiURL: 'https://bogano.diinf.usach.cl/api/',
+  frontURL: 'https://bogano.diinf.usach.cl/',
+  neuroneURL: 'https://bogano.diinf.usach.cl/neurone-api/',
   locale: 'es-CL'
 };
 /*
