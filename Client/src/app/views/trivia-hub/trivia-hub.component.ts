@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Study, StudyService } from 'src/app/services/game/study.service';
 import { PlyrModule } from "ngx-plyr";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-trivia-hub',
@@ -14,6 +15,7 @@ import { PlyrModule } from "ngx-plyr";
 export class TriviaHubComponent implements OnInit {
   study: Study;
   containsStudy: Boolean;
+  loginUrl = environment.frontURL + 'login';
   player: Plyr;
 
   videoSources: Plyr.Source[] = [
@@ -94,4 +96,3 @@ export class TriviaHubComponent implements OnInit {
   }
 
 }
-

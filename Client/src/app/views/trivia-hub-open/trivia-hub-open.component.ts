@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Study, StudyService } from 'src/app/services/game/study.service';
 import { PlyrModule } from "ngx-plyr";
 import openStudyLinks from 'src/assets/static/openStudiesLinks.json';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-trivia-hub-open',
@@ -15,6 +16,7 @@ import openStudyLinks from 'src/assets/static/openStudiesLinks.json';
 export class TriviaHubOpenComponent implements OnInit {
   study: Study;
   containsStudy: Boolean;
+  loginUrl = environment.frontURL + 'login';
   player: Plyr;
   studiesLinks: Array<Object> = openStudyLinks;
   courseSelected: String;
