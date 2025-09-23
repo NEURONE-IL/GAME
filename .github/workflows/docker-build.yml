@@ -35,7 +35,6 @@ jobs:
           tags: |
             type=raw,value=game-client
             type=sha,prefix=game-client-
-            type=ref,event=branch,suffix=-client
 
       - name: Build and push client image
         uses: docker/build-push-action@v5
@@ -72,7 +71,6 @@ jobs:
           tags: |
             type=raw,value=game-server
             type=sha,prefix=game-server-
-            type=ref,event=branch,suffix=-server
 
       - name: Build and push server image
         uses: docker/build-push-action@v5
