@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build --prod
+RUN npm run build -- --prod
 
 # Usar imagen base de Node.js para servir la app
 FROM node:14-alpine
