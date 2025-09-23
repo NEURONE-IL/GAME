@@ -1,0 +1,87 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ deploy-diinf ]
+  pull_request:
+    branches: [ deploy-diinf ]
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME_CLIENT: triviainteraction/neurone
+  IMAGE_NAME_SERVER: triviainteraction/neurone
+
+jobs:
+  build-client:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Extract metadata for client
+      id: meta-client
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.IMAGE_NAME_CLIENT }}
+        tags: |
+          type=ref,event=branch,suffix=-client
+          type=sha,prefix={{branch}}-client-
+          game-client
+
+    - name: Build and push client image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./Client
+        file: ./Client/Dockerfile
+        push: true
+        tags: |
+          ${{ env.IMAGE_NAME_CLIENT }}:game-client
+          ${{ env.IMAGE_NAME_CLIENT }}:game-client-${{ github.sha }}
+        labels: ${{ steps.meta-client.outputs.labels }}
+        platforms: linux/amd64,linux/arm64
+
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Extract metadata for server
+      id: meta-server
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.IMAGE_NAME_SERVER }}
+        tags: |
+          type=ref,event=branch,suffix=-server
+          type=sha,prefix={{branch}}-server-
+          game-server
+
+    - name: Build and push server image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./Server
+        file: ./Server/Dockerfile
+        push: true
+        tags: |
+          ${{ env.IMAGE_NAME_SERVER }}:game-server
+          ${{ env.IMAGE_NAME_SERVER }}:game-server-${{ github.sha }}
+        labels: ${{ steps.meta-server.outputs.labels }}
+        platforms: linux/amd64,linux/arm64
