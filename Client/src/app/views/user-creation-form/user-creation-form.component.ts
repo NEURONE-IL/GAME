@@ -202,8 +202,17 @@ export class UserCreationFormComponent implements OnInit {
     this.matDialog.getDialogById('app-user-creation-form').close();
   }
   descargarDocumento(nombre: string) {
-    const uriBase = environment.serverRoot + this.user._id + '/' + nombre;
-    FileSaver.saveAs(uriBase, nombre);
+    const downloadUrl = environment.apiURL + 'auth/downloadFile/' + this.user._id + '/' + nombre;
+    
+    // Crear un enlace temporal con el token de autenticación
+    const token = localStorage.getItem('token');
+    const link = document.createElement('a');
+    link.href = `${downloadUrl}?token=${token}`;
+    link.download = nombre;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   onTabChange(event: any): void {

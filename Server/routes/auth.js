@@ -466,4 +466,48 @@ router.get(
   }
 );
 
+router.get(
+  "/downloadFile/:user_id/:filename",
+  [verifyToken, authMiddleware.isAdmin],
+  async (req, res) => {
+    try {
+      const userId = req.params.user_id;
+      const filename = req.params.filename;
+      const filePath = `public/${userId}/${filename}`;
+
+      // Verificar que el archivo existe
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).json({
+          message: "File not found",
+          ok: false
+        });
+      }
+
+      // Verificar que es un archivo CSV (seguridad)
+      if (!filename.endsWith('.csv')) {
+        return res.status(400).json({
+          message: "Only CSV files are allowed",
+          ok: false
+        });
+      }
+
+      // Configurar headers para descarga
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+
+      // Enviar el archivo
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      return res.status(500).json({
+        message: "Internal server error",
+        ok: false,
+        error: error.message
+      });
+    }
+  }
+);
+
 module.exports = router;
