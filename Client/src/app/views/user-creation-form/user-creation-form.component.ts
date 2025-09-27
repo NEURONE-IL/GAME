@@ -205,7 +205,7 @@ export class UserCreationFormComponent implements OnInit {
     const downloadUrl = environment.apiURL + 'auth/downloadFile/' + this.user._id + '/' + nombre;
     
     // Crear un enlace temporal con el token de autenticación
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('auth_token');
     const link = document.createElement('a');
     link.href = `${downloadUrl}?token=${token}`;
     link.download = nombre;
